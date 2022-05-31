@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 .page-header {
     margin: 0 0 12px;
     border-bottom: 1px dotted #E2E2E2;
-    padding-bottom: 16px;
+    /*padding-bottom: 16px;*/
     padding-top: 7px
 }
 
@@ -10459,7 +10459,7 @@ input.ace+.lbl.padding-0::before {
 }
 
 .table>thead>tr>th:last-child {
-    border-right-color: #F1F1F1
+    /*border-right-color: #F1F1F1*/
 }
 
 .table.table-bordered>thead>tr>th {
