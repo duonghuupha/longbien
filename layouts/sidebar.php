@@ -93,7 +93,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="student.php">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Thông tin học sinh
                     </a>
