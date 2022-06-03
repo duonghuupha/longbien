@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="<?php echo URL.'/styles' ?>/css/ace-rtl.min.css" />
 		<script src="<?php echo URL.'/styles' ?>/js/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo URL.'/styles' ?>/js/jquery.toast.js"></script>
-		<script src="<?php echo URL.'/public' ?>/javascript/library.js"></script>
+		<script src="<?php echo URL.'/public' ?>/scripts/library.js"></script>
 		<script>
 			var baseUrl = '<?php echo URL ?>';
 		</script>
@@ -117,10 +117,12 @@
 				</div><!-- /.row -->
 			</div><!-- /.main-content -->
 		</div><!-- /.main-container -->
-		<script src="<?php echo URL.'/public' ?>/javascript/login.js"></script>
+		<script src="<?php echo URL.'/public' ?>/scripts/login.js"></script>
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo URL.'/styles' ?>/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
+		<script src="<?php echo URL.'/' ?>styles/js/select2.min.js"></script>
+		<script src="<?php echo URL.'/' ?>styles/js/bootstrap-datepicker.min.js"></script>
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			//you don't need this, just used for changing background

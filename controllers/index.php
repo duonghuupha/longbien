@@ -5,17 +5,17 @@ class Index extends Controller{
     }
 
     function index(){
-        Session::init();
+        /*Session::init();
         $logged = Session::get('loggedIn');
         if($logged == false){
             Session::destroy();
             header ('Location: '.URL.'/index/login');
             exit;
-        }else{
+        }else{*/
             require('layouts/header.php');
             $this->view->render('index/index');
             require('layouts/footer.php');
-        }
+        //}
     }
 
     function login(){
