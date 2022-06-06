@@ -5,6 +5,14 @@ $(function(){
         todayHighlight: true
     });
     $('#sidebar').removeClass('menu-min');
+    $('.file_attach').ace_file_input({
+        no_file:'No File ...',
+        btn_choose:'Choose',
+        btn_change:'Change',
+        droppable:false,
+        onchange:null,
+        thumbnail:false
+    });
 });
 
 function style_option(value){

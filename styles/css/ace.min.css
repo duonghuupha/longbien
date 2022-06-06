@@ -9168,7 +9168,7 @@ input.ace+.lbl.padding-0::before {
     display: block;
     font-size: inherit;
     position: relative;
-    height: 30px
+    height: 33px
 }
 
 .ace-file-input input[type=file] {
@@ -9191,7 +9191,7 @@ input.ace+.lbl.padding-0::before {
     top: 0;
     left: 0;
     right: 0;
-    height: 30px;
+    height: 32px;
     background-color: #FFF;
     border: 1px solid #D5D5D5;
     cursor: pointer;

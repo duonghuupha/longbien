@@ -28,19 +28,23 @@
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='styles/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="styles/js/bootstrap.min.js"></script>
-		<script src="styles/js/jquery-ui.custom.min.js"></script>
-		<script src="styles/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="styles/js/jquery.easypiechart.min.js"></script>
-		<script src="styles/js/jquery.sparkline.index.min.js"></script>
-		<script src="styles/js/jquery.flot.min.js"></script>
-		<script src="styles/js/jquery.flot.pie.min.js"></script>
-		<script src="styles/js/jquery.flot.resize.min.js"></script>
-		<script src="styles/js/bootstrap-datepicker.min.js"></script>
-		<script src="styles/js/jquery.toast.js"></script>
-		<script src="styles/js/select2.min.js"></script>
-		<script src="styles/js/bootbox.js"></script>
-		<script src="styles/js/ace-elements.min.js"></script>
-		<script src="styles/js/ace.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/bootstrap.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery-ui.custom.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery-ui.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery.easypiechart.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery.sparkline.index.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery.flot.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery.flot.pie.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery.flot.resize.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/bootstrap-datepicker.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/jquery.toast.js"></script>
+		<script src="<?php echo URL ?>/styles/js/select2.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/chosen.jquery.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/moment.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/fullcalendar.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/bootbox.js"></script>
+		<script src="<?php echo URL ?>/styles/js/ace-elements.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/ace.min.js"></script>
 	</body>
 </html>

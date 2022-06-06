@@ -49,23 +49,23 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/group_task' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Nhóm công việc
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/tasks' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Danh sách công việc
+                        Lịch công tác
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
         </li>
         <li class="hover">
-            <a href="categories.php">
+            <a href="<?php echo URL.'/calendars' ?>">
                 <i class="menu-icon fa fa-calendar-check-o"></i>
                 <span class="menu-text">
                     Lịch báo giảng
@@ -74,7 +74,7 @@
             <b class="arrow"></b>
         </li>
         <li class="hover">
-            <a href="personel.php">
+            <a href="<?php echo URL.'/personal' ?>">
                 <i class="menu-icon fa fa-users"></i>
                 <span class="menu-text">
                     Nhân sự
@@ -93,28 +93,28 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="hover">
-                    <a href="student.php">
+                    <a href="<?php echo URL.'/student' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Thông tin học sinh
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/student_change' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Luân chuyển lớp học
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/student_point' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Sổ điểm
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/student_dili' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Chuyên cần
                     </a>
