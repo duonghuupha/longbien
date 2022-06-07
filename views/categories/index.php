@@ -88,6 +88,24 @@
                     </h3>
                     <div id="list_department" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
+                <div class="col-xs-12 col-sm-6">
+                    <h3 class="header smaller lighter blue">
+                        Danh mục trang thiết bị
+                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_dmthietbi()">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </h3>
+                    <div id="list_danhmucthietbi" class="dataTables_wrapper form-inline no-footer"></div>
+                </div><!-- /.col -->
+                <div class="col-xs-12 col-sm-6">
+                    <h3 class="header smaller lighter blue">
+                        Danh mục đồ dùng
+                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_dmdodung()">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </h3>
+                    <div id="list_danhmucdodung" class="dataTables_wrapper form-inline no-footer"></div>
+                </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>

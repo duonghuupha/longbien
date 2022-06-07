@@ -133,63 +133,56 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="hover">
-                    <a href="faq.html">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Danh mục
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/devices' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Thông tin
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/import_device' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Nhập kho
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/export_device' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Phân bổ
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/qrcode_device' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         In mã thiết bị
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/change_device' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Luân chuyển thiết bị
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/loans' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Quản lý mượn - trả
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/repairs' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Sửa chữa nâng cấp
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/returns' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Thu hồi
                     </a>
