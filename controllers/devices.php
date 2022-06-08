@@ -25,5 +25,9 @@ class Devices extends Controller{
     function del(){
         
     }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function form_info(){
+        $this->view->render('devices/form_info');
+    }
 }
 ?>

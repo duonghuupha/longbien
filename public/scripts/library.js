@@ -6,12 +6,12 @@ $(function(){
     });
     $('#sidebar').removeClass('menu-min');
     $('.file_attach').ace_file_input({
-        no_file:'No File ...',
-        btn_choose:'Choose',
-        btn_change:'Change',
+        no_file:'Không có file ...',
+        btn_choose:'Lựa chọn',
+        btn_change:'Thay đổi',
         droppable:false,
         onchange:null,
-        thumbnail:false
+        thumbnail:true
     });
 });
 
