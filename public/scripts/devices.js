@@ -42,7 +42,7 @@ function search(){
 }
 /////////////////////////////////////////////////////////////////////////////////////////////
 function import_devices(){
-
+    window.location.href = baseUrl + '/devices/import';
 }
 
 function detail(idh){

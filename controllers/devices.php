@@ -29,5 +29,15 @@ class Devices extends Controller{
     function form_info(){
         $this->view->render('devices/form_info');
     }
+
+    function import(){
+        require('layouts/header.php');
+        $this->view->render('devices/import');
+        require('layouts/footer.php');
+    }
+
+    function content_tmp(){
+        $this->view->render('devices/content_tmp');
+    }
 }
 ?>
