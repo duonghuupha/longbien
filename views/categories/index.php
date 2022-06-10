@@ -73,20 +73,20 @@
                 <div class="col-xs-12 col-sm-6">
                     <h3 class="header smaller lighter blue">
                         Danh mục trang thiết bị
-                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_dmthietbi()">
+                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_equipment()">
                             <i class="fa fa-plus"></i>
                         </a>
                     </h3>
-                    <div id="list_danhmucthietbi" class="dataTables_wrapper form-inline no-footer"></div>
+                    <div id="list_equipment" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-6">
                     <h3 class="header smaller lighter blue">
                         Danh mục đồ dùng
-                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_dmdodung()">
+                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_utensils()">
                             <i class="fa fa-plus"></i>
                         </a>
                     </h3>
-                    <div id="list_danhmucdodung" class="dataTables_wrapper form-inline no-footer"></div>
+                    <div id="list_utensils" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
