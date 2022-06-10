@@ -6,13 +6,14 @@
 <div class="modal-body">
     <div class="row">
         <form id="fm" method="post">
-            <input id="id" name="id" type="hidden" value="0"/>
+            <input id="id" name="id" type="hidden" value="<?php echo (isset($_REQUEST['id'])) ? $this->jsonObj[0]['id'] : 0 ?>"/>
             <div class="col-xs-12">
                 <div class="form-group">
                     <label for="form-field-username">Tiêu đề</label>
                     <div>
                         <input type="text" id="title" name="title" required="" 
-                        placeholder="Phân công nhiệm vụ, ví dụ: Giáo viên" style="width:100%" />
+                        placeholder="Tiêu đề nhiệm vụ, ví dụ: Giáo viên" style="width:100%"
+                        value="<?php echo (isset($_REQUEST['id'])) ? $this->jsonObj[0]['title'] : '' ?>"/>
                     </div>
                 </div>
             </div>

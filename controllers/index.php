@@ -1,21 +1,25 @@
 <?php
 class Index extends Controller{
+    private $_Data;
+    private $_Convert;
     function __construct(){
         parent::__construct();
+        $this->_Data = new Model();
+        $this->_Convert = new Convert();
     }
 
     function index(){
-        /*Session::init();
+        Session::init();
         $logged = Session::get('loggedIn');
         if($logged == false){
             Session::destroy();
             header ('Location: '.URL.'/index/login');
             exit;
-        }else{*/
+        }else{
             require('layouts/header.php');
             $this->view->render('index/index');
             require('layouts/footer.php');
-        //}
+        }
     }
 
     function login(){
@@ -23,15 +27,28 @@ class Index extends Controller{
     }
 
     function do_login(){
-        $username = $_REQUEST['username'];
+        $username = $_REQUEST['username']; 
         $password = sha1($_REQUEST['password']);
         if($this->model->check_login($username, $password) > 0){
-            Session::init();
-            Session::set('loggedIn', true);
-            $_SESSION['data'] = $this->model->get_data($username, $password);
-            $jsonObj['msg'] = "Đăng nhập thành công";
-            $jsonObj['success'] = true;
-            $this->view->jsonObj = json_encode($jsonObj);
+            // tao token va cap nhat trang thai dang nhap
+            $token = sha1(time()); $ipaddress = $_SERVER['REMOTE_ADDR'];
+            $info = $_SERVER['HTTP_USER_AGENT'];
+            $data = array('token' => $token, 'last_login' => date("Y-m-d H:i:s"), 
+                            'info_login' => $ipaddress.'-'.$info);
+            $temp = $this->model->updateLogin($username, $password, $data);
+            if($temp){
+                Session::init();
+                Session::set('loggedIn', true);
+                $_SESSION['data'] = $this->model->get_data($username, $password);
+                $jsonObj['msg'] = "Đăng nhập thành công";
+                $jsonObj['token'] = $token;
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = 'Đăng nhập không thành công';
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
         }else{
             $jsonObj['msg'] = "Thông tin đăng nhập không chính xác";
             $jsonObj['success'] = false;

@@ -44,7 +44,7 @@
 												Nhập thông tin để đăng nhập
 											</h4>
 											<div class="space-6"></div>
-											<form id="login" method="post">
+											<form id="login" method="post" onsubmit="login()">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -123,6 +123,8 @@
 		</script>
 		<script src="<?php echo URL.'/' ?>styles/js/select2.min.js"></script>
 		<script src="<?php echo URL.'/' ?>styles/js/bootstrap-datepicker.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/ace-elements.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/ace.min.js"></script>
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			//you don't need this, just used for changing background

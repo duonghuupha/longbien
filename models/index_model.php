@@ -17,28 +17,9 @@ class Index_Model extends Model{
         return $query->fetchAll();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////
-    function get_total_seller_of_day($date){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_sellers WHERE DATE_FORMAT(date_seller, '%Y-%m-%d') = '$date'");
-        $row = $query->fetchAll();
-        return $row[0]['Total'];
-    }
-    function get_total_seller(){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_sellers");
-        $row = $query->fetchAll();
-        return $row[0]['Total'];
-    }
-    function get_total_customer(){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_customers");
-        $row = $query->fetchAll();
-        return $row[0]['Total'];
-    }
-    function get_total_doanhthu(){
-        $query = $this->db->query("SELECT SUM(total_price) AS Total FROM tbl_sellers");
-        $row = $query->fetchAll();
-        return $row[0]['Total'];
-    }
-    function get_total_sanpham_seller(){
-        
+    function updateLogin($username, $password, $data){
+        $query = $this->update("tbl_users", $data, "username = '$username' AND password = '$password'");
+        return $query;
     }
 }
 ?>

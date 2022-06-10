@@ -23,20 +23,44 @@
     </div><!-- /.sidebar-shortcuts -->
     <ul class="nav nav-list">
         <li class="active hover">
-            <a href="index.html">
+            <a href="<?php echo URL.'/index' ?>">
                 <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Bàn làm việc </span>
             </a>
             <b class="arrow"></b>
         </li>
         <li class="hover">
-            <a href="<?php echo URL.'/categories' ?>">
+            <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text">
                     Danh mục
                 </span>
+                <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
+            <ul class="submenu">
+                <li class="hover">
+                    <a href="<?php echo URL.'/categories' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Dùng chung
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/physical' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Phòng vật lý
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/department' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Phòng ban / Lớp học
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
         </li>
         <li class="hover">
             <a href="#" class="dropdown-toggle">

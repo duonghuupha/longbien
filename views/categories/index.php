@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <h3 class="header smaller lighter blue">
-                        Chuyên môn
+                        Chuyên môn / Môn học
                         <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_subject()">
                             <i class="fa fa-plus"></i>
                         </a>
@@ -70,24 +70,6 @@
                 <div class="col-sm-12">
                     <div class="space-4"></div>
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                    <h3 class="header smaller lighter blue">
-                        Phòng vật lý
-                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_physical()">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </h3>
-                    <div id="list_physical" class="dataTables_wrapper form-inline no-footer"></div>
-                </div><!-- /.col -->
-                <div class="col-xs-12 col-sm-6">
-                    <h3 class="header smaller lighter blue">
-                        Phòng ban / Lớp học
-                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_department()">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </h3>
-                    <div id="list_department" class="dataTables_wrapper form-inline no-footer"></div>
-                </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-6">
                     <h3 class="header smaller lighter blue">
                         Danh mục trang thiết bị

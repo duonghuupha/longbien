@@ -292,5 +292,30 @@ class Convert{
             return $filename;
         }
     }
+
+    function return_between_hours($diff){
+        $years = floor($diff / (365*60*60*24));
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+        $hours = floor(($diff - $years * 365*60*60*24- $months*30*60*60*24 - $days*60*60*24) / (60*60));
+        return $hours;
+    }
+
+    function return_show_entries($total, $perpage, $pages){
+        if($total == 0){
+            $html = "Hiển thị 0 đến 0 của 0 bản ghi";
+        }else{
+            $html ='Hiển thị '.((($pages-1) * $perpage) + 1).' đến '; 
+            $pagenumber = ceil($total/$perpage);
+            $to_record = $pages*$perpage;
+            if($pages == $pagenumber){
+                $html .= $total;
+            }else{
+                $html .= $to_record;
+            }
+            $html .= ' của '.$total.' bản ghi';
+        }
+        return $html;
+    }
 }
 ?>

@@ -35,6 +35,7 @@ class Controller {
             }else{
                 $url = "index";
             }
+            
         }
     }
 }
