@@ -164,6 +164,33 @@ function save_form_modal_no_refresh(id_form, post_url, id_modal){
     });
 }
 
+function save_form_reset_form(id_form, post_url, id_content, url_refresh){
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData($(id_form)[0]);
+    $.ajax({
+        url: post_url,  //server script to process data
+        type: 'POST',
+        xhr: function() {
+            return xhr;
+        },
+        data: formData,
+        success: function(data){
+            var result = JSON.parse(data);
+            if(result.success == true){
+                show_message('error', result.msg);
+                $(id_form).trigger("reset");
+                $(id_content).load(url_refresh);
+            }else{
+                show_message('error', result.msg);
+                return false;
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
 function del_data(str_data, notify, post_url, id_div, url_refresh){
     bootbox.confirm({
         message: notify,

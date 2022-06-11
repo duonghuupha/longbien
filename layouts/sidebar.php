@@ -47,9 +47,9 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/physical' ?>">
+                    <a href="<?php echo URL.'/physical_room' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Phòng vật lý
+                        Phòng "vật lý" 
                     </a>
                     <b class="arrow"></b>
                 </li>
