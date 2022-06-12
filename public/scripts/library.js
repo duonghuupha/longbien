@@ -229,3 +229,63 @@ function exec_del(data_str, url_data, id_div, url_content){
         }
     });
 }
+
+function combo_select2(id_select, url_data){
+    $(id_select).select2({
+        ajax: {
+            url: url_data,
+            type: 'POST',
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    keyWord: params.term
+                };
+            },
+            processResults: function (data, params) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.title,
+                            id: item.id,
+                            data: item
+                        };
+                    })
+                };
+            }
+        }
+    });
+}
+
+function combo_select2_pagination(id_select, url_data){
+    $(id_select).select2({
+        ajax: {
+            url: url_data,
+            type: 'POST',
+            dataType: 'json',
+            processResults: function (data, params){
+                params.page = data.page || 1;
+                return {
+                    results: $.map(data.rows, function(row){
+                        return {
+                            text: row.title,
+                            id: row.id,
+                            content: row.content
+                        };
+                    }),
+                    pagination: {
+                        more: (params.page * 10) < data.total
+                    }
+                };
+            },
+            cache:true
+        },
+        templateResult: format_content
+    });
+}
+
+function format_content(row){
+    var $strdata = $(
+        '<div>'+row.text+'</div><div style="color:gray">'+row.content+'</div>'
+    );
+    return $strdata;
+}

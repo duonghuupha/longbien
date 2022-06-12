@@ -9,7 +9,7 @@
                 <li class="active">Danh mục</li>
             </ul><!-- /.breadcrumb -->
             <div class="nav-search" id="nav-search">
-                <form class="form-search">
+                <form class="form-search" onsubmit="search()">
                     <span class="input-icon">
                         <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
                         onkeyup="search()"/>
@@ -21,7 +21,7 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Khai báo thông tin các phòng "vật lý"
+                    Khai báo phòng ban / lớp học
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -30,46 +30,35 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label for="form-field-username">Lựa chọn khu nhà</label>
+                                    <label for="form-field-username">Lựa chọn năm học</label>
                                     <div>
-                                        <select class="select2" data-placeholder="Lựa chọn khu nhà"
-                                        style="width:100%" required="" id="region" name="region">
-                                            <option value="1">Khu nhà A</option>
-                                            <option value="2">Khu nhà B</option>
-                                            <option value="3">Khu nhà C</option>
-                                            <option value="4">Khu nhà D</option>
-                                            <option value="5">Khu nhà E</option>
-                                            <option value="6">Khu nhà F</option>
+                                        <select class="select2" data-placeholder="Lựa chọn năm học"
+                                        style="width:100%" required="" id="year_id" name="year_id">
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label for="form-field-username">Lựa chọn tầng</label>
+                                    <label for="form-field-username">Lựa chọn phòng "vật lý"</label>
                                     <div>
-                                        <select class="select2" data-placeholder="Lựa chọn tầng"
-                                        style="width:100%" required="" id="floor" name="floor">
-                                            <option value="1">Tầng 1</option>
-                                            <option value="2">Tầng 2</option>
-                                            <option value="3">Tầng 3</option>
-                                            <option value="4">Tầng 4</option>
-                                            <option value="5">Tầng 5</option>
+                                        <select class="select2" data-placeholder="Lựa chọn phòng 'vật lý'"
+                                        style="width:100%" required="" id="physical_id" name="physical_id">
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label for="form-field-username">Tên phòng</label>
+                                    <label for="form-field-username">Tên phòng ban / lớp học</label>
                                     <div>
                                         <input type="text" id="title" name="title" required=""
-                                        placeholder="Tên phòng, ví dụ: Phòng A201" style="width:100%" />
+                                        placeholder="Tên phòng, ví dụ: Phòng Hiệu trưởng" style="width:100%" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12 text-center">
-                                <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/physical_room' ?>'">
+                                <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/department' ?>'">
                                     <i class="ace-icon fa fa-times"></i>
                                     Hủy bỏ
                                 </button>
@@ -82,11 +71,11 @@
                     </form>
                 </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-9">
-                    <div id="list_physical" class="dataTables_wrapper form-inline no-footer"></div>
+                    <div id="list_department" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/physical_room.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/department.js"></script>
