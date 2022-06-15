@@ -11,7 +11,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
+                        onkeyup="search()"/>
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -25,6 +26,10 @@
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm" onclick="import_teacher()">
+                            <i class="fa fa-file-excel-o"></i>
+                            Nhập từ file
                         </button>
                     </small>
                 </h1>
@@ -48,120 +53,125 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Mã nhân sự</label>
-                            <div>
-                                <input type="text" id="form-field-username"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
+                    <form id="fm" method="POST" enctype="multipart/form-data">
+                        <input id="image_old" name="image_old" type="hidden"/>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Mã nhân sự</label>
+                                <div>
+                                    <input type="text" id="code" name="code" style="width:100%" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Họ và tên</label>
-                            <div>
-                                <input type="text" id="form-field-username"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Họ và tên</label>
+                                <div>
+                                    <input type="text" id="fullname" name="fullname" required=""
+                                        placeholder="Họ và tên" style="width:100%" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Giới tính</label>
-                            <div>
-                                <select class="select2" data-placeholder="Choose a Country..."
-                                style="width:100%" required="" id="source" name="source">
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
-                                </select>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Giới tính</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Choose a Country..."
+                                    style="width:100%" required="" id="gender" name="gender"
+                                    data-minimum-results-for-search="Infinity">
+                                        <option value="1">Nam</option>
+                                        <option value="2">Nữ</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Ngày sinh</label>
-                            <div class="input-group">
-                                <input class="form-control date-picker" id="date_import" type="text" name="date_import"
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
+                                <div class="input-group">
+                                    <input class="form-control date-picker" id="birthday" type="text" name="birthday"
                                     data-date-format="dd-mm-yyyy" required="" readonly=""/>
-                                <span class="input-group-addon">
-                                    <i class="fa fa-calendar bigger-110"></i>
-                                </span>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar bigger-110"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Địa chỉ</label>
-                            <div>
-                                <input type="text" id="form-field-username"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Địa chỉ</label>
+                                <div>
+                                    <input type="text" id="address" name='address' placeholder="Địa chỉ" style="width:100%"
+                                    required=""/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Điện thoại</label>
-                            <div>
-                                <input type="text" id="form-field-username" onkeypress="validate(event)"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Điện thoại</label>
+                                <div>
+                                    <input type="text" id="phone" name="phone" onkeypress="validate(event)"
+                                    placeholder="Điện thoại" style="width:100%" maxlength="10" required=""/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Email</label>
-                            <div>
-                                <input type="text" id="form-field-username"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Email</label>
+                                <div>
+                                    <input type="email" id="email" name="email" placeholder="Email" style="width:100%"
+                                    required=""/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Trình độ</label>
-                            <div>
-                            <select class="select2" data-placeholder="Choose a Country..."
-                                style="width:100%" required="" id="source" name="source">
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
-                                </select>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Trình độ</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn trình độ"
+                                    style="width:100%" required="" id="level_id" name="level_id">
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="form-field-username">Chuyên môn</label>
-                            <div>
-                            <select class="select2" data-placeholder="Choose a Country..."
-                                style="width:100%" required="" id="source" name="source" multiple="">
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
-                                </select>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Chuyên môn</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn chuyên môn..."
+                                    style="width:100%" required="" id="subject_id" name="subject_id[]" multiple="">
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="form-field-username">Phân công nhiệm vụ</label>
-                            <div>
-                            <select class="select2" data-placeholder="Choose a Country..."
-                                style="width:100%" required="" id="source" name="source">
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
-                                </select>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Phân công nhiệm vụ</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn nhiệm vụ..."
+                                    style="width:100%" required="" id="job_id" name="job_id">
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="form-field-username">Ghi chú</label>
-                            <div>
-                                <input type="text" id="form-field-username"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Hình ảnh</label>
+                                <div>
+                                    <input type="file" id="avatar" name="avatar" class="file_attach" style="width:100%"
+                                    required=""/>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Ghi chú</label>
+                                <div>
+                                    <input type="text" id="description" name="description" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -181,102 +191,9 @@
 
 <!--Form don vi tinh-->
 <div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header no-padding">
-                <div class="table-header">
-                    Thông tin nhân sự
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Mã nhân sự:</b> 89567845
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Họ và tên:</b> Nguyễn Văn A
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>GIới tính:</b> Nam
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Ngày sinh:</b> 12-09-1979
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Địa chỉ:</b> Đa Tốn - Gia Lâm - Hà Nội
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Điện thoại:</b> 0987654321
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Trình độ:</b> Đại học
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Phân công nhiệm vụ:</b> Giáo viên
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Chuyên môn:</b> Tóa học, Tin học
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Emaiil:</b> webmasterzero@gmail.com
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                <b>Ghi chú:</b> Lorem ipsum dolor sit amet, consectetur 
-                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
-                                dolore magna aliqua..
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
-                    <i class="ace-icon fa fa-times"></i>
-                    Đóng
-                </button>
-            </div>
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content" id="detail">
+            
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>

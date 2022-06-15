@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Dashboard - Ace Admin</title>
+		<title>Trường THCS Long Biên - Quận Long Biên</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/roboto.css" />
@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-rtl.min.css" />
-		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/logo.png' ?>" />
+		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/Logo.png' ?>" />
 		<script src="<?php echo URL ?>/styles/js/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace-extra.min.js"></script>
 		<script src="<?php echo URL ?>/public./scripts/library.js"></script>

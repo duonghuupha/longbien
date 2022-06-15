@@ -40,6 +40,11 @@ class Model {
         $query = $this->db->query("SELECT last_login FROM tbl_users WHERE token = '$token'");
         return $query->fetchAll();
     }
+    function return_title_subject($id){
+        $query = $this->db->query("SELECT title FROM tbldm_subject WHERE id = $id");
+        $row = $query->fetchAll();
+        return $row[0]['title'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }

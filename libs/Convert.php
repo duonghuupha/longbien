@@ -276,9 +276,9 @@ class Convert{
         return $string;
     }
 
-    function generateBarcode($data) {
-        $PNG_TEMP_DIR = DIR_UPLOAD.'/barcode/';
-        $PNG_WEB_DIR = DIR_UPLOAD.'/barcode/';
+    function generateBarcode($data, $folder) {
+        $PNG_TEMP_DIR = DIR_UPLOAD.'/barcode/'.$folder.'/';
+        $PNG_WEB_DIR = DIR_UPLOAD.'/barcode/'.$folder.'/';
         $SKU = $data["sku"];
         $filename = $PNG_TEMP_DIR.$SKU.'.png';
         if(file_exists($filename)){

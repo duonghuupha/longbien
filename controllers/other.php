@@ -16,5 +16,23 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_physical");
     }
+
+    function combo_level(){
+        $jsonObj= $this->model->get_combo_level();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_level");
+    }
+
+    function combo_subject(){
+        $jsonObj= $this->model->get_combo_subject();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_subject");
+    }
+
+    function combo_job(){
+        $jsonObj= $this->model->get_combo_job();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_job");
+    }
 }
 ?>

@@ -9191,7 +9191,7 @@ input.ace+.lbl.padding-0::before {
     top: 0;
     left: 0;
     right: 0;
-    height: 32px;
+    height: 33px;
     background-color: #FFF;
     border: 1px solid #D5D5D5;
     cursor: pointer;
@@ -10488,7 +10488,8 @@ td .lbl:only-child, th .lbl:only-child {
     font-size: 14px;
     line-height: 38px;
     padding-left: 12px;
-    margin-bottom: 1px
+    margin-bottom: 1px;
+    text-align:center;
 }
 
 .table-header .close {
@@ -15350,7 +15351,7 @@ div.dataTables_processing {
 
 .select2-container--default .select2-selection {
     border-radius: 0;
-    line-height: 24px;
+    line-height: 20px;
     border-color: #AAA
 }
 

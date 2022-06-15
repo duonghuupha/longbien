@@ -14,6 +14,9 @@ require 'libs/Session.php';
 require 'libs/config/paths.php';
 require 'libs/config/database.php';
 
+// Barcode
+require 'libs/vendor/autoload.php';
+
 /**
 * PHPExcel_IOFactory
 */

@@ -25,7 +25,7 @@ function show_message(icon, msg){
         text: msg,
         showHideTransition: 'fade',
         icon: icon,
-        position: 'bottom-right'
+        position: 'top-right'
     })
 }
 

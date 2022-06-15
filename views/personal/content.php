@@ -1,3 +1,7 @@
+<?php
+$convert = new Convert(); $jsonObj = $this->jsonObj; $perpage = $this->perpage;
+$pages = $this->page; $sql = new Model();
+?>
 <table 
     id="dynamic-table" 
     class="table table-striped table-bordered table-hover dataTable no-footer" 
@@ -21,27 +25,32 @@
     </thead>
     <tbody>
         <?php
-        for($i = 1; $i <= 15; $i++){
+        $i = 0;
+        foreach($jsonObj['rows'] as $row){
+            $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
+            foreach(explode(",",  $row['subject']) AS $item){
+                $subject[] = $sql->return_title_subject($item);
+            }
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center">89342756</td>
-            <td>Nguyễn Văn A</td>
-            <td class="text-center hidden-480">Nam</td>
-            <td class="text-center hidden-480">12-09-1979</td>
-            <td class="text-center hidden-480">Đại học</td>
-            <td class="text-center hidden-480">Giáo viên</td>
-            <td class="hidden-480">Toán, Tin</td>
+            <td class="text-center"><?php echo $row['code'] ?></td>
+            <td><?php echo $row['fullname'] ?></td>
+            <td class="text-center hidden-480"><?php echo ($row['gender'] == 1) ? "Nam" : "Nữ" ?></td>
+            <td class="text-center hidden-480"><?php echo date("d-m-Y", strtotime($row['birthday'])) ?></td>
+            <td class="text-center hidden-480"><?php echo $row['level'] ?></td>
+            <td class="text-center hidden-480"><?php echo $row['job'] ?></td>
+            <td class="hidden-480"><?php echo implode(", ", $subject) ?></td>
             <td class="text-center">
                 <div class="action-buttons">
-                    <a class="blue" href="javascript:void(0)" onclick="detail()">
+                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-search-plus bigger-130"></i>
                     </a>
-                    <a class="green hidden-480" href="javascript:void(0)" onclick="edit()">
+                    <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
-                    <a class="red hidden-480" href="javascript:void(0)" onclick="del()">
+                    <a class="red hidden-480" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                     </a>
                 </div>
@@ -55,27 +64,22 @@
 <div class="row mini">
     <div class="col-xs-12 col-sm-6">
         <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
-            Hiển thị 1 đến 10 của 23 bản ghi</div>
+            <?php echo $convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
+        </div>
     </div>
     <div class="col-xs-12 col-sm-6">
+        <?php
+        if($jsonObj['total'] > $perpage){
+            $pagination = $convert->pagination($jsonObj['total'], $pages, $perpage);
+            $createlink = $convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_personal', 1);
+        ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">
-                <li class="paginate_button previous disabled" id="dynamic-table_previous">
-                    <a href="#">Trước</a>
-                </li>
-                <li class="paginate_button active">
-                    <a href="#">1</a>
-                </li>
-                <li class="paginate_button">
-                    <a href="#">2</a>
-                </li>
-                <li class="paginate_button">
-                    <a href="#">3</a>
-                </li>
-                <li class="paginate_button next" id="dynamic-table_next">
-                    <a href="#">Sau</a>
-                </li>
+                <?php echo $createlink ?>
             </ul>
         </div>
+        <?php
+        }
+        ?>
     </div>
 </div>
