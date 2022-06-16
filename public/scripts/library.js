@@ -289,3 +289,7 @@ function format_content(row){
     );
     return $strdata;
 }
+
+function url_content(url){
+    return $.get(url);
+}

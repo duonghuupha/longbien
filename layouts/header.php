@@ -22,6 +22,7 @@
 		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/Logo.png' ?>" />
 		<script src="<?php echo URL ?>/styles/js/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace-extra.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/html2canvas.js"></script>
 		<script src="<?php echo URL ?>/public./scripts/library.js"></script>
 		<script>
 			var baseUrl = '<?php echo URL ?>';

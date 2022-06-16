@@ -46,6 +46,7 @@ class Personal extends Controller{
                     $jsonObj['success'] = true;
                     $this->view->jsonObj = json_encode($jsonObj);
                 }else{
+                    $this->_Convert->generateBarcode($data = array('sku'=> $code), 'teacher');
                     $jsonObj['msg'] = "Quá trình tải ảnh lên bị gián đoạn, dữ liệu nhân sự đã được lưu";
                     $jsonObj['success'] = true;
                     $this->view->jsonObj = json_encode($jsonObj);
@@ -130,14 +131,21 @@ class Personal extends Controller{
     }
 
     function card(){
+        require('layouts/header.php');
         $id = $_REQUEST['id'];
         $jsonObj = $this->model->get_info($_REQUEST['id']);
         $this->view->jsonObj= $jsonObj;
         $this->view->render("personal/card");
+        require('layouts/footer.php');
     }
 
     function save_card(){
-        
+        $img = $_REQUEST['imgBase64']; $code = $_REQUEST['code'];
+        $img = str_replace("data:image/png;base64,", "", $img);
+        $imgr = str_replace(" ", "+", $img);
+        $data = base64_decode($img);
+        $file = DIR_UPLOAD.'/card/teacher/'.$code.'.png';
+        $success = file_put_contents($file, $data);
     }
 }
 ?>

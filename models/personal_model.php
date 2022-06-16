@@ -52,5 +52,11 @@ class Personal_Model extends Model{
                                     FROM tbl_personel WHERE id = $id");
         return $query->fetchAll();
     }
+
+    function return_id_hr_via_code($code){
+        $query = $this->db->query("SELECT id FROM tbl_personel WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['id'];
+    }
 }
 ?>

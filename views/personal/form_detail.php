@@ -4,6 +4,7 @@ foreach(explode(",",  $item[0]['subject']) AS $row){
     $subject[] = $sql->return_title_subject($row);
 }
 ?>
+<script src="<?php echo URL ?>/styles/js/html2canvas.js"></script>
 <div class="modal-header no-padding">
     <div class="table-header">
         Thông tin nhân sự
@@ -98,7 +99,7 @@ foreach(explode(",",  $item[0]['subject']) AS $row){
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Thẻ nhân sự </div>
                                 <div class="profile-info-value">
-                                    <canvas id="card" width="325" height="204"></canvas>
+                                    <img src="<?php echo URL.'/public/card/teacher/'.$item[0]['code'].'.png' ?>"/>
                                 </div>
                             </div>
                         </div>
@@ -114,71 +115,24 @@ foreach(explode(",",  $item[0]['subject']) AS $row){
         Đóng
     </button>
 </div>
-
 <script>
-    var canvas = document.getElementById('card');
-    var context = canvas.getContext("2d"), ctx = canvas.getContext("2d");
-    roundedImage(context, 0, 0, canvas.offsetWidth, canvas.offsetHeight, 10);
-    context.strokeStyle = '#06097c';
-    context.fillRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-    ctx.fillRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-    // Logo 
-    var image = new Image();
-    image.onload = function(){
-        context.drawImage(image, 10, 5, 30, 41);
-    }
-    image.src = "<?php echo URL ?>/styles/images/Logo.png";
-    // barcode 
-    var mavach = new Image();
-    mavach.src = "<?php echo URL ?>/public/barcode/teacher/<?php echo $item[0]['code'].'.png' ?>";
-    mavach.onload = function(){
-        ctx.drawImage(mavach, 110, 140, 190, 30);
-    }
-    // anh nhan su
-    var avatar = new Image();
-    avatar.src = "<?php echo URL ?>/public/avatar/<?php echo $item[0]['avatar'] ?>";
-    avatar.onload = function(){
-        roundedImage(context, 10, 60, 76, 114, 0);
-        context.strokeStyle = '#ccc';
-        context.stroke();
-        context.clip();
-        context.drawImage(avatar, 10, 60, 76, 114);
-        context.restore();
-    }
-    // Ten truong
-    context.fillStyle = "#06097c";
-    context.font = "bold 13px Arial";
-    context.fillText("TRƯỜNG TRUNG HỌC CƠ SỞ LONG BIÊN", 50, 25);
-    // Gach chan ten truong
-    context.strokeStyle = "#06097c";
-    context.lineWidth = 1;
-    context.moveTo(60, 35);
-    context.lineTo(300, 35);
-    context.stroke();
-    // ten nhan su
-    context.fillStyle = "#eb1c24";
-    context.font = "bold 17px Arial";
-    context.fillText("<?php echo mb_strtoupper($item[0]['fullname'], 'UTF-8') ?>", 120, 90);
-    // nhiem vu
-    context.fillStyle = "#000";
-    context.font = "bold 15px Arial";
-    context.fillText("<?php echo $item[0]['job'] ?>", 120, 120);
-    // ma nhan su
-    context.fillStyle = "#000";
-    context.font = "bold 13px Arial";
-    context.fillText("<?php echo $item[0]['code'] ?>", 170, 190);
-
-    function roundedImage(ctx, x, y, width, height, radius) {
-        ctx.beginPath();
-        ctx.moveTo(x + radius, y);
-        ctx.lineTo(x + width - radius, y);
-        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-        ctx.lineTo(x + width, y + height - radius);
-        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-        ctx.lineTo(x + radius, y + height);
-        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-        ctx.lineTo(x, y + radius);
-        ctx.quadraticCurveTo(x, y, x + radius, y);
-        ctx.closePath();
-    }
+    $(function(){
+        html2canvas(document.getElementById("card"),
+        {
+            allowTaint: true,
+            useCORS: true
+        }).then(function (canvas) {
+            /*$.ajax({
+                type: "POST",
+                url: "<?php echo URL.'/personal/save_card' ?>",
+                data: { 
+                    imgBase64: canvas.toDataURL(),
+                    code: <?php echo $item[0]['code'] ?>
+                }
+            }).done(function(o) {
+                console.log('saved'); 
+            });*/
+            console.log(canvas.toDataURL());
+        });
+    });
 </script>
