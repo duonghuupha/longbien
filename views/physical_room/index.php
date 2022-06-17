@@ -89,4 +89,4 @@
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/physical_room.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/categories/physical_room.js"></script>

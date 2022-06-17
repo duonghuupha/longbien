@@ -78,4 +78,4 @@
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/department.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/categories/department.js"></script>

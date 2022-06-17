@@ -1,3 +1,7 @@
+<?php
+$sql = new Model();
+$disabled_btn = ($sql->check_dupli_code() > 0) ? 'disabled=""' : '';
+?>
 <div class="main-content">
     <div class="main-content-inner">
         <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -11,8 +15,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
-                        onkeyup="search()"/>
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -21,45 +24,68 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Quản lý nhân sự
-                    <small class="pull-right">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="add()">
-                            <i class="fa fa-plus"></i>
-                            Thêm mới
-                        </button>
-                        <button type="button" class="btn btn-info btn-sm" onclick="import_teacher()">
-                            <i class="fa fa-file-excel-o"></i>
-                            Nhập từ file
+                    Nhập thông tin nhân sự qua file Excel
+                    <small class="pull-right hidden-480">
+                        <button type="button" class="btn btn-success btn-sm" onclick="save()"
+                        <?php echo $disabled_btn ?>>
+                            <i class="fa fa-save"></i>
+                            Ghi dữ liệu
                         </button>
                     </small>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-                <div class="col-xs-12 col-sm-12">
-                    <div id="list_personal" class="dataTables_wrapper form-inline no-footer"></div>
+                <div class="col-xs-12 col-sm-3">
+                    <form id="fm" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Lựa chọn file dữ liệu</label>
+                                    <div>
+                                        <input type="file" id="file_tmp" name="file_tmp" class="file_attach" style="width:100%"
+                                        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                        onchange="do_import()"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                Định dạng file là <b>.xlsx</b> (Excel 2007 trở lên). Tải file mẫu 
+                                <a href="<?php echo URL.'/public/temp/personel.xlsx'; ?>" target="_blank">tại đây</a> để moulde chạy đạt hiệu quả cao
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- /.col -->
+                <div class="col-xs-12 col-sm-9">
+                    <div id="list_personel_tmp" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+
 <!--Form don vi tinh-->
-<div id="modal-personal" class="modal fade" data-keyboard="false" data-backdrop="static">
+<div id="modal-personel" class="modal fade" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header no-padding">
+        <div class="modal-header no-padding">
                 <div class="table-header">
-                    Thêm mới - Cập nhật thông tin nhân sự
+                    Cập nhật thông tin nhân sự
                 </div>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <form id="fm" method="POST" enctype="multipart/form-data">
-                        <input id="image_old" name="image_old" type="hidden"/>
+                        <input id="id"  name="id" type="hidden"/>
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="form-field-username">Mã nhân sự</label>
-                                <div>
-                                    <input type="text" id="code" name="code" style="width:100%" />
+                                <div class="input-group">
+                                    <input type="text" id="code" name="code" style="width:100%"
+                                    onkeypress="validate(event)"/>
+                                    <span class="input-group-addon" style="cursor: pointer" title="Cập nhật mã nhân sự"
+                                    id="change_code">
+                                        <i class="fa fa-refresh bigger-110"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -88,21 +114,9 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="birthday" type="text" name="birthday"
-                                    data-date-format="dd-mm-yyyy" required="" readonly=""/>
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar bigger-110"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Địa chỉ</label>
                                 <div>
-                                    <input type="text" id="address" name='address' placeholder="Địa chỉ" style="width:100%"
-                                    required=""/>
+                                    <input class="form-control input-mask-date" id="birthday" type="text" 
+                                    name="birthday" required=""/>
                                 </div>
                             </div>
                         </div>
@@ -124,50 +138,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Trình độ</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Lựa chọn trình độ"
-                                    style="width:100%" required="" id="level_id" name="level_id">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label for="form-field-username">Chuyên môn</label>
+                                <label for="form-field-username">Địa chỉ</label>
                                 <div>
-                                    <select class="select2" data-placeholder="Lựa chọn chuyên môn..."
-                                    style="width:100%" required="" id="subject_id" name="subject_id[]" multiple="">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Phân công nhiệm vụ</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Lựa chọn nhiệm vụ..."
-                                    style="width:100%" required="" id="job_id" name="job_id">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Hình ảnh</label>
-                                <div>
-                                    <input type="file" id="avatar" name="avatar" class="file_attach" style="width:100%"
+                                    <input type="text" id="address" name='address' placeholder="Địa chỉ" style="width:100%"
                                     required=""/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Ghi chú</label>
-                                <div>
-                                    <input type="text" id="description" name="description" style="width:100%" />
                                 </div>
                             </div>
                         </div>
@@ -179,7 +155,7 @@
                     <i class="ace-icon fa fa-times"></i>
                     Đóng
                 </button>
-                <button class="btn btn-sm btn-primary pull-right" onclick="save()">
+                <button class="btn btn-sm btn-primary pull-right" onclick="save_info()">
                     <i class="ace-icon fa fa-save"></i>
                     Ghi dữ liệu
                 </button>
@@ -198,4 +174,5 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- End formm don vi tinh-->
-<script src="<?php echo URL.'/public/' ?>scripts/personel/index.js"></script>
+
+<script src="<?php echo URL.'/public/' ?>scripts/personel/import.js"></script>

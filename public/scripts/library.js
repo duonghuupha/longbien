@@ -13,6 +13,7 @@ $(function(){
         onchange:null,
         thumbnail:true
     });
+    $('.input-mask-date').mask('99-99-9999');
 });
 
 function style_option(value){
@@ -177,7 +178,7 @@ function save_form_reset_form(id_form, post_url, id_content, url_refresh){
         success: function(data){
             var result = JSON.parse(data);
             if(result.success == true){
-                show_message('error', result.msg);
+                show_message('success', result.msg);
                 $(id_form).trigger("reset");
                 $(id_content).load(url_refresh);
             }else{

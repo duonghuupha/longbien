@@ -1,7 +1,11 @@
 <?php 
 $item = $this->jsonObj; $sql = new Model();
-foreach(explode(",",  $item[0]['subject']) AS $row){
-    $subject[] = $sql->return_title_subject($row);
+if($item[0]['subject'] != ''){
+    foreach(explode(",",  $item[0]['subject']) AS $row){
+        $subject[] = $sql->return_title_subject($row);
+    }
+}else{
+    $subject = [];
 }
 ?>
 <script src="<?php echo URL ?>/styles/js/html2canvas.js"></script>
@@ -96,12 +100,15 @@ foreach(explode(",",  $item[0]['subject']) AS $row){
                                     <span class="editable" id="about"><?php echo $item[0]['description'] ?></span>
                                 </div>
                             </div>
+                            <?php if($item[0]['status'] != 99){ ?>
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> Thẻ nhân sự </div>
+                                <div class="profile-info-name"> Barcode </div>
                                 <div class="profile-info-value">
-                                    <img src="<?php echo URL.'/public/card/teacher/'.$item[0]['code'].'.png' ?>"/>
+                                    <img src="<?php echo URL.'/public/barcode/teacher/'.$item[0]['code'].'.png' ?>"
+                                    width="190" height="30"/>
                                 </div>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -110,29 +117,14 @@ foreach(explode(",",  $item[0]['subject']) AS $row){
     </div>
 </div>
 <div class="modal-footer">
+    <?php if($item[0]['status'] != 99){ ?>
+    <button class="btn btn-sm btn-success pull-left" onclick="window.location.href='<?php echo URL.'/personal/card?id='.$item[0]['id'] ?>'">
+        <i class="ace-icon fa fa-search"></i>
+        Xem thẻ
+    </button>
+    <?php } ?>
     <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
         <i class="ace-icon fa fa-times"></i>
         Đóng
     </button>
 </div>
-<script>
-    $(function(){
-        html2canvas(document.getElementById("card"),
-        {
-            allowTaint: true,
-            useCORS: true
-        }).then(function (canvas) {
-            /*$.ajax({
-                type: "POST",
-                url: "<?php echo URL.'/personal/save_card' ?>",
-                data: { 
-                    imgBase64: canvas.toDataURL(),
-                    code: <?php echo $item[0]['code'] ?>
-                }
-            }).done(function(o) {
-                console.log('saved'); 
-            });*/
-            console.log(canvas.toDataURL());
-        });
-    });
-</script>

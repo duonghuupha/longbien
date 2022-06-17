@@ -28,7 +28,7 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Chi tiết thông tin nhân sự
+                    Thẻ nhân viên
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -193,7 +193,12 @@ $(function(){
                 code: <?php echo $item[0]['code'] ?>
             }
         }).done(function(o) {
-            console.log('saved'); 
+            var result = JSON.parse(o);
+            if(result.success){
+                show_message("success", result.msg);
+            }else{
+                show_message("error", result.msg);
+            }
         });
     });
 });

@@ -35,4 +35,4 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
-<script src="<?php echo URL.'/public/' ?>scripts/calendars.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/calendars/index.js"></script>

@@ -159,4 +159,4 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- End formm don vi tinh-->
-<script src="<?php echo URL.'/public/' ?>scripts/categories.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/categories/categories.js"></script>
