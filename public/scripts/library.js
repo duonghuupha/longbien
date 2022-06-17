@@ -231,6 +231,45 @@ function exec_del(data_str, url_data, id_div, url_content){
     });
 }
 
+function update_data(str_data, notify, post_url, reject_url){
+    bootbox.confirm({
+        message: notify,
+        buttons:{
+            confirm: {
+                label: "Đồng ý",
+                className: "btn-danger btn-sm"
+            },
+            cancel: {
+                label: "Không đồng ý",
+                className: "btn-primary btn-sm"
+            }
+        },
+        callback: function(result){
+            if(result){
+                exec_del(str_data, post_url, id_div, url_refresh);
+            }
+        }
+    });
+}
+
+function exec_del(data_str, url_data, id_div, url_content){
+    $.ajax({
+        type: "POST",
+        url: url_data,
+        data: data_str, // serializes the form's elements.
+        success: function(data){
+            var result = JSON.parse(data);
+            if(result.success == true){
+                show_message('success', result.msg);
+                $(id_div).load(url_content);
+            }else{
+                show_message('error', result.msg);
+                return false;
+            }
+        }
+    });
+}
+
 function combo_select2(id_select, url_data){
     $(id_select).select2({
         ajax: {

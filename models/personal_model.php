@@ -75,5 +75,16 @@ class Personal_Model extends Model{
         $query = $this->delete("tbl_personel", "status = 99");
         return $query;
     }
+
+    function check_dupli_code(){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_personel GROUP BY code HAVING Total > 1");
+        $row = $query->fetchAll();
+        return count($row);
+    }
+
+    function get_all_tmp(){
+        $query = $this->db->query("SELECT * FROM tbl_personel WHERE status = 99");
+        return $query->fetchAll();
+    }
 }
 ?>

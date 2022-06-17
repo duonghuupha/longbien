@@ -55,7 +55,7 @@ function save_info(){
         }
     });
     if(allRequired){
-        save_form_modal('#fm', baseUrl+'/personel/update_tmp', '#modal-personal', '#list_personal_temp',  baseUrl+'/personal/content_temp?page='+page+'&q='+keyword); 
+        save_form_modal('#fm_edit', baseUrl+'/personal/update_tmp', '#modal-personel', '#list_personel_tmp',  baseUrl+'/personal/content_tmp?page='+page+'&q='+keyword); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -64,4 +64,14 @@ function save_info(){
 function change_code(idh){
     var number = Math.floor(Math.random() * 9999999999);
     $('#code').val(number);
+}
+
+function save(){
+    var data_str = '';;
+    del_data(data_str, "Bạn có chắc chắn muốn cập nhật dữ liệu ?", baseUrl + '/personal/update_all', "lis");
+}
+
+function del(idh){
+    var data_str = "id="+idh;
+    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/personal/del', "#list_personel_tmp", baseUrl + '/personal/content_tmp?page='+page+'&q='+keyword);
 }

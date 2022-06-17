@@ -1,6 +1,5 @@
 <?php
 $sql = new Model();
-$disabled_btn = ($sql->check_dupli_code() > 0) ? 'disabled=""' : '';
 ?>
 <div class="main-content">
     <div class="main-content-inner">
@@ -26,8 +25,7 @@ $disabled_btn = ($sql->check_dupli_code() > 0) ? 'disabled=""' : '';
                 <h1>
                     Nhập thông tin nhân sự qua file Excel
                     <small class="pull-right hidden-480">
-                        <button type="button" class="btn btn-success btn-sm" onclick="save()"
-                        <?php echo $disabled_btn ?>>
+                        <button type="button" class="btn btn-success btn-sm" onclick="save()">
                             <i class="fa fa-save"></i>
                             Ghi dữ liệu
                         </button>
@@ -74,7 +72,7 @@ $disabled_btn = ($sql->check_dupli_code() > 0) ? 'disabled=""' : '';
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form id="fm" method="POST" enctype="multipart/form-data">
+                    <form id="fm_edit" method="POST" enctype="multipart/form-data">
                         <input id="id"  name="id" type="hidden"/>
                         <div class="col-xs-6">
                             <div class="form-group">

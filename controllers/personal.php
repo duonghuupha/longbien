@@ -113,9 +113,17 @@ class Personal extends Controller{
         $temp = $this->model->delObj($id);
         if($temp){
             // thực hiện xóa barcode, thẻ và ảnh đại diện
-            unlink(DIR_UPLOAD.'/barcode/teacher/'.$barcode.'.png'); // Xóa barcode nhân sự
-            unlink(DIR_UPLOAD.'/card/teacher/'.$barcode.'.png'); // Xóa thẻ nhân sự
-            unlink(DIR_UPLOAD.'/avatar/'.$avatar); // Xóa ảnh đại diện
+            if(file_exists(DIR_UPLOAD.'/barcode/teacher/'.$barcode.'.png')){
+                unlink(DIR_UPLOAD.'/barcode/teacher/'.$barcode.'.png'); // Xóa barcode nhân sự
+            }
+            if(file_exists(DIR_UPLOAD.'/card/teacher/'.$barcode.'.png')){
+                unlink(DIR_UPLOAD.'/card/teacher/'.$barcode.'.png'); // Xóa thẻ nhân sự
+            }
+            if($avatar != ''){
+                if(file_exists(DIR_UPLOAD.'/avatar/'.$avatar)){
+                    unlink(DIR_UPLOAD.'/avatar/'.$avatar); // Xóa ảnh đại diện
+                }
+            }
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -258,6 +266,27 @@ class Personal extends Controller{
             }
         }
         $this->view->render("personal/update_tmp");
+    }
+
+    function update_all(){
+        if($this->model->check_dupli_code() > 0){
+            $jsonObj['msg']=  "Có nhân sự trùng mã, vui lòng kiểm tra lại";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $result = $this->model->get_all_tmp();
+            foreach($result as $row){
+                $data = array("status" => 1);
+                $temp = $this->model->updateObj($row['id'], $data);
+                if($temp){
+                    $this->_Convert->generateBarcode($data = array('sku'=> $row['code']), 'teacher');
+                }
+            }
+            $jsonObj['msg'] = 'Ghi dữ liệu thành công';
+            $jsonObj['success']  = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("personal/update_all");
     }
 }
 ?>
