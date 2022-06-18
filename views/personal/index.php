@@ -31,6 +31,10 @@
                             <i class="fa fa-file-excel-o"></i>
                             Nhập từ file
                         </button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="export_card()">
+                            <i class="fa fa-credit-card-alt"></i>
+                            Xuất thẻ
+                        </button>
                     </small>
                 </h1>
             </div><!-- /.page-header -->
@@ -88,12 +92,9 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="birthday" type="text" name="birthday"
-                                    data-date-format="dd-mm-yyyy" required="" readonly=""/>
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar bigger-110"></i>
-                                    </span>
+                                <div>
+                                    <input class="form-control input-mask-date" id="birthday" type="text" 
+                                    name="birthday"  required=""/>
                                 </div>
                             </div>
                         </div>

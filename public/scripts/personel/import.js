@@ -68,10 +68,15 @@ function change_code(idh){
 
 function save(){
     var data_str = '';;
-    del_data(data_str, "Bạn có chắc chắn muốn cập nhật dữ liệu ?", baseUrl + '/personal/update_all', "lis");
+    update_data(data_str, "Bạn có chắc chắn muốn cập nhật dữ liệu ?", baseUrl + '/personal/update_all', baseUrl + '/personal');
 }
 
 function del(idh){
     var data_str = "id="+idh;
     del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/personal/del', "#list_personel_tmp", baseUrl + '/personal/content_tmp?page='+page+'&q='+keyword);
+}
+
+function del_tmp(){
+    var data_str = "id=";
+    del_data(data_str, "Bạn có chắc chắn muốn xóa dữ liệu tạm?", baseUrl+'/personal/del_tmp', "#list_personel_tmp", baseUrl + '/personal/content_tmp?page='+page+'&q='+keyword);
 }

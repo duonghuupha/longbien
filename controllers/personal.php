@@ -288,5 +288,25 @@ class Personal extends Controller{
         }
         $this->view->render("personal/update_all");
     }
+
+    function export_card(){
+        require('layouts/header.php');
+        $this->view->render("personal/export_card");
+        require('layouts/footer.php');
+    }
+
+    function del_tmp(){
+        $temp = $this->model->delObj_temp();
+        if($temp){
+            $jsonObj['msg'] = "Xóa dữ liệu thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Xóa dữ liệu không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("personal/del_tmp");
+    }
 }
 ?>

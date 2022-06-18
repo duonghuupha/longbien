@@ -14,7 +14,8 @@ $sql = new Model();
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
+                        onkeyup="search()"/>
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -28,6 +29,10 @@ $sql = new Model();
                         <button type="button" class="btn btn-success btn-sm" onclick="save()">
                             <i class="fa fa-save"></i>
                             Ghi dữ liệu
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="del_tmp()">
+                            <i class="fa fa-trash"></i>
+                            Xóa bản ghi tạm
                         </button>
                     </small>
                 </h1>

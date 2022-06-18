@@ -1,8 +1,12 @@
 <?php 
     $item = $this->jsonObj; $convert = new Convert();
     $sql = new Model();
-    foreach(explode(",",  $item[0]['subject']) AS $row){
-        $subject[] = $sql->return_title_subject($row);
+    if($item[0]['subject'] != ''){
+        foreach(explode(",",  $item[0]['subject']) AS $row){
+            $subject[] = $sql->return_title_subject($row);
+        }
+    }else{
+        $subject  = [];
     }
 ?>
 <div class="main-content">
@@ -133,8 +137,19 @@
                                                 </div>
                                                 <div class="main" style="float:left; width:100%; oveflow:hidden; margin-top:10px;">
                                                     <div class="left" style="float:left; width:82px;">
+                                                        <?php
+                                                        if($item[0]['avatar'] != ''){ 
+                                                        ?>
                                                         <img src="<?php echo URL ?>/public/avatar/<?php echo $item[0]['avatar'] ?>"
                                                         style="width:76px; height:114px; border:1px solid gray; padding:2px; border-radius:5px;"/>
+                                                        <?php 
+                                                        }else{
+                                                        ?>
+                                                        <img src="<?php echo URL ?>/styles/images/avatars/profile-pic.jpg"
+                                                        style="width:76px; height:114px; border:1px solid gray; padding:2px; border-radius:5px;"/>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </div>
                                                     <div class="right" style="float:left; width:226px; font-family: Arial; text-align:center;padding: 0 10px 0px 10px;">
                                                         <span style="text-transform:uppercase; font-weight:700; color:#eb1c24; font-size:18px;

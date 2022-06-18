@@ -246,13 +246,13 @@ function update_data(str_data, notify, post_url, reject_url){
         },
         callback: function(result){
             if(result){
-                exec_del(str_data, post_url, id_div, url_refresh);
+                exec_update(str_data, post_url, reject_url);
             }
         }
     });
 }
 
-function exec_del(data_str, url_data, id_div, url_content){
+function exec_update(data_str, url_data, reject_url){
     $.ajax({
         type: "POST",
         url: url_data,
@@ -260,8 +260,7 @@ function exec_del(data_str, url_data, id_div, url_content){
         success: function(data){
             var result = JSON.parse(data);
             if(result.success == true){
-                show_message('success', result.msg);
-                $(id_div).load(url_content);
+                window.location.href = reject_url;
             }else{
                 show_message('error', result.msg);
                 return false;

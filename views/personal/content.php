@@ -29,8 +29,12 @@ $pages = $this->page; $sql = new Model();
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
-            foreach(explode(",",  $row['subject']) AS $item){
-                $subject[] = $sql->return_title_subject($item);
+            if($row['subject'] != ''){
+                foreach(explode(",",  $row['subject']) AS $item){
+                    $subject[] = $sql->return_title_subject($item);
+                }
+            }else{
+                $subject = [];
             }
         ?>
         <tr role="row" class="<?php echo $class ?>">

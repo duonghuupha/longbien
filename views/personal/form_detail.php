@@ -22,8 +22,19 @@ if($item[0]['subject'] != ''){
                     <div class="col-xs-12 col-sm-3 center">
                         <div>
                             <span class="profile-picture">
+                                <?php
+                                if($item[0]['avatar'] != ''){ 
+                                ?>
                                 <img id="avatar" class="editable img-responsive" alt="<?php echo $item[0]['fullname'] ?>" 
                                 src="<?php echo URL.'/public/avatar/'.$item[0] ['avatar']?>" />
+                                <?php 
+                                }else{
+                                ?>
+                                <img id="avatar" class="editable img-responsive" alt="<?php echo $item[0]['fullname'] ?>" 
+                                src="<?php echo URL ?>/styles/images/avatars/profile-pic.jpg" />
+                                <?php
+                                }
+                                ?>
                             </span>
                             <div class="space-4"></div>
                             <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">

@@ -21,15 +21,20 @@ function edit(idh){
             var result = JSON.parse(data);
             $('#code').val(result.code);
             $('#fullname').val(result.fullname); $('#gender').val(result.gender).trigger("change");
-            $('#birthday').datepicker('setDate', result.birthday); $('#address').val(result.address);
+            $('#birthday').val(result.birthday); $('#address').val(result.address);
             $('#phone').val(result.phone); $('#email').val(result.email); 
             $('#level_id').val(result.level_id).trigger('change');
             var subject = result.subject.split(",");
             $('#subject_id').val(subject).trigger('change'); $('#job_id').val(result.job_id).trigger('change');
             $('#description').val(result.description); $('#image_old').val(result.avatar);
+            if(result.avatar != ''){
+                $('#avatar').prop('required', false);
+            }else{
+                $('#avatar').prop('required', true);
+            }
         }
     });
-    $('#code').prop('readonly', true); $('#avatar').prop('required', false);
+    $('#code').prop('readonly', true);
     $('#modal-personal').modal('show');
     url = baseUrl + '/personal/update?id='+idh;
 }
@@ -77,4 +82,8 @@ function search(){
 ///////////////////////////////////////////////////////////////////////////////////////
 function import_teacher(){
     window.location.href = baseUrl + '/personal/import';
+}
+
+function export_card(){
+    window.location.href = baseUrl + '/personal/export_card';
 }
