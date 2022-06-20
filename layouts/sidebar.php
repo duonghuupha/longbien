@@ -1,4 +1,4 @@
-<div id="sidebar" class="sidebar responsive ace-save-state">
+<div id="sidebar" class="sidebar responsive ace-save-state sidebar-fixed">
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
             <button class="btn btn-success">
