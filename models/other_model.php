@@ -28,5 +28,10 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbldm_subject");
         return $query->fetchAll();
     }
+
+    function get_combo_equipment(){
+        $query = $this->db->query("SELECT id, title FROM tbldm_equipment");
+        return $query->fetchAll();
+    }
 }
 ?>

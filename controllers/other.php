@@ -34,5 +34,11 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_job");
     }
+
+    function combo_equipment(){
+        $jsonObj= $this->model->get_combo_equipment();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_equipment");
+    }
 }
 ?>

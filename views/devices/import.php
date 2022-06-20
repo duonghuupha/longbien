@@ -11,7 +11,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
+                        onkeyup="search()"/>
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -26,19 +27,24 @@
                             <i class="fa fa-save"></i>
                             Cập nhật
                         </button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="del_tmp()">
+                            <i class="fa fa-trash"></i>
+                            Xóa bản ghi tạm
+                        </button>
                     </small>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
                 <div class="col-xs-12 col-sm-3">
-                    <form id="fm" method="post" en>
+                    <form id="fm" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="form-field-username">Lựa chọn file dữ liệu</label>
                                     <div>
-                                        <input type="file" id="image" name="image" class="file_attach" style="width:100%"
-                                        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                                        <input type="file" id="file_asset" name="file_asset" class="file_attach" style="width:100%"
+                                        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                        onchange="do_import()"/>
                                     </div>
                                 </div>
                             </div>
@@ -57,4 +63,4 @@
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/import_device.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/import.js"></script>

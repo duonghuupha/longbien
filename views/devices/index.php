@@ -11,7 +11,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
+                        onkeyup="search()"/>
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -53,89 +54,89 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Mã thiết bị</label>
-                            <div>
-                                <input type="text" id="form-field-username"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
+                    <form id="fm" method="post" enctype="multipart/form-data">
+                        <input id="image_old" name="image_old" type="hidden"/>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Mã thiết bị</label>
+                                <div>
+                                    <input type="text" id="code" name="code" style="width:100%"
+                                    required="" readonly=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Tiêu đề</label>
+                                <div>
+                                    <input type="text" id="title" name="title" style="width:100%"
+                                    required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Danh mục thiết bị</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chonh danh mục..."
+                                    style="width:100%" required="" id="cate_id" name="cate_id">
+                                    </select>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Xuất sứ</label>
+                                <div>
+                                    <input id="origin" type="text"  name="origin"  required="" 
+                                    style="width:100%"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Nguyên giá</label>
+                                <div>
+                                    <input type="text" id="price" onkeypress="validate(event)" name="price"
+                                    required="" style="width:100%" data-type="currency"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Khấu hao (%)</label>
+                                <div>
+                                    <input type="text" id="depreciation" onkeypress="validate(event)"
+                                    name="depreciation" style="width:100%" maxlength="2" required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Năm đưa vào sử dụng</label>
+                                <div>
+                                    <input type="text" id="year_work" onkeypress="validate(event)"
+                                    name="year_work" required="" style="width:100%" maxlength="4"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Hình ảnh</label>
+                                <div>
+                                    <input type="file" id="image" name="image" class="file_attach" style="width:100%"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Mô tả / Thông số kỹ thuật</label>
+                                <div>
+                                    <textarea type="text" id="description" style="width:100%;resize:none;height:200px" name="description"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Tiêu đề</label>
-                            <div>
-                                <input type="text" id="form-field-username"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Danh mục thiết bị</label>
-                            <div>
-                                <select class="select2" data-placeholder="Choose a Country..."
-                                style="width:100%" required="" id="source" name="source">
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
-                                </select>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Xuất sứ</label>
-                            <div>
-                                <input id="date_import" type="text"  name="date_import"  required="" style="width:100%"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Nguyên giá</label>
-                            <div>
-                                <input type="text" id="form-field-username" onkeypress="validate(event)"
-                                placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Khấu hao (%)</label>
-                            <div>
-                                <input type="text" id="form-field-username" onkeypress="validate(event)"
-                                placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" 
-                                maxlength="2"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Năm đưa vào sử dụng</label>
-                            <div>
-                                <input type="text" id="form-field-username" onkeypress="validate(event)"
-                                    placeholder="Tiêu đề trình độ, ví dụ: Đại học" style="width:100%" maxlength="4"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Hình ảnh</label>
-                            <div>
-                                <input type="file" id="image" name="image" class="file_attach" style="width:100%"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="form-field-username">Mô tả / Thông số kỹ thuật</label>
-                            <div>
-                                <textarea type="text" id="form-field-username"placeholder="Tiêu đề trình độ, ví dụ: Đại học" 
-                                style="width:100%;resize:none"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -163,4 +164,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/devices.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/index.js"></script>

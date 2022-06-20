@@ -24,6 +24,11 @@
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
+		<div class="overlay">
+			<div class="overlay__inner">
+				<div class="overlay__content"><span class="spinner"></span></div>
+			</div>
+		</div>
 
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='styles/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
