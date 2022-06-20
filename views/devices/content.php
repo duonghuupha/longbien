@@ -25,12 +25,21 @@ $pages = $this->page; $sql = new Model();
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
+            if($row['cate_id'] == 0){
+                if($row['price'] >= 10000000){
+                    $danhmuc = "Tài sản cố định";
+                }else{
+                    $danhmuc = "Công cụ dụng cụ";
+                }
+            }else{
+                $danhmuc = $row['category'];
+            }
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
-            <td class="text-center hidden-480"><?php echo $row['category'] ?></td>
+            <td class="text-center hidden-480"><?php echo $danhmuc ?></td>
             <td class="text-center hidden-480"><?php echo $row['origin'] ?></td>
             <td class="text-center hidden-480"><?php echo $row['year_work'] ?></td>
             <td class="text-right hidden-480"><?php echo number_format($row['price']) ?></td>

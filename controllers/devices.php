@@ -179,12 +179,14 @@ class Devices extends Controller{
                     }elseif($j == 6){
                         $depreciation = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }elseif($j == 7){
+                        $stock = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                    }elseif($j == 8){
                         $description = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }
                 }
                 $data = array("code" => $code, 'title' => $title, 'origin' => $origin,
                                 'year_work' => $year_work,  'price' => $price, 'depreciation' => $depreciation,
-                                'description' => $description, 'status' => 99);
+                                'description' => $description, 'status' => 99, "stock" =>     $stock);
                 $this->model->addObj($data);
             }
             $jsonObj['msg'] = "Import dữ liệu thành công";
@@ -210,6 +212,54 @@ class Devices extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("devices/del_tmp");
+    }
+
+    function update_tmp(){
+        $id = $_REQUEST['id'];
+        $code = $_REQUEST['code']; $title = $_REQUEST['title'];
+        $origin = $_REQUEST['origin']; $price = str_replace(",", "", $_REQUEST['price']); 
+        $depreciation = $_REQUEST['depreciation']; $yearwork = $_REQUEST['year_work']; 
+        $description = $_REQUEST['description'];
+        if($this->model->dupliObj($id, $code) > 0){
+            $jsonObj['msg'] = "Mã thiết bị đã tồn tại";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $data = array("code" => $code, "title" => $title, "origin" => $origin,
+                            "price" => $price, "depreciation" => $depreciation,
+                            "year_work" => $yearwork, "description" => $description);
+            $temp = $this->model->updateObj($id, $data);
+            if($temp){
+                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }
+        $this->view->render("devices/update_tmp");
+    }
+
+    function update_all(){
+        if($this->model->check_dupli_code() > 0){
+            $jsonObj['msg']=  "Có thiết bị trùng mã, vui lòng kiểm tra lại";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $temp = $this->model->update_all_tmp();
+            if($temp){
+                $jsonObj['msg'] = 'Ghi dữ liệu thành công';
+                $jsonObj['success']  = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
+                $jsonObj['success']  = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }
+        $this->view->render("personal/update_all");
     }
 }
 ?>

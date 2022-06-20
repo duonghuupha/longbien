@@ -50,6 +50,11 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function check_dupli_code_device($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }

@@ -63,4 +63,97 @@
     </div>
 </div><!-- /.main-content -->
 
+<!--Form don vi tinh-->
+<div id="modal-info" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    Cập nhật thông tin thiết bị
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="fm_info" method="post" enctype="multipart/form-data">
+                        <input id="image_old" name="image_old" type="hidden"/>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Mã thiết bị</label>
+                                <div>
+                                    <input type="text" id="code" name="code" style="width:100%"
+                                    required="" onkeypress="validate(event)" maxlength="8"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Tiêu đề</label>
+                                <div>
+                                    <input type="text" id="title" name="title" style="width:100%"
+                                    required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Xuất sứ</label>
+                                <div>
+                                    <input id="origin" type="text"  name="origin"  required="" 
+                                    style="width:100%"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Nguyên giá</label>
+                                <div>
+                                    <input type="text" id="price" onkeypress="validate(event)" name="price"
+                                    required="" style="width:100%" data-type="currency"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Khấu hao (%)</label>
+                                <div>
+                                    <input type="text" id="depreciation" onkeypress="validate(event)"
+                                    name="depreciation" style="width:100%" maxlength="2" required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Năm đưa vào sử dụng</label>
+                                <div>
+                                    <input type="text" id="year_work" onkeypress="validate(event)"
+                                    name="year_work" required="" style="width:100%" maxlength="4"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Mô tả / Thông số kỹ thuật</label>
+                                <div>
+                                    <textarea type="text" id="description" style="width:100%;resize:none;height:200px" name="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="save_info()">
+                    <i class="ace-icon fa fa-save"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
 <script src="<?php echo URL.'/public/' ?>scripts/devices/import.js"></script>
