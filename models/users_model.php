@@ -30,6 +30,16 @@ class Users_Model extends Model{
         return $row[0]['Total'];
     }
 
+    function dupliObj_hr($id, $hrid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE hr_id = $hrid");
+        if($id > 0){
+            $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE hr_id = $hrid
+                                    AND id != $id");
+        }
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
     function addObj($data){
         $query = $this->insert("tbl_users", $data);
         return $query;

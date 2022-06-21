@@ -27,5 +27,10 @@ class Index_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+
+    function get_year_active(){
+        $query = $this->db->query("SELECT * FROM tbldm_years WHERE active = 1");
+        return $query->fetchAll();
+    }
 }
 ?>

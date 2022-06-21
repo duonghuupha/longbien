@@ -41,6 +41,7 @@ class Index extends Controller{
                     Session::init();
                     Session::set('loggedIn', true);
                     $_SESSION['data'] = $this->model->get_data($username, $password);
+                    $_SESSION['year'] = $this->model->get_year_active();
                     $jsonObj['msg'] = "Đăng nhập thành công";
                     $jsonObj['token'] = $token;
                     $jsonObj['success'] = true;
@@ -63,6 +64,7 @@ class Index extends Controller{
                         Session::init();
                         Session::set('loggedIn', true);
                         $_SESSION['data'] = $this->model->get_data($username, $password);
+                        $_SESSION['year'] = $this->model->get_year_active();
                         $jsonObj['msg'] = "Đăng nhập thành công";
                         $jsonObj['token'] = $token;
                         $jsonObj['success'] = true;

@@ -29,17 +29,23 @@ class Users extends Controller{
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $data = array('code' => $code, 'username' => $username, 'password' => sha1($password),
-                            'active' => 1, 'hr_id' => $hrid);
-            $temp = $this->model->addObj($data);
-            if($temp){
-                $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                $jsonObj['success'] = true;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }else{
-                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+            if($this->model->dupliObj_hr(0, $hrid) > 0){
+                $jsonObj['msg'] = "Nhân sự này đã được tạo thông tin đăng nhập";
                 $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $data = array('code' => $code, 'username' => $username, 'password' => sha1($password),
+                                'active' => 1, 'hr_id' => $hrid);
+                $temp = $this->model->addObj($data);
+                if($temp){
+                    $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                    $jsonObj['success'] = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
             }
         }
         $this->view->render('users/add');
