@@ -13,25 +13,19 @@ function add(){
 }
 
 function edit(idh){
-    $.ajax({
-        type: "POST",
-        url: baseUrl + '/personal/data_edit',
-        data: "id="+idh, // serializes the form's elements.
-        success: function(data){
-            var result = JSON.parse(data);
-            $('#code').val(result.code);
-            $('#fullname').val(result.fullname); $('#gender').val(result.gender).trigger("change");
-            $('#birthday').val(result.birthday); $('#address').val(result.address);
-            $('#phone').val(result.phone); $('#email').val(result.email); 
-            $('#level_id').val(result.level_id).trigger('change');
-            var subject = result.subject.split(",");
-            $('#subject_id').val(subject).trigger('change'); $('#job_id').val(result.job_id).trigger('change');
-            $('#description').val(result.description); $('#image_old').val(result.avatar);
-            if(result.avatar != ''){
-                $('#avatar').prop('required', false);
-            }else{
-                $('#avatar').prop('required', true);
-            }
+    $.getJSON(baseUrl+'/personal/data_edit?id='+idh, function(data) {
+        $('#code').val(data.code);
+        $('#fullname').val(data.fullname); $('#gender').val(data.gender).trigger("change");
+        $('#birthday').val(data.birthday); $('#address').val(data.address);
+        $('#phone').val(data.phone); $('#email').val(data.email); 
+        $('#level_id').val(data.level_id).trigger('change');
+        var subject = data.subject.split(",");
+        $('#subject_id').val(subject).trigger('change'); $('#job_id').val(data.job_id).trigger('change');
+        $('#description').val(data.description); $('#image_old').val(data.avatar);
+        if(data.avatar != ''){
+            $('#avatar').prop('required', false);
+        }else{
+            $('#avatar').prop('required', true);
         }
     });
     $('#code').prop('readonly', true);

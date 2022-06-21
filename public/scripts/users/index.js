@@ -9,15 +9,6 @@ function add(){
 }
 
 function edit(idh){
-    /*$.getJSON('http://time.jsontest.com', function(data) {
-
-        var text = `Date: ${data.date}<br>
-                    Time: ${data.time}<br>
-                    Unix time: ${data.milliseconds_since_epoch}`
-
-
-        $(".mypanel").html(text);
-    });*/
     $('#model-users').modal('show');
     url = baseUrl + '/users/update?id='+idh
 }
