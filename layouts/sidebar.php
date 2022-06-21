@@ -309,7 +309,7 @@
             </ul>
         </li>
         <li class="hover">
-            <a href="personel.php">
+            <a href="<?php echo URL.'/users' ?>">
                 <i class="menu-icon fa fa-user"></i>
                 <span class="menu-text">
                     Người dùng

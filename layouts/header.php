@@ -1,3 +1,6 @@
+<?php
+$info = $_SESSION['data'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -23,10 +26,21 @@
 		<script src="<?php echo URL ?>/styles/js/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace-extra.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/html2canvas.js"></script>
-		<script src="<?php echo URL ?>/public./scripts/library.js"></script>
 		<script>
 			var baseUrl = '<?php echo URL ?>';
+			<?php  
+			if($info[0]['id'] != 1){
+				if(isset($_SESSION['year'])){
+					echo 'var yearid = '.$_SESSION['year'][0]['id'].', userid = '.$info[0]['id'];
+				}else{
+					echo 'var yearid = 0, userid = '.$info[0]['id'];
+				}
+			}else{
+				echo 'var yearid = 0, userid = '.$info[0]['id'];
+			}
+			?>
 		</script>
+		<script src="<?php echo URL ?>/public./scripts/library.js"></script>
 	</head>
 
 	<body class="no-skin">

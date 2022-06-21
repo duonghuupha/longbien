@@ -20755,4 +20755,7 @@ input.typeahead.scrollable~.tt-menu {
       transform: rotate(360deg);
     }
 }
+.year_school{
+    background: none !important;
+}
 /************************************************************/

@@ -1,3 +1,6 @@
+<?php
+$info = $_SESSION['data'];
+?>
 <div id="navbar" class="navbar navbar-default ace-save-state navbar-fixed-top">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -7,7 +10,7 @@
             <span class="icon-bar"></span>
         </button>
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="<?php echo URL.'/index' ?>" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     LBHS Manager
@@ -16,80 +19,10 @@
         </div>
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
-                <li class="grey dropdown-modal">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="ace-icon fa fa-tasks"></i>
-                        <span class="badge badge-grey">4</span>
+                <li class="dropdown-modal">
+                    <a class="dropdown-toggle" href="#">
+                        <span class="badge year_school">Năm học 2021 - 2022</span>
                     </a>
-                    <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                        <li class="dropdown-header">
-                            <i class="ace-icon fa fa-check"></i>
-                            4 Tasks to complete
-                        </li>
-
-                        <li class="dropdown-content">
-                            <ul class="dropdown-menu dropdown-navbar">
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Software Update</span>
-                                            <span class="pull-right">65%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini">
-                                            <div style="width:65%" class="progress-bar"></div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Hardware Upgrade</span>
-                                            <span class="pull-right">35%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini">
-                                            <div style="width:35%" class="progress-bar progress-bar-danger"></div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Unit Testing</span>
-                                            <span class="pull-right">15%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini">
-                                            <div style="width:15%" class="progress-bar progress-bar-warning"></div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Bug Fixes</span>
-                                            <span class="pull-right">90%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini progress-striped active">
-                                            <div style="width:90%" class="progress-bar progress-bar-success"></div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown-footer">
-                            <a href="#">
-                                See tasks with details
-                                <i class="ace-icon fa fa-arrow-right"></i>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="purple dropdown-modal">
@@ -274,34 +207,33 @@
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="<?php echo URL.'/' ?>styles/images/avatars/user.jpg" alt="Jason's Photo" />
                         <span class="user-info">
-                            <small>Welcome,</small>
-                            Jason
+                            <small>Xin chào,</small>
+                            <?php
+                            if($info[0]['hr_id'] == 0){
+                                echo "Administrator";
+                            }
+                            ?>
                         </span>
-
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
-
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
                             <a href="#">
                                 <i class="ace-icon fa fa-cog"></i>
-                                Settings
+                                Cài đặt
                             </a>
                         </li>
-
                         <li>
                             <a href="profile.html">
                                 <i class="ace-icon fa fa-user"></i>
-                                Profile
+                                Tài khoản
                             </a>
                         </li>
-
                         <li class="divider"></li>
-
                         <li>
-                            <a href="#">
+                            <a href="<?php echo URL.'/index/logout' ?>">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                                Đăng xuất
                             </a>
                         </li>
                     </ul>
