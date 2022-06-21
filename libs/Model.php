@@ -55,6 +55,11 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function return_fullname_per($hrid){
+        $query = $this->db->query("SELECT fullname FROM tbl_personel WHERE id = $hrid");
+        $row = $query->fetchAll();
+        return $row[0]['fullname'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }

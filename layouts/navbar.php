@@ -1,5 +1,5 @@
 <?php
-$info = $_SESSION['data'];
+$info = $_SESSION['data']; $sql = new Model();
 ?>
 <div id="navbar" class="navbar navbar-default ace-save-state navbar-fixed-top">
     <div class="navbar-container ace-save-state" id="navbar-container">
@@ -211,6 +211,8 @@ $info = $_SESSION['data'];
                             <?php
                             if($info[0]['hr_id'] == 0){
                                 echo "Administrator";
+                            }else{
+                                echo $sql->return_fullname_per($info[0]['hr_id']);
                             }
                             ?>
                         </span>

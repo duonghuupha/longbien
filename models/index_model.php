@@ -21,5 +21,11 @@ class Index_Model extends Model{
         $query = $this->update("tbl_users", $data, "username = '$username' AND password = '$password'");
         return $query;
     }
+
+    function check_year_active(){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_years WHERE active = 1");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>
