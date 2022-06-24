@@ -77,6 +77,10 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function return_info_device($id){
+        $query = $this->db->query("SELECT code, title FROM tbl_devices WHERE id = $id");
+        return $query->fetchAll();
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }
