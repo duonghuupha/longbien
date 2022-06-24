@@ -30,14 +30,18 @@ $pages = $this->page; $sql = new Model();
                 $z++;
                 $array[] = '* '.$item['device'].' - '.$item['sub_device'];
                 if($z == 2){
-                    $array[] = "<a href='javascript:void(0)' onclick=''>Xem thêm</a>";
+                    $array[] = "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>Xem thêm</a>";
                     break;
                 }
             }
+            foreach($device as $items){
+                $tbdc[$i][] = $items['device_id'].'.'.$items['sub_device'];
+            }
+
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center"><?php echo $row['code'] ?></td>
+            <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
             <td class="text-center"><?php echo $row['namhoc'] ?></td>
             <td class="text-center hidden-480"><?php echo $row['physical'] ?></td>
             <td class="text-center hidden-480"><?php echo date("d-m-Y H:i:s", strtotime($row['create_at'])) ?></td>
@@ -53,6 +57,7 @@ $pages = $this->page; $sql = new Model();
                 </div>
             </td>
             <td class="hidden" id="physical_<?php echo $row['id'] ?>"><?php echo $row['physical_id'] ?></td>
+            <td class="hidden" id="tbdc_<?php echo $row['id'] ?>"><?php echo implode(",", $tbdc[$i]) ?></td>
         </tr>
         <?php
         }

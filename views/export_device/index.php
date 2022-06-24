@@ -28,6 +28,7 @@
                 <div class="col-xs-12 col-sm-12">
                     <form  id="fm" method="post">
                         <input id="device_selected" name="device_selected" type="hidden"/>
+                        <input id="code" name="code" type="hidden"/>
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn phòng</label>
@@ -91,6 +92,26 @@
     </div>
 </div><!-- /.main-content -->
 
-
+<!--Form don vi tinh-->
+<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header no-padding">
+                <div class="table-header">
+                    Danh sách thiết bị được phân bổ
+                </div>
+            </div>
+            <div class="modal-body" id="detail">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 
 <script src="<?php echo URL.'/public/' ?>scripts/export_device/index.js"></script>

@@ -20,7 +20,7 @@ $info = $_SESSION['data']; $sql = new Model();
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="dropdown-modal">
-                    <a class="dropdown-toggle" href="#">
+                    <a class="dropdown-toggle" href="javascript:void(0)">
                         <span class="badge year_school">Năm học 2021 - 2022</span>
                     </a>
                 </li>
@@ -34,7 +34,7 @@ $info = $_SESSION['data']; $sql = new Model();
                     <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                         <li class="dropdown-header">
                             <i class="ace-icon fa fa-exclamation-triangle"></i>
-                            8 Notifications
+                            8 Thông báo
                         </li>
 
                         <li class="dropdown-content">
@@ -102,7 +102,7 @@ $info = $_SESSION['data']; $sql = new Model();
                     <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                         <li class="dropdown-header">
                             <i class="ace-icon fa fa-envelope-o"></i>
-                            5 Messages
+                            5 Tin nhắn
                         </li>
 
                         <li class="dropdown-content">

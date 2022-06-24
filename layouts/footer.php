@@ -3,7 +3,7 @@
 					<div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">THCS Long Biên</span>
-							Application &copy; 2013-2014
+							Application &copy; <?php echo date("Y") - 1 ?>-<?php echo date("Y") ?>
 						</span>
 						&nbsp; &nbsp;
 						<span class="action-buttons">

@@ -70,5 +70,71 @@ class Export_device extends Controller{
         }
         $this->view->render("export_device/add");
     }
+
+    function update(){
+        $id = $_REQUEST['id'];
+        $code = $_REQUEST['code']; $yearid = $this->_Year[0]['id']; $physical = $_REQUEST['physical_id'];
+        $device = $_REQUEST['device_selected'];
+        if($this->model->dupliObj($id, $physical) > 0){
+            $jsonObj['msg'] = "Phòng này đã được phân bổ trang thiết bị, vui lòng cập nhật lại nếu có thay đổi";
+            $jsonObj['success'] =  false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $data = array("year_id" => $yearid, "physical_id" => $physical,
+                            "create_at" => date("Y-m-d H:i:s"));
+            $temp = $this->model->updateObj($id, $data);
+            if($temp){
+                $this->model->delObj_detail($code); // xoa ban ghi cu
+                $device = base64_decode($device); $device = explode(",", $device);
+                foreach($device as $row){
+                    $value = explode(".", $row);
+                    $data_detail = array("code" => $code,  "device_id" =>$value[0], "sub_device" => $value[1], "status" => 0);
+                    $this->model->addObj_detail($data_detail);
+                }
+                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }
+        $this->view->render("export_device/update");
+    }
+
+    function  del(){
+        $id = $_REQUEST['id'];
+        $temp = $this->model->delObj($id);
+        if($temp){
+            $jsonObj['msg'] = "Xóa dữ liệu thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Xóa dữ liệu không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("export_device/del");
+    }
+/////////////////////////////////////////////////////////////////////////////////////////
+    function data_edit(){
+        $id = $_REQUEST['id'];
+        $result = $this->model->get_list_device_export($id);
+        foreach($result as $row){
+            $jsonObj[] = $row['device_id'].'.'.$row['sub_device'];
+        }
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("export_device/data_edit");
+    }
+
+    function detail(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_info_export($id);
+        $this->view->jsonObj = $jsonObj;
+        $detail = $this->model->get_detail_export_device($jsonObj[0]['code']);
+        $this->view->detail = $detail;
+        $this->view->render("export_device/detail");
+    }
 }
 ?>

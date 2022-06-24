@@ -244,11 +244,11 @@ function del_data(str_data, notify, post_url, id_div, url_refresh){
         buttons:{
             confirm: {
                 label: "Đồng ý",
-                className: "btn-danger btn-sm"
+                className: "btn-primary btn-sm"
             },
             cancel: {
                 label: "Không đồng ý",
-                className: "btn-primary btn-sm"
+                className: "btn-danger btn-sm"
             }
         },
         callback: function(result){

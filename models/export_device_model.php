@@ -46,5 +46,41 @@ class Export_device_Model extends Model{
         $query = $this->insert("tbl_export_detail", $data);
         return $query;
     }
+
+    function updateObj($id, $data){
+        $query = $this->update("tbl_export", $data, "id = $id");
+        return $query;
+    }
+
+    function delObj_detail($code){
+        $query = $this->delete("tbl_export_detail", "code = $code");
+        return $query;
+    }
+
+    function delObj($id){
+        $query = $this->delete("tbl_export", "id = $id");
+        return $query;
+    }
+
+    function get_list_device_export($id){
+        $query = $this->db->query("SELECT device_id, sub_device FROM tbl_export_detail WHERE code = (SELECT tbl_export.code
+                                    FROM tbl_export WHERE tbl_export.id = $id) AND status = 0");
+        return $query->fetchAll();
+    }
+
+    function get_info_export($id){
+        $query = $this->db->query("SELECT id, code, year_id, physical_id, create_at, (SELECT title
+                                    FROM tbldm_years WHERE tbldm_years.id = year_id) AS namhoc,
+                                    (SELECT title FROM tbldm_physical_room WHERE tbldm_physical_room.id = physical_id)
+                                    AS physical FROM tbl_export WHERE id = $id");
+        return $query->fetchAll();
+    }
+
+    function get_detail_export_device($code){
+        $query = $this->db->query("SELECT code, device_id, sub_device, status, (SELECT title FROM tbl_devices
+                                    WHERE tbl_devices.id = device_id) AS title FROM tbl_export_detail 
+                                    WHERE code = $code");
+        return $query->fetchAll();
+    }
 }
 ?>
