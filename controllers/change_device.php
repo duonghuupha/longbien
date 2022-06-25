@@ -16,6 +16,12 @@ class Change_device extends Controller{
     }
 
     function content(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
+        $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('change_device/content');
     }
 
