@@ -194,7 +194,7 @@
                 <li class="hover">
                     <a href="<?php echo URL.'/loans' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Quản lý mượn - trả
+                        Mượn - trả
                     </a>
                     <b class="arrow"></b>
                 </li>

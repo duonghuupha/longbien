@@ -10,13 +10,13 @@ $pages = $this->page; $sql = new Model();
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
-            <th class="text-center" style="width:80px">Mã</th>
-            <th class="">Tên đăng nhập</th>
-            <th class="text-left">Họ tên nhân sự</th>
-            <th class="text-center">Đăng nhập lần cuối</th>
-            <th class="text-center" style="width:250px">Thông tin đăng nhập</th>
-            <th class="text-center">Trạng thái</th>
-            <th class="text-center" style="width:100px">Thao tác</th>
+            <th class="text-center" style="width:80px">Mã TB</th>
+            <th class="">Tiêu đề</th>
+            <th class="text-center hidden-480">Danh mục</th>
+            <th class="text-center hidden-480">Xuất sứ</th>
+            <th class="text-center hidden-480">Năm sử dụng</th>
+            <th class="text-right hidden-480">Nguyên giá</th>
+            <th class="text-center">Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -24,29 +24,32 @@ $pages = $this->page; $sql = new Model();
         $i = 0;
         foreach($jsonObj['rows'] as $row){
             $i++;
-            $class = ($i%2 == 0) ? 'even' : 'odd';
+            $class = ($i%2 == 0) ? 'even' : 'odd'; 
+            if($row['cate_id'] == 0){
+                if($row['price'] >= 10000000){
+                    $danhmuc = "Tài sản cố định";
+                }else{
+                    $danhmuc = "Công cụ dụng cụ";
+                }
+            }else{
+                $danhmuc = $row['category'];
+            }
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
-            <td><?php echo $row['username'] ?></td>
-            <td class="text-center"><?php echo $row['fullname'] ?></td>
-            <td class="text-center"><?php echo $row['last_login'] ?></td>
-            <td class="text-center"><?php echo $row['info_login'] ?></td>
-            <td class="text-center">
-                <?php
-                if($row['active'] == 1){
-                    echo '<span class="label label-sm label-success">Đang hoạt động</span>';
-                }else{
-                    echo '<span class="label label-sm label-danger">Không hoạt động</span>';
-                }
-                ?>
-            </td>
+            <td><?php echo $row['title'] ?></td>
+            <td class="text-center hidden-480"><?php echo $danhmuc ?></td>
+            <td class="text-center hidden-480"><?php echo $row['origin'] ?></td>
+            <td class="text-center hidden-480"><?php echo $row['year_work'] ?></td>
+            <td class="text-right hidden-480"><?php echo number_format($row['price']) ?></td>
             <td class="text-center">
                 <div class="action-buttons">
-                    <a class="green hidden-480" href="javascript:void(0)" onclick="re_pass(<?php echo $row['id'] ?>)"
-                    title="Đặt lại mật khẩu">
-                        <i class="ace-icon fa fa-refresh bigger-130"></i>
+                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
+                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                    </a>
+                    <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
+                        <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
                     <a class="red hidden-480" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
@@ -69,7 +72,7 @@ $pages = $this->page; $sql = new Model();
         <?php
         if($jsonObj['total'] > $perpage){
             $pagination = $convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_users', 1);
+            $createlink = $convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_devices', 1);
         ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">
