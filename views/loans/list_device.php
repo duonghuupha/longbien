@@ -12,11 +12,6 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã TB</th>
             <th class="">Tiêu đề</th>
-            <th class="text-center hidden-480">Danh mục</th>
-            <th class="text-center hidden-480">Xuất sứ</th>
-            <th class="text-center hidden-480">Năm sử dụng</th>
-            <th class="text-right hidden-480">Nguyên giá</th>
-            <th class="text-center">Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -25,37 +20,11 @@ $pages = $this->page; $sql = new Model();
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
-            if($row['cate_id'] == 0){
-                if($row['price'] >= 10000000){
-                    $danhmuc = "Tài sản cố định";
-                }else{
-                    $danhmuc = "Công cụ dụng cụ";
-                }
-            }else{
-                $danhmuc = $row['category'];
-            }
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
-            <td class="text-center hidden-480"><?php echo $danhmuc ?></td>
-            <td class="text-center hidden-480"><?php echo $row['origin'] ?></td>
-            <td class="text-center hidden-480"><?php echo $row['year_work'] ?></td>
-            <td class="text-right hidden-480"><?php echo number_format($row['price']) ?></td>
-            <td class="text-center">
-                <div class="action-buttons">
-                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
-                    </a>
-                    <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                    </a>
-                    <a class="red hidden-480" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                    </a>
-                </div>
-            </td>
         </tr>
         <?php
         }
