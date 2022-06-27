@@ -4,22 +4,7 @@ $(function(){
 });
 
 function add(){
-    $('.overlay').show();
-    $.ajax({
-        type: "POST",
-        url: baseUrl + '/loans/create_tmp',
-        data: "", // serializes the form's elements.
-        success: function(data){
-            var result = JSON.parse(data);
-            if(result.success == true){
-                window.location.href = baseUrl + '/loans/formadd';
-            }else{
-                $('.overlay').hide();
-                show_message('error', result.msg);
-                return false;
-            }
-        }
-    });
+    window.location.href = baseUrl + '/loans/formadd';
 }
 
 function edit(idh){

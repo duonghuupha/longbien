@@ -32,9 +32,15 @@ class Loans_Model extends Model{
 ///////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_device($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices_temp WHERE title LIKE '%$q%'");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE title LIKE '%$q%' 
+                                    AND id NOT IN (SELECT device_id FROM tbl_export_detail 
+                                    GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id_global AS id, title, code  FROM tbl_devices_temp WHERE title LIKE '%$q%'");
+        $query = $this->db->query("SELECT id, title, code  FROM tbl_devices WHERE title LIKE '%$q%'
+                                    AND id NOT IN (SELECT device_id FROM tbl_export_detail 
+                                    GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

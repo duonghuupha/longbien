@@ -21,7 +21,7 @@ $info = $_SESSION['data']; $sql = new Model();
             <ul class="nav ace-nav">
                 <li class="dropdown-modal">
                     <a class="dropdown-toggle" href="javascript:void(0)">
-                        <span class="badge year_school">Năm học 2021 - 2022</span>
+                        <span class="badge year_school"><?php echo $_SESSION['year'][0]['title'] ?></span>
                     </a>
                 </li>
 

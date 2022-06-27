@@ -55,34 +55,9 @@ class Loans extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
+        $jsonObj = $this->model->get_data_device($keyword,  $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render("loans/list_device");
-    }
-
-    function create_tmp(){
-        // thuc hien tao bang du lieu tam cua thiet bi
-        $tmp = $this->model->empty_table_tmp();
-        if($tmp){
-            $jsonObj = $this->model->get_device();
-            foreach($jsonObj as $row){
-                for($i = 1; $i <= $row['stock']; $i++){
-                    if($this->_Data->check_exit_sub_device($row['id'], $i) == 0){
-                        //echo $row['id'].'-'.$row['title'].'-'.$i.'<br/>';
-                        $data = array('title' => $row['title'], "id_global" => $row['id'].'.'.$i, "code" =>  $row['code']);
-                        $this->model->addObj_device_temp($data);
-                    }
-                }
-            }
-            $jsonObj['msg'] = "";
-            $jsonObj['success'] = true;
-            $this->view->jsonObj = json_encode($jsonObj);
-        }else{
-            $jsonObj['msg'] = "Quá trình tạo dữ liệu mẫu gặp lỗi. Vui lòng thử lại sau";
-            $jsonObj['success'] = false;
-            $this->view->jsonObj = json_encode($jsonObj);
-        }
-        $this->view->render("loans/create_tmp");
     }
 }
 ?>
