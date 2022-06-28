@@ -50,6 +50,7 @@
 		<script src="<?php echo URL ?>/styles/js/fullcalendar.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/bootbox.js"></script>
 		<script src="<?php echo URL ?>/styles/js/jquery.maskedinput.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/bootstrap-datetimepicker.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace-elements.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace.min.js"></script>
 	</body>

@@ -20,6 +20,22 @@ $(function(){
           formatCurrency($(this));
         }
     });
+    $('.date-timepicker').datetimepicker({
+        //format: 'DD-MM-YYYY HH:mm:ss',//use this option to display seconds
+        icons: {
+           time: 'fa fa-clock-o',
+           date: 'fa fa-calendar',
+           up: 'fa fa-chevron-up',
+           down: 'fa fa-chevron-down',
+           previous: 'fa fa-chevron-left',
+           next: 'fa fa-chevron-right',
+           today: 'fa fa-arrows ',
+           clear: 'fa fa-trash',
+           close: 'fa fa-times'
+        }
+       }).next().on(ace.click_event, function(){
+           $(this).prev().focus();
+       });
 });
 
 function style_option(value){

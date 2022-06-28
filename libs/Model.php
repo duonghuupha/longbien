@@ -81,6 +81,19 @@ class Model {
         $query = $this->db->query("SELECT code, title FROM tbl_devices WHERE id = $id");
         return $query->fetchAll();
     }
+    function get_device_selected($code){
+        $query = $this->db->query("SELECT CONCAT(device_id, '.', sub_device) AS id, (SELECT title FROM tbl_devices
+                                WHERE tbl_devices.id = device_id) AS title, (SELECT tbl_devices.code
+                                FROM tbl_devices WHERE tbl_devices.id = device_id) AS code, status,  sub_device
+                                FROM tbl_loans_detail WHERE code = $code AND status = 0");
+        return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
+    }
+    function check_exit_sub_device_loans($deviceid, $subdevice){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans_detail WHERE device_id = $deviceid
+                                    AND sub_device = $subdevice AND status = 0");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }

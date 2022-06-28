@@ -40,5 +40,12 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_equipment");
     }
+
+    function info_personel_scan(){
+        $code = $_REQUEST['code'];
+        $jsonObj = $this->model->get_info_personel_via_code($code);
+        $this->view->jsonObj = json_encode($jsonObj[0]);
+        $this->view->render("other/info_personel_scan");
+    }
 }
 ?>

@@ -33,5 +33,12 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbldm_equipment");
         return $query->fetchAll();
     }
+
+    function get_info_personel_via_code($code){
+        $query = $this->db->query("SELECT id, fullname, (SELECT tbl_users.id FROM tbl_users
+                                WHERE tbl_users.hr_id = tbl_personel.id) AS user_id FROM tbl_personel
+                                WHERE code = $code");
+        return $query->fetchAll();
+    }
 }
 ?>

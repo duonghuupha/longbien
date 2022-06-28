@@ -27,6 +27,10 @@
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </button>
+                        <button type="button" class="btn btn-info btn-sm" onclick="add_reserve()">
+                            <i class="fa fa-calendar"></i>
+                            Đặt trước
+                        </button>
                     </small>
                 </h1>
             </div><!-- /.page-header -->
@@ -38,4 +42,139 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+
+<!--Form don vi tinh-->
+<div id="modal-loan" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header" id="title_modal">
+                    Thêm mới - Cập nhật phiếu mượn thiết bị
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="fm" method="POST" enctype="multipart/form-data">
+                        <input id="user_loan" name="user_loan" type="hidden"/>
+                        <input id="datadc" name="datadc" type="hidden"/>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn người mượn <b>SCAN</b></label>
+                                <div>
+                                    <input type="text" id="personel_code" name="personel_code"
+                                    placeholder="Sử dụng mã nhân sự" style="width:100%" onchange="set_user_loan()"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn người mượn</label>
+                                <div class="input-group">
+                                    <input type="text" id="fullname" name="fullname" required=""
+                                    placeholder="Click Go! để lựa chọn" style="width:100%" readonly=""/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_user()"
+                                        id="select_users">
+                                            <i class="ace-icon fa fa-users bigger-110"></i>
+                                            Go!
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Ngày mượn</label>
+                                <div class="input-group">
+                                    <input class="form-control date-timepicker" id="date_loan" type="text" 
+                                    name="date_loan" required="" data-date-format="dd-mm-yyyy" readonly=""/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar bigger-110"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Ngày dự kiến trả</label>
+                                <div class="input-group">
+                                    <input class="form-control date-picker" id="date_return" type="text" 
+                                    name="date_return"  required="" data-date-format="dd-mm-yyyy" readonly=""/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar bigger-110"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Nội dung</label>
+                                <div>
+                                    <textarea id="content" name="content" style="width:100%;resize:none" 
+                                    required=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Ghi chú</label>
+                                <div>
+                                    <textarea id="notes" name="notes" style="width:100%;resize:none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <button class="btn btn-sm btn-success pull-right" onclick="select_device()"
+                            type="button" id="select_devices">
+                                <i class="ace-icon fa fa-cubes"></i>
+                                Lựa chọn trang thiết bị(s)
+                            </button>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="dataTables_wrapper form-inline no-footer">
+                                <table id="dynamic-table"
+                                    class="table table-striped table-bordered table-hover dataTable no-footer"
+                                    role="grid" aria-describedby="dynamic-table_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="text-center" style="width:20px">#</th>
+                                            <th class="text-center" style="width:100px">Mã</th>
+                                            <th class="">Tên trang thiết bị</th>
+                                            <th class="text-center">Số con</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="save()">
+                    <i class="ace-icon fa fa-save"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content" id="detail" style="height:551px">
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
 <script src="<?php echo URL.'/public/' ?>scripts/loans/index.js"></script>
