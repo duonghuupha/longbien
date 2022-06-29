@@ -8,7 +8,8 @@ $(function(){
 function add(){
     $('#title_modal').text("Thêm mới - Cập nhật phiếu mượn thiết bị");
     $('#user_loan').val(null); $('#fullname').val(null); $('#content').val(null);
-    $('#notes').val(null); $('#personel_code').focus();
+    $('#notes').val(null); $('#personel_code').focus(); $('#personel_code').attr('disabled',false);
+    $('#device_code').attr('disabled',false);
     let today = new Date(); var ngay = today.getDate(), thang = (today.getMonth() + 1);
     var nam = today.getFullYear(); data = []; render_table(data);
     var hientai = ngay+'-'+thang+'-'+nam+' '+today.getHours()+':'+today.getMinutes(); $('#date_loan').datepicker('setDate', hientai);
@@ -224,5 +225,13 @@ function return_device_quick(){
 }
 
 function add_reserve(){
-    
+    $('#title_modal').text("Đặt trước mượn thiết bị");
+    $('#user_loan').val(null); $('#fullname').val(null); $('#content').val(null);
+    $('#notes').val(null); $('#select_users').attr("disabled", true);
+    $('#personel_code').attr("disabled", true); $('#device_code').attr("disabled", true);
+    let today = new Date(); var ngay = today.getDate(), thang = (today.getMonth() + 1);
+    var nam = today.getFullYear(); data = []; render_table(data);
+    var hientai = ngay+'-'+thang+'-'+nam+' '+today.getHours()+':'+today.getMinutes(); $('#date_loan').datepicker('setDate', hientai);
+    $('#date_return').datepicker('setDate', hientai); $('#modal-loan').modal('show');
+    url = baseUrl + '/loans/reserve';
 }
