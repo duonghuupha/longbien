@@ -32,5 +32,9 @@ class Qrcode_device extends Controller{
     function print_barcode(){
         $this->view->render("qrcode_device/print_barcode");
     }
+
+    function print_allcode(){
+        $this->view->render("qrcode_device/print_allcode");
+    }
 }
 ?>

@@ -8,6 +8,7 @@ foreach($data as $row){
     for($i = 1; $i <= $detail[0]['stock']; $i++){
         $convert->generateBarcode_device($data = array('sku'=> $detail[0]['code'].'.'.$i), 'barcode');
         $title_file = $detail[0]['code'].'_'.$i;
+        for($z = 1; $z <= $value[1]; $z++){
 ?>
 <div class="item">
     <img src="<?php echo URL.'/public/assets/barcode/'.$title_file.'.png' ?>" width="190" height="50"/>
@@ -23,6 +24,7 @@ foreach($data as $row){
     </div>
 </div>
 <?php
+        }
     }
 }
 ?>

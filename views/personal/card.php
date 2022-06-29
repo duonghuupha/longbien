@@ -124,8 +124,8 @@
                                         <div class="profile-info-name"> Thẻ nhân sự </div>
                                         <div class="profile-info-value">
                                             <div id="card" style="width:320px; height:199px; border:1px solid #06097c; border-radius: 10px;
-                                            overflow:hidden;padding:5px; background: url('<?php echo URL.'/styles/images/bg_card.png' ?>') center;">
-                                                <div class="top" style="width:100%; height:55px;overflow:hidden">
+                                            overflow:hidden;padding:5px;">
+                                                <div class="top" style="width:100%; height:55px;overflow:hidden; background: url('<?php echo URL.'/styles/images/bg_card.png' ?>') center;">
                                                     <div class="logo" style="float:left; width:40px;">
                                                         <img src="<?php echo URL ?>/styles/images/Logo.png" style="width:40px;height:55px;"/>
                                                     </div>
