@@ -86,5 +86,12 @@ class Personal_Model extends Model{
         $query = $this->db->query("SELECT * FROM tbl_personel WHERE status = 99");
         return $query->fetchAll();
     }
+
+    function get_personel_via_id($array){
+        $query = $this->db->query("SELECT id, code, avatar, fullname, (SELECT title FROM tbldm_job
+                                    WHERE tbldm_job.id = job_id) AS job FROM tbl_personel
+                                    WHERE FIND_IN_SET(id, '$array')");
+        return $query->fetchAll();
+    }
 }
 ?>

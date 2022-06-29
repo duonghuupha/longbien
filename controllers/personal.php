@@ -308,5 +308,50 @@ class Personal extends Controller{
         }
         $this->view->render("personal/del_tmp");
     }
+
+    function content_card(){
+        $rows = 15;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
+        $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('personal/content_card');
+    }
+
+    function print_card(){
+        require('layouts/header.php');
+        $data = $_REQUEST['data']; $data = base64_decode($data);
+        $jsonObj = $this->model->get_personel_via_id($data);
+        $this->view->jsonObj  = $jsonObj;
+        $this->view->render("personal/print_card");
+        require('layouts/footer.php');
+    }
+
+    function print_print_card(){
+        $data = $_REQUEST['data']; $data = base64_decode($data);
+        $jsonObj = $this->model->get_personel_via_id($data);
+        $zip = new ZipArchive;
+        $tmp_file = DIR_UPLOAD.'/card/tmp/the_nhan_su.zip';
+        if ($zip->open($tmp_file,  ZipArchive::CREATE)) {
+            foreach($jsonObj as $row){
+                $zip->addFile(DIR_UPLOAD.'/card/teacher/'.$row['code'].'.png', $this->_Convert->vn2latin($row['fullname'], true).'.png');
+                //$zip->addFile('folder/bootstrap.min.js', 'bootstrap.min.js');
+            }
+            $zip->close();
+            //echo 'Archive created!';
+                //header('Content-disposition: attachment; filename=files.zip');
+                //header('Content-type: application/zip');
+                //readfile($tmp_file);
+            $jsonObj['msg'] = "Nén dữ liệu thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        } else {
+            $jsonObj['msg'] = "Nén dữ liệu không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("personal/print_print_card");
+    }
 }
 ?>
