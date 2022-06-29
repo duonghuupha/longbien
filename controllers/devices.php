@@ -37,7 +37,7 @@ class Devices extends Controller{
             $temp = $this->model->addObj($data);
             if($temp){
                 if($_FILES['image']['name'] != ''){
-                    if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/assets/'.$image)){
+                    if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/assets/images/'.$image)){
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
@@ -78,7 +78,7 @@ class Devices extends Controller{
             $temp = $this->model->updateObj($id, $data);
             if($temp){
                 if($_FILES['image']['name'] != ''){
-                    if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/assets/'.$image)){
+                    if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/assets/images/'.$image)){
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);

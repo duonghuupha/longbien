@@ -24,8 +24,16 @@
                     In mã trang thiết bị
                     <small class="pull-right hidden-480">
                         <button type="button" class="btn btn-primary btn-sm" onclick="print_code()">
+                            <i class="fa fa-qrcode"></i>
+                            In QRCODE
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm" onclick="print_barcode()">
+                            <i class="fa fa-barcode"></i>
+                            In BARCODE
+                        </button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="print_allcode()">
                             <i class="fa fa-print"></i>
-                            In mã
+                            In mã tổng hợp
                         </button>
                     </small>
                 </h1>

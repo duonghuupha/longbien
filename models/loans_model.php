@@ -44,6 +44,11 @@ class Loans_Model extends Model{
         return $query;
     }
 
+    function updateObj_via_code($code, $data){
+        $query = $this->update("tbl_loans", $data, "code = $code");
+        return $query;
+    }
+
     function updateObj_detail($data, $code, $deviceid, $subdevice){
         $query = $this->update("tbl_loans_detail", $data, "code = $code AND device_id = $deviceid AND sub_device = $subdevice");
         return $query;
@@ -112,6 +117,13 @@ class Loans_Model extends Model{
                                     AND status = 0");
         $row = $query->fetchAll();
         return $row[0]['Total'];
+    }
+
+    function get_detail_loans_via_device($devicecode, $subdevice){
+        $query = $this->db->query("SELECT id, code, status, date_return, device_id, sub_device FROM tbl_loans_detail
+                                    WHERE status = 0 AND sub_device = $subdevice AND device_id = (SELECT tbl_devices.id
+                                    FROM tbl_devices WHERE tbl_devices.code = $devicecode)");
+        return $query->fetchAll();
     }
 }
 ?>

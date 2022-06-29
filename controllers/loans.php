@@ -126,5 +126,36 @@ class Loans extends Controller{
         $this->view->jsonObj = json_encode($jsonObj[0]);
         $this->view->render("loans/data_edit");
     }
+
+    function return_quick(){
+        $devicecode = explode(".", $_REQUEST['code']);
+        $info = $this->model->get_detail_loans_via_device($devicecode[0], $devicecode[1]);
+        $datereturn = date("Y-m-d H:i:s");
+        if(count($info) > 0){
+            $data_detail = array("status" => 1, "date_return" => $datereturn);
+            $temp = $this->model->updateObj_detail($data_detail, $info[0]['code'], $info[0]['device_id'], $devicecode[1]);
+            if($temp){
+                if($this->model->check_return_all_device($info[0]['code']) > 0){
+                    // chua tra het
+                    $data = array("date_return" => $datereturn, "status" => 2);
+                }else{
+                    $data = array("date_return" => $datereturn, "status" => 1);
+                }
+                $this->model->updateObj_via_code($info[0]['code'], $data);
+                $jsonObj['msg'] = "Trả thiết bị thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Trả thiết bị không thành công. Vui lòng thử lại";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{
+            $jsonObj['msg'] = "Thiết bị đã được trả";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("loans/return_quick");
+    }
 }
 ?>

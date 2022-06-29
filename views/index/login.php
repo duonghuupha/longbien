@@ -20,7 +20,7 @@
 			var baseUrl = '<?php echo URL ?>';
 		</script>
 	</head>
-	<body class="login-layout">
+	<body class="login-layout light-login">
 		<div class="main-container">
 			<div class="main-content">
 				<div class="row">

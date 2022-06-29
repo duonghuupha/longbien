@@ -2,6 +2,7 @@ var page = 1, keyword = '',  url = '', page_user = 1, keyword_user = '', data = 
 var keyword_device = '', page_device = 1;
 $(function(){
     $('#list_loan').load(baseUrl + '/loans/content');
+    $('#sidebar').addClass('menu-min');
 });
 
 function add(){
@@ -186,9 +187,40 @@ function return_device(idh){
 function set_user_loan(){
     var value = $('#personel_code').val();
     $.getJSON(baseUrl+'/other/info_personel_scan?code='+value, function(data) {
-        $('#user_loan').val(data.user_id); $('#fullname').val(data.fullname);
-        $('#personel_code').val(null);
+        if(data.user_id !== null){
+            $('#user_loan').val(data.user_id); $('#fullname').val(data.fullname);
+            $('#personel_code').val(null);
+        }else{
+            show_message("error", "Nhân sự này chưa được tạo tài khoản");
+            $('#personel_code').val(null);
+        }
     });
+}
+
+function set_device_loan(){
+    var value = $('#device_code').val();
+    $.getJSON(baseUrl+'/other/info_device_scan?code='+value, function(result) {
+        if(result.total == 1){
+            var str = {'id': result.record.id, 'code': result.record.code, 'title': result.record.title, 'sub_device': result.record.sub_device};
+            var objIndex = data.findIndex(item => item.id === result.record.id);
+            if(objIndex != -1){
+                show_message("error", "Thiết bị đã được chọn, không thể chọn lại");
+            }else{
+                data.push(str);
+                render_table(data);
+            }
+        }else{
+            show_message("error", "Thiết bị đã được phân bổ hoặc đã được cho mượn");
+        }
+        $('#device_code').val(null);
+    });
+}
+
+function return_device_quick(){
+    var value = $('#device_return_quick').val();
+    var data_str = 'code='+value;
+    exec_del(data_str, baseUrl + '/loans/return_quick', '#list_loan', baseUrl + '/loans/content?page='+page+'&q='+keyword);
+    $('#device_return_quick').val(null);
 }
 
 function add_reserve(){

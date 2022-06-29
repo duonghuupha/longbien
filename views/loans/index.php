@@ -35,7 +35,18 @@
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-                <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-12 col-sm-3">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Trả nhanh thiết bị</label>
+                            <div>
+                                <input type="text" id="device_return_quick" name="device_return_quick"
+                                placeholder="Sử dụng mã thiết bị" style="width:100%" onchange="return_device_quick()"/>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.col -->
+                <div class="col-xs-12 col-sm-9">
                     <div id="list_loan" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -123,7 +134,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <div>
+                                    <input type="text" id="device_code" name="device_code"
+                                    placeholder="Sử dụng mã của từng thiết bị" style="width:100%" onchange="set_device_loan()"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
                             <button class="btn btn-sm btn-success pull-right" onclick="select_device()"
                             type="button" id="select_devices">
                                 <i class="ace-icon fa fa-cubes"></i>

@@ -1,8 +1,10 @@
 <?php
 class Other extends Controller{
+    private $_Data;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
+        $this->_Data = new Model();
     }
 
     function combo_years(){
@@ -46,6 +48,24 @@ class Other extends Controller{
         $jsonObj = $this->model->get_info_personel_via_code($code);
         $this->view->jsonObj = json_encode($jsonObj[0]);
         $this->view->render("other/info_personel_scan");
+    }
+
+    function info_device_scan(){
+        $code_device = explode(".",  $_REQUEST['code']); 
+        $info = $this->model->get_info_device_pass_code($code_device[0]);
+        // kiem tra xem thiet bi co ton tai khong
+        if($this->_Data->check_exit_sub_device($info[0]['id'], $code_device[1]) > 0
+        || $this->_Data->check_exit_sub_device_loans($info[0]['id'], $code_device[1]) > 0){
+            $jsonObj['total'] = 0;
+            $jsonObj['record'] = [];
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $json = $this->model->get_info_device_via_code($code_device[0], $code_device[1]);
+            $jsonObj['record'] = $json[0];
+            $jsonObj['total'] = 1;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("other/info_device_scan");
     }
 }
 ?>

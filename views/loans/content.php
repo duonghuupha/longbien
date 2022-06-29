@@ -18,7 +18,7 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center">Ngày dự kiến trả</th>
             <th class="text-center">Số lượng</th>
             <th class="text-center">Trạng thái</th>
-            <th class="text-center" style="width:100px">Thao tác</th>
+            <th class="text-center" style="width:80px">Thao tác</th>
         </tr>
     </thead>
     <tbody>

@@ -40,5 +40,16 @@ class Other_Model extends Model{
                                 WHERE code = $code");
         return $query->fetchAll();
     }
+
+    function get_info_device_via_code($code, $subdevice){
+        $query = $this->db->query("SELECT CONCAT(id, '.', $subdevice) AS id, code, title, status, $subdevice AS sub_device 
+                                    FROM tbl_devices WHERE code = $code");
+        return $query->fetchAll();
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_info_device_pass_code($code){
+        $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");
+        return $query->fetchAll();
+    }
 }
 ?>

@@ -293,6 +293,23 @@ class Convert{
         }
     }
 
+    function generateBarcode_device($data, $folder) {
+        $PNG_TEMP_DIR = DIR_UPLOAD.'/assets/'.$folder.'/';
+        $PNG_WEB_DIR = DIR_UPLOAD.'/assets/'.$folder.'/';
+        $SKU = $data["sku"]; $title_file = str_replace(".", "_", $data['sku']);
+        $filename = $PNG_TEMP_DIR.$title_file.'.png';
+        if(file_exists($filename)){
+            return $filename;
+        }else{
+            $productData = $SKU;
+            $barcode = new \Com\Tecnick\Barcode\Barcode();
+            $bobj = $barcode->getBarcodeObj('C128B', "{$productData}", 450, 70, 'black', array(0, 0, 0, 0));
+            $imageData = $bobj->getPngData();
+            file_put_contents($filename, $imageData);
+            return $filename;
+        }
+    }
+
     function return_between_hours($diff){
         $years = floor($diff / (365*60*60*24));
         $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));

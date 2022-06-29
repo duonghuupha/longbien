@@ -1,25 +1,27 @@
 <title>Trường THCS Long Biên - Quận Long Biên</title>
+<body onload="print()">
 <?php
 $data = base64_decode($_REQUEST['data']); $data = explode(",", $data);
 $sql = new Model();
 foreach($data as $row){
     $value = explode(".", $row); $detail = $sql->return_info_device($value[0]);
-    for($i = 1; $i <= $value[1]; $i++){
+    for($z = 1; $z <= $detail[0]['stock']; $z++){
+        for($i = 1; $i <= $value[1]; $i++){
 ?>
-<body onload="print()">
 <div class="item">
-    <img src="<?php echo URL.'/qrcode_device/qrcode?data='.base64_encode($detail[0]['code']."-".$i).'&size=200x200' ?>"/>
+    <img src="<?php echo URL.'/qrcode_device/qrcode?data='.base64_encode($detail[0]['code']."-".$z).'&size=200x200' ?>"/>
     <div>
         <?php
         echo "<img src='".URL."/styles/images/giao_duc.jpg'/>";
         ?>
         <span>
             <i>Trường THCS Long Biên</i>
-            <i><?php echo $detail[0]['title'].' - '.$i ?></i>
+            <i><?php echo $detail[0]['title'].' - '.$z ?></i>
         </span>
     </div>
 </div>
 <?php
+        }
     }
 }
 ?>

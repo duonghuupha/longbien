@@ -23,7 +23,7 @@ $info = $_SESSION['data'];
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-rtl.min.css" />
-		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/Logo.png' ?>" />
+		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/Logo.png" />
 		<script src="<?php echo URL ?>/styles/js/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace-extra.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/html2canvas.js"></script>

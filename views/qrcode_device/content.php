@@ -52,7 +52,7 @@ $pages = $this->page; $sql = new Model();
             <td class="text-right hidden-480"><?php echo number_format($row['price']) ?></td>
             <td class="text-center">
                 <input id="qty_<?php echo $row['id'] ?>" name="qty_<?php echo $row['id'] ?>"
-                value="<?php echo $row['stock'] ?>" size="1" class="form-control" style="text-align:center"/>
+                value="1" size="1" class="form-control" style="text-align:center"/>
             </td>
         </tr>
         <?php

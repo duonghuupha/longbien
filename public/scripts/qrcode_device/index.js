@@ -35,3 +35,20 @@ function print_code(){
         return false;
     }
 }
+
+function print_barcode(){
+    let myArray = (function() {
+        let a = [];
+        $(".ck_inma:checked").each(function() {
+            var qty = $('#qty_'+this.value).val();
+            a.push(this.value+'.'+qty);
+        });
+        return a;
+    })()
+    if(myArray.length > 0){
+        window.open(baseUrl + '/qrcode_device/print_barcode?data='+btoa(myArray.join(",")));
+    }else{
+        show_message('error', 'Không có bản ghi nào được chọn');
+        return false;
+    }
+}
