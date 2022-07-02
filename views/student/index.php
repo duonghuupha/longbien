@@ -40,8 +40,8 @@
 
 <!--Form don vi tinh-->
 <div id="modal-student" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content" style="height:575px">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
                     Thêm mới - Cập nhật thông tin học sinh
@@ -49,223 +49,120 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div id="tabs">
-                        <ul>
-                            <li>
-                                <a href="#tabs-1">Thông tin học sinh</a>
-                            </li>
-                            <li>
-                                <a href="#tabs-2">Quan hệ</a>
-                            </li>
-                        </ul>
-                        <div id="tabs-1" style="height:461px">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Mã học sinh</label>
-                                        <div>
-                                            <input type="text" id="code" name="code" required=""
-                                            placeholder="Mã học sinh gồm 12 chữ số ngẫu nhiên" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Họ và tên</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Giới tính</label>
-                                        <div>
-                                            <select class="select2" data-placeholder="Choose a Country..."
-                                            style="width:100%" required="" id="gender" name="gender">
-                                                <option value="1">Nam</option>
-                                                <option value="2">Nữ</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Ngày sinh</label>
-                                        <div class="input-group">
-                                            <input class="form-control date-picker" id="date_import" type="text" name="date_import"
-                                                data-date-format="dd-mm-yyyy" required="" readonly=""/>
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-calendar bigger-110"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Trạng thái</label>
-                                        <div>
-                                            <select class="select2" data-placeholder="Choose a Country..."
-                                            style="width:100%" required="" id="status" name="status">
-                                                <option value="1">Đang đi học</option>
-                                                <option value="2">Nghỉ học</option>
-                                                <option value="3">Chuyển trường</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Hình ảnh</label>
-                                        <div>
-                                            <input type="file" id="image" name="image" class="file_attach" style="width:100%"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Tỉnh / Thành phố</label>
-                                        <div>
-                                            <select class="select2" data-placeholder="Choose a Country..."
-                                            style="width:100%" required="" id="gender" name="gender">
-                                                <option value="1">Nam</option>
-                                                <option value="2">Nữ</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Quận / Huyện</label>
-                                        <div>
-                                            <select class="select2" data-placeholder="Choose a Country..."
-                                            style="width:100%" required="" id="gender" name="gender">
-                                                <option value="1">Nam</option>
-                                                <option value="2">Nữ</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Xã / Phường</label>
-                                        <div>
-                                            <select class="select2" data-placeholder="Choose a Country..."
-                                            style="width:100%" required="" id="gender" name="gender">
-                                                <option value="1">Nam</option>
-                                                <option value="2">Nữ</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Số nhà, Tên đường</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Số nhà, tên đường" style="width:100%" />
-                                        </div>
-                                    </div>
+                    <form id="fm" method="post" enctype="multipart/form-data">
+                        <input  id="datadc" name="datadc" type="hidden"/>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">
+                                    Mã học sinh &nbsp;
+                                    <a href="javascript:void(0)" onclick="refresh_code()" title="Tạo mã code">
+                                        <i class="fa fa-refresh"></i>
+                                    </a>
+                                </label>
+                                <div>
+                                    <input type="text" id="code" name="code" required="" readonly=""
+                                    placeholder="Mã học sinh gồm 12 chữ số ngẫu nhiên" style="width:100%" />
                                 </div>
                             </div>
                         </div>
-                        <div id="tabs-2" style="height:461px">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Họ và tên bố</label>
-                                        <div>
-                                            <input type="text" id="code" name="code" required=""
-                                            placeholder="Mã học sinh gồm 12 chữ số ngẫu nhiên" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Năm sinh của bố</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Số điện thoại của bố</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Số điện thoại của bố</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Nghề nghiệp của bố</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Họ và tên mẹ</label>
-                                        <div>
-                                            <input type="text" id="code" name="code" required=""
-                                            placeholder="Mã học sinh gồm 12 chữ số ngẫu nhiên" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Năm sinh của mẹ</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Số điện thoại của mẹ</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Số điện thoại của mẹ</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Nghề nghiệp của mẹ</label>
-                                        <div>
-                                            <input type="text" id="fullname" name="fullname" required=""
-                                            placeholder="Họ và tên học sinh" style="width:100%" />
-                                        </div>
-                                    </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Họ và tên</label>
+                                <div>
+                                    <input type="text" id="fullname" name="fullname" required=""
+                                    placeholder="Họ và tên học sinh" style="width:100%" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!---->
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Giới tính</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn giới tính..."
+                                    style="width:100%" required="" id="gender" name="gender">
+                                        <option value="1">Nam</option>
+                                        <option value="2">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
+                                <div>
+                                    <input class="form-control input-mask-date" id="birthday" type="text" 
+                                    name="birthday"  required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="form-group">
+                                <label for="form-field-username">Địa chỉ</label>
+                                <div>
+                                    <input type="text" id="address" name="address" required=""
+                                    placeholder="Địa chỉ" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="form-field-username">Lớp học</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn lớp học..."
+                                    style="width:100%" required="" id="department_id" name="department_id">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Hình ảnh</label>
+                                <div>
+                                    <input type="file" id="image" name="image" class="file_attach" style="width:100%"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Trạng thái</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Choose a Country..."
+                                    style="width:100%" required="" id="status" name="status">
+                                        <option value="1">Đang đi học</option>
+                                        <option value="2">Nghỉ học</option>
+                                        <option value="3">Chuyển trường</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <button class="btn btn-sm btn-success pull-right" onclick="add_line()"
+                            type="button" id="select_devices">
+                                <i class="ace-icon fa fa-list"></i>
+                                Thêm dòng (s)
+                            </button>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="dataTables_wrapper form-inline no-footer">
+                                <table id="quanhe"
+                                    class="table table-striped table-bordered table-hover dataTable no-footer"
+                                    role="grid" aria-describedby="dynamic-table_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="text-center" style="width:100px">Quan hệ</th>
+                                            <th class="">Họ và tên</th>
+                                            <th class="text-center" style="width:100px">Năm sinh</th>
+                                            <th class="text-center"style="width:120px">Điện thoại</th>
+                                            <th class="text-center">Nghề nghiệp</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -283,4 +180,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/student.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/student/index.js"></script>

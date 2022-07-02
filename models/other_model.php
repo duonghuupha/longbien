@@ -5,7 +5,7 @@ class Other_Model extends Model{
     }
 
     function get_combo_years(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_years");
+        $query = $this->db->query("SELECT id, title, active FROM tbldm_years");
         return $query->fetchAll();
     }
 
@@ -44,6 +44,12 @@ class Other_Model extends Model{
     function get_info_device_via_code($code, $subdevice){
         $query = $this->db->query("SELECT CONCAT(id, '.', $subdevice) AS id, code, title, status, $subdevice AS sub_device 
                                     FROM tbl_devices WHERE code = $code");
+        return $query->fetchAll();
+    }
+
+    function get_combo_department($yearid){
+        $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid
+                                    AND class_study = 1");
         return $query->fetchAll();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////

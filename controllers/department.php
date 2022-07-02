@@ -1,8 +1,10 @@
 <?php
 class Department extends Controller{
+    private $_Data;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
+        $this->_Data = new Model();
     }
 
     function index(){
@@ -24,8 +26,10 @@ class Department extends Controller{
     function add(){
         $title = $_REQUEST['title'];
         $namhocid = $_REQUEST['year_id'];
-        $vatly = $_REQUEST['physical_id'];
-        $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly);
+        $vatly = $_REQUEST['physical_id']; $classstudy = (isset($_REQUEST['class_study'])) ? 1 : 0;
+        $default = (isset($_REQUEST['is_default'])) ? 1 : 0;
+        $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly, 
+                        'class_study' => $classstudy, 'is_default' => $default);
         if($this->model->check_exit(0, $namhocid, $vatly) > 0){
             $jsonObj['msg'] = "Phòng 'vật lý' này trong năm học này đã được sắp xếp";
             $jsonObj['success'] = false;
@@ -49,8 +53,10 @@ class Department extends Controller{
         $id = $_REQUEST['id'];
         $title = $_REQUEST['title'];
         $namhocid = $_REQUEST['year_id'];
-        $vatly = $_REQUEST['physical_id'];
-        $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly);
+        $vatly = $_REQUEST['physical_id']; $classstudy = (isset($_REQUEST['class_study'])) ? 1 : 0;
+        $default = (isset($_REQUEST['is_default'])) ? 1 : 0;
+        $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly, 
+                        'class_study' => $classstudy, 'is_default' => $default);
         if($this->model->check_exit($id, $namhocid, $vatly) > 0){
             $jsonObj['msg'] = "Phòng 'vật lý' này trong năm học này đã được sắp xếp";
             $jsonObj['success'] = false;
@@ -83,6 +89,36 @@ class Department extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("department/del");
+    }
+
+    function list_department(){
+        $jsonObj = $this->model->get_all_class_study($_REQUEST['id']);
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("department/list_department");
+    }
+
+    function copy(){
+        $yearfrom = $_REQUEST['year_from']; $yearto = $_REQUEST['year_to'];
+        $departmentid = implode(",", $_REQUEST['department_id']);
+        $list_physical_old = $this->model->get_all_class_study_physical($departmentid);
+        foreach ($list_physical_old as $row) {
+            $physicalid[] = $row['physical_id'];
+        }
+        if($this->model->check_exit_department_copy($yearto, implode(",", $physicalid)) > 0){
+            $jsonObj['msg'] = "Trong danh sách dữ liệu copy đã tồn tại một lớp học có trong năm học ".$this->_Data->return_title_year($yearto);
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            foreach($list_physical_old as $item){
+                $data = array("year_id" => $yearto, "physical_id" => $item['physical_id'], "title" => $item['title'],
+                                "class_study" => $item['class_study'], "is_default" => $item['is_default']);
+                $this->model->addObj($data);
+            }
+            $jsonObj['msg'] = "Copy dữ  liệu thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("department/copy");
     }
 }
 ?>

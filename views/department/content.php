@@ -15,7 +15,9 @@ $pages = $this->page;
             <th class="text-center">Tầng</th>
             <th class="text-center">Tên phòng "vật lý"</th>
             <th class="">Phòng ban / lớp  học</th>
-            <th class="text-center" style="width:100px">Thao tác</th>
+            <th class="text-center">Là lớp học</th>
+            <th class="text-center">Cố định</th>
+            <th class="text-center" style="width:70px">Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -60,6 +62,24 @@ $pages = $this->page;
             <td class="text-center"><?php echo $row['physical'] ?></td>
             <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
             <td class="text-center">
+                <?php
+                if($row['class_study'] == 1){
+                    echo '<span class="label label-sm label-success">Có</span>';
+                }else{
+                    echo '<span class="label label-sm label-danger">Không</span>';
+                }
+                ?>
+            </td>
+            <td class="text-center">
+                <?php
+                if($row['is_default'] == 1){
+                    echo '<span class="label label-sm label-success">Không</span>';
+                }else{
+                    echo '<span class="label label-sm label-primary">Có</span>';
+                }
+                ?>
+            </td>
+            <td class="text-center">
                 <div class="hidden-sm hidden-xs action-buttons">
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
@@ -71,6 +91,8 @@ $pages = $this->page;
             </td>
             <td id="physicalid_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['physical_id'] ?></td>
             <td id="yearid_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['year_id'] ?></td>
+            <td id="study_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['class_study'] ?></td>
+            <td id="default_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['is_default'] ?></td>
         </tr>
         <?php
         }

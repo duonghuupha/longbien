@@ -43,6 +43,12 @@ class Other extends Controller{
         $this->view->render("other/combo_equipment");
     }
 
+    function combo_department(){
+        $jsonObj= $this->model->get_combo_department($_REQUEST['yearid']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_department");
+    }
+
     function info_personel_scan(){
         $code = $_REQUEST['code'];
         $jsonObj = $this->model->get_info_personel_via_code($code);

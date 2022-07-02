@@ -21,6 +21,7 @@ $info = $_SESSION['data'];
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/chosen.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-duallistbox.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-rtl.min.css" />
 		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/Logo.png" />
@@ -30,14 +31,10 @@ $info = $_SESSION['data'];
 		<script>
 			var baseUrl = '<?php echo URL ?>';
 			<?php  
-			if($info[0]['id'] != 1){
-				if(isset($_SESSION['year'])){
-					echo 'var yearid = '.$_SESSION['year'][0]['id'].', userid = '.$info[0]['id'];
-				}else{
-					echo 'var yearid = 0, userid = '.$info[0]['id'];
-				}
+			if(isset($_SESSION['year'])){
+				echo 'var yearid = '.$_SESSION['year'][0]['id'].', userid = '.$info[0]['id'];
 			}else{
-				echo 'var yearid = 0, userid = '.$info[0]['id'];
+				echo 'var yearid = '.$_SESSION['year'][0]['id'].', userid = '.$info[0]['id'];
 			}
 			?>
 		</script>

@@ -94,6 +94,11 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function return_title_year($id){
+        $query = $this->db->query("SELECT title FROM tbldm_years WHERE id = $id");
+        $row = $query->fetchAll();
+        return $row[0]['title'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }

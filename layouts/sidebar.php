@@ -225,42 +225,35 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="hover">
-                    <a href="faq.html">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Danh mục
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/gear' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Thông tin
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/gear_import' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Nhập kho
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/gear_code' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         In mã đồ dùng
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/gear_loans' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Quản lý mượn - trả
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/gear_repair' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Sửa chữa nâng cấp
                     </a>
@@ -279,30 +272,85 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/lib_cate' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Danh mục
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/library' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Quản lý đầu sách
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/lib_code' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         In mã đầu sách
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="faq.html">
+                    <a href="<?php echo URL.'/lib_loans' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Quản lý mượn - trả
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+        <li class="hover">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-bar-chart"></i>
+                <span class="menu-text">
+                    Báo cáo - Thống kê
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+                <li class="hover">
+                    <a href="<?php echo URL.'/lib_cate' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Lịch báo giảng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/library' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Nhân sự
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/lib_code' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Học sinh
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+               <li class="hover">
+                    <a a href="<?php echo URL.'/lib_loans' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Trang thiết bị
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a a href="<?php echo URL.'/lib_loans' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Đồ dùng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a a href="<?php echo URL.'/lib_loans' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Thư viện
                     </a>
                     <b class="arrow"></b>
                 </li>
