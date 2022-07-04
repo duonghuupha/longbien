@@ -99,6 +99,11 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['title'];
     }
+    function get_relation_via_code($code){
+        $query = $this->db->query("SELECT code, id, relation, fullname, year, phone, job FROM tbl_student_relation
+                                    WHERE code = $code");
+        return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }

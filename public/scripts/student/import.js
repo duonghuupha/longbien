@@ -1,76 +1,71 @@
-var page = 1, keyword = '', url = '', numbers_line = 0, data = [];
+var page = 1, keyword = '', numbers_line = 0, data = [], url = '';
 $(function(){
-    $('#list_student').load(baseUrl + '/student/content');
+    $('#list_student_tmp').load(baseUrl + '/student/content_tmp');
     $('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    $('#class_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
 });
 
-function add(){
-    var number = Math.floor(Math.random() * 999999999999); data = []; render_table(data);
-    $('#code').val(number); $('#fullname').val(null); $('#gender').val(null).trigger('change');
-    $('#birthday').val(null); $('#address').val(null); $('#department_id').val(null).trigger('change');
-    $('#image_old').val(null); $('#status').val(null).trigger('change'); $('#refreshcode').show();
-    $('#modal-student').modal('show');
-    url = baseUrl + '/student/add'
-}
-
-function edit(idh){
-    $('#refreshcode').hide();
-    var code = $('#code_'+idh).text(), fullname = $('#fullname_'+idh).text();
-    var gender = $('#gender_'+idh).text(), birthday = $('#birthday_'+idh).text();
-    var department = $('#department_'+idh).text(), status = $('#status_'+idh).text();
-    var address = $('#address_'+idh).text(), image = $('#image_'+idh).text();
-    var datadc = $('#datadc_'+idh).text();
-    $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
-    $('#birthday').val(birthday); $('#address').val(address); $('#department_id').val(department).trigger('change');
-    $('#image_old').val(image); $('#status').val(status).trigger('change');
-    // data relation////////////////////////////////////////////////////////
-    data = JSON.parse(datadc); numbers_line = data.length;
-    render_table(data);
-    $('#modal-student').modal('show');
-    url = baseUrl + '/student/update?id='+idh
-}
-
-function del(idh){
-    var data_str = "id="+idh;
-    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl + '/student/del', '#list_student', baseUrl + '/student/content?page='+page+'&q='+keyword);
-}
-
 function save(){
-    var required = $('input,textarea,select').filter('[required]:visible');
-    var allRequired = true;
-    required.each(function(){
-        if($(this).val() == ''){
-            allRequired = false;
-        }
-    });
-    if(allRequired && data.length > 0){
-        $('#datadc').val(JSON.stringify(data));
-        save_form_modal('#fm', url, '#modal-student', '#list_student',  baseUrl+'/student/content?page='+page+'&q='+keyword); 
+    var department = $('#department_id').val();
+    if(department.length != 0){
+        save_form_reset_form('#fm', baseUrl + '/student/do_import', '#list_student_tmp', baseUrl + '/student/content_tmp');
+        $('#file_tmp').val(null);
     }else{
-        show_message("error", "Chưa điền đủ thông tin");
+        show_message("error", "Bạn chưa chọn lớp học");
+        $('#file_tmp').val(null);
+        return false;
     }
 }
 
 function view_page_student(pages){
     page = pages;
-    $('#list_student').load(baseUrl + '/student/content?page='+pages+'&q='+keyword);
+    $('#list_student_tmp').load(baseUrl + '/student/content_tmp?page='+page+'&q='+keyword);
 }
 
 function search(){
-    var value = $('#table_search').val();
+    var value = $('#nav-search-input').val();
     if(value.length != 0){
         keyword = value.replaceAll(" ", "$", 'g');
-        $('#list_student').load(baseUrl + '/student/content?page=1&q='+keyword);
+        $('#list_student_tmp').load(baseUrl + '/student/content_tmp?page=1&q='+keyword);
     }else{
         keyword = '';
-        $('#list_student').load(baseUrl + '/student/content?page=1&q='+keyword);
+        $('#list_student_tmp').load(baseUrl + '/student/content_tmp?page=1&q='+keyword);
     }
 }
-//////////////////////////////////////////////////////////////////////////////////////////
-function detail(){
 
+function del_tmp(){
+    var data_str = "id=";
+    del_data(data_str, "Bạn có chắc chắn muốn xóa dữ liệu tạm?", baseUrl+'/student/del_all', "#list_student_tmp", baseUrl + '/student/content_tmp?page='+page+'&q='+keyword);
 }
 
+function edit(idh){
+    var code = $('#code_'+idh).text(), fullname = $('#fullname_'+idh).text();
+    var gender = $('#gender_'+idh).text(), birthday = $('#birthday_'+idh).text();
+    var address = $('#address_'+idh).text(), datadc = $('#datadc_'+idh).text();
+    data = JSON.parse(datadc); render_table(data); numbers_line = data.length;
+    $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
+    $('#birthday').val(birthday); $('#address').val(address);
+    $('#modal-student').modal('show');
+    url = baseUrl + '/student/update_tmp?id='+idh;
+}
+
+function save_info(){
+    var fullname = $('#fullname').val(), gender = $('#gender').val(), birthday = $("#birthday").val();
+    var address = $('#address').val(); 
+    if(fullname.length > 0 && gender.length > 0 && birthday.length > 0 && address.length > 0 
+    && data.length > 0){
+        $('#datadc').val(JSON.stringify(data));
+        save_form_modal('#fm_edit', url, '#modal-student', '#list_student_tmp',  baseUrl+'/student/content_tmp?page='+page+'&q='+keyword); 
+    }else{
+        show_message("error", "Chưa điền đủ thông tin");
+    }
+}
+
+function del(idh){
+    var data_str = "id="+idh;
+    del_data(data_str, "Bạn có chắc chắn muốn xóa dữ liệu?", baseUrl+'/student/del_tmp', "#list_student_tmp", baseUrl + '/student/content_tmp?page='+page+'&q='+keyword);
+}
+///////////////////////////////////////////////////////////////////////////////////////
 function add_line(){
     numbers_line += 1;
     var str = {'id': numbers_line, 'relation': '', 'fullname': '', 'year': '', 'phone': '', 'job': ''};
@@ -96,7 +91,7 @@ function render_table(data_json){
                 html += 'onkeypress="validate(event)" maxlength="4" value="'+data_json[i].year+'" onchange="push_data(this, '+data_json[i].id+')"/>';
             html += '</td>';
             html += '<td class="text-center">';
-                html += '<input id="phone_'+data_json[i].id+'" type="text" class="form-control" size="15" name="phone"';
+                html += '<input id="phone_'+data_json[i].id+'" type="text" class="form-control" size="10" name="phone"';
                 html += 'onkeypress="validate(event)" maxlength="10" value="'+data_json[i].phone+'" onchange="push_data(this, '+data_json[i].id+')"/>';
             html += '</td>';
             html += '<td class="text-center">';
@@ -139,6 +134,7 @@ function refresh_code(){
     $('#code').val(number);
 }
 
-function import_xls(){
-    window.location.href = baseUrl + '/student/import';
+function save_tmp(){
+    var data_str = '';
+    update_data(data_str, "Bạn có chắc chắn muốn cập nhật dữ liệu ?", baseUrl + '/student/update_all', baseUrl + '/student');
 }

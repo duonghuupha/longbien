@@ -67,7 +67,7 @@ function change_code(idh){
 }
 
 function save(){
-    var data_str = '';;
+    var data_str = '';
     update_data(data_str, "Bạn có chắc chắn muốn cập nhật dữ liệu ?", baseUrl + '/personal/update_all', baseUrl + '/personal');
 }
 
