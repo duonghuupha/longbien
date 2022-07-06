@@ -142,3 +142,7 @@ function refresh_code(){
 function import_xls(){
     window.location.href = baseUrl + '/student/import';
 }
+
+function export_card(){
+    window.location.href = baseUrl + '/student/export_card';
+}

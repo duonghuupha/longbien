@@ -321,5 +321,11 @@ class Student extends Controller{
         }
         $this->view->render("student/update_all");
     }
+
+    function export_card(){
+        require('layouts/header.php');
+        $this->view->render('student/export_card');
+        require('layouts/footer.php');
+    }
 }
 ?>
