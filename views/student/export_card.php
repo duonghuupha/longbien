@@ -23,7 +23,7 @@
                 <h1>
                     Xuất dữ liệu thẻ học sinh
                     <small class="pull-right hidden-480">
-                        <button type="button" class="btn btn-success btn-sm" onclick="save()">
+                        <button type="button" class="btn btn-success btn-sm" onclick="print_card()">
                             <i class="fa fa-print"></i>
                             Xuất thẻ
                         </button>
@@ -32,7 +32,7 @@
             </div><!-- /.page-header -->
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <div id="list_personel" class="dataTables_wrapper form-inline no-footer"></div>
+                    <div id="list_student" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->

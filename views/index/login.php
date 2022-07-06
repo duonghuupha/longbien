@@ -18,6 +18,11 @@
 		<script src="<?php echo URL.'/public' ?>/scripts/library.js"></script>
 		<script>
 			var baseUrl = '<?php echo URL ?>';
+			$(document).keypress(function (e) {
+				if (e.which == 13) {
+					login();
+				}
+			});
 		</script>
 	</head>
 	<body class="login-layout light-login">
@@ -41,7 +46,7 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
-												Nhập thông tin để đăng nhập
+												Nhập thông tin để đăng nhậ<p></p>
 											</h4>
 											<div class="space-6"></div>
 											<form id="login" method="post" onsubmit="login()">
@@ -58,6 +63,17 @@
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
+													<!--<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<img src="<?php echo URL.'/index/captcha' ?>"/>
+														</span>
+													</label>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" placeholder="Mã xác nhận" name="captcha" id="captcha"/>
+															<i class="ace-icon fa fa-barcode"></i>
+														</span>
+													</label>-->
 													<div class="space"></div>
 													<div class="clearfix">
 														<label class="inline">

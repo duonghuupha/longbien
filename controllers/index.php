@@ -95,5 +95,9 @@ class Index extends Controller{
         header('Location: '.URL.'/index/login');
         exit;
     }
+
+    function captcha(){
+        $this->view->render("index/captcha");
+    }
 }
 ?>
