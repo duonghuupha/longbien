@@ -337,12 +337,13 @@ function combo_select2(id_select, url_data){
                         return {
                             text: item.title,
                             id: item.id,
-                            data: item
+                            content: item.content
                         };
                     })
                 };
             }
-        }
+        },
+        templateResult: format_content
     });
 }
 
