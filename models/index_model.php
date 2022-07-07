@@ -32,5 +32,10 @@ class Index_Model extends Model{
         $query = $this->db->query("SELECT * FROM tbldm_years WHERE active = 1");
         return $query->fetchAll();
     }
+
+    function get_year_via_id($id){
+        $query = $this->db->query("SELECT * FROM tbldm_years WHERE id = $id");
+        return $query->fetchAll();
+    }
 }
 ?>

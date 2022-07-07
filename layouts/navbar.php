@@ -24,7 +24,7 @@ $info = $_SESSION['data']; $sql = new Model();
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="dropdown-modal">
-                    <a class="dropdown-toggle" href="javascript:void(0)">
+                    <a class="dropdown-toggle" href="javascript:void(0)" onclick="change_year()">
                         <span class="badge year_school"><?php echo $_SESSION['year'][0]['title'] ?></span>
                     </a>
                 </li>

@@ -99,5 +99,14 @@ class Index extends Controller{
     function captcha(){
         $this->view->render("index/captcha");
     }
+
+    function change_year(){
+        $yearid = $_REQUEST['year_change_id'];
+        $_SESSION['year'] = $this->model->get_year_via_id($yearid);
+        $jsonObj['msg'] = "Thay đổi năm học thành công";
+        $jsonObj['success'] = true;
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("index/change_year");
+    }
 }
 ?>

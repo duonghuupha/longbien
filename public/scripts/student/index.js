@@ -11,7 +11,7 @@ function add(){
     $('#code').val(number); $('#fullname').val(null); $('#gender').val(null).trigger('change');
     $('#birthday').val(null); $('#address').val(null); $('#department_id').val(null).trigger('change');
     $('#image_old').val(null); $('#status').val(null).trigger('change'); $('#refreshcode').show();
-    $('#modal-student').modal('show');
+    $('#modal-student').modal('show'); $('#department_id').prop('disabled', false);
     url = baseUrl + '/student/add'
 }
 
@@ -24,7 +24,7 @@ function edit(idh){
     var datadc = $('#datadc_'+idh).text();
     $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
     $('#birthday').val(birthday); $('#address').val(address); $('#department_id').val(department).trigger('change');
-    $('#image_old').val(image); $('#status').val(status).trigger('change');
+    $('#image_old').val(image); $('#status').val(status).trigger('change'); $('#department_id').prop('disabled', true);
     // data relation////////////////////////////////////////////////////////
     data = JSON.parse(datadc); numbers_line = data.length;
     render_table(data);

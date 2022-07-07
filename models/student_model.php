@@ -108,5 +108,11 @@ class Student_Model extends Model{
         return $query->fetchAll();
     }
 
+    function ger_id_student_via_code($code){
+        $query = $this->db->query("SELECT id FROM tbl_student WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]["id"];
+    }
+
 }
 ?>

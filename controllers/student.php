@@ -1,9 +1,11 @@
 <?php
 class Student extends Controller{
     private $_Convert;
+    private $_Year;
     function __construct(){
         parent::__construct();
         $this->_Convert = new Convert();
+        $this->_Year = $_SESSION['year'];
     }
 
     function index(){
@@ -49,6 +51,15 @@ class Student extends Controller{
                                             "year" => $row['year'], "phone" => $row['phone'], "job" => $row['job']);
                     $this->model->addObj_detail($data_relation);
                 }
+
+                // cap nhat luan chuyen lop hoc
+                $studentid = $this->ger_id_student_via_code($code);
+                $data_change = array("student_id" => $id, 'year_from_id' => 0, 'department_from_id' => 0,
+                                        "year_to_id" => $this->_Year[0]['id'], "department_to_id" => $department,
+                                    "create_at" => date("Y-m-d H:i:s"));
+                $this->model->addObj_student_change_class($data_change);
+
+                // tai anh hoc sinh
                 if($_FILES['image']['name'] != ''){
                     if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/student/'.$image)){
                         $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
@@ -80,7 +91,7 @@ class Student extends Controller{
         $id = $_REQUEST['id']; $imageold = $_REQUEST['image_old'];
         $code = $_REQUEST['code']; $fullname = $_REQUEST['fullname']; $gender = $_REQUEST['gender'];
         $birthday = $this->_Convert->convertDate($_REQUEST['birthday']);
-        $address = $_REQUEST['address']; $department = $_REQUEST['department_id'];
+        $address = $_REQUEST['address'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_img($_FILES['image']['name'], $code) : $imageold; 
         $status = $_REQUEST['status']; $datadc = json_decode($_REQUEST['datadc'], true);
         if($this->model->dupliObj($id, $code) > 0){
@@ -89,8 +100,7 @@ class Student extends Controller{
             $this->view->jsonObj= json_encode($jsonObj);
         }else{
             $data_global = array("fullname" => $fullname, "gender" => $gender, "birthday" => $birthday,
-                            "address" => $address, "department_id" => $department, "image" => $image,
-                            "status" => $status);
+                            "address" => $address, "image" => $image, "status" => $status);
             $temp = $this->model->updateObj($id, $data_global);
             if($temp){
                 $this->model->delObj_detail($code);
@@ -207,14 +217,16 @@ class Student extends Controller{
                 }
                 $data = array("code" => $code, 'fullname' => $fullname, 'gender' => $gender, 'department_id' => $department,
                                 'birthday' => $birthday,  'address' => $address, 'status' => 99);
-                $this->model->addObj($data);
-                if($namefa != ''){
-                    $data_fa = array("code" => $code, "relation" => 'Bố', "fullname" => $namefa, 'year' => $yearfa, 'phone' => $phonefa, 'job' => $jobfa);
-                    $this->model->addObj_detail($data_fa);
-                }
-                if($namemo != ''){
-                    $data_mo = array("code" => $code, "relation" => 'Mẹ', "fullname" => $namemo, 'year' => $yearmo, 'phone' => $phonemo, 'job' => $jobmo);
-                    $this->model->addObj_detail($data_mo);
+                $temp = $this->model->addObj($data);
+                    if($temp){
+                    if($namefa != ''){
+                        $data_fa = array("code" => $code, "relation" => 'Bố', "fullname" => $namefa, 'year' => $yearfa, 'phone' => $phonefa, 'job' => $jobfa);
+                        $this->model->addObj_detail($data_fa);
+                    }
+                    if($namemo != ''){
+                        $data_mo = array("code" => $code, "relation" => 'Mẹ', "fullname" => $namemo, 'year' => $yearmo, 'phone' => $phonemo, 'job' => $jobmo);
+                        $this->model->addObj_detail($data_mo);
+                    }
                 }
             }
             $jsonObj['msg'] = "Import dữ liệu thành công";
@@ -318,6 +330,11 @@ class Student extends Controller{
                 $temp = $this->model->updateObj($row['id'], $data);
                 if($temp){
                     $this->_Convert->generateBarcode($data = array('sku'=> $row['code']), 'student');
+                    // cap nhat luan chuyen lop hoc
+                    $data_change = array("student_id" => $row['id'], 'year_from_id' => 0, 'department_from_id' => 0,
+                                            "year_to_id" => $this->_Year[0]['id'], "department_to_id" => $row['department_id'],
+                                        "create_at" => date("Y-m-d H:i:s"));
+                    $this->model->addObj_student_change_class($data_change);
                 }
             }
             $jsonObj['msg'] = 'Ghi dữ liệu thành công';

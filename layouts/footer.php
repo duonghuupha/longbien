@@ -30,6 +30,45 @@
 			</div>
 		</div>
 
+		<!--Form don vi tinh-->
+		<div id="modal-change-year" class="modal fade" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog" style="width:30%">
+				<div class="modal-content">
+					<div class="modal-header no-padding">
+						<div class="table-header">
+							Thay đổi năm học
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<form id="fm-change-year" method="post">
+								<div class="col-xs-12">
+									<div class="form-group">
+										<label for="form-field-username">Năm học</label>
+										<div>
+											<select id="year_change_id" name="year_change_id" required="" style="width:100%"
+											class="form-control select2" data-placeholder="Lựa chọn năm học..."></select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+							<i class="ace-icon fa fa-times"></i>
+							Đóng
+						</button>
+						<button class="btn btn-sm btn-primary pull-right" onclick="save_change_year()">
+							<i class="ace-icon fa fa-save"></i>
+							Ghi dữ liệu
+						</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<!-- End formm don vi tinh-->
+
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='styles/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>

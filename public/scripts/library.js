@@ -20,6 +20,7 @@ $(function(){
           formatCurrency($(this));
         }
     });
+    $('#year_change_id').load(baseUrl + '/other/combo_years');
 });
 
 function style_option(value){
@@ -319,7 +320,7 @@ function exec_update(data_str, url_data, reject_url){
         }
     });
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////
 function combo_select2(id_select, url_data){
     $(id_select).select2({
         ajax: {
@@ -383,4 +384,39 @@ function format_content(row){
 
 function url_content(url){
     return $.get(url);
+}
+
+function change_year(){
+    $('#year_change_id').val(yearid).trigger('change');
+    $('#modal-change-year').modal('show');
+}
+
+function save_change_year(){
+    var value = $('#year_change_id').val();
+    if(value.length != 0){
+        if($('#year_change_id').val() != yearid){
+            bootbox.confirm({
+                message: "Khi thay đổi năm học dữ liệu sẽ được hiển thị theo năm học bạn đã chọn. Bạn có chắc chắn muốn thay đổi năm học?",
+                buttons:{
+                    confirm: {
+                        label: "Đồng ý",
+                        className: "btn-danger btn-sm"
+                    },
+                    cancel: {
+                        label: "Không đồng ý",
+                        className: "btn-primary btn-sm"
+                    }
+                },
+                callback: function(result){
+                    if(result){
+                        save_reject('#fm-change-year', baseUrl + '/index/change_year', window.location); 
+                    }
+                }
+            });
+        }else{
+            show_message("error", "Không thể chuyển đến cùng năm học");
+        }
+    }else{
+        show_message("error", "Chưa điền đủ thông tin");
+    }
 }
