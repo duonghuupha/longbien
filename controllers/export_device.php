@@ -56,7 +56,8 @@ class Export_device extends Controller{
                 $device = base64_decode($device); $device = explode(",", $device);
                 foreach($device as $row){
                     $value = explode(".", $row);
-                    $data_detail = array("code" => $code,  "device_id" =>$value[0], "sub_device" => $value[1], "status" => 0);
+                    $data_detail = array("code" => $code,  "device_id" =>$value[0], "sub_device" => $value[1], "status" => 0, 
+                                        'create_at' => date("Y-m-d H:i:s"));
                     $this->model->addObj_detail($data_detail);
                 }
                 $jsonObj['msg'] = "Ghi dữ liệu thành công";
@@ -88,7 +89,8 @@ class Export_device extends Controller{
                 $device = base64_decode($device); $device = explode(",", $device);
                 foreach($device as $row){
                     $value = explode(".", $row);
-                    $data_detail = array("code" => $code,  "device_id" =>$value[0], "sub_device" => $value[1], "status" => 0);
+                    $data_detail = array("code" => $code,  "device_id" =>$value[0], "sub_device" => $value[1], "status" => 0,
+                                            'create_at' => date("Y-m-d H:i:s"));
                     $this->model->addObj_detail($data_detail);
                 }
                 $jsonObj['msg'] = "Ghi dữ liệu thành công";

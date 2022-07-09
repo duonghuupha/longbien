@@ -45,6 +45,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-12 text-justify">
+                        <i>Sử dụng thiết bị đọc mã vạch để quét mã quản lý trên thiết bị, Hệ thống sẽ tự động nhận diện
+                            thiết bị đó là ai mượn và mượn khi nào để cập nhật trạng thái "Đã trả" trong hệ thống. Nếu 
+                            mỗi lần mượn nhiều thiết bị cùng một lúc thì khi trả chỉ cần quét từng thiết bị, nếu trả hết
+                            các thiết bị đã mượn hệ thống sẽ cập nhật là "Đã trả" nếu chỉ trả một phần hệ thống sẽ cập nhật
+                            là "Trả từng phần". <b>Sử dụng chức năng trả nhanh để cập nhật dữ liệu nhanh, chính xác và không
+                            tốn thời gian
+                            </b>
+                        </i>
+                    </div>
                 </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-9">
                     <div id="list_loan" class="dataTables_wrapper form-inline no-footer"></div>

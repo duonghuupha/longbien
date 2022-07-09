@@ -28,9 +28,9 @@ $pages = $this->page; $sql = new Model();
             $z = 0;
             foreach($device as $item){
                 $z++;
-                $array[] = '* '.$item['device'].' - '.$item['sub_device'];
+                $array[$i][] = '* '.$item['device'].' - '.$item['sub_device'];
                 if($z == 2){
-                    $array[] = "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>Xem thêm</a>";
+                    $array[$i][] = "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>Xem thêm</a>";
                     break;
                 }
             }
@@ -45,7 +45,7 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center"><?php echo $row['namhoc'] ?></td>
             <td class="text-center hidden-480"><?php echo $row['physical'] ?></td>
             <td class="text-center hidden-480"><?php echo date("d-m-Y H:i:s", strtotime($row['create_at'])) ?></td>
-            <td class="text-left hidden-480"><?php echo implode("<br/>", $array) ?></td>
+            <td class="text-left hidden-480"><?php echo implode("<br/>", $array[$i]) ?></td>
             <td class="text-center">
                 <div class="action-buttons">
                     <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">

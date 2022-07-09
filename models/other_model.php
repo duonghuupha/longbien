@@ -53,8 +53,15 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////
-    function get_info_device_pass_code($code){
+    function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");
+        return $query->fetchAll();
+    }
+
+    function get_info_export_device_scan($devicecode, $subdevice){
+        $query = $this->db->query("SELECT physical_id, code FROM tbl_export WHERE code = (SELECT tbl_export_detail.code
+                                FROM tbl_export_detail WHERE device_id = (SELECT tbl_devices.id FROM tbl_devices
+                                WHERE tbl_devices.code = $devicecode) AND sub_device = $subdevice AND status = 0)");
         return $query->fetchAll();
     }
 }

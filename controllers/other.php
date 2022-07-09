@@ -58,7 +58,7 @@ class Other extends Controller{
 
     function info_device_scan(){
         $code_device = explode(".",  $_REQUEST['code']); 
-        $info = $this->model->get_info_device_pass_code($code_device[0]);
+        $info = $this->model->get_info_device_pass_code_scan($code_device[0]);
         // kiem tra xem thiet bi co ton tai khong
         if($this->_Data->check_exit_sub_device($info[0]['id'], $code_device[1]) > 0
         || $this->_Data->check_exit_sub_device_loans($info[0]['id'], $code_device[1]) > 0){
@@ -72,6 +72,22 @@ class Other extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("other/info_device_scan");
+    }
+
+    function info_export_device_scan(){
+        $code_device = explode(".", $_REQUEST['code']);
+        $info = $this->model->get_info_export_device_scan($code_device[0], $code_device[1]);
+        if(count($info) > 0){
+            $jsonObj['msg'] ="Load dữ liệu thành công";
+            $jsonObj['success'] = true;
+            $jsonObj['physicalid'] = $info[0]['physical_id'];
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] ="Không tồn tại thiết phân bổ";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("other/info_export_device_scan");
     }
 }
 ?>

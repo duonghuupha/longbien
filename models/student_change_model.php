@@ -22,7 +22,8 @@ class Student_change_Model extends Model{
 
     function getFetObj($offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student_change_class");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student_change_class
+                                    WHERE year_from_id != 0 AND department_from_id != 0");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, student_id, year_from_id, department_from_id, year_to_id,
                                     department_to_id, create_at, (SELECT title FROM tbldm_years 
@@ -30,7 +31,7 @@ class Student_change_Model extends Model{
                                     WHERE tbldm_years.id = year_to_id) AS year_to, (SELECT title FROM tbldm_department
                                     WHERE tbldm_department.id = department_from_id) AS department_from, (SELECT title FROM tbldm_department
                                     WHERE tbldm_department.id = department_to_id) AS department_to FROM tbl_student_change_class
-                                    ORDER BY id DESC LIMIT $offset, $rows");
+                                    WHERE year_from_id != 0 AND department_from_id != 0 ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

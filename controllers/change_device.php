@@ -47,7 +47,7 @@ class Change_device extends Controller{
                 // da ton tai ban ghi phan bo
                 $detail = $this->model->get_info_export($physical_to);
                 $data_detail = array("code" => $detail[0]['code'], "device_id"  => $detail[0]['device_id'],
-                                "sub_device" => $detail[0]['sub_device'], "status" => 0);
+                                "sub_device" => $detail[0]['sub_device'], "status" => 0, 'create_at' => date("Y-m-d H:i:s"));
                 $tmp = $this->model->addObj_export_detail($data_detail);
                 if($tmp){
                     $datau = array("status" => 1);
@@ -67,7 +67,7 @@ class Change_device extends Controller{
                 $tmp = $this->model->addObj_export($data_global);
                 if($tmp){
                     $data_detail = array("code" => $code, "device_id" => $device[0], "sub_device" => $device[1],
-                                        "status" => 0);
+                                        "status" => 0, 'create_at' => date("Y-m-d H:i:s"));
                     $this->model->addObj_export_detail($data_detail);
                     $datau = array("status" => 1);
                     $this->model->updateObj_export_detail($physical_from, $datau, $device[0], $device[1]);

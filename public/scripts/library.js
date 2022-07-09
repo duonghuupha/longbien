@@ -148,8 +148,6 @@ function save_reject(id_form, post_url, url_reject){
     });
 }
 
-
-
 function save_form_modal(id_form, post_url, id_modal, id_content, url_refresh){
     var xhr = new XMLHttpRequest();
     var formData = new FormData($(id_form)[0]);
@@ -225,7 +223,7 @@ function save_form_reset_form(id_form, post_url, id_content, url_refresh){
             if(result.success == true){
                 $('.overlay').hide();
                 show_message('success', result.msg);
-                $(id_form).trigger("reset");
+                $(id_form)[0].reset(); $('.select2').val('').trigger('change');
                 $(id_content).load(url_refresh);
             }else{
                 $('.overlay').hide();
@@ -245,11 +243,11 @@ function del_data(str_data, notify, post_url, id_div, url_refresh){
         buttons:{
             confirm: {
                 label: "Đồng ý",
-                className: "btn-primary btn-sm"
+                className: "btn-danger btn-sm"
             },
             cancel: {
                 label: "Không đồng ý",
-                className: "btn-danger btn-sm"
+                className: "btn-primary btn-sm"
             }
         },
         callback: function(result){
@@ -376,9 +374,14 @@ function combo_select2_pagination(id_select, url_data){
 }
 
 function format_content(row){
-    var $strdata = $(
-        '<div>'+row.text+'</div><div style="color:gray">'+row.content+'</div>'
-    );
+    //console.log(Object.keys(row).length);
+    if(Object.keys(row).length > 3){
+        var $strdata = $(
+            '<div>'+row.text+'</div><div style="color:gray">'+row.content+'</div>'
+        );
+    }else{
+        var $strdata = '';
+    }
     return $strdata;
 }
 

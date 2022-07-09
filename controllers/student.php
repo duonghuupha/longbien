@@ -319,28 +319,34 @@ class Student extends Controller{
     }
 
     function update_all(){
-        if($this->model->check_dupli_code() > 0){
-            $jsonObj['msg']=  "Có học sinh trùng mã, vui lòng kiểm tra lại";
+        if($this->model->check_exit_record_tmp() > 0){
+            if($this->model->check_dupli_code() > 0){
+                $jsonObj['msg']=  "Có học sinh trùng mã, vui lòng kiểm tra lại";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $result = $this->model->get_all_tmp();
+                foreach($result as $row){
+                    $data = array("status" => 1);
+                    $temp = $this->model->updateObj($row['id'], $data);
+                    if($temp){
+                        $this->_Convert->generateBarcode($data = array('sku'=> $row['code']), 'student');
+                        // cap nhat luan chuyen lop hoc
+                        $data_change = array("student_id" => $row['id'], 'year_from_id' => 0, 'department_from_id' => 0,
+                                                "year_to_id" => $this->_Year[0]['id'], "department_to_id" => $row['department_id'],
+                                            "create_at" => date("Y-m-d H:i:s"));
+                        $this->model->addObj_student_change_class($data_change);
+                    }
+                }
+                $jsonObj['msg'] = 'Ghi dữ liệu thành công';
+                $jsonObj['success']  = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{
+            $jsonObj['msg']=  "Không có bản ghi nào";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
-        }else{
-            $result = $this->model->get_all_tmp();
-            foreach($result as $row){
-                $data = array("status" => 1);
-                $temp = $this->model->updateObj($row['id'], $data);
-                if($temp){
-                    $this->_Convert->generateBarcode($data = array('sku'=> $row['code']), 'student');
-                    // cap nhat luan chuyen lop hoc
-                    $data_change = array("student_id" => $row['id'], 'year_from_id' => 0, 'department_from_id' => 0,
-                                            "year_to_id" => $this->_Year[0]['id'], "department_to_id" => $row['department_id'],
-                                        "create_at" => date("Y-m-d H:i:s"));
-                    $this->model->addObj_student_change_class($data_change);
-                }
-            }
-            $jsonObj['msg'] = 'Ghi dữ liệu thành công';
-            $jsonObj['success']  = true;
-            $this->view->jsonObj = json_encode($jsonObj);
-        }
+        }   
         $this->view->render("student/update_all");
     }
 
