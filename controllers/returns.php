@@ -80,7 +80,8 @@ class Returns extends Controller{
 
     function detail(){
         $id = $_REQUEST['id'];
-        
+        $jsonObj = $this->model->get_info_returns($id);
+        $this->view->jsonObj  = $jsonObj;
         $this->view->render("returns/detail");
     }
 

@@ -1,3 +1,6 @@
+<?php
+$item = $this->jsonObj; $sql = new Model();
+?>
 <div class="modal-header no-padding">
     <div class="table-header">
         Chi tiết phiếu đề nghị thu hồi thiết bị
@@ -15,9 +18,9 @@
                 <span>Kính gửi: Hiệu trưởng trường THCS Long Biên</span>
             </div>
             <div class="post_main">
-                <span>Họ và tên: <b>Nguyễn Văn A</b></span>
-                <span>Phân công nhiệm vụ: <b>Nhân viên CNTT</b></span>
-                <span>Qua rà soát, kiểm tra trang thiết bị tại <b>Phòng A101 - Lớp 6A1</b></span>
+                <span>Họ và tên: <b><?php echo $item[0]['fullname'] ?></b></span>
+                <span>Phân công nhiệm vụ: <b><?php echo $item[0]['job'] ?></b></span>
+                <span>Qua rà soát, kiểm tra trang thiết bị tại <b><?php echo $item[0]['physical'].' - '.$item[0]['department'] ?></b></span>
                 <span>Đề nghị thu hồi trang thiết bị:</span>
             </div>
             <div class="main_device">
@@ -34,10 +37,10 @@
                     <tbody>
                         <tr>
                             <td class="text_center">1</td>
-                            <td>Máy tính giáo viên Core I5</td>
-                            <td class="text_center">12345686</td>
-                            <td class="text_center">1</td>
-                            <td class="text_center">23-04-2022</td>
+                            <td><?php echo $item[0]['device'] ?></td>
+                            <td class="text_center"><?php echo $item[0]['device_code'] ?></td>
+                            <td class="text_center"><?php echo $item[0]['sub_device'] ?></td>
+                            <td class="text_center"><?php echo date("d-m-Y",strtotime($item[0]['ngay_phan_bo'])) ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -48,9 +51,9 @@
                     <span>Thủ trưởng đơn vị</span>
                 </div>
                 <div class="post_right">
-                    <span>Long Biên, ngày 23 tháng 05 năm 2022</span>
+                    <span>Long Biên, <?php echo "ngày ".date("d", strtotime($item[0]['create_at']))." tháng ".date("m", strtotime($item[0]['create_at']))." năn ".date("Y", strtotime($item[0]['create_at'])) ?></span>
                     <span>Người đề nghị</span>
-                    <span>Nguyễn Văn A</span>
+                    <span><?php echo $item[0]['fullname'] ?></span>
                 </div>
             </div>
         </div>
@@ -61,10 +64,16 @@
         <i class="ace-icon fa fa-times"></i>
         Đóng
     </button>
+    <?php
+    if($item[0]['status'] == 0){
+    ?>
     <button class="btn btn-sm btn-success pull-right" onclick="approval(<?php echo $_REQUEST['id'] ?>)">
         <i class="ace-icon fa fa-check"></i>
         Duyệt đề nghị
     </button>
+    <?php
+    }
+    ?>
 </div>
 
 <style>

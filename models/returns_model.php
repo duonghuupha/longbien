@@ -74,8 +74,20 @@ class Returns_Model extends Model{
     }
 
     function get_info_returns($id){
-        $query = $this->db->query("SELECT id, code, create_at, year_id, physical_id, device_id,
-                                    sub_device, user_id FROM tbl_returns_device WHERE id = $id");
+        $query = $this->db->query("SELECT id, code, create_at, sub_device, status,  IF(user_id = 1, 'Administrator', 
+                                    (SELECT tbl_personel.fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id 
+                                    FROM tbl_users WHERE tbl_users.id = user_id))) AS fullname, IF(user_id = 1, 'Quản lý trung',
+                                    (SELECT tbldm_job.title FROM tbldm_job WHERE tbldm_job.id = (SELECT tbl_personel.job_id
+                                    FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users WHERE
+                                    tbl_users.id= user_id)))) AS job, (SELECT title FROM tbldm_physical_room WHERE
+                                    tbldm_physical_room.id = physical_id) AS physical, (SELECT title FROM tbldm_department
+                                    WHERE tbldm_department.physical_id = tbl_returns_device.physical_id AND 
+                                    tbldm_department.year_id = tbl_returns_device.year_id) AS department, (SELECT title FROM tbl_devices
+                                    WHERE tbl_devices.id  = device_id) AS device, (SELECT tbl_devices.code FROM tbl_devices 
+                                    WHERE tbl_devices.id  = device_id) AS device_code, (SELECT tbl_export_detail.create_at
+                                    FROM tbl_export_detail WHERE tbl_export_detail.device_id = tbl_returns_device.device_id
+                                    AND tbl_export_detail.sub_device = tbl_returns_device.sub_device AND tbl_export_detail.status = 0)
+                                    AS ngay_phan_bo FROM tbl_returns_device WHERE id = $id");
         return $query->fetchAll();
     }
 }

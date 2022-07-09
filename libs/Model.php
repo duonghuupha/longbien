@@ -68,12 +68,12 @@ class Model {
     function return_list_device_export($code){
         $query = $this->db->query("SELECT device_id, sub_device, code, status, (SELECT title FROM tbl_devices
                                     WHERE tbl_devices.id = device_id) AS device FROM tbl_export_detail
-                                    WHERE code = $code ORDER BY id DESC");
+                                    WHERE code = $code AND status = 0 ORDER BY id DESC");
         return $query->fetchAll();
     }
     function check_exit_sub_device($deviceid, $subdevice){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_export_detail WHERE device_id = $deviceid
-                                    AND sub_device = $subdevice");
+                                    AND sub_device = $subdevice AND status = 0");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
