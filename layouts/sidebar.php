@@ -98,6 +98,39 @@
             <b class="arrow"></b>
         </li>
         <li class="hover">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-book"></i>
+                <span class="menu-text">
+                    Văn bản
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+                <li class="hover">
+                    <a href="<?php echo URL.'/student_point' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Danh mục
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/student' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Văn bản đến
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/student_change' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Văn bản đi
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        <li class="hover">
             <a href="<?php echo URL.'/personal' ?>">
                 <i class="menu-icon fa fa-users"></i>
                 <span class="menu-text">
