@@ -37,5 +37,11 @@ class Index_Model extends Model{
         $query = $this->db->query("SELECT * FROM tbldm_years WHERE id = $id");
         return $query->fetchAll();
     }
+
+    function check_exit_year(){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_years");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>

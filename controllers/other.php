@@ -1,10 +1,8 @@
 <?php
 class Other extends Controller{
-    private $_Data;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
-        $this->_Data = new Model();
     }
 
     function combo_years(){

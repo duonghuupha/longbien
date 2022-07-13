@@ -6,10 +6,10 @@ class Subject_Model extends Model{
 
     function getFetObj($offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_subject");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_subject WHERE status = 0");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title FROM tbldm_subject ORDER BY id DESC 
-                                    LIMIT $offset, $rows");
+        $query = $this->db->query("SELECT id, title, create_at FROM tbldm_subject WHERE status = 0
+                                    ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

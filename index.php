@@ -6,6 +6,7 @@ require 'libs/Controller.php';
 require 'libs/Model.php';
 require 'libs/View.php';
 require 'libs/Convert.php';
+require 'libs/Log.php';
 
 // Library
 require 'libs/Database.php';

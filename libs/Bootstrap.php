@@ -6,15 +6,6 @@ class Bootstrap {
 		$url = rtrim($url, '/');
 		$url = explode('/', $url);
 
-		//print_r($url);
-
-		// tao session cho menu
-		if(empty($url[0])){
-			$_SESSION['url'] = 'index';
-		}else{
-			$_SESSION['url'] = $_GET['url'];
-		}
-
 		if (empty($url[0])) {
 			require 'controllers/index.php';
 			$controller = new Index();

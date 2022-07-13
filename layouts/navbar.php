@@ -1,10 +1,3 @@
-<?php
-if(isset($_SESSION['data'])){
-$info = $_SESSION['data']; $sql = new Model();
-}else{
-    header("Location: ".URL."/index/logout");
-}
-?>
 <div id="navbar" class="navbar navbar-default ace-save-state navbar-fixed-top">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -25,7 +18,7 @@ $info = $_SESSION['data']; $sql = new Model();
             <ul class="nav ace-nav">
                 <li class="dropdown-modal">
                     <a class="dropdown-toggle" href="javascript:void(0)" onclick="change_year()">
-                        <span class="badge year_school"><?php echo $_SESSION['year'][0]['title'] ?></span>
+                        <span class="badge year_school"><?php echo $this->_Year[0]['title'] ?></span>
                     </a>
                 </li>
 
@@ -213,10 +206,10 @@ $info = $_SESSION['data']; $sql = new Model();
                         <span class="user-info">
                             <small>Xin chào,</small>
                             <?php
-                            if($info[0]['hr_id'] == 0){
+                            if($this->_Info[0]['hr_id'] == 0){
                                 echo "Administrator";
                             }else{
-                                echo $sql->return_fullname_per($info[0]['hr_id']);
+                                echo $this->_Data->return_fullname_per($this->_Info[0]['hr_id']);
                             }
                             ?>
                         </span>

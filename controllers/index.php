@@ -1,25 +1,13 @@
 <?php
 class Index extends Controller{
-    private $_Data;
-    private $_Convert;
     function __construct(){
         parent::__construct();
-        $this->_Data = new Model();
-        $this->_Convert = new Convert();
     }
 
     function index(){
-        Session::init();
-        $logged = Session::get('loggedIn');
-        if($logged == false){
-            Session::destroy();
-            header ('Location: '.URL.'/index/login');
-            exit;
-        }else{
-            require('layouts/header.php');
-            $this->view->render('index/index');
-            require('layouts/footer.php');
-        }
+        require('layouts/header.php');
+        $this->view->render('index/index');
+        require('layouts/footer.php');
     }
 
     function login(){
@@ -30,7 +18,8 @@ class Index extends Controller{
         $username = $_REQUEST['username']; 
         $password = sha1($_REQUEST['password']);
         if($this->model->check_login($username, $password) > 0){
-            if($username == 'admin'){
+            // kiem tra xem co nam hoc duoc kich hoat khongs
+            if($this->model->check_year_active() > 0){
                 // tao token va cap nhat trang thai dang nhap
                 $token = sha1(time()); $ipaddress = $_SERVER['REMOTE_ADDR'];
                 $info = $_SERVER['HTTP_USER_AGENT'];
@@ -52,33 +41,9 @@ class Index extends Controller{
                     $this->view->jsonObj = json_encode($jsonObj);
                 }
             }else{
-                // kiem tra xem co nam hoc duoc kich hoat khongs
-                if($this->model->check_year_active() > 0){
-                    // tao token va cap nhat trang thai dang nhap
-                    $token = sha1(time()); $ipaddress = $_SERVER['REMOTE_ADDR'];
-                    $info = $_SERVER['HTTP_USER_AGENT'];
-                    $data = array('token' => $token, 'last_login' => date("Y-m-d H:i:s"), 
-                                    'info_login' => $ipaddress.'-'.$info);
-                    $temp = $this->model->updateLogin($username, $password, $data);
-                    if($temp){
-                        Session::init();
-                        Session::set('loggedIn', true);
-                        $_SESSION['data'] = $this->model->get_data($username, $password);
-                        $_SESSION['year'] = $this->model->get_year_active();
-                        $jsonObj['msg'] = "Đăng nhập thành công";
-                        $jsonObj['token'] = $token;
-                        $jsonObj['success'] = true;
-                        $this->view->jsonObj = json_encode($jsonObj);
-                    }else{
-                        $jsonObj['msg'] = 'Đăng nhập không thành công';
-                        $jsonObj['success'] = false;
-                        $this->view->jsonObj = json_encode($jsonObj);
-                    }
-                }else{
-                    $jsonObj['msg'] = 'Chưa có năm học nào được kích hoạt. Vui lòng liên hệ Ban quản trị để biết thêm chi tiết';
-                    $jsonObj['success'] = false;
-                    $this->view->jsonObj = json_encode($jsonObj);
-                }
+                $jsonObj['msg'] = 'Chưa có năm học nào được kích hoạt. Vui lòng liên hệ Ban quản trị để biết thêm chi tiết';
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
             }
         }else{
             $jsonObj['msg'] = "Thông tin đăng nhập không chính xác";

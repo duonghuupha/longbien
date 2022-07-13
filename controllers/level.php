@@ -16,9 +16,11 @@ class Level extends Controller{
 
     function add(){
         $title = $_REQUEST['title'];
-        $data = array('title' => $title);
+        $data = array('title' => $title, 'user_id' => $this->_Info[0]['id'], 
+                        "create_at" => date("Y-m-d H:i:s"), "status" => 0);
         $temp = $this->model->addObj($data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
             $jsonObj['msg'] = "Ghi dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -33,9 +35,11 @@ class Level extends Controller{
     function update(){
         $id = $_REQUEST['id'];
         $title = $_REQUEST['title'];
-        $data = array('title' => $title);
+        $data = array('title' => $title, 'user_id' => $this->_Info[0]['id'], 
+                        "create_at" => date("Y-m-d H:i:s"));
         $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
             $jsonObj['msg'] = "Ghi dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -48,9 +52,10 @@ class Level extends Controller{
     }
 
     function del(){
-        $id = $_REQUEST['id'];
-        $temp = $this->model->delObj($id);
+        $id = $_REQUEST['id']; $data = array("status" => 1);
+        $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);

@@ -46,7 +46,7 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
-												Nhập thông tin để đăng nhậ<p></p>
+												Nhập thông tin để đăng nhập
 											</h4>
 											<div class="space-6"></div>
 											<form id="login" method="post" onsubmit="login()">

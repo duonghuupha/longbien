@@ -46,7 +46,7 @@
 									<div class="form-group">
 										<label for="form-field-username">Năm học</label>
 										<div>
-											<select id="year_change_id" name="year_change_id" required="" style="width:100%"
+											<select id="year_change_id" name="year_change_id" style="width:100%"
 											class="form-control select2" data-placeholder="Lựa chọn năm học..."></select>
 										</div>
 									</div>

@@ -6,10 +6,10 @@ class Years_Model extends Model{
 
     function getFetObj($offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_years");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_years WHERE status = 0");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title, active FROM tbldm_years ORDER BY id DESC 
-                                    LIMIT $offset, $rows");
+        $query = $this->db->query("SELECT id, title, active FROM tbldm_years WHERE status = 0 
+                                    ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
