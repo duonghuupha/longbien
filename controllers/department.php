@@ -1,10 +1,8 @@
 <?php
 class Department extends Controller{
-    private $_Data;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
-        $this->_Data = new Model();
     }
 
     function index(){
@@ -29,7 +27,8 @@ class Department extends Controller{
         $vatly = $_REQUEST['physical_id']; $classstudy = (isset($_REQUEST['class_study'])) ? 1 : 0;
         $default = (isset($_REQUEST['is_default'])) ? 1 : 0;
         $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly, 
-                        'class_study' => $classstudy, 'is_default' => $default);
+                        'class_study' => $classstudy, 'is_default' => $default, 'user_id' => $this->_Info[0]['id'],
+                        "status" => 0, "create_at" => date("Y-m-d H:i:s"));
         if($this->model->check_exit(0, $namhocid, $vatly) > 0){
             $jsonObj['msg'] = "Phòng 'vật lý' này trong năm học này đã được sắp xếp";
             $jsonObj['success'] = false;
@@ -37,6 +36,7 @@ class Department extends Controller{
         }else{
             $temp = $this->model->addObj($data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
                 $jsonObj['msg'] = "Ghi dữ liệu thành công";
                 $jsonObj['success'] = true;
                 $this->view->jsonObj = json_encode($jsonObj);
@@ -56,7 +56,8 @@ class Department extends Controller{
         $vatly = $_REQUEST['physical_id']; $classstudy = (isset($_REQUEST['class_study'])) ? 1 : 0;
         $default = (isset($_REQUEST['is_default'])) ? 1 : 0;
         $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly, 
-                        'class_study' => $classstudy, 'is_default' => $default);
+                        'class_study' => $classstudy, 'is_default' => $default, 'user_id' => $this->_Info[0]['id'],
+                        "create_at" => date("Y-m-d H:i:s"));
         if($this->model->check_exit($id, $namhocid, $vatly) > 0){
             $jsonObj['msg'] = "Phòng 'vật lý' này trong năm học này đã được sắp xếp";
             $jsonObj['success'] = false;
@@ -64,6 +65,7 @@ class Department extends Controller{
         }else{
             $temp = $this->model->updateObj($id, $data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                 $jsonObj['msg'] = "Ghi dữ liệu thành công";
                 $jsonObj['success'] = true;
                 $this->view->jsonObj = json_encode($jsonObj);
@@ -77,9 +79,10 @@ class Department extends Controller{
     }
 
     function del(){
-        $id = $_REQUEST['id'];
-        $temp = $this->model->delObj($id);
+        $id = $_REQUEST['id']; $data = array("status" => 1);
+        $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -111,9 +114,11 @@ class Department extends Controller{
         }else{
             foreach($list_physical_old as $item){
                 $data = array("year_id" => $yearto, "physical_id" => $item['physical_id'], "title" => $item['title'],
-                                "class_study" => $item['class_study'], "is_default" => $item['is_default']);
+                                "class_study" => $item['class_study'], "is_default" => $item['is_default'],
+                                'user_id' => $this->_Info[0]['id'], "status" => 0, "create_at" => date("Y-m-d H:i:s"));
                 $this->model->addObj($data);
             }
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'copy');
             $jsonObj['msg'] = "Copy dữ  liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);

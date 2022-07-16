@@ -11,7 +11,7 @@ class Convert{
 		return $text;
 	}
 
-    function convert_img($txtname, $tiento){
+    function convert_file($txtname, $tiento){
         $extension = @end(explode(".", $txtname));
   		$prod = time();
   		$newfilename = $prod.'_'.$tiento.".".$extension;

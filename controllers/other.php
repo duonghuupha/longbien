@@ -87,5 +87,11 @@ class Other extends Controller{
         }
         $this->view->render("other/info_export_device_scan");
     }
+
+    function combo_task_group(){
+        $jsonObj = $this->model->get_combo_task_group($_REQUEST['userid']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_task_group");
+    }
 }
 ?>

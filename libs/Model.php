@@ -104,6 +104,12 @@ class Model {
                                     WHERE code = $code");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
+    function get_fullname_users($id){
+        $query = $this->db->query("SELECT fullname FROM tbl_personel WHERE id = (SELECT hr_id FROM tbl_users
+                                    WHERE tbl_users.id = $id)");
+        $row = $query->fetchAll();
+        return $row[0]['fullname'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 
 }

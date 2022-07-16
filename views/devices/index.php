@@ -133,9 +133,9 @@
                                 <label for="form-field-username">Mô tả / Thông số kỹ thuật</label>
                                 <div>
                                     <textarea type="text" id="description" style="width:100%;resize:none;height:200px" name="description"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>

@@ -45,3 +45,16 @@ function search(){
         $('#list_physical').load(baseUrl + '/physical_room/content?page=1&q='+keyword);
     }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////
+function import_xls(){
+    $('#modal-import').modal('show');
+}
+
+function saveimp(){
+    var file = $('#file').val();
+    if(file.length > 0){
+        save_form_modal('#fm-import', baseUrl + '/physical_room/do_import',  '#modal-import', '#list_physical', baseUrl+'/physical_room/content'); 
+    }else{
+        show_message("error", "Chưa điền đủ thông tin");
+    }
+}

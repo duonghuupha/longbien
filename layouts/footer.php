@@ -81,11 +81,12 @@
 		<script src="<?php echo URL ?>/styles/js/jquery.flot.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/jquery.flot.pie.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/jquery.flot.resize.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/moment.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/bootstrap-datepicker.min.js"></script>
+		<script src="<?php echo URL ?>/styles/js/bootstrap-datetimepicker.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/jquery.toast.js"></script>
 		<script src="<?php echo URL ?>/styles/js/select2.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/chosen.jquery.min.js"></script>
-		<script src="<?php echo URL ?>/styles/js/moment.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/fullcalendar.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/bootbox.js"></script>
 		<script src="<?php echo URL ?>/styles/js/jquery.maskedinput.min.js"></script>

@@ -1,15 +1,8 @@
 <?php
 class Loans extends Controller{
-    private $_Convert;
-    private $_Data;
-    private $_Year;
-    private $_Info;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
-        $this->_Convert = new Convert();
-        $this->_Data = new Model();
-        $this->_Info = $_SESSION['data'];
     }
 
     function index(){

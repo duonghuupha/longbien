@@ -6,10 +6,11 @@ class Physical_room_Model extends Model{
 
     function getFetObj($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_physical_room WHERE title LIKE '%$q%'");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_physical_room WHERE title LIKE '%$q%'
+                                    AND status = 0");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title, region, `floor` FROM tbldm_physical_room WHERE title LIKE '%$q%'
-                                    ORDER BY id DESC LIMIT $offset, $rows");
+        $query = $this->db->query("SELECT id, title, region, `floor`, create_at FROM tbldm_physical_room WHERE title LIKE '%$q%'
+                                     AND status = 0 ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

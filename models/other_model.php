@@ -25,12 +25,12 @@ class Other_Model extends Model{
     }
 
     function get_combo_subject(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_subject");
+        $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0");
         return $query->fetchAll();
     }
 
     function get_combo_equipment(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_equipment");
+        $query = $this->db->query("SELECT id, title FROM tbldm_equipment WHERE status = 0");
         return $query->fetchAll();
     }
 
@@ -49,7 +49,12 @@ class Other_Model extends Model{
 
     function get_combo_department($yearid){
         $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid
-                                    AND class_study = 1");
+                                    AND class_study = 1 AND status = 0");
+        return $query->fetchAll();
+    }
+
+    function get_combo_task_group($userid){
+        $query = $this->db->query("SELECT id, title FROM tbl_task_group WHERE user_id = $userid");
         return $query->fetchAll();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////

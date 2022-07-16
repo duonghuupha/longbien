@@ -18,8 +18,14 @@ class Log{
 
     function render_action($type){
         $array = array("add" => "Thêm mới dữ liệu", "edit" => "Cập nhật dữ liệu", "del" => "Xóa dữ liệu",
-                        "imp" => "Nhập  dữ liệu từ file");
+                        "imp" => "Nhập  dữ liệu từ file", "copy", "Copy dữ liệu");
         return $array[$type];
+    }
+
+    function save_notify($userread, $title, $link){
+        $data = array("user_id" => $this->_Info[0]['id'], "user_read" => $userread, "readed" => "",
+                        "title" => $title, "link" => $link, "create_at" => date("Y-m-d H:i:s"));
+        $this->_Data->insert("tbl_notify", $data);
     }
 }
 ?>

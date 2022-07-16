@@ -24,9 +24,11 @@ class Physical_room extends Controller{
     function add(){
         $region = $_REQUEST['region']; $floor = $_REQUEST['floor'];
         $title = $_REQUEST['title'];
-        $data = array('title' => $title, 'region' => $region, 'floor' => $floor);
+        $data = array('title' => $title, 'region' => $region, 'floor' => $floor, "user_id" => $this->_Info[0]['id'],
+                        "create_at" => date("Y-m-d H:i:s"), "status" => 0);
         $temp = $this->model->addObj($data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
             $jsonObj['msg'] = "Ghi dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -42,9 +44,11 @@ class Physical_room extends Controller{
         $id = $_REQUEST['id'];
         $region = $_REQUEST['region']; $floor = $_REQUEST['floor'];
         $title = $_REQUEST['title'];
-        $data = array('title' => $title, 'region' => $region, 'floor' => $floor);
+        $data = array('title' => $title, 'region' => $region, 'floor' => $floor, "user_id" => $this->_Info[0]['id'],
+                        "create_at" => date("Y-m-d H:i:s"));
         $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
             $jsonObj['msg'] = "Ghi dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -57,9 +61,10 @@ class Physical_room extends Controller{
     }
 
     function del(){
-        $id = $_REQUEST['id'];
-        $temp = $this->model->delObj($id);
+        $id = $_REQUEST['id']; $data = array("status" => 1);
+        $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -73,6 +78,40 @@ class Physical_room extends Controller{
 /////////////////////////////////////////////////////////////////////////////////////////////////
     function form(){
         $this->view->render('physical_room/form');
+    }
+
+    function do_import(){
+        $file = $_FILES['file']['tmp_name'];
+        $objFile = PHPExcel_IOFactory::identify($file);
+        $objData = PHPExcel_IOFactory::createReader($objFile);
+        $objData->setReadDataOnly(true);
+        $objPHPExcel = $objData->load($file);
+        $sheet = $objPHPExcel->setActiveSheetIndex(0);
+        $Totalrow = $sheet->getHighestRow();
+        $LastColumn = $sheet->getHighestColumn();
+        $TotalCol = PHPExcel_Cell::columnIndexFromString($LastColumn);
+        $data = [];
+        for ($i = 4; $i <= $Totalrow; $i++) {
+            for ($j = 1; $j < $TotalCol; $j++) {
+                //$data[$i - 2][$j] = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                if($j == 1){
+                    $region = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                }elseif($j == 2){
+                    $floor = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                }elseif($j == 3){
+                    $title = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                }
+            }
+            $data = array("title" => $title, 'region' => $region, 'floor' => $floor,
+                            'user_id' => $this->_Info[0]['id'], 
+                            'create_at' => date("Y-m-d H:i:s"), 'status' => 0);
+            $this->model->addObj($data);
+        }
+        $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'imp');
+        $jsonObj['msg'] = "Import dữ liệu thành công";
+        $jsonObj['success'] = true;
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render('physical_room/do_import');
     }
 }
 ?>

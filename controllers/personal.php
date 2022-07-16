@@ -1,10 +1,8 @@
 <?php
 class Personal extends Controller{
-    private $_Convert;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
-        $this->_Convert = new  Convert();
     }
 
     function index(){

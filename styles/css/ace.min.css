@@ -20758,4 +20758,9 @@ input.typeahead.scrollable~.tt-menu {
 .year_school{
     background: none !important;
 }
+
+.img_border{
+    border-radius:100%;
+    border: 2px solid #ccc;
+}
 /************************************************************/

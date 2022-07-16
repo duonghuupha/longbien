@@ -77,6 +77,7 @@ function copy(){
 function set_list_department(){
     var year = $('#year_from').val();
     //$('#department_id').load(baseUrl + '/department/list_department?id='+year);
+    $('#department_id').empty();
     $.getJSON(baseUrl + '/department/list_department?id='+year, function(data){
         //$("#department_id").children().remove();
         $.each(data, function(i, val){

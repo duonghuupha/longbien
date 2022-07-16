@@ -22,6 +22,12 @@
             <div class="page-header">
                 <h1>
                     Khai báo thông tin các phòng "vật lý"
+                    <small class="pull-right">
+                        <button class="btn btn-sm btn-info" type="button" onclick="import_xls()">
+                            <i class="ace-icon fa fa-file-excel-o"></i>
+                            Nhập từ file
+                        </button>
+                    </small>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -88,5 +94,52 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+
+<!--Form don vi tinh-->
+<div id="modal-import" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    Thêm mới - Cập nhật thông tin nhân sự
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="fm-import" method="POST" enctype="multipart/form-data">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn file</label>
+                                <div>
+                                    <input type="file" id="file" name="file" class="file_attach" style="width:100%"
+                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">
+                                Định dạng file là <b>.xlsx</b> (Excel 2007 trở lên). Tải file mẫu 
+                                <a href="<?php echo URL.'/public/temp/physical_room.xlsx'; ?>" target="_blank">tại đây</a> để moulde chạy đạt hiệu quả cao
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="saveimp()">
+                    <i class="ace-icon fa fa-save"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 
 <script src="<?php echo URL.'/public/' ?>scripts/categories/physical_room.js"></script>

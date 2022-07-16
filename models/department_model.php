@@ -6,7 +6,8 @@ class Department_Model extends Model{
 
     function getFetObj($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE title LIKE '%$q%'");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE title LIKE '%$q%'
+                                    AND status = 0");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, title, year_id, physical_id, (SELECT tbldm_years.title
                                 FROM tbldm_years WHERE tbldm_years.id = year_id) AS namhoc,
@@ -16,7 +17,7 @@ class Department_Model extends Model{
                                 WHERE tbldm_physical_room.id = physical_id) AS region,
                                 (SELECT tbldm_physical_room.floor FROM tbldm_physical_room
                                 WHERE tbldm_physical_room.id = physical_id) AS `floor`, class_study, is_default
-                                FROM tbldm_department WHERE title LIKE '%$q%' ORDER BY id DESC 
+                                FROM tbldm_department WHERE title LIKE '%$q%' AND status = 0 ORDER BY id DESC 
                                 LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
@@ -45,10 +46,10 @@ class Department_Model extends Model{
 
     function check_exit($id, $yearid, $physicalid){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE year_id = $yearid
-                                    AND physical_id = $physicalid");
+                                    AND physical_id = $physicalid AND status = 0");
         if($id > 0){
             $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE year_id = $yearid
-                                    AND physical_id = $physicalid AND id != $id");
+                                    AND physical_id = $physicalid AND id != $id AND status = 0");
         }
         $row = $query->fetchAll();
         return $row[0]['Total'];
