@@ -21,6 +21,15 @@ $(function(){
         }
     });
     $('#year_change_id').load(baseUrl + '/other/combo_years');
+    $('#list_notify_modal').load(baseUrl + '/notify/list_notify_modal');
+    ///////////////////////////////////////////////////////////////
+    $.getJSON(baseUrl + '/notify/total_notify', function(data){
+        //console.log(data);
+        $('#total_notify').text(data);
+    });
+    setInterval(function(){
+        load_total_notify();
+    }, 5000);
 });
 
 function style_option(value){
@@ -119,6 +128,27 @@ function removeVietnameseTones(str) {
     // Bỏ dấu câu, kí tự đặc biệt
     str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
     return str.toLowerCase();
+}
+
+function load_total_notify(){
+    $.getJSON(baseUrl + '/notify/total_notify', function(data){
+        //console.log(data);
+        $('#total_notify').text(data);
+    });
+}
+
+function reject_link(idh){
+    $.getJSON(baseUrl + '/notify/readed?id='+idh, function(data){
+        if(data.success){
+            window.location.href = data.link;
+        }else{
+            window.location.href = baseUrl;
+        }
+    });
+}
+
+function load_list_notify(){
+    $('#list_notify_modal').load(baseUrl + '/notify/list_notify_modal');
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function save_reject(id_form, post_url, url_reject){

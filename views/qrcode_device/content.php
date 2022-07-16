@@ -10,9 +10,7 @@ $pages = $this->page; $sql = new Model();
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
-            <th class="text_center">
-
-            </th>
+            <th class="text_center"></th>
             <th class="text-center" style="width:80px">Mã TB</th>
             <th class="">Tiêu đề</th>
             <th class="text-center hidden-480">Danh mục</th>

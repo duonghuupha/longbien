@@ -22,10 +22,11 @@ class Log{
         return $array[$type];
     }
 
-    function save_notify($userread, $title, $link){
-        $data = array("user_id" => $this->_Info[0]['id'], "user_read" => $userread, "readed" => "",
+    function save_notify($userread, $title, $link, $userid){
+        $sql = new Model();
+        $data = array("user_id" => $userid, "user_read" => $userread, "readed" => "",
                         "title" => $title, "link" => $link, "create_at" => date("Y-m-d H:i:s"));
-        $this->_Data->insert("tbl_notify", $data);
+        $sql->insert("tbl_notify", $data);
     }
 }
 ?>

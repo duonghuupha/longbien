@@ -27,12 +27,27 @@ class Tasks extends Controller{
         $content = addslashes($_REQUEST['content']); $datadc = base64_decode($_REQUEST['datadc']);
         $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'tasks') : '';
         $usermain = (isset($_REQUEST['user_main_id']) && $_REQUEST['user_main_id'] != '') ? $_REQUEST['user_main_id'] : $this->_Info[0]['id'];
+        $status = ($this->_Info[0]['id'] == $usermain) ? 2 : 0;
         $data = array("code" => $code, "title" => $title, "content" => $content, "date_work" => $datework,
                         "time_work" => $timework, "user_id" => $this->_Info[0]['id'], "user_share" => $datadc,
-                        "file" => $file, "status" => 0, "create_at" => date("Y-m-d H:i:s"), "group_id" => $groupid,
+                        "file" => $file, "status" => $status, "create_at" => date("Y-m-d H:i:s"), "group_id" => $groupid,
                         "user_main" => $usermain);
         $temp = $this->model->addObj($data);
         if($temp){
+            //  ghi du lieu thong bao
+            $user_ar = [];
+            if($usermain !=  $this->_Info[0]['id']){
+                array_push($user_ar, $usermain);
+            }
+            if($datadc != ''){
+                $user_share = explode(",", $datadc); $user_share = array_filter($user_share);
+                array_merge($user_ar, $user_share);
+            }
+            if(count($user_ar) > 0){
+                $id_task = $this->model->get_id_task_by_code($code);
+                $this->add_notify($user_ar, "Bạn có công việc mới", URL.'/tasks/detail?id='.$id_task);
+            }
+            //////////////////////////////////////////////////////////////////////////////
             if($_FILES['file']['name'] != ''){
                 $dirname = DIR_UPLOAD.'/tasks/'.$this->_Info[0]['id'];
                 if(!file_exists($dirname)){
@@ -73,6 +88,14 @@ class Tasks extends Controller{
                         "create_at" => date("Y-m-d H:i:s"), "group_id" => $groupid, "user_main" => $usermain);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
+            //  ghi du lieu thong bao
+            $json = $this->model->get_info_edit($id);
+            $usertask = $json[0]['user_id'].','.$json[0]['user_main'].','.$json[0]['user_share'];
+            $usertask = explode(",", $usertask); $usertask =  array_filter($usertask);
+            $user_ar = array_diff($usertask, [$this->_Info[0]['id']]);
+            if(count($user_ar) > 0){
+                $this->add_notify($user_ar, "Cập nhật nội dung công việc", URL.'/tasks/detail?id='.$id);
+            }
             if($_FILES['file']['name'] != ''){
                 $dirname = DIR_UPLOAD.'/tasks/'.$this->_Info[0]['id'];
                 if(!file_exists($dirname)){
@@ -122,7 +145,7 @@ class Tasks extends Controller{
         require('layouts/header.php');
         $id = $_REQUEST['id'];
         $jsonObj = $this->model->get_info_edit($id);
-        if($jsonObj[0]['status'] == 0){
+        if($jsonObj[0]['status'] == 0 AND $this->_Info[0]['id'] == $jsonObj[0]['user_main']){
             $data = array('status' => 2); 
             $this->model->updateObj($id, $data);
             // cap nhat comment cho cong viec
@@ -154,6 +177,14 @@ class Tasks extends Controller{
                         "file" => $file, "create_at" => date("Y-m-d H:i:s"));
         $temp = $this->model->addObj_C($data);
         if($temp){
+            //  ghi du lieu thong bao
+            $json = $this->model->get_info_edit($id);
+            $usertask = $json[0]['user_id'].','.$json[0]['user_main'].','.$json[0]['user_share'];
+            $usertask = explode(",", $usertask); $usertask =  array_filter($usertask);
+            $user_ar = array_diff($usertask, [$this->_Info[0]['id']]);
+            if(count($user_ar) > 0){
+                $this->add_notify($user_ar, "Trao đổi / ý kiến công việc", URL.'/tasks/detail?id='.$id);
+            }
             if($_FILES['file']['name'] != ''){
                 $dirname = DIR_UPLOAD.'/tasks/'.$this->_Info[0]['id'];
                 if(!file_exists($dirname)){
@@ -191,6 +222,14 @@ class Tasks extends Controller{
                         "file" => $file, "create_at" => date("Y-m-d H:i:s"));
         $temp = $this->model->addObj_C($data);
         if($temp){
+             //  ghi du lieu thong bao
+             $json = $this->model->get_info_edit($id);
+             $usertask = $json[0]['user_id'].','.$json[0]['user_main'].','.$json[0]['user_share'];
+             $usertask = explode(",", $usertask); $usertask =  array_filter($usertask);
+             $user_ar = array_diff($usertask, [$this->_Info[0]['id']]);
+             if(count($user_ar) > 0){
+                 $this->add_notify($user_ar, "Trao đổi / ý kiến công việc", URL.'/tasks/detail?id='.$id);
+             }
             //cap nhat trang thai cho cong viec
             $data_s = array("status" => 3, "create_at" => date("Y-m-d H:i:s"));
             $this->model->updateObj($id, $data_s);
@@ -249,6 +288,12 @@ class Tasks extends Controller{
         $jsonObj = $this->model->get_info_edit($id);
         $this->view->jsonObj = $jsonObj;
         $this->view->render("tasks/data_edit");
+    }
+
+    function add_notify($array, $title, $link){
+        foreach($array as $row){
+            $this->_Log->save_notify($row, $title, $link, $this->_Info[0]['id']);
+        }
     }
 }
 ?>

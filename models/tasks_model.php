@@ -12,7 +12,7 @@ class Tasks_Model extends Model{
         $query = $this->db->query("SELECT id, code, title, content, date_work, time_work, file, status, create_at, user_share,
                                     (SELECT title FROM tbl_task_group WHERE tbl_task_group.id = group_id) AS group_task,
                                     IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users
-                                    WHERE tbl_users.id = user_id))) AS user_create, IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel 
+                                    WHERE tbl_users.id = user_id))) AS user_create, IF(user_main = 1, 'Administrator', (SELECT fullname FROM tbl_personel 
                                     WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users WHERE tbl_users.id = user_main))) AS usermain 
                                     FROM tbl_tasks WHERE status != 1  AND title LIKE '%$q%' ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
@@ -86,6 +86,12 @@ class Tasks_Model extends Model{
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
+    }
+
+    function get_id_task_by_code($code){
+        $query = $this->db->query("SELECT id FROM tbl_tasks WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['id'];
     }
 }
 ?>

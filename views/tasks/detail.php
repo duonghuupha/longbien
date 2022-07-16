@@ -23,18 +23,22 @@
             <div class="page-header">
                 <h1>
                     Chi tiết công việc
-                    <?php
-                    if($item[0]['status'] == 2){
-                    ?>
                     <small class="pull-right">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='<?php echo URL.'/tasks' ?>'">
+                            <i class="fa fa-arrow-left"></i>
+                            Quay lại
+                        </button>
+                        <?php
+                        if($item[0]['status'] == 2){
+                        ?>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add(<?php echo $item[0]['id'] ?>)">
                             <i class="fa fa-comment"></i>
                             Gửi ý kiến
                         </button>
+                        <?php
+                        }
+                        ?>
                     </small>
-                    <?php
-                    }
-                    ?>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
