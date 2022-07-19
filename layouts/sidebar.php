@@ -82,6 +82,13 @@
                 <li class="hover">
                     <a href="<?php echo URL.'/tasks' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
+                        Công việc
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/weekly' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
                         Lịch công tác
                     </a>
                     <b class="arrow"></b>

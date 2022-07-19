@@ -250,7 +250,7 @@ class Convert{
         $datetime = new DateTime('00:00:00');
         $datetime->setISODate((int)$datetime->format('o'), $weekNum, 1);
         $interval = new DateInterval('P1D');
-        $week = new DatePeriod($datetime, $interval, 5);
+        $week = new DatePeriod($datetime, $interval, 6);
         foreach($week as $day){
             $result[] = $day->format('D d-m-Y');
         }
@@ -342,5 +342,11 @@ class Convert{
             return false;
         }
     } 
+
+    function return_fullname_sort($txt){
+        $data = trim($txt); $data = explode(" ", $data);
+        $fullname = array_slice($data, -2,  2, true);
+        return implode(" ",  $fullname);
+    }
 }
 ?>
