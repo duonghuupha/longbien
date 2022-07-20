@@ -57,6 +57,11 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbl_task_group WHERE user_id = $userid");
         return $query->fetchAll();
     }
+
+    function get_combo_document_cate(){
+        $query = $this->db->query("SELECT id, title, parent_id FROM tbldm_document WHERE status = 0");
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");

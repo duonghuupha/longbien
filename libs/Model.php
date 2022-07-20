@@ -110,6 +110,10 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['fullname'];
     }
+    function get_parent_document_cate($parentid){
+        $query = $this->db->query("SELECT id, title, parent_id FROM tbldm_document WHERE id = $parentid");
+        return $query->fetchAll();
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

@@ -93,5 +93,11 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_task_group");
     }
+
+    function combo_document_cate(){
+        $jsonObj = $this->model->get_combo_document_cate();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_document_cate");
+    }
 }
 ?>

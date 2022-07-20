@@ -115,21 +115,21 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="hover">
-                    <a href="<?php echo URL.'/student_point' ?>">
+                    <a href="<?php echo URL.'/document_cate' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Danh mục
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/student' ?>">
+                    <a href="<?php echo URL.'/document_in' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Văn bản đến
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/student_change' ?>">
+                    <a href="<?php echo URL.'/document_out' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Văn bản đi
                     </a>

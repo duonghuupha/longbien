@@ -253,7 +253,7 @@ function save_form_reset_form(id_form, post_url, id_content, url_refresh){
             if(result.success == true){
                 $('.overlay').hide();
                 show_message('success', result.msg);
-                $(id_form)[0].reset(); $('.select2').val('').trigger('change');
+                $(id_form)[0].reset(); $('.select2').val(null).trigger('change.select2');
                 $(id_content).load(url_refresh);
             }else{
                 $('.overlay').hide();
