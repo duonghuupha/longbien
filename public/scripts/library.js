@@ -150,6 +150,12 @@ function reject_link(idh){
 function load_list_notify(){
     $('#list_notify_modal').load(baseUrl + '/notify/list_notify_modal');
 }
+
+function format_date(str){
+    var date  = new Date(str);
+    var ngay = date.getDate(), thang = (date.getMonth()) + 1, nam = date.getFullYear();
+    return ngay+'-'+thang+'-'+nam;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function save_reject(id_form, post_url, url_reject){
     var xhr = new XMLHttpRequest();
