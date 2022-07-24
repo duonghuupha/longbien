@@ -28,7 +28,11 @@ $sql = new Model();
                     <small class="pull-right hidden-480">
                         <button type="button" class="btn btn-success btn-sm" onclick="print_card()">
                             <i class="fa fa-print"></i>
-                            In thẻ
+                            Xuất thẻ
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href = '<?php echo URL.'/personal' ?>'">
+                            <i class="fa fa-arrow-left"></i>
+                            Quay lại
                         </button>
                     </small>
                 </h1>
@@ -68,19 +72,18 @@ $sql = new Model();
                                     }
                                     ?>
                                 </div>
-                                <div class="right" style="float:left; width:226px; font-family: Arial; text-align:center;padding: 0 10px 0px 10px;">
-                                    <span style="text-transform:uppercase; font-weight:700; color:#eb1c24; font-size:18px;
-                                    float:left; width:100%;">
-                                        <?php echo $row['fullname'] ?>
+                                <div class="right" style="float:left; width:226px; font-family: Arial; padding: 0 10px 0px 10px;">
+                                    <span style="float:left; width:100%;font-weight:700; color:#06097c">
+                                        Họ và tên: <?php echo $row['fullname'] ?>
                                     </span>
                                     <span style="float:left; width:100%; margin-top:5px; font-weight:700; color:#06097c">
-                                        <?php echo $row['job'] ?>
+                                        Nhiệm vụ: <?php echo $row['job'] ?>
                                     </span>
                                     <span style="float:left; width:100%; margin-top:10px; ">
                                         <img src="<?php echo URL ?>/public/barcode/teacher/<?php echo $row['code'].'.png' ?>"
                                         style="width:190px; height:30px"/>
                                     </span>
-                                    <span style="float:left; width:100%; margin-top:5px; font-weight:700; color: #06097c;">
+                                    <span style="float:left; width:100%; margin-top:5px; font-weight:700; color: #06097c; text-align:center">
                                         <?php echo $row['code'] ?>
                                     </span>
                                 </div>

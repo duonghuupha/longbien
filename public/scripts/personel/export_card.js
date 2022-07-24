@@ -50,6 +50,26 @@ function print_card(){
                 show_message('success', result.msg);
                 //$(id_div).load(url_content);
                 window.open(baseUrl+'/public/card/tmp/the_nhan_su.zip');
+                // xoa fiel the sau khi xuat thanh cong
+                del_card();
+            }else{
+                $('.overlay').hide();
+                show_message('error', result.msg);
+                return false;
+            }
+        }
+    });
+}
+
+function del_card(){
+    $.ajax({
+        type: "POST",
+        url: baseUrl + '/personal/del_card',
+        data: '', // serializes the form's elements.
+        success: function(data){
+            var result = JSON.parse(data);
+            if(result.success == true){
+                show_message('success', result.msg);
             }else{
                 $('.overlay').hide();
                 show_message('error', result.msg);

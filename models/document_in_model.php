@@ -14,7 +14,8 @@ class Document_in_Model extends Model{
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_document_in WHERE $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, number_in, date_in, number_dc, date_dc, title,
-                                content, user_id, user_share, create_at, file, cate_id FROM tbl_document_in
+                                content, user_id, user_share, create_at, file, cate_id, (SELECT tbldm_document.title
+                                FROM tbldm_document WHERE tbldm_document.id = cate_id) AS category FROM tbl_document_in
                                 WHERE $where ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();

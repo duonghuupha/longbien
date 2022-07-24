@@ -145,15 +145,6 @@ class Personal extends Controller{
         $this->view->render("personal/form_detail");
     }
 
-    function card(){
-        require('layouts/header.php');
-        $id = $_REQUEST['id'];
-        $jsonObj = $this->model->get_info($_REQUEST['id']);
-        $this->view->jsonObj= $jsonObj;
-        $this->view->render("personal/card");
-        require('layouts/footer.php');
-    }
-
     function save_card(){
         $img = $_REQUEST['imgBase64']; $code = $_REQUEST['code'];
         $img = str_replace("data:image/png;base64,", "", $img);
@@ -333,7 +324,7 @@ class Personal extends Controller{
         $tmp_file = DIR_UPLOAD.'/card/tmp/the_nhan_su.zip';
         if ($zip->open($tmp_file,  ZipArchive::CREATE)) {
             foreach($jsonObj as $row){
-                $zip->addFile(DIR_UPLOAD.'/card/teacher/'.$row['code'].'.png', $this->_Convert->vn2latin($row['fullname'], true).'.png');
+                $zip->addFile(DIR_UPLOAD.'/card/teacher/'.$row['code'].'.png', $this->_Convert->vn2latin($row['code'], true).'.png');
                 //$zip->addFile('folder/bootstrap.min.js', 'bootstrap.min.js');
             }
             $zip->close();
@@ -350,6 +341,20 @@ class Personal extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("personal/print_print_card");
+    }
+
+    function del_card(){
+        $dirname = DIR_UPLOAD.'/card/teacher/*';
+        if(array_map('unlink', array_filter((array) glob($dirname)))){
+            $jsonObj['msg'] = "";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj=  json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Xóa dữ liệu tạm không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj=  json_encode($jsonObj);
+        }
+        $this->view->render("personal/del_card");
     }
 }
 ?>

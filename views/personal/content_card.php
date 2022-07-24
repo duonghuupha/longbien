@@ -2,6 +2,24 @@
 $convert = new Convert(); $jsonObj = $this->jsonObj; $perpage = $this->perpage;
 $pages = $this->page; $sql = new Model();
 ?>
+<script>
+$(function(){
+    var $chkboxes = $('.ck_inma');
+    var lastChecked = null;
+    $chkboxes.click(function(e){
+        if(!lastChecked){
+            lastChecked = this;
+            return;
+        }
+        if(e.shiftKey){
+            var start = $chkboxes.index(this);
+            var end = $chkboxes.index(lastChecked);
+            $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
+        }
+        lastChecked = this;
+    });
+});
+</script>
 <table 
     id="dynamic-table" 
     class="table table-striped table-bordered table-hover dataTable no-footer" 

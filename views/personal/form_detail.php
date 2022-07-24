@@ -128,12 +128,6 @@ if($item[0]['subject'] != ''){
     </div>
 </div>
 <div class="modal-footer">
-    <?php if($item[0]['status'] != 99){ ?>
-    <button class="btn btn-sm btn-success pull-left" onclick="window.location.href='<?php echo URL.'/personal/card?id='.$item[0]['id'] ?>'">
-        <i class="ace-icon fa fa-search"></i>
-        Xem thẻ
-    </button>
-    <?php } ?>
     <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
         <i class="ace-icon fa fa-times"></i>
         Đóng
