@@ -11,15 +11,6 @@ $sql = new Model();
                 </li>
                 <li class="active">Học sinh</li>
             </ul><!-- /.breadcrumb -->
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
-                        onkeyup="search()"/>
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
         <div class="page-content">
             <div class="page-header">
@@ -28,7 +19,7 @@ $sql = new Model();
                     <small class="pull-right hidden-480">
                         <button type="button" class="btn btn-success btn-sm" onclick="save()">
                             <i class="fa fa-print"></i>
-                            In thẻ
+                            Xuất thẻ
                         </button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href = '<?php echo URL.'/student' ?>'">
                             <i class="fa fa-arrow-left"></i>
@@ -113,7 +104,7 @@ $sql = new Model();
                                 }).done(function(o) {
                                     var result = JSON.parse(o);
                                     if(result.success){
-                                        show_message("success", result.msg);
+                                        //show_message("success", result.msg);
                                     }else{
                                         show_message("error", result.msg);
                                     }

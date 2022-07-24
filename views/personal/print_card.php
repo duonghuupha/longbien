@@ -109,7 +109,7 @@ $sql = new Model();
                                 }).done(function(o) {
                                     var result = JSON.parse(o);
                                     if(result.success){
-                                        show_message("success", result.msg);
+                                        //show_message("success", result.msg);
                                     }else{
                                         show_message("error", result.msg);
                                     }

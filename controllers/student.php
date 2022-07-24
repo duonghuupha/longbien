@@ -1,11 +1,8 @@
 <?php
 class Student extends Controller{
-    private $_Convert;
-    private $_Year;
     function __construct(){
         parent::__construct();
-        $this->_Convert = new Convert();
-        $this->_Year = $_SESSION['year'];
+        parent::PhadhInt();
     }
 
     function index(){
@@ -359,9 +356,14 @@ class Student extends Controller{
     function content_card(){
         $rows = 15;
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $code = isset($_REQUEST['code']) ? $_REQUEST['code'] : '';
+        $name = isset($_REQUEST['name']) ? str_replace("$", " ", $_REQUEST['name']) : '';
+        $date = isset($_REQUEST['date']) ? $this->_Convert->convertDate($_REQUEST['date']) : '';
+        $class = isset($_REQUEST['class']) ? $_REQUEST['class'] : '';
+        $address = isset($_REQUEST['address']) ? str_replace("$", " ", $_REQUEST['address']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
+        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('student/content_card');
     }
@@ -421,6 +423,20 @@ class Student extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("student/download_card");
+    }
+
+    function del_card(){
+        $dirname = DIR_UPLOAD.'/card/student/*';
+        if(array_map('unlink', array_filter((array) glob($dirname)))){
+            $jsonObj['msg'] = "";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj=  json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Xóa dữ liệu tạm không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj=  json_encode($jsonObj);
+        }
+        $this->view->render("student/del_card");
     }
 }
 ?>
