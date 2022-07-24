@@ -73,26 +73,46 @@ class Loans_Model extends Model{
                                     GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
                                     FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)
                                     AND id NOT IN (SELECT device_id FROM tbl_loans_detail GROUP BY device_id HAVING
-                                    (COUNT(*) - (SELECT tbl_devices.stock FROM tbl_devices WHERE tbl_devices.id = device_id)) > 0)");
+                                    (COUNT(*) - (SELECT tbl_devices.stock FROM tbl_devices WHERE tbl_devices.id = device_id)) > 0)
+                                    ORDER BY title ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
     }
 
+    function get_total_data_device($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE title LIKE '%$q%' 
+                                    AND id NOT IN (SELECT device_id FROM tbl_export_detail 
+                                    GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)
+                                    AND id NOT IN (SELECT device_id FROM tbl_loans_detail GROUP BY device_id HAVING
+                                    (COUNT(*) - (SELECT tbl_devices.stock FROM tbl_devices WHERE tbl_devices.id = device_id)) > 0)");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
     function get_data_users($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id != 1
-                                    AND active = 1 AND username LIKE '%$q%'");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id != 1 AND active = 1
+                                    AND hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE fullname LIKE '%$q%')");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, username, (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = hr_id) AS fullname,
-                                    (SELECT gender FROM tbl_personel WHERE tbl_personel.id = hr_id) AS gender,
-                                    (SELECT birthday FROM tbl_personel WHERE tbl_personel.id = hr_id) AS birthday,
-                                    (SELECT title FROM tbldm_level WHERE tbldm_level.id = (SELECT level_id FROM tbl_personel
-                                    WHERE tbl_personel.id = hr_id)) AS level FROM tbl_users WHERE id != 1 AND active = 1
-                                    AND username LIKE '%$q%' ORDER BY id DESC LIMIT $offset, $rows");
+        $query = $this->db->query("SELECT id, (SELECT fullname FROM tbl_personel WHERE tbl_personel.id  = hr_id) AS fullname,
+                                    (SELECT birthday FROM tbl_personel WHERE tbl_personel.id  = hr_id) AS birthday,
+                                    (SELECT gender FROM tbl_personel WHERE tbl_personel.id  = hr_id) AS gender,
+                                    (SELECT title FROM tbldm_job WHERE tbldm_job.id = (SELECT job_id FROM tbl_personel
+                                    WHERE tbl_personel.id = hr_id)) AS job
+                                    FROM tbl_users WHERE id != 1 AND active = 1 AND hr_id IN (SELECT tbl_personel.id FROM tbl_personel 
+                                    WHERE fullname LIKE '%$q%')ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
+    }
+
+    function geet_total_Data_user($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id != 1 AND active = 1
+                                AND hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE fullname LIKE '%$q%')");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
     }
 
     function get_info($id){

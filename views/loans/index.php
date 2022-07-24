@@ -197,10 +197,72 @@
 <!-- End formm don vi tinh-->
 
 <!--Form don vi tinh-->
-<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:60%">
-        <div class="modal-content" id="detail" style="height:551px">
-            
+<div id="modal-users" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:62%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách người dùng
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-user" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_user()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_users" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-device" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:62%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách trang thiết bị
+                </div>
+            </div>
+            <div class="modal-body" style="height:600px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-device" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_device()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_device" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager_device">
+                    <!--display pagination-->
+                </small>
+            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>

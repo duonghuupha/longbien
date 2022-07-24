@@ -1,12 +1,8 @@
 <?php
 class Change_device extends Controller{
-    private $_Convert;
-    private $_Data;
-    private $_Year;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
-        $this->_Year = $_SESSION['year'];
     }
 
     function index(){

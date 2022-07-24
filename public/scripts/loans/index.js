@@ -72,35 +72,55 @@ function search(){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 function select_user(){
-    $('#detail').load(baseUrl + '/loans/list_users');
-    $('#modal-detail').modal('show');
-}
-
-function confirm_user(idh){
-    $('#user_loan').val(idh); var fullname = $('#title_'+idh).text();
-    $('#fullname').val(fullname);
-    $('#modal-detail').modal('hide');
+    $('#list_users').load(baseUrl + '/loans/list_user?page='+page_user+'&q='+keyword_user+'&checked='); 
+    $('#pager').load(baseUrl + '/loans/list_user_page?page='+page_user+'&q='+keyword_user);
+    $('#modal-users').modal('show');
 }
 
 function view_page_user(pages){
     page_user = pages;
-    $('#detail').load(baseUrl + '/loans/list_users?page='+page_user+'&q='+keyword_user);
+    $('#list_users').load(baseUrl + '/loans/list_user?page='+page_user+'&q='+keyword_user+'&checked='); 
+    $('#pager').load(baseUrl + '/loans/list_user_page?page='+page_user+'&q='+keyword_user);
 }
 
 function search_user(){
-    var value = $('#table_search').val();
+    var value = $('#nav-search-input-user').val();
     if(value.length != 0){
         keyword_user = value.replaceAll(" ", "$", 'g');
-        $('#detail').load(baseUrl + '/loans/list_users?page=1&q='+keyword_user);
     }else{
         keyword_user = '';
-        $('#detail').load(baseUrl + '/loans/list_users?page=1&q='+keyword_user);
     }
+    $('#list_users').load(baseUrl + '/loans/list_user?page=1&q='+keyword_user+'&checked='); 
+    $('#pager').load(baseUrl + '/loans/list_user_page?page=1&q='+keyword_user);
+}
+
+function selected_user(idh){
+    $('#user_loan').val(idh); var fullname = $('#fullname_'+idh).text();
+    $('#fullname').val(fullname);
+    $('#modal-users').modal('hide');
 }
 
 function select_device(){
-    $('#detail').load(baseUrl + '/loans/list_device');
-    $('#modal-detail').modal('show');
+    $('#list_device').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device+'&checked='); 
+    $('#pager_device').load(baseUrl + '/loans/list_device_page?page='+page_device+'&q='+keyword_device);
+    $('#modal-device').modal('show');
+}
+
+function view_page_device(pages){
+    page_device = pages;
+    $('#list_device').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device+'&checked='); 
+    $('#pager_device').load(baseUrl + '/loans/list_device_page?page='+page_device+'&q='+keyword_device);
+}
+
+function search_device(){
+    var value = $('#nav-search-input-device').val();
+    if(value.length != 0){
+        keyword_device = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_device = '';
+    }
+    $('#list_device').load(baseUrl + '/loans/list_device?page=1&q='+keyword_device+'&checked='); 
+    $('#pager_device').load(baseUrl + '/loans/list_device_page?page=1&q='+keyword_device);
 }
 
 function confirm_device(idh){
@@ -112,23 +132,7 @@ function confirm_device(idh){
         return false;
     }else{
         data.push(str);
-        render_table(data); $('#modal-detail').modal('hide');
-    }
-}
-
-function view_page_device(pages){
-    page_device = pages;
-    $('#detail').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device);
-}
-
-function search_device(){
-    var value = $('#table_search').val();
-    if(value.length != 0){
-        keyword_device = value.replaceAll(" ", "$", 'g');
-        $('#detail').load(baseUrl + '/loans/list_device?page=1&q='+keyword_device);
-    }else{
-        keyword_device = '';
-        $('#detail').load(baseUrl + '/loans/list_device?page=1&q='+keyword_device);
+        render_table(data); $('#modal-device').modal('hide');
     }
 }
 
