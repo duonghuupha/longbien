@@ -17,7 +17,7 @@ class Document_in extends Controller{
         $cate = isset($_REQUEST['c']) ? $_REQUEST['c'] : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $cate, $offset, $rows);
+        $jsonObj = $this->model->getFetObj($keyword, $cate, $this->_Info[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('document_in/content');
     }

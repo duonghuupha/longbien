@@ -28,7 +28,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td>
                 <?php echo $row['title'].'<br/>';?>
                 <small style="color:gray">
-                    Số đến: <?php echo $row['number_in'] ?> - Ngày đến: <?php echo date("d-m-Y", strtotime($row['date_in'])) ?>
+                    Danh mục văn bản : <?php echo $row['category'] ?>
                     <?php
                     if($row['user_share'] != ''){
                     ?>
