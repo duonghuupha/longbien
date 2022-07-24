@@ -99,14 +99,14 @@ class Document_in extends Controller{
                 $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
             }else{
-                //ghi du lieu thong bao cho nguoi dung
-                $array_user = trim($datausershare); $array_user = explode(",", $array_user);
-                array_filter($array_user);
-                if(count($array_user)  > 0){
-                    $this->add_notify($array_user, "Cập nhật nội dung văn bản: ".$title, URL.'/document_in');
-                }
                 $temp = $this->model->updateObj($id, $data);
                 if($temp){
+                    //ghi du lieu thong bao cho nguoi dung
+                    $array_user = trim($datausershare); $array_user = explode(",", $array_user);
+                    array_filter($array_user);
+                    if(count($array_user)  > 0){
+                        $this->add_notify($array_user, "Cập nhật nội dung văn bản: ".$title, URL.'/document_in');
+                    }
                     $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                     if($_FILES['file']['name'] != ''){
                         $dirname = DIR_UPLOAD.'/document_in/'.$cateid;

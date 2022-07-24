@@ -47,6 +47,7 @@ class Returns extends Controller{
                             "status" => 0, 'user_id' => $this->_Info[0]['id']);
             $temp = $this->model->addObj($data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
                 $jsonObj['msg'] = "Ghi dữ liệu thành công. Yêu cầu thu hồi thiết bị đang chờ duyệt";
                 $jsonObj['success'] = true;
                 $this->view->jsonObj= json_encode($jsonObj);
@@ -63,6 +64,7 @@ class Returns extends Controller{
         $id = $_REQUEST['id'];
         $temp = $this->model->delObj($id);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -88,6 +90,7 @@ class Returns extends Controller{
             $data = array("status" => 1);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                 $data_exp = array("status" => 2);
                 $this->model->updateObj_device_export($info[0]['device_id'], $info[0]['sub_device'], $info[0]['physical_id'],$data_exp);
                 $jsonObj['msg'] = "Duyệt dữ liệu thành công";
@@ -102,6 +105,7 @@ class Returns extends Controller{
             $data = array("status" => 2);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                 $jsonObj['msg'] = "Duyệt dữ liệu thành công";
                 $jsonObj['success'] = true;
                 $this->view->jsonObj = json_encode($jsonObj);
@@ -112,6 +116,12 @@ class Returns extends Controller{
             }
         }
         $this->view->render("returns/approval");
+    }
+
+    function add_notify($array, $title, $link){
+        foreach($array as $row){
+            $this->_Log->save_notify($row, $title, $link, $this->_Info[0]['id']);
+        }
     }
 }
 ?>

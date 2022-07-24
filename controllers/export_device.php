@@ -49,6 +49,7 @@ class Export_device extends Controller{
                             "create_at" => date("Y-m-d H:i:s"));
             $temp = $this->model->addObj($data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
                 $device = base64_decode($device); $device = explode(",", $device);
                 foreach($device as $row){
                     $value = explode(".", $row);
@@ -81,6 +82,7 @@ class Export_device extends Controller{
                             "create_at" => date("Y-m-d H:i:s"));
             $temp = $this->model->updateObj($id, $data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                 $this->model->delObj_detail($code); // xoa ban ghi cu
                 $device = base64_decode($device); $device = explode(",", $device);
                 foreach($device as $row){
@@ -105,6 +107,7 @@ class Export_device extends Controller{
         $id = $_REQUEST['id'];
         $temp = $this->model->delObj($id);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);

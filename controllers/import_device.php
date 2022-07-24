@@ -26,6 +26,7 @@ class Import_device extends Controller{
         $data = array("stock" => $stock);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
             $jsonObj['msg'] = "Cập nhật tồn kho thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);

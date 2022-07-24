@@ -61,14 +61,14 @@ class Loans_Model extends Model{
 ///////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_device($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE title LIKE '%$q%' 
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE status = 1 AND title LIKE '%$q%' 
                                     AND id NOT IN (SELECT device_id FROM tbl_export_detail 
                                     GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
                                     FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)
                                     AND id NOT IN (SELECT device_id FROM tbl_loans_detail GROUP BY device_id HAVING
                                     (COUNT(*) - (SELECT tbl_devices.stock FROM tbl_devices WHERE tbl_devices.id = device_id)) > 0)");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title, code, stock FROM tbl_devices WHERE title LIKE '%$q%'
+        $query = $this->db->query("SELECT id, title, code, stock FROM tbl_devices WHERE status = 1 AND title LIKE '%$q%'
                                     AND id NOT IN (SELECT device_id FROM tbl_export_detail 
                                     GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
                                     FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)
@@ -81,7 +81,7 @@ class Loans_Model extends Model{
     }
 
     function get_total_data_device($q){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE title LIKE '%$q%' 
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE status = 1 AND title LIKE '%$q%' 
                                     AND id NOT IN (SELECT device_id FROM tbl_export_detail 
                                     GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
                                     FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)

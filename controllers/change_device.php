@@ -38,6 +38,7 @@ class Change_device extends Controller{
                         "create_at" => date("Y-m-d H:i:s"));
         $temp = $this->model->addObj($data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
             // kiem tra xem co ban ghi  phan bo cho phong chua
             if($this->model->check_export_device_physical($physical_to, $yearid) > 0){
                 // da ton tai ban ghi phan bo

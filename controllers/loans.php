@@ -31,6 +31,7 @@ class Loans extends Controller{
                         "status" => 0, "create_at" => date("Y-m-d H:i:s"));
         $temp = $this->model->addObj($data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
             $status = array();
             foreach($datadc as $row){
                 $device = explode(".", $row['id']);
@@ -79,6 +80,7 @@ class Loans extends Controller{
         }
         $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
             $jsonObj['msg'] = "Ghi dữ  liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -148,6 +150,7 @@ class Loans extends Controller{
             $data_detail = array("status" => 1, "date_return" => $datereturn);
             $temp = $this->model->updateObj_detail($data_detail, $info[0]['code'], $info[0]['device_id'], $devicecode[1]);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                 if($this->model->check_return_all_device($info[0]['code']) > 0){
                     // chua tra het
                     $data = array("date_return" => $datereturn, "status" => 2);

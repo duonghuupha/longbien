@@ -2,7 +2,6 @@ var page = 1, keyword = '',  url = '', page_user = 1, keyword_user = '', data = 
 var keyword_device = '', page_device = 1;
 $(function(){
     $('#list_loan').load(baseUrl + '/loans/content');
-    $('#sidebar').addClass('menu-min');
 });
 
 function add(){

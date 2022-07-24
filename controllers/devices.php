@@ -36,6 +36,7 @@ class Devices extends Controller{
                             "image" => $image, "description" => $description, 'status' => 1);
             $temp = $this->model->addObj($data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
                 if($_FILES['image']['name'] != ''){
                     if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/assets/images/'.$image)){
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
@@ -77,6 +78,7 @@ class Devices extends Controller{
                             "image" => $image, "description" => $description);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                 if($_FILES['image']['name'] != ''){
                     if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/assets/images/'.$image)){
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
@@ -102,10 +104,11 @@ class Devices extends Controller{
     }
 
     function del(){
-        $id = $_REQUEST['id'];
+        $id = $_REQUEST['id']; $data = array("status" => 0);
         $info = $this->model->get_info($id); $image = $info[0]['image'];
-        $temp = $this->model->delObj($id);
+        $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
             // thực hiện xóa barcode, thẻ và ảnh đại diện
             if($image != ''){
                 if(file_exists(DIR_UPLOAD.'/assets/'.$image)){

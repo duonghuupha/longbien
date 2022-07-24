@@ -77,3 +77,4 @@
 2022-07-24 21:32:31/1/Thêm mới dữ liệu/document_in/add
 2022-07-24 21:32:31/1/Thêm mới dữ liệu/document_in/add
 2022-07-24 21:37:01/1/Thêm mới dữ liệu/document_out/add
+2022-07-24 21:42:44/1/Xóa dữ liệu/devices/del

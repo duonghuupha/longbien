@@ -7,11 +7,11 @@ class Devices_Model extends Model{
     function getFetObj($q, $offset, $rows){
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE title LIKE '%$q%'
-                                    AND status != 99");
+                                    AND status != 99 AND status != 0");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, origin, year_work, price, cate_id, (SELECT tbldm_equipment.title
                                     FROM tbldm_equipment WHERE tbldm_equipment.id = cate_id) AS category, title
-                                    FROM tbl_devices WHERE title LIKE'%$q%' AND status != 99 
+                                    FROM tbl_devices WHERE title LIKE'%$q%' AND status != 99 AND status != 0
                                     ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
@@ -19,10 +19,11 @@ class Devices_Model extends Model{
     }
 
     function dupliObj($id, $code){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE code = $code");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE code = $code
+                                    AND status = 1");
         if($id  > 0){
             $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE code = $code
-                                    AND id != $id");
+                                    AND id != $id AND status = 1");
         }
         $row = $query->fetchAll();
         return $row[0]['Total'];
