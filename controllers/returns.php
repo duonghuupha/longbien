@@ -1,12 +1,8 @@
 <?php
 class Returns extends Controller{
-    private $_Year;
-    private $_Info;
     function __construct(){
         parent::__construct();
         parent::PhadhInt();
-        $this->_Year = $_SESSION['year'];
-        $this->_Info = $_SESSION['data'];
     }
 
     function index(){

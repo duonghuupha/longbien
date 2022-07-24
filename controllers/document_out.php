@@ -39,6 +39,13 @@ class Document_out extends Controller{
                             "create_at" => date("Y-m-d H:i:s"));
             $temp = $this->model->addObj($data);
             if($temp){
+                //ghi du lieu thong bao cho nguoi dung
+                $array_user = trim($usershare); $array_user = explode(",", $array_user);
+                array_filter($array_user);
+                if(count($array_user)  > 0){
+                    $this->add_notify($array_user, "Bạn có văn bản mới: ".$title, URL.'/document_out');
+                }
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
                 $dirname = DIR_UPLOAD.'/document_out/'.$cateid;
                 if(!file_exists($dirname)){
                     mkdir($dirname, 0777);
@@ -78,6 +85,13 @@ class Document_out extends Controller{
                             "create_at" => date("Y-m-d H:i:s"));
             $temp = $this->model->updateObj($id, $data);
             if($temp){
+                //ghi du lieu thong bao cho nguoi dung
+                $array_user = trim($usershare); $array_user = explode(",", $array_user);
+                array_filter($array_user);
+                if(count($array_user)  > 0){
+                    $this->add_notify($array_user, "Cập nhật nội dung văn bản: ".$title, URL.'/document_out');
+                }
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
                 if($_FILES['file']['name'] != ''){
                     $dirname = DIR_UPLOAD.'/document_out/'.$cateid;
                     if(!file_exists($dirname)){
@@ -110,6 +124,7 @@ class Document_out extends Controller{
         $id = $_REQUEST['id']; $data = array("status" => 1);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
+            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -153,6 +168,12 @@ class Document_out extends Controller{
         $jsonObj = $this->model->get_info($id);
         $this->view->jsonObj = $jsonObj;
         $this->view->render("document_out/data_edit");
+    }
+
+    function add_notify($array, $title, $link){
+        foreach($array as $row){
+            $this->_Log->save_notify($row, $title, $link, $this->_Info[0]['id']);
+        }
     }
 }
 ?>
