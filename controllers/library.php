@@ -13,9 +13,13 @@ class Library extends Controller{
 
     function content(){
         $rows = 15;
+        $title = isset($_REQUEST['t']) ? str_replace("$", " ", $_REQUEST['t']) : '';
+        $cate = isset($_REQUEST['c']) ? $_REQUEST['c'] : '';
+        $manu = isset($_REQUEST['m']) ? $_REQUEST['m'] : '';
+        $author = isset($_REQUEST['a']) ? str_replace("$", " ", $_REQUEST['a']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($offset, $rows);
+        $jsonObj = $this->model->getFetObj($title, $cate, $manu, $author, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('library/content');
     }
@@ -121,6 +125,8 @@ class Library extends Controller{
 
     function detail(){
         $id = $_REQUEST['id'];
+        $jsonObj  = $this->model->get_info($id);
+        $this->view->jsonObj = $jsonObj;
         $this->view->render("library/detail");
     }
 /////////////////////////////////////////////////////////////////////////////////////////////
