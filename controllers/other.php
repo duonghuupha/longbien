@@ -99,5 +99,17 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_document_cate");
     }
+
+    function combo_book_cate(){
+        $jsonObj = $this->model->get_combo_book_cate();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_book_cate");
+    }
+
+    function combo_book_manu(){
+        $jsonObj = $this->model->get_combo_book_manu();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_book_manu");
+    }
 }
 ?>
