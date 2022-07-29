@@ -97,3 +97,11 @@ function refresh_code(){
     var number = Math.floor(Math.random() * 99999999);
     $('#code').val(number); 
 }
+
+function del_cate(){
+    $('#cate_s').val(null).trigger('change');
+}
+
+function del_nb(){
+    $('#manu_s').val(null).trigger('change');
+}
