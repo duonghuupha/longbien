@@ -45,7 +45,7 @@
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header" id="title_modal">
-                    Thêm mới - Cập nhật phiếu đề nghị thu hồi thiết bị
+                    Thêm mới - Cập nhật thông tin phiếu thu hồi thiết bị
                 </div>
             </div>
             <div class="modal-body">

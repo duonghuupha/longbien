@@ -114,6 +114,37 @@ class Model {
         $query = $this->db->query("SELECT id, title, parent_id FROM tbldm_document WHERE id = $parentid");
         return $query->fetchAll();
     }
+    function return_info_book($id){
+        $query = $this->db->query("SELECT code, title, stock FROM tbl_book WHERE id = $id");
+        return $query->fetchAll();
+    }
+    function check_book_loan($bookid, $subbook){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book_loan WHERE book_id = $bookid
+                                    AND sub_book = $subbook AND status = 0");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+    function return_titlee_job_via_user_id($userid){
+        $query = $this->db->query("SELECT title FROM tbldm_job WHERE tbldm_job.id = (SELECT job_id FROM tbl_personel
+                                    WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users WHERE tbl_users.id = $userid))");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['title'];
+        }else{
+            return '';
+        }
+    }
+
+    function return_title_department_via_student_id($student){
+        $query = $this->db->query("SELECT title FROM tbldm_department WHERE tbldm_department.id = (SELECT department_id
+                                FROM tbl_student WHERE tbl_student.id = $student)");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['title'];
+        }else{
+            return '';
+        }
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['data'])){
+    header("Location: ".URL.'/index/logout');
+}
+?>
 <div id="navbar" class="navbar navbar-default ace-save-state navbar-fixed-top">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
