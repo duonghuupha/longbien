@@ -72,6 +72,10 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbldm_book_manu WHERE status = 0");
         return $query->fetchAll();
     }
+    function get_combo_people(){
+        $query = $this->db->query("SELECT id, title FROM tbldm_people");
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");

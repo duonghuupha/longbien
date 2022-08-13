@@ -11,15 +11,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
-                        onkeyup="search()"/>
+                        <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                    <span>
-                        <button type="button" class="btn btn-primary btn-xs" onclick="adv()"
-                        title="Tìm kiếm nâng cao">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </span>
                 </form>
             </div><!-- /.nav-search -->
@@ -28,7 +21,11 @@
             <div class="page-header">
                 <h1>
                     Quản lý thông tin học sinh
-                    <small class="pull-right hidden-480">
+                    <small class="pull-right">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="add()">
+                            <i class="fa fa-filter"></i>
+                            Lọc dữ liệu
+                        </button>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
@@ -45,7 +42,7 @@
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-                <div class="col-xs-12 col-sm-12" id="adv">
+                <!--<div class="col-xs-12 col-sm-12">
                     <div class="col-xs-2">
                         <input class="form-control" placeholder="Mã học sinh" id="code_s"/>
                     </div>
@@ -57,7 +54,7 @@
                     </div>
                     <div class="col-xs-2">
                         <select class="select2" data-placeholder="Lựa chọn lớp học..."
-                        style="width:100%" required="" id="class_id">
+                        style="width:100%" id="class_id">
                         </select>
                     </div>
                     <div class="col-xs-3">
@@ -72,7 +69,7 @@
                     <div class="col-xs-12">
                         <div class="space-6"></div>
                     </div>
-                </div><!-- /.col -->
+                </div> -->
                 <div class="col-xs-12 col-sm-12">
                     <div id="list_student" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
@@ -95,7 +92,7 @@
                     <form id="fm" method="post" enctype="multipart/form-data">
                         <input id="datadc" name="datadc" type="hidden"/>
                         <input id="image_old" name="image_old" type="hidden"/>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="form-field-username">
                                     Mã học sinh &nbsp;
@@ -109,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="form-field-username">Họ và tên</label>
                                 <div>
@@ -118,43 +115,61 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
+                                <div>
+                                    <input class="form-control input-mask-date" id="birthday" type="text" 
+                                    name="birthday" required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="form-field-username">Giới tính</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn giới tính..."
-                                    style="width:100%" required="" id="gender" name="gender">
+                                    style="width:100%" id="gender" name="gender">
                                         <option value="1">Nam</option>
                                         <option value="2">Nữ</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <div class="form-group">
-                                <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
+                                <label for="form-field-username">Dân tộc</label>
                                 <div>
-                                    <input class="form-control input-mask-date" id="birthday" type="text" 
-                                    name="birthday"  required=""/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="form-group">
-                                <label for="form-field-username">Địa chỉ</label>
-                                <div>
-                                    <input type="text" id="address" name="address" required=""
-                                    placeholder="Địa chỉ" style="width:100%" />
+                                    <select class="select2" data-placeholder="Lựa chọn dân tộc..."
+                                    style="width:100%" id="people_id" name="people_id">
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group">
-                                <label for="form-field-username">Lớp học</label>
+                                <label for="form-field-username">Tôn giáo</label>
                                 <div>
-                                    <select class="select2" data-placeholder="Lựa chọn lớp học..."
-                                    style="width:100%" required="" id="department_id" name="department_id">
+                                    <select class="select2" data-placeholder="Lựa chọn tôn giáo..."
+                                    style="width:100%" id="religion" name="religion">
+                                        <option value="1">Không</option>
+                                        <option value="2">Phật giáo</option>
+                                        <option value="3">Công giáo</option>
+                                        <option value="4">Kito giáo</option>
+                                        <option value="5">Tin lành</option>
+                                        <option value="6">Hòa hảo</option>
+                                        <option value="7">Cao đài</option>
+                                        <option value="8">Khác</option>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Địa chỉ</label>
+                                <div>
+                                    <input type="text" id="address" name="address" required=""
+                                    placeholder="Địa chỉ" style="width:100%" />
                                 </div>
                             </div>
                         </div>
@@ -220,6 +235,16 @@
                     Ghi dữ liệu
                 </button>
             </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content" id="detail">
+            
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>

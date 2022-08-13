@@ -21,7 +21,7 @@ class Student extends Controller{
         $address = isset($_REQUEST['address']) ? str_replace("$", " ", $_REQUEST['address']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $offset, $rows);
+        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $this->_Year[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('student/content');
     }
@@ -29,7 +29,7 @@ class Student extends Controller{
     function add(){
         $code = $_REQUEST['code']; $fullname = $_REQUEST['fullname']; $gender = $_REQUEST['gender'];
         $birthday = $this->_Convert->convertDate($_REQUEST['birthday']);
-        $address = $_REQUEST['address']; $department = $_REQUEST['department_id'];
+        $address = $_REQUEST['address']; $peopleid = $_REQUEST['people_id']; $religion = $_REQUEST['religion'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_img($_FILES['image']['name'], $code) : ''; 
         $status = $_REQUEST['status']; $datadc = json_decode($_REQUEST['datadc'], true);
         if($this->model->dupliObj(0, $code) > 0){
@@ -38,39 +38,29 @@ class Student extends Controller{
             $this->view->jsonObj= json_encode($jsonObj);
         }else{
             $data_global = array("code" => $code, "fullname" => $fullname, "gender" => $gender, "birthday" => $birthday,
-                            "address" => $address, "department_id" => $department, "image" => $image,
-                            "status" => $status);
+                            "address" => $address, "image" => $image, "status" => $status, 'people_id' => $peopleid,
+                            "religion" => $religion);
             $temp = $this->model->addObj($data_global);
             if($temp){
+                $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
                 // cap nhat thong tin quan he
                 foreach ($datadc as $row) {
                     $data_relation = array("code" => $code, "relation" => $row['relation'], "fullname" => $row['fullname'],
                                             "year" => $row['year'], "phone" => $row['phone'], "job" => $row['job']);
                     $this->model->addObj_detail($data_relation);
                 }
-
-                // cap nhat luan chuyen lop hoc
-                $studentid = $this->ger_id_student_via_code($code);
-                $data_change = array("student_id" => $id, 'year_from_id' => 0, 'department_from_id' => 0,
-                                        "year_to_id" => $this->_Year[0]['id'], "department_to_id" => $department,
-                                    "create_at" => date("Y-m-d H:i:s"));
-                $this->model->addObj_student_change_class($data_change);
-
                 // tai anh hoc sinh
                 if($_FILES['image']['name'] != ''){
                     if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/student/'.$image)){
-                        $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }else{
-                        $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
                         $jsonObj['msg'] = "Quá trình tải ảnh lên bị gián đoạn, dữ liệu học sinh đã được lưu";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }
                 }else{
-                    $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
                     $jsonObj['msg'] = "Ghi dữ liệu thành công";
                     $jsonObj['success'] = true;
                     $this->view->jsonObj = json_encode($jsonObj);
@@ -88,7 +78,7 @@ class Student extends Controller{
         $id = $_REQUEST['id']; $imageold = $_REQUEST['image_old'];
         $code = $_REQUEST['code']; $fullname = $_REQUEST['fullname']; $gender = $_REQUEST['gender'];
         $birthday = $this->_Convert->convertDate($_REQUEST['birthday']);
-        $address = $_REQUEST['address'];
+        $address = $_REQUEST['address']; $peopleid = $_REQUEST['people_id']; $religion = $_REQUEST['religion'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_img($_FILES['image']['name'], $code) : $imageold; 
         $status = $_REQUEST['status']; $datadc = json_decode($_REQUEST['datadc'], true);
         if($this->model->dupliObj($id, $code) > 0){
@@ -97,7 +87,8 @@ class Student extends Controller{
             $this->view->jsonObj= json_encode($jsonObj);
         }else{
             $data_global = array("fullname" => $fullname, "gender" => $gender, "birthday" => $birthday,
-                            "address" => $address, "image" => $image, "status" => $status);
+                            "address" => $address, "image" => $image, "status" => $status, 'people_id' => $peopleid,
+                            "religion" => $religion);
             $temp = $this->model->updateObj($id, $data_global);
             if($temp){
                 $this->model->delObj_detail($code);
@@ -108,18 +99,15 @@ class Student extends Controller{
                 }
                 if($_FILES['image']['name'] != ''){
                     if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/student/'.$image)){
-                        $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }else{
-                        $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
                         $jsonObj['msg'] = "Quá trình tải ảnh lên bị gián đoạn, dữ liệu học sinh đã được lưu";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }
                 }else{
-                    $this->_Convert->generateBarcode($data = array('sku'=> $code), 'student');
                     $jsonObj['msg'] = "Ghi dữ liệu thành công";
                     $jsonObj['success'] = true;
                     $this->view->jsonObj = json_encode($jsonObj);
@@ -148,6 +136,14 @@ class Student extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("student/del");
+    }
+
+    function detail(){
+        $id = $_REQUEST['id']; $info = $this->model->get_info($id);
+        $this->view->info = $info;
+        $relation = $this->model->get_student_relation($info[0]['code']);
+        $this->view->relation = $relation;
+        $this->view->render("student/detail");
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////
     function import(){

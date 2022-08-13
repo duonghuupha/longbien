@@ -8,83 +8,118 @@
                 </li>
                 <li class="active">Học sinh</li>
             </ul><!-- /.breadcrumb -->
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
-                        onkeyup="search()"/>
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Luân chuyển học sinh
-                    <small class="pull-right">
-                        <button class="btn btn-sm btn-success" onclick="save()" type="button">
-                            <i class="ace-icon fa fa-line-chart"></i>
-                            Lên lớp
-                        </button>
-                    </small>
+                    Phân lớp
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-                <div class="col-xs-12 col-sm-12">
-                    <form  id="fm" method="post">
-                        <input id="class_current_id" name="class_current_id" type="hidden"/>
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn học sinh</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Lựa chọn học sinh..."
-                                    style="width:100%" required="" id="student_id" name="student_id"
-                                    onchange="set_current_class()">
-                                    </select>
+                <div class="col-xs-12 col-sm-3">
+                    <form id="fm" method="post">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Lựa chọn lớp học</label>
+                                    <div>
+                                        <select id="department_id" name="department_id" required=""
+                                        data-placeholder="Lựa chọn lớp  học" style="width:100%" class="select2">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <label for="form-field-username">Lớp hiện tại</label>
-                                <div>
-                                    <input id="class_current" name="class_current" class="form-control"
-                                    style="width:100%" placeholder="Lớp hiện tai" readonly="" required=""/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn lớp muốn chuyển đến</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Lựa chọn lớp học..."
-                                    style="width:100%" required="" id="class_to" name="class_to">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 text-center">
-                            <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/student_change' ?>'">
-                                <i class="ace-icon fa fa-times"></i>
-                                Hủy bỏ
-                            </button>
-                            <button class="btn btn-sm btn-primary" onclick="save()" type="button">
-                                <i class="ace-icon fa fa-save"></i>
-                                Ghi dữ liệu
-                            </button>
                         </div>
                     </form>
                 </div><!-- /.col -->
-                <div class="col-xs-12 col-sm-12">
-                    <div class="space-6"></div>
-                </div>
-                <div class="col-xs-12 col-sm-12">
-                    <div id="list_change" class="dataTables_wrapper form-inline no-footer"></div>
+                <div class="col-xs-12 col-sm-9">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label for="form-field-username">Họ và tên</label>
+                                <div>
+                                    <input type="text" id="fullname_s" name="fullname_s"
+                                    placeholder="Nhập họ tên học sinh" style="width:100%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <label for="form-field-username">Năm sinh</label>
+                                <div>
+                                    <input type="text" id="year_s" name="year_s" maxlength="4"
+                                    placeholder="Nhập năm sinh" style="width:100%" onkeypress="validate(event)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label for="form-field-username">Giới tính</label>
+                                <div>
+                                    <select id="gender_s" name="gender_s" class="select2"
+                                    data-placeholder="Lựa chọn giới tính" style="width:100%">
+                                        <option value="0">Tất cả</option>
+                                        <option value="1">Nam</option>
+                                        <option value="2">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="form-field-username">&nbsp;</label>
+                                <div>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="search()">
+                                        <i class="fa fa-search"></i>
+                                        Tìm kiếm
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-sm" onclick="check_list()">
+                                        <i class="fa fa-check"></i>
+                                        Duyệt DS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-3"></div>
+                    <div id="list_student" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+
+<!--Form don vi tinh-->
+<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    <span id="title_modal">Danh sách học sinh đã chọn để phân vào lớp</span>
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_data" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager">
+                    <!--display pagination-->
+                </small>
+                <button class="btn btn-sm btn-primary pull-right" onclick="save()">
+                    <i class="ace-icon fa fa-save"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 
 <script src="<?php echo URL.'/public/' ?>scripts/student_change/index.js"></script>

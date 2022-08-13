@@ -166,7 +166,7 @@
                 <li class="hover">
                     <a href="<?php echo URL.'/student_change' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Luân chuyển lớp học
+                        Phân lớp
                     </a>
                     <b class="arrow"></b>
                 </li>

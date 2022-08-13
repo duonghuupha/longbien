@@ -37,7 +37,7 @@ if($item[0]['subject'] != ''){
                                 ?>
                             </span>
                             <div class="space-4"></div>
-                            <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                            <div class="width-100 label label-info label-xlg">
                                 <div class="inline position-relative">
                                     <a href="javascript:void(0)" class="user-title-label">
                                         <span class="white"><?php echo $item[0]['fullname'] ?></span>

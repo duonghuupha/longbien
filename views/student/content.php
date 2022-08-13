@@ -1,6 +1,5 @@
 <?php
-$convert = new Convert(); $jsonObj = $this->jsonObj; $perpage = $this->perpage;
-$pages = $this->page; $sql = new Model();
+$jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
 ?>
 <table 
     id="dynamic-table" 
@@ -59,7 +58,9 @@ $pages = $this->page; $sql = new Model();
             <td class="hidden" id="status_<?php echo $row['id'] ?>"><?php echo $row['status'] ?></td>
             <td class="hidden" id="image_<?php echo $row['id'] ?>"><?php echo $row['image'] ?></td>
             <td class="hidden" id="address_<?php echo $row['id'] ?>"><?php echo $row['address'] ?></td>
-            <td class="hidden" id="datadc_<?php echo $row['id'] ?>"><?php echo $sql->get_relation_via_code($row['code']) ?></td>
+            <td class="hidden" id="people_<?php echo $row['id'] ?>"><?php echo $row['people_id'] ?></td>
+            <td class="hidden" id="religion_<?php echo $row['id'] ?>"><?php echo $row['religion'] ?></td>
+            <td class="hidden" id="datadc_<?php echo $row['id'] ?>"><?php echo $this->_Data->get_relation_via_code($row['code']) ?></td>
         </tr>
         <?php
         }
@@ -69,14 +70,14 @@ $pages = $this->page; $sql = new Model();
 <div class="row mini">
     <div class="col-xs-12 col-sm-6">
         <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
-            <?php echo $convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
+            <?php echo $this->_Convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
         </div>
     </div>
     <div class="col-xs-12 col-sm-6">
         <?php
         if($jsonObj['total'] > $perpage){
-            $pagination = $convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_student', 1);
+            $pagination = $this->_Convert->pagination($jsonObj['total'], $pages, $perpage);
+            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_student', 1);
         ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">

@@ -111,5 +111,11 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_book_manu");
     }
+
+    function combo_people(){
+        $jsonObj = $this->model->get_combo_people();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_people");
+    }
 }
 ?>

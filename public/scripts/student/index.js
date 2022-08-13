@@ -2,16 +2,16 @@ var page = 1, keyword = '', url = '', numbers_line = 0, data = [], codes = '', n
 var classs = '', addresss = '';
 $(function(){
     $('#list_student').load(baseUrl + '/student/content');
-    $('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    $('#adv').hide(); $('#class_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    $('#class_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    $('#people_id').load(baseUrl + '/other/combo_people');
 });
 
 function add(){
     var number = Math.floor(Math.random() * 999999999999); data = []; render_table(data);
-    $('#code').val(number); $('#fullname').val(null); $('#gender').val(null).trigger('change');
-    $('#birthday').val(null); $('#address').val(null); $('#department_id').val(null).trigger('change');
+    $('#code').val(number); $('#fullname').val(null); $('#gender').val(1).trigger('change');
+    $('#birthday').val(null); $('#address').val(null); $('#people_id').val(2).trigger('change');
     $('#image_old').val(null); $('#status').val(null).trigger('change'); $('#refreshcode').show();
-    $('#modal-student').modal('show'); $('#department_id').prop('disabled', false);
+    $('#modal-student').modal('show'); $('#status').val(1).trigger('change'); $('#religion').val(1).trigger('change');
     url = baseUrl + '/student/add'
 }
 
@@ -19,12 +19,13 @@ function edit(idh){
     $('#refreshcode').hide();
     var code = $('#code_'+idh).text(), fullname = $('#fullname_'+idh).text();
     var gender = $('#gender_'+idh).text(), birthday = $('#birthday_'+idh).text();
-    var department = $('#department_'+idh).text(), status = $('#status_'+idh).text();
+    var status = $('#status_'+idh).text(), people = $('#people_'+idh).text();
     var address = $('#address_'+idh).text(), image = $('#image_'+idh).text();
-    var datadc = $('#datadc_'+idh).text();
+    var datadc = $('#datadc_'+idh).text(), religion = $('#religion_'+idh).text();
     $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
-    $('#birthday').val(birthday); $('#address').val(address); $('#department_id').val(department).trigger('change');
-    $('#image_old').val(image); $('#status').val(status).trigger('change'); $('#department_id').prop('disabled', true);
+    $('#birthday').val(birthday); $('#address').val(address); $('#people_id').val(people).trigger('change');
+    $('#image_old').val(image); $('#status').val(status).trigger('change');
+    $('#religion').val(religion).trigger('change');
     // data relation////////////////////////////////////////////////////////
     data = JSON.parse(datadc); numbers_line = data.length;
     render_table(data);
@@ -58,19 +59,10 @@ function view_page_student(pages){
     $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+classs+'&address='+addresss+'&page='+page);
 }
 
-function search(){
-    var value = $('#nav-search-input').val();
-    if(value.length != 0){
-        keyword = value.replaceAll(" ", "$", 'g');
-        $('#list_student').load(baseUrl + '/student/content?page=1&q='+keyword);
-    }else{
-        keyword = '';
-        $('#list_student').load(baseUrl + '/student/content?page=1&q='+keyword);
-    }
-}
 //////////////////////////////////////////////////////////////////////////////////////////
-function detail(){
-
+function detail(idh){
+    $('#detail').load(baseUrl + '/student/detail?id='+idh);
+    $('#modal-detail').modal('show');
 }
 
 function add_line(){
@@ -147,15 +139,6 @@ function import_xls(){
 
 function export_card(){
     window.location.href = baseUrl + '/student/export_card';
-}
-
-function adv(){
-    var value = $('#adv').is(':visible');
-    if(!value){
-        $('#adv').show(300);
-    }else{
-        $('#adv').hide(300);
-    }
 }
 
 function search_adv(){

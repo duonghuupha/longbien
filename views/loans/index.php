@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="form-field-username">Trả nhanh thiết bị</label>
                             <div>
-                                <input type="text" id="device_return_quick" name="device_return_quick"
+                                <input type="text" id="device_return_quick" name="device_return_quick" autofocus=""
                                 placeholder="Sử dụng mã thiết bị" style="width:100%" onchange="return_device_quick()"/>
                             </div>
                         </div>
