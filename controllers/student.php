@@ -139,7 +139,7 @@ class Student extends Controller{
     }
 
     function detail(){
-        $id = $_REQUEST['id']; $info = $this->model->get_info($id);
+        $id = $_REQUEST['id']; $info = $this->model->get_detail($id, $this->_Year[0]['id']);
         $this->view->info = $info;
         $relation = $this->model->get_student_relation($info[0]['code']);
         $this->view->relation = $relation;

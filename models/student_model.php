@@ -79,6 +79,16 @@ class Student_Model extends Model{
         return $query->fetchAll();
     }
 
+    function get_detail($id, $yearid){
+        $query = $this->db->query("SELECT id, code, fullname, gender, birthday, people_id, religion,
+                                 address, image, status, (SELECT title FROM tbldm_people 
+                                 WHERE tbldm_people.id = people_id) AS people, (SELECT title FROM tbldm_department
+                                 WHERE tbldm_department.id = (SELECT department_id FROM tbl_student_class
+                                 WHERE student_id = tbl_student.id AND year_id = $yearid)) AS department 
+                                 FROM tbl_student WHERE id = $id");
+        return $query->fetchAll();
+    }
+
     function get_student_relation($code){
         $query = $this->db->query("SELECT relation, fullname, year, phone, job FROM tbl_student_relation
                                     WHERE code = $code");

@@ -171,6 +171,30 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Chuyển lớp
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="<?php echo URL.'/change_class' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Chuyển lớp
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="<?php echo URL.'/up_class' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Lên lớp
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hover">
                     <a href="<?php echo URL.'/student_point' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Sổ điểm

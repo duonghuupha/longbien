@@ -93,25 +93,35 @@ $item = $this->info;
                                     <span class="editable" id="country"><?php echo $item[0]['address'] ?></span>
                                 </div>
                             </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Lớp hiện tại </div>
+                                <div class="profile-info-value">
+                                    <span class="editable" id="country">
+                                        <?php echo ($item[0]['department'] != '')? $item[0]['department'] : '<i>Chưa phân lớp</i>' ?>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="space-20"></div>
-
-                        <div class="widget-box transparent">
-                            <div class="widget-header widget-header-small">
-                                <h4 class="widget-title blue smaller">
-                                    <i class="ace-icon fa fa-code-fork orange"></i>
-                                    Thông tin quan hệ
-                                </h4>
-                            </div>
-                            <div class="widget-body">
-                                <div class="widget-main padding-8">
+                        
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#relation">Thông tin quan hệ</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#profile4">Quá trình học</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="relation" class="tab-pane in active">
                                     <table style="font-size:12px"
                                         class="table table-striped table-bordered table-hover dataTable no-footer"
                                         role="grid" aria-describedby="dynamic-table_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="text-center" style="width:100px">Quan hệ</th>
+                                                <th class="text-center" style="width:80px">Quan hệ</th>
                                                 <th class="">Họ và tên</th>
                                                 <th class="text-center" style="width:100px">Năm sinh</th>
                                                 <th class="text-center"style="width:120px">Điện thoại</th>
@@ -134,6 +144,9 @@ $item = $this->info;
                                         ?>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div id="profile4" class="tab-pane">
+                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
                                 </div>
                             </div>
                         </div>
