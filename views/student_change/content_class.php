@@ -13,6 +13,8 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-left" style="width:150px">Họ và tên</th>
             <th class="text-center" style="width:150px">Ngày sinh</th>
             <th class="text-center" style="width:150px">Giới tính</th>
+            <th class="text-center" style="width:150px">Lớp học</th>
+            <th class="text-center" style="width:150px">Cập nhật<br/>lần cuối</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +30,13 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo date("d-m-Y", strtotime($row['birthday'])) ?></td>
             <td class="text-center">
                 <?php echo ($row['gender'] == 1) ? 'Nam' : 'Nữ' ?>
+            </td>
+            <td class="text-center"><?php echo $row['department'] ?></td>
+            <td class="text-center">
+                <?php
+                    echo date("H:i:s", strtotime($row['create_at']))."<br/>";
+                    echo date("d-m-Y", strtotime($row['create_at']));
+                ?>
             </td>
         </tr>
         <?php
@@ -45,7 +54,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <?php
         if($jsonObj['total'] > $perpage){
             $pagination = $this->_Convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_student_check', 1);
+            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_student_class', 1);
         ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">

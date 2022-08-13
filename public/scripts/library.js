@@ -354,6 +354,49 @@ function exec_update(data_str, url_data, reject_url){
         }
     });
 }
+
+function del_data_modal(str_data, notify, post_url, id_div, url_refresh, modal_id){
+    bootbox.confirm({
+        message: notify,
+        buttons:{
+            confirm: {
+                label: "Đồng ý",
+                className: "btn-danger btn-sm"
+            },
+            cancel: {
+                label: "Không đồng ý",
+                className: "btn-primary btn-sm"
+            }
+        },
+        callback: function(result){
+            if(result){
+                exec_del_modal(str_data, post_url, id_div, url_refresh, modal_id);
+            }
+        }
+    });
+}
+
+function exec_del_modal(data_str, url_data, id_div, url_content, modal_id){
+    $('.overlay').show();
+    $.ajax({
+        type: "POST",
+        url: url_data,
+        data: data_str, // serializes the form's elements.
+        success: function(data){
+            var result = JSON.parse(data);
+            if(result.success == true){
+                $('.overlay').hide();
+                $(modal_id).modal('hide');
+                show_message('success', result.msg);
+                $(id_div).load(url_content);
+            }else{
+                $('.overlay').hide();
+                show_message('error', result.msg);
+                return false;
+            }
+        }
+    });
+}
 ////////////////////////////////////////////////////////////////////////////////////////////
 function combo_select2(id_select, url_data){
     $(id_select).select2({

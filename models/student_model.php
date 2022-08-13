@@ -22,9 +22,9 @@ class Student_Model extends Model{
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, fullname, gender, birthday, status, image, address, people_id, religion,
-                                IF((SELECT COUNT(*) FROM tbl_student_change_class WHERE student_id = tbl_student.id) > 0,
+                                IF((SELECT COUNT(*) FROM tbl_student_class WHERE student_id = tbl_student.id) > 0,
                                 (SELECT title FROM tbldm_department WHERE tbldm_department.id = (SELECT department_id
-                                FROM tbl_student_change_class WHERE tbl_student_change_class.student_id = tbl_student.id
+                                FROM tbl_student_class WHERE tbl_student_class.student_id = tbl_student.id
                                 AND year_id = $yearid ORDER BY id DESC LIMIT 0, 1)), 'Chưa xếp lớp') AS department
                                 FROM tbl_student WHERE $where ORDER BY fullname ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
@@ -68,7 +68,7 @@ class Student_Model extends Model{
     }
 
     function addObj_student_change_class($data){
-        $query = $this->insert("tbl_student_change_class", $data);
+        $query = $this->insert("tbl_student_class", $data);
         return $query;
     }
 //////////////////////////////////////////////////////////////////////////////////////////////
