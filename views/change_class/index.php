@@ -11,7 +11,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
+                        <input type="text" placeholder="Tìm  kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
                         onkeyup="search()"/>
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
@@ -22,12 +22,6 @@
             <div class="page-header">
                 <h1>
                     Luân chuyển học sinh
-                    <small class="pull-right">
-                        <button class="btn btn-sm btn-success" onclick="save()" type="button">
-                            <i class="ace-icon fa fa-line-chart"></i>
-                            Lên lớp
-                        </button>
-                    </small>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -59,7 +53,8 @@
                                 <label for="form-field-username">Lựa chọn lớp muốn chuyển đến</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn lớp học..."
-                                    style="width:100%" required="" id="class_to" name="class_to">
+                                    style="width:100%" required="" id="class_to" name="class_to"
+                                    onchange="check_class_to()">
                                     </select>
                                 </div>
                             </div>

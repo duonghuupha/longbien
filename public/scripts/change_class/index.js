@@ -1,15 +1,25 @@
-var page = 1, keyword = '', url = baseUrl + '/student_change/add';
+var page = 1, keyword = '';
 $(function(){
-    $('#list_change').load(baseUrl + '/student_change/content');
-    $('#year_to').load(baseUrl + '/other/combo_years?id='+yearid);
-    combo_select2_student('#student_id', baseUrl + '/student_change/student');
+    $('#list_change').load(baseUrl + '/change_class/content');
+    $('#class_to').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    combo_select2_student('#student_id', baseUrl + '/change_class/student');
 });
 
 function set_current_class(){
-    var value = $('#student_id').select2('data');
-    //console.log(value[0].department_id);
-    $('#class_current_id').val(value[0].department_id);
-    $('#class_current').val(value[0].department);
+    $('#student_id').on('select2:select', function(e){
+        var data = e.params.data;
+        $('#class_current_id').val(data.department_id);
+        $('#class_current').val(data.department);
+    });
+}
+
+function check_class_to(){
+    var value = $('#class_to').val();
+    if(value == $('#class_current_id').val()){
+        show_message("error", "Không thể chuyển đến cùng lớp");
+        $('#class_to').val(null).trigger('change');
+        return false;
+    }
 }
 
 function save(){
@@ -22,7 +32,7 @@ function save(){
     });
     if(allRequired){
         if($('#class_current_id').val() != $('#class_to').val()){
-            save_reject('#fm', url, baseUrl+'/student_change'); 
+            save_form_reset_form('#fm', baseUrl+'/change_class/add', '#list_change', baseUrl + '/change_class/content'); 
         }else{
             show_message("error", "Không thể chuyển học sinh đến lớp hiện tại");
         }
@@ -33,7 +43,18 @@ function save(){
 
 function view_page_change(pages){
     page = pages;
-    $('#list_change').load(baseUrl + '/student_change/content?page='+page);
+    $('#list_change').load(baseUrl + '/change_class/content?page='+page+'&q='+keyword);
+}
+
+function search(){
+    var value = $('#nav-search-input').val();
+    if(value.length != 0){
+        keyword = value.replaceAll(" ", "$", 'g');
+        $('#list_change').load(baseUrl + '/change_class/content?page=1&q='+keyword);
+    }else{
+        keyword = '';
+        $('#list_change').load(baseUrl + '/change_class/content?page=1&q='+keyword);
+    }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function combo_select2_student(id_select, url_data){
