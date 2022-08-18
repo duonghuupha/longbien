@@ -15,7 +15,7 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center">Giới tính</th>
             <th class="text-center">Ngày sinh</th>
             <th class="text-center">Lớp học</th>
-            <th class="text-center" style="width:80px">Thao tác</th>
+            <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +41,9 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center"><?php echo $row['department'] ?></td>
             <td class="text-center">
                 <div class="action-buttons">
+                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
+                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                    </a>
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
@@ -52,6 +55,8 @@ $pages = $this->page; $sql = new Model();
             <td class="hidden" id="gender_<?php echo $row['id'] ?>"><?php echo $row['gender'] ?></td>
             <td class="hidden" id="address_<?php echo $row['id'] ?>"><?php echo $row['address'] ?></td>
             <td class="hidden" id="datadc_<?php echo $row['id'] ?>"><?php echo $sql->get_relation_via_code($row['code']) ?></td>
+            <td class="hidden" id="people_<?php echo $row['id'] ?>"><?php echo $row['people_id'] ?></td>
+            <td class="hidden" id="religion_<?php echo $row['id'] ?>"><?php echo $row['religion'] ?></td>
         </tr>
         <?php
         }

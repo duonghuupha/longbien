@@ -1,14 +1,15 @@
-var page = 1, keyword = '', numbers_line = 0, data = [], url = '';
+var page = 1, keyword = '', numbers_line = 0, data = [], url = '', departmentid = 0;
 $(function(){
     $('#list_student_tmp').load(baseUrl + '/student/content_tmp');
     $('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    $('#class_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    $('#people_id').load(baseUrl + '/other/combo_people');
 });
 
 function save(){
     var department = $('#department_id').val();
     if(department.length != 0){
-        save_form_reset_form('#fm', baseUrl + '/student/do_import', '#list_student_tmp', baseUrl + '/student/content_tmp');
+        departmentid = department;
+        save_form_reset_form('#fm', baseUrl + '/student/do_import', '#list_student_tmp', baseUrl + '/student/content_tmp?departmentid='+department);
         $('#file_tmp').val(null);
     }else{
         show_message("error", "Bạn chưa chọn lớp học");
@@ -19,32 +20,34 @@ function save(){
 
 function view_page_student(pages){
     page = pages;
-    $('#list_student_tmp').load(baseUrl + '/student/content_tmp?page='+page+'&q='+keyword);
+    $('#list_student_tmp').load(baseUrl + '/student/content_tmp?departmentid='+departmentid+'&page='+page+'&q='+keyword);
 }
 
 function search(){
     var value = $('#nav-search-input').val();
     if(value.length != 0){
         keyword = value.replaceAll(" ", "$", 'g');
-        $('#list_student_tmp').load(baseUrl + '/student/content_tmp?page=1&q='+keyword);
+        $('#list_student_tmp').load(baseUrl + '/student/content_tmp?departmentid='+departmentid+'&page=1&q='+keyword);
     }else{
         keyword = '';
-        $('#list_student_tmp').load(baseUrl + '/student/content_tmp?page=1&q='+keyword);
+        $('#list_student_tmp').load(baseUrl + '/student/content_tmp?departmentid='+departmentid+'&page=1&q='+keyword);
     }
 }
 
 function del_tmp(){
     var data_str = "id=";
-    del_data(data_str, "Bạn có chắc chắn muốn xóa dữ liệu tạm?", baseUrl+'/student/del_all', "#list_student_tmp", baseUrl + '/student/content_tmp?page='+page+'&q='+keyword);
+    del_data(data_str, "Bạn có chắc chắn muốn xóa dữ liệu tạm?", baseUrl+'/student/del_all', "#list_student_tmp", baseUrl + '/student/content_tmp?departmentid='+departmentid+'&page='+page+'&q='+keyword);
 }
 
 function edit(idh){
     var code = $('#code_'+idh).text(), fullname = $('#fullname_'+idh).text();
     var gender = $('#gender_'+idh).text(), birthday = $('#birthday_'+idh).text();
     var address = $('#address_'+idh).text(), datadc = $('#datadc_'+idh).text();
+    var people = $('#people_'+idh).text(), religion = $('#religion_'+idh).text();
     data = JSON.parse(datadc); render_table(data); numbers_line = data.length;
     $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
-    $('#birthday').val(birthday); $('#address').val(address);
+    $('#birthday').val(birthday); $('#address').val(address); $('#people_id').val(people).trigger('change');
+    $('#religion').val(religion).trigger('change');
     $('#modal-student').modal('show');
     url = baseUrl + '/student/update_tmp?id='+idh;
 }
@@ -55,7 +58,7 @@ function save_info(){
     if(fullname.length > 0 && gender.length > 0 && birthday.length > 0 && address.length > 0 
     && data.length > 0){
         $('#datadc').val(JSON.stringify(data));
-        save_form_modal('#fm_edit', url, '#modal-student', '#list_student_tmp',  baseUrl+'/student/content_tmp?page='+page+'&q='+keyword); 
+        save_form_modal('#fm_edit', url, '#modal-student', '#list_student_tmp',  baseUrl+'/student/content_tmp?departmentid='+departmentid+'&page='+page+'&q='+keyword); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -63,7 +66,12 @@ function save_info(){
 
 function del(idh){
     var data_str = "id="+idh;
-    del_data(data_str, "Bạn có chắc chắn muốn xóa dữ liệu?", baseUrl+'/student/del_tmp', "#list_student_tmp", baseUrl + '/student/content_tmp?page='+page+'&q='+keyword);
+    del_data(data_str, "Bạn có chắc chắn muốn xóa dữ liệu?", baseUrl+'/student/del_tmp', "#list_student_tmp", baseUrl + '/student/content_tmp?departmentid='+departmentid+'&page='+page+'&q='+keyword);
+}
+
+function detail(idh){
+    $('#detail').load(baseUrl + '/student/detail?id='+idh);
+    $('#modal-detail').modal('show');
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 function add_line(){

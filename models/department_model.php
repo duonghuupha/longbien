@@ -69,7 +69,7 @@ class Department_Model extends Model{
 
     function check_exit_department_copy($yearid, $list){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE year_id = $yearid 
-                                    AND FIND_IN_SET(physical_id, '$list')");
+                                    AND FIND_IN_SET(physical_id, '$list') AND status = 0");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }

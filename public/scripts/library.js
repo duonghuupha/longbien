@@ -184,6 +184,34 @@ function save_reject(id_form, post_url, url_reject){
     });
 }
 
+function save_reject_return_file(id_form, post_url, url_reject, url_file){
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData($(id_form)[0]);
+    $('.overlay').show();
+    $.ajax({
+        url: post_url,  //server script to process data
+        type: 'POST',
+        xhr: function() {
+            return xhr;
+        },
+        data: formData,
+        success: function(data){
+            var result = JSON.parse(data);
+            if(result.success == true){
+                window.location.href = url_reject;
+            }else{
+                $('.overlay').hide();
+                show_message('error', result.msg);
+                window.open(url_file);
+                return false;
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
 function save_form_modal(id_form, post_url, id_modal, id_content, url_refresh){
     var xhr = new XMLHttpRequest();
     var formData = new FormData($(id_form)[0]);

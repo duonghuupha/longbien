@@ -18,7 +18,7 @@ class Log{
 
     function render_action($type){
         $array = array("add" => "Thêm mới dữ liệu", "edit" => "Cập nhật dữ liệu", "del" => "Xóa dữ liệu",
-                        "imp" => "Nhập  dữ liệu từ file", "copy", "Copy dữ liệu");
+                        "imp" => "Nhập  dữ liệu từ file", "copy" => "Copy dữ liệu");
         return $array[$type];
     }
 

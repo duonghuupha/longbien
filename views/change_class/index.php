@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12 text-center">
-                            <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/student_change' ?>'">
+                            <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/change_class' ?>'">
                                 <i class="ace-icon fa fa-times"></i>
                                 Hủy bỏ
                             </button>

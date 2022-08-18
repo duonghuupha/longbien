@@ -94,7 +94,7 @@ $sql = new Model();
                     <form id="fm_edit" method="post" enctype="multipart/form-data">
                         <input id="datadc" name="datadc" type="hidden"/>
                         <input id="image_old" name="image_old" type="hidden"/>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="form-field-username">
                                     Mã học sinh &nbsp;
@@ -108,7 +108,7 @@ $sql = new Model();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="form-field-username">Họ và tên</label>
                                 <div>
@@ -117,7 +117,16 @@ $sql = new Model();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
+                                <div>
+                                    <input class="form-control input-mask-date" id="birthday" type="text" 
+                                    name="birthday" required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="form-field-username">Giới tính</label>
                                 <div>
@@ -129,16 +138,35 @@ $sql = new Model();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <div class="form-group">
-                                <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
+                                <label for="form-field-username">Dân tộc</label>
                                 <div>
-                                    <input class="form-control input-mask-date" id="birthday" type="text" 
-                                    name="birthday" required=""/>
+                                    <select class="select2" data-placeholder="Lựa chọn dân tộc..."
+                                    style="width:100%" id="people_id" name="people_id">
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="form-field-username">Tôn giáo</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn tôn giáo..."
+                                    style="width:100%" id="religion" name="religion">
+                                        <option value="1">Không</option>
+                                        <option value="2">Phật giáo</option>
+                                        <option value="3">Công giáo</option>
+                                        <option value="4">Kito giáo</option>
+                                        <option value="5">Tin lành</option>
+                                        <option value="6">Hòa hảo</option>
+                                        <option value="7">Cao đài</option>
+                                        <option value="8">Khác</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="form-field-username">Địa chỉ</label>
                                 <div>

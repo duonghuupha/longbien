@@ -79,8 +79,10 @@ $item = $this->info;
                                             echo "Đang đi học";
                                         }elseif($item[0]['status'] == 2){
                                             echo "Nghỉ học";
-                                        }else{
+                                        }elseif($item[0]['status'] == 3){
                                             echo "Chuyển trường";
+                                        }else{
+                                            echo "Lưu tạm";
                                         }
                                         ?>
                                     </span>

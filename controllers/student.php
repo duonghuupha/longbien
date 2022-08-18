@@ -157,7 +157,7 @@ class Student extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj_tmp($keyword,  $offset, $rows);
+        $jsonObj = $this->model->getFetObj_tmp($keyword, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('student/content_tmp');
     }
@@ -208,8 +208,9 @@ class Student extends Controller{
                         $jobmo = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }
                 }
-                $data = array("code" => $code, 'fullname' => $fullname, 'gender' => $gender, 'department_id' => $department,
-                                'birthday' => $birthday,  'address' => $address, 'status' => 99);
+                $data = array("code" => $code, 'fullname' => $fullname, 'gender' => $gender, "people_id" => 2,
+                                'birthday' => $birthday,  'address' => $address, 'status' => 99, "religion" => 1,
+                                'dep_temp' => $department);
                 $temp = $this->model->addObj($data);
                     if($temp){
                     if($namefa != ''){
@@ -251,7 +252,7 @@ class Student extends Controller{
         $id = $_REQUEST['id'];
         $code = $_REQUEST['code']; $fullname = $_REQUEST['fullname']; $gender = $_REQUEST['gender'];
         $birthday = $this->_Convert->convertDate($_REQUEST['birthday']);
-        $address = $_REQUEST['address'];
+        $address = $_REQUEST['address']; $people = $_REQUEST['people_id']; $religion = $_REQUEST['religion'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_img($_FILES['image']['name'], $code) : ''; 
         $datadc = json_decode($_REQUEST['datadc'], true);
         if($this->model->dupliObj($id, $code) > 0){
@@ -260,7 +261,7 @@ class Student extends Controller{
             $this->view->jsonObj= json_encode($jsonObj);
         }else{
             $data_global = array("fullname" => $fullname, "gender" => $gender, "birthday" => $birthday,
-                            "address" => $address, "image" => $image);
+                            "address" => $address, "image" => $image, "people_id" => $people, "religion" => $religion);
             $temp = $this->model->updateObj($id, $data_global);
             if($temp){
                 $this->model->delObj_detail($code);
@@ -324,12 +325,14 @@ class Student extends Controller{
                     $temp = $this->model->updateObj($row['id'], $data);
                     if($temp){
                         $this->_Convert->generateBarcode($data = array('sku'=> $row['code']), 'student');
-                        // cap nhat luan chuyen lop hoc
-                        $data_change = array("student_id" => $row['id'], 'year_from_id' => 0, 'department_from_id' => 0,
-                                                "year_to_id" => $this->_Year[0]['id'], "department_to_id" => $row['department_id'],
+                        // cap nhat phan lop
+                        $data_change = array("student_id" => $row['id'], 'year_id' => $this->_Year[0]['id'], 'department_id' => $row['dep_temp'],
                                             "create_at" => date("Y-m-d H:i:s"));
                         $this->model->addObj_student_change_class($data_change);
+                        $data_dep = array("dep_temp" => 0);
+                        $this->model->updateObj($row['id'], $data_dep);
                     }
+
                 }
                 $jsonObj['msg'] = 'Ghi dữ liệu thành công';
                 $jsonObj['success']  = true;
