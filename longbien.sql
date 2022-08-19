@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2022 at 05:13 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Aug 19, 2022 at 06:15 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -101,7 +101,18 @@ INSERT INTO `tbldm_department` (`id`, `year_id`, `physical_id`, `title`, `class_
 (3, 2, 3, 'Lớp 6A3', 1, 1, 1, '2022-07-14 00:43:19', 0),
 (4, 2, 4, 'Lớp 6A4', 1, 1, 1, '2022-07-14 00:43:47', 0),
 (5, 2, 5, 'Lớp 6A5', 1, 1, 1, '2022-07-14 00:44:28', 0),
-(6, 2, 6, 'Phòng Hiệu trưởng', 0, 0, 1, '2022-07-14 00:44:55', 0);
+(6, 2, 6, 'Phòng Hiệu trưởng', 0, 0, 1, '2022-07-14 00:44:55', 0),
+(7, 4, 1, 'Lớp 6A1', 1, 1, 1, '2022-08-18 00:29:24', 1),
+(8, 4, 2, 'Lớp 6A2', 1, 1, 1, '2022-08-18 00:29:24', 1),
+(9, 4, 3, 'Lớp 6A3', 1, 1, 1, '2022-08-18 00:29:25', 1),
+(10, 4, 4, 'Lớp 6A4', 1, 1, 1, '2022-08-18 00:29:25', 1),
+(11, 4, 5, 'Lớp 6A5', 1, 1, 1, '2022-08-18 00:29:25', 1),
+(12, 4, 1, 'Lớp 6A1', 1, 1, 1, '2022-08-18 00:32:05', 0),
+(13, 4, 2, 'Lớp 6A2', 1, 1, 1, '2022-08-18 00:32:05', 0),
+(14, 4, 3, 'Lớp 6A3', 1, 1, 1, '2022-08-18 00:32:05', 0),
+(15, 4, 4, 'Lớp 6A4', 1, 1, 1, '2022-08-18 00:32:06', 0),
+(16, 4, 5, 'Lớp 6A5', 1, 1, 1, '2022-08-18 00:32:06', 0),
+(17, 4, 6, 'Lớp 7A1', 1, 1, 1, '2022-08-18 00:33:17', 0);
 
 -- --------------------------------------------------------
 
@@ -213,6 +224,77 @@ INSERT INTO `tbldm_level` (`id`, `title`, `user_id`, `create_at`, `status`) VALU
 (6, 'Phó giáo sư', 1, '2022-07-11 15:30:56', 0),
 (7, 'Giáo sư', 1, '2022-07-11 15:31:04', 1),
 (8, 'Trung học phổ thông 1', 1, '2022-07-12 17:02:57', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbldm_people`
+--
+
+CREATE TABLE `tbldm_people` (
+  `id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbldm_people`
+--
+
+INSERT INTO `tbldm_people` (`id`, `title`) VALUES
+(2, 'Kinh'),
+(3, 'Tày'),
+(4, 'Thái'),
+(5, 'Hoa'),
+(6, 'Khơ-me'),
+(7, 'Mường'),
+(8, 'Nùng'),
+(9, 'Hmông'),
+(10, 'Dao'),
+(11, 'Gia-rai'),
+(12, 'Ngái'),
+(13, 'Ê-đê'),
+(14, 'Ba-na'),
+(15, 'Xơ-đăng'),
+(16, 'Sán Chay'),
+(17, 'Cơ-ho'),
+(18, 'Chăm'),
+(19, 'Sán Dìu'),
+(20, 'Hrê'),
+(21, 'Mnông'),
+(22, 'Ra-glai'),
+(23, 'Xtiêng'),
+(24, 'Bru-Vân Kiều'),
+(25, 'Thổ'),
+(26, 'Giáy'),
+(27, 'Cơ-tu'),
+(28, 'Gié-Triêng'),
+(29, 'Mạ'),
+(30, 'Khơ-mú'),
+(31, 'Co'),
+(32, 'Ta-ôi'),
+(33, 'Chơ-ro'),
+(34, 'Kháng'),
+(35, 'Xinh-mun'),
+(36, 'Hà Nhì'),
+(37, 'Chu-ru'),
+(38, 'Lào'),
+(39, 'La Chi'),
+(40, 'La Ha'),
+(41, 'Phù Lá'),
+(42, 'La Hủ'),
+(43, 'Lự'),
+(44, 'Lô Lô'),
+(45, 'Chứt'),
+(46, 'Mảng'),
+(47, 'Pà Thẻn'),
+(48, 'Cơ Lao'),
+(49, 'Cống'),
+(50, 'Bố Y'),
+(51, 'Si La'),
+(52, 'Pu Péo'),
+(53, 'Brâu'),
+(54, 'Ơ Đu'),
+(55, 'Rơ-măm');
 
 -- --------------------------------------------------------
 
@@ -412,7 +494,52 @@ CREATE TABLE `tbl_book` (
 
 INSERT INTO `tbl_book` (`id`, `code`, `cate_id`, `manu_id`, `title`, `content`, `number_page`, `author`, `image`, `type`, `file`, `status`, `user_id`, `create_at`, `stock`) VALUES
 (1, 24208023, 1, 1, 'Bài Tập Tiếng Anh Lớp 8 - Không Đáp Án (2020)', 'Bài Tập Tiếng Anh 8 được biên soạn dưới dạng vở bài tập, dựa theo sách giáo khoa Tiếng Anh 8 của Bộ Giáo Dục và Đào Tạo.\r\nBài Tập Tiếng Anh 8 là tập hợp các bài tập thực hành về từ vựng (vocabulary), ngữ pháp (grammar), đàm thoại (conversation) và đọc hiểu (reading comprehension), nhằm giúp học sinh luyện tập các nội dung trọng tâm của bài học. Các bài tập được biên soạn theo từng đơn vị bài học (Unit), gồm hai phần A và B có nội dung tương ứng với các phần bài học trong sách giáo khoa.\r\nSau phần bài tập của mỗi đơn vị bài học có một bài kiểm tra (Test For Unit), sau 4 đơn vị bài học có bài tự kiểm tra (Test Yourself) được soạn như bài kiểm tra một tiết và sau Unit 8 và Unit 16 có hai bài kiểm tra học kì nhằm giúp các em ôn luyện và củng cố kiến thức đã học.', 128, 'Mai Lan Hương, Nguyễn Thanh Loan', '1658719665_img_library.jpg', 1, '1658719665_file_library.jpg', 0, 1, '2022-07-26 22:35:43', 12),
-(2, 51823420, 3, 1, 'Sách giáo khoa học sinh toán 6 tập 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 115, 'Nhóm  tác giả chân trời sáng tạo', '1658857260_img_library.png', 2, '1658857260_file_library.pdf', 0, 1, '2022-07-27 00:41:00', 0);
+(2, 51823420, 3, 1, 'Sách giáo khoa học sinh toán 6 tập 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 115, 'Nhóm  tác giả chân trời sáng tạo', '1658857260_img_library.png', 1, '1658857260_file_library.pdf', 0, 1, '2022-07-27 00:41:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_book_loan`
+--
+
+CREATE TABLE `tbl_book_loan` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `sub_book` int(11) NOT NULL,
+  `date_loan` datetime NOT NULL,
+  `date_return` datetime NOT NULL,
+  `status` int(11) NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_book_loan`
+--
+
+INSERT INTO `tbl_book_loan` (`id`, `code`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
+(1, 1659689584, 3, 0, 1, 1, '2022-08-05 15:53:04', '2022-08-05 22:35:47', 1, '2022-08-05 15:53:04'),
+(4, 1659690783, 0, 1, 1, 2, '2022-08-05 16:13:03', '2022-08-05 22:41:06', 1, '2022-08-05 16:13:03'),
+(5, 1659973534, 3, 0, 1, 1, '2022-08-08 22:45:34', '2022-08-09 22:32:57', 1, '2022-08-08 22:45:34'),
+(6, 1659977770, 4, 0, 1, 3, '2022-08-08 23:56:10', '2022-08-08 23:57:49', 1, '2022-08-08 23:56:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_change_class`
+--
+
+CREATE TABLE `tbl_change_class` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `year_id_from` int(11) NOT NULL,
+  `department_id_from` int(11) NOT NULL,
+  `year_id_to` int(11) NOT NULL,
+  `department_id_to` int(11) NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -785,37 +912,39 @@ CREATE TABLE `tbl_student` (
   `fullname` text COLLATE utf8_unicode_ci NOT NULL,
   `gender` int(11) NOT NULL,
   `birthday` date NOT NULL,
+  `people_id` int(11) NOT NULL,
+  `religion` int(11) NOT NULL,
   `address` text COLLATE utf8_unicode_ci NOT NULL,
-  `department_id` int(11) NOT NULL,
   `image` text COLLATE utf8_unicode_ci NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `dep_temp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_student`
 --
 
-INSERT INTO `tbl_student` (`id`, `code`, `fullname`, `gender`, `birthday`, `address`, `department_id`, `image`, `status`) VALUES
-(1, 123456789101, 'Nguyễn Văn A', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(2, 123456789102, 'Lê Thị B', 2, '2010-05-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(3, 123456789103, 'Đào Văn C', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(4, 123456789104, 'Hoàng Kiều D', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(5, 123456789105, 'Nguyễn Văn A', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(6, 123456789106, 'Lê Thị B', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(7, 123456789107, 'Đào Văn C', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(8, 123456789108, 'Hoàng Kiều D', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(9, 123456789109, 'Nguyễn Văn A', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(10, 123456789110, 'Lê Thị B', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(11, 123456789111, 'Đào Văn C', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(12, 123456789112, 'Hoàng Kiều D', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(13, 123456789113, 'Nguyễn Văn A', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(14, 123456789114, 'Lê Thị B', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(15, 123456789115, 'Đào Văn C', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(16, 123456789116, 'Hoàng Kiều D', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(17, 123456789117, 'Nguyễn Văn A', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(18, 123456789118, 'Lê Thị B', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(19, 123456789119, 'Đào Văn C', 1, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1),
-(20, 123456789120, 'Hoàng Kiều D', 2, '2010-04-12', 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', 4, '', 1);
+INSERT INTO `tbl_student` (`id`, `code`, `fullname`, `gender`, `birthday`, `people_id`, `religion`, `address`, `image`, `status`, `dep_temp`) VALUES
+(104, 123456789101, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(105, 123456789102, 'Lê Thị B', 2, '2010-05-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(106, 123456789103, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(107, 123456789104, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(108, 123456789105, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(109, 123456789106, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(110, 123456789107, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(111, 123456789108, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(112, 123456789109, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(113, 123456789110, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(114, 123456789111, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(115, 123456789112, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(116, 123456789113, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(117, 123456789114, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(118, 123456789115, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(119, 123456789116, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(120, 123456789117, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(121, 123456789118, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(122, 123456789119, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(123, 123456789120, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0);
 
 --
 -- Triggers `tbl_student`
@@ -828,44 +957,62 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_student_change_class`
+-- Table structure for table `tbl_student_class`
 --
 
-CREATE TABLE `tbl_student_change_class` (
+CREATE TABLE `tbl_student_class` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `year_from_id` int(11) NOT NULL,
-  `department_from_id` int(11) NOT NULL,
-  `year_to_id` int(11) NOT NULL,
-  `department_to_id` int(11) NOT NULL,
+  `year_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tbl_student_change_class`
+-- Dumping data for table `tbl_student_class`
 --
 
-INSERT INTO `tbl_student_change_class` (`id`, `student_id`, `year_from_id`, `department_from_id`, `year_to_id`, `department_to_id`, `create_at`) VALUES
-(1, 1, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(2, 2, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(3, 3, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(4, 4, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(5, 5, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(6, 6, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(7, 7, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(8, 8, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(9, 9, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(10, 10, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(11, 11, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(12, 12, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(13, 13, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(14, 14, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(15, 15, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(16, 16, 0, 0, 3, 4, '2022-07-08 01:27:45'),
-(17, 17, 0, 0, 3, 4, '2022-07-08 01:27:46'),
-(18, 18, 0, 0, 3, 4, '2022-07-08 01:27:46'),
-(19, 19, 0, 0, 3, 4, '2022-07-08 01:27:46'),
-(20, 20, 0, 0, 3, 4, '2022-07-08 01:27:46');
+INSERT INTO `tbl_student_class` (`id`, `student_id`, `year_id`, `department_id`, `create_at`) VALUES
+(12, 104, 2, 1, '2022-08-17 00:46:14'),
+(13, 105, 2, 1, '2022-08-17 00:46:14'),
+(14, 106, 2, 1, '2022-08-17 00:46:14'),
+(15, 107, 2, 1, '2022-08-17 00:46:14'),
+(16, 108, 2, 1, '2022-08-17 00:46:14'),
+(17, 109, 2, 1, '2022-08-17 00:46:15'),
+(18, 110, 2, 1, '2022-08-17 00:46:15'),
+(19, 111, 2, 1, '2022-08-17 00:46:15'),
+(20, 112, 2, 1, '2022-08-17 00:46:15'),
+(21, 113, 2, 1, '2022-08-17 00:46:15'),
+(22, 114, 2, 1, '2022-08-17 00:46:15'),
+(23, 115, 2, 1, '2022-08-17 00:46:15'),
+(24, 116, 2, 1, '2022-08-17 00:46:15'),
+(25, 117, 2, 1, '2022-08-17 00:46:15'),
+(26, 118, 2, 1, '2022-08-17 00:46:15'),
+(27, 119, 2, 1, '2022-08-17 00:46:15'),
+(28, 120, 2, 1, '2022-08-17 00:46:15'),
+(29, 121, 2, 1, '2022-08-17 00:46:16'),
+(30, 122, 2, 1, '2022-08-17 00:46:16'),
+(31, 123, 2, 1, '2022-08-17 00:46:16'),
+(32, 104, 4, 17, '2022-08-18 16:39:51'),
+(33, 105, 4, 17, '2022-08-18 16:39:51'),
+(34, 106, 4, 17, '2022-08-18 16:39:51'),
+(35, 107, 4, 17, '2022-08-18 16:39:51'),
+(36, 108, 4, 17, '2022-08-18 16:39:51'),
+(37, 109, 4, 17, '2022-08-18 16:39:51'),
+(38, 110, 4, 17, '2022-08-18 16:39:51'),
+(39, 111, 4, 17, '2022-08-18 16:39:51'),
+(40, 112, 4, 17, '2022-08-18 16:39:51'),
+(41, 113, 4, 17, '2022-08-18 16:39:51'),
+(42, 114, 4, 17, '2022-08-18 16:39:51'),
+(43, 115, 4, 17, '2022-08-18 16:39:51'),
+(44, 116, 4, 17, '2022-08-18 16:39:51'),
+(45, 117, 4, 17, '2022-08-18 16:39:51'),
+(46, 118, 4, 17, '2022-08-18 16:39:51'),
+(47, 119, 4, 17, '2022-08-18 16:39:51'),
+(48, 120, 4, 17, '2022-08-18 16:39:51'),
+(49, 121, 4, 17, '2022-08-18 16:39:51'),
+(50, 122, 4, 17, '2022-08-18 16:39:51'),
+(51, 123, 4, 17, '2022-08-18 16:39:51');
 
 -- --------------------------------------------------------
 
@@ -888,46 +1035,46 @@ CREATE TABLE `tbl_student_relation` (
 --
 
 INSERT INTO `tbl_student_relation` (`id`, `code`, `relation`, `fullname`, `year`, `phone`, `job`) VALUES
-(1, 123456789101, 'Bố', 'Đào Văn C', 1988, '0987654315', 'Tự do'),
-(2, 123456789101, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654321', 'Tự do'),
-(3, 123456789102, 'Bố', 'Đào Văn C', 1988, '0987654316', 'Tự do'),
-(4, 123456789102, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654322', 'Tự do'),
-(5, 123456789103, 'Bố', 'Đào Văn C', 1988, '0987654317', 'Tự do'),
-(6, 123456789103, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654323', 'Tự do'),
-(7, 123456789104, 'Bố', 'Đào Văn C', 1988, '0987654318', 'Tự do'),
-(8, 123456789104, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654324', 'Tự do'),
-(9, 123456789105, 'Bố', 'Đào Văn C', 1988, '0987654319', 'Tự do'),
-(10, 123456789105, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654325', 'Tự do'),
-(11, 123456789106, 'Bố', 'Đào Văn C', 1988, '0987654320', 'Tự do'),
-(12, 123456789106, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654326', 'Tự do'),
-(13, 123456789107, 'Bố', 'Đào Văn C', 1988, '0987654321', 'Tự do'),
-(14, 123456789107, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654327', 'Tự do'),
-(15, 123456789108, 'Bố', 'Đào Văn C', 1988, '0987654322', 'Tự do'),
-(16, 123456789108, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654328', 'Tự do'),
-(17, 123456789109, 'Bố', 'Đào Văn C', 1988, '0987654323', 'Tự do'),
-(18, 123456789109, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654329', 'Tự do'),
-(19, 123456789110, 'Bố', 'Đào Văn C', 1988, '0987654324', 'Tự do'),
-(20, 123456789110, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654330', 'Tự do'),
-(21, 123456789111, 'Bố', 'Đào Văn C', 1988, '0987654325', 'Tự do'),
-(22, 123456789111, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654331', 'Tự do'),
-(23, 123456789112, 'Bố', 'Đào Văn C', 1988, '0987654326', 'Tự do'),
-(24, 123456789112, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654332', 'Tự do'),
-(25, 123456789113, 'Bố', 'Đào Văn C', 1988, '0987654327', 'Tự do'),
-(26, 123456789113, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654333', 'Tự do'),
-(27, 123456789114, 'Bố', 'Đào Văn C', 1988, '0987654328', 'Tự do'),
-(28, 123456789114, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654334', 'Tự do'),
-(29, 123456789115, 'Bố', 'Đào Văn C', 1988, '0987654329', 'Tự do'),
-(30, 123456789115, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654335', 'Tự do'),
-(31, 123456789116, 'Bố', 'Đào Văn C', 1988, '0987654330', 'Tự do'),
-(32, 123456789116, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654336', 'Tự do'),
-(33, 123456789117, 'Bố', 'Đào Văn C', 1988, '0987654331', 'Tự do'),
-(34, 123456789117, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654337', 'Tự do'),
-(35, 123456789118, 'Bố', 'Đào Văn C', 1988, '0987654332', 'Tự do'),
-(36, 123456789118, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654338', 'Tự do'),
-(37, 123456789119, 'Bố', 'Đào Văn C', 1988, '0987654333', 'Tự do'),
-(38, 123456789119, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654339', 'Tự do'),
-(39, 123456789120, 'Bố', 'Đào Văn C', 1988, '0987654334', 'Tự do'),
-(40, 123456789120, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654340', 'Tự do');
+(207, 123456789101, 'Bố', 'Đào Văn C', 1988, '0987654315', 'Tự do'),
+(208, 123456789101, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654321', 'Tự do'),
+(209, 123456789102, 'Bố', 'Đào Văn C', 1988, '0987654316', 'Tự do'),
+(210, 123456789102, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654322', 'Tự do'),
+(213, 123456789104, 'Bố', 'Đào Văn C', 1988, '0987654318', 'Tự do'),
+(214, 123456789104, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654324', 'Tự do'),
+(215, 123456789105, 'Bố', 'Đào Văn C', 1988, '0987654319', 'Tự do'),
+(216, 123456789105, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654325', 'Tự do'),
+(217, 123456789106, 'Bố', 'Đào Văn C', 1988, '0987654320', 'Tự do'),
+(218, 123456789106, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654326', 'Tự do'),
+(219, 123456789107, 'Bố', 'Đào Văn C', 1988, '0987654321', 'Tự do'),
+(220, 123456789107, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654327', 'Tự do'),
+(221, 123456789108, 'Bố', 'Đào Văn C', 1988, '0987654322', 'Tự do'),
+(222, 123456789108, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654328', 'Tự do'),
+(223, 123456789109, 'Bố', 'Đào Văn C', 1988, '0987654323', 'Tự do'),
+(224, 123456789109, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654329', 'Tự do'),
+(225, 123456789110, 'Bố', 'Đào Văn C', 1988, '0987654324', 'Tự do'),
+(226, 123456789110, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654330', 'Tự do'),
+(227, 123456789111, 'Bố', 'Đào Văn C', 1988, '0987654325', 'Tự do'),
+(228, 123456789111, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654331', 'Tự do'),
+(229, 123456789112, 'Bố', 'Đào Văn C', 1988, '0987654326', 'Tự do'),
+(230, 123456789112, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654332', 'Tự do'),
+(231, 123456789113, 'Bố', 'Đào Văn C', 1988, '0987654327', 'Tự do'),
+(232, 123456789113, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654333', 'Tự do'),
+(233, 123456789114, 'Bố', 'Đào Văn C', 1988, '0987654328', 'Tự do'),
+(234, 123456789114, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654334', 'Tự do'),
+(235, 123456789115, 'Bố', 'Đào Văn C', 1988, '0987654329', 'Tự do'),
+(236, 123456789115, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654335', 'Tự do'),
+(237, 123456789116, 'Bố', 'Đào Văn C', 1988, '0987654330', 'Tự do'),
+(238, 123456789116, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654336', 'Tự do'),
+(239, 123456789117, 'Bố', 'Đào Văn C', 1988, '0987654331', 'Tự do'),
+(240, 123456789117, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654337', 'Tự do'),
+(241, 123456789118, 'Bố', 'Đào Văn C', 1988, '0987654332', 'Tự do'),
+(242, 123456789118, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654338', 'Tự do'),
+(243, 123456789119, 'Bố', 'Đào Văn C', 1988, '0987654333', 'Tự do'),
+(244, 123456789119, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654339', 'Tự do'),
+(245, 123456789120, 'Bố', 'Đào Văn C', 1988, '0987654334', 'Tự do'),
+(246, 123456789120, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654340', 'Tự do'),
+(249, 123456789103, 'Bố', 'Đào Văn C', 1988, '0987654317', 'Tự do'),
+(250, 123456789103, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654323', 'Tự do');
 
 -- --------------------------------------------------------
 
@@ -1035,6 +1182,28 @@ INSERT INTO `tbl_task_group` (`id`, `title`, `user_id`, `create_at`, `status`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_up_class`
+--
+
+CREATE TABLE `tbl_up_class` (
+  `id` int(11) NOT NULL,
+  `year_from` int(11) NOT NULL,
+  `department_from` int(11) NOT NULL,
+  `year_to` int(11) NOT NULL,
+  `department_to` int(11) NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_up_class`
+--
+
+INSERT INTO `tbl_up_class` (`id`, `year_from`, `department_from`, `year_to`, `department_to`, `create_at`) VALUES
+(1, 2, 1, 4, 17, '2022-08-18 22:36:53');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_users`
 --
 
@@ -1056,7 +1225,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-07-27 23:06:54', '388d74e51625eec6cd1ea24ffba9c4de3a73bf1a', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-08-17 00:53:23', '54df0f7137ab4e42083b03f34dde4fd03fe8f6ac', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-24 21:22:15', '7ccf03f57ad8ad7ee4d23677d6019989346d8f82', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, '');
 
@@ -1107,6 +1276,12 @@ ALTER TABLE `tbldm_level`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbldm_people`
+--
+ALTER TABLE `tbldm_people`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbldm_physical_room`
 --
 ALTER TABLE `tbldm_physical_room`
@@ -1146,6 +1321,18 @@ ALTER TABLE `tbl_attend`
 -- Indexes for table `tbl_book`
 --
 ALTER TABLE `tbl_book`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_book_loan`
+--
+ALTER TABLE `tbl_book_loan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_change_class`
+--
+ALTER TABLE `tbl_change_class`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1221,9 +1408,9 @@ ALTER TABLE `tbl_student`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_student_change_class`
+-- Indexes for table `tbl_student_class`
 --
-ALTER TABLE `tbl_student_change_class`
+ALTER TABLE `tbl_student_class`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1248,6 +1435,12 @@ ALTER TABLE `tbl_task_comment`
 -- Indexes for table `tbl_task_group`
 --
 ALTER TABLE `tbl_task_group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_up_class`
+--
+ALTER TABLE `tbl_up_class`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1276,7 +1469,7 @@ ALTER TABLE `tbldm_book_manu`
 -- AUTO_INCREMENT for table `tbldm_department`
 --
 ALTER TABLE `tbldm_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbldm_document`
@@ -1301,6 +1494,12 @@ ALTER TABLE `tbldm_job`
 --
 ALTER TABLE `tbldm_level`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbldm_people`
+--
+ALTER TABLE `tbldm_people`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `tbldm_physical_room`
@@ -1343,6 +1542,18 @@ ALTER TABLE `tbl_attend`
 --
 ALTER TABLE `tbl_book`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_book_loan`
+--
+ALTER TABLE `tbl_book_loan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_change_class`
+--
+ALTER TABLE `tbl_change_class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_device`
@@ -1414,19 +1625,19 @@ ALTER TABLE `tbl_returns_device`
 -- AUTO_INCREMENT for table `tbl_student`
 --
 ALTER TABLE `tbl_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
--- AUTO_INCREMENT for table `tbl_student_change_class`
+-- AUTO_INCREMENT for table `tbl_student_class`
 --
-ALTER TABLE `tbl_student_change_class`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `tbl_student_class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_relation`
 --
 ALTER TABLE `tbl_student_relation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT for table `tbl_tasks`
@@ -1445,6 +1656,12 @@ ALTER TABLE `tbl_task_comment`
 --
 ALTER TABLE `tbl_task_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_up_class`
+--
+ALTER TABLE `tbl_up_class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
