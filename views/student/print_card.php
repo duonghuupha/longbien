@@ -1,6 +1,3 @@
-<?php
-$sql = new Model();
-?>
 <div class="main-content">
     <div class="main-content-inner">
         <div class="breadcrumbs ace-save-state breadcrumbs-fixed" id="breadcrumbs">
@@ -94,6 +91,7 @@ $sql = new Model();
                             }).then(function (canvas) {
                                 var anchorTag = document.createElement("a");
                                 document.body.appendChild(anchorTag);
+                                $('.overlay').show();
                                 $.ajax({
                                     type: "POST",
                                     url: "<?php echo URL.'/student/save_card' ?>",
@@ -104,8 +102,10 @@ $sql = new Model();
                                 }).done(function(o) {
                                     var result = JSON.parse(o);
                                     if(result.success){
-                                        //show_message("success", result.msg);
+                                        $('.overlay').hide();
+                                        show_message("success", result.msg);
                                     }else{
+                                        $('.overlay').hide();
                                         show_message("error", result.msg);
                                     }
                                 });

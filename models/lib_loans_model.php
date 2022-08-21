@@ -32,9 +32,10 @@ class Lib_loans_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_info_student($code){
+    function get_info_student($code, $yearid){
         $query = $this->db->query("SELECT id, code, fullname, (SELECT title FROM tbldm_department
-                                    WHERE tbldm_department.id = department_id) AS department
+                                    WHERE tbldm_department.id = (SELECT department_id FROM tbl_student_class
+                                    WHERE tbl_student_class.student_id = tbl_student.id AND year_id = $yearid)) AS department
                                     FROM tbl_student WHERE code = '$code' AND status = 1");
         return $query->fetchAll();
     }
@@ -100,13 +101,14 @@ class Lib_loans_Model extends Model{
         return $row[0]['Total'];
     }
 
-    function get_data_student($q, $offset, $rows){
+    function get_data_student($q, $yearid, $offset, $rows){
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE status = 1
                                     AND fullname LIKE '%$q%'");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, fullname, code, gender, birthday, department_id,
-                                    (SELECT title FROM tbldm_department WHERE tbldm_department.id = department_id) AS department
+        $query = $this->db->query("SELECT id, fullname, code, gender, birthday, (SELECT title FROM tbldm_department 
+                                    WHERE tbldm_department.id = (SELECT department_id FROM tbl_student_class
+                                    WHERE tbl_student_class.student_id = tbl_student.id AND year_id = $yearid)) AS department
                                     FROM tbl_student WHERE status = 1 AND fullname LIKE '%$q%'
                                     ORDER BY fullname ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];

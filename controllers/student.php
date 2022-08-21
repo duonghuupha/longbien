@@ -19,9 +19,12 @@ class Student extends Controller{
         $date = isset($_REQUEST['date']) ? $this->_Convert->convertDate($_REQUEST['date']) : '';
         $class = isset($_REQUEST['class']) ? $_REQUEST['class'] : '';
         $address = isset($_REQUEST['address']) ? str_replace("$", " ", $_REQUEST['address']) : '';
+        $gender = isset($_REQUEST['gender']) ? $_REQUEST['gender'] : 0; 
+        $religion = isset($_REQUEST['religion']) ? $_REQUEST['religion'] : 0;
+        $people = isset($_REQUEST['people']) ? $_REQUEST['people'] : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $this->_Year[0]['id'], $offset, $rows);
+        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $gender, $people, $religion, $this->_Year[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('student/content');
     }
@@ -360,9 +363,12 @@ class Student extends Controller{
         $date = isset($_REQUEST['date']) ? $this->_Convert->convertDate($_REQUEST['date']) : '';
         $class = isset($_REQUEST['class']) ? $_REQUEST['class'] : '';
         $address = isset($_REQUEST['address']) ? str_replace("$", " ", $_REQUEST['address']) : '';
+        $gender = isset($_REQUEST['gender']) ? $_REQUEST['gender'] : 0; 
+        $religion = isset($_REQUEST['religion']) ? $_REQUEST['religion'] : 0;
+        $people = isset($_REQUEST['people']) ? $_REQUEST['people'] : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $offset, $rows);
+        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $gender, $people, $religion, $this->_Year[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('student/content_card');
     }
@@ -377,6 +383,10 @@ class Student extends Controller{
     }
 
     function save_card(){
+        $dirname = DIR_UPLOAD.'/card/student';
+        if(!file_exists($dirname)){
+            mkdir($dirname, 0777);
+        }
         $img = $_REQUEST['imgBase64']; $code = $_REQUEST['code'];
         $img = str_replace("data:image/png;base64,", "", $img);
         $imgr = str_replace(" ", "+", $img);
@@ -387,11 +397,11 @@ class Student extends Controller{
         }
         $success = file_put_contents($file, $data);
         if($success){
-            $jsonObj['msg'] = "Tạo thẻ thành công";
+            $jsonObj['msg'] = "Tạo thẻ ".$code." thành công";
             $jsonObj['success'] = true;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $jsonObj['msg'] = "Quá trình tạo thẻ đang gián đoạn, vui lòng thử lại sau";
+            $jsonObj['msg'] = "Tạo thẻ ".$code." không thành công, vui lòng thử lại sau";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }
@@ -436,6 +446,10 @@ class Student extends Controller{
             $this->view->jsonObj=  json_encode($jsonObj);
         }
         $this->view->render("student/del_card");
+    }
+
+    function filter(){
+        $this->view->render("student/filter");
     }
 }
 ?>

@@ -1,9 +1,8 @@
-var page = 1, keyword = '', url = '', numbers_line = 0, data = [], codes = '', names = '', dates = '';
-var classs = '', addresss = '';
+var page = 1, keyword = '', url = '', numbers_line = 0, data = [];
+var codes = '', names = '', dates = '', departments = '', addresss = '', genders = 0, peoples = '';
+var religions = 0;
 $(function(){
     $('#list_student').load(baseUrl + '/student/content');
-    $('#class_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    $('#people_id').load(baseUrl + '/other/combo_people');
 });
 
 function add(){
@@ -56,7 +55,7 @@ function save(){
 
 function view_page_student(pages){
     page = pages;
-    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+classs+'&address='+addresss+'&page='+page);
+    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page='+page);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -141,20 +140,38 @@ function export_card(){
     window.location.href = baseUrl + '/student/export_card';
 }
 
+function filter(){
+    $('#sdepartment').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    $('#speople').load(baseUrl + '/other/combo_people');
+    $('#modal-search').modal('show');
+}
+
+function del_speople(){
+    $('#speople').val(null).trigger('change');
+}
+
+function del_sdepartment(){
+    $('#sdepartment').val(null).trigger('change');
+}
+
 function search_adv(){
-    var code= $('#code_s').val(), name = $('#name_s').val(), date = $('#date_s').val();
-    var classid = $('#class_id').val(), address = $('#address_s').val();
-    if(code.length != 0 || name.length != 0 || date.length != 0 || classid.length != 0 || address.length != 0){
+    var code= $('#scode').val(), name = $('#sfullname').val(), date = $('#sbirthday').val();
+    var classid = $('#sdepartment').val(), address = $('#saddress').val(), gender = $('#sgender').val();
+    var peolpe = $('#speople').val(), religion = $('#sreligion').val();
+    if(code.length != 0 || name.length != 0 || date.length != 0 || classid.length != 0 || address.length != 0
+        || gender != 0 || peolpe.length != 0 || religion != 0){
         if(name.length != 0){
             names = name.replaceAll(" ", "$", 'g');
         }
         if(address.length != 0){
             addresss = address.replaceAll(" ", "$", 'g');
         }
-        codes = code; dates = date; classs = classid;
-        $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+classs+'&address='+addresss+'&page=1');
+        codes = code; dates = date; departments = classid; genders = gender; 
+        peoples = peolpe; religions = religion;
     }else{
-        codes = ''; dates = ''; classs = ''; names = ''; addresss = ''
-        $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+classs+'&address='+addresss+'&page=1');
+        codes = ''; dates = ''; departments = ''; names = ''; addresss = ''; genders = 0; peoples =  '';
+        religions = 0;
     }
+    $('#modal-search').modal('hide');
+    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page=1');
 }

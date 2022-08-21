@@ -1,6 +1,7 @@
 <?php
-$convert = new Convert(); $jsonObj = $this->jsonObj; $perpage = $this->perpage;
-$pages = $this->page; $sql = new Model();
+$jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
+$checked = (isset($_REQUEST['checked']) && $_REQUEST['checked'] != '') ? base64_decode($_REQUEST['checked']) : '';
+$checked = explode(",", $checked);
 ?>
 <script>
 $(function(){
@@ -16,7 +17,23 @@ $(function(){
             var end = $chkboxes.index(lastChecked);
             $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
         }
-        lastChecked = this;
+    });
+    var checkedbox = $('.ck_inma');
+    checkedbox.click(function(e){
+        $('input[type="checkbox"]').each(function() {
+            if($('#ck_'+this.value).is(":checked")){
+                if(data.length == 0 ){
+                    data.push(this.value);
+                }else{
+                    if(data.indexOf(this.value) === -1){
+                        data.push(this.value);
+                    }
+                }
+            }else{
+                data = data.filter(item => item !== this.value);
+            }
+        });
+        $('#data_check').val(btoa(data.join(",")));
     });
 });
 </script>
@@ -43,12 +60,13 @@ $(function(){
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd';
+            $checkedbox = (in_array($row['id'], $checked)) ? 'checked=""' : '';
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center">
                 <input id="ck_<?php echo $row['id'] ?>" name="ck_<?php echo $row['id'] ?>"
-                type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma"/>
+                type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma" <?php echo $checkedbox ?>/>
             </td>
             <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
             <td id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
@@ -65,14 +83,14 @@ $(function(){
 <div class="row mini">
     <div class="col-xs-12 col-sm-6">
         <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
-            <?php echo $convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
+            <?php echo $this->_Convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
         </div>
     </div>
     <div class="col-xs-12 col-sm-6">
         <?php
         if($jsonObj['total'] > $perpage){
-            $pagination = $convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_student', 1);
+            $pagination = $this->_Convert->pagination($jsonObj['total'], $pages, $perpage);
+            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_student', 1);
         ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">

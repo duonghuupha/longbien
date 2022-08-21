@@ -26,7 +26,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             if($row['user_id'] != 0){
                 $detail = $this->_Data->return_titlee_job_via_user_id($row['user_id']);
             }else{
-                $detail = $this->_Data->return_title_department_via_student_id($row['student_id']);
+                $detail = $this->_Data->return_title_department_via_student_id($row['student_id'], $this->_Year[0]['id']);
             }
         ?>
         <tr role="row" class="<?php echo $class ?>">

@@ -16,7 +16,7 @@ class Lib_loans extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
+        $jsonObj = $this->model->getFetObj($keyword, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('lib_loans/content');
     }
@@ -37,7 +37,7 @@ class Lib_loans extends Controller{
                     $this->view->jsonObj = $jsonObj;
                 }
             }else{ // hoc sinh
-                $detail = $this->model->get_info_student($code);
+                $detail = $this->model->get_info_student($code, $this->_Year[0]['id']);
                 $jsonObj['type'] = 2;
                 $jsonObj['success'] = true;
                 $jsonObj['fullname'] = $detail[0]['fullname'];
@@ -223,7 +223,7 @@ class Lib_loans extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_student($keyword, $offset, $rows);
+        $jsonObj = $this->model->get_data_student($keyword, $this->_Year[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('lib_loans/list_student');
     }

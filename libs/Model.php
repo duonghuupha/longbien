@@ -135,9 +135,9 @@ class Model {
         }
     }
 
-    function return_title_department_via_student_id($student){
+    function return_title_department_via_student_id($student, $yearid){
         $query = $this->db->query("SELECT title FROM tbldm_department WHERE tbldm_department.id = (SELECT department_id
-                                FROM tbl_student WHERE tbl_student.id = $student)");
+                                FROM tbl_student_class WHERE tbl_student_class.student_id = $student AND year_id = $yearid)");
         $row = $query->fetchAll();
         if(count($row) > 0){
             return $row[0]['title'];

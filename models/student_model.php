@@ -4,7 +4,7 @@ class Student_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($q, $code, $name, $date, $class, $address, $yearid, $offset, $rows){
+    function getFetObj($q, $code, $name, $date, $class, $address, $gender, $people, $religion, $yearid, $offset, $rows){
         $result = array();
         $where = "status != 99";
         if($q != '')
@@ -15,10 +15,16 @@ class Student_Model extends Model{
             $where = $where." AND fullname LIKE '%$name%'";
         if($date != '')
             $where = $where." AND birthday = '$date'";
-        /*if($class != '')
-            $where = $where." AND department_id = $class";*/
+        if($class != '')
+            $where = $where." AND id IN (SELECT student_id FROM tbl_student_class WHERE year_id = $yearid AND department_id = $class)";
         if($address != '')
             $where = $where." AND address LIKE '%$address%'";
+        if($gender != 0)
+            $where = $where." AND gender = $gender";
+        if($people != '')
+            $where = $where." AND people_id = $people";
+        if($religion != 0)
+            $where = $where." AND religion = $religion";
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, fullname, gender, birthday, status, image, address, people_id, religion,
