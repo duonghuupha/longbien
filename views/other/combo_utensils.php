@@ -1,4 +1,4 @@
-<option value="">Lựa chọn dah mục</option>
+<option value="">Lựa chọn danh mục</option>
 <?php
 $jsonObj = $this->jsonObj;
 foreach($jsonObj as $row){

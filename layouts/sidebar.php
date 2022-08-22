@@ -96,13 +96,37 @@
             </ul>
         </li>
         <li class="hover">
-            <a href="<?php echo URL.'/calendars' ?>">
+            <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-calendar-check-o"></i>
                 <span class="menu-text">
-                    Lịch báo giảng
+                    Giảng dạy
                 </span>
+                <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
+            <ul class="submenu">
+                <li class="hover">
+                    <a href="<?php echo URL.'/schedule' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Thời khóa biểu
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/teaching' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Phân bổ giáo viên dạy
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/calendars' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Lịch báo giảng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
         </li>
         <li class="hover">
             <a href="#" class="dropdown-toggle">
@@ -380,6 +404,13 @@
                     <a href="<?php echo URL.'/lib_cate' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Lịch báo giảng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/lib_cate' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Văn bản
                     </a>
                     <b class="arrow"></b>
                 </li>

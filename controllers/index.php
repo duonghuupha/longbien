@@ -73,5 +73,9 @@ class Index extends Controller{
         $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("index/change_year");
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    function percent_student(){
+        $this->view->render("index/percent_student");
+    }
 }
 ?>

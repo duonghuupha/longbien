@@ -122,37 +122,25 @@
                                 <div class="widget-header widget-header-flat widget-header-small">
                                     <h5 class="widget-title">
                                         <i class="ace-icon fa fa-signal"></i>
-                                        Tỷ lệ chuyên cần
+                                        Học sinh
                                     </h5>
                                     <div class="widget-toolbar no-border">
                                         <div class="inline dropdown-hover">
                                             <button class="btn btn-minier btn-primary">
-                                                Tuần này
+                                                Giới tính
                                                 <i class="ace-icon fa fa-angle-down icon-on-right bigger-110"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-right dropdown-125 dropdown-lighter dropdown-close dropdown-caret">
                                                 <li class="active">
                                                     <a href="#" class="blue">
                                                         <i class="ace-icon fa fa-caret-right bigger-110">&nbsp;</i>
-                                                        Tuần này
+                                                        Giới tính
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="#">
                                                         <i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
-                                                        Tuần trước
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
-                                                        Tháng này
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
-                                                        Tháng trước
+                                                        Độ tuổi
                                                     </a>
                                                 </li>
                                             </ul>
@@ -1053,11 +1041,11 @@
                             </div><!-- /.widget-box -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-
                     <!-- PAGE CONTENT ENDS -->
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+<script src="<?php echo URL.'/public/' ?>scripts/index/chart_circle.js"></script>
 <script src="<?php echo URL.'/public/' ?>scripts/index.js"></script>
