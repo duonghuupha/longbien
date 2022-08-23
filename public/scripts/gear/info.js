@@ -66,3 +66,11 @@ function detail(idh){
     $('#detail').load(baseUrl + '/gear/detail?id='+idh);
     $('#modal-detail').modal('show');
 }
+
+function del_cate(){
+    $('#cate_s').val(null).trigger('change');
+}
+
+function import_gear(){
+    window.location.href = baseUrl + '/gear/import';
+}

@@ -145,6 +145,12 @@ class Model {
             return '';
         }
     }
+
+    function check_dupli_code_gear($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

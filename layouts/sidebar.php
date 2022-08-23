@@ -320,13 +320,6 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/gear_import' ?>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Nhập kho
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
                     <a href="<?php echo URL.'/gear_code' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         In mã đồ dùng

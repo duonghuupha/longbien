@@ -12,7 +12,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center" style="width:120px">Mã đồ dùng</th>
             <th class="" style="width:350px;">Tiêu đề</th>
             <th class="text-center hidden-480">Danh mục</th>
-            <th class="text-center hidden-480">SL</th>
+            <th class="text-center hidden-480">Số lượng</th>
             <th class="text-center">Thao tác</th>
         </tr>
     </thead>
@@ -21,11 +21,12 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         $i = 0;
         foreach($jsonObj['rows'] as $row){
             $i++;
+            $style_code = ($this->_Data->check_dupli_code_gear($row['code']) > 1) ? "style='color:red;font-weight:700'" : "";
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center"><?php echo $row['code'] ?></td>
+            <td class="text-center" <?php echo $style_code ?>><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
             <td class="text-center"><?php echo $row['category'] ?></td>
             <td class="text-center"><?php echo $row['stock'] ?></td>
