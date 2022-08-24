@@ -153,6 +153,19 @@ class Model {
         $query = $this->db->query("SELECT * FROM tbl_utensils WHERE id = $id");
         return $query->fetchAll();
     }
+    function check_gear_loan($gearid, $subgear){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan_detail WHERE utensils_id = $gearid
+                                    AND sub_utensils = $subgear AND status = 0");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+    function get_gear_selected($code){
+        $query = $this->db->query("SELECT CONCAT(utensils_id, '.', sub_utensils) AS id, (SELECT title FROM tbl_utensils
+                                WHERE tbl_utensils.id = utensils_id) AS title, (SELECT tbl_utensils.code
+                                FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS code, status,  sub_utensils
+                                FROM tbl_utensils_loan_detail WHERE code = $code AND status = 0");
+        return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 
