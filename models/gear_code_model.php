@@ -4,13 +4,20 @@ class Gear_code_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($q, $offset, $rows){
+    function getFetObj($title, $code, $cate, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE status = 0 AND title LIKE '%$q%'");
+        $where = "status = 0";
+        if($title != '')
+            $where = $where." AND title LIKE '%$title%'";
+        if($code != '')
+            $where = $where." AND code LIKE '%$code%'";
+        if($cate != '')
+            $where = $where." AND cate_id = $cate";
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE $where");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, title, image, cate_id, content, create_at, stock,
-                                    (SELECT tbldm_utensils.title FROM tbldm_utensils WHERE tbldm_utensils.id = cate_id) AS category,
-                                    FROM tbl_utensils WHERE status = 0 AND title LIKE '%$q%' ORDER BY id DESC  LIMIT $offset, $rows");
+        $query = $this->db->query("SELECT id, code, title, content, image, stock, cate_id, create_at,
+                                (SELECT tbldm_utensils.title FROM tbldm_utensils WHERE tbldm_utensils.id= cate_id)
+                                AS category FROM tbl_utensils WHERE $where ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

@@ -134,7 +134,6 @@ class Model {
             return '';
         }
     }
-
     function return_title_department_via_student_id($student, $yearid){
         $query = $this->db->query("SELECT title FROM tbldm_department WHERE tbldm_department.id = (SELECT department_id
                                 FROM tbl_student_class WHERE tbl_student_class.student_id = $student AND year_id = $yearid)");
@@ -145,11 +144,14 @@ class Model {
             return '';
         }
     }
-
     function check_dupli_code_gear($code){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE code = $code");
         $row = $query->fetchAll();
         return $row[0]['Total'];
+    }
+    function return_info_utensils($id){
+        $query = $this->db->query("SELECT * FROM tbl_utensils WHERE id = $id");
+        return $query->fetchAll();
     }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
