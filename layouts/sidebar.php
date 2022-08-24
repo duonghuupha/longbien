@@ -334,9 +334,9 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/gear_repair' ?>">
+                    <a href="<?php echo URL.'/gear_return' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Sửa chữa nâng cấp
+                        Thu hồi
                     </a>
                     <b class="arrow"></b>
                 </li>
