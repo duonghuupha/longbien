@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2022 at 06:15 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Aug 24, 2022 at 03:14 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -520,10 +520,8 @@ CREATE TABLE `tbl_book_loan` (
 --
 
 INSERT INTO `tbl_book_loan` (`id`, `code`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
-(1, 1659689584, 3, 0, 1, 1, '2022-08-05 15:53:04', '2022-08-05 22:35:47', 1, '2022-08-05 15:53:04'),
-(4, 1659690783, 0, 1, 1, 2, '2022-08-05 16:13:03', '2022-08-05 22:41:06', 1, '2022-08-05 16:13:03'),
-(5, 1659973534, 3, 0, 1, 1, '2022-08-08 22:45:34', '2022-08-09 22:32:57', 1, '2022-08-08 22:45:34'),
-(6, 1659977770, 4, 0, 1, 3, '2022-08-08 23:56:10', '2022-08-08 23:57:49', 1, '2022-08-08 23:56:10');
+(7, 1661018731, 3, 0, 1, 1, '2022-08-21 01:05:31', '2022-08-21 01:08:20', 1, '2022-08-21 01:05:31'),
+(8, 1661018887, 0, 123, 1, 2, '2022-08-21 01:08:07', '2022-08-21 01:08:18', 1, '2022-08-21 01:08:07');
 
 -- --------------------------------------------------------
 
@@ -909,6 +907,7 @@ INSERT INTO `tbl_returns_device` (`id`, `code`, `create_at`, `year_id`, `physica
 CREATE TABLE `tbl_student` (
   `id` int(11) NOT NULL,
   `code` bigint(20) NOT NULL,
+  `code_csdl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `fullname` text COLLATE utf8_unicode_ci NOT NULL,
   `gender` int(11) NOT NULL,
   `birthday` date NOT NULL,
@@ -924,27 +923,27 @@ CREATE TABLE `tbl_student` (
 -- Dumping data for table `tbl_student`
 --
 
-INSERT INTO `tbl_student` (`id`, `code`, `fullname`, `gender`, `birthday`, `people_id`, `religion`, `address`, `image`, `status`, `dep_temp`) VALUES
-(104, 123456789101, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(105, 123456789102, 'Lê Thị B', 2, '2010-05-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(106, 123456789103, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(107, 123456789104, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(108, 123456789105, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(109, 123456789106, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(110, 123456789107, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(111, 123456789108, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(112, 123456789109, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(113, 123456789110, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(114, 123456789111, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(115, 123456789112, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(116, 123456789113, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(117, 123456789114, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(118, 123456789115, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(119, 123456789116, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(120, 123456789117, 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(121, 123456789118, 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(122, 123456789119, 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
-(123, 123456789120, 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0);
+INSERT INTO `tbl_student` (`id`, `code`, `code_csdl`, `fullname`, `gender`, `birthday`, `people_id`, `religion`, `address`, `image`, `status`, `dep_temp`) VALUES
+(104, 123456789101, '', 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(105, 123456789102, '', 'Lê Thị B', 2, '2010-05-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(106, 123456789103, '', 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(107, 123456789104, '', 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(108, 123456789105, '', 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(109, 123456789106, '', 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(110, 123456789107, '', 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(111, 123456789108, '', 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(112, 123456789109, '', 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(113, 123456789110, '', 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(114, 123456789111, '', 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(115, 123456789112, '', 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(116, 123456789113, '', 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(117, 123456789114, '', 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(118, 123456789115, '', 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(119, 123456789116, '', 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(120, 123456789117, '', 'Nguyễn Văn A', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(121, 123456789118, '', 'Lê Thị B', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(122, 123456789119, '', 'Đào Văn C', 1, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0),
+(123, 123456789120, '', 'Hoàng Kiều D', 2, '2010-04-12', 2, 1, 'Đào Xuyên - Đa Tốn - Gia Lâm - Hà Nội', '', 1, 0);
 
 --
 -- Triggers `tbl_student`
@@ -1225,9 +1224,53 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-08-17 00:53:23', '54df0f7137ab4e42083b03f34dde4fd03fe8f6ac', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-08-23 22:21:15', '073f46859947d48e0ca22bd71c18b035b8ad38a5', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-24 21:22:15', '7ccf03f57ad8ad7ee4d23677d6019989346d8f82', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_utensils`
+--
+
+CREATE TABLE `tbl_utensils` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `cate_id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `image` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `stock` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_utensils`
+--
+
+INSERT INTO `tbl_utensils` (`id`, `code`, `cate_id`, `title`, `image`, `content`, `stock`, `status`, `create_at`) VALUES
+(1, 38163453, 3, 'Quả địa cầu', '1661189454_38163453.png', 'Quả địa cầu là một mô hình ba chiều mô phỏng Trái Đất (quả địa cầu mặt đất hay quả địa cầu địa lý) hay các thiên thể khác như hành tinh, ngôi sao hay vệ tinh tự nhiên.', 5, 0, '2022-08-23 01:22:17'),
+(2, 12345678, 1, 'Quả  cầu vật lý', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(3, 12345679, 1, 'Bản đồ Việt Nam', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(4, 12345680, 1, 'Ảnh mô phỏng hệ thống hô hấp của người', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(5, 12345681, 1, 'Bản đồ địa lý châu âu', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(6, 12345682, 1, 'Bản đồ địa lý châu á', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(7, 12345683, 1, 'Bản đồ địa lý châu phi', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(8, 12345684, 1, 'Bản đồ địa lý chây mỹ', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(9, 12345685, 1, 'Bản đồ địa lý châu úc', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(10, 12345686, 1, 'Kính lúp', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(11, 12345687, 1, 'Lăng kính', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(12, 12345688, 1, 'Kính hiển vi', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(13, 12345689, 1, 'Mô hình cơ quan tiêu hóa của người', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(14, 12345690, 1, 'Bộ thí nghiệm hóa học', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(15, 12345691, 1, 'Bộ thí nghiệm vật lý - Lục đẩy Acsimet', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(16, 12345692, 1, 'Bộ thí nghiệm vật lý - Khúc xạ ánh sáng', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(17, 12345693, 1, 'Bộ thí nghiệm vật lý - Lục từ và từ trường', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(18, 12345694, 1, 'Bộ thí nghiệ vật lý - Dao động và sóng', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(19, 12345695, 1, 'Bảng tuần hoàn các nguyên tố hóa học', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23'),
+(20, 12345696, 1, 'Mô hình hệ tuần hoàn của người', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:17:47');
 
 --
 -- Indexes for dumped tables
@@ -1450,6 +1493,12 @@ ALTER TABLE `tbl_users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_utensils`
+--
+ALTER TABLE `tbl_utensils`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1547,7 +1596,7 @@ ALTER TABLE `tbl_book`
 -- AUTO_INCREMENT for table `tbl_book_loan`
 --
 ALTER TABLE `tbl_book_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_class`
@@ -1668,6 +1717,12 @@ ALTER TABLE `tbl_up_class`
 --
 ALTER TABLE `tbl_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_utensils`
+--
+ALTER TABLE `tbl_utensils`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
