@@ -336,7 +336,7 @@
                 <li class="hover">
                     <a href="<?php echo URL.'/gear_return' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Thu hồi
+                        Thu hồi - Khôi phục
                     </a>
                     <b class="arrow"></b>
                 </li>
