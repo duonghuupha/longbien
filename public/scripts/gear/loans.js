@@ -6,7 +6,7 @@ $(function(){
 
 function add(){
     $('#title_modal').text("Thêm mới - Cập nhật phiếu mượn đồ dùng"); $('#content').val("Minh họa cho nội dung bài học");
-    $('#select_users').attr("disabled", false); $('#date_loan').attr('disabled', false);
+    $('#select_users').attr("disabled", false); $('#date_loan').attr('disabled', false); $('#select_devices').attr("disabled", false);
     $('#user_loan').val(null); $('#fullname').val(null); $('#notes').val(null); 
     $('#personel_code').focus(); $('#personel_code').attr('disabled',false);
     $('#gear_code').attr('disabled',false); data = []; render_table(data);
