@@ -27,7 +27,64 @@
             </div><!-- /.page-header -->
             <div class="row">
                 <div class="col-xs-12 col-sm-3">
-                    
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Người mượn</label>
+                            <div>
+                                <input type="text" id="fullnames" name="fullnames"
+                                placeholder="Tên người mượn" style="width:100%"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Ngày mượn &nbsp;
+                                <a href="javascript:void(0)" onclick="del_date_loan()">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </label>
+                            <div class="input-group">
+                                <input class="form-control date-picker" id="date_loan_s" type="text" 
+                                name="date_loan_s" data-date-format="dd-mm-yyyy" readonly=""/>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar bigger-110"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Ngày trả &nbsp;
+                                <a href="javascript:void(0)" onclick="del_date_return()">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </label>
+                            <div class="input-group">
+                                <input class="form-control date-picker" id="date_return_s" type="text" 
+                                name="date_return_s" data-date-format="dd-mm-yyyy" readonly=""/>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar bigger-110"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Tên đồ dùng</label>
+                            <div>
+                                <input type="text" id="titles" name="titles"
+                                placeholder="Tên đồ dùng" style="width:100%"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-sm btn-primary" onclick="search()">
+                            <i class="ace-icon fa fa-search"></i>
+                            Tìm kiếm
+                        </button>
+                    </div>
                 </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-9">
                     <div id="list_loan" class="dataTables_wrapper form-inline no-footer"></div>

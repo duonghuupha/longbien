@@ -63,9 +63,18 @@ class Gear_loans_Model extends Model{
         return $row[0]['Total'];
     }
 
-    function getFetObj($offset, $rows){
+    function getFetObj($name, $title, $dateloan, $datereturn, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan");
+        $where = "user_loan IN (SELECT tbl_users.id FROM tbl_users WHERE tbl_users.hr_id IN (SELECT tbl_personel.id
+                FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$name%'))";
+        if($title != '')
+            $where = $where." AND code IN (SELECT tbl_utensils_loan_detail.code FROM tbl_utensils_loan_detail WHERE tbl_utensils_loan_detail.utensils_id
+                            IN (SELECT tbl_utensils.id FROM tbl_utensils WHERE tbl_utensils.title LIKE '%$title%'))";
+        if($dateloan != '')
+            $where = $where." AND DATE_FORMAT(date_loan, '%Y-%m-%d') = '$dateloan'";
+        if($datereturn  != '')
+            $where = $where." AND DATE_FORMAT(date_return, '%Y-%m-%d') = '$datereturn'";
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan WHERE $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, user_id, user_loan, date_loan, date_return, content, notes, status,
                                     create_at, (SELECT COUNT(*) FROM tbl_utensils_loan_detail 
@@ -74,7 +83,7 @@ class Gear_loans_Model extends Model{
                                     FROM tbl_users WHERE tbl_users.id = user_id))) AS fullname_create,
                                     IF(user_loan = 1, 'Administrator', (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id 
                                     FROM tbl_users WHERE tbl_users.id = user_loan))) AS fullname_loan
-                                    FROM tbl_utensils_loan ORDER BY id DESC LIMIT $offset, $rows");
+                                    FROM tbl_utensils_loan WHERE $where ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
@@ -95,6 +104,37 @@ class Gear_loans_Model extends Model{
                                     (SELECT tbl_utensils.code FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) 
                                     AS code_utensils FROM tbl_utensils_loan_detail WHERE code = $code");
         return $query->fetchAll();
+    }
+
+    function updateObj($id, $data){
+        $query = $this->update("tbl_utensils_loan", $data, "id = $id");
+        return  $query;
+    }
+
+    function updateObj_detail($data, $code, $utensilsid, $subutensils){
+        $query = $this->update("tbl_utensils_loan_detail", $data, "code = $code AND utensils_id = $utensilsid 
+                                AND sub_utensils = $subutensils");
+        return $query;
+    }
+
+    function check_return_all_utensils($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan_detail WHERE code = $code
+                                    AND status = 0");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function get_info_utensils($code){
+        $query= $this->db->query("SELECT id, code, title FROM tbl_utensils WHERE code = $code");
+        return $query->fetchAll();
+    }
+
+    function check_utensils_loan($code, $sub){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan_detail WHERE sub_utensils = $sub
+                                AND status = 0 AND utensils_id = (SELECT tbl_utensils.id FROM tbl_utensils
+                                WHERE tbl_utensils.code = $code)");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
     }
 }
 ?>

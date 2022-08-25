@@ -1,4 +1,5 @@
 var page = 1, page_user = 1, keyword_user = '', page_gear = 1, keyword_gear = '', data = []. url = '';
+var names = '', dateloans = '',   datereturns = '', titles =  '';
 $(function(){
     $('#list_loan').load(baseUrl + '/gear_loans/content');
 });
@@ -27,8 +28,8 @@ function edit(idh){
     var datadc = $('#detail_'+idh).text(); data = JSON.parse(datadc); render_table_edit(data);
     $('#modal-loan').modal('show'); $('#select_devices').attr("disabled", true);
     $('#select_users').attr("disabled", true); $('#date_loan').attr('disabled', true);
-    $('#date_return').attr('disabled', true);
-    $('#modal-loan').modal('show'); url = baseUrl + '/loans/update?id='+idh;
+    $('#date_return').attr('disabled', true); 
+    $('#modal-loan').modal('show'); url = baseUrl + '/gear_loans/update?id='+idh;
 }
 
 function save(){
@@ -41,7 +42,7 @@ function save(){
     });
     if(allRequired && data.length != 0){
         $('#datadc').val(JSON.stringify(data));
-        save_form_modal('#fm', url, '#modal-loan', '#list_loan', baseUrl + '/gear_loans/content?page='+page+'&q='); 
+        save_form_modal('#fm', url, '#modal-loan', '#list_loan', baseUrl + '/gear_loans/content?page='+page+'&name='+names+'&title='+titles+'&date_loan='+dateloans+'&date_return='+datereturns); 
     }else{
         show_message("error", "Bạn chưa điền đủ thông tin");
     }
@@ -49,6 +50,7 @@ function save(){
 
 function view_page_loan(pages){
     page = pages;
+    $('#list_loan').load(baseUrl + '/gear_loans/content?page='+page+'&name='+names+'&title='+titles+'&date_loan='+dateloans+'&date_return='+datereturns);
 }
 
 function select_user(){
@@ -166,4 +168,61 @@ function return_device(idh){
     }else{
         data[objIndex].status = 0;
     }
+}
+
+function search(){
+    var name = $('#fullnames').val(), title = $('#titles').val();
+    var dateloan = $('#date_loan_s').val(), datereturn = $('#date_return_s').val();
+    if(name.length != 0 || title.length != 0  || dateloan.length != 0 || datereturn.length != 0){
+        dateloans = dateloan; datereturns = datereturn;
+        if(title.length  > 0){
+            titles = title.replaceAll(" ", "$", 'g');
+        }else{
+            titles = '';
+        }
+        if(name.length  > 0){
+            names = name.replaceAll(" ", "$", 'g');
+        }else{
+            names = '';
+        }
+    }else{
+        names = ''; titles = ''; dateloans = ''; datereturns = '';
+    }
+    $('#list_loan').load(baseUrl + '/gear_loans/content?page=1&name='+names+'&title='+titles+'&date_loan='+dateloans+'&date_return='+datereturns);
+}
+
+function del_date_loan(){
+    $('#date_loan_s').datepicker('setDate', '');
+}
+
+function del_date_return(){
+    $('#date_return_s').datepicker('setDate', '');
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function set_user_loan(){
+    var value =   $('#personel_code').val();
+    $.getJSON(baseUrl + '/other/info_personel_scan?code='+value, function(result){
+        $('#user_loan').val(result.user_id); $('#fullname').val(result.fullname);
+    });
+    $('#personel_code').val(null);
+}
+
+function set_gear_loan(){
+    var value = $('#gear_code').val();
+    $.getJSON(baseUrl  + '/gear_loans/info_gear?data='+value, function(result){
+        if(result.success == true){
+            show_message("success", result.msg);
+            var str = {'id': result.id+'.'+result.sub, 'code': result.code, 'title': result.title, 'sub_utensils': result.sub};
+            var objIndex = data.findIndex(item => item.id === result.id+'.'+result.sub);
+            if(objIndex != -1){
+                show_message("error", "Đồ dùng đã được chọn, không thể chọn lại");
+                return false;
+            }else{
+                data.push(str); render_table(data); $('#gear_code').val(null);
+            }
+        }else{
+            show_message("error", result.msg);
+            return false;
+        }
+    });
 }
