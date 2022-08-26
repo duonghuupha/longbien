@@ -296,7 +296,7 @@
                 <li class="hover">
                     <a href="<?php echo URL.'/returns' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Thu hồi
+                        Thu hồi - Khôi phục
                     </a>
                     <b class="arrow"></b>
                 </li>

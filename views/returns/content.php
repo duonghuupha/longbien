@@ -14,8 +14,9 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center">Ngày tạo</th>
             <th class="text-center">Phòng ban/Lớp học</th>
             <th class="text-left">Thiết bị</th>
+            <th>Lý do thu hồi / khôi phục</th>
             <th class="text-center">Trạng thái</th>
-            <th class="text-center" style="width:80px">Thao tác</th>
+            <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,7 @@ $pages = $this->page; $sql = new Model();
             </td>
             <td class="text-center"><?php echo $row['physical'].' - '.$row['department'] ?></td>
             <td class="text-left"><?php echo $row['device'].'-'.$row['sub_device'] ?></td>
+            <td><?php echo $row['content'] ?></td>
             <td class="text-center">
                 <?php
                 if($row['status'] == 0){
@@ -44,19 +46,33 @@ $pages = $this->page; $sql = new Model();
                     echo '<span class="label label-sm label-success">Đã duyệt</span>';
                 }elseif($row['status'] == 2){
                     echo '<span class="label label-sm label-danger">Từ chối</span>';
+                }elseif($row['status'] == 3){
+                    echo '<span class="label label-sm label-primary">Khôi phục</span>';
                 }
                 ?>
             </td>
             <td class="text-center">
                 <div class="action-buttons">
-                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
+                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)"
+                    title="Chi tiết phiếu đề nghị thu hồi">
                         <i class="ace-icon fa fa-search-plus bigger-130"></i>
                     </a>
                     <?php
                     if($row['status'] == 0){
                     ?>
-                    <a class="red" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
+                    <a class="red" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)"
+                    title="Xóa bản ghi">
                         <i class="ace-icon fa fa-trash bigger-130"></i>
+                    </a>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if($row['status'] == 1){
+                    ?>
+                    <a class="green" href="javascript:void(0)" onclick="restore(<?php echo $row['id'] ?>)"
+                    title="Khôi phục trang thiết bị">
+                        <i class="ace-icon fa fa-refresh bigger-130"></i>
                     </a>
                     <?php
                     }

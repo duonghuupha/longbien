@@ -166,6 +166,33 @@ class Model {
                                 FROM tbl_utensils_loan_detail WHERE code = $code AND status = 0");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
+    function check_gear_return($gearid, $subgear){
+        $query = $this->db->query("SELECT `status` FROM tbl_utensils_return WHERE utensils_id = $gearid
+                                    AND sub_utensils = $subgear ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 3;
+        }
+    }
+    function get_all_task_of_user_via_time_work($str_user, $date, $time){
+        $query = $this->db->query("SELECT title FROM tbl_tasks WHERE FIND_IN_SET(user_main, '$str_user') AND time_work = $time
+                                AND date_work = '$date' AND is_display = 1");
+        return $query->fetchAll();
+    }
+    function get_all_user_main_via_time_work($str_user, $date, $time){
+        $query  = $this->db->query("SELECT user_main, (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
+                                    FROM tbl_users WHERE tbl_users.id = user_main)) AS fullname FROM tbl_tasks WHERE FIND_IN_SET(user_main, '$str_user') AND time_work = $time
+                                AND date_work = '$date' AND is_display = 1 GROUP BY user_main");
+        return $query->fetchAll();
+    }
+    function check_exit_sub_device_return($deviceid, $subdevice){
+        $query = $this->db->query("SELECT `status` FROM tbl_returns_device WHERE device_id = $deviceid
+                                    AND sub_device = $subdevice ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        return $row[0]['status'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

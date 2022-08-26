@@ -15,7 +15,7 @@ $item = $this->jsonObj; $sql = new Model();
             </div>
             <div class="post_middle">
                 <span>đề nghị thu hồi trang thiết bị</span>
-                <span>Kính gửi: Hiệu trưởng trường THCS Long Biên</span>
+                <span>Kính gửi: Ban giám hiệu trường THCS Long Biên</span>
             </div>
             <div class="post_main">
                 <span>Họ và tên: <b><?php echo $item[0]['fullname'] ?></b></span>
@@ -46,7 +46,7 @@ $item = $this->jsonObj; $sql = new Model();
                 </table>
             </div>
             <div class="post_footer">
-                <span>Lý do thu hồi: <b>Sửa chữa và nhập lưu kho</b></span>
+                <span>Lý do thu hồi: <b><?php echo $item[0]['content'] ?></b></span>
                 <div class="post_left">
                     <span>Thủ trưởng đơn vị</span>
                 </div>

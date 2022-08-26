@@ -21,7 +21,7 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Thu hồi trang thiết bị
+                    Thu hồi - Khôi phục trang thiết bị
                     <small class="pull-right">
                         <button class="btn btn-sm btn-primary" type="button" onclick="add()">
                             <i class="ace-icon fa fa-plus"></i>
@@ -69,6 +69,15 @@
                                     <select class="select2" data-placeholder="Lựa chọn thiết bị..."
                                     style="width:100%" required="" id="device_id" name="device_id">
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Lý do</label>
+                                <div>
+                                    <input type="text" id="content" name="content" required=""
+                                    placeholder="Lý do thu hồi" style="width:100%"/>
                                 </div>
                             </div>
                         </div>

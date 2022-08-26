@@ -8,7 +8,7 @@ class Returns_Model extends Model{
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_returns_device");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, create_at, year_id, physical_id, device_id, sub_device,
+        $query = $this->db->query("SELECT id, code, create_at, year_id, physical_id, device_id, sub_device, content,
                                     status, (SELECT title FROM tbldm_physical_room WHERE tbldm_physical_room.id = physical_id)
                                     AS physical, (SELECT title FROM tbldm_department WHERE tbldm_department.physical_id = tbl_returns_device.physical_id
                                     AND tbldm_department.year_id = tbl_returns_device.year_id) AS department, (SELECT title FROM tbl_devices
@@ -74,7 +74,7 @@ class Returns_Model extends Model{
     }
 
     function get_info_returns($id){
-        $query = $this->db->query("SELECT id, code, create_at, sub_device, status,  IF(user_id = 1, 'Administrator', 
+        $query = $this->db->query("SELECT id, code, create_at, sub_device, status, content,  IF(user_id = 1, 'Administrator', 
                                     (SELECT tbl_personel.fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id 
                                     FROM tbl_users WHERE tbl_users.id = user_id))) AS fullname, IF(user_id = 1, 'Quản lý trung',
                                     (SELECT tbldm_job.title FROM tbldm_job WHERE tbldm_job.id = (SELECT tbl_personel.job_id

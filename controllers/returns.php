@@ -20,7 +20,7 @@ class Returns extends Controller{
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('returns/content');
     }
-
+ 
     function combo_department(){
         $jsonObj = $this->model->get_combo_department($this->_Year[0]['id']);
         $this->view->jsonObj = $jsonObj;
@@ -36,7 +36,7 @@ class Returns extends Controller{
 
     function add(){
         $code = time(); $physical = $_REQUEST['physical_id']; $device = $_REQUEST['device_id'];
-        $device = explode(".", $device);
+        $device = explode(".", $device); $content = $_REQUEST['content'];
         if($this->model->dupliObj(0, $physical, $device[0], $device[1]) > 0){
             $jsonObj['msg'] = "Thiết bị thu hồi đang chờ duyệt";
             $jsonObj['success'] = false;
@@ -44,7 +44,7 @@ class Returns extends Controller{
         }else{
             $data = array("code" => $code, "create_at" => date("Y-m-d H:i:s"), "year_id" => $this->_Year[0]['id'],
                             "physical_id" => $physical, "device_id" =>  $device[0], 'sub_device' =>  $device[1],
-                            "status" => 0, 'user_id' => $this->_Info[0]['id']);
+                            "status" => 0, 'user_id' => $this->_Info[0]['id'], 'content' => $content);
             $temp = $this->model->addObj($data);
             if($temp){
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');

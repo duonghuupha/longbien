@@ -136,5 +136,17 @@ class Gear_loans_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+
+    function check_utensils_return($code, $sub){
+        $query = $this->db->query("SELECT `status` FROM tbl_utensils_return WHERE utensils_id = (SELECT tbl_utensils.id
+                                    FROM tbl_utensils WHERE tbl_utensils.code = $code) AND sub_utensils = $sub 
+                                    ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 3;
+        }
+    }
 }
 ?>

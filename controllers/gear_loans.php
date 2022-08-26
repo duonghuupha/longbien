@@ -148,8 +148,9 @@ class Gear_loans extends Controller{
             $detail = $this->model->get_info_utensils($utensilscode);
             if(count($detail) > 0){
                 // kiem tra xem do dung co kha nang muon nua khong
-                if($this->model->check_utensils_loan($utensilscode, $subutensils) > 0){
-                    $jsonObj['msg'] = "Đồ dùng đang cho mượn, không thể mượn tiếp";
+                if($this->model->check_utensils_loan($utensilscode, $subutensils) > 0
+                || $this->model->check_utensils_return($utensilscode, $subutensils) == 1){
+                    $jsonObj['msg'] = "Đồ dùng đang cho mượn hoặc đồ dùng đã bị thu hồi, không thể mượn tiếp";
                     $jsonObj['success']  = false;
                     $this->view->jsonObj = json_encode($jsonObj);
                 }else{

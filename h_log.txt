@@ -113,3 +113,10 @@
 2022-08-25 15:01:39/1/Cập nhật dữ liệu/gear_loans/update
 2022-08-25 15:02:41/1/Thêm mới dữ liệu/gear_loans/add
 2022-08-25 15:04:20/1/Cập nhật dữ liệu/gear_loans/update
+2022-08-26 01:08:28/1/Thêm mới dữ liệu/tasks/add
+2022-08-26 01:09:47/1/Thêm mới dữ liệu/tasks/add
+2022-08-26 09:59:05/1/Thêm mới dữ liệu/tasks/add
+2022-08-26 10:06:41/3/Thêm mới dữ liệu/tasks/detail
+2022-08-26 10:31:10/1/Thêm mới dữ liệu/tasks/add
+2022-08-26 22:38:20/1/Thêm mới dữ liệu/returns/add
+2022-08-26 22:48:14/1/Cập nhật dữ liệu/returns/approval

@@ -16,7 +16,7 @@ class Tasks extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $offset, $rows);
+        $jsonObj = $this->model->getFetObj($keyword, $this->_Info[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('tasks/content');
     }
@@ -27,11 +27,11 @@ class Tasks extends Controller{
         $content = addslashes($_REQUEST['content']); $datadc = base64_decode($_REQUEST['datadc']);
         $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'tasks') : '';
         $usermain = (isset($_REQUEST['user_main_id']) && $_REQUEST['user_main_id'] != '') ? $_REQUEST['user_main_id'] : $this->_Info[0]['id'];
-        $status = ($this->_Info[0]['id'] == $usermain) ? 2 : 0;
+        $status = ($this->_Info[0]['id'] == $usermain) ? 2 : 0; $isdisplay = (isset($_REQUEST['is_display'])) ? 1 : 0;
         $data = array("code" => $code, "title" => $title, "content" => $content, "date_work" => $datework,
                         "time_work" => $timework, "user_id" => $this->_Info[0]['id'], "user_share" => $datadc,
                         "file" => $file, "status" => $status, "create_at" => date("Y-m-d H:i:s"), "group_id" => $groupid,
-                        "user_main" => $usermain);
+                        "user_main" => $usermain, 'is_display' => $isdisplay);
         $temp = $this->model->addObj($data);
         if($temp){
             //  ghi du lieu thong bao

@@ -61,10 +61,17 @@ function save(){
 
 function view_page_tasks(pages){
     page = pages;
+    $('#list_tasks').load(baseUrl + '/tasks/content?page='+page+'&q='+keyword);
 }
 
 function search(){
-
+    var value = $('#nav-search-input').val();
+    if(value.length != 0){
+        keyword = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword = '';
+    }
+    $('#list_tasks').load(baseUrl + '/tasks/content?page=1&q='+keyword);
 }
 
 function detail(idh){

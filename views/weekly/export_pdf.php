@@ -4,6 +4,7 @@ use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 $html = file_get_contents(DIR_UPLOAD."/temp/lich_tuan.html");
 $week = $this->week; $weekly = $this->_Convert->daysInWeek($this->week);
+$data = base64_decode($_REQUEST['data']); 
 
 $msg = '';
 $msg .= '
@@ -20,52 +21,53 @@ $msg .= '
         <th>BGH trực</th>
     </tr>
 ';
-$i = 0;
-foreach($_SESSION['tasks'] as $row){
-    $i++;
-    if(isset($row['s']) && $row['s']  != ''){
-        $userids[$i] = [];
-        foreach($row['s'] as $items){
-            if($items['checked'] == 0){
-                $task_s[$i][] = "* ".$items['title'];
-            }else{
-                $task_s[$i] = [];
-            }
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            if(!in_array($items['user_main'], $userids)){
-                array_push($userids, $items['user_main']);
-                if($items['checkedu'] == 0){
-                    $user_s[$i][] = "+ ".$this->_Convert->return_fullname_sort($items['usermain']);
-                }else{
-                    $user_s[$i] = [];
-                }
-            }
+$listdate = $this->_Convert->daysInWeek($_REQUEST['week']);
+foreach($listdate as $row){
+    $msg .=   '
+    <tr>
+        <td style="text-align:center;font-weight:700">
+            '.$this->_Convert->return_day_text(date("D", strtotime($row)))."<br/>".date("d-m-Y",strtotime($row)).'
+        </td>
+        <td>';
+        $json_am = $this->_Data->get_all_task_of_user_via_time_work($data, date("Y-m-d",  strtotime($row)), 1);
+        $msg .= "<ul style='margin:0px;padding-left:12px;'>";
+        foreach($json_am as $item_am){
+            $msg .= "<li>".$item_am['title']."</li>";
         }
-    }else{
-        $task_s[$i] = []; $user_s[$i] = [];
-    }
-    if(isset($row['c']) && $row['c']  != ''){
-        $useridc[$i] = [];
-        foreach($row['c'] as $itemc){
-            if($itemc['checked'] == 0){
-                $task_c[$i][] = "* <span>".$itemc['title'].'</span>';
-            }else{
-                $task_c[$i] = [];
-            }
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            if(!in_array($itemc['user_main'], $useridc)){
-                array_push($useridc, $itemc['user_main']);
-                if($itemc['checkedu'] == 0){
-                    $user_c[$i][] = "+ ".$this->_Convert->return_fullname_sort($itemc['usermain']);
-                }else{
-                    $user_c[$i] = [];
-                }
-            }
-        }
-    }else{
-        $task_c[$i] = []; $user_c[$i] = [];
-    }
+        $msg .= "</ul>";
     $msg .= '
+        </td>
+        <td>';
+        $json_am_user = $this->_Data->get_all_user_main_via_time_work($data, date("Y-m-d",  strtotime($row)), 1);
+        $msg  .= "<ul style='margin:0px;padding-left:12px;'>";
+        foreach($json_am_user as $item_am_user){
+            $msg .= "<li>".$this->_Convert->return_fullname_sort($item_am_user['fullname'])."</li>";
+        }
+        $msg .= "</ul>";
+    $msg .= '
+        </td>
+        <td>';
+        $json_pm = $this->_Data->get_all_task_of_user_via_time_work($data, date("Y-m-d",  strtotime($row)), 2);
+        $msg .= "<ul style='margin:0px;padding-left:12px;'>";
+        foreach($json_pm as $item_pm){
+            $msg .= "<li>".$item_pm['title']."</li>";
+        }
+        $msg .= "</ul>";
+    $msg .= '
+        </td>
+        <td>';  
+        $json_pm_user = $this->_Data->get_all_user_main_via_time_work($data, date("Y-m-d",  strtotime($row)), 2);
+        $msg .= "<ul style='margin:0px;padding-left:12px;'>";
+        foreach($json_pm_user as $item_pm_user){
+            $msg .= "<li>".$this->_Convert->return_fullname_sort($item_pm_user['fullname'])."</li>";
+        }
+        $msg .= "</ul>";
+    $msg .= '
+        </td>
+    </tr>
+    ';
+}
+    /*$msg .= '
     <tr>
         <td style="text-align:center;font-weight:700">
             '.$this->_Convert->return_day_text(date("D", strtotime($row['date_work']))).'<br/>
@@ -76,8 +78,7 @@ foreach($_SESSION['tasks'] as $row){
         <td>'.implode("<br/>", $task_c[$i]).'</td>
         <td>'.implode("<br/>", array_unique($user_c[$i])).'</td>
     </tr>
-    ';
-}
+    ';*/
 
 $msg .= '
 <tr>

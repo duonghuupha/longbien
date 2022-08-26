@@ -41,7 +41,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-tasks" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:55%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
@@ -54,104 +54,114 @@
                         <input id="file_old" name="file_old" type="hidden"/>
                         <input id="datadc" name="datadc" type="hidden"/>
                         <input id="user_main_id" name="user_main_id" type="hidden"/>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Ngày làm việc</label>
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="date_work" type="text" 
-                                    name="date_work" required="" data-date-format="dd-mm-yyyy" readonly=""/>
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar bigger-110"></i>
-                                    </span>
+                        <div class="col-sm-4">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Ngày làm việc</label>
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" id="date_work" type="text" 
+                                        name="date_work" required="" data-date-format="dd-mm-yyyy" readonly=""/>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Thời gian làm việc</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Choose a Country..."
-                                    style="width:100%" required="" id="time_work" name="time_work"
-                                    data-minimum-results-for-search="Infinity">
-                                        <option value="1">Sáng</option>
-                                        <option value="2">Chiều</option>
-                                    </select>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Thời gian làm việc</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Choose a Country..."
+                                        style="width:100%" required="" id="time_work" name="time_work"
+                                        data-minimum-results-for-search="Infinity">
+                                            <option value="1">Sáng</option>
+                                            <option value="2">Chiều</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn nhóm công việc</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Lựa chọn nhóm công việc..."
-                                    style="width:100%" required="" id="group_id" name="group_id">
-                                    </select>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Lựa chọn nhóm công việc</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn nhóm công việc..."
+                                        style="width:100%" required="" id="group_id" name="group_id">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Tiêu đề công việc</label>
-                                <div>
-                                    <input class="form-control" id="title" type="text" name="title"  required=""/>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">
+                                        Người xử lý chính &nbsp;
+                                        <a class="red" href="javascript:void(0)" onclick="del_user_main()" title="Xóa người xử lý chính">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" id="user_main" name="user_main"
+                                        placeholder="Click Go! để lựa chọn" style="width:100%" readonly=""/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary" type="button" onclick="select_user(1)"
+                                            id="select_users">
+                                                <i class="ace-icon fa fa-user bigger-110"></i>
+                                                Go!
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Nội dung công việc</label>
-                                <div>
-                                    <textarea type="text" id="content" style="width:100%;resize:none;height:70px" name="content"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">
-                                    Người xử lý chính &nbsp;
-                                    <a class="red" href="javascript:void(0)" onclick="del_user_main()" title="Xóa người xử lý chính">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                            <div class="col-xs-12">
+                                <label>
+                                    <input name="is_display" id="is_display" class="ace ace-checkbox-2" type="checkbox"/>
+                                    <span class="lbl"> Hiển thị trên lịch công tác</span>
                                 </label>
-                                <div class="input-group">
-                                    <input type="text" id="user_main" name="user_main"
-                                    placeholder="Click Go! để lựa chọn" style="width:100%" readonly=""/>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_user(1)"
-                                        id="select_users">
-                                            <i class="ace-icon fa fa-user bigger-110"></i>
-                                            Go!
-                                        </button>
-                                    </span>
-                                </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">
-                                    Lựa chọn người tham gia &nbsp;
-                                    <a class="red" href="javascript:void(0)" onclick="del_user_share()" title="Xóa người tham gia">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </label>
-                                <div class="input-group">
-                                    <input type="text" id="fullname" name="fullname"
-                                    placeholder="Click Go! để lựa chọn" style="width:100%" readonly=""/>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_user(2)"
-                                        id="select_users">
-                                            <i class="ace-icon fa fa-users bigger-110"></i>
-                                            Go!
-                                        </button>
-                                    </span>
+                        <div class="col-sm-8" style="border-left:1px solid #000">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Tiêu đề công việc</label>
+                                    <div>
+                                        <input class="form-control" id="title" type="text" name="title"  required=""/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Tài liệu đính kèm</label>
-                                <div>
-                                    <input type="file" id="file" name="file" class="file_attach" style="width:100%"/>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Nội dung công việc</label>
+                                    <div>
+                                        <textarea type="text" id="content" style="width:100%;resize:none;height:70px" name="content"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">
+                                        Lựa chọn người tham gia &nbsp;
+                                        <a class="red" href="javascript:void(0)" onclick="del_user_share()" title="Xóa người tham gia">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" id="fullname" name="fullname"
+                                        placeholder="Click Go! để lựa chọn" style="width:100%" readonly=""/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary" type="button" onclick="select_user(2)"
+                                            id="select_users">
+                                                <i class="ace-icon fa fa-users bigger-110"></i>
+                                                Go!
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Tài liệu đính kèm</label>
+                                    <div>
+                                        <input type="file" id="file" name="file" class="file_attach" style="width:100%"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
