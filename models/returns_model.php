@@ -51,16 +51,12 @@ class Returns_Model extends Model{
         return $query;
     }
 
-    function dupliObj($id, $physicalid, $deviceid, $subdevice){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_returns_device WHERE physical_id = $physicalid
-                                    AND device_id = $deviceid AND sub_device = $subdevice AND status = 0");
-        if($id > 0){
-            $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_returns_device WHERE physical_id = $physicalid
-                                    AND device_id = $deviceid AND sub_device = $subdevice AND status = 0
-                                    AND id  != $id");
-        }
+    function dupliObj($physicalid, $deviceid, $subdevice){
+        $query = $this->db->query("SELECT `status` FROM tbl_returns_device WHERE physical_id = $physicalid
+                                    AND device_id = $deviceid AND sub_device = $subdevice ORDER BY id DESC
+                                    LIMIT 0, 1");
         $row = $query->fetchAll();
-        return $row[0]['Total'];
+        return $row[0]['status'];
     }
 
     function delObj($id){
@@ -88,6 +84,16 @@ class Returns_Model extends Model{
                                     FROM tbl_export_detail WHERE tbl_export_detail.device_id = tbl_returns_device.device_id
                                     AND tbl_export_detail.sub_device = tbl_returns_device.sub_device AND tbl_export_detail.status = 0)
                                     AS ngay_phan_bo FROM tbl_returns_device WHERE id = $id");
+        return $query->fetchAll();
+    }
+
+    function get_info_restore($id){
+        $query = $this->db->query("SELECT id, physical_id, device_id, sub_device, (SELECT title FROM tbldm_physical_room 
+                                    WHERE tbldm_physical_room.id = physical_id) AS physical, (SELECT title FROM tbldm_department 
+                                    WHERE tbldm_department.physical_id = tbl_returns_device.physical_id
+                                    AND tbldm_department.year_id = tbl_returns_device.year_id) AS department, 
+                                    (SELECT title FROM tbl_devices WHERE tbl_devices.id = device_id) AS device 
+                                    FROM tbl_returns_device WHERE id = $id");
         return $query->fetchAll();
     }
 }

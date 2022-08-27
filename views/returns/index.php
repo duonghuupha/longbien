@@ -100,6 +100,64 @@
 <!-- End formm don vi tinh-->
 
 <!--Form don vi tinh-->
+<div id="modal-restore" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header" id="title_modal">
+                    Khôi phục thiết bị
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="fm_restore" method="POST" enctype="multipart/form-data">
+                        <input id="physicalid" name="physicalid" type="hidden"/>
+                        <input id="deviceid" name="deviceid" type="hidden"/>
+                        <input id="subdevice" name="subdevice" type="hidden"/>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Phòng ban / Lớp học</label>
+                                <div>
+                                    <b id="department"></b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Trang thiết bị</label>
+                                <div>
+                                    <b id="device"></b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Lý do</label>
+                                <div>
+                                    <input type="text" id="content_restore" name="content_restore" required=""
+                                    placeholder="Lý do thu hồi" style="width:100%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="save_restore()">
+                    <i class="ace-icon fa fa-save"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
 <div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog" style="width:60%">
         <div class="modal-content" id="detail">

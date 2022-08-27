@@ -193,6 +193,13 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['status'];
     }
+    function check_restore_device($physical, $device, $sub){
+        $query = $this->db->query("SELECT `status` FROM tbl_returns_device WHERE physical_id = $physical
+                                    AND device_id = $device AND sub_device = $sub ORDER BY id DESC
+                                    LIMIT 0, 1");
+        $row = $query->fetchAll();
+        return $row[0]['status'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

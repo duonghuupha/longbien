@@ -37,7 +37,7 @@ class Returns extends Controller{
     function add(){
         $code = time(); $physical = $_REQUEST['physical_id']; $device = $_REQUEST['device_id'];
         $device = explode(".", $device); $content = $_REQUEST['content'];
-        if($this->model->dupliObj(0, $physical, $device[0], $device[1]) > 0){
+        if($this->model->dupliObj($physical, $device[0], $device[1]) == 0){
             $jsonObj['msg'] = "Thiết bị thu hồi đang chờ duyệt";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -116,6 +116,40 @@ class Returns extends Controller{
             }
         }
         $this->view->render("returns/approval");
+    }
+
+    function data_edit(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_info_restore($id);
+        $this->view->jsonObj = json_encode($jsonObj[0]);
+        $this->view->render('returns/data_edit');
+    }
+
+    function restore(){
+        $code = time();
+        $physical = $_REQUEST['physicalid']; $device = $_REQUEST['deviceid'];
+        $subdevice = $_REQUEST['subdevice']; $content = $_REQUEST['content_restore'];
+        if($this->model->dupliObj($physical, $device, $subdevice) == 3){
+            $jsonObj['msg'] = "Thiết bị đã được khôi phục không thể khôi phục lại";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $data = array("code" => $code, "create_at" => date("Y-m-d H:i:s"), "year_id" => $this->_Year[0]['id'],
+                            "physical_id" => $physical, "device_id" =>  $device, 'sub_device' => $subdevice,
+                            "status" => 3, 'user_id' => $this->_Info[0]['id'], 'content' => $content);
+            $temp = $this->model->addObj($data);
+            if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
+                $jsonObj['msg'] = "Khôi phục trang thiết bị thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj= json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Khôi phục trang thiết bị không thành công";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }
+        $this->view->render("returns/restore");
     }
 
     function add_notify($array, $title, $link){

@@ -68,7 +68,8 @@ $pages = $this->page; $sql = new Model();
                     }
                     ?>
                     <?php
-                    if($row['status'] == 1){
+                    $status = $this->_Data->check_restore_device($row['physical_id'], $row['device_id'], $row['sub_device']);
+                    if($row['status'] == 1 && $status != 3){
                     ?>
                     <a class="green" href="javascript:void(0)" onclick="restore(<?php echo $row['id'] ?>)"
                     title="Khôi phục trang thiết bị">

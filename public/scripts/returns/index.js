@@ -5,6 +5,7 @@ $(function(){
 });
 
 function add(){
+    $('#title_modal').text('Thêm mới - Cập nhật thông tin phiếu thu hồi thiết bị');
     $('#modal-returns').modal('show');
     url = baseUrl + '/returns/add';
 }
@@ -69,5 +70,26 @@ function approval(idh){
         }
     });
     //del_data(data_str, "", baseUrl+'/returns/approval', '#list_return', baseUrl+'/returns/content?page='+page);
+}
+
+function restore(idh){
+    $('#title_modal').text('Khôi phục thiết bị');
+    $.getJSON(baseUrl + '/returns/data_edit?id='+idh, function(data){
+        $('#physicalid').val(data.physical_id); $('#deviceid').val(data.device_id);
+        $('#subdevice').val(data.sub_device);
+        $('#department').text(data.physical+' - '+data.department);
+        $('#device').text(data.device+' - '+data.sub_device);
+    });
+    $('#modal-restore').modal('show');
+    url = baseUrl + '/returns/restore';
+}
+
+function save_restore(){
+    var content = $('#content_restore').val();
+    if(content.length != 0){
+        save_form_modal('#fm_restore', url, '#modal-restore', '#list_return', baseUrl + '/returns/content'); 
+    }else{
+        show_message("error", "Chưa điền đủ thông tin");
+    }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
