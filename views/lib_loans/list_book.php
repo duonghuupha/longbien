@@ -33,7 +33,8 @@ $jsonObj = $this->jsonObj; //$perpage = $this->perpage; $pages = $this->page;
                 <option value=""></option>
                 <?php
                 for($z = 1; $z <= $row['stock']; $z++){
-                    if($this->_Data->check_book_loan($row['id'], $z) == 0){
+                    if($this->_Data->check_book_loan($row['id'], $z) == 0
+                    && $this->_Data->check_restore_book($row['id'], $z) != 1){
                         echo '<option value="'.$z.'">'.$z.'</option>';
                     }
                 }

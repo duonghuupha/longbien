@@ -1,7 +1,6 @@
-var page = 1, page_book = 1, keyword_book = '', url = '';
+var page = 1, page_book = 1, keyword_book = '', url = '', titles = '', statuss = 0;
 $(function(){
-    $('#list_return').load(baseUrl + '/lib_return/content');
-
+    $('#list_return').load(baseUrl + '/lib_return/content?status=0');
 });
 
 function add(){
@@ -10,7 +9,7 @@ function add(){
     $('#title').val(null); $('#sub_book').val(null);
     $('#content').attr("placeholder", "Lý do thu hồi");
     $('#modal-returns').modal('show');
-    url = baseUrl + '/gear_return/add';
+    url = baseUrl + '/lib_return/add';
 }
 
 function select_book(){
@@ -52,8 +51,32 @@ function save(){
         }
     });
     if(allRequired){
-        save_form_modal('#fm', baseUrl+'/lib_return/add',  '#modal-returns', '#list_return', baseUrl+'/lib_return/content');
+        save_form_modal('#fm', url,  '#modal-returns', '#list_return', baseUrl+'/lib_return/content?status=0');
     }else{
         show_message("error", "Bạn chưa điền đủ thông tin");
     }
+}
+
+function restore(idh, subbook, bookid){
+    $('#title_modal').text("Khôi phục sách");
+    $('#book_id').val(bookid); $('#title').val($('#title_'+idh).text());
+    $('#sub_book').val(subbook);
+    $('#content').attr("placeholder", "Lý do khôi phục");
+    $('#modal-returns').modal('show');
+    url = baseUrl + '/lib_return/restore';
+}
+
+function search(){
+    var title = $('#titles').val(), statuss = $('#statuss').val();
+    if(title.length != 0){
+        titles = title.replaceAll(" ", "$", 'g');
+    }else{
+        titles = ''
+    }
+    $('#list_return').load(baseUrl + '/lib_return/content?page=1&title='+titles+'&status='+statuss);
+}
+
+function view_page_return(pages){
+    page = pages;
+    $('#list_return').load(baseUrl + '/lib_return/content?page='+page+'&title='+titles+'&status='+statuss);
 }

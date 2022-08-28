@@ -11,7 +11,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã</th>
             <th class="">Người lập</th>
-            <th class="">ên sách</th>
+            <th class="">Tên sách</th>
             <th>Lý do</th>
             <th class="text-center">Trạng thái</th>
             <th class="text-center">Cập nhật lần cuối</th>
@@ -29,7 +29,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td><?php echo $row['fullname'] ?></td>
-            <td><?php echo $row['title'].' - '.$row['sub_book'] ?></td>
+            <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'].' - '.$row['sub_book'] ?></td>
             <td><?php echo $row['content'] ?></td>
             <td class="text-center">
                 <?php 
@@ -47,10 +47,11 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             </td>
             <td class="text-center">
                 <?php
-                if($row['status'] == 1){
+                $status = $this->_Data->check_restore_book($row['book_id'], $row['sub_book']);
+                if($row['status'] == 1 && $status != 2){
                 ?>
                 <div class="action-buttons">
-                    <a class="blue" href="javascript:void(0)" onclick="restore(<?php echo $row['id'] ?>)"
+                    <a class="blue" href="javascript:void(0)" onclick="restore(<?php echo $row['id'].', '.$row['sub_book'].', '.$row['book_id'] ?>)"
                     title="Khôi phục đồ dùng">
                         <i class="ace-icon fa fa-refresh bigger-130"></i>
                     </a>

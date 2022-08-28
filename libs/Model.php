@@ -206,6 +206,12 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['status'];
     }
+    function check_restore_book($bookid, $subbook){
+        $query  = $this->db->query("SELECT `status` FROM tbl_book_return WHERE book_id = $bookid
+                                    AND sub_book = $subbook ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        return $row[0]['status'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

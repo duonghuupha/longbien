@@ -55,25 +55,38 @@ class Lib_loans extends Controller{
     function book_info(){
         $code = base64_decode($_REQUEST['code']);
         $code = explode(".", $code);
-        // kiem tra xem sach da duoc tra chua
-        if($this->model->check_book_returned($code[0], $code[1]) > 0){
-            $jsonObj['msg'] = "Sách này đã có người mượn chưa trả, bạn không thể mượn";
-            $jsonObj['success'] = false;
-            $this->view->jsonObj = $jsonObj;
-        }else{
-        $detail = $this->model->get_info_book($code[0]);
-            if(count($detail) > 0){
-                $jsonObj['success'] = true;
-                $jsonObj['title'] = $detail[0]['title'];
-                $jsonObj['cate'] = $detail[0]['category'];
-                $jsonObj['manu'] = $detail[0]['manufactory'];
-                $jsonObj['sub_book'] = $code[1];
-                $this->view->jsonObj = $jsonObj;
-            }else{
-                $jsonObj['msg'] = '';
+        if(count($code) > 1){
+            // kiem tra xem sach da duoc tra chua
+            if($this->model->check_book_returned($code[0], $code[1]) > 0){
+                $jsonObj['msg'] = "Sách này đã có người mượn chưa trả, bạn không thể mượn";
                 $jsonObj['success'] = false;
                 $this->view->jsonObj = $jsonObj;
+            }else{
+                // kiem tra xem sach co bi thu hoi khong
+                if($this->model->check_restore_book_via_code($code[0], $code[1]) == 1){
+                    $jsonObj['msg'] = "Sách đã bị thu hồi không thể mượn";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = $jsonObj;
+                }else{
+                    $detail = $this->model->get_info_book($code[0]);
+                    if(count($detail) > 0){
+                        $jsonObj['success'] = true;
+                        $jsonObj['title'] = $detail[0]['title'];
+                        $jsonObj['cate'] = $detail[0]['category'];
+                        $jsonObj['manu'] = $detail[0]['manufactory'];
+                        $jsonObj['sub_book'] = $code[1];
+                        $this->view->jsonObj = $jsonObj;
+                    }else{
+                        $jsonObj['msg'] = 'Thông tin sách không tồn tại';
+                        $jsonObj['success'] = false;
+                        $this->view->jsonObj = $jsonObj;
+                    }
+                }
             }
+        }else{
+            $jsonObj['msg'] = "Mã sách không chính xác";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = $jsonObj;
         }
         $this->view->render("lib_loans/book_info");
     }

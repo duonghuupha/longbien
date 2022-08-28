@@ -143,5 +143,12 @@ class Lib_loans_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+
+    function check_restore_book_via_code($code, $subbook){
+        $query  = $this->db->query("SELECT `status` FROM tbl_book_return WHERE book_id = (SELECT tbl_book.id FROM tbl_book
+                                    WHERE tbl_book.code = $code) AND sub_book = $subbook ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        return $row[0]['status'];
+    }
 }
 ?>
