@@ -380,6 +380,13 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/lib_return' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Thu hồi - Khôi phục
+                    </a>
+                    <b class="arrow"></b>
+                </li>
             </ul>
         </li>
 

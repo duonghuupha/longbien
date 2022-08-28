@@ -79,7 +79,7 @@
                 </form>
                 <div class="col-xs-12 col-sm-12 text-center">
                     <div class="space-6"></div>
-                    <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/export_device' ?>'">
+                    <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/change_device' ?>'">
                         <i class="ace-icon fa fa-times"></i>
                         Hủy bỏ
                     </button>

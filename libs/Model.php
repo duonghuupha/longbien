@@ -200,6 +200,12 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['status'];
     }
+    function check_restore_gear($utensilsid, $subutensils){
+        $query  = $this->db->query("SELECT `status` FROM tbl_utensils_return WHERE utensils_id = $utensilsid
+                                    AND sub_utensils = $subutensils ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        return $row[0]['status'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

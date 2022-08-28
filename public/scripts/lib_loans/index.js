@@ -124,8 +124,8 @@ function search_book(){
     }else{
         key_book = '';
     }
-    $('#list_data').load(baseUrl + '/lib_loans/list_book?page=1&q='+key_per_stu); 
-    $('#pager').load(baseUrl + '/lib_loans/list_book_page?page=1&q='+key_per_stu);
+    $('#list_data').load(baseUrl + '/lib_loans/list_book?page=1&q='+key_book); 
+    $('#pager').load(baseUrl + '/lib_loans/list_book_page?page=1&q='+key_book);
 }
 
 function view_page_per_stu(pages){
