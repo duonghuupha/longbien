@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2022 at 06:47 PM
+-- Generation Time: Aug 29, 2022 at 07:13 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -379,6 +379,7 @@ CREATE TABLE `tbldm_subject` (
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `create_at` datetime NOT NULL,
+  `set_point` int(11) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -386,20 +387,22 @@ CREATE TABLE `tbldm_subject` (
 -- Dumping data for table `tbldm_subject`
 --
 
-INSERT INTO `tbldm_subject` (`id`, `title`, `user_id`, `create_at`, `status`) VALUES
-(1, 'Toán', 1, '2022-07-11 23:01:41', 0),
-(2, 'Tin học', 1, '2022-07-11 23:02:27', 0),
-(3, 'Ngữ văn', 1, '2022-07-11 23:02:34', 0),
-(4, 'Lịch sử', 1, '2022-07-11 23:02:41', 0),
-(5, 'Sinh học', 1, '2022-07-11 23:02:48', 0),
-(6, 'Hóa học', 1, '2022-07-11 23:02:53', 0),
-(7, 'Địa lý', 1, '2022-07-11 23:03:01', 0),
-(8, 'Vật  lý', 1, '2022-07-11 23:03:08', 0),
-(9, 'Giáo dục thể chất', 1, '2022-07-11 23:03:24', 0),
-(10, 'Kế toán - Tài chính', 1, '2022-07-11 23:03:36', 0),
-(11, 'Quản lý giáo dục', 1, '2022-07-11 23:03:47', 0),
-(12, 'Bảo vệ', 1, '2022-07-11 23:03:52', 0),
-(13, 'Công nghệ thông tin', 1, '2022-07-11 23:04:02', 0);
+INSERT INTO `tbldm_subject` (`id`, `title`, `user_id`, `create_at`, `set_point`, `status`) VALUES
+(1, 'Toán', 1, '2022-08-29 00:11:43', 1, 0),
+(2, 'Tin học', 1, '2022-08-29 00:11:40', 1, 0),
+(3, 'Ngữ văn', 1, '2022-08-29 00:11:36', 1, 0),
+(4, 'Lịch sử', 1, '2022-08-29 00:11:32', 1, 0),
+(5, 'Sinh học', 1, '2022-08-29 00:11:29', 1, 0),
+(6, 'Hóa học', 1, '2022-08-29 00:11:26', 1, 0),
+(7, 'Địa lý', 1, '2022-08-29 00:11:23', 1, 0),
+(8, 'Vật  lý', 1, '2022-08-29 00:11:20', 1, 0),
+(9, 'Giáo dục thể chất', 1, '2022-08-29 00:10:38', 1, 0),
+(10, 'Kế toán - Tài chính', 1, '2022-07-11 23:03:36', 0, 0),
+(11, 'Quản lý giáo dục', 1, '2022-07-11 23:03:47', 0, 0),
+(12, 'Bảo vệ', 1, '2022-07-11 23:03:52', 0, 0),
+(13, 'Công nghệ thông tin', 1, '2022-07-11 23:04:02', 0, 0),
+(14, 'Công nghệ', 1, '2022-08-29 01:42:27', 1, 0),
+(15, 'Ngoại ngữ', 1, '2022-08-29 01:42:56', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -446,9 +449,9 @@ CREATE TABLE `tbldm_years` (
 --
 
 INSERT INTO `tbldm_years` (`id`, `title`, `active`, `user_id`, `create_at`, `status`) VALUES
-(1, 'Năm học 2000 - 2001', 0, 1, '2022-07-11 18:28:39', 0),
+(1, 'Năm học 2000 - 2001', 0, 1, '2022-07-11 18:28:39', 1),
 (2, 'Năm học 2022-2023', 1, 1, '2022-07-12 17:05:30', 0),
-(3, 'Năm học 2023-2022', 0, 1, '2022-07-12 17:06:35', 0),
+(3, 'Năm học 2023-2022', 0, 1, '2022-07-12 17:06:35', 1),
 (4, 'Năm học 2023-2024', 0, 1, '2022-07-12 21:34:25', 1);
 
 -- --------------------------------------------------------
@@ -522,6 +525,33 @@ CREATE TABLE `tbl_book_loan` (
 INSERT INTO `tbl_book_loan` (`id`, `code`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
 (7, 1661018731, 3, 0, 1, 1, '2022-08-21 01:05:31', '2022-08-21 01:08:20', 1, '2022-08-21 01:05:31'),
 (8, 1661018887, 0, 123, 1, 2, '2022-08-21 01:08:07', '2022-08-21 01:08:18', 1, '2022-08-21 01:08:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_book_return`
+--
+
+CREATE TABLE `tbl_book_return` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `sub_book` int(11) NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `create_at` datetime NOT NULL,
+  `status` int(11) NOT NULL COMMENT '1 la thu hoi; 2 la khoi phuc'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_book_return`
+--
+
+INSERT INTO `tbl_book_return` (`id`, `code`, `user_id`, `book_id`, `sub_book`, `content`, `create_at`, `status`) VALUES
+(1, 1661676851, 1, 1, 1, 'Không đạt tiêu chí lưu hành', '2022-08-28 15:54:11', 1),
+(2, 1661704665, 1, 1, 1, 'Sách đã được khôi phục lại nguyên hiện trạng ban đầu đủ tiêu chí lưu hành', '2022-08-28 23:37:45', 2),
+(3, 1661705307, 1, 1, 2, 'Sách không đạt tiêu chí lưu hành', '2022-08-28 23:48:27', 1),
+(4, 1661705964, 1, 1, 2, 'Sách đã được điều chỉnh đạt tiêu chí lưu hành', '2022-08-28 23:59:24', 2);
 
 -- --------------------------------------------------------
 
@@ -680,7 +710,7 @@ CREATE TABLE `tbl_export` (
 --
 
 INSERT INTO `tbl_export` (`id`, `code`, `year_id`, `physical_id`, `create_at`) VALUES
-(9, 1657388721, 3, 1, '2022-07-10 00:45:21'),
+(9, 1657388721, 2, 1, '2022-08-29 01:46:26'),
 (10, 1657388764, 3, 3, '2022-07-10 00:46:04');
 
 --
@@ -711,11 +741,9 @@ CREATE TABLE `tbl_export_detail` (
 --
 
 INSERT INTO `tbl_export_detail` (`id`, `code`, `device_id`, `sub_device`, `status`, `create_at`) VALUES
-(19, 1657388721, 26, 1, 2, '2022-07-10 00:45:21'),
-(20, 1657388721, 29, 1, 2, '2022-07-10 00:45:21'),
-(21, 1657388721, 31, 1, 0, '2022-07-10 00:45:21'),
-(22, 1657388721, 34, 1, 1, '2022-07-10 00:45:21'),
-(23, 1657388764, 34, 1, 0, '2022-07-10 00:46:04');
+(23, 1657388764, 34, 1, 0, '2022-07-10 00:46:04'),
+(24, 1657388721, 31, 1, 0, '2022-08-29 01:46:26'),
+(25, 1657388721, 26, 1, 0, '2022-08-29 01:46:26');
 
 -- --------------------------------------------------------
 
@@ -874,7 +902,7 @@ INSERT INTO `tbl_personel` (`id`, `code`, `fullname`, `gender`, `birthday`, `lev
 (118, 1234567906, 'Lê Thị B', 2, '2007-01-19', 0, 0, '', '0987654337', 'Số 234, Đội Cấn, Ba Đình Hà Nội', '', '', 1, 'webmasterzero19@gmail.com'),
 (119, 1234567907, 'Trần Văn C', 1, '2008-01-19', 0, 0, '', '0987654338', 'Số 234, Đội Cấn, Ba Đình Hà Nội', '', '', 1, 'webmasterzero19@gmail.com'),
 (120, 1234567908, 'Đào Thị Quỳnh D', 2, '2009-01-19', 0, 0, '', '0987654339', 'Số 234, Đội Cấn, Ba Đình Hà Nội', '', '', 1, 'webmasterzero19@gmail.com'),
-(121, 1234567909, 'Hoàng Văn E', 1, '2010-01-19', 0, 0, '', '0987654340', 'Số 234, Đội Cấn, Ba Đình Hà Nội', '', '', 1, 'webmasterzero19@gmail.com'),
+(121, 1234567909, 'Hoàng Văn E', 1, '2010-01-19', 3, 1, '1,2', '0987654340', 'Số 234, Đội Cấn, Ba Đình Hà Nội', 'profile-pic.jpg', '', 1, 'webmasterzero19@gmail.com'),
 (122, 1234567910, 'Nguyễn Phương Anh', 1, '2011-01-19', 4, 1, '4', '0987654341', 'Số 234, Đội Cấn, Ba Đình Hà Nội', 'index.jpg', '', 1, 'webmasterzero19@gmail.com');
 
 -- --------------------------------------------------------
@@ -901,7 +929,8 @@ CREATE TABLE `tbl_returns_device` (
 --
 
 INSERT INTO `tbl_returns_device` (`id`, `code`, `create_at`, `year_id`, `physical_id`, `device_id`, `sub_device`, `content`, `status`, `user_id`) VALUES
-(1, 1661528300, '2022-08-26 22:38:20', 2, 1, 26, 1, 'Thiết bị lỗi không khắc phục được', 1, 1);
+(1, 1661528300, '2022-08-26 22:38:20', 2, 1, 26, 1, 'Thiết bị lỗi không khắc phục được', 1, 1),
+(4, 1661620798, '2022-08-28 00:19:58', 2, 1, 26, 1, 'Máy tính đã được sửa chữa và nâng cấp đạt chuẩn phục vụ công tác giảng dạy', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -996,27 +1025,7 @@ INSERT INTO `tbl_student_class` (`id`, `student_id`, `year_id`, `department_id`,
 (28, 120, 2, 1, '2022-08-17 00:46:15'),
 (29, 121, 2, 1, '2022-08-17 00:46:16'),
 (30, 122, 2, 1, '2022-08-17 00:46:16'),
-(31, 123, 2, 1, '2022-08-17 00:46:16'),
-(32, 104, 4, 17, '2022-08-18 16:39:51'),
-(33, 105, 4, 17, '2022-08-18 16:39:51'),
-(34, 106, 4, 17, '2022-08-18 16:39:51'),
-(35, 107, 4, 17, '2022-08-18 16:39:51'),
-(36, 108, 4, 17, '2022-08-18 16:39:51'),
-(37, 109, 4, 17, '2022-08-18 16:39:51'),
-(38, 110, 4, 17, '2022-08-18 16:39:51'),
-(39, 111, 4, 17, '2022-08-18 16:39:51'),
-(40, 112, 4, 17, '2022-08-18 16:39:51'),
-(41, 113, 4, 17, '2022-08-18 16:39:51'),
-(42, 114, 4, 17, '2022-08-18 16:39:51'),
-(43, 115, 4, 17, '2022-08-18 16:39:51'),
-(44, 116, 4, 17, '2022-08-18 16:39:51'),
-(45, 117, 4, 17, '2022-08-18 16:39:51'),
-(46, 118, 4, 17, '2022-08-18 16:39:51'),
-(47, 119, 4, 17, '2022-08-18 16:39:51'),
-(48, 120, 4, 17, '2022-08-18 16:39:51'),
-(49, 121, 4, 17, '2022-08-18 16:39:51'),
-(50, 122, 4, 17, '2022-08-18 16:39:51'),
-(51, 123, 4, 17, '2022-08-18 16:39:51');
+(31, 123, 2, 1, '2022-08-17 00:46:16');
 
 -- --------------------------------------------------------
 
@@ -1233,9 +1242,10 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-08-26 10:06:53', '508c375eb3a8dbb01da1b40f11f0132150b2be43', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-08-28 23:30:22', '66112211f3d59459c53feb0d6bb92b222768225e', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
-(4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, '');
+(4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
+(6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
 
 -- --------------------------------------------------------
 
@@ -1462,6 +1472,12 @@ ALTER TABLE `tbl_book_loan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_book_return`
+--
+ALTER TABLE `tbl_book_return`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_change_class`
 --
 ALTER TABLE `tbl_change_class`
@@ -1673,7 +1689,7 @@ ALTER TABLE `tbldm_realtion`
 -- AUTO_INCREMENT for table `tbldm_subject`
 --
 ALTER TABLE `tbldm_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbldm_utensils`
@@ -1704,6 +1720,12 @@ ALTER TABLE `tbl_book`
 --
 ALTER TABLE `tbl_book_loan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_book_return`
+--
+ALTER TABLE `tbl_book_return`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_class`
@@ -1745,7 +1767,7 @@ ALTER TABLE `tbl_export`
 -- AUTO_INCREMENT for table `tbl_export_detail`
 --
 ALTER TABLE `tbl_export_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans`
@@ -1775,7 +1797,7 @@ ALTER TABLE `tbl_personel`
 -- AUTO_INCREMENT for table `tbl_returns_device`
 --
 ALTER TABLE `tbl_returns_device`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
@@ -1823,7 +1845,7 @@ ALTER TABLE `tbl_up_class`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils`
