@@ -193,4 +193,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/lib_loans/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/library/loans.js"></script>

@@ -167,4 +167,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/returns/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/returns.js"></script>

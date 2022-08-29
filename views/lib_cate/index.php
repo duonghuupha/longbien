@@ -48,4 +48,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/lib_cate/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/library/category.js"></script>

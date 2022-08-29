@@ -38,4 +38,4 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
-<script src="<?php echo URL.'/public/' ?>scripts/lib_code/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/library/qrcode.js"></script>

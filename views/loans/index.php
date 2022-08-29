@@ -268,4 +268,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/loans/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/loans.js"></script>

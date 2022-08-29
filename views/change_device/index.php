@@ -99,4 +99,4 @@
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/change_device/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/change_device.js"></script>

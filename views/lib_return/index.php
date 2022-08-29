@@ -161,4 +161,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/lib_return/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/library/return.js"></script>
