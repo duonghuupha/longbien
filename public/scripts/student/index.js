@@ -3,14 +3,15 @@ var codes = '', names = '', dates = '', departments = '', addresss = '', genders
 var religions = 0;
 $(function(){
     $('#list_student').load(baseUrl + '/student/content');
+    $('#people_id').load(baseUrl + '/other/combo_people');
 });
 
 function add(){
     var number = Math.floor(Math.random() * 999999999999); data = []; render_table(data);
     $('#code').val(number); $('#fullname').val(null); $('#gender').val(1).trigger('change');
     $('#birthday').val(null); $('#address').val(null); $('#people_id').val(2).trigger('change');
-    $('#image_old').val(null); $('#status').val(null).trigger('change'); $('#refreshcode').show();
-    $('#modal-student').modal('show'); $('#status').val(1).trigger('change'); $('#religion').val(1).trigger('change');
+    $('#image_old').val(null); $('#status').val(1).trigger('change'); $('#refreshcode').show();
+    $('#modal-student').modal('show'); $('#religion').val(1).trigger('change');
     url = baseUrl + '/student/add'
 }
 

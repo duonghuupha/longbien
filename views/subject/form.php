@@ -17,6 +17,15 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>
+                        <input name="set_point" id="set_point" class="ace ace-checkbox-2" type="checkbox"
+                        <?php echo (isset($_REQUEST['id']) && $this->jsonObj[0]['set_point'] == 1) ? 'checked=""' : '' ?>>
+                        <span class="lbl"> Có tính điểm</span>
+                    </label>
+                </div>
+            </div>
         </form>
     </div>
 </div>

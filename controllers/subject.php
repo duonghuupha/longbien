@@ -15,9 +15,9 @@ class Subject extends Controller{
     }
 
     function add(){
-        $title = $_REQUEST['title'];
+        $title = $_REQUEST['title']; $setpoint = isset($_REQUEST['set_point']) ? 1 : 0;
         $data = array('title' => $title, "user_id" => $this->_Info[0]['id'], "status" => 0,
-                        "create_at" => date("Y-m-d H:i:s"));
+                        "create_at" => date("Y-m-d H:i:s"), "set_point" => $setpoint);
         $temp = $this->model->addObj($data);
         if($temp){
             $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
@@ -34,8 +34,9 @@ class Subject extends Controller{
 
     function update(){
         $id = $_REQUEST['id'];
-        $title = $_REQUEST['title'];
-        $data = array('title' => $title, "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d H:i:s"));
+        $title = $_REQUEST['title']; $setpoint = isset($_REQUEST['set_point']) ? 1 : 0;
+        $data = array('title' => $title, "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d H:i:s"),
+                        "set_point" => $setpoint);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
             $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');

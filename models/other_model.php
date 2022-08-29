@@ -5,22 +5,22 @@ class Other_Model extends Model{
     }
 
     function get_combo_years(){
-        $query = $this->db->query("SELECT id, title, active FROM tbldm_years");
+        $query = $this->db->query("SELECT id, title, active FROM tbldm_years WHERE status = 0");
         return $query->fetchAll();
     }
 
     function get_combo_phhysical(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_physical_room");
+        $query = $this->db->query("SELECT id, title FROM tbldm_physical_room WHERE status = 0");
         return $query->fetchAll();
     }
 
     function get_combo_level(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_level");
+        $query = $this->db->query("SELECT id, title FROM tbldm_level WHERE status = 0");
         return $query->fetchAll();
     }
 
     function get_combo_job(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_job");
+        $query = $this->db->query("SELECT id, title FROM tbldm_job WHERE status = 0");
         return $query->fetchAll();
     }
 

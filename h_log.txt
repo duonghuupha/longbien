@@ -123,3 +123,18 @@
 2022-08-28 00:12:48/1/Thêm mới dữ liệu/returns/restore
 2022-08-28 00:13:51/1/Thêm mới dữ liệu/returns/restore
 2022-08-28 00:19:58/1/Thêm mới dữ liệu/returns/restore
+2022-08-29 00:09:23/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:10:38/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:20/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:23/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:26/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:29/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:32/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:36/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:40/1/Cập nhật dữ liệu/subject/update
+2022-08-29 00:11:43/1/Cập nhật dữ liệu/subject/update
+2022-08-29 01:42:27/1/Thêm mới dữ liệu/subject/add
+2022-08-29 01:42:56/1/Thêm mới dữ liệu/subject/add
+2022-08-29 01:43:03/1/Xóa dữ liệu/years/del
+2022-08-29 01:44:04/1/Xóa dữ liệu/years/del
+2022-08-29 01:46:26/1/Cập nhật dữ liệu/export_device/update

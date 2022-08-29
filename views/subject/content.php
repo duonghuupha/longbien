@@ -10,6 +10,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage;  $pages = $this->page;
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
             <th class="">Tiêu đề</th>
+            <th class="text-center">Tính điểm</th>
             <th class="text-center" style="width:180px">Cập nhật lần cuối</th>
             <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
@@ -24,6 +25,15 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage;  $pages = $this->page;
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td id="titlelevel_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
+            <td class="text-center">
+                <?php
+                if($row['set_point'] == 0){
+                    echo '<span class="label label-sm label-danger">Không</span>';
+                }elseif($row['set_point'] == 1){
+                    echo '<span class="label label-sm label-success">Có</span>';
+                }
+                ?>
+            </td>
             <td class="text-center"><?php echo date('H:i:s d-m-Y', strtotime($row['create_at'])) ?></td>
             <td class="text-center">
                 <div class="hidden-sm hidden-xs action-buttons">
@@ -35,6 +45,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage;  $pages = $this->page;
                     </a>
                 </div>
             </td>
+            <td id="point_<?php echo $row['id'] ?>"><?php echo $row['set_point'] ?></td>
         </tr>
         <?php
         }
