@@ -6,7 +6,10 @@ class Loans_Model extends Model{
 
     function getFetObj($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans WHERE user_loan IN (SELECT tbl_users.id FROM tbl_users
+                                    WHERE tbl_users.hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$q%'))
+                                    OR code IN (SELECT tbl_loans_detail.code FROM tbl_loans_detail WHERE tbl_loans_detail.device_id IN (SELECT tbl_devices.id
+                                    FROM tbl_devices WHERE tbl_devices.title LIKE '%$q%'))");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, user_id, user_loan, date_loan, date_return, content,
                                     notes, status, create_at, IF(user_id = 1, 'Administrator', (SELECT fullname 
@@ -15,7 +18,10 @@ class Loans_Model extends Model{
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users
                                     WHERE tbl_users.id = user_loan))) AS fullname_loan, (SELECT COUNT(*) FROM tbl_loans_detail
                                     WHERE tbl_loans_detail.code = tbl_loans.code) AS qty
-                                    FROM tbl_loans ORDER BY id DESC LIMIT $offset, $rows");
+                                    FROM tbl_loans WHERE user_loan IN (SELECT tbl_users.id FROM tbl_users
+                                    WHERE tbl_users.hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$q%'))
+                                    OR code IN (SELECT tbl_loans_detail.code FROM tbl_loans_detail WHERE tbl_loans_detail.device_id IN (SELECT tbl_devices.id
+                                    FROM tbl_devices WHERE tbl_devices.title LIKE '%$q%')) ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

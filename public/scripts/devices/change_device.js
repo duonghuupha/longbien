@@ -21,11 +21,17 @@ function save(){
 
 function view_page_change(pages){
     page = pages;
-
+    $('#list_change').load(baseUrl + '/change_device/content?page='+page+'&q='+keyword);
 }
 
 function search(){
-
+    var value = $('#nav-search-input').val();
+    if(value.length != 0){
+        keyword = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword = '';
+    }
+    $('#list_change').load(baseUrl + '/change_device/content?page=1&q='+keyword);
 }
 
 function set_device(){

@@ -33,7 +33,7 @@
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-                <div class="col-xs-12 col-sm-3">
+                <div class="col-xs-12 col-sm-4">
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="form-field-username" style="font-weight:700">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-9">
+                <div class="col-xs-12 col-sm-8">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12" id="comment">
                             
