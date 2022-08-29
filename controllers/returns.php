@@ -83,6 +83,13 @@ class Returns extends Controller{
         $this->view->render("returns/detail");
     }
 
+    function detailr(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_info_returns($id);
+        $this->view->jsonObj  = $jsonObj;
+        $this->view->render("returns/detailr");
+    }
+
     function approval(){
         $id = $_REQUEST['id']; $type = $_REQUEST['type'];
         if($type == 1){ // dong y duyet

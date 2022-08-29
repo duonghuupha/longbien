@@ -6,12 +6,18 @@ class Export_device_Model extends Model{
 
     function getFetObj($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_export");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_export WHERE physical_id IN (SELECT tbldm_physical_room.id
+                                FROM tbldm_physical_room WHERE tbldm_physical_room.title LIKE '%$q%') OR code IN (SELECT tbl_export_detail.code
+                                FROM tbl_export_detail WHERE tbl_export_detail.device_id IN (SELECT tbl_devices.id FROM tbl_devices
+                                WHERE tbl_devices.title LIKE '%$q%'))");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, year_id, physical_id, create_at, (SELECT title
                                     FROM tbldm_years WHERE tbldm_years.id = year_id) AS namhoc,
                                     (SELECT title FROM tbldm_physical_room WHERE tbldm_physical_room.id = physical_id) AS physical 
-                                    FROM tbl_export ORDER BY id DESC LIMIT $offset, $rows");
+                                    FROM tbl_export WHERE physical_id IN (SELECT tbldm_physical_room.id
+                                    FROM tbldm_physical_room WHERE tbldm_physical_room.title LIKE '%$q%') OR code IN (SELECT tbl_export_detail.code
+                                    FROM tbl_export_detail WHERE tbl_export_detail.device_id IN (SELECT tbl_devices.id FROM tbl_devices
+                                    WHERE tbl_devices.title LIKE '%$q%')) ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

@@ -53,7 +53,7 @@ $pages = $this->page; $sql = new Model();
             </td>
             <td class="text-center">
                 <div class="action-buttons">
-                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)"
+                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'].', '.$row['status'] ?>)"
                     title="Chi tiết phiếu đề nghị thu hồi">
                         <i class="ace-icon fa fa-search-plus bigger-130"></i>
                     </a>

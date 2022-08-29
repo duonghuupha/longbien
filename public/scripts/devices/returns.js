@@ -40,8 +40,12 @@ function view_page_return(pages){
     $('#list_return').load(baseUrl + '/returns/content?page='+page);
 }
 
-function detail(idh){
-    $('#detail').load(baseUrl + '/returns/detail?id='+idh);
+function detail(idh, status){
+    if(status != 3){
+        $('#detail').load(baseUrl + '/returns/detail?id='+idh);
+    }else{
+        $('#detail').load(baseUrl + '/returns/detailr?id='+idh);
+    }
     $('#modal-detail').modal('show');
 }
 

@@ -270,7 +270,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:45%">
+    <div class="modal-dialog" style="width:50%">
         <div class="modal-content" id="detail">
             
         </div><!-- /.modal-content -->

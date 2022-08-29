@@ -51,9 +51,6 @@ $pages = $this->page; $sql = new Model();
                     <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
-                    <a class="red hidden-480" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                    </a>
                 </div>
             </td>
             <td class="hidden" id="physical_<?php echo $row['id'] ?>"><?php echo $row['physical_id'] ?></td>

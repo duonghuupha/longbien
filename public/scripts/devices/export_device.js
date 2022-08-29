@@ -63,3 +63,13 @@ function detail(idh){
     $('#detail').load(baseUrl + '/export_device/detail?id='+idh);
     $('#modal-detail').modal('show');
 }
+
+function search(){
+    var value = $('#nav-search-input').val();
+    if(value.length != 0){
+        keyword = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword = '';
+    }
+    $('#list_export').load(baseUrl + '/export_device/content?page=1&q='+keyword);
+}
