@@ -173,3 +173,4 @@ function set_data(val){
         $('#pager').load(baseUrl + '/lib_loans/list_student_page?page='+pages_per_stu+'&q='+key_per_stu);
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////

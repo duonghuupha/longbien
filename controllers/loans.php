@@ -218,5 +218,13 @@ class Loans extends Controller{
         }
         $this->view->render("loans/reserve");
     }
+
+    function detail(){
+        $jsonObj = $this->model->get_info($_REQUEST['id']);
+        $this->view->jsonObj= $jsonObj;
+        $detail = $this->model->get_device_selected($jsonObj[0]['code']);
+        $this->view->detail = $detail;
+        $this->view->render("loans/detail");
+    }
 }
 ?>

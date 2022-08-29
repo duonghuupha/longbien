@@ -119,8 +119,10 @@ class Loans_Model extends Model{
         $query = $this->db->query("SELECT id, code, user_loan, DATE_FORMAT(date_loan, '%d-%m-%Y') AS date_loan, 
                                     DATE_FORMAT(date_return, '%d-%m-%Y') AS date_return, content, notes,
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
-                                    FROM tbl_users WHERE tbl_users.id = user_loan)) AS fullname FROM tbl_loans 
-                                    WHERE id = $id");
+                                    FROM tbl_users WHERE tbl_users.id = user_loan)) AS fullname,  create_at,
+                                    IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel 
+                                    WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users WHERE tbl_users.id = user_loan))) AS create_name
+                                    FROM tbl_loans WHERE id = $id");
         return $query->fetchAll();
     }
 

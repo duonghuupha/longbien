@@ -238,3 +238,8 @@ function add_reserve(){
     $('#date_return').datepicker('setDate', hientai); $('#modal-loan').modal('show');
     url = baseUrl + '/loans/reserve';
 }
+
+function detail(idh){
+    $('#detail').load(baseUrl + '/loans/detail?id='+idh);
+    $('#modal-detail').modal('show');
+}
