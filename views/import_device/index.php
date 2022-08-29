@@ -33,4 +33,4 @@
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/import_device/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/import_device.js"></script>

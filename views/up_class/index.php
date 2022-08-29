@@ -95,4 +95,4 @@
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/up_class/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/student/up_class.js"></script>

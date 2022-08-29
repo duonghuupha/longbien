@@ -46,4 +46,4 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
-<script src="<?php echo URL.'/public/' ?>scripts/qrcode_device/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/qrcode.js"></script>

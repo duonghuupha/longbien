@@ -82,4 +82,4 @@
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/change_class/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/student/change_class.js"></script>

@@ -122,4 +122,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/student_change/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/student/student_change.js"></script>

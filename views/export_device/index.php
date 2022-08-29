@@ -114,4 +114,4 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script src="<?php echo URL.'/public/' ?>scripts/export_device/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/devices/export_device.js"></script>
