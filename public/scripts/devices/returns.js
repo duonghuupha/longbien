@@ -37,7 +37,17 @@ function save(){
 
 function view_page_return(pages){
     page = pages;
-    $('#list_return').load(baseUrl + '/returns/content?page='+page);
+    $('#list_return').load(baseUrl + '/returns/content?page='+page+'&q='+keyword);
+}
+
+function search(){
+    var value = $('#nav-search-input').val();
+    if(value.length != 0){
+        keyword = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword = '';
+    }
+    $('#list_return').load(baseUrl + '/returns/content?page=1&q='+keyword);
 }
 
 function detail(idh, status){
@@ -66,10 +76,10 @@ function approval(idh){
         callback: function(result){
             if(result){
                 var data_str = "id="+idh+"&type=1";
-                exec_del(data_str, baseUrl+'/returns/approval', '#list_return', baseUrl+'/returns/content?page='+page);
+                exec_del(data_str, baseUrl+'/returns/approval', '#list_return', baseUrl+'/returns/content?page='+page+'&q='+keyword);
             }else{
                 var data_str = "id="+idh+"&type=2";
-                exec_del(data_str, baseUrl+'/returns/approval', '#list_return', baseUrl+'/returns/content?page='+page);
+                exec_del(data_str, baseUrl+'/returns/approval', '#list_return', baseUrl+'/returns/content?page='+page+'&q='+keyword);
             }
         }
     });
