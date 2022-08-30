@@ -31,14 +31,14 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td>
                 <?php echo $row['fullname_create'] ?><br/>
-                <small>
-                    Ngày lập: <?php echo date("H:i:s d-m-Y", strtotime($row['create_at'])) ?>
+                <small style="color:gray">
+                    Ngày lập: <?php echo date("d-m-Y", strtotime($row['create_at'])) ?>
                 </small>
             </td>
             <td>
                 <?php echo $row['fullname_loan'] ?><br/>
-                <small>
-                    Ngày mượn: <?php echo date("H:i:s d-m-Y", strtotime($row['date_loan'])) ?>
+                <small style="color:gray">
+                    Ngày mượn: <?php echo date("d-m-Y", strtotime($row['date_loan'])) ?>
                 </small>
             </td>
             <td class="text-center">

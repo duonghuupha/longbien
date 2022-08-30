@@ -91,7 +91,9 @@ class Gear_loans_Model extends Model{
 
     function get_info($id){
         $query = $this->db->query("SELECT id, code, user_loan, DATE_FORMAT(date_loan, '%d-%m-%Y') AS date_loan, 
-                                    DATE_FORMAT(date_return, '%d-%m-%Y') AS date_return, content, notes,
+                                    DATE_FORMAT(date_return, '%d-%m-%Y') AS date_return, content, notes, create_at,
+                                    IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel
+                                    WHERE tbl_personel.id = (SELECT tbl_users.hr_id FROM tbl_users WHERE tbl_users.id = user_id))) AS create_name,
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
                                     FROM tbl_users WHERE tbl_users.id = user_loan)) AS fullname FROM tbl_utensils_loan 
                                     WHERE id = $id");

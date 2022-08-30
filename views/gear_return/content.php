@@ -46,19 +46,23 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                 ?>
             </td>
             <td class="text-center">
-                <?php
-                $status = $this->_Data->check_restore_gear($row['utensils_id'], $row['sub_utensils']);
-                if($row['status'] == 1 && $status != 2){
-                ?>
                 <div class="action-buttons">
                     <a class="blue" href="javascript:void(0)" onclick="restore(<?php echo $row['id'] ?>)"
+                    title="Chi tiết">
+                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                    </a>
+                    <?php
+                    $status = $this->_Data->check_restore_gear($row['utensils_id'], $row['sub_utensils']);
+                    if($row['status'] == 1 && $status != 2){
+                    ?>
+                    <a class="green" href="javascript:void(0)" onclick="restore(<?php echo $row['id'] ?>)"
                     title="Khôi phục đồ dùng">
                         <i class="ace-icon fa fa-refresh bigger-130"></i>
                     </a>
+                    <?php
+                    }
+                    ?>
                 </div>
-                <?php
-                }
-                ?>
             </td>
         </tr>
         <?php

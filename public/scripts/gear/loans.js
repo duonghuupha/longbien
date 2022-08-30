@@ -226,3 +226,8 @@ function set_gear_loan(){
         }
     });
 }
+
+function detail(idh){
+    $('#detail').load(baseUrl + '/gear_loans/detail?id='+idh);
+    $('#modal-detail').modal('show');
+}

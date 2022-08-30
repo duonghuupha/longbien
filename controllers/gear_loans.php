@@ -174,5 +174,13 @@ class Gear_loans extends Controller{
         }
         $this->view->render("gear_loans/info_gear");
     }
+
+    function detail(){
+        $jsonObj = $this->model->get_info($_REQUEST['id']);
+        $this->view->jsonObj = $jsonObj;
+        $detail = $this->model->get_gear_selected($jsonObj[0]['code']);
+        $this->view->detail = $detail;
+        $this->view->render("gear_loans/detail");
+    }
 }
 ?>

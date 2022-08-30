@@ -12,7 +12,7 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Mượn - Trả
+                    Mượn - Trả đồ dùng
                     <small class="pull-right">
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
@@ -293,6 +293,16 @@
                     <!--display pagination-->
                 </small>
             </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:55%">
+        <div class="modal-content" id="detail">
+            
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
