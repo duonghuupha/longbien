@@ -55,11 +55,32 @@ $jsonObj = $this->jsonObj;
                     <b>Loại sách:</b> <?php echo ($jsonObj[0]['type'] == 1) ? 'Sách truyền thống' : 'Sách nói, sách điện tử' ?>
                 </label>
             </div>
+            <?php
+            if($jsonObj[0]['type'] == 2){
+                $ext = explode(".", $jsonObj[0]['file']); $extension = end($ext);
+                if($extension == 'pdf' || $extension == 'PDF'){
+            ?>
+            <div class="col-sm-12">
+                <iframe
+                    src="<?php echo URL.'/public/library/file/'.$jsonObj[0]['cate_id'].'/'.$jsonObj[0]['file'] ?>"
+                    frameBorder="0"
+                    scrolling="auto"
+                    height="300px"
+                    width="100%"
+                ></iframe>
+            </div>
+            <?php
+                }else{
+            ?>
             <div class="col-xs-12">
                 <label for="form-field-username">
                     <b>Tệp dữ liệu:</b> <a href="<?php echo URL.'/public/library/file/'.$jsonObj[0]['cate_id'].'/'.$jsonObj[0]['file'] ?>" target="_blank"><?php echo $jsonObj[0]['file'] ?></a>
                 </label>
             </div>
+            <?php
+                }
+            }
+            ?>
         </div>
     </div>
 </div>

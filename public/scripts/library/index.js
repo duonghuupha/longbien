@@ -45,10 +45,14 @@ function save(){
         var file = $('#file').val().split(".").pop();
         var audio = ['mp3', 'mp4', 'pdf'];
         if($('#type').val() == 2){
-            if(audio.includes(file)){
-                save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
+            if($('#file').val().length != 0){
+                if(audio.includes(file)){
+                    save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
+                }else{
+                    show_message("error", "Định dạng tệp dữ liệu không đúng. Sách điện tử, sách nói phải có định dạng: mp3, mp4, pdf");
+                }
             }else{
-                show_message("Định dạng tệp dữ liệu không đúng. Sách điện tử, sách nói phải có định dạng: mp3, mp4, pdf");
+                save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
             }
         }else{
             save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
