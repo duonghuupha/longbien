@@ -408,7 +408,7 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/lib_cate' ?>">
+                    <a href="<?php echo URL.'/report_document' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Văn bản
                     </a>
