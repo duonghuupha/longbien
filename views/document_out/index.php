@@ -117,7 +117,7 @@
                                     <label for="form-field-username">Nơi nhận</label>
                                     <div>
                                         <input class="form-control" id="location_to" type="text" 
-                                        name="location_to" placeholder="Nơi nhận văn bản"/>
+                                        name="location_to" placeholder="Nơi nhận văn bản" required=""/>
                                     </div>
                                 </div>
                             </div>

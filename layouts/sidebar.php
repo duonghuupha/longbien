@@ -415,14 +415,14 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/library' ?>">
+                    <a href="<?php echo URL.'/report_personel' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Nhân sự
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="hover">
-                    <a href="<?php echo URL.'/lib_code' ?>">
+                    <a href="<?php echo URL.'/report_student' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Học sinh
                     </a>

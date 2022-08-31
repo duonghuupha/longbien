@@ -1,6 +1,5 @@
 <?php
-$convert = new Convert(); $jsonObj = $this->jsonObj; $perpage = $this->perpage;
-$pages = $this->page; $sql = new Model();
+$jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
 ?>
 <table 
     id="dynamic-table" 
@@ -20,7 +19,6 @@ $pages = $this->page; $sql = new Model();
                 <i class="ace-icon fa fa-question-circle bigger-110"></i>
             </th>
             <th class="hidden-480">Chuyên môn</th>
-            <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +29,7 @@ $pages = $this->page; $sql = new Model();
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
             if($row['subject'] != ''){
                 foreach(explode(",",  $row['subject']) AS $item){
-                    $subject[$i][] = $sql->return_title_subject($item);
+                    $subject[$i][] = $this->_Data->return_title_subject($item);
                 }
             }else{
                 $subject[$i] = [];
@@ -46,19 +44,6 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center hidden-480"><?php echo $row['level'] ?></td>
             <td class="text-center hidden-480"><?php echo $row['job'] ?></td>
             <td class="hidden-480"><?php echo implode(", ", $subject[$i]) ?></td>
-            <td class="text-center">
-                <div class="action-buttons">
-                    <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
-                    </a>
-                    <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                    </a>
-                    <a class="red hidden-480" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                    </a>
-                </div>
-            </td>
         </tr>
         <?php
         }
@@ -68,14 +53,14 @@ $pages = $this->page; $sql = new Model();
 <div class="row mini">
     <div class="col-xs-12 col-sm-6">
         <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
-            <?php echo $convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
+            <?php echo $this->_Convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
         </div>
     </div>
     <div class="col-xs-12 col-sm-6">
         <?php
         if($jsonObj['total'] > $perpage){
-            $pagination = $convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_personal', 1);
+            $pagination = $this->_Convert->pagination($jsonObj['total'], $pages, $perpage);
+            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_personal', 1);
         ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">
