@@ -43,5 +43,11 @@ class Index_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_total_personel(){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_personel WHERE status = 1");
+        $row  = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>

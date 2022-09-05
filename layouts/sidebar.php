@@ -429,11 +429,56 @@
                     <b class="arrow"></b>
                 </li>
                <li class="hover">
-                    <a a href="<?php echo URL.'/lib_loans' ?>">
+                    <a href="#" class="dropdown-toggle">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Trang thiết bị
+                        <b class="arrow fa fa-angle-down"></b>
                     </a>
                     <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="hover">
+                            <a href="<?php echo URL.'/report_device' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Danh sách trang thiết bị
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="hover">
+                            <a href="<?php echo URL.'/report_export_device' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Sổ theo dõi trang thiết bị phòng ban
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="hover">
+                            <a href="<?php echo URL.'/report_change_device' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Sổ theo dõi luân chuyển thiết bị
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="hover">
+                            <a href="<?php echo URL.'/report_loan_device' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Sổ theo dõi mượn - trả thiết bị
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="hover">
+                            <a href="<?php echo URL.'/report_repair_device' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Sổ theo dõi quá trình bảo trì bảo dưỡng trang thiết bị
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="hover">
+                            <a href="<?php echo URL.'/report_file_device' ?>">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Hồ sơ trang thiết bị
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
                 <li class="hover">
                     <a a href="<?php echo URL.'/lib_loans' ?>">

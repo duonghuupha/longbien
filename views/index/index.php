@@ -7,15 +7,6 @@
                     <a href="#">Trang chủ</a>
                 </li>
                 <li class="active">Bàn làm việc</li>
-            </ul><!-- /.breadcrumb -->
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
         <div class="page-content">
             <div class="page-header">
@@ -32,97 +23,21 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="row">
                         <div class="space-6"></div>
-                        <div class="col-sm-7 infobox-container">
-                            <div class="infobox infobox-green">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-users"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <span class="infobox-data-number">32</span>
-                                    <div class="infobox-content">CBGVNV</div>
-                                </div>
-                            </div>
-                            <div class="infobox infobox-blue">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-graduation-cap"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <span class="infobox-data-number">11</span>
-                                    <div class="infobox-content">Học sinh</div>
-                                </div>
-                            </div>
-                            <div class="infobox infobox-pink">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-cubes"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <span class="infobox-data-number">8</span>
-                                    <div class="infobox-content">Trang thiết bị</div>
-                                </div>
-                            </div>
-                            <div class="infobox infobox-red">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-flask"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <span class="infobox-data-number">7</span>
-                                    <div class="infobox-content">Đồ dùng dạy học</div>
-                                </div>
-                            </div>
-                            <div class="infobox infobox-orange2">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-book"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <span class="infobox-text">Thư viện</span>
-                                    <div class="infobox-content">Sách truyền thống</div>
-                                </div>
-                            </div>
-                            <div class="infobox infobox-blue2">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-book"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <span class="infobox-text">Thư viện</span>
-                                    <div class="infobox-content">Sách điện tử/sách nói</div>
-                                </div>
-                            </div>
-                            <div class="space-6"></div>
-                            <div class="infobox infobox-green infobox-small infobox-dark">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-university"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <div class="infobox-content">Lớp học</div>
-                                    <div class="infobox-content">10</div>
-                                </div>
-                            </div>
-                            <div class="infobox infobox-blue infobox-small infobox-dark">
-                                <div class="infobox-progress">
-                                    <div class="easy-pie-chart percentage" data-percent="12" data-size="39">
-                                        <span class="percent">12</span>
-                                    </div>
-                                </div>
-                                <div class="infobox-data">
-                                    <div class="infobox-content">Phòng chức năng</div>
-                                </div>
-                            </div>
-                            <div class="infobox infobox-grey infobox-small infobox-dark">
-                                <div class="infobox-icon">
-                                    <i class="ace-icon fa fa-gear"></i>
-                                </div>
-                                <div class="infobox-data">
-                                    <div class="infobox-content">Khu hiệu bộ</div>
-                                </div>
-                            </div>
+                        <div class="col-sm-4 infobox-container" id="block_one">
+                            
                         </div>
                         <div class="vspace-12-sm"></div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
+                            <div class="widget-box" id="block_two">
+                                
+                            </div><!-- /.widget-box -->
+                        </div><!-- /.col -->
+                        <div class="col-sm-4">
                             <div class="widget-box">
                                 <div class="widget-header widget-header-flat widget-header-small">
                                     <h5 class="widget-title">
                                         <i class="ace-icon fa fa-signal"></i>
-                                        Học sinh
+                                        Nhân sự
                                     </h5>
                                     <div class="widget-toolbar no-border">
                                         <div class="inline dropdown-hover">
@@ -140,7 +55,13 @@
                                                 <li>
                                                     <a href="#">
                                                         <i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
-                                                        Độ tuổi
+                                                        Trình độ
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
+                                                        Nhiệm vụ
                                                     </a>
                                                 </li>
                                             </ul>
@@ -163,15 +84,9 @@
                             <div class="widget-box transparent">
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="widget-title lighter">
-                                        <i class="ace-icon fa fa-star orange"></i>
-                                        Popular Domains
+                                        <i class="ace-icon fa fa-calendar orange"></i>
+                                        Lịch báo giảng hôm nay
                                     </h4>
-
-                                    <div class="widget-toolbar">
-                                        <a href="#" data-action="collapse">
-                                            <i class="ace-icon fa fa-chevron-up"></i>
-                                        </a>
-                                    </div>
                                 </div>
 
                                 <div class="widget-body">
@@ -182,7 +97,6 @@
                                                     <th>
                                                         <i class="ace-icon fa fa-caret-right blue"></i>name
                                                     </th>
-
                                                     <th>
                                                         <i class="ace-icon fa fa-caret-right blue"></i>price
                                                     </th>
@@ -273,16 +187,9 @@
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="widget-title lighter">
                                         <i class="ace-icon fa fa-signal"></i>
-                                        Sale Stats
+                                        Chuyên cần
                                     </h4>
-
-                                    <div class="widget-toolbar">
-                                        <a href="#" data-action="collapse">
-                                            <i class="ace-icon fa fa-chevron-up"></i>
-                                        </a>
-                                    </div>
                                 </div>
-
                                 <div class="widget-body">
                                     <div class="widget-main padding-4">
                                         <div id="sales-charts"></div>
@@ -291,17 +198,14 @@
                             </div><!-- /.widget-box -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-
                     <div class="hr hr32 hr-dotted"></div>
-
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="widget-box transparent" id="recent-box">
                                 <div class="widget-header">
                                     <h4 class="widget-title lighter smaller">
-                                        <i class="ace-icon fa fa-rss orange"></i>RECENT
+                                        <i class="ace-icon fa fa-rss orange"></i>Kết quả học tập
                                     </h4>
-
                                     <div class="widget-toolbar no-border">
                                         <ul class="nav nav-tabs" id="recent-tab">
                                             <li class="active">
@@ -894,7 +798,7 @@
                                 <div class="widget-header">
                                     <h4 class="widget-title lighter smaller">
                                         <i class="ace-icon fa fa-comment blue"></i>
-                                        Conversation
+                                        Thư viện
                                     </h4>
                                 </div>
 
@@ -1047,5 +951,5 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
-<script src="<?php echo URL.'/public/' ?>scripts/index/chart_circle.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/index/block.js"></script>
 <script src="<?php echo URL.'/public/' ?>scripts/index.js"></script>
