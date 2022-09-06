@@ -23,5 +23,25 @@ class Dashboard extends Controller{
         }
         $this->view->render('dashboard/block_two');
     }
+
+    function block_three(){
+        $id = $_REQUEST['id'];
+        if($id == 1){
+            $this->view->jsonObj = $this->model->get_percent_gender_personel();
+        }elseif($id == 2){
+            $this->view->jsonObj = $this->model->get_percent_level_personel();
+        }else{
+            $this->view->jsonObj = $this->model->get_percent_job_personel();
+        }
+        $this->view->render('dashboard/block_three');
+    }
+
+    function block_four(){
+        $this->view->render('dashboard/block_four');
+    }
+
+    function block_five(){
+        $this->view->render('dashboard/block_five');
+    }
 }
 ?>

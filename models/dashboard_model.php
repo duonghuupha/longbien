@@ -40,5 +40,26 @@ class Dashboard_Model extends Model{
                                     SELECT COUNT(*) AS Total, 'Nữ' AS title FROM tbl_student WHERE status = 1 AND gender = 2");
         return $query->fetchAll();
     }
+
+    function get_percent_gender_personel(){
+        $query = $this->db->query("SELECT COUNT(*) AS Total, 'Nam' AS title FROM tbl_personel WHERE status = 1 AND gender = 1
+                                    UNION ALL
+                                    SELECT COUNT(*) AS Total, 'Nữ' AS title FROM tbl_personel WHERE status = 1 AND gender = 2");
+        return $query->fetchAll();
+    }
+
+    function get_percent_level_personel(){
+        $query = $this->db->query("SELECT level_id, IF(level_id = 0, 'Chưa rõ', (SELECT title FROM tbldm_level 
+                                    WHERE tbldm_level.id = level_id)) AS title, COUNT(*) AS Total FROM tbl_personel 
+                                    WHERE status = 1 GROUP BY level_id");
+        return $query->fetchAll();
+    }
+
+    function get_percent_job_personel(){
+        $query = $this->db->query("SELECT job_id, IF(job_id = 0, 'Chưa rõ', (SELECT title FROM tbldm_job 
+                                    WHERE tbldm_job.id = job_id)) AS title, COUNT(*) AS Total FROM tbl_personel 
+                                    WHERE status = 1 GROUP BY job_id");
+        return $query->fetchAll();
+    }
 }
 ?>
