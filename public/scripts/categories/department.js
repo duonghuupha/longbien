@@ -5,12 +5,14 @@ $(function(){
     $('#physical_id').load(baseUrl + '/other/combo_physical');
     $('#sidebar').removeClass('menu-min');
     $('#year_from').load(baseUrl + '/other/combo_years'); $('#year_to').load(baseUrl + '/other/combo_years');
+    $('#is_function').attr('disabled', true);
 });
 
 function edit(idh){
     var title = $('#title_'+idh).text(), year = $('#yearid_'+idh).text(), physical = $('#physicalid_'+idh).text();
     $('#year_id').val(year).trigger('change'); $('#physical_id').val(physical).trigger('change');
     $('#title').val(title.trim()); var study = $('#study_'+idh).text(), isdefault = $('#default_'+idh).text();
+    var isfunction = $('#function_'+idh).text();
     if(study == 1){
         $('#class_study').prop('checked',true);
     }else{
@@ -18,8 +20,18 @@ function edit(idh){
     }
     if(isdefault == 1){
         $('#is_default').prop('checked',true);
+        $('#is_function').attr("disabled", true);
+        $('#class_study').prop('checked', true);
+        $('#class_study').attr('disabled', false);
+        $('#is_function').val(null).trigger('change');
+        $('#is_function').attr('required', false);
     }else{
         $('#is_default').prop('checked',false);
+        $('#is_function').attr("disabled", false);
+        $('#class_study').prop('checked', false);
+        $('#class_study').attr('disabled', true);
+        $('#is_function').val(isfunction).trigger('change');
+        $('#is_function').attr('required', true);
     }
     url = baseUrl + '/department/update?id='+idh;
 }
@@ -106,5 +118,20 @@ function save_copy(){
         }
     }else{
         show_message("error", "Chưa điền đủ thông tin");
+    }
+}
+
+function set_default(){
+    var value = $('#is_default').is(':checked');
+    if(value){
+        $('#is_function').attr("disabled", true);
+        $('#class_study').prop('checked', true);
+        $('#class_study').attr('disabled', false);
+        $('#is_function').attr('required', false);
+    }else{
+        $('#is_function').attr("disabled", false);
+        $('#class_study').prop('checked', false);
+        $('#class_study').attr('disabled', true);
+        $('#is_function').attr('required', true);
     }
 }

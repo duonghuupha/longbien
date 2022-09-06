@@ -10,7 +10,7 @@ class Department_Model extends Model{
                                     AND status = 0");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, title, year_id, physical_id, (SELECT tbldm_years.title
-                                FROM tbldm_years WHERE tbldm_years.id = year_id) AS namhoc,
+                                FROM tbldm_years WHERE tbldm_years.id = year_id) AS namhoc, is_function,
                                 (SELECT tbldm_physical_room.title FROM tbldm_physical_room
                                 WHERE tbldm_physical_room.id = physical_id) AS physical,
                                 (SELECT tbldm_physical_room.region FROM tbldm_physical_room

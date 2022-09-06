@@ -74,10 +74,22 @@
                             <div class="col-xs-6">
                                 <label>
                                     <input name="is_default" id="is_default" class="ace ace-checkbox-2" type="checkbox"
-                                    checked="">
+                                    checked="" onclick="set_default()">
                                     <span class="lbl"> Không cố định</span>
                                     
                                 </label>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Lựa chọn kiểu phòng</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn kiểu phòng"
+                                        style="width:100%" id="is_function" name="is_function">
+                                            <option value="1">Hiệu bộ / Văn phòng</option>
+                                            <option value="2">Phòng chức năng</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-xs-12 text-center">
                                 <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/department' ?>'">

@@ -139,3 +139,11 @@
 2022-08-29 01:44:04/1/Xóa dữ liệu/years/del
 2022-08-29 01:46:26/1/Cập nhật dữ liệu/export_device/update
 2022-08-30 09:48:58/1/Cập nhật dữ liệu/library/update
+2022-09-07 00:07:06/1/Cập nhật dữ liệu/department/update
+2022-09-07 00:07:19/1/Cập nhật dữ liệu/department/update
+2022-09-07 00:08:33/1/Cập nhật dữ liệu/department/update
+2022-09-07 00:08:47/1/Cập nhật dữ liệu/department/update
+2022-09-07 00:09:59/1/Thêm mới dữ liệu/department/add
+2022-09-07 00:10:31/1/Xóa dữ liệu/department/del
+2022-09-07 00:12:19/1/Thêm mới dữ liệu/department/add
+2022-09-07 00:13:26/1/Thêm mới dữ liệu/department/add

@@ -95,7 +95,7 @@
                 </li>
             </ul>
         </li>
-        <li class="hover">
+        <!--<li class="hover">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-calendar-check-o"></i>
                 <span class="menu-text">
@@ -127,6 +127,15 @@
                     <b class="arrow"></b>
                 </li>
             </ul>
+        </li>-->
+        <li class="hover">
+            <a href="<?php echo URL.'/calendars' ?>">
+                <i class="menu-icon fa fa-calendar-check-o"></i>
+                <span class="menu-text">
+                    Lịch báo giảng
+                </span>
+            </a>
+            <b class="arrow"></b>
         </li>
         <li class="hover">
             <a href="#" class="dropdown-toggle">

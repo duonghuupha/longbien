@@ -93,6 +93,7 @@ $pages = $this->page;
             <td id="yearid_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['year_id'] ?></td>
             <td id="study_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['class_study'] ?></td>
             <td id="default_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['is_default'] ?></td>
+            <td id="function_<?php echo $row['id'] ?>" class="hidden"><?php echo $row['is_function'] ?></td>
         </tr>
         <?php
         }

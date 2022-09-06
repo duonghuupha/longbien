@@ -26,9 +26,14 @@ class Department extends Controller{
         $namhocid = $_REQUEST['year_id'];
         $vatly = $_REQUEST['physical_id']; $classstudy = (isset($_REQUEST['class_study'])) ? 1 : 0;
         $default = (isset($_REQUEST['is_default'])) ? 1 : 0;
+        if($default == 0){
+            $function = $_REQUEST['is_function'];
+        }else{
+            $function = 0;
+        }
         $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly, 
                         'class_study' => $classstudy, 'is_default' => $default, 'user_id' => $this->_Info[0]['id'],
-                        "status" => 0, "create_at" => date("Y-m-d H:i:s"));
+                        "status" => 0, "create_at" => date("Y-m-d H:i:s"), "is_function" => $function);
         if($this->model->check_exit(0, $namhocid, $vatly) > 0){
             $jsonObj['msg'] = "Phòng 'vật lý' này trong năm học này đã được sắp xếp";
             $jsonObj['success'] = false;
@@ -55,9 +60,14 @@ class Department extends Controller{
         $namhocid = $_REQUEST['year_id'];
         $vatly = $_REQUEST['physical_id']; $classstudy = (isset($_REQUEST['class_study'])) ? 1 : 0;
         $default = (isset($_REQUEST['is_default'])) ? 1 : 0;
+        if($default == 0){
+            $function = $_REQUEST['is_function'];
+        }else{
+            $function = 0;
+        }
         $data = array('title' => $title, "year_id" => $namhocid, 'physical_id' => $vatly, 
                         'class_study' => $classstudy, 'is_default' => $default, 'user_id' => $this->_Info[0]['id'],
-                        "create_at" => date("Y-m-d H:i:s"));
+                        "create_at" => date("Y-m-d H:i:s"), "is_function" => $function);
         if($this->model->check_exit($id, $namhocid, $vatly) > 0){
             $jsonObj['msg'] = "Phòng 'vật lý' này trong năm học này đã được sắp xếp";
             $jsonObj['success'] = false;
