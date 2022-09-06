@@ -23,16 +23,16 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="row">
                         <div class="space-6"></div>
-                        <div class="col-sm-4 infobox-container" id="block_one">
+                        <div class="col-sm-6 col-xs-4 infobox-container" id="block_one">
                             
                         </div>
                         <div class="vspace-12-sm"></div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6 col-xs-4">
                             <div class="widget-box" id="block_two">
                                 
                             </div><!-- /.widget-box -->
                         </div><!-- /.col -->
-                        <div class="col-sm-4">
+                        <div class="col-sm-6 col-xs-4">
                             <div class="widget-box">
                                 <div class="widget-header widget-header-flat widget-header-small">
                                     <h5 class="widget-title">
@@ -80,7 +80,7 @@
                     <div class="hr hr32 hr-dotted"></div>
 
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-6 col-xs-4">
                             <div class="widget-box transparent">
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="widget-title lighter">
@@ -182,7 +182,7 @@
                             </div><!-- /.widget-box -->
                         </div><!-- /.col -->
 
-                        <div class="col-sm-7">
+                        <div class="col-sm-6 col-xs-4">
                             <div class="widget-box transparent">
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="widget-title lighter">
@@ -200,7 +200,7 @@
                     </div><!-- /.row -->
                     <div class="hr hr32 hr-dotted"></div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 col-xs-4">
                             <div class="widget-box transparent" id="recent-box">
                                 <div class="widget-header">
                                     <h4 class="widget-title lighter smaller">
@@ -793,7 +793,7 @@
                             </div><!-- /.widget-box -->
                         </div><!-- /.col -->
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 col-xs-4">
                             <div class="widget-box">
                                 <div class="widget-header">
                                     <h4 class="widget-title lighter smaller">
