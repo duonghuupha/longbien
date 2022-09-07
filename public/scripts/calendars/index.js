@@ -1,13 +1,23 @@
+var page = 1, url = '';
 $(function(){
-    $('#calendar').fullCalendar({
-		buttonHtml: {
-			prev: '<i class="ace-icon fa fa-chevron-left"></i>',
-			next: '<i class="ace-icon fa fa-chevron-right"></i>'
-		},
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		}
-	});
+    $('#list_task').load(baseUrl + '/calendars/content');
 });
+
+function add(){
+	$('#modal-cal').modal('show');
+	url = baseUrl + '/calendars/add';
+}
+
+function edit(idh){
+	$('#modal-cal').modal('show');
+	url = baseUrl + '/calendars/update?id='+idh;
+}
+
+function del(idh){
+	var data_str = "id="+idh;
+	del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/calendars/del', '#list_task', baseUrl + '/calendars/content?page='+pgae);
+}
+
+function save(){
+	
+}

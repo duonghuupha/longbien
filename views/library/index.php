@@ -22,7 +22,7 @@
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-            <div class="col-xs-12 col-sm-3">
+                <div class="col-xs-12 col-sm-3">
                     <form id="fm-search" method="post">
                         <div class="row">
                             <div class="col-xs-12">

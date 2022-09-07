@@ -147,3 +147,4 @@
 2022-09-07 00:10:31/1/Xóa dữ liệu/department/del
 2022-09-07 00:12:19/1/Thêm mới dữ liệu/department/add
 2022-09-07 00:13:26/1/Thêm mới dữ liệu/department/add
+2022-09-07 09:12:14/1/Thêm mới dữ liệu/department/add

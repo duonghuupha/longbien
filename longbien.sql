@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2022 at 07:13 PM
+-- Generation Time: Sep 07, 2022 at 06:11 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -86,6 +86,7 @@ CREATE TABLE `tbldm_department` (
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `class_study` int(11) NOT NULL,
   `is_default` int(11) NOT NULL,
+  `is_function` int(11) NOT NULL COMMENT '1 la hieu bo,  2 la chuc nang',
   `user_id` int(11) NOT NULL,
   `create_at` datetime NOT NULL,
   `status` int(11) NOT NULL
@@ -95,24 +96,25 @@ CREATE TABLE `tbldm_department` (
 -- Dumping data for table `tbldm_department`
 --
 
-INSERT INTO `tbldm_department` (`id`, `year_id`, `physical_id`, `title`, `class_study`, `is_default`, `user_id`, `create_at`, `status`) VALUES
-(1, 2, 1, 'Lớp 6A1', 1, 1, 1, '2022-07-14 00:42:41', 0),
-(2, 2, 2, 'Lớp 6A2', 1, 1, 1, '2022-07-14 00:43:04', 0),
-(3, 2, 3, 'Lớp 6A3', 1, 1, 1, '2022-07-14 00:43:19', 0),
-(4, 2, 4, 'Lớp 6A4', 1, 1, 1, '2022-07-14 00:43:47', 0),
-(5, 2, 5, 'Lớp 6A5', 1, 1, 1, '2022-07-14 00:44:28', 0),
-(6, 2, 6, 'Phòng Hiệu trưởng', 0, 0, 1, '2022-07-14 00:44:55', 0),
-(7, 4, 1, 'Lớp 6A1', 1, 1, 1, '2022-08-18 00:29:24', 1),
-(8, 4, 2, 'Lớp 6A2', 1, 1, 1, '2022-08-18 00:29:24', 1),
-(9, 4, 3, 'Lớp 6A3', 1, 1, 1, '2022-08-18 00:29:25', 1),
-(10, 4, 4, 'Lớp 6A4', 1, 1, 1, '2022-08-18 00:29:25', 1),
-(11, 4, 5, 'Lớp 6A5', 1, 1, 1, '2022-08-18 00:29:25', 1),
-(12, 4, 1, 'Lớp 6A1', 1, 1, 1, '2022-08-18 00:32:05', 0),
-(13, 4, 2, 'Lớp 6A2', 1, 1, 1, '2022-08-18 00:32:05', 0),
-(14, 4, 3, 'Lớp 6A3', 1, 1, 1, '2022-08-18 00:32:05', 0),
-(15, 4, 4, 'Lớp 6A4', 1, 1, 1, '2022-08-18 00:32:06', 0),
-(16, 4, 5, 'Lớp 6A5', 1, 1, 1, '2022-08-18 00:32:06', 0),
-(17, 4, 6, 'Lớp 7A1', 1, 1, 1, '2022-08-18 00:33:17', 0);
+INSERT INTO `tbldm_department` (`id`, `year_id`, `physical_id`, `title`, `class_study`, `is_default`, `is_function`, `user_id`, `create_at`, `status`) VALUES
+(1, 2, 1, 'Lớp 6A1', 1, 1, 0, 1, '2022-07-14 00:42:41', 0),
+(2, 2, 2, 'Lớp 6A2', 1, 1, 0, 1, '2022-07-14 00:43:04', 0),
+(3, 2, 3, 'Lớp 6A3', 1, 1, 0, 1, '2022-07-14 00:43:19', 0),
+(4, 2, 4, 'Lớp 6A4', 1, 1, 0, 1, '2022-07-14 00:43:47', 0),
+(5, 2, 5, 'Lớp 6A5', 1, 1, 0, 1, '2022-07-14 00:44:28', 0),
+(6, 2, 6, 'Phòng Hiệu trưởng', 0, 0, 0, 1, '2022-07-14 00:44:55', 0),
+(7, 4, 1, 'Lớp 6A1', 1, 1, 0, 1, '2022-08-18 00:29:24', 1),
+(8, 4, 2, 'Lớp 6A2', 1, 1, 0, 1, '2022-08-18 00:29:24', 1),
+(9, 4, 3, 'Lớp 6A3', 1, 1, 0, 1, '2022-08-18 00:29:25', 1),
+(10, 4, 4, 'Lớp 6A4', 1, 1, 0, 1, '2022-08-18 00:29:25', 1),
+(11, 4, 5, 'Lớp 6A5', 1, 1, 0, 1, '2022-08-18 00:29:25', 1),
+(12, 4, 1, 'Lớp 6A1', 1, 1, 0, 1, '2022-08-18 00:32:05', 0),
+(13, 4, 2, 'Lớp 6A2', 1, 1, 0, 1, '2022-08-18 00:32:05', 0),
+(14, 4, 3, 'Lớp 6A3', 1, 1, 0, 1, '2022-08-18 00:32:05', 0),
+(15, 4, 4, 'Lớp 6A4', 1, 1, 0, 1, '2022-08-18 00:32:06', 0),
+(16, 4, 5, 'Lớp 6A5', 1, 1, 0, 1, '2022-08-18 00:32:06', 0),
+(17, 4, 6, 'Lớp 7A1', 1, 1, 0, 1, '2022-08-18 00:33:17', 0),
+(18, 2, 7, 'Phòng thực hành Sinh học', 0, 0, 2, 1, '2022-09-07 09:12:14', 0);
 
 -- --------------------------------------------------------
 
@@ -497,7 +499,7 @@ CREATE TABLE `tbl_book` (
 
 INSERT INTO `tbl_book` (`id`, `code`, `cate_id`, `manu_id`, `title`, `content`, `number_page`, `author`, `image`, `type`, `file`, `status`, `user_id`, `create_at`, `stock`) VALUES
 (1, 24208023, 1, 1, 'Bài Tập Tiếng Anh Lớp 8 - Không Đáp Án (2020)', 'Bài Tập Tiếng Anh 8 được biên soạn dưới dạng vở bài tập, dựa theo sách giáo khoa Tiếng Anh 8 của Bộ Giáo Dục và Đào Tạo.\r\nBài Tập Tiếng Anh 8 là tập hợp các bài tập thực hành về từ vựng (vocabulary), ngữ pháp (grammar), đàm thoại (conversation) và đọc hiểu (reading comprehension), nhằm giúp học sinh luyện tập các nội dung trọng tâm của bài học. Các bài tập được biên soạn theo từng đơn vị bài học (Unit), gồm hai phần A và B có nội dung tương ứng với các phần bài học trong sách giáo khoa.\r\nSau phần bài tập của mỗi đơn vị bài học có một bài kiểm tra (Test For Unit), sau 4 đơn vị bài học có bài tự kiểm tra (Test Yourself) được soạn như bài kiểm tra một tiết và sau Unit 8 và Unit 16 có hai bài kiểm tra học kì nhằm giúp các em ôn luyện và củng cố kiến thức đã học.', 128, 'Mai Lan Hương, Nguyễn Thanh Loan', '1658719665_img_library.jpg', 1, '1658719665_file_library.jpg', 0, 1, '2022-07-26 22:35:43', 12),
-(2, 51823420, 3, 1, 'Sách giáo khoa học sinh toán 6 tập 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 115, 'Nhóm  tác giả chân trời sáng tạo', '1658857260_img_library.png', 1, '1658857260_file_library.pdf', 0, 1, '2022-07-27 00:41:00', 0);
+(2, 51823420, 3, 1, 'Sách giáo khoa học sinh toán 6 tập 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 115, 'Nhóm  tác giả chân trời sáng tạo', '1658857260_img_library.png', 2, '1658857260_file_library.pdf', 0, 1, '2022-08-30 09:48:58', 0);
 
 -- --------------------------------------------------------
 
@@ -935,6 +937,26 @@ INSERT INTO `tbl_returns_device` (`id`, `code`, `create_at`, `year_id`, `physica
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_schedule`
+--
+
+CREATE TABLE `tbl_schedule` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_create` int(11) NOT NULL,
+  `lesson` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `lesson_export` int(11) NOT NULL,
+  `date_study` date NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_student`
 --
 
@@ -1242,7 +1264,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-08-28 23:30:22', '66112211f3d59459c53feb0d6bb92b222768225e', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-07 12:23:39', '0ec522f6873d5af0a104a194d6d718040d1bbca1', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
@@ -1550,6 +1572,12 @@ ALTER TABLE `tbl_returns_device`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_schedule`
+--
+ALTER TABLE `tbl_schedule`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_student`
 --
 ALTER TABLE `tbl_student`
@@ -1641,7 +1669,7 @@ ALTER TABLE `tbldm_book_manu`
 -- AUTO_INCREMENT for table `tbldm_department`
 --
 ALTER TABLE `tbldm_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbldm_document`
@@ -1798,6 +1826,12 @@ ALTER TABLE `tbl_personel`
 --
 ALTER TABLE `tbl_returns_device`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_schedule`
+--
+ALTER TABLE `tbl_schedule`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
