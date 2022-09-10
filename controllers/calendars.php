@@ -13,10 +13,14 @@ class Calendars extends Controller{
 
     function content(){
         $rows = 15;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $title = isset($_REQUEST['title']) ? str_replace("$", " ", $_REQUEST['title']) : '';
+        $date = isset($_REQUEST['date']) ? $this->_Convert->convertDate($_REQUEST['date']) : '';
+        $lesson = isset($_REQUEST['lesson']) ? $_REQUEST['lesson'] : ''; 
+        $lesson_export = isset($_REQUEST['lesson_export']) ? $_REQUEST['lesson_export'] : '';
+        $teacher = isset($_REQUEST['teacher']) ? str_replace("$", " ", $_REQUEST['teacher']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
+        $jsonObj = $this->model->getFetObj($title, $date, $lesson, $lesson_export, $teacher, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('calendars/content');
     }

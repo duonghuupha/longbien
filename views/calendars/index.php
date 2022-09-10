@@ -37,25 +37,45 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="form-group">
-                                            <label for="form-field-username">Tiêu đề</label>
+                                            <label for="form-field-username">Đầu bài dạy</label>
                                             <div>
-                                                <input type="text" id="title_s" name="title_s"
-                                                placeholder="Từ kh ...." style="width:100%" />
+                                                <input type="text" id="title_search" name="title_search"
+                                                placeholder="Từ khóa...." style="width:100%" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label for="form-field-username">
-                                                Lựa chọn danh mục
+                                                Lựa chọn ngày học
                                                 &nbsp;
-                                                <a class="red" href="javascript:void(0)" onclick="del_cate()" title="Xóa người tham gia">
+                                                <a class="red" href="javascript:void(0)" onclick="del_date_study()" title="Xóa ngày học">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </label>
+                                            <div class="input-group">
+                                                <input class="form-control date-picker" id="date_search" type="text" 
+                                                name="date_search" required="" data-date-format="dd-mm-yyyy" readonly=""/>
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar bigger-110"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="form-field-username">
+                                                Tiết học
+                                            </label>
                                             <div>
-                                                <select class="select2" data-placeholder="Lựa chọn danh mục"
-                                                style="width:100%" id="cate_s" name="cate_s">
+                                                <select class="select2" data-placeholder="Lựa chọn tiết học"
+                                                style="width:100%" id="lesson_search" name="lesson_search">
+                                                    <option value="0">Tất cả</option>
+                                                    <option value="1">Tiết 1</option>
+                                                    <option value="2">Tiết 2</option>
+                                                    <option value="3">Tiết 3</option>
+                                                    <option value="4">Tiết 4</option>
+                                                    <option value="5">Tiết 5</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -63,32 +83,27 @@
                                     <div class="col-xs-12">
                                         <div class="form-group">
                                             <label for="form-field-username">
-                                                Lựa chọn NXB
-                                                &nbsp;
-                                                <a class="red" href="javascript:void(0)" onclick="del_nxb()" title="Xóa người tham gia">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+                                                Tiết theo PP chương trình
                                             </label>
                                             <div>
-                                                <select class="select2" data-placeholder="Lựa chọn NXB"
-                                                style="width:100%" id="manu_s" name="manu_s">
-                                                </select>
+                                                <input type="text" id="lessonexport" name="lessonexport" onkeypress="validate(event)"
+                                                placeholder="Tiết theo phân phối chương trình" style="width:100%" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12">
                                         <div class="form-group">
-                                            <label for="form-field-username">Tác giả</label>
+                                            <label for="form-field-username">Giáo viên</label>
                                             <div>
-                                                <input type="text" id="author_s" name="author_s"
-                                                placeholder="Tác giả ...." style="width:100%" />
+                                                <input type="text" id="teacher" name="teacher"
+                                                placeholder="Giáo viên...." style="width:100%" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 text-center">
                                         <button class="btn btn-sm btn-primary" type="button" onclick="search()">
                                             <i class="ace-icon fa fa-search"></i>
-                                            Lọc dữ liệu
+                                            Tìm kiếm
                                         </button>
                                     </div>
                                 </div>

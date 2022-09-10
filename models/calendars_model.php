@@ -4,17 +4,27 @@ class Calendars_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($q, $offset, $rows){
+    function getFetObj($title, $date, $lesson, $lessonexport, $teacher, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_schedule");
+        $where = "title LIKE '%$title%'";
+        if($date != '')
+            $where = $where." AND date_study = '$date'";
+        if($lesson != 0)
+            $where = $where." AND lesson = $lesson";
+        if($lessonexport != '')
+            $where = $where." AND lesson_export = $lessonexport";
+        if($teacher != '')
+            $where = $where." AND user_id IN (SELECT tbl_users.id FROM tbl_users WHERE tbl_users.hr_id IN (SELECT tbl_personel.id
+                    FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$teacher%'))";
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_schedule WHERE $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, user_id, user_create, lesson, lesson_export, subject_id, title, department_id,
                                     date_study, create_at, (SELECT tbldm_subject.title FROM tbldm_subject WHERE tbldm_subject.id = subject_id) 
                                     AS `subject`, (SELECT tbldm_department.title FROM tbldm_department WHERE tbldm_department.id = department_id)
                                     AS department, (SELECT fullname FROM tbl_personel WHERE tbl_personel. id = (SELECT  hr_id FROM tbl_users
                                     WHERE tbl_users.id = user_id)) AS fullname, (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
-                                    FROM tbl_users WHERE tbl_users.id = user_create)) AS fullname_create FROM tbl_schedule ORDER BY id DESC 
-                                    LIMIT $offset, $rows");
+                                    FROM tbl_users WHERE tbl_users.id = user_create)) AS fullname_create FROM tbl_schedule WHERE $where
+                                    ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

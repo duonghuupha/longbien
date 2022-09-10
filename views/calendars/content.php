@@ -14,9 +14,9 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center">Tiết học</th>
             <th class="text-center">Môn học</th>
             <th class="text-center">Lớp học</th>
-            <th class="text-center">Tiêt thứ theo <br/>phân bổ C/trình</th>
+            <th class="text-center">Tiêt theo <br/>phân bổ C/trình</th>
             <th>Đầu bài dạy</th>
-            <th class="text-center">Thao tác</th>
+            <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
     </thead>
     <tbody>

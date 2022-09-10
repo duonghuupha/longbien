@@ -1,7 +1,9 @@
 var page = 1, url = '', page_user = 1, keyword_user = '';
+var titles = '', datestudy = '', lessons = 0, lessonexps = '', teacher = '';
 $(function(){
     $('#list_task').load(baseUrl + '/calendars/content');
 	$('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
+	$('#lesson_search').val(lessons).trigger('change');
 });
 
 function add(){
@@ -33,7 +35,7 @@ function edit(idh){
 
 function del(idh){
 	var data_str = "id="+idh;
-	del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/calendars/del', '#list_task', baseUrl + '/calendars/content?page='+page);
+	del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/calendars/del', '#list_task', baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher);
 }
 
 function save(){
@@ -45,7 +47,7 @@ function save(){
         }
     });
     if(allRequired){
-        save_form_modal('#fm', url, '#modal-cal', '#list_task',  baseUrl+'/calendars/content?page='+page); 
+        save_form_modal('#fm', url, '#modal-cal', '#list_task',  baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -54,6 +56,34 @@ function save(){
 function detail(idh){
 	$('#detail').load(baseUrl + '/calendars/detail?id='+idh);
 	$('#modal-detail').modal('show');
+}
+
+function view_page_task(pages){
+	page = pages;
+	$('#list_task').load(baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher);
+}
+
+function search(){
+	var title = $('#title_search').val(), date = $('#date_search').val();
+	var lesson_search = $('#lesson_search').val(), lesson_export = $('#lessonexport').val();
+	var giaovien = $('#teacher').val();
+	if(title.length != 0 || date.length != 0 || lesson_export.length != 0 || giaovien.length != 0
+		|| lesson_search != 0){
+		if(title.length != 0){
+			titles = title.replaceAll(" ", "$", 'g');
+		}else{
+			titles = '';
+		}
+		if(giaovien.length != 0){
+			teacher = giaovien.replaceAll(" ", "$", 'g');
+		}else{
+			teacher = '';
+		}
+		datestudy = date; lessonexps = lesson_export; lessons = lesson_search;
+	}else{
+		titles = ''; datestudy = ''; lessons = 0; lessonexps = ''; teacher = '';
+	}
+	$('#list_task').load(baseUrl + '/calendars/content?page=1&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function select_user(){
@@ -95,4 +125,8 @@ function set_lesson(){
 		show_message("error", "Bạn chưa chọn ngày dạy");
 		return false;
 	}
+}
+
+function del_date_study(){
+	$('#date_search').datepicker('setDate', '');
 }
