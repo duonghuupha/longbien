@@ -83,6 +83,21 @@
                         <div class="col-xs-4">
                             <div class="col-xs-12">
                                 <div class="form-group">
+                                    <label for="form-field-username">Lựa chọn kiểu văn bản</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn kiểu văn bản..."
+                                        style="width:100%" required="" id="type" name="type" onchange="set_numberdc()">
+                                            <option value="1">Quyết định</option>
+                                            <option value="2">Kế hoạch</option>
+                                            <option value="3">Công văn</option>
+                                            <option value="4">Thông báo</option>
+                                            <option value="5">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
                                     <label for="form-field-username">Lựa chọn danh mục</label>
                                     <div>
                                         <select class="select2" data-placeholder="Lựa chọn danh mục..."

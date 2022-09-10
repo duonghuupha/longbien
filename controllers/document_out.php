@@ -25,7 +25,7 @@ class Document_out extends Controller{
     function add(){
         $code = time(); $cateid = $_REQUEST['cate_id']; $numberdc = $_REQUEST['number_dc'];
         $datedc = $this->_Convert->convertDate($_REQUEST['date_dc']); $title = $_REQUEST['title'];
-        $content = $_REQUEST['content']; $location = $_REQUEST['location_to'];
+        $content = $_REQUEST['content']; $location = $_REQUEST['location_to']; $type = $_REQUEST['type'];
         $userid = $this->_Info[0]['id']; $usershare = base64_decode($_REQUEST['data_user_share']);
         $file = $this->_Convert->convert_file($_FILES['file']['name'], 'document_out');
         if($this->model->dupliObj(0, $numberdc) > 0){
@@ -36,7 +36,7 @@ class Document_out extends Controller{
             $data = array("code" => $code, "cate_id" => $cateid, "number_dc" => $numberdc, "date_dc" => $datedc,
                             "title" => $title, "content" => $content, "file" => $file, "location_to" => $location,
                             "user_id" => $userid, "user_share" => $usershare, "status" => 0,
-                            "create_at" => date("Y-m-d H:i:s"));
+                            "create_at" => date("Y-m-d H:i:s"), 'type' => $type);
             $temp = $this->model->addObj($data);
             if($temp){
                 //ghi du lieu thong bao cho nguoi dung
@@ -71,7 +71,7 @@ class Document_out extends Controller{
     function update(){
         $id = $_REQUEST['id']; $code = time(); $cateid = $_REQUEST['cate_id']; $numberdc = $_REQUEST['number_dc'];
         $datedc = $this->_Convert->convertDate($_REQUEST['date_dc']); $title = $_REQUEST['title'];
-        $content = $_REQUEST['content']; $location = $_REQUEST['location_to'];
+        $content = $_REQUEST['content']; $location = $_REQUEST['location_to']; $type = $_REQUEST['type'];
         $userid = $this->_Info[0]['id']; $usershare = base64_decode($_REQUEST['data_user_share']);
         $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'document_out') : $_REQUEST['file_old'];
         if($this->model->dupliObj($id, $numberdc) > 0){
@@ -82,7 +82,7 @@ class Document_out extends Controller{
             $data = array("code" => $code, "cate_id" => $cateid, "number_dc" => $numberdc, "date_dc" => $datedc,
                             "title" => $title, "content" => $content, "file" => $file, "location_to" => $location,
                             "user_id" => $userid, "user_share" => $usershare, "status" => 0,
-                            "create_at" => date("Y-m-d H:i:s"));
+                            "create_at" => date("Y-m-d H:i:s"), 'type' => $type);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
                 //ghi du lieu thong bao cho nguoi dung

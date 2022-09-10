@@ -140,7 +140,7 @@
                                 <div class="form-group">
                                     <label for="form-field-username">Số văn bản</label>
                                     <div>
-                                        <input class="form-control" id="number_dc" type="text" 
+                                        <input class="form-control" id="number_dc" type="text" style="text-transform:uppercase;"
                                         name="number_dc" required="" placeholder="Số văn bản, ví dụ: 01/KH-UBND"/>
                                     </div>
                                 </div>

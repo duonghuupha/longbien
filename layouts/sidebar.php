@@ -171,6 +171,24 @@
             </ul>
         </li>
         <li class="hover">
+            <a href="<?php echo URL.'/quanlity' ?>">
+                <i class="menu-icon fa fa-balance-scale"></i>
+                <span class="menu-text">
+                    Kiểm đinh chất lượng
+                </span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="hover">
+            <a href="<?php echo URL.'/works' ?>">
+                <i class="menu-icon fa fa-briefcase"></i>
+                <span class="menu-text">
+                    Hồ sơ công việc
+                </span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="hover">
             <a href="<?php echo URL.'/personal' ?>">
                 <i class="menu-icon fa fa-users"></i>
                 <span class="menu-text">
@@ -231,13 +249,6 @@
                     <a href="<?php echo URL.'/student_point' ?>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Sổ điểm
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="hover">
-                    <a href="<?php echo URL.'/student_dili' ?>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Chuyên cần
                     </a>
                     <b class="arrow"></b>
                 </li>

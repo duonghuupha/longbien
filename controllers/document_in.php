@@ -25,7 +25,7 @@ class Document_in extends Controller{
     function add(){
         $code = time(); $cateid = $_REQUEST['cate_id']; $numnerin = $_REQUEST['number_in'];
         $datein = $this->_Convert->convertDate($_REQUEST['date_in']);
-        $datausershare = base64_decode($_REQUEST['data_user_share']); $numberdc = $_REQUEST['number_dc'];
+        $datausershare = base64_decode($_REQUEST['data_user_share']); $numberdc = mb_strtoupper($_REQUEST['number_dc'], 'UTF-8');
         $datedc  = $this->_Convert->convertDate($_REQUEST['date_dc']);
         $title = $_REQUEST['title']; $content = addslashes($_REQUEST['content']);
         $userid = $this->_Info[0]['id']; $file = $this->_Convert->convert_file($_FILES['file']['name'], 'document_in');

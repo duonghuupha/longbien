@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2022 at 06:11 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Sep 10, 2022 at 03:31 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -526,7 +526,8 @@ CREATE TABLE `tbl_book_loan` (
 
 INSERT INTO `tbl_book_loan` (`id`, `code`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
 (7, 1661018731, 3, 0, 1, 1, '2022-08-21 01:05:31', '2022-08-21 01:08:20', 1, '2022-08-21 01:05:31'),
-(8, 1661018887, 0, 123, 1, 2, '2022-08-21 01:08:07', '2022-08-21 01:08:18', 1, '2022-08-21 01:08:07');
+(8, 1661018887, 0, 123, 1, 2, '2022-08-21 01:08:07', '2022-08-21 01:08:18', 1, '2022-08-21 01:08:07'),
+(9, 1662712797, 6, 0, 1, 1, '2022-09-09 15:39:57', '2022-09-09 15:40:00', 1, '2022-09-09 15:39:57');
 
 -- --------------------------------------------------------
 
@@ -681,6 +682,7 @@ CREATE TABLE `tbl_document_out` (
   `location_to` text COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_share` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -689,9 +691,9 @@ CREATE TABLE `tbl_document_out` (
 -- Dumping data for table `tbl_document_out`
 --
 
-INSERT INTO `tbl_document_out` (`id`, `code`, `cate_id`, `number_dc`, `date_dc`, `title`, `content`, `file`, `location_to`, `user_id`, `user_share`, `status`, `create_at`) VALUES
-(1, 1658653214, 7, '01/KH-THCSLB', '2022-07-05', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1658652330_document_out.docx', '', 1, '4,3', 0, '2022-07-24 16:00:14'),
-(2, 1658673421, 3, '01/QĐ-THCSLLB', '2022-07-24', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\"', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium', '1658673421_document_out.html', '', 1, '3', 0, '2022-07-24 21:37:01');
+INSERT INTO `tbl_document_out` (`id`, `code`, `cate_id`, `number_dc`, `date_dc`, `title`, `content`, `file`, `location_to`, `user_id`, `user_share`, `type`, `status`, `create_at`) VALUES
+(1, 1658653214, 7, '01/KH-THCSLB', '2022-07-05', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1658652330_document_out.docx', '', 1, '4,3', 0, 0, '2022-07-24 16:00:14'),
+(2, 1658673421, 3, '01/QĐ-THCSLLB', '2022-07-24', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\"', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium', '1658673421_document_out.html', '', 1, '3', 0, 0, '2022-07-24 21:37:01');
 
 -- --------------------------------------------------------
 
@@ -1264,7 +1266,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-07 12:23:39', '0ec522f6873d5af0a104a194d6d718040d1bbca1', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-09 16:00:05', 'e69f06e847f90de703b063df83c84f25f8a5008a', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
@@ -1747,7 +1749,7 @@ ALTER TABLE `tbl_book`
 -- AUTO_INCREMENT for table `tbl_book_loan`
 --
 ALTER TABLE `tbl_book_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_book_return`

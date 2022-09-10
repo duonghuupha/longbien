@@ -159,3 +159,8 @@ function del_user_share(){
 function del_cate(){
     $('#cate_s').val(null).trigger('change');
 }
+
+function set_numberdc(){
+    var value = $('#type').val();
+    console.log(value);
+}
