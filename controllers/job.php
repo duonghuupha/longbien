@@ -15,9 +15,10 @@ class Job extends Controller{
     }
 
     function add(){
-        $title = $_REQUEST['title'];
+        $title = $_REQUEST['title']; $isteacher = isset($_REQUEST['is_teacher']) ? 1 : 0;
         $data = array('title' => $title, "user_id" => $this->_Info[0]['id'],
-                        "create_at" => date("Y-m-d H:i:s"), "status" => 0);
+                        "create_at" => date("Y-m-d H:i:s"), "status" => 0,
+                        "is_teacher" => $isteacher);
         $temp = $this->model->addObj($data);
         if($temp){
             $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
@@ -34,9 +35,9 @@ class Job extends Controller{
 
     function update(){
         $id = $_REQUEST['id'];
-        $title = $_REQUEST['title'];
+        $title = $_REQUEST['title']; $isteacher = isset($_REQUEST['is_teacher']) ? 1 : 0;
         $data = array('title' => $title, "user_id" => $this->_Info[0]['id'],
-                        "create_at" => date("Y-m-d H:i:s"));
+                        "create_at" => date("Y-m-d H:i:s"), "is_teacher" => $isteacher);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
             $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');
@@ -75,6 +76,22 @@ class Job extends Controller{
             $this->view->jsonObj = [];
         }
         $this->view->render('job/form');
+    }
+
+    function change(){
+        $id = $_REQUEST['id']; $status = $_REQUEST['status'];
+        $data = array("is_teacher" => $status);
+        $temp = $this->model->updateObj($id, $data);
+        if($temp){
+            $jsonObj['msg'] = "Ghi dữ liệu thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("job/change");
     }
 }
 ?>

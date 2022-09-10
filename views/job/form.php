@@ -17,6 +17,13 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-12">
+                <label>
+                    <input name="is_teacher" id="is_teacher" class="ace ace-checkbox-2" type="checkbox"
+                    <?php echo (isset($_REQUEST['id']) && $this->jsonObj[0]['is_teacher'] == 1) ? 'checked=""' : '' ?>/>
+                    <span class="lbl"> Là giáo viên</span>
+                </label>
+            </div>
         </form>
     </div>
 </div>

@@ -11,6 +11,7 @@ $pages = $this->page;
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
             <th class="">Tiêu đề</th>
+            <th class="text-center" style="width:80px">Là GV</th>
             <th class="text-center" style="width:180px">Cập nhật lần cuối</th>
             <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
@@ -25,6 +26,15 @@ $pages = $this->page;
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td id="titlelevel_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
+            <td class="text-center">
+                <?php 
+                if($row['is_teacher'] == 0){
+                    echo '<span class="label label-sm label-danger" style="cursor: pointer" onclick="change_job('.$row['id'].', 1)">Không</span>';
+                }elseif($row['is_teacher'] == 1){
+                    echo '<span class="label label-sm label-success" style="cursor: pointer" onclick="change_job('.$row['id'].', 0)">Có</span>';
+                }
+                ?>
+            </td>
             <td class="text-center"><?php echo date("H:i:s d-m-Y", strtotime($row['create_at'])) ?></td>
             <td class="text-center">
                 <div class="hidden-sm hidden-xs action-buttons">
@@ -36,6 +46,7 @@ $pages = $this->page;
                     </a>
                 </div>
             </td>
+            <td class="hidden" id="teacher_<?php echo $row['id'] ?>"><?php echo $row['is_teacher'] ?></td>
         </tr>
         <?php
         }

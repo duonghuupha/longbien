@@ -212,6 +212,12 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['status'];
     }
+    function get_lesson_of_department_via_date_study($departmentid, $datestudy, $lesson){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_schedule WHERE department_id = $departmentid AND date_study = '$datestudy'
+                                    AND lesson = $lesson");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

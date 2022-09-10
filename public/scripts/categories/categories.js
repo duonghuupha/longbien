@@ -89,6 +89,11 @@ function view_page_job(pages){
     $('#list_job').load(baseUrl + '/job/content?page='+page_job);
 }
 
+function change_job(idh, status){
+    var data_str = "id="+idh+'&status='+status;
+    del_data(data_str, "Bạn có muốn cập nhật trạng thái cho bản ghi này không ?",   baseUrl + '/job/change', '#list_job', baseUrl + '/job/content?page='+page_job);
+}
+
 /**
  * Subject
  */

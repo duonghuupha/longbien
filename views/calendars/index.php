@@ -95,7 +95,7 @@
                             </form>
                         </div><!-- /.col -->
                         <div class="col-xs-12 col-sm-9">
-                            <div id="list_library" class="dataTables_wrapper form-inline no-footer"></div>
+                            <div id="list_task" class="dataTables_wrapper form-inline no-footer"></div>
                         </div><!-- /.col -->
                     </div>
                 </div><!-- /.col -->
@@ -103,4 +103,172 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+
+<!--Form don vi tinh-->
+<div id="modal-cal" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    Thêm mới - Cập nhật lịch báo giảng
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="fm" method="POST" enctype="multipart/form-data">
+                        <input id="user_id" name="user_id" type="hidden"/>
+                        <input id="lesson_id" name="lesson_id" type="hidden"/>
+                        <input id="subjectid" name="subjectid" type="hidden"/>
+                        <input id="code" name="code" type="hidden"/>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn giáo viên</label>
+                                <div class="input-group">
+                                    <input type="text" id="fullname" name="fullname" required=""
+                                    placeholder="Click Go! để lựa chọn" style="width:100%;" readonly=""/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_user()"
+                                        id="select_users">
+                                            <i class="ace-icon fa fa-users bigger-110"></i>
+                                            Go!
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Ngày dạy</label>
+                                <div class="input-group">
+                                    <input class="form-control date-picker" id="date_study" type="text" 
+                                    name="date_study" required="" data-date-format="dd-mm-yyyy" readonly=""/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar bigger-110"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn lớp học</label>
+                                <div>
+                                    <select class="select2" id="department_id" name="department_id" required=""
+                                    data-placeholder="Lựa chọn lớp học..." style="width:100%" onchange="set_lesson()"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn tiết học</label>
+                                <div>
+                                    <select class="select2" id="lesson" name="lesson"
+                                    data-placeholder="Lựa chọn tiết học..." style="width:100%"></select>
+                                    <i class="title_lesson" style="font-size:11px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn môn học</label>
+                                <div>
+                                    <select class="select2" id="subject_id" name="subject_id"
+                                    data-placeholder="Lựa chọn môn học..." style="width:100%"></select>
+                                    <i class="title_subject" style="font-size:11px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="form-field-username">Tiết học theo C/trình PP</label>
+                                <div>
+                                    <input type="text" id="lesson_export" name="lesson_export" required=""
+                                    placeholder="Tiết học theo chương trình phân bổ" style="width:100%"
+                                    onkeypress="validate(event)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Đầu bài dạy</label>
+                                <div>
+                                    <input type="text" id="title" name="title" required=""
+                                    placeholder="Đầu bài dạy" style="width:100%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="save()">
+                    <i class="ace-icon fa fa-save"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-users" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:55%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách giáo viên
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-user" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_user()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_users" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    Phiếu báo giảng
+                </div>
+            </div>
+            <div class="modal-body" id="detail">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 <script src="<?php echo URL.'/public/' ?>scripts/calendars/index.js"></script>

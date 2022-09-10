@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2022 at 03:31 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Sep 10, 2022 at 05:14 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -178,6 +178,7 @@ CREATE TABLE `tbldm_job` (
   `id` int(11) NOT NULL,
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
+  `is_teacher` int(11) NOT NULL,
   `create_at` datetime NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -186,18 +187,18 @@ CREATE TABLE `tbldm_job` (
 -- Dumping data for table `tbldm_job`
 --
 
-INSERT INTO `tbldm_job` (`id`, `title`, `user_id`, `create_at`, `status`) VALUES
-(1, 'Giáo viên', 1, '2022-07-11 15:35:31', 0),
-(2, 'Phó hiệu trưởng', 1, '2022-07-11 15:35:51', 0),
-(3, 'Hiệu trưởng', 1, '2022-07-11 15:35:59', 0),
-(4, 'Bảo vệ', 1, '2022-07-11 15:36:06', 0),
-(5, 'Hành chính nhân sự', 1, '2022-07-11 15:36:15', 0),
-(6, 'Kế toán', 1, '2022-07-11 15:36:20', 0),
-(7, 'Thủ quỹ', 1, '2022-07-11 15:36:24', 0),
-(8, 'Văn thư', 1, '2022-07-11 15:36:29', 0),
-(9, 'Nhân viên', 1, '2022-07-11 15:36:36', 0),
-(10, 'Nhân viên CNTT', 1, '2022-07-11 15:36:42', 0),
-(11, 'Tạp vụ', 1, '2022-07-11 15:38:36', 0);
+INSERT INTO `tbldm_job` (`id`, `title`, `user_id`, `is_teacher`, `create_at`, `status`) VALUES
+(1, 'Giáo viên', 1, 1, '2022-07-11 15:35:31', 0),
+(2, 'Phó hiệu trưởng', 1, 0, '2022-07-11 15:35:51', 0),
+(3, 'Hiệu trưởng', 1, 0, '2022-07-11 15:35:59', 0),
+(4, 'Bảo vệ', 1, 0, '2022-07-11 15:36:06', 0),
+(5, 'Hành chính nhân sự', 1, 0, '2022-07-11 15:36:15', 0),
+(6, 'Kế toán', 1, 0, '2022-07-11 15:36:20', 0),
+(7, 'Thủ quỹ', 1, 0, '2022-07-11 15:36:24', 0),
+(8, 'Văn thư', 1, 0, '2022-07-11 15:36:29', 0),
+(9, 'Nhân viên', 1, 0, '2022-07-11 15:36:36', 0),
+(10, 'Nhân viên CNTT', 1, 0, '2022-07-11 15:36:42', 0),
+(11, 'Tạp vụ', 1, 0, '2022-09-10 16:18:30', 0);
 
 -- --------------------------------------------------------
 
@@ -956,6 +957,13 @@ CREATE TABLE `tbl_schedule` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tbl_schedule`
+--
+
+INSERT INTO `tbl_schedule` (`id`, `code`, `user_id`, `user_create`, `lesson`, `subject_id`, `department_id`, `lesson_export`, `date_study`, `title`, `create_at`) VALUES
+(3, 1662819549, 3, 1, 1, 4, 1, 1, '2022-09-10', 'Tìm hiểu khởi nghĩa Hai Bà Trưng', '2022-09-10 21:19:09');
+
 -- --------------------------------------------------------
 
 --
@@ -1266,7 +1274,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-09 16:00:05', 'e69f06e847f90de703b063df83c84f25f8a5008a', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-10 09:25:22', 'f90437d60eb5e9803fcbbab01a9f17c958ab7932', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
@@ -1833,7 +1841,7 @@ ALTER TABLE `tbl_returns_device`
 -- AUTO_INCREMENT for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
