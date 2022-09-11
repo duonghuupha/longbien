@@ -64,6 +64,11 @@ class Loans_Model extends Model{
         $query = $this->delete("tbl_loans", "id = $id");
         return $query;
     }
+
+    function updateObj_detail_via_code($code, $data){
+        $query = $this->update("tbl_loans_detail", $data, "code = $code");
+        return $query;
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_device($q, $offset, $rows){
         $result = array();

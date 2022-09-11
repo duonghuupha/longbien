@@ -243,3 +243,27 @@ function detail(idh){
     $('#detail').load(baseUrl + '/loans/detail?id='+idh);
     $('#modal-detail').modal('show');
 }
+
+function change(idh){
+    bootbox.confirm({
+        message: "Vui lòng chọn đồng ý nếu duyệt mượn thiết bị, Chọn không đồng ý nếu không duyệt",
+        buttons:{
+            confirm: {
+                label: "Đồng ý",
+                className: "btn-primary btn-sm"
+            },
+            cancel: {
+                label: "Không đồng ý",
+                className: "btn-danger btn-sm"
+            }
+        },
+        callback: function(result){
+            if(result){ // dong  y
+                var data_str = "id="+idh+'&status=0';
+            }else{ // khong dong y
+                var data_str = "id="+idh+'&status=1';
+            }
+            exec_del(data_str, baseUrl+'/loans/change', '#list_loan', baseUrl + '/loans/content?page='+page+'&q='+keyword);
+        }
+    });
+}

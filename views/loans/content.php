@@ -62,7 +62,7 @@ $pages = $this->page; $sql = new Model();
                 }elseif($row['status'] == 2){
                     echo '<span class="label label-sm label-warning">Trả một phần</span>';
                 }elseif($row['status'] == 3){
-                    echo '<span class="label label-sm label-primary">Đặt trước</span>';
+                    echo '<span class="label label-sm label-primary" style="cursor:pointer" onclick="change('.$row['id'].')">Đặt trước</span>';
                 }
                 ?>
             </td>

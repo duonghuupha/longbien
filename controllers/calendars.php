@@ -55,40 +55,8 @@ class Calendars extends Controller{
                     if($temp){
                         // kiem tra xem co muon do dung hay thiet bi khong
                         if(count($datadc) > 0){
-                            foreach($datadc as $row){
-                                $device = explode(".", $row['id']);
-                                if($row['type'] == 1){ //muon thiet bi
-                                    if($this->model->check_code_loans_device($code) == 0){ // neu chua co phieu thi tao phieu
-                                        $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                                            "date_loan" => $datestudy, "date_return" =>  $datestudy, 
-                                                            "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                                                            "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-                                        $this->model->addObj_device_loan($data_loan_device);
-                                    }
-
-                                    if($this->model->check_device_loans($code, $device[0], $row['sub']) == 0){
-                                        // them moi du lieu chi tiet  muon thiet bi
-                                        $data_loan_device_detail = array("code" => $code, "device_id" => $device[0],
-                                                                    "sub_device" => $row['sub'], "status" => 0, "date_return" => $datestudy);
-                                        $this->model->addObj_device_loan_detail($data_loan_device_detail);
-                                    }
-                                }else{ // muon do dung
-                                    if($this->model->check_code_loans_gear($code) == 0){ // neu chua co phieu thi tao phieu
-                                        $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                                            "date_loan" => $datestudy, "date_return" =>  $datestudy, 
-                                                            "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                                                            "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-                                        $this->model->addObj_gear_loan($data_loan_device);
-                                    }
-
-                                    if($this->model->check_gear_loans($code, $device[0], $row['sub']) == 0){
-                                        // them moi du lieu chi tiet  muon thiet bi
-                                        $data_loan_device_detail = array("code" => $code, "utensils_id" => $device[0],
-                                                                    "sub_utensils" => $row['sub'], "status" => 0, "date_return" => $datestudy);
-                                        $this->model->addObj_gear_loan_detail($data_loan_device_detail);
-                                    }
-                                }
-                            }
+                            $this->action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title);
+                            $this->action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title);
                             $jsonObj['msg'] = "Ghi dữ liệu thành công";
                             $jsonObj['success'] = true;
                             $this->view->jsonObj = json_encode($jsonObj);
@@ -145,40 +113,19 @@ class Calendars extends Controller{
                                 $thietbi += ($row['type'] == 1) ? 1 : 0;
                                 $dodung += ($row['type'] == 2) ? 1 : 0;
                             }
-                            if($thietbi == 0){
+                            // thao tac khi co du lieu muon thiet bi
+                            if($thietbi == 0){ // khong muon thiet bi
                                 $this->action_loans_device($code);
+                            }else{ // co muon thiet bi
+                                $this->model->delObj_device_loans_detail($code); // xoa du lieu chi tiet muon thiet bi
+                                $this->action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title);
                             }
-                            $device = explode(".", $row['id']);
-                            if($row['type'] == 1){ //muon thiet bi
-                                /*if($this->model->check_code_loans_device($code) == 0){ // neu chua co phieu thi tao phieu
-                                    $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, 
-                                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                                                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-                                    $this->model->addObj_device_loan($data_loan_device);
-                                }
-
-                                if($this->model->check_device_loans($code, $device[0], $row['sub']) == 0){
-                                    // them moi du lieu chi tiet  muon thiet bi
-                                    $data_loan_device_detail = array("code" => $code, "device_id" => $device[0],
-                                                                "sub_device" => $row['sub'], "status" => 0, "date_return" => $datestudy);
-                                    $this->model->addObj_device_loan_detail($data_loan_device_detail);
-                                }*/
-                            }else{ // muon do dung
-                                /*if($this->model->check_code_loans_gear($code) == 0){ // neu chua co phieu thi tao phieu
-                                    $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, 
-                                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                                                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-                                    $this->model->addObj_gear_loan($data_loan_device);
-                                }
-
-                                if($this->model->check_gear_loans($code, $device[0], $row['sub']) == 0){
-                                    // them moi du lieu chi tiet  muon thiet bi
-                                    $data_loan_device_detail = array("code" => $code, "utensils_id" => $device[0],
-                                                                "sub_utensils" => $row['sub'], "status" => 0, "date_return" => $datestudy);
-                                    $this->model->addObj_gear_loan_detail($data_loan_device_detail);
-                                }*/
+                            // thao tac khi co du lieu muon do dung
+                            if($dodung == 0){ // khong muon do dung
+                                $this->action_loans_gear($code);
+                            }else{ // co muon do dung
+                                $this->model->delObj_gear_loan_detail($code); // xao du lieu chi tiett mmuon do dung
+                                $this->action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title);
                             }
                         }else{
                             // thuc hien xoa du lieu muon hoac tra toan bo thiet bi do dung da muon
@@ -318,6 +265,50 @@ class Calendars extends Controller{
             $this->model->updateObj_gear_loan($code, $data_loan_gear);
             $data_loan_gear_detail = array("date_return" => date("Y-m-d H:i:s"), "status" => 1);
             $this->model->updateObj_gear_loan_detail($code, $data_loan_gear_detail);
+        }
+    }
+
+    function action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title){
+        foreach($datadc as $row){
+            $device = explode(".", $row['id']);
+            if($row['type'] == 1){ //muon thiet bi
+                if($this->model->check_code_loans_device($code) == 0){ // neu chua co phieu thi tao phieu
+                    $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
+                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, 
+                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
+                                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
+                    $this->model->addObj_device_loan($data_loan_device);
+                }
+
+                if($this->model->check_device_loans($code, $device[0], $row['sub']) == 0){
+                    // them moi du lieu chi tiet  muon thiet bi
+                    $data_loan_device_detail = array("code" => $code, "device_id" => $device[0],
+                                                "sub_device" => $row['sub'], "status" => 0, "date_return" => $datestudy);
+                    $this->model->addObj_device_loan_detail($data_loan_device_detail);
+                }
+            }
+        }
+    }
+
+    function action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title){
+        foreach($datadc as $row){
+            $device = explode(".", $row['id']);
+            if($row['type'] == 2){ //muon do dung
+                if($this->model->check_code_loans_gear($code) == 0){ // neu chua co phieu thi tao phieu
+                    $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
+                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, 
+                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
+                                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
+                    $this->model->addObj_gear_loan($data_loan_device);
+                }
+
+                if($this->model->check_gear_loans($code, $device[0], $row['sub']) == 0){
+                    // them moi du lieu chi tiet  muon thiet bi
+                    $data_loan_device_detail = array("code" => $code, "utensils_id" => $device[0],
+                                                "sub_utensils" => $row['sub'], "status" => 0, "date_return" => $datestudy);
+                    $this->model->addObj_gear_loan_detail($data_loan_device_detail);
+                }
+            }
         }
     }
 }
