@@ -150,5 +150,10 @@ class Gear_loans_Model extends Model{
             return 3;
         }
     }
+
+    function updateObj_detail_via_code($code, $data){
+        $query = $this->update("tbl_utensils_loan_detail", $data, "code = $code");
+        return $query;
+    }
 }
 ?>

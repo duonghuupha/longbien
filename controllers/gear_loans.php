@@ -182,5 +182,44 @@ class Gear_loans extends Controller{
         $this->view->detail = $detail;
         $this->view->render("gear_loans/detail");
     }
+/////////////////////////////////////////////////////////////////////////////////////////////
+    function change(){
+        $id = $_REQUEST['id']; $status = $_REQUEST['status'];
+        if($status == 1){ // khong dong y cho muon
+            $data = array("date_return" => date("Y-m-d H:i:s"), "status" => 1);
+            $temp = $this->model->updateObj($id, $data);
+            if($temp){
+                $info = $this->model->get_info($id);
+                $data_detail = array("date_return" => date("Y-m-d H:i:s"), "status" => 1);
+                $tmp = $this->model->updateObj_detail_via_code($info[0]['code'], $data_detail);
+                if($tmp){
+                    $jsonObj['msg'] = "Ghi dữ  liệu thành công";
+                    $jsonObj['success'] = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = "Ghi dữ liệu không thành công 1";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
+            }else{
+                $jsonObj['msg'] = "Ghi dữ liệu không thành công 2";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{ // dong y cho muon
+            $data = array("status" => 0);
+            $temp = $this->model->updateObj($id, $data);
+            if($temp){
+                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Ghi dữ liệu không thành công 3";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }
+        $this->view->render("gear_loans/change");
+    }
 }
 ?>
