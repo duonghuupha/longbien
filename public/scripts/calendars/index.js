@@ -1,5 +1,6 @@
 var page = 1, url = '', page_user = 1, keyword_user = '';
 var titles = '', datestudy = '', lessons = 0, lessonexps = '', teacher = '';
+var page_device = 1, keyword_device = '', datadc = [], page_gear = 1, keyword_gear = '';
 $(function(){
     $('#list_task').load(baseUrl + '/calendars/content');
 	$('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
@@ -47,6 +48,11 @@ function save(){
         }
     });
     if(allRequired){
+		if(datadc.length > 0){
+			$('#datadc').val(JSON.stringify(datadc));
+		}else{
+			$('#datadc').val(null);
+		}
         save_form_modal('#fm', url, '#modal-cal', '#list_task',  baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
@@ -129,4 +135,99 @@ function set_lesson(){
 
 function del_date_study(){
 	$('#date_search').datepicker('setDate', '');
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+function select_device(){
+	$('#list_device').load(baseUrl + '/calendars/list_device'); 
+    $('#pager_device').load(baseUrl + '/calendars/list_device_page');
+	$('#modal-device').modal('show');
+}
+
+function view_page_devices(pages){
+	page_device = pages;
+	$('#list_device').load(baseUrl + '/calendars/list_device?page='+page_device+'&q='+keyword_device); 
+    $('#pager_device').load(baseUrl + '/calendars/list_device_page?page='+page_device+'&q='+keyword_device);
+}
+
+function search_device(){
+	var value = $('#nav-search-input-device').val();
+    if(value.length != 0){
+        keyword_device = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_device = '';
+    }
+    $('#list_device').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device); 
+    $('#pager_device').load(baseUrl + '/calendars/list_device_page?page=1&q='+keyword_device);
+}
+
+function confirm_devices(idh){
+	var value = $('#device_'+idh).val(), title = $('#title_'+idh).text();
+    var str = {'id': idh+'.'+value, 'title': title, 'sub': value, 'type' : 1};
+    var objIndex = datadc.findIndex(item => item.id === idh+'.'+value && item.type === 1);
+    if(objIndex != -1){
+        show_message("error", "Thiết bị đã được chọn, không thể chọn lại");
+        return false;
+    }else{
+        datadc.push(str);
+        render_table(datadc); $('#modal-device').modal('hide');
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+function select_gear(){
+	$('#list_gear').load(baseUrl + '/calendars/list_gear');
+    $('#pager_gear').load(baseUrl + '/calendars/list_gear_page');
+	$('#modal-gear').modal('show');
+}
+
+function view_page_gear(pages){
+    page_gear = pages;
+    $('#list_gear').load(baseUrl + '/calendars/list_gear?page='+page_gear+'&q='+keyword_gear);
+    $('#pager_gear').load(baseUrl +'/calendars/list_gear_page?page='+page_gear+'&q='+keyword_gear);
+}
+
+function search_gear(){
+    var value = $('#nav-search-input-gear').val();
+    if(value.length != 0){
+        keyword_gear = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_gear = '';
+    }
+    $('#list_gear').load(baseUrl + '/calendars/list_gear?page=1&q='+keyword_gear);
+    $('#pager_gear').load(baseUrl +'/calendars/list_gear_page?page=1&q='+keyword_gear);
+}
+
+function confirm_gear(idh){
+    var value = $('#gear_'+idh).val(), title = $('#title_'+idh).text();
+    var str = {'id': idh+'.'+value, 'title': title, 'sub': value, 'type': 2};
+    var objIndex = datadc.findIndex(item => item.id === idh+'.'+value && item.type === 2);
+    if(objIndex != -1){
+        show_message("error", "Đồ dùng đã được chọn, không thể chọn lại");
+        return false;
+    }else{
+        datadc.push(str);
+        render_table(datadc); $('#modal-gear').modal('hide');
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function render_table(data_json){
+	$('#list_prepare').empty(); var html = '';
+	for(var i = 0; i < data_json.length; i++){
+		html += '<li>';
+			if(data_json[i].type ==  1){
+				html += '<i class="ace-icon fa fa-cubes bigger-110 purple"></i>';
+			}else{
+				html += '<i class="ace-icon fa fa-flask bigger-110 green"></i>';
+			}
+			html += ' '+data_json[i].title+' - '+data_json[i].sub;
+			html += ' <a href="javascript:void(0)" onclick="del_select('+data_json[i].id+', '+data_json[i].type+')">';
+				html += '<i class="fa fa-trash" style="color:red"></i>';
+			html += '</a>';
+		html += '</li>';
+	}
+	$('#list_prepare').append(html);
+}
+
+function del_select(idh, type){
+	var objIndex = datadc.findIndex(item => item.id === idh.toString() && item.type === type);
+	datadc.splice(objIndex, 1); render_table(datadc);
 }

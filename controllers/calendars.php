@@ -29,6 +29,7 @@ class Calendars extends Controller{
         $userid = $_REQUEST['user_id']; $usercreate = $this->_Info[0]['id']; $datestudy = $this->_Convert->convertDate($_REQUEST['date_study']);
         $department = $_REQUEST['department_id']; $lesson = $_REQUEST['lesson']; $subject = $_REQUEST['subject_id']; $lessonmain = $_REQUEST['lesson_export'];
         $title = $_REQUEST['title']; $code = time();
+        $datadc = ($_REQUEST['datadc'] != '') ? json_decode($_REQUEST['datadc'], true) : [];
         if($datestudy > date("Y-m-d")){
             $jsonObj['msg'] = "Không báo giảng trước sau ngày hiện tại";
             $jsonObj['success'] = false;
@@ -50,6 +51,46 @@ class Calendars extends Controller{
                                     "create_at" => date("Y-m-d H:i:s"));
                     $temp = $this->model->addObj($data);
                     if($temp){
+                        // kiem tra xem co muon do dung hay thiet bi khong
+                        if(count($datadc) > 0){
+                            foreach($datadc as $row){
+                                /*$device = explode(".", $row['id']);
+                                if($row['type'] == 1){ //muon thiet bi
+                                    if($this->model->check_code_loans_device($code) == 0){ // neu chua co phieu thi tao phieu
+                                        $data_loan_device = array("code" => $code, "user_id" => $usercreate, "user_loan" => $usercreate,
+                                                            "date_loan" => $datestudy, "date_return" =>  $datestudy, 
+                                                            "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
+                                                            "status" => 3, "create_at" => date("Y-m-d H:i:s"));
+                                        $this->model->addObj_device_loan($data_loan_device);
+                                    }
+
+                                    if($this->model->check_device_loans($code, $device[0], $row['sub']) == 0){
+                                        // them moi du lieu chi tiet  muon thiet bi
+                                        $data_loan_device_detail = array("code" => $code, "device_id" => $device[0],
+                                                                    "sub_device" => $row['sub'], "status" => 0, "date_return" => $datestudy);
+                                        $this->model->addObj_device_loan_detail($data_loan_device_detail);
+                                    }
+                                }else{ // muon do dung
+                                    if($this->model->check_code_loans_gear($code) == 0){ // neu chua co phieu thi tao phieu
+                                        $data_loan_device = array("code" => $code, "user_id" => $usercreate, "user_loan" => $usercreate,
+                                                            "date_loan" => $datestudy, "date_return" =>  $datestudy, 
+                                                            "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
+                                                            "status" => 3, "create_at" => date("Y-m-d H:i:s"));
+                                        $this->model->addObj_gear_loan($data_loan_device);
+                                    }
+
+                                    if($this->model->check_gear_loans($code, $device[0], $row['sub']) == 0){
+                                        // them moi du lieu chi tiet  muon thiet bi
+                                        $data_loan_device_detail = array("code" => $code, "utensils_id" => $device[0],
+                                                                    "sub_utensils" => $row['sub'], "status" => 0, "date_return" => $datestudy);
+                                        $this->model->addObj_gear_loan_detail($data_loan_device_detail);
+                                    }
+                                }*/
+                                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                                $jsonObj['success'] = false;
+                                $this->view->jsonObj = json_encode($jsonObj);
+                            }
+                        }
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
@@ -161,6 +202,46 @@ class Calendars extends Controller{
 
     function combo_lesson(){
         $this->view->render("calendars/combo_lesson");
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_device(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_device($keyword, $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render("calendars/list_device");
+    }
+
+    function list_device_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_device_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_device_page');
+    }
+
+    function list_gear(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_gear($keyword, $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_gear');
+    }
+
+    function list_gear_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_date_gear_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_gear_page');
     }
 }
 ?>

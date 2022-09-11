@@ -114,5 +114,101 @@ class Calendars_Model extends Model{
                                     FROM tbl_users WHERE tbl_users.id = user_create)) AS fullname_create FROM tbl_schedule WHERE id = $id");
         return $query->fetchAll();
     }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_device($q, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE status = 1 AND title LIKE '%$q%' 
+                                    AND id NOT IN (SELECT device_id FROM tbl_export_detail 
+                                    GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)
+                                    AND id NOT IN (SELECT device_id FROM tbl_loans_detail GROUP BY device_id HAVING
+                                    (COUNT(*) - (SELECT tbl_devices.stock FROM tbl_devices WHERE tbl_devices.id = device_id)) > 0)");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, title, code, stock FROM tbl_devices WHERE status = 1 AND title LIKE '%$q%'
+                                    AND id NOT IN (SELECT device_id FROM tbl_export_detail 
+                                    GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)
+                                    AND id NOT IN (SELECT device_id FROM tbl_loans_detail GROUP BY device_id HAVING
+                                    (COUNT(*) - (SELECT tbl_devices.stock FROM tbl_devices WHERE tbl_devices.id = device_id)) > 0)
+                                    ORDER BY title ASC LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_device_total($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE status = 1 AND title LIKE '%$q%' 
+                                    AND id NOT IN (SELECT device_id FROM tbl_export_detail 
+                                    GROUP BY device_id HAVING (COUNT(*) - (SELECT tbl_devices.stock 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id)) >= 0)
+                                    AND id NOT IN (SELECT device_id FROM tbl_loans_detail GROUP BY device_id HAVING
+                                    (COUNT(*) - (SELECT tbl_devices.stock FROM tbl_devices WHERE tbl_devices.id = device_id)) > 0)");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function get_data_gear($q, $offset, $rows){
+        $result = array();
+        $query= $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE title LIKE '%$q%' AND status = 0");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, code, title, content, image, cate_id, stock, (SELECT tbldm_utensils.title
+                                    FROM tbldm_utensils WHERE tbldm_utensils.id = cate_id) AS category FROM tbl_utensils WHERE status = 0
+                                    AND title LIKE '%$q%' ORDER BY id DESC LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_date_gear_total($q){
+        $query= $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE title LIKE '%$q%' AND status = 0");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function addObj_device_loan($data){
+        $query = $this->insert("tbl_loans", $data);
+        return $query;
+    }
+
+    function addObj_device_loan_detail($data){
+        $query = $this->insert("tbl_loans_detail", $data);
+        return $query;
+    }
+
+    function check_code_loans_device($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function check_device_loans($code, $deviceid, $subdevice){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans_detail WHERE code = $code
+                                    AND device_id = $deviceid AND sub_device  = $subdevice");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function addObj_gear_loan($data){
+        $query = $this->insert("tbl_utensils", $data);
+        return $query;
+    }
+
+    function addObj_gear_loan_detail($data){
+        $query = $this->insert("tbl_utensils", $data);
+        return $query;
+    }
+
+    function check_code_loans_gear($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function check_gear_loans($code, $gearid, $subgear){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan_detail WHERE code = $code
+                                    AND utensils_id = $gearid AND sub_utensils  = $subgear");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>
