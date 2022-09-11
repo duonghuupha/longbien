@@ -4,7 +4,7 @@ class Calendars_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($title, $date, $lesson, $lessonexport, $teacher, $offset, $rows){
+    function getFetObj($title, $date, $lesson, $lessonexport, $teacher, $department, $subject, $offset, $rows){
         $result = array();
         $where = "title LIKE '%$title%'";
         if($date != '')
@@ -16,6 +16,10 @@ class Calendars_Model extends Model{
         if($teacher != '')
             $where = $where." AND user_id IN (SELECT tbl_users.id FROM tbl_users WHERE tbl_users.hr_id IN (SELECT tbl_personel.id
                     FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$teacher%'))";
+        if($department != '')
+            $where = $where." AND department_id = $department";
+        if($subject != '')
+            $where = $where." AND subject_id = $subject";
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_schedule WHERE $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, user_id, user_create, lesson, lesson_export, subject_id, title, department_id,
@@ -187,14 +191,14 @@ class Calendars_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function addObj_gear_loan($data){
-        $query = $this->insert("tbl_utensils", $data);
+        $query = $this->insert("tbl_utensils_loan", $data);
         return $query;
     }
 
     function addObj_gear_loan_detail($data){
-        $query = $this->insert("tbl_utensils", $data);
+        $query = $this->insert("tbl_utensils_loan_detail", $data);
         return $query;
     }
 
@@ -209,6 +213,66 @@ class Calendars_Model extends Model{
                                     AND utensils_id = $gearid AND sub_utensils  = $subgear");
         $row = $query->fetchAll();
         return $row[0]['Total'];
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function delObj_device_loans($code){
+        $query = $this->delete("tbl_loans", "code  = $code");
+        return $query;
+    }
+
+    function delObj_gear_loan($code){
+        $query = $this->delete("tbl_utensils_loan",  "code = $code");
+        return $query;
+    }
+
+    function delObj_device_loans_detail($code){
+        $query = $this->delete("tbl_loans_detail", "code = $code");
+        return $query;
+    }
+
+    function delObj_gear_loan_detail($code){
+        $query = $this->delete("tbl_utensils_loan_detail", "code = $code");
+        return $query;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function updateObj_device_loan($code, $data){
+        $query = $this->update("tbl_loans", $data, "code = $code");
+        return $query;
+    }
+
+    function updateobj_dvice_loan_detail($code, $data){
+        $query = $this->update("tbl_loans_detail", $data, "code = $code");
+        return $query;
+    }
+
+    function updateObj_gear_loan($code,$data){
+        $query = $this->update("tbl_utensils_loan", $data, "code = $code");
+        return $query;
+    }
+
+    function updateObj_gear_loan_detail($code, $data){
+        $query = $this->update("tbl_utensils_loan_detail", $data, "code = $code");
+        return $query;
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_status_device_loan($code){
+        $query = $this->db->query("SELECT `status` FROM tbl_loans WHERE code = $code");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 4;
+        }
+    }
+
+    function check_status_gear_loan($code){
+        $query = $this->db->query("SELECT `status` FROM tbl_utensils_loan WHERE code = $code");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 4;
+        }
     }
 }
 ?>

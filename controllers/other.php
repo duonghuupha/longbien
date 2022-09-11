@@ -29,6 +29,12 @@ class Other extends Controller{
         $this->view->render("other/combo_subject");
     }
 
+    function combo_subject_point(){
+        $jsonObj= $this->model->get_combo_subject_point();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_subject_point");
+    }
+
     function combo_job(){
         $jsonObj= $this->model->get_combo_job();
         $this->view->jsonObj = $jsonObj;

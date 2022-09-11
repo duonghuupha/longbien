@@ -25,6 +25,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
+            $dettail = $this->_Data->get_device_gear_loan($row['code']);
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
@@ -48,6 +49,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                     </a>
                 </div>
             </td>
+            <td class="hidden" id="datadc_<?php echo $row['id'] ?>"><?php echo $dettail ?></td>
         </tr>
         <?php
         }

@@ -76,7 +76,7 @@ class Gear_loans_Model extends Model{
             $where = $where." AND DATE_FORMAT(date_return, '%Y-%m-%d') = '$datereturn'";
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan WHERE $where");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, user_id, user_loan, date_loan, date_return, content, notes, status,
+        $query = $this->db->query("SELECT id, code, user_id, user_loan, date_loan, date_return, content, notes, `status`,
                                     create_at, (SELECT COUNT(*) FROM tbl_utensils_loan_detail 
                                     WHERE tbl_utensils_loan_detail.code = tbl_utensils_loan.code) AS qty,
                                     IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id 

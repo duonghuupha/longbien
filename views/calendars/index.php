@@ -46,6 +46,15 @@
                                     </div>
                                     <div class="col-xs-12">
                                         <div class="form-group">
+                                            <label for="form-field-username">Giáo viên</label>
+                                            <div>
+                                                <input type="text" id="teacher" name="teacher"
+                                                placeholder="Giáo viên...." style="width:100%" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
                                             <label for="form-field-username">
                                                 Lựa chọn ngày học
                                                 &nbsp;
@@ -62,7 +71,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-6">
                                         <div class="form-group">
                                             <label for="form-field-username">
                                                 Tiết học
@@ -80,10 +89,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-6">
                                         <div class="form-group">
                                             <label for="form-field-username">
-                                                Tiết theo PP chương trình
+                                                Tiết PP chương trình
                                             </label>
                                             <div>
                                                 <input type="text" id="lessonexport" name="lessonexport" onkeypress="validate(event)"
@@ -93,10 +102,33 @@
                                     </div>
                                     <div class="col-xs-12">
                                         <div class="form-group">
-                                            <label for="form-field-username">Giáo viên</label>
+                                            <label for="form-field-username">
+                                                Lựa chọn môn học
+                                                &nbsp;
+                                                <a class="red" href="javascript:void(0)" onclick="del_subject()" title="Xóa môn học đã chọn">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </label>
                                             <div>
-                                                <input type="text" id="teacher" name="teacher"
-                                                placeholder="Giáo viên...." style="width:100%" />
+                                                <select class="select2" data-placeholder="Lựa chọn môn học"
+                                                style="width:100%" id="subject_search" name="subject_search">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="form-field-username">
+                                                Lựa chọn lớp học
+                                                &nbsp;
+                                                <a class="red" href="javascript:void(0)" onclick="del_department()" title="Xóa lớp học đã chọn">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </label>
+                                            <div>
+                                                <select class="select2" data-placeholder="Lựa chọn lớp học"
+                                                style="width:100%" id="class_search" name="class_search">
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

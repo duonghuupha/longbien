@@ -29,6 +29,11 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
+    function get_combo_subject_point(){
+        $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0 AND set_point = 1");
+        return $query->fetchAll();
+    }
+
     function get_combo_equipment(){
         $query = $this->db->query("SELECT id, title FROM tbldm_equipment WHERE status = 0");
         return $query->fetchAll();
