@@ -1,6 +1,6 @@
 var page = 1, url = '', page_user = 1, keyword_user = '';
 var titles = '', datestudy = '', lessons = 0, lessonexps = '', teacher = '', department = '', subjects = '';
-var page_device = 1, keyword_device = '', datadc = [], page_gear = 1, keyword_gear = '';
+var page_device = 1, keyword_device = '', datadc = [], page_gear = 1, keyword_gear = '', page_department = 1, keyword_department = '';
 $(function(){
     $('#list_task').load(baseUrl + '/calendars/content');
 	$('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
@@ -219,6 +219,42 @@ function confirm_gear(idh){
         render_table(datadc); $('#modal-gear').modal('hide');
     }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function select_department(){
+	$('#list_department').load(baseUrl + '/calendars/list_department');
+	$('#pager_department').load(baseUrl + '/calendars/list_department_page');
+	$('#modal-department').modal('show');
+}
+
+function view_page_department(pages){
+	page_department = pages;
+	$('#list_department').load(baseUrl + '/calendars/list_department?page='+page_department+'&q='+keyword_department);
+	$('#pager_department').load(baseUrl + '/calendars/list_department_page?page='+page_department+'&q='+keyword_department);
+}
+
+function search_department(){
+	var value = $('#nav-search-input-department').val();
+    if(value.length != 0){
+        keyword_department = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_department = '';
+    }
+    $('#list_department').load(baseUrl + '/calendars/list_department?page=1&q='+keyword_department);
+	$('#pager_department').load(baseUrl + '/calendars/list_department_page?page=1&q='+keyword_department);
+}
+
+function confirm_department(idh){
+	var title = $('#title_'+idh).text();
+	var str = {'id': idh, 'title': title, 'sub': 0, 'type': 3};
+    var objIndex = datadc.findIndex(item => item.id === idh && item.type === 3);
+    if(objIndex != -1){
+        show_message("error", "Phòng chức năng đã được chọn, không thể chọn lại");
+        return false;
+    }else{
+        datadc.push(str);
+        render_table(datadc); $('#modal-department').modal('hide');
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 function render_table(data_json){
 	$('#list_prepare').empty(); var html = '';
@@ -226,8 +262,10 @@ function render_table(data_json){
 		html += '<li>';
 			if(data_json[i].type ==  1){
 				html += '<i class="ace-icon fa fa-cubes bigger-110 purple"></i>';
-			}else{
+			}else if(data_json[i].type == 2){
 				html += '<i class="ace-icon fa fa-flask bigger-110 green"></i>';
+			}else{
+				html += '<i class="ace-icon fa fa-gamepad bigger-110 blue"></i>';
 			}
 			html += ' '+data_json[i].title+' - '+data_json[i].sub;
 			html += ' <a href="javascript:void(0)" onclick="del_select('+data_json[i].id+', '+data_json[i].type+')">';

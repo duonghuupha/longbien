@@ -245,16 +245,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <button class="btn btn-sm btn-success pull-left" type="button" onclick="select_device()">
                                     <i class="ace-icon fa fa-cubes"></i>
                                     Mượn thiết bị
                                 </button>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <button class="btn btn-sm btn-success pull-left" type="button" onclick="select_gear()">
                                     <i class="ace-icon fa fa-flask"></i>
                                     Mượn đồ dùng
+                                </button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn btn-sm btn-info pull-left" type="button" onclick="select_department()">
+                                    <i class="ace-icon fa fa-gamepad"></i>
+                                    ĐK sử dụng phòng CN
                                 </button>
                             </div>
                         </form>
@@ -262,7 +268,7 @@
                     <dv class="col-xs-4">
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label for="form-field-username">Thiết bị, đồ dùng chuẩn bị</label>
+                                <label for="form-field-username">Thiết bị, đồ dùng, phòng chức năng chuẩn bị</label>
                             </div>
                         </div>
                         <div class="col-xs-12">
@@ -410,6 +416,42 @@
             </div>
             <div class="modal-footer">
                 <small class="pull-left" id="pager_gear">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-department" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:55%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách phòng chức năng
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-department" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_department()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_department" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager_department">
                     <!--display pagination-->
                 </small>
             </div>

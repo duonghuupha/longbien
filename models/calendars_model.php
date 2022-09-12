@@ -168,6 +168,25 @@ class Calendars_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+
+    function get_data_department($q, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE title LIKE '%$q%' AND is_function = 2
+                                    AND status = 0");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE title LIKE '%$q%' AND is_function = 2 AND status = 0
+                                    ORDER BY id DESC LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_department_total($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE title LIKE '%$q%' AND is_function = 2
+                                    AND status = 0");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function addObj_device_loan($data){
         $query = $this->insert("tbl_loans", $data);
@@ -273,6 +292,29 @@ class Calendars_Model extends Model{
         }else{
             return 4;
         }
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_all_device_gear_loan_of_calendar($code){
+        $query = $this->db->query("SELECT sub_device AS sub, 1 AS type, (SELECT title FROM tbl_devices WHERE tbl_devices.id = device_id)
+                                    AS title, (SELECT tbl_devices.code FROM tbl_devices WHERE tbl_devices.id = device_id) AS code_cal 
+                                    FROM tbl_loans_detail WHERE code  = $code
+                                    UNION ALL 
+                                    SELECT sub_utensils AS sub, 2 AS type, (SELECT title  FROM tbl_utensils WHERE tbl_utensils.id = utensils_id)
+                                    AS title, (SELECT tbl_utensils.code FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS code_cal 
+                                    FROM tbl_utensils_loan_detail WHERE code = $code");
+        return $query->fetchAll();
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_code_loans_department($date, $lesson, $departmentid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_department_loan WHERE date_loan = '$date' AND lesson = $lesson
+                                    AND status = 0 AND departmentt_id = $departmentid");
+        $row = $querry->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function addObj_department_loan($data){
+        $query = $this->inserrt("tbl_department_loan", $data);
+        return $query;
     }
 }
 ?>

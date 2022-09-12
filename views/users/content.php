@@ -12,7 +12,7 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã</th>
             <th class="">Tên đăng nhập</th>
-            <th class="text-left">Họ tên nhân sự</th>
+            <th class="text-center">Họ tên nhân sự</th>
             <th class="text-center">Đăng nhập lần cuối</th>
             <th class="text-center" style="width:250px">Thông tin đăng nhập</th>
             <th class="text-center">Trạng thái</th>

@@ -161,7 +161,9 @@ class Calendars extends Controller{
     }
 
     function detail(){
-        $this->view->jsonObj = $this->model->get_info($_REQUEST['id']);
+        $jsonObj = $this->model->get_info($_REQUEST['id']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->detail = $this->model->get_all_device_gear_loan_of_calendar($jsonObj[0]['code']);
         $this->view->render('calendars/detail');
     }
 /////////////////////////////////////////////////////////////////////////////////
@@ -241,6 +243,26 @@ class Calendars extends Controller{
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('calendars/list_gear_page');
     }
+
+    function list_department(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_department($keyword, $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_department');
+    }
+
+    function list_department_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_department_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_department_page');
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function action_loans_device($code){
         $status_device = $this->model->check_status_device_loan($code);
@@ -307,6 +329,21 @@ class Calendars extends Controller{
                     $data_loan_device_detail = array("code" => $code, "utensils_id" => $device[0],
                                                 "sub_utensils" => $row['sub'], "status" => 0, "date_return" => $datestudy);
                     $this->model->addObj_gear_loan_detail($data_loan_device_detail);
+                }
+            }
+        }
+    }
+
+    function action_loan_department_add($datadc, $code, $userid, $datestudy, $subject, $title, $lesson){
+        $status = true;
+        foreach($datadc as $row){
+            if($row['type'] == 3){ //muon do dung
+                if($this->model->check_code_loans_department($datestudy, $lesson, $row['id']) == 0){ // duoc muon phong
+                    $data_loan_department = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
+                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, "lesson" => $lesson
+                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
+                                        "status" => 0, "create_at" => date("Y-m-d H:i:s"), 'department_id' => $row['id']);
+                    $this->model->addObj_gear_loan($data_loan_device);
                 }
             }
         }
