@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2022 at 12:49 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Sep 12, 2022 at 03:04 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -782,7 +782,7 @@ INSERT INTO `tbl_loans` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `dat
 (9, 1656517357, 1, 4, '2022-06-29 22:42:37', '2022-06-29 23:12:46', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-29 22:42:37'),
 (10, 1656526338, 1, 4, '2022-06-30 01:12:18', '2022-06-30 01:12:35', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-30 01:12:18'),
 (11, 1656598271, 1, 4, '2022-06-30 21:11:11', '2022-06-30 21:11:20', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-30 21:11:11'),
-(17, 1662864369, 6, 6, '2022-09-11 00:00:00', '2022-09-11 00:00:00', 'Phục vụ bài dạy môn Toán: Giải toán bằng cách lập phương trình', '', 3, '2022-09-11 09:46:09');
+(18, 1662864369, 6, 6, '2022-09-11 00:00:00', '2022-09-12 01:59:50', 'Phục vụ bài dạy môn Toán: ', '', 1, '2022-09-11 23:38:00');
 
 --
 -- Triggers `tbl_loans`
@@ -824,7 +824,7 @@ INSERT INTO `tbl_loans_detail` (`id`, `code`, `device_id`, `sub_device`, `status
 (11, 1656526338, 34, 1, 1, '2022-06-30 01:12:34'),
 (12, 1656598271, 34, 1, 1, '2022-06-30 21:11:16'),
 (13, 1656598271, 34, 2, 1, '2022-06-30 21:11:20'),
-(16, 1662864369, 28, 1, 0, '2022-09-11 00:00:00');
+(20, 1662864369, 28, 1, 1, '2022-09-12 01:59:50');
 
 -- --------------------------------------------------------
 
@@ -966,7 +966,7 @@ CREATE TABLE `tbl_schedule` (
 INSERT INTO `tbl_schedule` (`id`, `code`, `user_id`, `user_create`, `lesson`, `subject_id`, `department_id`, `lesson_export`, `date_study`, `title`, `create_at`) VALUES
 (3, 1662819549, 3, 1, 1, 4, 1, 1, '2022-09-10', 'Tìm hiểu khởi nghĩa Hai Bà Trưng', '2022-09-10 21:19:09'),
 (8, 1662835408, 6, 1, 1, 1, 1, 1, '2022-09-11', 'Giải toán bằng cách lập phương trình', '2022-09-11 01:43:28'),
-(13, 1662864369, 6, 1, 2, 1, 1, 2, '2022-09-11', 'Giải toán bằng cách lập phương trình', '2022-09-11 09:46:09');
+(13, 1662864369, 6, 1, 2, 1, 1, 2, '2022-09-11', 'Giải toán bằng cách lập phương trình', '2022-09-11 23:39:26');
 
 -- --------------------------------------------------------
 
@@ -1163,7 +1163,7 @@ INSERT INTO `tbl_tasks` (`id`, `code`, `group_id`, `title`, `content`, `date_wor
 (12, 1658103065, 1, '1914 translation by H. Rackham', '', '2022-07-19', 1, 1, 3, '', '', 2, '2022-07-18 07:11:05', 1),
 (13, 1658136028, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '', '2022-07-18', 1, 1, 4, '', '', 2, '2022-07-18 16:20:28', 1),
 (16, 1661482745, 1, 'asdf', 'asdfasdf', '2022-08-26', 1, 1, 3, '', '', 2, '2022-08-26 09:59:05', 1),
-(17, 1661484670, 1, 'sdfgsdf', 'dfgdf', '2022-08-26', 1, 1, 4, '', '', 0, '2022-08-26 10:31:10', 1);
+(17, 1661484670, 1, 'sdfgsdf', 'dfgdf', '2022-08-26', 1, 1, 4, '', '', 1, '2022-08-26 10:31:10', 1);
 
 -- --------------------------------------------------------
 
@@ -1278,7 +1278,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-11 09:06:18', '78acf7bc9555c682d608295278ddc9afa1b040e4', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-11 23:36:00', 'ccb12b4ea524c2366bc1fa917d49f2274b186b81', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
@@ -1354,7 +1354,7 @@ INSERT INTO `tbl_utensils_loan` (`id`, `code`, `user_id`, `user_loan`, `date_loa
 (1, 1661361543, 1, 3, '2022-08-25 00:19:03', '2022-08-25 13:56:17', 'Minh họa nội dung bài học', '', 1, '2022-08-25 00:19:03'),
 (2, 1661414491, 1, 4, '2022-08-25 15:01:31', '2022-08-25 15:01:39', 'Minh họa cho nội dung bài học', '', 1, '2022-08-25 15:01:31'),
 (3, 1661414561, 1, 3, '2022-08-25 15:02:41', '2022-08-25 15:04:20', 'Minh họa cho nội dung bài học', '', 1, '2022-08-25 15:02:41'),
-(4, 1662864369, 6, 6, '2022-09-11 00:00:00', '2022-09-11 00:00:00', 'Phục vụ bài dạy môn Toán: Giải toán bằng cách lập phương trình', '', 3, '2022-09-11 09:46:09');
+(5, 1662864369, 6, 6, '2022-09-11 00:00:00', '2022-09-12 00:20:49', 'Phục vụ bài dạy môn Toán: ', '', 1, '2022-09-11 23:38:13');
 
 --
 -- Triggers `tbl_utensils_loan`
@@ -1388,7 +1388,8 @@ INSERT INTO `tbl_utensils_loan_detail` (`id`, `code`, `utensils_id`, `sub_utensi
 (2, 1661414491, 1, 1, 1, '2022-08-25 15:01:39'),
 (3, 1661414491, 1, 2, 1, '2022-08-25 15:01:36'),
 (4, 1661414561, 20, 1, 1, '2022-08-25 15:04:20'),
-(5, 1662864369, 20, 1, 0, '2022-09-11 00:00:00');
+(7, 1662864369, 20, 1, 1, '2022-09-12 00:20:49'),
+(8, 1662864369, 19, 1, 1, '2022-09-12 00:20:49');
 
 -- --------------------------------------------------------
 
@@ -1825,13 +1826,13 @@ ALTER TABLE `tbl_export_detail`
 -- AUTO_INCREMENT for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans_detail`
 --
 ALTER TABLE `tbl_loans_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_notify`
@@ -1915,13 +1916,13 @@ ALTER TABLE `tbl_utensils`
 -- AUTO_INCREMENT for table `tbl_utensils_loan`
 --
 ALTER TABLE `tbl_utensils_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_loan_detail`
 --
 ALTER TABLE `tbl_utensils_loan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_return`
