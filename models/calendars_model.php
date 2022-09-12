@@ -307,13 +307,18 @@ class Calendars_Model extends Model{
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function check_code_loans_department($date, $lesson, $departmentid){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_department_loan WHERE date_loan = '$date' AND lesson = $lesson
-                                    AND status = 0 AND departmentt_id = $departmentid");
-        $row = $querry->fetchAll();
+                                    AND status = 0 AND department_id = $departmentid");
+        $row = $query->fetchAll();
         return $row[0]['Total'];
     }
 
     function addObj_department_loan($data){
         $query = $this->inserrt("tbl_department_loan", $data);
+        return $query;
+    }
+
+    function updateObj_department_loan($code, $data){
+        $query = $this->update("tbl_deparment_loan", $data, "code = $code");
         return $query;
     }
 }

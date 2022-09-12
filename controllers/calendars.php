@@ -57,9 +57,15 @@ class Calendars extends Controller{
                         if(count($datadc) > 0){
                             $this->action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title);
                             $this->action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title);
-                            $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                            $jsonObj['success'] = true;
-                            $this->view->jsonObj = json_encode($jsonObj);
+                            if($this->action_loan_department_add($datadc, $code, $userid, $datestudy, $subject, $title, $lesson)){
+                                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                                $jsonObj['success'] = true;
+                                $this->view->jsonObj = json_encode($jsonObj);
+                            }else{
+                                $jsonObj['msg'] = "Vào tiết ".$lesson."  của ngày ".$datestudy." phòng  chức năng đã có người dạy";
+                                $jsonObj['success'] = false;
+                                $this->view->jsonObj = json_encode($jsonObj);
+                            }
                         }else{
                             $jsonObj['msg'] = "Ghi dữ liệu thành công";
                             $jsonObj['success'] = true;
@@ -108,10 +114,11 @@ class Calendars extends Controller{
                         // kiem tra xem co ton tai muon trang thiet bi hay do dung khong
                         if(count($datadc) > 0){
                             // kiem tra xem co du lieu muon thiet bi hay do dung khong
-                            $thietbi = 0; $dodung = 0;
+                            $thietbi = 0; $dodung = 0; $phongban = 0;
                             foreach($datadc as $row){
                                 $thietbi += ($row['type'] == 1) ? 1 : 0;
                                 $dodung += ($row['type'] == 2) ? 1 : 0;
+                                $phongban += ($row['type'] == 3) ? 1 : 0;
                             }
                             // thao tac khi co du lieu muon thiet bi
                             if($thietbi == 0){ // khong muon thiet bi
@@ -127,9 +134,23 @@ class Calendars extends Controller{
                                 $this->model->delObj_gear_loan_detail($code); // xao du lieu chi tiett mmuon do dung
                                 $this->action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title);
                             }
+                            // thao tac khi co du lieu muon phong chuc nang
+                            if($phongban == 0){
+                                $this->actiion_loans_department($code);
+                            }else{
+                                if($this->action_loan_department_add($datadc, $code, $userid, $datestudy, $subject, $title, $lesson)){
+                                    $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                                    $jsonObj['success'] = true;
+                                    $this->view->jsonObj = json_encode($jsonObj);
+                                }else{
+                                    $jsonObj['msg'] = "Vào tiết ".$lesson."  của ngày ".$datestudy." phòng  chức năng đã có người dạy";
+                                    $jsonObj['success'] = false;
+                                    $this->view->jsonObj = json_encode($jsonObj);
+                                }
+                            }
                         }else{
                             // thuc hien xoa du lieu muon hoac tra toan bo thiet bi do dung da muon
-                            $this->action_loans_device($code); $this->action_loans_gear($code);
+                            $this->action_loans_device($code); $this->action_loans_gear($code); $this->actiion_loans_department($code);
                         }
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
@@ -290,6 +311,11 @@ class Calendars extends Controller{
         }
     }
 
+    function actiion_loans_department($code){
+        $data = array("status" => 1);
+        $this->model->updateObj_department_loan($code, $data);
+    }
+
     function action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title){
         foreach($datadc as $row){
             $device = explode(".", $row['id']);
@@ -337,16 +363,24 @@ class Calendars extends Controller{
     function action_loan_department_add($datadc, $code, $userid, $datestudy, $subject, $title, $lesson){
         $status = true;
         foreach($datadc as $row){
-            if($row['type'] == 3){ //muon do dung
+            if($row['type'] == 3){ //muon phong chuc nang
                 if($this->model->check_code_loans_department($datestudy, $lesson, $row['id']) == 0){ // duoc muon phong
                     $data_loan_department = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, "lesson" => $lesson
+                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, "lesson" => $lesson,
                                         "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
                                         "status" => 0, "create_at" => date("Y-m-d H:i:s"), 'department_id' => $row['id']);
-                    $this->model->addObj_gear_loan($data_loan_device);
+                    $temp = $this->model->addObj_department_loan($data_loan_department);
+                    if($temp){
+                        $status = true;
+                    }else{
+                        $status = false;
+                    }
+                }else{
+                    $status = false;
                 }
             }
         }
+        return $status;
     }
 }
 ?>
