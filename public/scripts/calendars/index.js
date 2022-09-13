@@ -17,8 +17,8 @@ function add(){
 	$('.title_lesson').text(''); $('.title_subject').text(''); $('#lesson_export').val(null);
 	$('#department_id').val(null).trigger('change'); $('#lesson').attr("required", true);
 	$('#subject_id').attr('required', true); $('#code').val(null); $('#lesson').val(null).trigger('change');
-	$('#subject_id').val(null).trigger('change');
-	$('#modal-cal').modal('show');
+	$('#subject_id').val(null).trigger('change'); datadc = []; render_table(datadc);
+	$('#title').val(null); $('#modal-cal').modal('show');
 	url = baseUrl + '/calendars/add';
 }
 
@@ -51,11 +51,6 @@ function save(){
         }
     });
     if(allRequired){
-		if(datadc.length > 0){
-			$('#datadc').val(JSON.stringify(datadc));
-		}else{
-			$('#datadc').val(null);
-		}
         save_form_modal('#fm', url, '#modal-cal', '#list_task',  baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher+'&department_id='+department+'&subject_id='+subjects); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");

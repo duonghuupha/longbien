@@ -225,7 +225,10 @@ class Model {
                                     UNION ALL
                                     SELECT CONCAT(utensils_id, '.', sub_utensils) AS id, (SELECT title FROM tbl_utensils 
                                     WHERE tbl_utensils.id = utensils_id) AS title, sub_utensils AS sub, 2 AS type FROM tbl_utensils_loan_detail 
-                                    WHERE code = $code");
+                                    WHERE code = $code
+                                    UNION  ALL
+                                    SELECT department_id AS id, (SELECT title FROM tbldm_department WHERE tbldm_department.id = department_id)
+                                    AS title, 0 AS sub, 3 AS type FROM tbl_department_loan WHERE code = $code");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////

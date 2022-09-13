@@ -301,7 +301,12 @@ class Calendars_Model extends Model{
                                     UNION ALL 
                                     SELECT sub_utensils AS sub, 2 AS type, (SELECT title  FROM tbl_utensils WHERE tbl_utensils.id = utensils_id)
                                     AS title, (SELECT tbl_utensils.code FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS code_cal 
-                                    FROM tbl_utensils_loan_detail WHERE code = $code");
+                                    FROM tbl_utensils_loan_detail WHERE code = $code
+                                    UNION ALL
+                                    SELECT 0 AS sub, 3 AS type, (SELECT title FROM tbldm_department WHERE tbldm_department.id = department_id)
+                                    AS title, (SELECT tbldm_physical_room.title FROM tbldm_physical_room WHERE tbldm_physical_room.id = (SELECT physical_id
+                                    FROM tbldm_department WHERE tbldm_department.id =  department_id)) AS code_cal FROM tbl_department_loan
+                                    WHERE code = $code");
         return $query->fetchAll();
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -313,7 +318,7 @@ class Calendars_Model extends Model{
     }
 
     function addObj_department_loan($data){
-        $query = $this->inserrt("tbl_department_loan", $data);
+        $query = $this->insert("tbl_department_loan", $data);
         return $query;
     }
 

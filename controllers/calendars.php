@@ -32,7 +32,7 @@ class Calendars extends Controller{
         $department = $_REQUEST['department_id']; $lesson = $_REQUEST['lesson']; $subject = $_REQUEST['subject_id']; $lessonmain = $_REQUEST['lesson_export'];
         $title = $_REQUEST['title']; $code = time();
         $datadc = ($_REQUEST['datadc'] != '') ? json_decode($_REQUEST['datadc'], true) : [];
-        if($datestudy > date("Y-m-d")){
+        /*if($datestudy > date("Y-m-d")){
             $jsonObj['msg'] = "Không báo giảng trước sau ngày hiện tại";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -53,24 +53,9 @@ class Calendars extends Controller{
                                     "create_at" => date("Y-m-d H:i:s"));
                     $temp = $this->model->addObj($data);
                     if($temp){
-                        // kiem tra xem co muon do dung hay thiet bi khong
-                        if(count($datadc) > 0){
-                            $this->action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title);
-                            $this->action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title);
-                            if($this->action_loan_department_add($datadc, $code, $userid, $datestudy, $subject, $title, $lesson)){
-                                $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                                $jsonObj['success'] = true;
-                                $this->view->jsonObj = json_encode($jsonObj);
-                            }else{
-                                $jsonObj['msg'] = "Vào tiết ".$lesson."  của ngày ".$datestudy." phòng  chức năng đã có người dạy";
-                                $jsonObj['success'] = false;
-                                $this->view->jsonObj = json_encode($jsonObj);
-                            }
-                        }else{
-                            $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                            $jsonObj['success'] = true;
-                            $this->view->jsonObj = json_encode($jsonObj);
-                        }
+                        $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                        $jsonObj['success'] = true;
+                        $this->view->jsonObj = json_encode($jsonObj);
                     }else{
                         $jsonObj['msg'] = "Ghi dữ liệu không thành công";
                         $jsonObj['success'] = false;
@@ -79,6 +64,10 @@ class Calendars extends Controller{
                 }
             }
         }
+        */
+        $jsonObj['msg'] = "Ghi dữ liệu thành công";
+        $jsonObj['success'] = true;
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render('calendars/add');
     }
 
@@ -283,104 +272,6 @@ class Calendars extends Controller{
         $jsonObj = $this->model->get_data_department_total($keyword);
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('calendars/list_department_page');
-    }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    function action_loans_device($code){
-        $status_device = $this->model->check_status_device_loan($code);
-        if($status_device == 3){ // dang trong trang thai dat truoc thiet bi
-            $this->model->delObj_device_loans($code); // xoa du lieu muon thiet bi
-        }elseif($status_device == 0 || $status_device == 2){ // dang trong trang thai muon hoac tra mot phan
-            // thuc hien tra het thiet bij
-            $data_loan_deview = array("date_return" => date("Y-m-d H:i:s"), "status" => 1);
-            $this->model->updateObj_device_loan($code, $data_loan_deview);
-            $data_loan_device_detail = array("date_return" => date("Y-m-d H:i:s"), "status" => 1);
-            $this->model->updateobj_dvice_loan_detail($code, $data_loan_device_detail);
-        }
-    }
-
-    function action_loans_gear($code){
-        $status_gear = $this->model->check_status_gear_loan($code);
-        if($status_gear == 3){ // dang trong trang thai dat truoc do dung
-            $this->model->delObj_gear_loan($code); // xao du lieu muon do dung
-        }elseif($status_gear == 0 || $status_gear == 2){// dang trong trang thai muon hoac tra mot phan do dung
-            // thuwc hien tra het do dung
-            $data_loan_gear = array("date_return" => date("Y-m-d H:i:s"), "status" => 1);
-            $this->model->updateObj_gear_loan($code, $data_loan_gear);
-            $data_loan_gear_detail = array("date_return" => date("Y-m-d H:i:s"), "status" => 1);
-            $this->model->updateObj_gear_loan_detail($code, $data_loan_gear_detail);
-        }
-    }
-
-    function actiion_loans_department($code){
-        $data = array("status" => 1);
-        $this->model->updateObj_department_loan($code, $data);
-    }
-
-    function action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title){
-        foreach($datadc as $row){
-            $device = explode(".", $row['id']);
-            if($row['type'] == 1){ //muon thiet bi
-                if($this->model->check_code_loans_device($code) == 0){ // neu chua co phieu thi tao phieu
-                    $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, 
-                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-                    $this->model->addObj_device_loan($data_loan_device);
-                }
-
-                if($this->model->check_device_loans($code, $device[0], $row['sub']) == 0){
-                    // them moi du lieu chi tiet  muon thiet bi
-                    $data_loan_device_detail = array("code" => $code, "device_id" => $device[0],
-                                                "sub_device" => $row['sub'], "status" => 0, "date_return" => $datestudy);
-                    $this->model->addObj_device_loan_detail($data_loan_device_detail);
-                }
-            }
-        }
-    }
-
-    function action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title){
-        foreach($datadc as $row){
-            $device = explode(".", $row['id']);
-            if($row['type'] == 2){ //muon do dung
-                if($this->model->check_code_loans_gear($code) == 0){ // neu chua co phieu thi tao phieu
-                    $data_loan_device = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, 
-                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-                    $this->model->addObj_gear_loan($data_loan_device);
-                }
-
-                if($this->model->check_gear_loans($code, $device[0], $row['sub']) == 0){
-                    // them moi du lieu chi tiet  muon thiet bi
-                    $data_loan_device_detail = array("code" => $code, "utensils_id" => $device[0],
-                                                "sub_utensils" => $row['sub'], "status" => 0, "date_return" => $datestudy);
-                    $this->model->addObj_gear_loan_detail($data_loan_device_detail);
-                }
-            }
-        }
-    }
-
-    function action_loan_department_add($datadc, $code, $userid, $datestudy, $subject, $title, $lesson){
-        $status = true;
-        foreach($datadc as $row){
-            if($row['type'] == 3){ //muon phong chuc nang
-                if($this->model->check_code_loans_department($datestudy, $lesson, $row['id']) == 0){ // duoc muon phong
-                    $data_loan_department = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,
-                                        "date_loan" => $datestudy, "date_return" =>  $datestudy, "lesson" => $lesson,
-                                        "content" => "Phục vụ bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                                        "status" => 0, "create_at" => date("Y-m-d H:i:s"), 'department_id' => $row['id']);
-                    $temp = $this->model->addObj_department_loan($data_loan_department);
-                    if($temp){
-                        $status = true;
-                    }else{
-                        $status = false;
-                    }
-                }else{
-                    $status = false;
-                }
-            }
-        }
-        return $status;
     }
 }
 ?>
