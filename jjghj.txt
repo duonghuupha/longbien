@@ -1,0 +1,108 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+function select_device(){
+	$('#list_device').load(baseUrl + '/calendars/list_device'); 
+    $('#pager_device').load(baseUrl + '/calendars/list_device_page');
+	$('#modal-device').modal('show');
+}
+
+function view_page_devices(pages){
+	page_device = pages;
+	$('#list_device').load(baseUrl + '/calendars/list_device?page='+page_device+'&q='+keyword_device); 
+    $('#pager_device').load(baseUrl + '/calendars/list_device_page?page='+page_device+'&q='+keyword_device);
+}
+
+function search_device(){
+	var value = $('#nav-search-input-device').val();
+    if(value.length != 0){
+        keyword_device = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_device = '';
+    }
+    $('#list_device').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device); 
+    $('#pager_device').load(baseUrl + '/calendars/list_device_page?page=1&q='+keyword_device);
+}
+
+function confirm_devices(idh){
+	var value = $('#device_'+idh).val(), title = $('#title_'+idh).text();
+    var str = {'id': idh+'.'+value, 'title': title, 'sub': value, 'type' : 1};
+    var objIndex = datadc.findIndex(item => item.id === idh+'.'+value && item.type === 1);
+    if(objIndex != -1){
+        show_message("error", "Thiết bị đã được chọn, không thể chọn lại");
+        return false;
+    }else{
+        datadc.push(str);
+        render_table(datadc); $('#modal-device').modal('hide');
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+function select_gear(){
+	$('#list_gear').load(baseUrl + '/calendars/list_gear');
+    $('#pager_gear').load(baseUrl + '/calendars/list_gear_page');
+	$('#modal-gear').modal('show');
+}
+
+function view_page_gear(pages){
+    page_gear = pages;
+    $('#list_gear').load(baseUrl + '/calendars/list_gear?page='+page_gear+'&q='+keyword_gear);
+    $('#pager_gear').load(baseUrl +'/calendars/list_gear_page?page='+page_gear+'&q='+keyword_gear);
+}
+
+function search_gear(){
+    var value = $('#nav-search-input-gear').val();
+    if(value.length != 0){
+        keyword_gear = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_gear = '';
+    }
+    $('#list_gear').load(baseUrl + '/calendars/list_gear?page=1&q='+keyword_gear);
+    $('#pager_gear').load(baseUrl +'/calendars/list_gear_page?page=1&q='+keyword_gear);
+}
+
+function confirm_gear(idh){
+    var value = $('#gear_'+idh).val(), title = $('#title_'+idh).text();
+    var str = {'id': idh+'.'+value, 'title': title, 'sub': value, 'type': 2};
+    var objIndex = datadc.findIndex(item => item.id === idh+'.'+value && item.type === 2);
+    if(objIndex != -1){
+        show_message("error", "Đồ dùng đã được chọn, không thể chọn lại");
+        return false;
+    }else{
+        datadc.push(str);
+        render_table(datadc); $('#modal-gear').modal('hide');
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function select_department(){
+	$('#list_department').load(baseUrl + '/calendars/list_department');
+	$('#pager_department').load(baseUrl + '/calendars/list_department_page');
+	$('#modal-department').modal('show');
+}
+
+function view_page_department(pages){
+	page_department = pages;
+	$('#list_department').load(baseUrl + '/calendars/list_department?page='+page_department+'&q='+keyword_department);
+	$('#pager_department').load(baseUrl + '/calendars/list_department_page?page='+page_department+'&q='+keyword_department);
+}
+
+function search_department(){
+	var value = $('#nav-search-input-department').val();
+    if(value.length != 0){
+        keyword_department = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_department = '';
+    }
+    $('#list_department').load(baseUrl + '/calendars/list_department?page=1&q='+keyword_department);
+	$('#pager_department').load(baseUrl + '/calendars/list_department_page?page=1&q='+keyword_department);
+}
+
+function confirm_department(idh){
+	var title = $('#title_'+idh).text();
+	var str = {'id': idh, 'title': title, 'sub': 0, 'type': 3};
+    var objIndex = datadc.findIndex(item => item.id === idh && item.type === 3);
+    if(objIndex != -1){
+        show_message("error", "Phòng chức năng đã được chọn, không thể chọn lại");
+        return false;
+    }else{
+        datadc.push(str);
+        render_table(datadc); $('#modal-department').modal('hide');
+    }
+}
