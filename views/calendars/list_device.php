@@ -1,7 +1,7 @@
 <?php
 $jsonObj = $this->jsonObj;
 ?>
-<table 
+<table style="font-size:12px"
     id="dynamic-table" 
     class="table table-striped table-bordered table-hover dataTable no-footer" 
     role="grid"

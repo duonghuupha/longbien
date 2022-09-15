@@ -208,39 +208,63 @@
 <!-- End formm don vi tinh-->
 
 <!--Form don vi tinh-->
-<div id="modal-device" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:55%">
+<div id="modal-device-gear-dep" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <span class="white">×</span>
-                    </button>
-                    Danh sách thiết bị
+                    Đăng ký sử dụng trang thiết bị / đồ dùng / phòng chức năng
                 </div>
             </div>
-            <div class="modal-body" style="height:520px;">
+            <div class="modal-body" style="height:620px;">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                        <input class="form-control" id="nav-search-input-device" type="text" style="width:100%"
-                        placeholder="Tìm kiếm" onkeyup="search_device()"/>
+                    <div class="col-xs-4 col-sm-4">
+                        <select class="select2" id="data_type" name="data_type" style="width:100%"
+                        onchange="set_data_list()">
+                            <option value="1">Trang thiết bị</option>
+                            <option value="2">Đồ dùng dạy học</option>
+                            <option value="3">Phòng chức năng</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-8 col-sm-8">
+                        <input class="form-control" id="nav-search-input-device-gear-dep" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_device_gear_dep()"/>
                     </div>
                     <div class="col-xs-12">
                         <div class="space-6"></div>
                     </div>
-                    <div class="col-xs-12 col-sm-12" style="overflow:scroll">
-                        <div id="list_device" class="dataTables_wrapper form-inline no-footer"></div>
-                    </div><!-- /.col -->
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8">
+                            <div id="list_data" class="dataTables_wrapper form-inline no-footer"></div>
+                        </div><!-- /.col -->
+                        <div class="col-xs-4 col-sm-4">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Thiết bị, đồ dùng, phòng CN chuẩn bị</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <ul class="list-unstyled spaced" id="list_prepare" style="font-size:12px;">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <small class="pull-left" id="pager_device">
+                <small class="pull-left" id="pager_data">
                     <!--display pagination-->
                 </small>
-                <button class="btn btn-sm btn-primary pull-right" onclick="save_loan_device()">
-                    <i class="ace-icon fa fa-save"></i>
-                    Ghi dữ liệu
-                </button>
+                <small class="pull-right">
+                    <button class="btn btn-sm btn-danger" onclick="cancel_loan()">
+                        <i class="ace-icon fa fa-times"></i>
+                        Đóng
+                    </button>
+                    <button class="btn btn-sm btn-primary" onclick="save_loan()">
+                        <i class="ace-icon fa fa-save"></i>
+                        Ghi dữ liệu
+                    </button>
+                </small>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

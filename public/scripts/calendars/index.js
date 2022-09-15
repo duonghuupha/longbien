@@ -1,4 +1,4 @@
-var page = 1, url = '', page_user = 1, keyword_user = '';
+var page = 1, url = '', page_user = 1, keyword_user = '',data_type = 1;
 var titles = '', datestudy = '', lessons = 0, lessonexps = '', teacher = '', department = '', subjects = '';
 var page_device = 1, keyword_device = '', datadc = [], page_gear = 1, keyword_gear = '', page_department = 1, keyword_department = '';
 $(function(){
@@ -7,6 +7,7 @@ $(function(){
 	$('#lesson_search').val(lessons).trigger('change');
 	$('#class_search').load(baseUrl + '/other/combo_department?yearid='+yearid);
 	$('#subject_search').load(baseUrl + '/other/combo_subject_point');
+	select_device_gear_de();
 });
 
 function add(){
@@ -143,27 +144,43 @@ function del_subject(){
 	$('#subject_search').val(null).trigger('change');
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
-function select_device(){
-	$('#list_device').load(baseUrl + '/calendars/list_device'); 
-    $('#pager_device').load(baseUrl + '/calendars/list_device_page');
-	$('#modal-device').modal('show');
+function select_device_gear_de(idh){
+	$('#data_type').val(1).trigger('change'); render_table(datadc);
+	$('#modal-device-gear-dep').modal('show');
 }
 
-function view_page_devices(pages){
+function set_data_list(){
+	var value = $('#data_type').val(); data_type = value;
+	if(data_type == 1){
+		$('#list_data').load(baseUrl + '/calendars/list_device'); 
+    	$('#pager_data').load(baseUrl + '/calendars/list_device_page');
+	}else if(data_type == 2){
+		$('#list_data').load(baseUrl + '/calendars/list_gear');
+    	$('#pager_data').load(baseUrl + '/calendars/list_gear_page');
+	}
+}
+
+function view_page_device(pages){
 	page_device = pages;
-	$('#list_device').load(baseUrl + '/calendars/list_device?page='+page_device+'&q='+keyword_device); 
-    $('#pager_device').load(baseUrl + '/calendars/list_device_page?page='+page_device+'&q='+keyword_device);
+	$('#list_data').load(baseUrl + '/calendars/list_device?page='+page_device+'&q='+keyword_device); 
+    $('#pager_data').load(baseUrl + '/calendars/list_device_page?page='+page_device+'&q='+keyword_device);
 }
 
-function search_device(){
-	var value = $('#nav-search-input-device').val();
+function view_page_gear(pages){
+    page_gear = pages;
+    $('#list_data').load(baseUrl + '/calendars/list_gear?page='+page_gear+'&q='+keyword_gear);
+    $('#pager_data').load(baseUrl +'/calendars/list_gear_page?page='+page_gear+'&q='+keyword_gear);
+}
+
+function search_device_gear_dep(){
+	var value = $('#nav-search-input-device-gear-dep').val();
     if(value.length != 0){
         keyword_device = value.replaceAll(" ", "$", 'g');
     }else{
         keyword_device = '';
     }
-    $('#list_device').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device); 
-    $('#pager_device').load(baseUrl + '/calendars/list_device_page?page=1&q='+keyword_device);
+    $('#list_data').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device); 
+    $('#pager_data').load(baseUrl + '/calendars/list_device_page?page=1&q='+keyword_device);
 }
 
 function confirm_devices(idh){
@@ -174,32 +191,8 @@ function confirm_devices(idh){
         show_message("error", "Thiết bị đã được chọn, không thể chọn lại");
         return false;
     }else{
-        datadc.push(str);
-        render_table(datadc); $('#modal-device').modal('hide');
+        datadc.push(str);  render_table(datadc); set_data_list();
     }
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-function select_gear(){
-	$('#list_gear').load(baseUrl + '/calendars/list_gear');
-    $('#pager_gear').load(baseUrl + '/calendars/list_gear_page');
-	$('#modal-gear').modal('show');
-}
-
-function view_page_gear(pages){
-    page_gear = pages;
-    $('#list_gear').load(baseUrl + '/calendars/list_gear?page='+page_gear+'&q='+keyword_gear);
-    $('#pager_gear').load(baseUrl +'/calendars/list_gear_page?page='+page_gear+'&q='+keyword_gear);
-}
-
-function search_gear(){
-    var value = $('#nav-search-input-gear').val();
-    if(value.length != 0){
-        keyword_gear = value.replaceAll(" ", "$", 'g');
-    }else{
-        keyword_gear = '';
-    }
-    $('#list_gear').load(baseUrl + '/calendars/list_gear?page=1&q='+keyword_gear);
-    $('#pager_gear').load(baseUrl +'/calendars/list_gear_page?page=1&q='+keyword_gear);
 }
 
 function confirm_gear(idh){
@@ -210,44 +203,7 @@ function confirm_gear(idh){
         show_message("error", "Đồ dùng đã được chọn, không thể chọn lại");
         return false;
     }else{
-        datadc.push(str);
-        render_table(datadc); $('#modal-gear').modal('hide');
-    }
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function select_department(){
-	$('#list_department').load(baseUrl + '/calendars/list_department');
-	$('#pager_department').load(baseUrl + '/calendars/list_department_page');
-	$('#modal-department').modal('show');
-}
-
-function view_page_department(pages){
-	page_department = pages;
-	$('#list_department').load(baseUrl + '/calendars/list_department?page='+page_department+'&q='+keyword_department);
-	$('#pager_department').load(baseUrl + '/calendars/list_department_page?page='+page_department+'&q='+keyword_department);
-}
-
-function search_department(){
-	var value = $('#nav-search-input-department').val();
-    if(value.length != 0){
-        keyword_department = value.replaceAll(" ", "$", 'g');
-    }else{
-        keyword_department = '';
-    }
-    $('#list_department').load(baseUrl + '/calendars/list_department?page=1&q='+keyword_department);
-	$('#pager_department').load(baseUrl + '/calendars/list_department_page?page=1&q='+keyword_department);
-}
-
-function confirm_department(idh){
-	var title = $('#title_'+idh).text();
-	var str = {'id': idh, 'title': title, 'sub': 0, 'type': 3};
-    var objIndex = datadc.findIndex(item => item.id === idh && item.type === 3);
-    if(objIndex != -1){
-        show_message("error", "Phòng chức năng đã được chọn, không thể chọn lại");
-        return false;
-    }else{
-        datadc.push(str);
-        render_table(datadc); $('#modal-department').modal('hide');
+		datadc.push(str);  render_table(datadc); set_data_list();
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -275,3 +231,13 @@ function del_select(idh, type){
 	var objIndex = datadc.findIndex(item => item.id === idh.toString() && item.type === type);
 	datadc.splice(objIndex, 1); render_table(datadc);
 }
+
+function cancel_loan(){
+	datadc = [];
+	$('#modal-device-gear-dep').modal('hide');
+}
+
+function save_loans(){
+	$('#modal-device-gear-dep').modal('hide');
+}
+

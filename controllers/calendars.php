@@ -32,7 +32,7 @@ class Calendars extends Controller{
         $department = $_REQUEST['department_id']; $lesson = $_REQUEST['lesson']; $subject = $_REQUEST['subject_id']; $lessonmain = $_REQUEST['lesson_export'];
         $title = $_REQUEST['title']; $code = time();
         $datadc = ($_REQUEST['datadc'] != '') ? json_decode($_REQUEST['datadc'], true) : [];
-        /*if($datestudy > date("Y-m-d")){
+        if($datestudy > date("Y-m-d")){
             $jsonObj['msg'] = "Không báo giảng trước sau ngày hiện tại";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -64,10 +64,6 @@ class Calendars extends Controller{
                 }
             }
         }
-        */
-        $jsonObj['msg'] = "Ghi dữ liệu thành công";
-        $jsonObj['success'] = true;
-        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render('calendars/add');
     }
 
