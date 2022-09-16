@@ -272,6 +272,124 @@ class Calendars extends Controller{
 ///////////////////////////////////////////////////////////////////////////////////////////////
     function update_loan(){
         $id = $_REQUEST['id']; $info = $this->model->get_info($id);
+        $datadc = json_decode($_REQUEST['datadc'], true);
+        if(count($datadc) > 0){
+            $status = true;
+            foreach($datadc as $row){
+                if($row['type'] == 1){ // thiet bi
+                    $device = explode(".", $row['id']);
+                    // kiem tra xem ton tai phieu muon thiet bi chua
+                    if($this->model->check_code_loans_device($info[0]['code']) > 0){ // da ton tai phieu muon thiet bi voi ma da cho
+                        if($this->add_item_loans_device_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
+                            $status = true;
+                        }else{
+                            $status = false;
+                        }
+                    }else{   // khong ton tai phieu muon thiet bi thi tao phieu moi
+                        if($this->add_item_loans_device($info[0]['code'], $info[0]['datestudy'], $info[0]['user_id'], $info[0]['subject_id'], $info[0]['title'])){
+                            if($this->add_item_loans_device_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
+                                $status = true;
+                            }else{
+                                $status = false;
+                            }
+                        }else{
+                            $status = false;
+                        }
+                    }
+                }elseif($row['type'] == 2){ /// do dung
+                    $device = explode(".", $row['id']);
+                    // kiem tra xem ton tai phieu muon do dung chua
+                    if($this->model->check_code_loans_gear($info[0]['code']) > 0){ // da ton tai phieu muon do dung voi ma da cho
+                        if($this->add_item_loans_gear_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
+                            $status = true;
+                        }else{
+                            $status = false;
+                        }
+                    }else{ // khong tin tai phieu muon do dung thi tao phieu moi
+                        if($this->add_item_loans_gear($info[0]['code'], $info[0]['datestudy'], $info[0]['user_id'], $info[0]['subject_id'], $info[0]['title'])){
+                            if($this->add_item_loans_gear_detail($info[0]['code'], $device[0], $device[1], $info[0]['date_sdatestudytudy'])){
+                                $status = true;
+                            }else{
+                                $status = false;
+                            }
+                        }else{
+                            $status = false;
+                        }
+                    }
+                }else{ // phong chuc nang
+                    // kiem tra xem ton tai phieu muon phong chuc nang hay khong
+                    if($this->add_item_loans_department($info[0]['code'], $info[0]['datestudy'],  $info[0]['user_id'], $info[0]['subject_id'], $info[0]['title'], $info[0]['lesson'], $row['id'])){
+                        $status = true;
+                    }else{
+                        $status = false;
+                    }
+                }
+            }
+            if($status){
+                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{
+            $jsonObj['msg'] = "Không có bản ghi nào được chọn";
+            $jsonObj['success'] =  false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("calendars/update_loan");
+    }
+/////////////////////////////////////////Thao tac muon thiet bi////////////////////////////////////////////////
+    function add_item_loans_device($code, $date, $userid, $subject, $title){
+        $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" =>  $date,
+                        "content" => "Phục vụ cho bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
+                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
+        $temp = $this->model->addObj_device_loan($data);
+        return $temp;
+    }
+
+    function add_item_loans_device_detail($code, $deviceid, $subdevice, $date){
+        $data = array("code" => $code, "device_id" =>  $deviceid, "sub_device" => $subdevice, "date_return" => $date,
+                        "status" => 0);
+        if($this->model->check_device_loans_detail($deviceid, $subdevice) == 0){
+            $temp = false;
+        }else{
+            $temp = $this->model->addObj_device_loan_detail($data);
+        }
+        return $temp;
+    }
+//////////////////////////////////////Thao tac muon do dung//////////////////////////////////////////////////////
+    function add_item_loans_gear($code, $date, $userid, $subject, $title){
+        $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" =>  $date,
+                        "content" => "Phục vụ cho bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
+                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
+        $temp = $this->model->addObj_gear_loan($data);
+        return $temp;
+    }
+
+    function add_item_loans_gear_detail($code, $utesilsid, $subutensils, $date){
+        $data = array("code" => $code, "utensils_id" =>  $deviceid, "sub_utensils" => $subdevice, "date_return" => $date,
+                        "status" => 0);
+        if($this->model->check_gear_loans_detail($deviceid, $subdevice) == 0){
+            $temp = false;
+        }else{
+            $temp = $this->model->addObj_gear_loan_detail($data);
+        }
+        return $temp;
+    }
+/////////////////////////////////////Thao tac muon phong chuc nang////////////////////////////////////////////////
+    function add_item_loans_department($code, $date, $userid, $subject, $title, $lesson, $departmentid){
+        if($this->model->check_code_loans_department($date, $lesson, $departmentid) > 0){
+            return false;
+        }else{
+            $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" => $date,
+                            "department_id" => $departmentid, "lesson" => $lesson, "status" => 0, "create_at" => date("Y-m-d H:i:s"),
+                            "content" => "Phục vụ cho bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title);
+            $temp = $this->model->addObj_department_loan($data);
+            return $temp;
+        }
     }
 }
 ?>

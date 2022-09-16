@@ -215,7 +215,7 @@
                     Đăng ký sử dụng trang thiết bị / đồ dùng / phòng chức năng
                 </div>
             </div>
-            <div class="modal-body" style="height:620px;">
+            <div class="modal-body">
                 <div class="row">
                     <form id="fm_loan">
                         <input id="datadc" name="datadc" type="hidden"/>
@@ -236,7 +236,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-8 col-sm-8">
-                                <div id="list_data" class="dataTables_wrapper form-inline no-footer"></div>
+                                <div id="list_data" class="dataTables_wrapper form-inline no-footer" style="overflow:hidden"></div>
                             </div><!-- /.col -->
                             <div class="col-xs-4 col-sm-4">
                                 <div class="col-xs-12">

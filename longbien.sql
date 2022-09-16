@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2022 at 02:07 AM
+-- Generation Time: Sep 16, 2022 at 05:41 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -803,7 +803,7 @@ INSERT INTO `tbl_loans` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `dat
 (9, 1656517357, 1, 4, '2022-06-29 22:42:37', '2022-06-29 23:12:46', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-29 22:42:37'),
 (10, 1656526338, 1, 4, '2022-06-30 01:12:18', '2022-06-30 01:12:35', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-30 01:12:18'),
 (11, 1656598271, 1, 4, '2022-06-30 21:11:11', '2022-06-30 21:11:20', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-30 21:11:11'),
-(17, 1662864369, 6, 6, '2022-09-11 00:00:00', '2022-09-11 00:00:00', 'Phục vụ bài dạy môn Toán: Giải toán bằng cách lập phương trình', '', 3, '2022-09-11 09:46:09');
+(19, 1662945698, 3, 3, '2022-09-12 00:00:00', '2022-09-12 00:00:00', 'Phục vụ cho bài dạy môn Lịch sử: Tìm hiểu cuộc cách  mạng công nghiệp lần thứ nhất', '', 3, '2022-09-16 13:01:25');
 
 --
 -- Triggers `tbl_loans`
@@ -844,8 +844,7 @@ INSERT INTO `tbl_loans_detail` (`id`, `code`, `device_id`, `sub_device`, `status
 (10, 1656526338, 34, 2, 1, '2022-06-30 01:12:35'),
 (11, 1656526338, 34, 1, 1, '2022-06-30 01:12:34'),
 (12, 1656598271, 34, 1, 1, '2022-06-30 21:11:16'),
-(13, 1656598271, 34, 2, 1, '2022-06-30 21:11:20'),
-(16, 1662864369, 28, 1, 0, '2022-09-11 00:00:00');
+(13, 1656598271, 34, 2, 1, '2022-06-30 21:11:20');
 
 -- --------------------------------------------------------
 
@@ -1312,7 +1311,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-15 23:26:58', 'af9301a1dbd22c9f1ffbb296f519871d4df6d527', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-16 09:08:04', '4bcfe99c25c00a24e1ff3acf2fe90c5d82fccfe4', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
@@ -1873,7 +1872,7 @@ ALTER TABLE `tbl_export_detail`
 -- AUTO_INCREMENT for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans_detail`

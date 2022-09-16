@@ -20763,4 +20763,30 @@ input.typeahead.scrollable~.tt-menu {
     border-radius:100%;
     border: 2px solid #ccc;
 }
+.tableFixHead {
+    overflow-y: auto;
+    height: 450px;
+}
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    border: 1px solid #ddd;
+    border-bottom-width: 2px;
+}
+.tableFixHead table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.tableFixHead th, .tableFixHead td {
+    padding: 5px 8px;
+    border: 1px solid #ddd;
+}
+.tableFixHead th {
+    background: repeat-x #F2F2F2;
+    background-image: -webkit-linear-gradient(top, #F8F8F8 0, #ECECEC 100%);
+    background-image: -o-linear-gradient(top, #F8F8F8 0, #ECECEC 100%);
+    background-image: linear-gradient(to bottom, #F8F8F8 0, #ECECEC 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8', endColorstr='#ffececec', GradientType=0)
+}
 /************************************************************/

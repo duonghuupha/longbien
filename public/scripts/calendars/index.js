@@ -280,7 +280,7 @@ function cancel_loan(){
 function save_loan(){
 	if(datadc.length != 0){
 		$('#datadc').val(JSON.stringify(datadc));
-		save_form_modal('#fm', url, '#modal-device-gear-dep', '#list_task',  baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher+'&department_id='+department+'&subject_id='+subjects); 
+		save_form_modal('#fm_loan', url, '#modal-device-gear-dep', '#list_task',  baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher+'&department_id='+department+'&subject_id='+subjects); 
 		//$('#modal-device-gear-dep').modal('hide');
 	}else{
 		show_message("error", "Không có bản ghi nào được chọn");

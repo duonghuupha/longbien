@@ -110,7 +110,7 @@ class Calendars_Model extends Model{
     }
 
     function get_info($id){
-        $query = $this->db->query("SELECT id, code, user_id, user_create, lesson, lesson_export, subject_id, title, department_id,
+        $query = $this->db->query("SELECT id, code, user_id, user_create, lesson, lesson_export, subject_id, title, department_id, date_study AS datestudy,
                                     DATE_FORMAT(date_study, '%d-%m-%Y') AS date_study, create_at, (SELECT tbldm_subject.title FROM tbldm_subject WHERE tbldm_subject.id = subject_id) 
                                     AS `subject`, (SELECT tbldm_department.title FROM tbldm_department WHERE tbldm_department.id = department_id)
                                     AS department, (SELECT fullname FROM tbl_personel WHERE tbl_personel. id = (SELECT  hr_id FROM tbl_users
@@ -204,11 +204,10 @@ class Calendars_Model extends Model{
         return $row[0]['Total'];
     }
 
-    function check_device_loans($code, $deviceid, $subdevice){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans_detail WHERE code = $code
-                                    AND device_id = $deviceid AND sub_device  = $subdevice");
+    function check_device_loans_detail($deviceid, $subdevice){
+        $query = $this->db->query("SELECT status FROM tbl_loans_detail WHERE device_id = $deviceid AND sub_device  = $subdevice");
         $row = $query->fetchAll();
-        return $row[0]['Total'];
+        return $row[0]['status'];
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function addObj_gear_loan($data){
@@ -227,11 +226,10 @@ class Calendars_Model extends Model{
         return $row[0]['Total'];
     }
 
-    function check_gear_loans($code, $gearid, $subgear){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan_detail WHERE code = $code
-                                    AND utensils_id = $gearid AND sub_utensils  = $subgear");
+    function check_gear_loans_detail($gearid, $subgear){
+        $query = $this->db->query("SELECT status FROM tbl_utensils_loan_detail WHERE utensils_id = $gearid AND sub_utensils  = $subgear");
         $row = $query->fetchAll();
-        return $row[0]['Total'];
+        return $row[0]['status'];
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function delObj_device_loans($code){
