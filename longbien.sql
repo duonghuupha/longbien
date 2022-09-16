@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2022 at 06:27 PM
+-- Generation Time: Sep 16, 2022 at 02:07 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -651,7 +651,8 @@ INSERT INTO `tbl_devices` (`id`, `code`, `title`, `cate_id`, `origin`, `price`, 
 (31, 12345683, 'Máy chiếu đa năng kỹ thuật số Panasonic', 0, 'Việt Nam', 14020000, 20, 2027, '', '', 10, 1),
 (32, 12345684, 'Máu tin Canon LBP151DW', 0, 'Việt Nam', 14020000, 20, 2028, '', '', 10, 1),
 (33, 12345685, 'Loa Microlap M108', 3, 'Việt Nam', 14020000, 20, 2029, '', '', 10, 1),
-(34, 12345686, 'Thiết bị trợ giảng, mic gài', 0, 'Việt Nam', 14020000, 20, 2030, '', '', 10, 1);
+(34, 12345686, 'Thiết bị trợ giảng, mic gài', 0, 'Việt Nam', 14020000, 20, 2030, '', '', 10, 1),
+(35, 48320702, 'Đàn organ Yamaha 670s', 3, 'Trung quốc', 19020000, 20, 2022, '', '', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -989,6 +990,18 @@ INSERT INTO `tbl_schedule` (`id`, `code`, `user_id`, `user_create`, `lesson`, `s
 (13, 1662864369, 6, 1, 2, 1, 1, 2, '2022-09-11', 'Giải toán bằng cách lập phương trình', '2022-09-11 09:46:09'),
 (14, 1662945698, 3, 1, 1, 4, 1, 2, '2022-09-12', 'Tìm hiểu cuộc cách  mạng công nghiệp lần thứ nhất', '2022-09-12 08:21:38');
 
+--
+-- Triggers `tbl_schedule`
+--
+DELIMITER $$
+CREATE TRIGGER `del_device_gear_department_loan_after_del_schedule` AFTER DELETE ON `tbl_schedule` FOR EACH ROW BEGIN
+DELETE FROM tbl_loans WHERE tbl_loans.code = old.code;
+DELETE FROM tbl_utensils_loan WHERE tbl_utensils_loan.code = old.code;
+DELETE FROM tbl_department_loan WHERE tbl_department_loan.code = old.code;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -1299,7 +1312,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-12 08:22:15', '330fef99521d17c7c23bf05c50a7de8686739ca4', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-15 23:26:58', 'af9301a1dbd22c9f1ffbb296f519871d4df6d527', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
@@ -1830,7 +1843,7 @@ ALTER TABLE `tbl_department_loan`
 -- AUTO_INCREMENT for table `tbl_devices`
 --
 ALTER TABLE `tbl_devices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_document_in`

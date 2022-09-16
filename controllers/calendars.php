@@ -269,5 +269,9 @@ class Calendars extends Controller{
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('calendars/list_department_page');
     }
+///////////////////////////////////////////////////////////////////////////////////////////////
+    function update_loan(){
+        $id = $_REQUEST['id']; $info = $this->model->get_info($id);
+    }
 }
 ?>

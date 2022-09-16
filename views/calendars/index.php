@@ -54,7 +54,6 @@
                         <input id="lesson_id" name="lesson_id" type="hidden"/>
                         <input id="subjectid" name="subjectid" type="hidden"/>
                         <input id="code" name="code" type="hidden"/>
-                        <input id="datadc" name="datadc" type="hidden"/>
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn giáo viên</label>
@@ -218,37 +217,40 @@
             </div>
             <div class="modal-body" style="height:620px;">
                 <div class="row">
-                    <div class="col-xs-4 col-sm-4">
-                        <select class="select2" id="data_type" name="data_type" style="width:100%"
-                        onchange="set_data_list()">
-                            <option value="1">Trang thiết bị</option>
-                            <option value="2">Đồ dùng dạy học</option>
-                            <option value="3">Phòng chức năng</option>
-                        </select>
-                    </div>
-                    <div class="col-xs-8 col-sm-8">
-                        <input class="form-control" id="nav-search-input-device-gear-dep" type="text" style="width:100%"
-                        placeholder="Tìm kiếm" onkeyup="search_device_gear_dep()"/>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="space-6"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8 col-sm-8">
-                            <div id="list_data" class="dataTables_wrapper form-inline no-footer"></div>
-                        </div><!-- /.col -->
+                    <form id="fm_loan">
+                        <input id="datadc" name="datadc" type="hidden"/>
                         <div class="col-xs-4 col-sm-4">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="form-field-username">Thiết bị, đồ dùng, phòng CN chuẩn bị</label>
+                            <select class="select2" id="data_type" name="data_type" style="width:100%"
+                            onchange="set_data_list()">
+                                <option value="1">Trang thiết bị</option>
+                                <option value="2">Đồ dùng dạy học</option>
+                                <option value="3">Phòng chức năng</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-8 col-sm-8">
+                            <input class="form-control" id="nav-search-input-device-gear-dep" type="text" style="width:100%"
+                            placeholder="Tìm kiếm" onkeyup="search_device_gear_dep()"/>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="space-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-8">
+                                <div id="list_data" class="dataTables_wrapper form-inline no-footer"></div>
+                            </div><!-- /.col -->
+                            <div class="col-xs-4 col-sm-4">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="form-field-username">Thiết bị, đồ dùng, phòng CN chuẩn bị</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <ul class="list-unstyled spaced" id="list_prepare" style="font-size:12px;">
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <ul class="list-unstyled spaced" id="list_prepare" style="font-size:12px;">
-                                </ul>
-                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">

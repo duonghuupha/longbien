@@ -7,7 +7,6 @@ $(function(){
 	$('#lesson_search').val(lessons).trigger('change');
 	$('#class_search').load(baseUrl + '/other/combo_department?yearid='+yearid);
 	$('#subject_search').load(baseUrl + '/other/combo_subject_point');
-	select_device_gear_de();
 });
 
 function add(){
@@ -147,6 +146,7 @@ function del_subject(){
 function select_device_gear_de(idh){
 	$('#data_type').val(1).trigger('change'); render_table(datadc);
 	$('#modal-device-gear-dep').modal('show');
+	url = baseUrl + '/calendars/update_loan?id='+idh;
 }
 
 function set_data_list(){
@@ -157,7 +157,11 @@ function set_data_list(){
 	}else if(data_type == 2){
 		$('#list_data').load(baseUrl + '/calendars/list_gear');
     	$('#pager_data').load(baseUrl + '/calendars/list_gear_page');
+	}else if(data_type == 3){
+		$('#list_data').load(baseUrl + '/calendars/list_department');
+		$('#pager_data').load(baseUrl + '/calendars/list_department_page');
 	}
+	$('#nav-search-input-device-gear-dep').val(null);
 }
 
 function view_page_device(pages){
@@ -172,15 +176,39 @@ function view_page_gear(pages){
     $('#pager_data').load(baseUrl +'/calendars/list_gear_page?page='+page_gear+'&q='+keyword_gear);
 }
 
+function view_page_department(pages){
+	page_department = pages;
+	$('#list_data').load(baseUrl + '/calendars/list_department?page='+page_department+'&q='+keyword_department);
+	$('#pager_data').load(baseUrl + '/calendars/list_department_page?page='+page_department+'&q='+keyword_department);
+}
+
 function search_device_gear_dep(){
 	var value = $('#nav-search-input-device-gear-dep').val();
-    if(value.length != 0){
-        keyword_device = value.replaceAll(" ", "$", 'g');
-    }else{
-        keyword_device = '';
-    }
-    $('#list_data').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device); 
-    $('#pager_data').load(baseUrl + '/calendars/list_device_page?page=1&q='+keyword_device);
+	if(data_type == 1){
+		if(value.length != 0){
+			keyword_device = value.replaceAll(" ", "$", 'g');
+		}else{
+			keyword_device = '';
+		}
+		$('#list_data').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device); 
+		$('#pager_data').load(baseUrl + '/calendars/list_device_page?page=1&q='+keyword_device);
+	}else if(data_type == 2){
+		if(value.length != 0){
+			keyword_gear = value.replaceAll(" ", "$", 'g');
+		}else{
+			keyword_gear = '';
+		}
+		$('#list_data').load(baseUrl + '/calendars/list_gear?page=1&q='+keyword_gear);
+		$('#pager_data').load(baseUrl +'/calendars/list_gear_page?page=1&q='+keyword_gear);
+	}else if(data_type == 3){
+		if(value.length != 0){
+			keyword_department = value.replaceAll(" ", "$", 'g');
+		}else{
+			keyword_department = '';
+		}
+		$('#list_data').load(baseUrl + '/calendars/list_department?page=1&q='+keyword_department);
+		$('#pager_data').load(baseUrl + '/calendars/list_department_page?page=1&q='+keyword_department);
+	}
 }
 
 function confirm_devices(idh){
@@ -189,7 +217,7 @@ function confirm_devices(idh){
     var objIndex = datadc.findIndex(item => item.id === idh+'.'+value && item.type === 1);
     if(objIndex != -1){
         show_message("error", "Thiết bị đã được chọn, không thể chọn lại");
-        return false;
+        set_data_list();
     }else{
         datadc.push(str);  render_table(datadc); set_data_list();
     }
@@ -201,9 +229,21 @@ function confirm_gear(idh){
     var objIndex = datadc.findIndex(item => item.id === idh+'.'+value && item.type === 2);
     if(objIndex != -1){
         show_message("error", "Đồ dùng đã được chọn, không thể chọn lại");
-        return false;
+        set_data_list();
     }else{
 		datadc.push(str);  render_table(datadc); set_data_list();
+    }
+}
+
+function confirm_department(idh){
+	var title = $('#title_'+idh).text();
+	var str = {'id': idh, 'title': title, 'sub': 0, 'type': 3};
+    var objIndex = datadc.findIndex(item => item.id === idh && item.type === 3);
+    if(objIndex != -1){
+        show_message("error", "Phòng chức năng đã được chọn, không thể chọn lại");
+        set_data_list();
+    }else{
+        datadc.push(str);  render_table(datadc); set_data_list();
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -237,7 +277,14 @@ function cancel_loan(){
 	$('#modal-device-gear-dep').modal('hide');
 }
 
-function save_loans(){
-	$('#modal-device-gear-dep').modal('hide');
+function save_loan(){
+	if(datadc.length != 0){
+		$('#datadc').val(JSON.stringify(datadc));
+		save_form_modal('#fm', url, '#modal-device-gear-dep', '#list_task',  baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher+'&department_id='+department+'&subject_id='+subjects); 
+		//$('#modal-device-gear-dep').modal('hide');
+	}else{
+		show_message("error", "Không có bản ghi nào được chọn");
+		return false;
+	}
 }
 
