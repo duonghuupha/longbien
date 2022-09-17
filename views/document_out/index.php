@@ -90,7 +90,7 @@
                                             <option value="1">Quyết định</option>
                                             <option value="2">Kế hoạch</option>
                                             <option value="3">Công văn</option>
-                                            <option value="4">Thông báo</option>
+                                            <option value="4">Báo cáo</option>
                                             <option value="5">Khác</option>
                                         </select>
                                     </div>
@@ -108,10 +108,16 @@
                             </div>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label for="form-field-username">Số văn bản</label>
+                                    <label for="form-field-username">
+                                        Số văn bản
+                                        &nbsp;
+                                        <a href="javascript:void(0)" onclick="reload_code()" title="Cấp lại số văn bản">
+                                            <i class="fa fa-refresh"></i>
+                                        </a>
+                                    </label>
                                     <div>
-                                        <input class="form-control" id="number_dc" type="text" 
-                                        name="number_dc" required="" placeholder="Số văn bản, ví dụ: 01/KH-UBND"/>
+                                        <input class="form-control" id="number_dc" type="text" style="text-transform:uppercase"
+                                        name="number_dc" required="" placeholder="Số văn bản, ví dụ: 01/KH-UBND" readonly=""/>
                                     </div>
                                 </div>
                             </div>

@@ -79,5 +79,12 @@ class  Document_out_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+
+    function get_number_dc($type){
+        $query = $this->db->query("SELECT number_dc FROM tbl_document_out WHERE type = $type
+                                    AND status = 0 ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        return $row;
+    }
 }
 ?>

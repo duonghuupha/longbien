@@ -162,5 +162,18 @@ function del_cate(){
 
 function set_numberdc(){
     var value = $('#type').val();
-    console.log(value);
+    $.getJSON(baseUrl + '/document_out/general_number_dc?type='+value, function(data){
+        $('#number_dc').val(data.code);
+    });
+}
+
+function reload_code(){
+    var value = $('#type').val();
+    if(value != null){
+        $.getJSON(baseUrl + '/document_out/general_number_dc?type='+value, function(data){
+            $('#number_dc').val(data.code);
+        });
+    }else{
+        show_message("error", "Chưa chọn Kiểu văn bản");
+    }
 }

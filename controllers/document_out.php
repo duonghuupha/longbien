@@ -175,5 +175,50 @@ class Document_out extends Controller{
             $this->_Log->save_notify($row, $title, $link, $this->_Info[0]['id']);
         }
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function general_number_dc(){
+        $type = $_REQUEST['type']; $info = $this->model->get_number_dc($type);
+        if($type == 1){ // quyet dinh
+            if(count($info) > 0){ // ton tai ban ghi quyet dinh
+                $number = explode("/", $info[0]['number_dc']);
+                $numberdc = (int)$number[0];
+                $number_dc = ($numberdc < 10) ? '0'.($numberdc + 1) : ($numberdc + 1);
+                $jsonObj['code'] = $number_dc."/QĐ-THCSLB";
+            }else{
+                $jsonObj['code'] = '01/QĐ-THCSLB';
+            }
+        }elseif($type == 2){ // ke hoach
+            if(count($info) > 0){ // ton tai ban ghi quyet dinh
+                $number = explode("/", $info[0]['number_dc']);
+                $numberdc = (int)$number[0];
+                $number_dc = ($numberdc < 10) ? '0'.($numberdc + 1) : ($numberdc + 1);
+                $jsonObj['code'] = $number_dc."/KH-THCSLB";
+            }else{
+                $jsonObj['code'] = '01/KH-THCSLB';
+            }
+        }elseif($type == 3){ // cong van
+            if(count($info) > 0){ // ton tai ban ghi quyet dinh
+                $number = explode("/", $info[0]['number_dc']);
+                $numberdc = (int)$number[0];
+                $number_dc = ($numberdc < 10) ? '0'.($numberdc + 1) : ($numberdc + 1);
+                $jsonObj['code'] = $number_dc."/THCSLB";
+            }else{
+                $jsonObj['code'] = '01/THCSLB';
+            }
+        }elseif($type == 4){ // bao cao
+            if(count($info) > 0){ // ton tai ban ghi quyet dinh
+                $number = explode("/", $info[0]['number_dc']);
+                $numberdc = (int)$number[0];
+                $number_dc = ($numberdc < 10) ? '0'.($numberdc + 1) : ($numberdc + 1);
+                $jsonObj['code'] = $number_dc."/BC-THCSLB";
+            }else{
+                $jsonObj['code'] = '01/BC-THCSLB';
+            }
+        }else{  //  khac
+            $jsonObj['code'] = '';
+        }
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("document_out/general_number_dc");
+    }
 }
 ?>
