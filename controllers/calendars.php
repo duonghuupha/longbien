@@ -307,7 +307,7 @@ class Calendars extends Controller{
                         }
                     }else{ // khong tin tai phieu muon do dung thi tao phieu moi
                         if($this->add_item_loans_gear($info[0]['code'], $info[0]['datestudy'], $info[0]['user_id'], $info[0]['subject_id'], $info[0]['title'])){
-                            if($this->add_item_loans_gear_detail($info[0]['code'], $device[0], $device[1], $info[0]['date_sdatestudytudy'])){
+                            if($this->add_item_loans_gear_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
                                 $status = true;
                             }else{
                                 $status = false;
@@ -370,9 +370,9 @@ class Calendars extends Controller{
     }
 
     function add_item_loans_gear_detail($code, $utesilsid, $subutensils, $date){
-        $data = array("code" => $code, "utensils_id" =>  $deviceid, "sub_utensils" => $subdevice, "date_return" => $date,
+        $data = array("code" => $code, "utensils_id" =>  $utesilsid, "sub_utensils" => $subutensils, "date_return" => $date,
                         "status" => 0);
-        if($this->model->check_gear_loans_detail($deviceid, $subdevice) == 0){
+        if($this->model->check_gear_loans_detail($utesilsid, $subutensils) == 0){
             $temp = false;
         }else{
             $temp = $this->model->addObj_gear_loan_detail($data);

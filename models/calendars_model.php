@@ -207,7 +207,11 @@ class Calendars_Model extends Model{
     function check_device_loans_detail($deviceid, $subdevice){
         $query = $this->db->query("SELECT status FROM tbl_loans_detail WHERE device_id = $deviceid AND sub_device  = $subdevice");
         $row = $query->fetchAll();
-        return $row[0]['status'];
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 1;
+        }
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function addObj_gear_loan($data){
@@ -229,7 +233,11 @@ class Calendars_Model extends Model{
     function check_gear_loans_detail($gearid, $subgear){
         $query = $this->db->query("SELECT status FROM tbl_utensils_loan_detail WHERE utensils_id = $gearid AND sub_utensils  = $subgear");
         $row = $query->fetchAll();
-        return $row[0]['status'];
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 1;
+        }
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function delObj_device_loans($code){

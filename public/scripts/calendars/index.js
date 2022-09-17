@@ -144,6 +144,7 @@ function del_subject(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 function select_device_gear_de(idh){
+	var data = $('#datadc_'+idh).text(); datadc = JSON.parse(data);
 	$('#data_type').val(1).trigger('change'); render_table(datadc);
 	$('#modal-device-gear-dep').modal('show');
 	url = baseUrl + '/calendars/update_loan?id='+idh;

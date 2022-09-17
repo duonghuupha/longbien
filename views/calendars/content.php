@@ -30,7 +30,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center">
-                <?php echo "<a href='javascript:void()' onclick='detail(".$row['id'].")'>".$row['code']."</a>" ?>
+                <?php echo "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>".$row['code']."</a>" ?>
             </td>
             <td class="text-center"><?php echo date("d-m-Y", strtotime($row['date_study'])) ?></td>
             <td class="text-center"><?php echo $row['lesson'] ?></td>
