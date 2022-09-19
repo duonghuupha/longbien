@@ -24,8 +24,8 @@ class Document_out extends Controller{
 
     function add(){
         $code = time(); $cateid = $_REQUEST['cate_id']; $numberdc = $_REQUEST['number_dc'];
-        $datedc = $this->_Convert->convertDate($_REQUEST['date_dc']); $title = $_REQUEST['title'];
-        $content = $_REQUEST['content']; $location = $_REQUEST['location_to']; $type = $_REQUEST['type'];
+        $datedc = $this->_Convert->convertDate($_REQUEST['date_dc']); $title = addslashes($_REQUEST['title']);
+        $content = addslashes($_REQUEST['content']); $location = $_REQUEST['location_to']; $type = $_REQUEST['type'];
         $userid = $this->_Info[0]['id']; $usershare = base64_decode($_REQUEST['data_user_share']);
         $file = $this->_Convert->convert_file($_FILES['file']['name'], 'document_out');
         if($this->model->dupliObj(0, $numberdc) > 0){
@@ -70,8 +70,8 @@ class Document_out extends Controller{
 
     function update(){
         $id = $_REQUEST['id']; $code = time(); $cateid = $_REQUEST['cate_id']; $numberdc = $_REQUEST['number_dc'];
-        $datedc = $this->_Convert->convertDate($_REQUEST['date_dc']); $title = $_REQUEST['title'];
-        $content = $_REQUEST['content']; $location = $_REQUEST['location_to']; $type = $_REQUEST['type'];
+        $datedc = $this->_Convert->convertDate($_REQUEST['date_dc']); $title = addslashes($_REQUEST['title']);
+        $content = addslashes($_REQUEST['content']); $location = $_REQUEST['location_to']; $type = $_REQUEST['type'];
         $userid = $this->_Info[0]['id']; $usershare = base64_decode($_REQUEST['data_user_share']);
         $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'document_out') : $_REQUEST['file_old'];
         if($this->model->dupliObj($id, $numberdc) > 0){

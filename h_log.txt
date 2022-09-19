@@ -158,3 +158,5 @@
 2022-09-12 01:59:22/1/Cập nhật dữ liệu/loans/update
 2022-09-15 00:37:30/1/Thêm mới dữ liệu/devices/add
 2022-09-15 00:37:40/1/Cập nhật dữ liệu/import_device/update
+2022-09-18 09:26:53/1/Cập nhật dữ liệu/document_out/update
+2022-09-18 09:41:26/1/Cập nhật dữ liệu/document_out/update

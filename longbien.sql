@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2022 at 05:41 PM
+-- Generation Time: Sep 19, 2022 at 07:53 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -617,6 +617,13 @@ CREATE TABLE `tbl_department_loan` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tbl_department_loan`
+--
+
+INSERT INTO `tbl_department_loan` (`id```, `code`, `user_id`, `user_loan`, `date_loan`, `date_return`, `department_id`, `lesson`, `content`, `status`, `create_at`) VALUES
+(1, 1662945698, 3, 3, '2022-09-12 00:00:00', '2022-09-12 00:00:00', 18, 1, 'Phục vụ cho bài dạy môn Lịch sử: Tìm hiểu cuộc cách  mạng công nghiệp lần thứ nhất', 0, '2022-09-16 23:10:08');
+
 -- --------------------------------------------------------
 
 --
@@ -714,8 +721,8 @@ CREATE TABLE `tbl_document_out` (
 --
 
 INSERT INTO `tbl_document_out` (`id`, `code`, `cate_id`, `number_dc`, `date_dc`, `title`, `content`, `file`, `location_to`, `user_id`, `user_share`, `type`, `status`, `create_at`) VALUES
-(1, 1658653214, 7, '01/KH-THCSLB', '2022-07-05', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1658652330_document_out.docx', '', 1, '4,3', 0, 0, '2022-07-24 16:00:14'),
-(2, 1658673421, 3, '01/QĐ-THCSLLB', '2022-07-24', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\"', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium', '1658673421_document_out.html', '', 1, '3', 0, 0, '2022-07-24 21:37:01');
+(1, 1658653214, 7, '01/KH-THCSLB', '2022-07-05', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1658652330_document_out.docx', '', 1, '4,3', 2, 0, '2022-07-24 16:00:14'),
+(2, 1663468886, 3, '01/QĐ-THCSLB', '2022-07-24', 'Section 1.10.33 of de Finibus Bonorum et Malorum', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium', '1658673421_document_out.html', 'THCS Long Biên', 1, '3', 1, 0, '2022-09-18 09:41:26');
 
 -- --------------------------------------------------------
 
@@ -803,7 +810,7 @@ INSERT INTO `tbl_loans` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `dat
 (9, 1656517357, 1, 4, '2022-06-29 22:42:37', '2022-06-29 23:12:46', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-29 22:42:37'),
 (10, 1656526338, 1, 4, '2022-06-30 01:12:18', '2022-06-30 01:12:35', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-30 01:12:18'),
 (11, 1656598271, 1, 4, '2022-06-30 21:11:11', '2022-06-30 21:11:20', 'Phục vụ công tác giảng dạy', '', 1, '2022-06-30 21:11:11'),
-(19, 1662945698, 3, 3, '2022-09-12 00:00:00', '2022-09-12 00:00:00', 'Phục vụ cho bài dạy môn Lịch sử: Tìm hiểu cuộc cách  mạng công nghiệp lần thứ nhất', '', 3, '2022-09-16 13:01:25');
+(22, 1662945698, 3, 3, '2022-09-12 00:00:00', '2022-09-12 00:00:00', 'Phục vụ cho bài dạy môn Lịch sử: Tìm hiểu cuộc cách  mạng công nghiệp lần thứ nhất', '', 3, '2022-09-16 23:10:08');
 
 --
 -- Triggers `tbl_loans`
@@ -844,7 +851,9 @@ INSERT INTO `tbl_loans_detail` (`id`, `code`, `device_id`, `sub_device`, `status
 (10, 1656526338, 34, 2, 1, '2022-06-30 01:12:35'),
 (11, 1656526338, 34, 1, 1, '2022-06-30 01:12:34'),
 (12, 1656598271, 34, 1, 1, '2022-06-30 21:11:16'),
-(13, 1656598271, 34, 2, 1, '2022-06-30 21:11:20');
+(13, 1656598271, 34, 2, 1, '2022-06-30 21:11:20'),
+(19, 1662945698, 28, 1, 0, '2022-09-12 00:00:00'),
+(20, 1662945698, 28, 2, 0, '2022-09-12 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -880,7 +889,9 @@ INSERT INTO `tbl_notify` (`id`, `user_id`, `user_read`, `readed`, `title`, `link
 (18, 1, 3, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=14', '2022-08-26 01:08:28'),
 (19, 1, 3, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=15', '2022-08-26 01:09:47'),
 (20, 1, 3, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=16', '2022-08-26 09:59:05'),
-(21, 1, 4, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=17', '2022-08-26 10:31:10');
+(21, 1, 4, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=17', '2022-08-26 10:31:10'),
+(22, 1, 3, 0, 'Cập nhật nội dung văn bản: Section 1.10.33 of de Finibus Bonorum et Malorum', 'http://localhost:81/longbien/document_out', '2022-09-18 09:26:53'),
+(23, 1, 3, 0, 'Cập nhật nội dung văn bản: Section 1.10.33 of de Finibus Bonorum et Malorum', 'http://localhost:81/longbien/document_out', '2022-09-18 09:41:26');
 
 -- --------------------------------------------------------
 
@@ -958,6 +969,32 @@ CREATE TABLE `tbl_returns_device` (
 INSERT INTO `tbl_returns_device` (`id`, `code`, `create_at`, `year_id`, `physical_id`, `device_id`, `sub_device`, `content`, `status`, `user_id`) VALUES
 (1, 1661528300, '2022-08-26 22:38:20', 2, 1, 26, 1, 'Thiết bị lỗi không khắc phục được', 1, 1),
 (4, 1661620798, '2022-08-28 00:19:58', 2, 1, 26, 1, 'Máy tính đã được sửa chữa và nâng cấp đạt chuẩn phục vụ công tác giảng dạy', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_roles`
+--
+
+CREATE TABLE `tbl_roles` (
+  `id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `link` text COLLATE utf8_unicode_ci NOT NULL,
+  `functions` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_roles`
+--
+
+INSERT INTO `tbl_roles` (`id`, `title`, `link`, `functions`) VALUES
+(1, 'Nhóm công việc', 'group_task', '1,2,3'),
+(3, 'Công việc', 'tasks', '1,2,3'),
+(4, 'Lịch công tác', 'weekly', '5'),
+(5, 'Lịch báo giảng', 'calendars', '1,2,3'),
+(6, 'Danh mục văn bản', 'document_cate', '1,2,3'),
+(7, 'Văn bản đến', 'document_in', '1,2,3'),
+(8, 'Văn bản đi', 'document_out', '1,2,3');
 
 -- --------------------------------------------------------
 
@@ -1311,7 +1348,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-16 09:08:04', '4bcfe99c25c00a24e1ff3acf2fe90c5d82fccfe4', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-20 00:34:02', '8d1de810224051faf3015b9c094c2b4caec247aa', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
 (3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
 (4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
@@ -1388,7 +1425,7 @@ INSERT INTO `tbl_utensils_loan` (`id`, `code`, `user_id`, `user_loan`, `date_loa
 (2, 1661414491, 1, 4, '2022-08-25 15:01:31', '2022-08-25 15:01:39', 'Minh họa cho nội dung bài học', '', 1, '2022-08-25 15:01:31'),
 (3, 1661414561, 1, 3, '2022-08-25 15:02:41', '2022-08-25 15:04:20', 'Minh họa cho nội dung bài học', '', 1, '2022-08-25 15:02:41'),
 (4, 1662864369, 6, 6, '2022-09-11 00:00:00', '2022-09-12 08:22:36', 'Phục vụ bài dạy môn Toán: Giải toán bằng cách lập phương trình', '', 1, '2022-09-11 09:46:09'),
-(5, 1662945698, 3, 3, '2022-09-12 00:00:00', '2022-09-12 00:00:00', 'Phục vụ bài dạy môn Lịch sử: Tìm hiểu cuộc cách  mạng công nghiệp lần thứ nhất', '', 0, '2022-09-12 08:21:38');
+(7, 1662945698, 3, 3, '2022-09-12 00:00:00', '2022-09-12 00:00:00', 'Phục vụ cho bài dạy môn Lịch sử: Tìm hiểu cuộc cách  mạng công nghiệp lần thứ nhất', '', 3, '2022-09-16 23:10:08');
 
 --
 -- Triggers `tbl_utensils_loan`
@@ -1423,7 +1460,8 @@ INSERT INTO `tbl_utensils_loan_detail` (`id`, `code`, `utensils_id`, `sub_utensi
 (3, 1661414491, 1, 2, 1, '2022-08-25 15:01:36'),
 (4, 1661414561, 20, 1, 1, '2022-08-25 15:04:20'),
 (5, 1662864369, 20, 1, 1, '2022-09-12 08:22:36'),
-(6, 1662945698, 12, 1, 0, '2022-09-12 00:00:00');
+(7, 1662945698, 20, 1, 0, '2022-09-12 00:00:00'),
+(8, 1662945698, 20, 2, 0, '2022-09-12 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1637,6 +1675,12 @@ ALTER TABLE `tbl_returns_device`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_roles`
+--
+ALTER TABLE `tbl_roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
@@ -1836,7 +1880,7 @@ ALTER TABLE `tbl_change_device`
 -- AUTO_INCREMENT for table `tbl_department_loan`
 --
 ALTER TABLE `tbl_department_loan`
-  MODIFY `id``` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id``` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_devices`
@@ -1872,19 +1916,19 @@ ALTER TABLE `tbl_export_detail`
 -- AUTO_INCREMENT for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans_detail`
 --
 ALTER TABLE `tbl_loans_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_notify`
 --
 ALTER TABLE `tbl_notify`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_personel`
@@ -1897,6 +1941,12 @@ ALTER TABLE `tbl_personel`
 --
 ALTER TABLE `tbl_returns_device`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_roles`
+--
+ALTER TABLE `tbl_roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`
@@ -1962,13 +2012,13 @@ ALTER TABLE `tbl_utensils`
 -- AUTO_INCREMENT for table `tbl_utensils_loan`
 --
 ALTER TABLE `tbl_utensils_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_loan_detail`
 --
 ALTER TABLE `tbl_utensils_loan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_return`

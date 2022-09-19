@@ -80,13 +80,14 @@
                     <form id="fm" method="POST" enctype="multipart/form-data">
                         <input id="data_user_share" name="data_user_share"  type="hidden"/>
                         <input id="file_old" name="file_old" type="hidden"/>
+                        <input id="id" name="id" type="hidden" value="0"/>
                         <div class="col-xs-4">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="form-field-username">Lựa chọn kiểu văn bản</label>
                                     <div>
                                         <select class="select2" data-placeholder="Lựa chọn kiểu văn bản..."
-                                        style="width:100%" required="" id="type" name="type" onchange="set_numberdc()">
+                                        style="width:100%" required="" id="type_dc" name="type" onchange="set_numberdc()">
                                             <option value="1">Quyết định</option>
                                             <option value="2">Kế hoạch</option>
                                             <option value="3">Công văn</option>

@@ -49,11 +49,11 @@ class  Document_out_Model extends Model{
     }
 
     function get_info($id){
-        $query = $this->db->query("SELECT id, code, cate_id, number_dc, date_dc, location_to,
-                                title, content, user_share, create_at, file, (SELECT tbldm_document.title
+        $query = $this->db->query("SELECT id, code, cate_id, number_dc, date_dc, location_to, `type`,
+                                title, content, user_share, create_at, `file`, (SELECT tbldm_document.title
                                 FROM tbldm_document WHERE tbldm_document.id = cate_id) AS category 
                                 FROM  tbl_document_out WHERE id = $id");
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetchAll();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_users($q, $offset, $rows){

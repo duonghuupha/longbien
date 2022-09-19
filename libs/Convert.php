@@ -378,5 +378,15 @@ class Convert{
         }
         return $str;
     }
+
+    function return_title_function($str){
+        $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
+                        5 => "Xuất dữ liệu", 6 => "Đặt trước");
+        $data = explode(",", $str);
+        foreach($data as $row){
+            $arr_title[] = $array[$row];
+        }
+        return implode(", ",  $arr_title);
+    }
 }
 ?>

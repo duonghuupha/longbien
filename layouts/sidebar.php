@@ -517,13 +517,37 @@
             </ul>
         </li>
         <li class="hover">
-            <a href="<?php echo URL.'/users' ?>">
+            <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-user"></i>
                 <span class="menu-text">
                     Người dùng
                 </span>
+                <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
+            <ul class="submenu">
+                <li class="hover">
+                    <a href="<?php echo URL.'/users' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Quản lý người dùng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/group_role' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Nhóm quyền sử dụng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover">
+                    <a href="<?php echo URL.'/roles' ?>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Quản lý quyền sử dụng
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
         </li>
     </ul><!-- /.nav-list -->
 
