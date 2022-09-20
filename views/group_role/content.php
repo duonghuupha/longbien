@@ -9,9 +9,10 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
-            <th class="text-left">Tiêu đề</th>
-            <th class="text-center">Đường dẫn</th>
-            <th class="text-left">Chức năng</th>
+            <th class="text-center" style="width:120px">Mã nhóm</th>
+            <th class="" style="width:200px;">Tiêu đề</th>
+            <th class="">Quyền sử dụng</th>
+            <th class="text-center">Trạng thái</th>
             <th class="text-center" style="width:70px">Thao tác</th>
         </tr>
     </thead>
@@ -20,15 +21,16 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         $i = 0;
         foreach($jsonObj['rows'] as $row){
             $i++;
-            $class = ($i % 2 == 0) ? 'even' : 'odd';
+            $class = ($i%2 == 0) ? 'even' : 'odd'; 
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-left" id="title_<?php echo $row['id']; ?>"><?php echo $row['title'] ?></td>
-            <td class="text-center" id="link_<?php echo $row['id']; ?>"><?php echo $row['link'] ?></td>
-            <td class="text-left"><?php echo $this->_Convert->return_title_function($row['functions']) ?></td>
+            <td class="text-center"><?php echo $row['code'] ?></td>
+            <td><?php echo $row['title'] ?></td>
+            <td><?php echo $this->_Convert->return_list_role_of_group($row['roles']) ?></td>
+            <td class="text-center"><?php echo $row['status'] ?></td>
             <td class="text-center">
-                <div class="hidden-sm hidden-xs action-buttons">
+                <div class="action-buttons">
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
@@ -37,7 +39,6 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                     </a>
                 </div>
             </td>
-            <td class="hidden" id="function_<?php echo $row['id'] ?>"><?php echo $row['functions'] ?></td>
         </tr>
         <?php
         }

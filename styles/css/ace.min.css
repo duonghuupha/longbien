@@ -16068,7 +16068,7 @@ div.dataTables_processing {
 }
 
 .tree .tree-branch-name, .tree .tree-item-name {
-    cursor: pointer
+    
 }
 
 .tree .icon-caret {
@@ -16078,7 +16078,7 @@ div.dataTables_processing {
 .tree .tree-branch {
     width: auto;
     min-height: 20px;
-    cursor: pointer
+    
 }
 
 .tree .tree-branch .tree-branch-header {
@@ -16157,7 +16157,6 @@ div.dataTables_processing {
 .tree .tree-item {
     height: 20px;
     line-height: 20px;
-    cursor: pointer;
     max-width: calc(100% - 20px)
 }
 

@@ -61,19 +61,6 @@
                     <div class="hr hr32 hr-dotted"></div>
                     <div class="row">
                         <div class="col-sm-6 col-xs-4">
-                            <div class="widget-box transparent">
-                                <div class="widget-header widget-header-flat">
-                                    <h4 class="widget-title lighter">
-                                        <i class="ace-icon fa fa-signal"></i>
-                                        Chuyên cần
-                                    </h4>
-                                </div>
-                                <div class="widget-body" id="block_five">
-                                    
-                                </div><!-- /.widget-body -->
-                            </div><!-- /.widget-box -->
-                        </div><!-- /.col -->
-                        <div class="col-sm-6 col-xs-4">
                             <div class="widget-box transparent" id="recent-box">
                                 <div class="widget-header">
                                     <h4 class="widget-title lighter smaller">
@@ -664,7 +651,6 @@
                                 </div><!-- /.widget-body -->
                             </div><!-- /.widget-box -->
                         </div><!-- /.col -->
-
                         <div class="col-sm-6 col-xs-4">
                             <div class="widget-box">
                                 <div class="widget-header">

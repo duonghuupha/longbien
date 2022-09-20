@@ -32,3 +32,8 @@ function save(){
         show_message("error", "Chưa điền đủ thông tin");
     }
 }
+
+function view_page_role(pages){
+    page = pages;
+    $('#list_roles').load(baseUrl + '/roles/content?page='+page+'&q='+keyword);
+}
