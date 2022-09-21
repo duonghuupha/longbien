@@ -4,14 +4,17 @@ $(function(){
 });
 
 function add(){
-    $('#title').val(null);
+    $('#title').val(null); $('#save_form').show(); $('#title').attr("readonly", false);
     $('#roles').load(baseUrl + '/group_role/data_role');
     $('#modal-role').modal('show');
     url= baseUrl + '/group_role/add';
 }
 
 function edit(idh){
-    $('#modal-role').modal('show');
+    var title = $('#title_'+idh).text(); data = [];
+    $('#title').val(title); $('#title').attr("readonly", false);
+    $('#roles').load(baseUrl + '/group_role/data_role?id='+idh);
+    $('#modal-role').modal('show'); $('#save_form').show();
     url= baseUrl + '/group_role/update?id='+idh;
 }
 
@@ -61,4 +64,21 @@ function set_checked_sub(id, sub){
 
 function view_page_role(pages){
     page = pages;
+    $('#list_role').load(baseUrl + '/group_role/content?page='+page+'&q='+keyword);
+}
+
+function search(){
+
+}
+
+function detail(idh){
+    var title = $('#title_'+idh).text();
+    $('#title').val(title); $('#title').attr("readonly", true);
+    $('#roles').load(baseUrl + '/group_role/data_role?id='+idh);
+    $('#modal-role').modal('show'); $('#save_form').hide();
+}
+
+function change(status, idh){
+    var data_str = "id="+idh+'&status='+status;
+    del_data(data_str, "Bạn có chắc chắn muốn thay đổi trạng thái của bản ghi này?", baseUrl + '/group_role/change', '#list_role', baseUrl+'/group_role/content?page='+page+'&q='+keyword);
 }

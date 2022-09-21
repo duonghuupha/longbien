@@ -72,7 +72,7 @@
                     <i class="ace-icon fa fa-times"></i>
                     Đóng
                 </button>
-                <button class="btn btn-sm btn-primary pull-right" onclick="save()">
+                <button class="btn btn-sm btn-primary pull-right" onclick="save()" id="save_form">
                     <i class="ace-icon fa fa-save"></i>
                     Ghi dữ liệu
                 </button>

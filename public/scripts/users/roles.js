@@ -37,3 +37,7 @@ function view_page_role(pages){
     page = pages;
     $('#list_roles').load(baseUrl + '/roles/content?page='+page+'&q='+keyword);
 }
+
+function search(){
+    
+}

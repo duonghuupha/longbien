@@ -29,8 +29,8 @@ $pages = $this->page; $sql = new Model();
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
-            <td><?php echo $row['username'] ?></td>
-            <td class="text-center"><?php echo $row['fullname'] ?></td>
+            <td id="username_<?php echo $row['id'] ?>"><?php echo $row['username'] ?></td>
+            <td class="text-center" id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
             <td class="text-center"><?php echo $row['last_login'] ?></td>
             <td class="text-center"><?php echo $row['info_login'] ?></td>
             <td class="text-center">
@@ -44,15 +44,20 @@ $pages = $this->page; $sql = new Model();
             </td>
             <td class="text-center">
                 <div class="action-buttons">
-                    <a class="green hidden-480" href="javascript:void(0)" onclick="re_pass(<?php echo $row['id'] ?>)"
+                    <a class="green" href="javascript:void(0)" onclick="re_pass(<?php echo $row['id'] ?>)"
                     title="Đặt lại mật khẩu">
                         <i class="ace-icon fa fa-refresh bigger-130"></i>
                     </a>
-                    <a class="red hidden-480" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
+                    <a class="blue" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
+                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                    </a>
+                    <a class="red" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                     </a>
                 </div>
             </td>
+            <td class="hidden" id="hrid_<?php echo $row['id'] ?>"><?php echo $row['hr_id'] ?></td>
+            <td class="hidden" id="group_<?php echo $row['id'] ?>"><?php echo $row['group_role_id'] ?></td>
         </tr>
         <?php
         }

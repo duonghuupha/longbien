@@ -52,12 +52,37 @@ class Users extends Controller{
     }
 
     function update(){
-
+        $hrid = $_REQUEST['hrid']; $username = $_REQUEST['username'];
+        $id = $_REQUEST['id'];
+        if($this->model->dupliObj($id, $username) > 0){
+            $jsonObj['msg'] = "Tên đăng nhập đã tồn tại";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            if($this->model->dupliObj_hr($id, $hrid) > 0){
+                $jsonObj['msg'] = "Nhân sự này đã được tạo thông tin đăng nhập";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $data = array('username' => $username, 'hr_id' => $hrid);
+                $temp = $this->model->updateObj($id, $data);
+                if($temp){
+                    $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                    $jsonObj['success'] = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
+            }
+        }
+        $this->view->render('users/update');
     }
 
     function del(){
-        $id = $_REQUEST['id'];
-        $temp = $this->model->delObj($id);
+        $id = $_REQUEST['id']; $data = array("active" => 2);
+        $temp = $this->model->updateObj($id, $data);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ liệu thành công";
             $jsonObj['success'] = true;
@@ -76,8 +101,18 @@ class Users extends Controller{
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
         $jsonObj = $this->model->get_personel($keyword, $offset, $rows);
-        $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->jsonObj = $jsonObj;//$this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('users/list_personel');
+    }
+
+    function list_personel_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_personel_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('users/list_personel_page');
     }
 
     function change_pass(){
@@ -94,6 +129,12 @@ class Users extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render('users/change_pass');
+    }
+
+    function combo_role(){
+        $jsonObj = $this->model->get_combo_role();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render('users/combo_role');
     }
 }
 ?>

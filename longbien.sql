@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2022 at 07:53 PM
+-- Generation Time: Sep 21, 2022 at 02:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -781,6 +781,28 @@ INSERT INTO `tbl_export_detail` (`id`, `code`, `device_id`, `sub_device`, `statu
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_group_role`
+--
+
+CREATE TABLE `tbl_group_role` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `roles` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_group_role`
+--
+
+INSERT INTO `tbl_group_role` (`id`, `code`, `title`, `roles`, `status`, `create_at`) VALUES
+(2, 1663687699, 'Giáo viên', '5,5_1,5_2,5_3,7,8', 1, '2022-09-20 22:28:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_loans`
 --
 
@@ -1340,6 +1362,7 @@ CREATE TABLE `tbl_users` (
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `info_login` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `hr_id` int(11) NOT NULL,
+  `group_role_id` int(11) NOT NULL,
   `avatar` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1347,11 +1370,11 @@ CREATE TABLE `tbl_users` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-20 00:34:02', '8d1de810224051faf3015b9c094c2b4caec247aa', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, ''),
-(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, ''),
-(4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, ''),
-(6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 121, '');
+INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `group_role_id`, `avatar`) VALUES
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-20 22:55:38', '33b4edc4e02ab16ab7807fededbf1fb3bbc49e84', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, 0, ''),
+(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, 0, ''),
+(4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, 0, ''),
+(6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 2, '0000-00-00 00:00:00', '', '', 121, 0, '');
 
 -- --------------------------------------------------------
 
@@ -1645,6 +1668,12 @@ ALTER TABLE `tbl_export_detail`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_group_role`
+--
+ALTER TABLE `tbl_group_role`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
@@ -1911,6 +1940,12 @@ ALTER TABLE `tbl_export`
 --
 ALTER TABLE `tbl_export_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `tbl_group_role`
+--
+ALTER TABLE `tbl_group_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans`

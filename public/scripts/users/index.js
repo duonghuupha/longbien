@@ -1,16 +1,22 @@
 var page = 1, keyword = '', url = '', page_per = 1, keword_per = '';
 $(function(){
     $('#list_users').load(baseUrl + '/users/content');
+    $('#group_role').load(baseUrl + '/users/combo_role');
+    $('#group_role_id').load(baseUrl + '/users/combo_role');
 });
 
 function add(){
+    $('#hr_id').val(null); $('#fullname').val(null); $('#username').val(null);
     $('#modal-users').modal('show');
     url = baseUrl + '/users/add';
 }
 
 function edit(idh){
-    $('#model-users').modal('show');
-    url = baseUrl + '/users/update?id='+idh
+    var fullname = $('#fullname_'+idh).text(), username =  $('#username_'+idh).text();
+    var hrid = $('#hrid_'+idh).text(), role = $('#group_'+idh).text(); 
+    $('#fullname_update').val(fullname); $('#username_update').val(username); 
+    $('#group_role_id').val(role).trigger('change'); $('#hrid').val(hrid);
+    $('#modal-users-update').modal('show'); url = baseUrl + '/users/update?id='+idh
 }
 
 function del(idh){
@@ -47,6 +53,22 @@ function save(){
     }
 }
 
+function save_update(){
+    // kiem tra nhap input 
+    var required = $('input,textarea,select').filter('[required]:visible');
+    var allRequired = true;
+    required.each(function(){
+        if($(this).val() == ''){
+            allRequired = false;
+        }
+    });
+    if(allRequired){
+        save_form_modal('#fm-update', url, '#modal-users-update', '#list_users',  baseUrl+'/users/content?page='+page+'&q='+keyword); 
+    }else{
+        show_message("error", "Chưa điền đủ thông tin");
+    }
+}
+
 function view_page_users(pages){
     page = pages;
     $('#list_users').load(baseUrl + '/users/content?page='+page+'&q='+keyword);
@@ -69,24 +91,26 @@ function re_pass(idh){
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 function select_per(){
-    $('#personel').load(baseUrl + '/users/list_personel');
+    $('#list_personel').load(baseUrl + '/users/list_personel');
+    $('#pager').load(baseUrl + '/users/list_personel_page');
     $('#modal-personel').modal('show');
 }
 
 function view_page_per(pages){
     page_per = pages;
-    $('#personel').load(baseUrl + '/users/list_personel?page='+page_per+'&q='+keword_per);
+    $('#list_personel').load(baseUrl + '/users/list_personel?page='+page_per+'&q='+keword_per);
+    $('#pager').load(baseUrl + '/users/list_personel_page?page='+page_per+'&q='+keword_per);
 }
 
 function search_per(){
-    var value = $('#table_search').val();
+    var value = $('#nav-search-input-user').val();
     if(value.length != 0){
         keword_per = value.replaceAll(" ", "$", 'g');
-        $('#personel').load(baseUrl + '/users/list_personel?page=1&q='+keword_per);
     }else{
-        keyword = '';
-        $('#personel').load(baseUrl + '/users/list_personel?page=1&q='+keword_per);
+        keyword_per = '';
     }
+    $('#list_personel').load(baseUrl + '/users/list_personel?page=1&q='+keword_per);
+    $('#pager').load(baseUrl + '/users/list_personel_page?page=1&q='+keword_per);
 }
 
 function confirm_per(idh){

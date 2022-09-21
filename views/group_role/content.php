@@ -11,8 +11,10 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:120px">Mã nhóm</th>
             <th class="" style="width:200px;">Tiêu đề</th>
-            <th class="">Quyền sử dụng</th>
-            <th class="text-center">Trạng thái</th>
+            <th class="text-center">Quyền sử dụng</th>
+            <th class="text-center">Số lượng người dùng được phân quyền</th>
+            <th class="text-center" style="width:120px">Trạng thái</th>
+            <th class="text-center">Cập nhật lần cuối</th>
             <th class="text-center" style="width:70px">Thao tác</th>
         </tr>
     </thead>
@@ -26,9 +28,23 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
-            <td><?php echo $row['title'] ?></td>
-            <td><?php echo $this->_Convert->return_list_role_of_group($row['roles']) ?></td>
-            <td class="text-center"><?php echo $row['status'] ?></td>
+            <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
+            <td class="text-center">
+                <a href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
+                    Xem chi tiết quyền sử dụng
+                </a>
+            </td>
+            <td class="text-center"><?php echo $row['total_user'] ?></td>
+            <td class="text-center">
+                <?php
+                if($row['status'] == 0){
+                    echo '<span class="label label-sm label-danger" onclick="change(1, '.$row['id'].')" style="cursor: pointer">Không kích hoạt</span>';
+                }else{
+                    echo '<span class="label label-sm label-success" onclick="change(0, '.$row['id'].')" style="cursor: pointer">Kích hoạt</span>';
+                }
+                ?>
+            </td>
+            <td class="text-center"><?php echo date("H:i:s  d-m-Y", strtotime($row['create_at'])) ?></td>
             <td class="text-center">
                 <div class="action-buttons">
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">

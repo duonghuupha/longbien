@@ -389,36 +389,23 @@ class Convert{
         return implode(", ",  $arr_title);
     }
 
-    function return_roles($id, $str){
+    function return_roles($id, $str, $idh){
         $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
                         5 => "Xuất dữ liệu", 6 => "Đặt trước");
         $data = explode(",", $str);
-        $html = '';
+        $html = ''; $sql = new Model();
         foreach($data as $row){
+            $checked = ($idh != 0 && $sql->checked_role($idh, $id.'_'.$row) != 0) ? 'checked=""' : '';
             $html .= '
             <li class="tree-item" role="treeitem"> 
                 <span class="tree-item-name"> 
                     <span class="tree-label">'.$array[$row].'</span>
                     <input id="role_'.$id.'_'.$row.'" name="role_'.$id.'_" type="checkbox"
-                    value="'.$id.'_'.$row.'" onclick="set_checked_sub('.$id.', '.$row.')"/>
+                    value="'.$id.'_'.$row.'" onclick="set_checked_sub('.$id.', '.$row.')"
+                    '.$checked.'/>
                 </span> 
             </li>
             ';
-        }
-        return $html;
-    }
-
-    function return_list_role_of_group($roles){
-        $data = explode(",", $roles); $html = ''; $sql = new Model();
-        $array_role = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
-                        5 => "Xuất dữ liệu", 6 => "Đặt trước"); 
-        foreach($data as $row){
-            $array = explode("_", $row);
-            if(count($array) == 1){
-                $html .= '<b>'.$sql->return_title_role($array[0]).': </b>';
-            }else{
-                $html .= $array_role[$array[1]].', ';
-            }
         }
         return $html;
     }

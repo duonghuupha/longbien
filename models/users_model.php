@@ -6,14 +6,14 @@ class Users_Model extends Model{
 
     function getFetObj($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id != 1 AND 
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id != 1 AND active != 2 AND
                                     (username LIKE '%$q%' OR hr_id IN (SELECT tbl_personel.id FROM tbl_personel
                                     WHERE tbl_personel.fullname LIKE '%$q%'))");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, username, last_login, info_login, hr_id, active,
+        $query = $this->db->query("SELECT id, code, username, last_login, info_login, hr_id, active, group_role_id,
                                 (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = hr_id) AS fullname
-                                FROM tbl_users WHERE id != 1 AND (username LIKE '%$q%' OR hr_id IN (SELECT tbl_personel.id FROM tbl_personel
-                                WHERE tbl_personel.fullname LIKE '%$q%'))
+                                FROM tbl_users WHERE id != 1 AND active != 2 AND (username LIKE '%$q%' OR hr_id 
+                                IN (SELECT tbl_personel.id FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$q%'))
                                 ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
@@ -68,9 +68,21 @@ class Users_Model extends Model{
         return $result;
     }
 
+    function get_personel_total($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_personel WHERE status != 99
+                                    AND fullname LIKE '%$q%'");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
     function get_info($id){
         $query = $this->db->query("SELECT id, code, username, hr_id, (SELECT fullname FROM tbl_personel
                                     WHERE tbl_personel.id = hr_id) AS fullname FROM tbl_users WHERE id = $id");
+        return $query->fetchAll();
+    }
+
+    function get_combo_role(){
+        $query = $this->db->query("SELECT id, title FROM tbl_group_role WHERE status = 1");
         return $query->fetchAll();
     }
 }

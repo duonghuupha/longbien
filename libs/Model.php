@@ -231,10 +231,11 @@ class Model {
                                     AS title, 0 AS sub, 3 AS type FROM tbl_department_loan WHERE code = $code");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
-    function return_title_role($id){
-        $query = $this->db->query("SELECT title FROM tbl_roles WHERE id = $id");
+    function checked_role($id, $role){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_group_role WHERE id = $id
+                                    AND FIND_IN_SET('$role', roles)");
         $row = $query->fetchAll();
-        return $row[0]['title'];
+        return $row[0]['Total'];
     }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }

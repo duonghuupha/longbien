@@ -1,23 +1,7 @@
 <?php
-$convert = new Convert(); $jsonObj = $this->jsonObj; $perpage = $this->perpage;
-$pages = $this->page; $sql = new Model();
-$keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+$jsonObj = $this->jsonObj;
 ?>
-<div class="modal-header no-padding">
-    <div class="table-header">
-        Danh sách nhân sự
-    </div>
-</div>
-<div class="modal-body no-padding">
-    <div class="row" style="margin:0;">
-        <div id="dynamic-table_filter" class="dataTables_filter" style="text-align:left">
-            <label style="width:100%">
-                <input class="form-control input-sm" placeholder="Tìm kiếm" style="width:100%"
-                onkeyup="search_per()" id="table_search" value="<?php echo $keyword ?>">
-            </label>
-        </div>
-    </div>
-    <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+<table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
         <thead>
             <tr>
                 <th class="text-center">#</th>
@@ -52,21 +36,3 @@ $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
             ?>
         </tbody>
     </table>
-</div>
-<div class="modal-footer no-margin-top">
-    <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-        <i class="ace-icon fa fa-times"></i>
-        Đóng
-    </button>
-    <?php
-    if($jsonObj['total'] > $perpage){
-        $pagination = $convert->pagination($jsonObj['total'], $pages, $perpage);
-        $createlink = $convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_per', 1);
-    ?>
-    <ul class="pagination pull-right no-margin">
-        <?php echo $createlink ?>
-    </ul>
-    <?php
-    }
-    ?>
-</div>
