@@ -8,8 +8,8 @@ class Roles_Model extends Model{
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_roles");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title, link, functions FROM tbl_roles ORDER BY id DESC
-                                    LIMIT $offset, $rows");
+        $query = $this->db->query("SELECT id, title, link, functions, parent_id FROM tbl_roles WHERE parent_id = 0
+                                    ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
@@ -28,6 +28,11 @@ class Roles_Model extends Model{
     function delObj($id){
         $query = $this->delete("tbl_roles", "id = $id");
         return $query;
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_parent(){
+        $query = $this->db->query("SELECT id, title, parent_id FROM tbl_roles");
+        return $query->fetchAll();
     }
 }
 ?>

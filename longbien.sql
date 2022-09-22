@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 02:41 AM
+-- Generation Time: Sep 23, 2022 at 01:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -793,13 +793,6 @@ CREATE TABLE `tbl_group_role` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_group_role`
---
-
-INSERT INTO `tbl_group_role` (`id`, `code`, `title`, `roles`, `status`, `create_at`) VALUES
-(2, 1663687699, 'Giáo viên', '5,5_1,5_2,5_3,7,8', 1, '2022-09-20 22:28:19');
-
 -- --------------------------------------------------------
 
 --
@@ -898,22 +891,9 @@ CREATE TABLE `tbl_notify` (
 --
 
 INSERT INTO `tbl_notify` (`id`, `user_id`, `user_read`, `readed`, `title`, `link`, `create_at`) VALUES
-(8, 1, 3, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=7', '2022-07-17 00:09:50'),
 (9, 3, 1, 1, 'Trao đổi / ý kiến công việc', 'http://localhost:81/longbien/tasks/detail?id=7', '2022-07-17 00:34:23'),
-(10, 1, 3, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=8', '2022-07-18 00:21:13'),
-(11, 1, 3, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=9', '2022-07-18 00:21:38'),
-(12, 1, 3, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=10', '2022-07-18 00:21:54'),
-(13, 1, 3, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=11', '2022-07-18 07:06:37'),
-(14, 1, 3, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=12', '2022-07-18 07:11:06'),
 (15, 1, 4, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=13', '2022-07-18 16:20:28'),
-(16, 1, 3, 1, 'Bạn có văn bản mới', 'http://localhost:81/longbien/document_in', '2022-07-24 21:32:31'),
-(17, 1, 3, 1, 'Bạn có văn bản mới: Section 1.10.33 of \"de Finibus Bonorum et Malorum\"', 'http://localhost:81/longbien/document_out', '2022-07-24 21:37:01'),
-(18, 1, 3, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=14', '2022-08-26 01:08:28'),
-(19, 1, 3, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=15', '2022-08-26 01:09:47'),
-(20, 1, 3, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=16', '2022-08-26 09:59:05'),
-(21, 1, 4, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=17', '2022-08-26 10:31:10'),
-(22, 1, 3, 0, 'Cập nhật nội dung văn bản: Section 1.10.33 of de Finibus Bonorum et Malorum', 'http://localhost:81/longbien/document_out', '2022-09-18 09:26:53'),
-(23, 1, 3, 0, 'Cập nhật nội dung văn bản: Section 1.10.33 of de Finibus Bonorum et Malorum', 'http://localhost:81/longbien/document_out', '2022-09-18 09:41:26');
+(21, 1, 4, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=17', '2022-08-26 10:31:10');
 
 -- --------------------------------------------------------
 
@@ -1000,6 +980,7 @@ INSERT INTO `tbl_returns_device` (`id`, `code`, `create_at`, `year_id`, `physica
 
 CREATE TABLE `tbl_roles` (
   `id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `link` text COLLATE utf8_unicode_ci NOT NULL,
   `functions` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -1009,14 +990,16 @@ CREATE TABLE `tbl_roles` (
 -- Dumping data for table `tbl_roles`
 --
 
-INSERT INTO `tbl_roles` (`id`, `title`, `link`, `functions`) VALUES
-(1, 'Nhóm công việc', 'group_task', '1,2,3'),
-(3, 'Công việc', 'tasks', '1,2,3'),
-(4, 'Lịch công tác', 'weekly', '5'),
-(5, 'Lịch báo giảng', 'calendars', '1,2,3'),
-(6, 'Danh mục văn bản', 'document_cate', '1,2,3'),
-(7, 'Văn bản đến', 'document_in', '1,2,3'),
-(8, 'Văn bản đi', 'document_out', '1,2,3');
+INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`) VALUES
+(1, 0, 'Lịch làm việc', '#', ''),
+(2, 1, 'Nhóm công việc', 'group_task', '1,2,3'),
+(3, 1, 'Công việc', 'tasks', '1,2,3'),
+(4, 1, 'Lịch công tác', 'weekly', '5'),
+(5, 0, 'Lịch báo giảng', 'calendars', '1,2,3'),
+(6, 0, 'Văn bản', '#', ''),
+(7, 6, 'Danh mục', 'document_cate', '1,2,3'),
+(8, 6, 'Văn bản đến', 'document_in', '1,2,3'),
+(9, 6, 'Văn bản đi', 'document_out', '1,2,3');
 
 -- --------------------------------------------------------
 
@@ -1371,9 +1354,9 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `group_role_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-20 22:55:38', '33b4edc4e02ab16ab7807fededbf1fb3bbc49e84', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, 0, ''),
-(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-08-26 10:06:29', '192db9225190cf8fe5ca85bba52fd76397f350b9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0', 122, 0, ''),
-(4, 1656510163, 'ctv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, 0, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-23 01:35:03', '4a385738d16c4f7b2a9617e067967b34afb70db9', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 0, 0, ''),
+(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-23 01:00:12', '9a5b9ea0c4b061f701de65ba52601d6d134c2377', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.42', 122, 2, ''),
+(4, 1656510163, 'anhnp', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, 2, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 2, '0000-00-00 00:00:00', '', '', 121, 0, '');
 
 -- --------------------------------------------------------
@@ -1945,7 +1928,7 @@ ALTER TABLE `tbl_export_detail`
 -- AUTO_INCREMENT for table `tbl_group_role`
 --
 ALTER TABLE `tbl_group_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans`
@@ -1981,7 +1964,7 @@ ALTER TABLE `tbl_returns_device`
 -- AUTO_INCREMENT for table `tbl_roles`
 --
 ALTER TABLE `tbl_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`

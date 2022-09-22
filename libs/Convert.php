@@ -382,29 +382,52 @@ class Convert{
     function return_title_function($str){
         $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
                         5 => "Xuất dữ liệu", 6 => "Đặt trước");
-        $data = explode(",", $str);
-        foreach($data as $row){
-            $arr_title[] = $array[$row];
+        if($str != ''){
+            $data = explode(",", $str);
+            foreach($data as $row){
+                $arr_title[] = $array[$row];
+            }
+            return implode(", ",  $arr_title);
+        }else{
+            return '';
         }
-        return implode(", ",  $arr_title);
     }
 
-    function return_roles($id, $str, $idh){
+    function return_roles($mainid, $id, $str, $idh){
         $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
                         5 => "Xuất dữ liệu", 6 => "Đặt trước");
         $data = explode(",", $str);
         $html = ''; $sql = new Model();
         foreach($data as $row){
-            $checked = ($idh != 0 && $sql->checked_role($idh, $id.'_'.$row) != 0) ? 'checked=""' : '';
+            $checked = ($idh != 0 && $sql->checked_role($idh, $mainid.'_'.$id.'_'.$row) != 0) ? 'checked=""' : '';
             $html .= '
             <li class="tree-item" role="treeitem"> 
                 <span class="tree-item-name"> 
                     <span class="tree-label">'.$array[$row].'</span>
-                    <input id="role_'.$id.'_'.$row.'" name="role_'.$id.'_" type="checkbox"
-                    value="'.$id.'_'.$row.'" onclick="set_checked_sub('.$id.', '.$row.')"
+                    <input id="role_'.$mainid.'_'.$id.'_'.$row.'" name="role_'.$mainid.'_'.$id.'_" type="checkbox"
+                    value="'.$mainid.'_'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
                     '.$checked.'/>
                 </span> 
             </li>
+            ';
+        }
+        return $html;
+    }
+
+    function return_roles_horizontal($mainid, $id, $str, $idh){
+        $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
+                        5 => "Xuất dữ liệu", 6 => "Đặt trước");
+        $data = explode(",", $str);
+        $html = ''; $sql = new Model();
+        foreach($data as $row){
+            $checked = ($idh != 0 && $sql->checked_role($idh, $mainid.'_'.$id.'_'.$row) != 0) ? 'checked=""' : '';
+            $html .= '
+            <div class="col-sm-4">
+                <span class="tree-label">'.$array[$row].'</span>
+                <input id="role_'.$mainid.'_'.$id.'_'.$row.'" name="role_'.$mainid.'_'.$id.'_" type="checkbox"
+                value="'.$mainid.'_'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
+                '.$checked.'/>
+            </div>
             ';
         }
         return $html;

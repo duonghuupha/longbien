@@ -21,7 +21,7 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Quản lý quyền người dùng
+                    Quản lý quyền / menu sử dụng
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -30,10 +30,20 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label for="form-field-username">Tên quyền</label>
+                                    <label for="form-field-username">Menu cha</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn menu cha"
+                                        style="width:100%" id="parent_id" name="parent_id">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Tên quyền / menu</label>
                                     <div>
                                         <input type="text" id="title" name="title" required=""
-                                        placeholder="Tên quyền sử dụng" style="width:100%" />
+                                        placeholder="Tên quyền / menu sử dụng" style="width:100%" />
                                     </div>
                                 </div>
                             </div>

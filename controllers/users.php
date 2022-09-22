@@ -14,7 +14,7 @@ class Users extends Controller{
     function content(){
         $rows = 15;
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1; 
         $offset = ($get_pages-1)*$rows;
         $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
@@ -23,7 +23,7 @@ class Users extends Controller{
 
     function add(){
         $code = time(); $hrid = $_REQUEST['hr_id']; $username = $_REQUEST['username'];
-        $password = $_REQUEST['password']; $repass = $_REQUEST['repass'];
+        $password = $_REQUEST['password']; $repass = $_REQUEST['repass']; $role = $_REQUEST['group_role'];
         if($this->model->dupliObj(0, $username) > 0){
             $jsonObj['msg'] = "Tên đăng nhập đã tồn tại";
             $jsonObj['success'] = false;
@@ -35,7 +35,7 @@ class Users extends Controller{
                 $this->view->jsonObj = json_encode($jsonObj);
             }else{
                 $data = array('code' => $code, 'username' => $username, 'password' => sha1($password),
-                                'active' => 1, 'hr_id' => $hrid);
+                                'active' => 1, 'hr_id' => $hrid, "group_role_id" => $role);
                 $temp = $this->model->addObj($data);
                 if($temp){
                     $jsonObj['msg'] = "Ghi dữ liệu thành công";
@@ -53,7 +53,7 @@ class Users extends Controller{
 
     function update(){
         $hrid = $_REQUEST['hrid']; $username = $_REQUEST['username'];
-        $id = $_REQUEST['id'];
+        $id = $_REQUEST['id']; $role = $_REQUEST['group_role'];
         if($this->model->dupliObj($id, $username) > 0){
             $jsonObj['msg'] = "Tên đăng nhập đã tồn tại";
             $jsonObj['success'] = false;
@@ -64,7 +64,7 @@ class Users extends Controller{
                 $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
             }else{
-                $data = array('username' => $username, 'hr_id' => $hrid);
+                $data = array('username' => $username, 'hr_id' => $hrid, "group_role_id" => $role);
                 $temp = $this->model->updateObj($id, $data);
                 if($temp){
                     $jsonObj['msg'] = "Ghi dữ liệu thành công";

@@ -237,6 +237,13 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function get_parent_menu($id){
+        $query = $this->db->query("SELECT id, title, link, functions, parent_id FROM tbl_roles WHERE parent_id = $id");
+        return $query->fetchAll();
+    }
+    function get_menu_via_user($userid){
+        $query = $this->db->query("");
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

@@ -1,6 +1,7 @@
 var page = 1, keyword = '', url = '', data = [];
 $(function(){
     $('#list_role').load(baseUrl + '/group_role/content');
+    add();
 });
 
 function add(){
@@ -48,6 +49,7 @@ function set_checked(id){
         $("input:checkbox[name=role_"+id+"_]").each(function(){
             $(this).prop('checked', true);
         });
+        $('#role'+id).prop('checked', true);
     }else{
         $("input:checkbox[name=role_"+id+"_]").each(function(){
             $(this).prop('checked', false);
@@ -55,10 +57,18 @@ function set_checked(id){
     }
 }
 
-function set_checked_sub(id, sub){
-    var value = $('#role_'+id+'_'+sub).is(":checked");
+function set_checked_sub(idh, id, sub){
+    var value = $('#role_'+idh+'_'+id+'_'+sub).is(":checked");
     if(value){
-        $('#role_'+id).prop('checked', true);
+        $('#role_'+idh+'_'+id).prop('checked', true);
+        $('#role'+idh).prop('checked', true);
+    }
+}
+
+function set_checked_main(id){
+    var value = $('#role'+id).is(":checked");
+    if(value){
+
     }
 }
 

@@ -115,7 +115,7 @@ function search_per(){
 }
 
 function confirm_per(idh){
-    $('#hr_id').val(idh); var title = $('#title_'+idh).text();
+    var title = $('#title_'+idh).text();
     title = title.trim(); arr_title = title.split(' ');
     var chieudai = arr_title.length, name = arr_title[chieudai-1];
     name = removeVietnameseTones(name); arr_title.pop();
@@ -126,8 +126,10 @@ function confirm_per(idh){
     var username = name+prefix; console.log(username);
     var type_action = $('#type_action').text();
     if(type_action == 0){
+        $('#hr_id').val(idh);
         $('#fullname').val(title); $('#username').val(username);
     }else{
+        $('#hrid').val(idh);
         $('#fullname_update').val(title); $('#username_update').val(username);
     }
     $('#modal-personel').modal('hide');

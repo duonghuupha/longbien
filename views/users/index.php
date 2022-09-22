@@ -199,7 +199,7 @@
             </div>
             <div class="modal-body" style="height:520px;">
                 <div class="row">
-                    <span id="tupe_action" class="hidden"></span>
+                    <span id="type_action" class="hidden"></span>
                     <div class="col-xs-12 col-sm-12">
                         <input class="form-control" id="nav-search-input-user" type="text" style="width:100%"
                         placeholder="Tìm kiếm" onkeyup="search_per()"/>

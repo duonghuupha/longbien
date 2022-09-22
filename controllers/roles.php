@@ -24,7 +24,8 @@ class Roles extends Controller{
     function add(){
         $title = $_REQUEST['title']; $link = $_REQUEST['link'];
         $function = isset($_REQUEST['functions']) ? implode(",", $_REQUEST['functions']) : '';
-        $data = array("title" => $title, "link" => $link, "functions" => $function);
+        $parent = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0;
+        $data = array("title" => $title, "link" => $link, "functions" => $function, "parent_id" => $parent);
         $temp = $this->model->addObj($data);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ  liệu thành công";
@@ -41,7 +42,8 @@ class Roles extends Controller{
     function update(){
         $title = $_REQUEST['title']; $link = $_REQUEST['link']; $id = $_REQUEST['id'];
         $function = isset($_REQUEST['functions']) ? implode(",", $_REQUEST['functions']) : '';
-        $data = array("title" => $title, "link" => $link, "functions" => $function);
+        $parent = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0;
+        $data = array("title" => $title, "link" => $link, "functions" => $function,"parent_id" => $parent);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ  liệu thành công";
@@ -72,6 +74,12 @@ class Roles extends Controller{
 /////////////////////////////////////////////////////////////////////////////////
     function combo_link(){
         $this->view->render('roles/combo_link');
+    }
+
+    function combo_menu(){
+        $jsonObj = $this->model->get_data_parent();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("roles/combo_menu");
     }
 }
 ?>

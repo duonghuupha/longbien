@@ -32,7 +32,7 @@ class Group_role_model extends Model{
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_role(){
-        $query = $this->db->query("SELECT id, title, link, functions FROM tbl_roles");
+        $query = $this->db->query("SELECT id, title, link, functions FROM tbl_roles WHERE parent_id = 0");
         return $query->fetchAll();
     }
 

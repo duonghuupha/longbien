@@ -1,4 +1,5 @@
 <option value="">Lựa chọn đường dẫn</option>
+<option value="#">#</option>
 <?php
 $path = DIR_BASIC.'/controllers';
 $files = array_diff(scandir($path), array(".", ".."));
