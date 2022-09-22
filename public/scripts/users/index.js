@@ -90,9 +90,10 @@ function re_pass(idh){
     del_data(data_str, "Bạn có chắc chắn muốn đặt lại mật khẩu cho người dùng này?", baseUrl + '/users/change_pass', '#list_users',  baseUrl+ '/users/content?page='+page+'&q='+keyword)
 }
 /////////////////////////////////////////////////////////////////////////////////////////
-function select_per(){
+function select_per(type){
     $('#list_personel').load(baseUrl + '/users/list_personel');
     $('#pager').load(baseUrl + '/users/list_personel_page');
+    $('#type_action').text(type);
     $('#modal-personel').modal('show');
 }
 
@@ -122,7 +123,12 @@ function confirm_per(idh){
     for(const element of arr_title){
         prefix += removeVietnameseTones(element.substr(0, 1));
     }
-    var username = name+prefix;
-    $('#fullname').val(title); $('#username').val(username);
+    var username = name+prefix; console.log(username);
+    var type_action = $('#type_action').text();
+    if(type_action == 0){
+        $('#fullname').val(title); $('#username').val(username);
+    }else{
+        $('#fullname_update').val(title); $('#username_update').val(username);
+    }
     $('#modal-personel').modal('hide');
 }

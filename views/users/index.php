@@ -58,7 +58,7 @@
                                     <input type="text" id="fullname" name="fullname" required=""
                                     placeholder="Click Go! để lựa chọn nhân sự" style="width:100%" readonly=""/>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_per()">
+                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_per(0)">
                                             <i class="ace-icon fa fa-users bigger-110"></i>
                                             Go!
                                         </button>
@@ -141,7 +141,7 @@
                                     <input type="text" id="fullname_update" name="fullname" required=""
                                     placeholder="Click Go! để lựa chọn nhân sự" style="width:100%" readonly=""/>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_per()">
+                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_per(1)">
                                             <i class="ace-icon fa fa-users bigger-110"></i>
                                             Go!
                                         </button>
@@ -199,6 +199,7 @@
             </div>
             <div class="modal-body" style="height:520px;">
                 <div class="row">
+                    <span id="tupe_action" class="hidden"></span>
                     <div class="col-xs-12 col-sm-12">
                         <input class="form-control" id="nav-search-input-user" type="text" style="width:100%"
                         placeholder="Tìm kiếm" onkeyup="search_per()"/>
