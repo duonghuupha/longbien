@@ -8,6 +8,7 @@ $(function(){
 function edit(idh){
     var title = $('#title_'+idh).text(), link = $('#link_'+idh).text(), functions = $('#function_'+idh).text();
     var parent = $('#parent_'+idh).text(); $('#title').val(title); $('#link').val(link).trigger('change');
+    var order = $('#order_'+idh).text(); $('#order').val(order);
     if(functions.length > 0){
         $('#functions').val(functions.split(",")).trigger('change');
     }

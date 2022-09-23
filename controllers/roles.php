@@ -22,10 +22,11 @@ class Roles extends Controller{
     }
 
     function add(){
-        $title = $_REQUEST['title']; $link = $_REQUEST['link'];
+        $title = $_REQUEST['title']; $link = $_REQUEST['link']; $order = $_REQUEST['order'];
         $function = isset($_REQUEST['functions']) ? implode(",", $_REQUEST['functions']) : '';
         $parent = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0;
-        $data = array("title" => $title, "link" => $link, "functions" => $function, "parent_id" => $parent);
+        $data = array("title" => $title, "link" => $link, "functions" => $function, "parent_id" => $parent,
+                        "order_position" => $order);
         $temp = $this->model->addObj($data);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ  liệu thành công";
@@ -42,8 +43,9 @@ class Roles extends Controller{
     function update(){
         $title = $_REQUEST['title']; $link = $_REQUEST['link']; $id = $_REQUEST['id'];
         $function = isset($_REQUEST['functions']) ? implode(",", $_REQUEST['functions']) : '';
-        $parent = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0;
-        $data = array("title" => $title, "link" => $link, "functions" => $function,"parent_id" => $parent);
+        $parent = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0; $order = $_REQUEST['order'];
+        $data = array("title" => $title, "link" => $link, "functions" => $function,"parent_id" => $parent,
+                        "order_position" => $order);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ  liệu thành công";

@@ -238,11 +238,15 @@ class Model {
         return $row[0]['Total'];
     }
     function get_parent_menu($id){
-        $query = $this->db->query("SELECT id, title, link, functions, parent_id FROM tbl_roles WHERE parent_id = $id");
+        $query = $this->db->query("SELECT id, title, link, functions, parent_id, order_position FROM tbl_roles WHERE parent_id = $id
+                                    ORDER BY order_position ASC");
         return $query->fetchAll();
     }
-    function get_menu_via_user($userid){
-        $query = $this->db->query("");
+    function get_menu_via_user($grouproleid, $parentid){
+        $query = $this->db->query("SELECT id, title, link, functions, parent_id FROM tbl_roles WHERE FIND_IN_SET(tbl_roles.id,
+                                (SELECT roles FROM tbl_group_role WHERE tbl_group_role.id = $grouproleid)) AND parent_id = $parentid
+                                ORDER BY order_position ASC");
+        return $query->fetchAll();
     }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }

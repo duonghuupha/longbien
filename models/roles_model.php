@@ -8,8 +8,8 @@ class Roles_Model extends Model{
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_roles");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title, link, functions, parent_id FROM tbl_roles WHERE parent_id = 0
-                                    ORDER BY id DESC LIMIT $offset, $rows");
+        $query = $this->db->query("SELECT id, title, link, functions, parent_id, order_position FROM tbl_roles WHERE parent_id = 0
+                                    ORDER BY order_position ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

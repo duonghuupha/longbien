@@ -406,7 +406,7 @@ class Convert{
                     <span class="tree-label">'.$array[$row].'</span>
                     <input id="role_'.$mainid.'_'.$id.'_'.$row.'" name="role_'.$mainid.'_'.$id.'_" type="checkbox"
                     value="'.$mainid.'_'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
-                    '.$checked.'/>
+                    '.$checked.' data_role="role_'.$mainid.'_"/>
                 </span> 
             </li>
             ';
@@ -426,7 +426,7 @@ class Convert{
                 <span class="tree-label">'.$array[$row].'</span>
                 <input id="role_'.$mainid.'_'.$id.'_'.$row.'" name="role_'.$mainid.'_'.$id.'_" type="checkbox"
                 value="'.$mainid.'_'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
-                '.$checked.'/>
+                '.$checked.' data_role="role_'.$mainid.'_"/>
             </div>
             ';
         }

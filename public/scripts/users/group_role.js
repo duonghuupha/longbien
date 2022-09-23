@@ -1,7 +1,6 @@
 var page = 1, keyword = '', url = '', data = [];
 $(function(){
     $('#list_role').load(baseUrl + '/group_role/content');
-    add();
 });
 
 function add(){
@@ -43,15 +42,15 @@ function save(){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function set_checked(id){
-    var value = $('#role_'+id).is(':checked');
+function set_checked(idh, id){
+    var value = $('#role_'+idh+'_'+id).is(':checked');
     if(value){
-        $("input:checkbox[name=role_"+id+"_]").each(function(){
+        $("input:checkbox[name=role_"+idh+"_"+id+"_]").each(function(){
             $(this).prop('checked', true);
         });
-        $('#role'+id).prop('checked', true);
+        $('#role'+idh).prop('checked', true);
     }else{
-        $("input:checkbox[name=role_"+id+"_]").each(function(){
+        $("input:checkbox[name=role_"+idh+"_"+id+"_]").each(function(){
             $(this).prop('checked', false);
         });
     }
@@ -63,12 +62,19 @@ function set_checked_sub(idh, id, sub){
         $('#role_'+idh+'_'+id).prop('checked', true);
         $('#role'+idh).prop('checked', true);
     }
+    console.log(value+',', idh);
 }
 
 function set_checked_main(id){
     var value = $('#role'+id).is(":checked");
     if(value){
-
+        $("input:checkbox[data_role=role_"+id+"_]").each(function(){
+            $(this).prop('checked', true);
+        });
+    }else{
+        $("input:checkbox[data_role=role_"+id+"_]").each(function(){
+            $(this).prop('checked', false);
+        });
     }
 }
 

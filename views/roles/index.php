@@ -73,6 +73,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Thứ tự hiển thị</label>
+                                    <div>
+                                        <input type="text" id="order" name="order" required=""
+                                        placeholder="Thứ tự hiển thị" style="width:100%" onkeypress="validate(event)"/>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-xs-12 text-center">
                                 <button class="btn btn-sm btn-danger" type="button" onclick="window.location.href='<?php echo URL.'/roles' ?>'">
                                     <i class="ace-icon fa fa-times"></i>

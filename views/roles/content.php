@@ -11,6 +11,7 @@ function showCategories($categories, $parent_id, $char = '|---'){
                 <td class="text-left">'.$char.$item['title'].'</td>
                 <td class="text-center" id="link_'.$item['id'].'">'.$item['link'].'</td>
                 <td class="text-left">'.$convert->return_title_function($item['functions']).'</td>
+                <td class="text-center" id="order_'.$item['id'].'">'.$item['order_position'].'</td>
                 <td class="text-center">
                     <div class="hidden-sm hidden-xs action-buttons">
                         <a class="green" href="javascript:void(0)" onclick="edit('.$item['id'].')">
@@ -45,6 +46,7 @@ function showCategories($categories, $parent_id, $char = '|---'){
             <th class="text-left">Tiêu đề</th>
             <th class="text-center">Đường dẫn</th>
             <th class="text-left">Chức năng</th>
+            <th class="text-center">Thứ tự</th>
             <th class="text-center" style="width:70px">Thao tác</th>
         </tr>
     </thead>
@@ -54,11 +56,12 @@ function showCategories($categories, $parent_id, $char = '|---'){
         foreach($jsonObj['rows'] as $row){
             $i++;
         ?>
-        <tr role="row">
+        <tr role="row" style="font-weight:700">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-left" id="title_<?php echo $row['id']; ?>"><?php echo $row['title'] ?></td>
             <td class="text-center" id="link_<?php echo $row['id']; ?>"><?php echo $row['link'] ?></td>
             <td class="text-left"><?php echo $this->_Convert->return_title_function($row['functions']) ?></td>
+            <td class="text-center" id="order_<?php echo $row['id']; ?>"><?php echo $row['order_position'] ?></td>
             <td class="text-center">
                 <div class="hidden-sm hidden-xs action-buttons">
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
