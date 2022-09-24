@@ -4,9 +4,9 @@ class Calendars_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($title, $date, $lesson, $lessonexport, $teacher, $department, $subject, $offset, $rows){
+    function getFetObj($userid, $title, $date, $lesson, $lessonexport, $teacher, $department, $subject, $offset, $rows){
         $result = array();
-        $where = "title LIKE '%$title%'";
+        $where = "(user_id = $userid OR user_create = $userid) AND title LIKE '%$title%'";
         if($date != '')
             $where = $where." AND date_study = '$date'";
         if($lesson != 0)

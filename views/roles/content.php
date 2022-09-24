@@ -1,39 +1,5 @@
 <?php
 $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
-function showCategories($categories, $parent_id, $char = '|---'){
-    $convert = new Convert();
-    foreach ($categories as $key => $item){
-        // Nếu là chuyên mục con thì hiển thị
-        if ($item['parent_id'] == $parent_id){
-            echo '
-            <tr role="row">
-                <td class="text-center"></td>
-                <td class="text-left">'.$char.$item['title'].'</td>
-                <td class="text-center" id="link_'.$item['id'].'">'.$item['link'].'</td>
-                <td class="text-left">'.$convert->return_title_function($item['functions']).'</td>
-                <td class="text-center" id="order_'.$item['id'].'">'.$item['order_position'].'</td>
-                <td class="text-center">
-                    <div class="hidden-sm hidden-xs action-buttons">
-                        <a class="green" href="javascript:void(0)" onclick="edit('.$item['id'].')">
-                            <i class="ace-icon fa fa-pencil bigger-130"></i>
-                        </a>
-                        <a class="red" href="javascript:void(0)" onclick="del('.$item['id'].')">
-                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                        </a>
-                    </div>
-                </td>
-                <td class="hidden" id="function_'.$item['id'].'">'.$item['functions'].'</td>
-                <td class="hidden" id="title_'.$item['id'].'">'.$item['title'].'</td>
-                <td class="hidden" id="parent_'.$item['id'].'">'.$item['parent_id'].'</td>
-            </tr>
-            ';
-            // Xóa chuyên mục đã lặp
-            unset($categories[$key]);
-            // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
-            showCategories($categories, $item['id'], $char.'|---');
-        }
-    }
-}
 ?>
 <table 
     id="dynamic-table" 
@@ -43,6 +9,7 @@ function showCategories($categories, $parent_id, $char = '|---'){
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
+            <th class="text-left">Menu cha</th>
             <th class="text-left">Tiêu đề</th>
             <th class="text-center">Đường dẫn</th>
             <th class="text-left">Chức năng</th>
@@ -55,9 +22,12 @@ function showCategories($categories, $parent_id, $char = '|---'){
         $i = 0;
         foreach($jsonObj['rows'] as $row){
             $i++;
+            $class = ($i%2 == 0) ? 'even' : 'odd'; 
+            $parent = ($row['parent_id'] == 0) ? 'Menu gốc' : $this->_Data->return_title_menu($row['parent_id']);
         ?>
-        <tr role="row" style="font-weight:700">
+        <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
+            <td class="text-left" style="font-weight:700"><?php echo $parent ?></td>
             <td class="text-left" id="title_<?php echo $row['id']; ?>"><?php echo $row['title'] ?></td>
             <td class="text-center" id="link_<?php echo $row['id']; ?>"><?php echo $row['link'] ?></td>
             <td class="text-left"><?php echo $this->_Convert->return_title_function($row['functions']) ?></td>
@@ -73,9 +43,9 @@ function showCategories($categories, $parent_id, $char = '|---'){
                 </div>
             </td>
             <td class="hidden" id="function_<?php echo $row['id'] ?>"><?php echo $row['functions'] ?></td>
+            <td class="hidden" id="parent_<?php echo $row['id'] ?>"><?php echo $row['parent_id'] ?></td>
         </tr>
         <?php
-            showCategories($this->_Data->get_parent_menu($row['id']), $row['id']);
         }
         ?>
     </tbody>

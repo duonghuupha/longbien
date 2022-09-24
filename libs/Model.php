@@ -243,10 +243,22 @@ class Model {
         return $query->fetchAll();
     }
     function get_menu_via_user($grouproleid, $parentid){
-        $query = $this->db->query("SELECT id, title, link, functions, parent_id FROM tbl_roles WHERE FIND_IN_SET(tbl_roles.id,
+        $query = $this->db->query("SELECT id, title, link, functions, parent_id, icon FROM tbl_roles WHERE FIND_IN_SET(tbl_roles.id,
                                 (SELECT roles FROM tbl_group_role WHERE tbl_group_role.id = $grouproleid)) AND parent_id = $parentid
                                 ORDER BY order_position ASC");
         return $query->fetchAll();
+    }
+    function return_title_menu($id){
+        $query = $this->db->query("SELECT title FROM tbl_roles WHERE id = $id");
+        $row = $query->fetchAll();
+        return $row[0]['title'];
+    }
+    function check_role_controller($grouproleid, $link){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_group_role WHERE id = $grouproleid 
+                                    AND FIND_IN_SET((SELECT tbl_roles.id FROM tbl_roles 
+                                    WHERE tbl_roles.link = '$link'), roles); ");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
     }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }

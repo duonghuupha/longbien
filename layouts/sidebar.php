@@ -82,7 +82,7 @@ $userid = $this->_Info[0]['id']; $role = $this->_Info[0]['group_role_id'];
         ?>
         <li class="hover">
             <a href="<?php echo ($row_0['link'] == '#') ? '#' : URL.'/'.$row_0['link'] ?>" <?php echo $class ?>>
-                <i class="menu-icon fa fa-list"></i>
+                <i class="menu-icon fa fa-<?php echo $row_0['icon'] ?>"></i>
                 <span class="menu-text">
                     <?php echo $row_0['title'] ?>
                 </span>

@@ -22,7 +22,7 @@ class Calendars extends Controller{
         $subject_id = isset($_REQUEST['subject_id']) ? $_REQUEST['subject_id'] : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($title, $date, $lesson, $lesson_export, $teacher, $department_id, $subject_id, $offset, $rows);
+        $jsonObj = $this->model->getFetObj($this->_Info[0]['id'], $title, $date, $lesson, $lesson_export, $teacher, $department_id, $subject_id, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('calendars/content');
     }

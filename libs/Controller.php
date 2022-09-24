@@ -27,13 +27,23 @@ class Controller {
         $logged = Session::get('loggedIn');
         if($logged == false){
             session_start();
-            //Session::destroy();
             session_destroy();
             header ('Location: '.URL.'/index/login');
             exit;
         }else{
             if(isset($_REQUEST['url'])){
                 $url = $_REQUEST['url'];
+                $url = explode("/", $url);
+                if($this->_Info[0]['id'] != 1){
+                    if($url[0] != 'other' || $url[0] != 'notify' || $url[0] != 'dashboard'){
+                        if($this->_Data->check_role_controller($this->_Info[0]['group_role_id'], $url[0]) == 0){
+                            session_start();
+                            session_destroy();
+                            header ('Location: '.URL.'/index/login');
+                            exit;
+                        }
+                    }
+                }
             }else{
                 $url = "index";
             }

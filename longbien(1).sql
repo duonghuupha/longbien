@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2022 at 06:42 PM
+-- Generation Time: Sep 24, 2022 at 05:01 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -798,7 +798,7 @@ CREATE TABLE `tbl_group_role` (
 --
 
 INSERT INTO `tbl_group_role` (`id`, `code`, `title`, `roles`, `status`, `create_at`) VALUES
-(1, 1663899640, 'Giáo viên', '5,5_5_1,5_5_2,5_5_3,6,8,9', 1, '2022-09-23 09:20:40');
+(1, 1663899640, 'Giáo viên', '5,5_5_1,5_5_2,5_5_3,6,8,9,13,14,13_14_1,13_14_2,13_14_3,18,19,25,19_25_6,26,28,31,28_31_6,33,37,33_37_1,39,40,39_40_5,43,39_43_5', 1, '2022-09-24 02:09:41');
 
 -- --------------------------------------------------------
 
@@ -991,32 +991,64 @@ CREATE TABLE `tbl_roles` (
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `link` text COLLATE utf8_unicode_ci NOT NULL,
   `functions` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `order_position` int(11) NOT NULL
+  `order_position` int(11) NOT NULL,
+  `icon` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_roles`
 --
 
-INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`, `order_position`) VALUES
-(1, 0, 'Lịch làm việc', '#', '', 2),
-(2, 1, 'Nhóm công việc', 'group_task', '1,2,3', 1),
-(3, 1, 'Công việc', 'tasks', '1,2,3', 2),
-(4, 1, 'Lịch công tác', 'weekly', '5', 3),
-(5, 0, 'Lịch báo giảng', 'calendars', '1,2,3', 3),
-(6, 0, 'Văn bản', '#', '', 4),
-(7, 6, 'Danh mục', 'document_cate', '1,2,3', 1),
-(8, 6, 'Văn bản đến', 'document_in', '1,2,3', 2),
-(9, 6, 'Văn bản đi', 'document_out', '1,2,3', 3),
-(10, 0, 'Kiểm định chất lượng', '#', '', 5),
-(11, 0, 'Hồ sơ công việc', '#', '', 6),
-(12, 0, 'Nhân sự', 'personal', '1,2,3,4,5', 7),
-(13, 0, 'Học sinh', '#', '', 8),
-(14, 13, 'Thông tin học sinh', 'student', '1,2,3,4,5', 1),
-(15, 13, 'Phân lớp', 'student_change', '', 2),
-(16, 13, 'Chuyển lớp', 'change_class', '', 3),
-(17, 13, 'Lên lớp', 'up_class', '', 4),
-(18, 13, 'Sổ điểm', '#', '', 5);
+INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`, `order_position`, `icon`) VALUES
+(1, 0, 'Lịch làm việc', '#', '', 2, 'calendar'),
+(2, 1, 'Nhóm công việc', 'group_task', '1,2,3', 1, ''),
+(3, 1, 'Công việc', 'tasks', '1,2,3', 2, ''),
+(4, 1, 'Lịch công tác', 'weekly', '5', 3, ''),
+(5, 0, 'Lịch báo giảng', 'calendars', '1,2,3', 3, 'calendar-check-o'),
+(6, 0, 'Văn bản', '#', '', 4, 'book'),
+(7, 6, 'Danh mục', 'document_cate', '1,2,3', 1, ''),
+(8, 6, 'Văn bản đến', 'document_in', '1,2,3', 2, ''),
+(9, 6, 'Văn bản đi', 'document_out', '1,2,3', 3, ''),
+(10, 0, 'Kiểm định chất lượng', '#', '', 5, 'balance-scale'),
+(11, 0, 'Hồ sơ công việc', '#', '', 6, 'briefcase'),
+(12, 0, 'Nhân sự', 'personal', '1,2,3,4,5', 7, 'users'),
+(13, 0, 'Học sinh', '#', '', 8, 'graduation-cap'),
+(14, 13, 'Thông tin học sinh', 'student', '1,2,3,4,5', 1, ''),
+(15, 13, 'Phân lớp', 'student_change', '', 2, ''),
+(16, 13, 'Chuyển lớp', 'change_class', '', 3, ''),
+(17, 13, 'Lên lớp', 'up_class', '', 4, ''),
+(18, 13, 'Sổ điểm', '#', '', 5, ''),
+(19, 0, 'Trang thiết bị', '#', '', 9, 'cubes'),
+(20, 19, 'Thông tin thiết bị', 'devices', '1,2,3,4', 1, ''),
+(21, 19, 'Nhập kho', 'import_device', '', 2, ''),
+(22, 19, 'Phân bổ', 'export_device', '', 3, ''),
+(23, 19, 'In mã thiết bị', 'qrcode_device', '', 4, ''),
+(24, 19, 'Luân chuyển thiết bị', 'change_device', '', 5, ''),
+(25, 19, 'Mượn - trả', 'loans', '1,6', 6, ''),
+(26, 19, 'Sửa chữa nâng cấp', '#', '', 7, ''),
+(27, 19, 'Thu hồi - Khôi phục', 'returns', '1', 8, ''),
+(28, 0, 'Đồ dùng dạy học', '#', '', 10, 'flask'),
+(29, 28, 'Thông tin', 'gear', '1,2,3,4', 1, ''),
+(30, 28, 'In mã đồ dùng', 'gear_code', '', 2, ''),
+(31, 28, 'Mượn - trả', 'gear_loans', '1,6', 3, ''),
+(32, 28, 'Thu hồi - Khôi phục', 'gear_return', '1', 4, ''),
+(33, 0, 'Thư viện', '#', '', 11, 'book'),
+(34, 33, 'Danh mục', 'lib_cate', '1,2,3', 1, ''),
+(35, 33, 'Quản lý đầu sách', 'library', '1,2,3', 2, ''),
+(36, 33, 'In mã đầu sách', 'lib_code', '', 3, ''),
+(37, 33, 'Mượn - trả', 'lib_loans', '1', 4, ''),
+(38, 33, 'Thu hồi - khôi phục', 'lib_return', '1', 5, ''),
+(39, 0, 'Báo  cáo - Thống kê', '#', '', 12, 'bar-chart'),
+(40, 39, 'Lịch báo giảng', '#', '5', 1, ''),
+(41, 39, 'Văn bản', 'report_document', '5', 2, ''),
+(42, 39, 'Nhân sự', 'report_personel', '5', 3, ''),
+(43, 39, 'Học sinh', '#', '5', 4, ''),
+(44, 39, 'Trang thiết bị', 'report_device', '5', 5, ''),
+(45, 39, 'Đồ dùng dạy học', '#', '5', 6, ''),
+(46, 39, 'Thư viện', '#', '5', 7, ''),
+(47, 0, 'Quản lý người dùng', '#', '', 13, 'user'),
+(48, 47, 'Quản lý người dùng', 'users', '1,2,3', 1, ''),
+(49, 47, 'Nhóm quyền sử dụng', 'group_role', '1,2,3', 2, '');
 
 -- --------------------------------------------------------
 
@@ -1371,8 +1403,8 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `group_role_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-23 10:15:34', '3d984a9f1bc3adef1f50f003f03e7b7c5e437f98', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, 0, ''),
-(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-23 09:32:49', 'e09bd51129c094f58b7a3a2b261cb5eb9a0aaed0', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.42', 122, 1, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-24 02:31:11', '6e08a4bfe732af947d67c91709349309f66b68e4', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 0, 0, ''),
+(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-24 02:31:25', '92852da037a5eed699d37a0eab55f593074f6a2d', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.42', 122, 1, ''),
 (4, 1656510163, 'anhnp', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, 1, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 2, '0000-00-00 00:00:00', '', '', 121, 0, '');
 
@@ -1981,7 +2013,7 @@ ALTER TABLE `tbl_returns_device`
 -- AUTO_INCREMENT for table `tbl_roles`
 --
 ALTER TABLE `tbl_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`
