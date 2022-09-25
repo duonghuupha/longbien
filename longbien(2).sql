@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2022 at 05:01 AM
+-- Generation Time: Sep 25, 2022 at 07:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -798,7 +798,7 @@ CREATE TABLE `tbl_group_role` (
 --
 
 INSERT INTO `tbl_group_role` (`id`, `code`, `title`, `roles`, `status`, `create_at`) VALUES
-(1, 1663899640, 'Giáo viên', '5,5_5_1,5_5_2,5_5_3,6,8,9,13,14,13_14_1,13_14_2,13_14_3,18,19,25,19_25_6,26,28,31,28_31_6,33,37,33_37_1,39,40,39_40_5,43,39_43_5', 1, '2022-09-24 02:09:41');
+(1, 1663899640, 'Giáo viên', '5,5_1,5_2,5_3,6,8,9,13,14,18,19,25,25_6,26,28,31,31_6,33,37,37_1,39,40,40_5,43,43_5', 1, '2022-09-24 23:35:56');
 
 -- --------------------------------------------------------
 
@@ -1403,8 +1403,8 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `group_role_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-24 02:31:11', '6e08a4bfe732af947d67c91709349309f66b68e4', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 0, 0, ''),
-(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-24 02:31:25', '92852da037a5eed699d37a0eab55f593074f6a2d', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.42', 122, 1, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-24 23:10:54', 'e8a4677a8ced61ee0382a95a934e016285a1f47c', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.50', 0, 0, ''),
+(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-24 23:09:15', '2738c44c73b847b500487a91dd16710cf3d53ee8', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 122, 1, ''),
 (4, 1656510163, 'anhnp', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, 1, ''),
 (6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 2, '0000-00-00 00:00:00', '', '', 121, 0, '');
 

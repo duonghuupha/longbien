@@ -6,6 +6,7 @@ class View {
         $this->_Info = (isset($_SESSION['data'])) ? $_SESSION['data']: [];
         $this->_Convert = new Convert();
         $this->_Year = (isset($_SESSION['year'])) ? $_SESSION['year'] : [];
+        $this->_Url = explode("/", $_REQUEST['url']);
 	}
 
     public function render($name, $noInclude = false){

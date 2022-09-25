@@ -11,7 +11,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -21,12 +21,18 @@
             <div class="page-header">
                 <h1>
                     Lịch báo  giảng
+                    <?php
+                    if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                    ?>
                     <small class="pull-right hidden-480">
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </button>
                     </small>
+                    <?php
+                    }
+                    ?>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">

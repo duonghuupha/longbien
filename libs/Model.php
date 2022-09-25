@@ -260,6 +260,13 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function check_role_view($grouproleid, $link, $functions){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_group_role WHERE id = $grouproleid 
+                                    AND FIND_IN_SET(CONCAT((SELECT tbl_roles.id FROM tbl_roles 
+                                    WHERE tbl_roles.link = '$link'), '_', $functions), roles);");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

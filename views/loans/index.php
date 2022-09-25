@@ -23,18 +23,31 @@
                 <h1>
                     Mượn - Trả
                     <small class="pull-right">
+                        <?php
+                        if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                        ?>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </button>
+                        <?php
+                        }
+                        if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 6) > 0){
+                        ?>
                         <button type="button" class="btn btn-info btn-sm" onclick="add_reserve()">
                             <i class="fa fa-calendar"></i>
                             Đặt trước
                         </button>
+                        <?php
+                        }
+                        ?>
                     </small>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
+                <?php
+                if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                ?>
                 <div class="col-xs-12 col-sm-3">
                     <div class="col-xs-12">
                         <div class="form-group">
@@ -56,7 +69,11 @@
                         </i>
                     </div>
                 </div><!-- /.col -->
-                <div class="col-xs-12 col-sm-9">
+                <?php
+                }
+                $class = ($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0) ? '9' : '12';
+                ?>
+                <div class="col-xs-12 col-sm-<?php echo $class ?>">
                     <div id="list_loan" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->

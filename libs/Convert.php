@@ -399,13 +399,13 @@ class Convert{
         $data = explode(",", $str);
         $html = ''; $sql = new Model();
         foreach($data as $row){
-            $checked = ($idh != 0 && $sql->checked_role($idh, $mainid.'_'.$id.'_'.$row) != 0) ? 'checked=""' : '';
+            $checked = ($idh != 0 && $sql->checked_role($idh, $id.'_'.$row) != 0) ? 'checked=""' : '';
             $html .= '
             <li class="tree-item" role="treeitem"> 
                 <span class="tree-item-name"> 
                     <span class="tree-label">'.$array[$row].'</span>
                     <input id="role_'.$mainid.'_'.$id.'_'.$row.'" name="role_'.$mainid.'_'.$id.'_" type="checkbox"
-                    value="'.$mainid.'_'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
+                    value="'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
                     '.$checked.' data_role="role_'.$mainid.'_"/>
                 </span> 
             </li>
@@ -421,12 +421,12 @@ class Convert{
             $data = explode(",", $str);
             $sql = new Model();
             foreach($data as $row){
-                $checked = ($idh != 0 && $sql->checked_role($idh, $mainid.'_'.$id.'_'.$row) != 0) ? 'checked=""' : '';
+                $checked = ($idh != 0 && $sql->checked_role($idh, $id.'_'.$row) != 0) ? 'checked=""' : '';
                 $html .= '
                 <div class="col-sm-4">
                     <span class="tree-label">'.$array[$row].'</span>
                     <input id="role_'.$mainid.'_'.$id.'_'.$row.'" name="role_'.$mainid.'_'.$id.'_" type="checkbox"
-                    value="'.$mainid.'_'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
+                    value="'.$id.'_'.$row.'" onclick="set_checked_sub('.$mainid.', '.$id.', '.$row.')"
                     '.$checked.' data_role="role_'.$mainid.'_"/>
                 </div>
                 ';
