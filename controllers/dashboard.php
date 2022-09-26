@@ -37,6 +37,9 @@ class Dashboard extends Controller{
     }
 
     function block_four(){
+        $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+        $jsonObj = $this->model->get_schedule_today($id, date("Y-m-d"));
+        $this->view->jsonObj = $jsonObj;
         $this->view->render('dashboard/block_four');
     }
 

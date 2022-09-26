@@ -4,6 +4,7 @@ $(function(){
     $('#block_three').load(baseUrl + '/dashboard/block_three?id=2');
     $('#block_four').load(baseUrl + '/dashboard/block_four');
     $('#block_five').load(baseUrl + '/dashboard/block_five');
+    $('#department_schedule').load(baseUrl + '/other/combo_department?yearid='+yearid);
 });
 
 function reload_block_two(value){
@@ -12,4 +13,9 @@ function reload_block_two(value){
 
 function reload_block_three(value){
     $('#block_three').load(baseUrl + '/dashboard/block_three?id='+value);
+}
+
+function set_data_schedule(){
+    var value = $('#department_schedule').val();
+    $('#block_four').load(baseUrl + '/dashboard/block_four?id='+value);
 }

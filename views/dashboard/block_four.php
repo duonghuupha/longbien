@@ -9,13 +9,13 @@
     </thead>
     <tbody>
         <?php
-        for($i = 1; $i <= 5; $i++){
+        foreach($this->jsonObj as $row){
         ?>
         <tr>
-            <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center"><?php echo 'Toán' ?></td>
-            <td class="text-center"><?php echo 'Lớp 6A1' ?></td>
-            <td><?php echo 'Định lý Pitago' ?></td>
+            <td class="text-center"><?php echo $row['lesson'] ?></td>
+            <td class="text-center"><?php echo $row['subject'] ?></td>
+            <td class="text-center"><?php echo $row['department'] ?></td>
+            <td><?php echo $row['title'] ?></td>
         </tr>
         <?php
         }

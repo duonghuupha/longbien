@@ -61,5 +61,18 @@ class Dashboard_Model extends Model{
                                     WHERE status = 1 GROUP BY job_id");
         return $query->fetchAll();
     }
+
+    function get_schedule_today($department, $date){
+        if($department == 0){
+            $where = "";
+        }else{
+            $where = " AND department_id = $department";
+        }
+        $query = $this->db->query("SELECT id, code, lesson, subject_id, department_id, title, (SELECT tbldm_subject.title
+                                    FROM tbldm_subject WHERE tbldm_subject.id = subject_id) AS subject, (SELECT tbldm_department.title
+                                    FROM tbldm_department WHERE tbldm_department.id = department_id) AS department FROM tbl_schedule
+                                    WHERE date_study = '$date' $where ORDER BY id DESC LIMIT 0, 5");
+        return $query->fetchAll();
+    }
 }
 ?>
