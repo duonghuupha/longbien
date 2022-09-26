@@ -78,13 +78,37 @@
 </li>
 <!------------------------------------Kiem dinh chat luong----------------------------------------->
 <li class="hover">
-    <a href="<?php echo URL.'/quanlity' ?>">
+    <a href="#" class="dropdown-toggle">
         <i class="menu-icon fa fa-balance-scale"></i>
         <span class="menu-text">
-            Kiểm đinh chất lượng
+            Kiểm đinh CL
         </span>
+        <b class="arrow fa fa-angle-down"></b>
     </a>
     <b class="arrow"></b>
+    <ul class="submenu">
+        <li class="hover">
+            <a href="<?php echo URL.'/quanlity_cate' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Danh mục
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="hover">
+            <a href="<?php echo URL.'/quanlity_role' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Phân quyền tiêu chí
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="hover">
+            <a href="<?php echo URL.'/proof' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Quản lý minh chứng
+            </a>
+            <b class="arrow"></b>
+        </li>
+    </ul>
 </li>
 <!------------------------------------Ho so cong viec----------------------------------------->
 <li class="hover">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2022 at 07:10 PM
+-- Generation Time: Sep 26, 2022 at 01:12 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -344,6 +344,49 @@ INSERT INTO `tbldm_physical_room` (`id`, `title`, `region`, `floor`, `user_id`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbldm_quanlity`
+--
+
+CREATE TABLE `tbldm_quanlity` (
+  `id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbldm_quanlity`
+--
+
+INSERT INTO `tbldm_quanlity` (`id`, `title`, `create_at`) VALUES
+(1, 'Kiểm định chất lượng giai đoạn 2022 - 2027', '2022-09-26 16:37:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbldm_quanlity_criteria`
+--
+
+CREATE TABLE `tbldm_quanlity_criteria` (
+  `id` int(11) NOT NULL,
+  `standard_id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbldm_quanlity_standard`
+--
+
+CREATE TABLE `tbldm_quanlity_standard` (
+  `id` int(11) NOT NULL,
+  `quanlity_id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbldm_realtion`
 --
 
@@ -511,6 +554,7 @@ INSERT INTO `tbl_book` (`id`, `code`, `cate_id`, `manu_id`, `title`, `content`, 
 CREATE TABLE `tbl_book_loan` (
   `id` int(11) NOT NULL,
   `code` int(11) NOT NULL,
+  `user_create` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
@@ -525,10 +569,10 @@ CREATE TABLE `tbl_book_loan` (
 -- Dumping data for table `tbl_book_loan`
 --
 
-INSERT INTO `tbl_book_loan` (`id`, `code`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
-(7, 1661018731, 3, 0, 1, 1, '2022-08-21 01:05:31', '2022-08-21 01:08:20', 1, '2022-08-21 01:05:31'),
-(8, 1661018887, 0, 123, 1, 2, '2022-08-21 01:08:07', '2022-08-21 01:08:18', 1, '2022-08-21 01:08:07'),
-(9, 1662712797, 6, 0, 1, 1, '2022-09-09 15:39:57', '2022-09-09 15:40:00', 1, '2022-09-09 15:39:57');
+INSERT INTO `tbl_book_loan` (`id`, `code`, `user_create`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
+(7, 1661018731, 1, 3, 0, 1, 1, '2022-08-21 01:05:31', '2022-08-21 01:08:20', 1, '2022-08-21 01:05:31'),
+(8, 1661018887, 1, 0, 123, 1, 2, '2022-08-21 01:08:07', '2022-08-21 01:08:18', 1, '2022-08-21 01:08:07'),
+(9, 1662712797, 1, 6, 0, 1, 1, '2022-09-09 15:39:57', '2022-09-09 15:40:00', 1, '2022-09-09 15:39:57');
 
 -- --------------------------------------------------------
 
@@ -798,7 +842,8 @@ CREATE TABLE `tbl_group_role` (
 --
 
 INSERT INTO `tbl_group_role` (`id`, `code`, `title`, `roles`, `status`, `create_at`) VALUES
-(1, 1663899640, 'Giáo viên', '5,5_1,5_2,5_3,6,8,9,13,14,18,19,25,25_6,26,28,31,31_6,33,37,37_1,39,40,40_5,43,43_5', 1, '2022-09-24 23:35:56');
+(1, 1663899640, 'Giáo viên', '5,5_1,5_2,5_3,6,8,9,13,14,18,19,25,25_6,26,28,31,31_6,33,37,39,40,40_5,43,43_5', 1, '2022-09-26 00:33:53'),
+(2, 1664127781, 'Hành chính nhân sự', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,7,7_1,7_2,7_3,8,8_1,8_2,8_3,9,9_1,9_2,9_3,10,11,12,12_1,12_2,12_3,12_4,12_5,13,14,14_1,14_2,14_3,14_4,14_5,15,16,17,19,20,20_1,20_2,20_3,20_4,21,22,23,24,25,25_1,25_6,26,27,27_1,28,29,29_1,29_2,29_3,29_4,30,31,31_1', 1, '2022-09-26 01:04:09');
 
 -- --------------------------------------------------------
 
@@ -951,6 +996,19 @@ INSERT INTO `tbl_personel` (`id`, `code`, `fullname`, `gender`, `birthday`, `lev
 (120, 1234567908, 'Đào Thị Quỳnh D', 2, '2009-01-19', 0, 0, '', '0987654339', 'Số 234, Đội Cấn, Ba Đình Hà Nội', '', '', 1, 'webmasterzero19@gmail.com'),
 (121, 1234567909, 'Hoàng Văn E', 1, '2010-01-19', 3, 1, '1,2', '0987654340', 'Số 234, Đội Cấn, Ba Đình Hà Nội', 'profile-pic.jpg', '', 1, 'webmasterzero19@gmail.com'),
 (122, 1234567910, 'Nguyễn Phương Anh', 1, '2011-01-19', 4, 1, '4', '0987654341', 'Số 234, Đội Cấn, Ba Đình Hà Nội', 'index.jpg', '', 1, 'webmasterzero19@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_quanlity_role`
+--
+
+CREATE TABLE `tbl_quanlity_role` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `criteria` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1287,7 +1345,7 @@ INSERT INTO `tbl_tasks` (`id`, `code`, `group_id`, `title`, `content`, `date_wor
 (12, 1658103065, 1, '1914 translation by H. Rackham', '', '2022-07-19', 1, 1, 3, '', '', 2, '2022-07-18 07:11:05', 1),
 (13, 1658136028, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '', '2022-07-18', 1, 1, 4, '', '', 2, '2022-07-18 16:20:28', 1),
 (16, 1661482745, 1, 'asdf', 'asdfasdf', '2022-08-26', 1, 1, 3, '', '', 2, '2022-08-26 09:59:05', 1),
-(17, 1661484670, 1, 'sdfgsdf', 'dfgdf', '2022-08-26', 1, 1, 4, '', '', 0, '2022-08-26 10:31:10', 1);
+(17, 1661484670, 1, 'sdfgsdf', 'dfgdf', '2022-08-26', 1, 1, 4, '', '', 1, '2022-08-26 10:31:10', 1);
 
 -- --------------------------------------------------------
 
@@ -1354,7 +1412,8 @@ INSERT INTO `tbl_task_group` (`id`, `title`, `user_id`, `create_at`, `status`) V
 (1, 'Công việc hàng ngày', 1, '2022-07-14 01:24:25', 0),
 (2, 'Công việc phát sinh', 1, '2022-07-14 01:21:10', 0),
 (3, 'Công tác tuyển sinh', 1, '2022-07-14 01:21:29', 0),
-(4, 'Công tác kỷ niệm 20 tháng 11', 1, '2022-07-14 01:21:57', 1);
+(4, 'Công tác kỷ niệm 20 tháng 11', 1, '2022-07-14 01:21:57', 1),
+(5, 'Demo', 7, '2022-09-26 00:50:16', 0);
 
 -- --------------------------------------------------------
 
@@ -1403,10 +1462,10 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `group_role_id`, `avatar`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-24 23:10:54', 'e8a4677a8ced61ee0382a95a934e016285a1f47c', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.50', 0, 0, ''),
-(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-24 23:09:15', '2738c44c73b847b500487a91dd16710cf3d53ee8', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 122, 1, ''),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-09-26 14:28:44', '9ab2c91569d1e65ea232a6091587b182aa4a888c', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0', 0, 0, ''),
+(3, 1655827342, 'anv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-26 14:13:00', '017de2233d126544a21591ec16dd9ed71138c263', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.50', 122, 1, ''),
 (4, 1656510163, 'anhnp', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-07-18 16:20:17', '84fcb6631bd620f883dfea66af45fa19b5c545e2', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 104, 1, ''),
-(6, 1661706917, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 2, '0000-00-00 00:00:00', '', '', 121, 0, '');
+(7, 1664127924, 'ehv', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-09-26 14:06:19', 'da9c8524ec6b4e812569159c3703d5ee82c4cfb5', '::1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.50', 116, 2, '');
 
 -- --------------------------------------------------------
 
@@ -1604,6 +1663,24 @@ ALTER TABLE `tbldm_physical_room`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbldm_quanlity`
+--
+ALTER TABLE `tbldm_quanlity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbldm_quanlity_criteria`
+--
+ALTER TABLE `tbldm_quanlity_criteria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbldm_quanlity_standard`
+--
+ALTER TABLE `tbldm_quanlity_standard`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbldm_realtion`
 --
 ALTER TABLE `tbldm_realtion`
@@ -1727,6 +1804,12 @@ ALTER TABLE `tbl_notify`
 -- Indexes for table `tbl_personel`
 --
 ALTER TABLE `tbl_personel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_quanlity_role`
+--
+ALTER TABLE `tbl_quanlity_role`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1878,6 +1961,24 @@ ALTER TABLE `tbldm_physical_room`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `tbldm_quanlity`
+--
+ALTER TABLE `tbldm_quanlity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbldm_quanlity_criteria`
+--
+ALTER TABLE `tbldm_quanlity_criteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbldm_quanlity_standard`
+--
+ALTER TABLE `tbldm_quanlity_standard`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbldm_realtion`
 --
 ALTER TABLE `tbldm_realtion`
@@ -1977,7 +2078,7 @@ ALTER TABLE `tbl_export_detail`
 -- AUTO_INCREMENT for table `tbl_group_role`
 --
 ALTER TABLE `tbl_group_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans`
@@ -2002,6 +2103,12 @@ ALTER TABLE `tbl_notify`
 --
 ALTER TABLE `tbl_personel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+
+--
+-- AUTO_INCREMENT for table `tbl_quanlity_role`
+--
+ALTER TABLE `tbl_quanlity_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_returns_device`
@@ -2055,7 +2162,7 @@ ALTER TABLE `tbl_task_comment`
 -- AUTO_INCREMENT for table `tbl_task_group`
 --
 ALTER TABLE `tbl_task_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_up_class`
@@ -2067,7 +2174,7 @@ ALTER TABLE `tbl_up_class`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils`
