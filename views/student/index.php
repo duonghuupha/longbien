@@ -8,14 +8,6 @@
                 </li>
                 <li class="active">Học sinh</li>
             </ul><!-- /.breadcrumb -->
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
         <div class="page-content">
             <div class="page-header">
@@ -27,7 +19,7 @@
                             Lọc dữ liệu
                         </button>
                         <?php
-                        if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                        if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
                         ?>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
@@ -35,7 +27,7 @@
                         </button>
                         <?php
                         }
-                        if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 4) > 0){
+                        if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 4) > 0){
                         ?>
                         <button type="button" class="btn btn-info btn-sm" onclick="import_xls()">
                             <i class="fa fa-file-excel-o"></i>
@@ -43,7 +35,7 @@
                         </button>
                         <?php
                         }
-                        if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 5) > 0){
+                        if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 5) > 0){
                         ?>
                         <button type="button" class="btn btn-success btn-sm" onclick="export_card()">
                             <i class="fa fa-print"></i>

@@ -22,7 +22,7 @@
                 <h1>
                     Lịch báo  giảng
                     <?php
-                    if($this->_Data->check_role_view($this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
                     ?>
                     <small class="pull-right hidden-480">
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">

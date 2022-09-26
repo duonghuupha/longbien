@@ -22,12 +22,18 @@
             <div class="page-header">
                 <h1>
                     Công việc
+                    <?php
+                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                    ?>
                     <small class="pull-right">
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </button>
                     </small>
+                    <?php
+                    }
+                    ?>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -185,7 +191,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-users" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:51%">
+    <div class="modal-dialog" style="width:55%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">

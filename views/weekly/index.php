@@ -12,12 +12,18 @@
             <div class="page-header">
                 <h1>
                     Lịch công tác tuần
+                    <?php
+                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 5) > 0){
+                    ?>
                     <small class="pull-right">
                         <button type="button" class="btn btn-primary btn-sm" onclick="export_pdf()">
                             <i class="fa fa-file-pdf-o"></i>
                             Xuất file
                         </button>
                     </small>
+                    <?php
+                    }
+                    ?>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">

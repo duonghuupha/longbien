@@ -15,7 +15,7 @@ class Group_task extends Controller{
         $rows = 15;
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($offset, $rows);
+        $jsonObj = $this->model->getFetObj($this->_Info[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('group_task/content');
     }

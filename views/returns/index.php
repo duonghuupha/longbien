@@ -22,12 +22,18 @@
             <div class="page-header">
                 <h1>
                     Thu hồi - Khôi phục trang thiết bị
+                    <?php
+                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                    ?>
                     <small class="pull-right">
                         <button class="btn btn-sm btn-primary" type="button" onclick="add()">
                             <i class="ace-icon fa fa-plus"></i>
                             Thêm mới
                         </button>
                     </small>
+                    <?php
+                    }
+                    ?>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">

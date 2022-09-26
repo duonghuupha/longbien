@@ -16,7 +16,7 @@ class Lib_loans extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $offset, $rows);
+        $jsonObj = $this->model->getFetObj($this->_Info[0]['id'], $keyword, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('lib_loans/content');
     }
@@ -112,7 +112,8 @@ class Lib_loans extends Controller{
                     $book_id = $detail_book[0]['id']; $subbook = $codebook[1];
                     $data = array("code" => $code, "user_id" => $userid, "student_id" => $studentid,
                                     "book_id" => $book_id, "sub_book" => $subbook, "date_loan" => date("Y-m-d H:i:s"),
-                                    "date_return" => '', "status" => 0, "create_at" => date("Y-m-d H:i:s"));
+                                    "date_return" => '', "status" => 0, "create_at" => date("Y-m-d H:i:s"), 
+                                    'user_create' => $this->_Info[0]['id']);
                     $temp = $this->model->addObj($data);
                     if($temp){
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";

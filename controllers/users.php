@@ -82,7 +82,7 @@ class Users extends Controller{
 
     function del(){
         $id = $_REQUEST['id']; $data = array("active" => 2);
-        $temp = $this->model->updateObj($id, $data);
+        $temp = $this->model->delObj($id);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ liệu thành công";
             $jsonObj['success'] = true;

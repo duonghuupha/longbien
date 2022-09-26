@@ -34,12 +34,22 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                     <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-search-plus bigger-130"></i>
                     </a>
+                    <?php
+                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 2) > 0){
+                    ?>
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
+                    <?php
+                    }
+                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 3) > 0){
+                    ?>
                     <a class="red" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                     </a>
+                    <?php
+                    }
+                    ?>
                 </div>
             </td>
         </tr>

@@ -34,7 +34,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                     Xem chi tiết quyền sử dụng
                 </a>
             </td>
-            <td class="text-center"><?php echo $row['total_user'] ?></td>
+            <td class="text-center" id="total_<?php echo $row['id'] ?>"><?php echo $row['total_user'] ?></td>
             <td class="text-center">
                 <?php
                 if($row['status'] == 0){

@@ -4,12 +4,12 @@ class Lib_loans_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($q, $offset, $rows){
+    function getFetObj($userid, $q, $offset, $rows){
         $result = array();
-        $where = "WHERE book_id IN (SELECT tbl_book.id FROM tbl_book WHERE tbl_book.title LIKE '%$q%'
+        $where = "WHERE (user_create = $userid OR user_id = $userid) AND (book_id IN (SELECT tbl_book.id FROM tbl_book WHERE tbl_book.title LIKE '%$q%'
                     OR tbl_book.author LIKE '%$q%') OR user_id IN (SELECT tbl_users.id FROM tbl_users
                     WHERE tbl_users.hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$q%'))
-                    OR student_id IN (SELECT tbl_student.id FROM tbl_student WHERE tbl_student.fullname LIKE '%$q%')";
+                    OR student_id IN (SELECT tbl_student.id FROM tbl_student WHERE tbl_student.fullname LIKE '%$q%'))";
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book_loan $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, user_id, student_id, book_id, sub_book, date_loan, date_return,

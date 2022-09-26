@@ -25,6 +25,11 @@
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
+                <?php
+                $class = "12";
+                if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                    $class = "8";
+                ?>
                 <div class="col-xs-12 col-sm-4">
                     <form id="fm" method="post">
                         <div class="row">
@@ -50,7 +55,10 @@
                         </div>
                     </form>
                 </div><!-- /.col -->
-                <div class="col-xs-12 col-sm-8">
+                <?php
+                }
+                ?>
+                <div class="col-xs-12 col-sm-<?php echo $class ?>">
                     <div id="list_group" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
