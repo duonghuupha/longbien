@@ -76,6 +76,23 @@ class Quanlity_cate extends Controller{
         }
         $this->view->render("quanlity_cate/del_quanlity");
     }
+
+    function change_quanlity(){
+        $id = $_REQUEST['id']; $status = $_REQUEST['status'];
+        $data = array('status' => $status);
+        $this->model->updateObj_all_quanlity();
+        $temp = $this->model->updateObj_quanlity($id, $data);
+        if($temp){
+            $jsonObj['msg'] = "Cập nhật dữ liệu thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Cập nhật dữ liệu không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("quanlity_cate/change_quanlity");
+    }
 //////////////////// tieu chuan //////////////////////////////////////////////////////////////////////////////
     function content_standard(){
         $rows = 5;

@@ -9,7 +9,7 @@ class Quanlity_cate_Model extends Model{
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_quanlity");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title, create_at FROM tbldm_quanlity
+        $query = $this->db->query("SELECT id, title, create_at, `status` FROM tbldm_quanlity
                                     ORDER BY id DESC  LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
@@ -34,6 +34,11 @@ class Quanlity_cate_Model extends Model{
     function get_info_quanlity($id){
         $query = $this->db->query("SELECT * FROM tbldm_quanlity WHERE id = $id");
         return $query->fetchAll();
+    }
+
+    function updateObj_all_quanlity(){
+        $query = $this->db->query("UPDATE tbldm_quanlity SET status = 0");
+        return $query;
     }
 //////////////////////////// tieu chuan////////////////////////////////////////////////////////
     function getFetObj_standard($offset,  $rows){

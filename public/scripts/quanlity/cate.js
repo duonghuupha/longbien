@@ -43,6 +43,16 @@ function view_page_quanlity(pages){
     page_quanlity = pages;
     $('#list_quanlity').load(baseUrl + '/quanlity_cate/content_quanlity?page='+page_quanlity);
 }
+
+function change_quanlity(status, idh){
+    if(status == 0){
+        show_message("error", "Giai đoạn kiểm định bắt buộc phải có một bản ghi được kích hoạt");
+        return false;
+    }else{
+        var data_str = "id="+idh+'&status='+status;
+        del_data(data_str, "Giai đoạn kiểm định chỉ được kích hoạt 1 bản ghi. Bạn có chắc chắn muốn cập nhật trạng thái bản ghi này?", baseUrl + '/quanlity_cate/change_quanlity', '#list_quanlity', baseUrl + '/quanlity_cate/content_quanlity?page='+page_quanlity);
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function add_standard(){
     $('#title_standard').val(null); $('#quanlity_id').val(null).trigger('change');
