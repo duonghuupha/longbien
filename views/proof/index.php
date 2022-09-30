@@ -160,24 +160,28 @@
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
-                    Thêm mới - Cập nhật thông tin minh chứng
+                    Lựa chọn điều kiện hiển thị dữ liệu
                 </div>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
+                            <label for="form-field-username">Lựa chọn tiêu chuẩn</label>
+                            <div>
+                                <select class="select2" id="standards" name="standards" style="width:100%"
+                                data-placeholder="Lựa chọn tiêu chuẩn" onchange="set_criteria()">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
                             <label for="form-field-username">Lựa chọn tiêu chí</label>
-                            <div class="input-group">
-                                <input type="text" id="fullname" name="fullname"
-                                placeholder="Click Go! để lựa chọn" style="width:100%;" readonly=""/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary" type="button" onclick="select_criteria()"
-                                    id="select_users">
-                                        <i class="ace-icon fa fa-users bigger-110"></i>
-                                        Go!
-                                    </button>
-                                </span>
+                            <div>
+                                <select class="select2" id="criterias" name="criterias" style="width:100%"
+                                data-placeholder="Lựa chọn tiêu chí">
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -189,7 +193,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-6">
                         <div class="form-group">
                             <label for="form-field-username">Tiêu đề</label>
                             <div>

@@ -4,9 +4,19 @@ class Proof_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($q, $offset, $rows){
+    function getFetObj($standard, $criteria, $codeproof, $title, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_proof WHERE status = 1");
+        $where = "status = 1";
+        if($standard != '')
+            $where = $where." AND criteria_id IN (SELECT tbldm_quanlity_criteria.id FROM tbldm_quanlity_criteria
+                            WHERE tbldm_quanlity_criteria.standard_id = $standard)";
+        if($criteria != '')
+            $where = $where." AND criteria_id = $criteria";
+        if($codeproof != '')
+            $where = $where." AND code_proof LIKE '%$codeproof%'";
+        if($title != '')
+            $where = $where." AND title LIKE '%$title%'";
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_proof WHERE $where");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, code_proof, criteria_id, title, file, create_at,
                                     user_id, status, IF(user_id = 1, 'Administrator', (SELECT fullname
@@ -16,7 +26,7 @@ class Proof_Model extends Model{
                                     (SELECT tbldm_quanlity_standard.title FROM tbldm_quanlity_standard 
                                     WHERE tbldm_quanlity_standard.id = (SELECT standard_id FROM tbldm_quanlity_criteria
                                     WHERE tbldm_quanlity_criteria.id = criteria_id)) AS `standard` 
-                                    FROM tbl_proof WHERE status = 1 ORDER BY id DESC LIMIT $offset, $rows");
+                                    FROM tbl_proof WHERE $where ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

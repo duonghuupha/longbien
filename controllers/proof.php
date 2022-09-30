@@ -13,10 +13,13 @@ class Proof extends Controller{
 
     function content(){
         $rows = 15;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $standard = isset($_REQUEST['standard']) ? $_REQUEST['standard'] : '';
+        $criteria = isset($_REQUEST['criteria']) ? $_REQUEST['criteria'] : '';
+        $codeproof = isset($_REQUEST['codeproof']) ? str_replace("$", " ", $_REQUEST['codeproof']) : '';
+        $title = isset($_REQUEST['title']) ? str_replace("$", " ", $_REQUEST['title']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword,  $offset, $rows);
+        $jsonObj = $this->model->getFetObj($standard, $criteria, $codeproof, $title, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('proof/content');
     }

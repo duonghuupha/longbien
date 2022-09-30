@@ -97,6 +97,17 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbldm_quanlity_standard WHERE quanlity_id = $id");
         return $query->fetchAll();
     }
+
+    function get_combo_tieu_chuan(){
+        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity_standard WHERE quanlity_id = (SELECT tbldm_quanlity.id
+                                    FROM tbldm_quanlity WHERE tbldm_quanlity.status = 1)");
+        return $query->fetchAll();
+    }
+
+    function get_combo_criteria($id){
+        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity_criteria WHERE standard_id = $id");
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");

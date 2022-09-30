@@ -148,5 +148,17 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_standard");
     }
+
+    function combo_tieu_chuan(){
+        $jsonObj= $this->model->get_combo_tieu_chuan();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_tieu_chuan");
+    }
+
+    function combo_criteria(){
+        $jsonObj= $this->model->get_combo_criteria($_REQUEST['id']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_criteria");
+    }
 }
 ?>
