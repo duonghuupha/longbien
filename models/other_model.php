@@ -87,6 +87,16 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbldm_utensils WHERE status = 0");
         return $query->fetchAll();
     }
+    
+    function get_combo_quanlity(){
+        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity");
+        return $query->fetchAll();
+    }
+
+    function get_combo_standard($id){
+        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity_standard WHERE quanlity_id = $id");
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");

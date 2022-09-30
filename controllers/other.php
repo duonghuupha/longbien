@@ -136,5 +136,17 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_utensils");
     }
+
+    function combo_quanlity(){
+        $jsonObj= $this->model->get_combo_quanlity();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_quanlity");
+    }
+
+    function combo_standard(){
+        $jsonObj= $this->model->get_combo_standard($_REQUEST['id']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_standard");
+    }
 }
 ?>
