@@ -271,6 +271,20 @@ class Model {
             return $row[0]['Total'];
         }
     }
+    function get_data_standard_quanlity($id){
+        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity_standard WHERE quanlity_id = $id");
+        return $query->fetchAll();
+    }
+    function get_data_criteria_quanlity($id){
+        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity_criteria WHERE  standard_id = $id");
+        return $query->fetchAll();
+    }
+    function checked_role_quanlity($userid, $role){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_quanlity_role WHERE user_id = $userid
+                                    AND FIND_IN_SET('$role', criteria)");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

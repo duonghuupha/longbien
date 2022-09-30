@@ -16155,7 +16155,7 @@ div.dataTables_processing {
 }
 
 .tree .tree-item {
-    height: 20px;
+    /*height: 20px;*/
     line-height: 20px;
     max-width: calc(100% - 20px)
 }

@@ -32,7 +32,7 @@ class Quanlity_cate extends Controller{
 
     function add_quanlity(){
         $title = $_REQUEST['title'];
-        $data = array("title" => $title, "create_at" => date("Y-m-d H:i:s"));
+        $data = array("title" => $title, "create_at" => date("Y-m-d H:i:s"), 'status' => 1);
         $temp = $this->model->addObj_quanlity($data);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ liệu thành công";

@@ -62,7 +62,7 @@ function set_checked_sub(idh, id, sub){
         $('#role_'+idh+'_'+id).prop('checked', true);
         $('#role'+idh).prop('checked', true);
     }
-    console.log(value+',', idh);
+    //console.log(value+',', idh);
 }
 
 function set_checked_main(id){

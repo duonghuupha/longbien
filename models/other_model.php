@@ -89,7 +89,7 @@ class Other_Model extends Model{
     }
     
     function get_combo_quanlity(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity");
+        $query = $this->db->query("SELECT id, title FROM tbldm_quanlity WHERE status = 1");
         return $query->fetchAll();
     }
 
