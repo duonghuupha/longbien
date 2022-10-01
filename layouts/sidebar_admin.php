@@ -112,13 +112,37 @@
 </li>
 <!------------------------------------Ho so cong viec----------------------------------------->
 <li class="hover">
-    <a href="<?php echo URL.'/works' ?>">
+    <a href="#" class="dropdown-toggle">
         <i class="menu-icon fa fa-briefcase"></i>
         <span class="menu-text">
             Hồ sơ công việc
         </span>
+        <b class="arrow fa fa-angle-down"></b>
     </a>
     <b class="arrow"></b>
+    <ul class="submenu">
+        <li class="hover">
+            <a href="<?php echo URL.'/works_cate' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Danh mục
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="hover">
+            <a href="<?php echo URL.'/works_role' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Phân quyền danh mục
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="hover">
+            <a href="<?php echo URL.'/works' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Quản lý hồ sơ
+            </a>
+            <b class="arrow"></b>
+        </li>
+    </ul>
 </li>
 <!------------------------------------Nhan su----------------------------------------->
 <li class="hover">

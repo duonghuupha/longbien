@@ -108,6 +108,11 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbldm_quanlity_criteria WHERE standard_id = $id");
         return $query->fetchAll();
     }
+
+    function get_combo_works_group(){
+        $query = $this->db->query("SELECT id, title FROM tbldm_works_group WHERE status = 1");
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");

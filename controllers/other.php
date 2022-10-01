@@ -160,5 +160,11 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_criteria");
     }
+
+    function combo_works_group(){
+        $jsonObj = $this->model->get_combo_works_group();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_works_group");
+    }
 }
 ?>

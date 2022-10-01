@@ -33,7 +33,7 @@
                             </h1>
                             <hr />
                             <h3 class="lighter smaller">
-                                Không tim thấy trang hoặc bạn không cóquyền rtuy cập vào trang bạn yêu cầu!
+                                Không tim thấy trang hoặc bạn không có quyền rtuy cập vào trang bạn yêu cầu!
                             </h3>
                             <div>
                                 <div class="space"></div>
