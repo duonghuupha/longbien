@@ -6,13 +6,13 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="#">Trang chủ</a>
                 </li>
-                <li class="active">Kiểm định chất lượng giáo dục</li>
+                <li class="active">Hồ sơ công việc</li>
             </ul><!-- /.breadcrumb -->
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
                         <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
+                            autocomplete="off" onkeyup="search()"/>
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -21,7 +21,7 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Phần quyền tiêu chí
+                    Phần quyền danh mục
                     <small class="pull-right hidden-480">
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
@@ -65,16 +65,6 @@
                                             Go!
                                         </button>
                                     </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn giai đoạn</label>
-                                <div>
-                                    <select id="quanlity_id" name="quanlity_id" required="" style="width:100%"
-                                    class="form-control select2" data-placeholder="Lựa chọn giai đoạn"
-                                    onchange="set_role()"></select>
                                 </div>
                             </div>
                         </div>
@@ -134,4 +124,4 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- End formm don vi tinh-->
-<script src="<?php echo URL.'/public/' ?>scripts/quanlity/role.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/works/role.js"></script>

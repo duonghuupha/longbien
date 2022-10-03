@@ -285,6 +285,16 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function get_all_cate_works_via_group($id){
+        $query = $this->db->query("SELECT id, title FROM tbldm_works WHERE group_id = $id");
+        return $query->fetchAll();
+    }
+    function check_role_works($userid, $role){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_works_role WHERE user_id = $userid
+                                    AND FIND_IN_SET($role, works)");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 
