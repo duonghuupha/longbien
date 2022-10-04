@@ -286,7 +286,7 @@ class Model {
         return $row[0]['Total'];
     }
     function get_all_cate_works_via_group($id){
-        $query = $this->db->query("SELECT id, title FROM tbldm_works WHERE group_id = $id");
+        $query = $this->db->query("SELECT id, title FROM tbldm_works WHERE group_id = $id AND status = 1");
         return $query->fetchAll();
     }
     function check_role_works($userid, $role){

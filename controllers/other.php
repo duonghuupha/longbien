@@ -166,5 +166,11 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_works_group");
     }
+
+    function combo_works_cate(){
+        $jsonObj = $this->model->get_combo_works_cate($_REQUEST['id']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_works_cate");
+    }
 }
 ?>

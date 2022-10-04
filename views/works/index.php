@@ -13,11 +13,21 @@
             <div class="page-header">
                 <h1>
                     Quản lý hồ sơ
-                    <small class="pull-right hidden-480">
+                    <small class="pull-right">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="filter()">
+                            <i class="fa fa-search"></i>
+                            Lọc dữ liệu
+                        </button>
+                        <?php
+                        if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                        ?>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </button>
+                        <?php
+                        }
+                        ?>
                     </small>
                 </h1>
             </div><!-- /.page-header -->
@@ -149,6 +159,62 @@
     <div class="modal-dialog">
         <div class="modal-content" id="detail">
             
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-search" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:30%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    Lựa chọn điều kiện hiển thị dữ liệu
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Lựa chọn nhóm hồ sơ</label>
+                            <div>
+                                <select class="select2" type="text" name="group_id_s" id="group_id_s"
+                                style="width:100%" data-placeholder="Lựa chọn nhóm hồ sơ"
+                                onchange="set_works_cate()"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Lựa chọn danh mục hồ sơ</label>
+                            <div>
+                                <select class="select2" type="text" name="works_id_s" id="works_id_s"
+                                style="width:100%" data-placeholder="Lựa chọn danh mục hồ sơ"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Tiêu đề</label>
+                            <div>
+                                <input class="form-control" type="text" name="titles" id="titles"
+                                style="width:100%" placeholder="Tiêu đề hồ sơ"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="search()" id="save_form">
+                    <i class="ace-icon fa fa-search"></i>
+                    Tìm kiếm
+                </button>
+            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>

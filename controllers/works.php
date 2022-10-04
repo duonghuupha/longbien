@@ -13,10 +13,12 @@ class Works extends Controller{
 
     function content(){
         $rows = 5;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $group = isset($_REQUEST['group']) ? $_REQUEST['group'] : '';
+        $cate = (isset($_REQUEST['works']) && $_REQUEST['works']  != 'null') ? $_REQUEST['works'] : '';
+        $title = isset($_REQUEST['title']) ? str_replace("$", " ", $_REQUEST['title']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $offset, $rows);
+        $jsonObj = $this->model->getFetObj($group, $cate, $title, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('works/content');
     }

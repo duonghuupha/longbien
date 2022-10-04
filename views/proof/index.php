@@ -18,10 +18,16 @@
                             <i class="fa fa-search"></i>
                             Lọc dữ liệu
                         </button>
+                        <?php
+                        if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                        ?>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </button>
+                        <?php
+                        }
+                        ?>
                     </small>
                 </h1>
             </div><!-- /.page-header -->

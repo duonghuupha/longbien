@@ -1,6 +1,8 @@
 var page = 1, keyword = '', url = '', data = [], page_works = 1, keyword_work = '';
+var groups = '', workss = '', titles = '';
 $(function(){
     $('#list_works').load(baseUrl + '/works/content');
+    $('#group_id_s').load(baseUrl + '/other/combo_works_group');
 });
 
 function add(){
@@ -23,7 +25,7 @@ function edit(idh){
 
 function del(idh){
     var data_str = "id="+idh;
-    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl + '/works/del','#list_works', baseUrl + '/works/content?page='+page);
+    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl + '/works/del','#list_works', baseUrl + '/works/content?page='+page+'&group='+groups+'&works='+workss+'&title='+titles);
 }
 
 function save(){
@@ -35,7 +37,7 @@ function save(){
         }
     });
     if(allRequired){
-        save_form_modal('#fm', url, '#modal-works', '#list_works', baseUrl+'/works/content?page='+page+'&q='+keyword); 
+        save_form_modal('#fm', url, '#modal-works', '#list_works', baseUrl + '/works/content?page='+page+'&group='+groups+'&works='+workss+'&title='+titles); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -43,11 +45,28 @@ function save(){
 
 function view_page_works(pages){
     page = pages;
+    $('#list_works').load(baseUrl + '/works/content?page='+page+'&group='+groups+'&works='+workss+'&title='+titles);
 
 }
 
-function search(){
+function filter(){
+    $('#modal-search').modal('show');
+}
 
+function search(){
+    var groupids = $('#group_id_s').val(), worksids = $('#works_id_s').val(), title = $('#titles').val();
+    if(groupids.length != 0 || worksids != null || title.length != 0){
+        groups = groupids; workss = worksids;
+        if(title.length != 0){
+            titles = title.replaceAll(" ", "$", 'g');
+        }else{
+            titles = '';
+        }
+    }else{
+        groups = ''; workss = '', titles = '';
+    }
+    $('#list_works').load(baseUrl + '/works/content?page=1&group='+groups+'&works='+workss+'&title='+titles);
+    $('#modal-search').modal('hide');
 }
 ////////////////////////////////////////////////////////////////////////////////////////
 function select_works(){
@@ -90,4 +109,9 @@ function confirm_works(){
 function detail(idh){
     $('#detail').load(baseUrl + '/works/detail?id='+idh);
     $('#modal-detail').modal('show');
+}
+
+function set_works_cate(){
+    var value = $('#group_id_s').val();
+    $('#works_id_s').load(baseUrl + '/other/combo_works_cate?id='+value);
 }
