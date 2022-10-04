@@ -49,8 +49,8 @@ class Proof extends Controller{
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }else{
-                        $jsonObj['msg'] = "Ghi dữ liệu không thành công";
-                        $jsonObj['success'] = false;
+                        $jsonObj['msg'] = "Thông tin minh chứng được lưu thành công, quá trình tải file gặp lỗi";
+                        $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }
                 }else{

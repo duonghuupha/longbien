@@ -295,6 +295,10 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function return_title_works_cate($str){
+        $query = $this->db->query("SELECT id, title FROM tbldm_works WHERE FIND_IN_SET(id, '$str')");
+        return  $query;
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

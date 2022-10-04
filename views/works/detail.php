@@ -1,9 +1,12 @@
 <?php
 $item = $this->jsonObj;
+foreach($this->_Data->return_title_works_cate($item[0]['works_id']) as $row){
+    $array[] = $row['title'];
+}
 ?>
 <div class="modal-header no-padding">
     <div class="table-header">
-        Thông tin minh chứng
+        Thông tin hồ sơ công việc
     </div>
 </div>
 <div class="modal-body">
@@ -15,24 +18,10 @@ $item = $this->jsonObj;
                 </label>
             </div>
         </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <label for="form-field-username">
-                    <b>Mã minh chứng:</b> <?php echo $item[0]['code_proof'] ?>
-                </label>
-            </div>
-        </div>
         <div class="col-xs-12">
             <div class="form-group">
                 <label for="form-field-username">
-                    <b>Tiêu chuẩn:</b> <?php echo $item[0]['standard'] ?>
-                </label>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="form-group">
-                <label for="form-field-username">
-                    <b>Tiêu chí:</b> <?php echo $item[0]['criteria'] ?>
+                    <b>Danh mục:</b> <?php echo implode("; ",$array) ?>
                 </label>
             </div>
         </div>
@@ -46,13 +35,16 @@ $item = $this->jsonObj;
         <div class="col-xs-12">
             <div class="form-group">
                 <label for="form-field-username">
+                    <b>Nội dung:</b> <?php echo $item[0]['content'] ?>
+                </label>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="form-field-username">
                     <b>File đính kèm:</b> 
                     <?php 
-                        if($item[0]['file'] != ''){
-                            echo "<a href='".URL."/public/proof_quanlity/".$item[0]['criteria_id']."/".$item[0]['file']."' target='_blank'>".$item[0]['file']."</a>";
-                        }else{
-                            echo "<i>Không có file đính kèm</i>";
-                        }
+                    echo "<a href='".URL."/public/works/".$item[0]['file']."' target='_blank'>".$item[0]['file']."</a>";
                     ?>
                 </label>
             </div>
