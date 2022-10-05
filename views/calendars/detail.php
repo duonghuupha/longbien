@@ -91,7 +91,13 @@ $item = $this->jsonObj;
                             <td class="text-center"><?php echo $row['sub'] ?></td>
                             <td class="text-center">
                                 <?php
-                                echo ($row['type'] == 1) ? 'Thiết bị' : ($row['type'] == 2) ? 'Đồ dùng' : 'Phòng chức năng';
+                                if($row['type'] == 1){
+                                    echo "Thiết bị";
+                                }elseif($row['type'] == 2){
+                                    echo "Đồ dùng";
+                                }else{
+                                    echo "Phòng chức năng";
+                                }
                                 ?>
                             </td>
                         </tr>

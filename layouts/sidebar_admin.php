@@ -34,13 +34,30 @@
 </li>
 <!------------------------------------Lich bao giang----------------------------------------->
 <li class="hover">
-    <a href="<?php echo URL.'/calendars' ?>">
+    <a href="#" class="dropdown-toggle">
         <i class="menu-icon fa fa-calendar-check-o"></i>
         <span class="menu-text">
-            Lịch báo giảng
+            Chuyên môn
         </span>
+        <b class="arrow fa fa-angle-down"></b>
     </a>
     <b class="arrow"></b>
+    <ul class="submenu">
+        <li class="hover">
+            <a href="<?php echo URL.'/assign' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Phân công giáo viên
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="hover">
+            <a href="<?php echo URL.'/calendars' ?>">
+                <i class="menu-icon fa fa-caret-right"></i>
+                Lịch báo giảng
+            </a>
+            <b class="arrow"></b>
+        </li>
+    </ul>
 </li>
 <!------------------------------------Van ban----------------------------------------->
 <li class="hover">

@@ -172,5 +172,17 @@ class Other extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_works_cate");
     }
+
+    function combo_subject_point_no_null(){
+        $jsonObj= $this->model->get_combo_subject_point();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_subject_point_no_null");
+    }
+
+    function combo_department_no_null(){
+        $jsonObj= $this->model->get_combo_department($_REQUEST['yearid']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_department_no_null");
+    }
 }
 ?>

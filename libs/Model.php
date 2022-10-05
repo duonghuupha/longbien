@@ -299,6 +299,11 @@ class Model {
         $query = $this->db->query("SELECT id, title FROM tbldm_works WHERE FIND_IN_SET(id, '$str')");
         return  $query;
     }
+    function return_title_department($id){
+        $query = $this->db->query("SELECT title FROM tbldm_department WHERE id = $id");
+        $row = $query->fetchAll();
+        return $row[0]['title'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

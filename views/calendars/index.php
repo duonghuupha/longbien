@@ -6,7 +6,7 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="#">Trang chủ</a>
                 </li>
-                <li class="active">Danh mục</li>
+                <li class="active">Chuyên môn</li>
             </ul><!-- /.breadcrumb -->
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
