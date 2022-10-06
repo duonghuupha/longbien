@@ -28,6 +28,8 @@ class Student_point extends Controller{
         $subjectid = $_REQUEST['subjectid']; $type_point = $_REQUEST['type_point'];
         $point = $_REQUEST['point']; $yearid = $this->_Year[0]['id']; $semester = $_REQUEST['semesterid'];
         $createat = date("Y-m-d H:i:s");
+        // kiem tra userid co quyen cap nhat diem  khong
+        
         if($this->model->dupliObj($studentid, $type_point, $yearid, $semester, $subjectid) > 0){
             $jsonObj['msg'] = "Học sinh đã tồn tại điểm cho môn học này";
             $jsonObj['success'] = false;

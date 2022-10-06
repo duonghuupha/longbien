@@ -88,5 +88,9 @@ class Student_point_Model extends Model{
                                     AND semester = $semester");
         return $query->fetchAll();
     }
+//////////////////////////////////////////////////////////////////////////////////////////////
+    function check_user_update_point($userid, $subjecid, $departmentid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl");
+    }
 }
 ?>

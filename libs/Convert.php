@@ -381,7 +381,7 @@ class Convert{
 
     function return_title_function($str){
         $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
-                        5 => "Xuất dữ liệu", 6 => "Đặt trước");
+                        5 => "Xuất dữ liệu", 6 => "Đặt trước", 7 => 'Duyệt yêu cầu');
         if($str != ''){
             $data = explode(",", $str);
             foreach($data as $row){
@@ -395,7 +395,7 @@ class Convert{
 
     function return_roles($mainid, $id, $str, $idh){
         $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
-                        5 => "Xuất dữ liệu", 6 => "Đặt trước");
+                        5 => "Xuất dữ liệu", 6 => "Đặt trước", 7 => 'Duyệt yêu cầu');
         $data = explode(",", $str);
         $html = ''; $sql = new Model();
         foreach($data as $row){
@@ -416,7 +416,7 @@ class Convert{
 
     function return_roles_horizontal($mainid, $id, $str, $idh){
         $array = array(1 => "Thêm mới", 2 => "Cập nhật", 3 => "Xóa", 4 => "Nhập từ file", 
-                        5 => "Xuất dữ liệu", 6 => "Đặt trước"); $html = ''; 
+                        5 => "Xuất dữ liệu", 6 => "Đặt trước", 7 => 'Duyệt yêu cầu'); $html = ''; 
         if($str != ''){
             $data = explode(",", $str);
             $sql = new Model();
