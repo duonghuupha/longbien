@@ -2,7 +2,6 @@
 class Other extends Controller{
     function __construct(){
         parent::__construct();
-        parent::PhadhInt();
     }
 
     function combo_years(){
@@ -183,6 +182,22 @@ class Other extends Controller{
         $jsonObj= $this->model->get_combo_department($_REQUEST['yearid']);
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_department_no_null");
+    }
+
+    function combo_subject_user(){
+        $userid = $this->_Info[0]['id']; $yearid = $this->_Year[0]['id'];
+        $type = $this->model->check_user_is_teacher($userid);
+        $jsonObj = $this->model->get_combo_subject_via_user_id($type, $userid, $yearid);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_subject_user");
+    }
+
+    function combo_department_user(){
+        $userid = $this->_Info[0]['id']; $yearid = $this->_Year[0]['id'];
+        $type = $this->model->check_user_is_teacher($userid);
+        $jsonObj = $this->model->get_combo_department_user($type, $userid, $yearid);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_department_user");
     }
 }
 ?>

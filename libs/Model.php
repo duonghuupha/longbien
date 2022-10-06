@@ -304,6 +304,23 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['title'];
     }
+    function return_point_of_student($type_poin, $studentid, $yearid, $semester, $subject){
+        $query = $this->db->query("SELECT `point` FROM tbl_student_point WHERE student_id = $studentid AND subject_id = $subject
+                                    AND type_point = $type_poin AND semester = $semester AND year_id = $yearid");
+        $row= $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['point'];
+        }else{
+            return '';
+        }
+    }
+    function check_change_point($studentid, $typepoint, $yearid, $subject, $semester){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_change_point WHERE point_id = (SELECT tbl_student_point.id
+                                FROM tbl_student_point WHERE student_id = $studentid AND type_point = $typepoint
+                                AND year_id = $yearid AND subject_id = $subject AND semester = $semester) AND status = 1");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

@@ -4,9 +4,17 @@ class Student_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($q, $code, $name, $date, $class, $address, $gender, $people, $religion, $yearid, $offset, $rows){
+    function getFetObj($type, $userid, $q, $code, $name, $date, $class, $address, $gender, $people, $religion, $yearid, $offset, $rows){
         $result = array();
-        $where = "status != 99";
+        if($type == 0){
+            $where = "status != 99";
+        }else{
+            $string = $this->get_department_assign($userid, $yearid);
+            $where = "status != 99 AND id IN (SELECT tbl_student_class.student_id FROM tbl_student_class 
+                    WHERE tbl_student_class.year_id = $yearid AND FIND_IN_SET(tbl_student_class.department_id, 
+                    (SELECT tbl_assign.department FROM tbl_assign WHERE tbl_assign.user_id = $userid 
+                    AND tbl_assign.year_id = $yearid)))";
+        }
         if($q != '')
             $where = $where." AND fullname LIKE '%$q%'";
         if($code != '')
@@ -151,6 +159,20 @@ class Student_Model extends Model{
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_years WHERE id = $id AND active = 1");
         $row = $query->fetchAll();
         return $row[0]['Total'];
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////
+    function check_user_is_teacher($userid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id = $userid
+                                    AND hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE tbl_personel.job_id = (SELECT tbldm_job.id
+                                    FROM tbldm_job WHERE tbldm_job.is_teacher = 1 AND tbldm_job.status = 0))");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function get_department_assign($userid, $yearid){
+        $query = $this->db->query("SELECT department FROM tbl_assign WHERE user_id = $userid AND year_id = $yearid");
+        $row = $query->fetchAll();
+        return $row[0]['department'];
     }
 }
 ?>

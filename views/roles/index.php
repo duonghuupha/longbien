@@ -69,6 +69,7 @@
                                             <option value="4">Nhập từ file</option>
                                             <option value="5">Xuất dữ liệu</option>
                                             <option value="6">Đặt trước</option>
+                                            <option value="7">Duyệt yêu cầu</option>
                                         </select>
                                     </div>
                                 </div>

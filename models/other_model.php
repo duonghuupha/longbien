@@ -118,6 +118,30 @@ class Other_Model extends Model{
         $query = $this->db->query("SELECT id, title FROM tbldm_works WHERE group_id = $id AND status =1");
         return $query->fetchAll();
     }
+
+    function get_combo_subject_via_user_id($type, $userid, $yearid){
+        if($type == 0){
+            $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0 
+                                        AND set_point = 1");
+        }else{
+            $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0 
+                                        AND set_point = 1 AND FIND_IN_SET(tbldm_subject.id, (SELECT tbl_assign.subject
+                                        FROM tbl_assign WHERE tbl_assign.user_id = $userid AND year_id = $yearid))");
+        }
+        return $query->fetchAll();
+    }
+
+    function get_combo_department_user($type, $userid, $yearid){
+        if($type == 0){
+            $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid
+                                        AND status = 0 AND class_study = 1");
+        }else{
+            $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid AND class_study = 1
+                                        AND status = 0 AND FIND_IN_SET(tbldm_department.id, (SELECT tbl_assign.department
+                                        FROM tbl_assign WHERE tbl_assign.user_id = $userid AND year_id = $yearid))");
+        }
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");
@@ -129,6 +153,14 @@ class Other_Model extends Model{
                                 FROM tbl_export_detail WHERE device_id = (SELECT tbl_devices.id FROM tbl_devices
                                 WHERE tbl_devices.code = $devicecode) AND sub_device = $subdevice AND status = 0)");
         return $query->fetchAll();
+    }
+
+    function check_user_is_teacher($userid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id = $userid
+                                    AND hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE tbl_personel.job_id = (SELECT tbldm_job.id
+                                    FROM tbldm_job WHERE tbldm_job.is_teacher = 1 AND tbldm_job.status = 0))");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
     }
 }
 ?>

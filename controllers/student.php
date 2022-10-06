@@ -24,7 +24,8 @@ class Student extends Controller{
         $people = isset($_REQUEST['people']) ? $_REQUEST['people'] : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($keyword, $code, $name, $date, $class, $address, $gender, $people, $religion, $this->_Year[0]['id'], $offset, $rows);
+        $type = $this->model->check_user_is_teacher($this->_Info[0]['id']);
+        $jsonObj = $this->model->getFetObj($type, $this->_Info[0]['id'], $keyword, $code, $name, $date, $class, $address, $gender, $people, $religion, $this->_Year[0]['id'], $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('student/content');
     }
