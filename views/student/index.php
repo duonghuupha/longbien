@@ -70,7 +70,7 @@
                     <form id="fm" method="post" enctype="multipart/form-data">
                         <input id="datadc" name="datadc" type="hidden"/>
                         <input id="image_old" name="image_old" type="hidden"/>
-                        <div class="col-xs-4">
+                        <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="form-field-username">
                                     Mã học sinh &nbsp;
@@ -81,6 +81,17 @@
                                 <div>
                                     <input type="text" id="code" name="code" required="" readonly=""
                                     placeholder="Mã học sinh gồm 12 chữ số ngẫu nhiên" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="form-field-username">
+                                    Mã định danh
+                                </label>
+                                <div>
+                                    <input type="text" id="code_csdl" name="code_csdl" required=""
+                                    placeholder="Mã định danh Bộ GD&ĐT" style="width:100%" />
                                 </div>
                             </div>
                         </div>
@@ -239,13 +250,23 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-12">
                         <div class="form-group">
                             <label for="form-field-username">
                                 Mã học sinh
                             </label>
                             <div>
                                 <input type="text" id="scode" name="scode" style="width:100%" onkeypress="validate(event)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Mã định danh
+                            </label>
+                            <div>
+                                <input type="text" id="scodecsdl" name="scodecsdl" style="width:100%" onkeypress="validate(event)"/>
                             </div>
                         </div>
                     </div>

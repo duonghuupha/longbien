@@ -1,6 +1,6 @@
 var page = 1, keyword = '', url = '', numbers_line = 0, data = [];
 var codes = '', names = '', dates = '', departments = '', addresss = '', genders = 0, peoples = '';
-var religions = 0;
+var religions = 0, codecsdls = '';
 $(function(){
     $('#list_student').load(baseUrl + '/student/content');
     $('#people_id').load(baseUrl + '/other/combo_people');
@@ -22,10 +22,11 @@ function edit(idh){
     var status = $('#status_'+idh).text(), people = $('#people_'+idh).text();
     var address = $('#address_'+idh).text(), image = $('#image_'+idh).text();
     var datadc = $('#datadc_'+idh).text(), religion = $('#religion_'+idh).text();
+    var codecsdl = $('#codecsdl_'+idh).text();
     $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
     $('#birthday').val(birthday); $('#address').val(address); $('#people_id').val(people).trigger('change');
     $('#image_old').val(image); $('#status').val(status).trigger('change');
-    $('#religion').val(religion).trigger('change');
+    $('#religion').val(religion).trigger('change'); $('#code_csdl').val(codecsdl);
     // data relation////////////////////////////////////////////////////////
     data = JSON.parse(datadc); numbers_line = data.length;
     render_table(data);
@@ -158,9 +159,9 @@ function del_sdepartment(){
 function search_adv(){
     var code= $('#scode').val(), name = $('#sfullname').val(), date = $('#sbirthday').val();
     var classid = $('#sdepartment').val(), address = $('#saddress').val(), gender = $('#sgender').val();
-    var peolpe = $('#speople').val(), religion = $('#sreligion').val();
+    var peolpe = $('#speople').val(), religion = $('#sreligion').val(), codecsdl = $('#scodecsdl').val();
     if(code.length != 0 || name.length != 0 || date.length != 0 || classid.length != 0 || address.length != 0
-        || gender != 0 || peolpe.length != 0 || religion != 0){
+        || gender != 0 || peolpe.length != 0 || religion != 0 || codecsdl.length != 0){
         if(name.length != 0){
             names = name.replaceAll(" ", "$", 'g');
         }
@@ -168,11 +169,11 @@ function search_adv(){
             addresss = address.replaceAll(" ", "$", 'g');
         }
         codes = code; dates = date; departments = classid; genders = gender; 
-        peoples = peolpe; religions = religion;
+        peoples = peolpe; religions = religion; codecsdls = codecsdl;
     }else{
         codes = ''; dates = ''; departments = ''; names = ''; addresss = ''; genders = 0; peoples =  '';
-        religions = 0;
+        religions = 0; codecsdls = '';
     }
     $('#modal-search').modal('hide');
-    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page=1');
+    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&codecsdl='+codecsdls+'&page=1');
 }

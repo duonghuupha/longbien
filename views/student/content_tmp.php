@@ -31,11 +31,16 @@ $pages = $this->page; $sql = new Model();
             }else{
                 $status = "Chuyển trường";
             }
+            $style = ($this->_Data->check_dupli_code_student($row['code']) > 1
+                    || $this->_Data->check_dupli_codecsdl_student($row['code_csdl']) > 1) ? 'style="color:red"' : '';
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
-            <td id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
+            <td class="text-center" id="code_<?php echo $row['id'] ?>" <?php echo $style ?>><?php echo $row['code'] ?></td>
+            <td>
+                <?php echo $row['fullname'] ?><br/>
+                <small style="color:gray">Mã định danh: <?php echo $row['code_csdl'] ?></small>
+            </td>
             <td class="text-center"><?php echo ($row['gender'] == 1) ? 'Nam' : 'Nữ' ?></td>
             <td class="text-center" id="birthday_<?php echo $row['id'] ?>"><?php echo date("d-m-Y", strtotime($row['birthday'])) ?></td>
             <td class="text-center"><?php echo $row['department'] ?></td>
@@ -57,6 +62,8 @@ $pages = $this->page; $sql = new Model();
             <td class="hidden" id="datadc_<?php echo $row['id'] ?>"><?php echo $sql->get_relation_via_code($row['code']) ?></td>
             <td class="hidden" id="people_<?php echo $row['id'] ?>"><?php echo $row['people_id'] ?></td>
             <td class="hidden" id="religion_<?php echo $row['id'] ?>"><?php echo $row['religion'] ?></td>
+            <td class="hidden" id="codecsdl_<?php echo $row['id'] ?>"><?php echo $row['code_csdl'] ?></td>
+            <td class="hidden" id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
         </tr>
         <?php
         }

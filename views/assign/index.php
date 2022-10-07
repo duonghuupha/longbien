@@ -78,23 +78,26 @@
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn môn học</label>
                                 <div>
-                                    <select class="select2" data-placeholder="Lựa chọn môn học"
+                                    <select class="select2" placeholder="Lựa chọn môn học"
                                     style="width:100%" required="" id="subject" name="subject[]"
-                                    multiple="">
+                                    multiple="" onchange="set_department()">
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12">
+                        <!--<div class="col-xs-12">
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn lớp học</label>
                                 <div>
-                                    <select class="select2" data-placeholder="Lựa chọn lớp học"
+                                    <select class="select2" placeholder="Lựa chọn lớp học"
                                     style="width:100%" required="" id="department" name="department[]"
                                     multiple="">
                                     </select>
                                 </div> 
                             </div>
+                        </div>-->
+                        <div class="col-xs-12" id="select_department">
+
                         </div>
                     </form>
                 </div>
@@ -160,4 +163,7 @@
 </div>
 <!-- End formm don vi tinh-->
 
+<script>
+var array_subject = [];
+</script>
 <script src="<?php echo URL.'/public/' ?>scripts/calendars/assign.js"></script>

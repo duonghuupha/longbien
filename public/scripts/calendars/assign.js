@@ -3,6 +3,7 @@ $(function(){
     $('#list_assign').load(baseUrl + '/assign/content');
     $('#subject').load(baseUrl + '/other/combo_subject_point_no_null');
     $('#department').load(baseUrl + '/other/combo_department_no_null?yearid='+yearid);
+    add();
 });
 
 function add(){
@@ -88,4 +89,31 @@ function confirm_user(idh){
     $('#user_id').val(idh); var fullname = $('#fullname_'+idh).text();
     $('#fullname').val(fullname);
     $('#modal-users').modal('hide');
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+function set_department(){
+    //var value = $("#subject option:selected").html();
+    console.log($('#subject').val());
+    // Fetching Text
+    console.log($('#subject').find('option:selected').text());
+    //render_html(value)
+}
+
+function render_html(value){
+    var html = ''; $('#select_department').empty();
+    for(var item in value){
+        html += '<div class="col-xs-4">';
+            html += '<ul id="tree1" class="tree tree-unselectable" role="tree">';
+                html += '<li class="tree-branch tree-open" role="treeitem" aria-expanded="true">';
+                    html += '<div class="tree-branch-header">';
+                        html += '<span class="tree-branch-name">';
+                            html += '<i class="icon-folder ace-icon tree-minus"></i>';
+                            html += '<span class="tree-label" style="font-weight:700">'+item+'</span>';
+                        html += '</span>';
+                    html += '</div>';
+                html += '</li>';
+            html += '</ul>';
+        html += '</div>';
+    }
+    $('#select_department').append(html);
 }

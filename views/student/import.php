@@ -14,7 +14,7 @@ $sql = new Model();
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
+                        <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
                         onkeyup="search()"/>
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
@@ -94,7 +94,7 @@ $sql = new Model();
                     <form id="fm_edit" method="post" enctype="multipart/form-data">
                         <input id="datadc" name="datadc" type="hidden"/>
                         <input id="image_old" name="image_old" type="hidden"/>
-                        <div class="col-xs-4">
+                        <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="form-field-username">
                                     Mã học sinh &nbsp;
@@ -105,6 +105,17 @@ $sql = new Model();
                                 <div>
                                     <input type="text" id="code" name="code" required="" readonly=""
                                     placeholder="Mã học sinh gồm 12 chữ số ngẫu nhiên" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label for="form-field-username">
+                                    Mã định danh
+                                </label>
+                                <div>
+                                    <input type="text" id="code_csdl" name="code_csdl" required=""
+                                    placeholder="Mã định danh Bộ GD&ĐT" style="width:100%" />
                                 </div>
                             </div>
                         </div>

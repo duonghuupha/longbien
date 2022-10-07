@@ -4,7 +4,7 @@ class Student_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($type, $userid, $q, $code, $name, $date, $class, $address, $gender, $people, $religion, $yearid, $offset, $rows){
+    function getFetObj($type, $userid, $q, $code, $codecsdl, $name, $date, $class, $address, $gender, $people, $religion, $yearid, $offset, $rows){
         $result = array();
         if($type == 0){
             $where = "status != 99";
@@ -19,6 +19,8 @@ class Student_Model extends Model{
             $where = $where." AND fullname LIKE '%$q%'";
         if($code != '')
             $where = $where." AND code LIKE '%$code%'";
+        if($codecsdl != '')
+            $where = $where." AND code_csdl LIKE '%$codecsdl%'";
         if($name != '')
             $where = $where." AND fullname LIKE '%$name%'";
         if($date != '')
@@ -35,7 +37,7 @@ class Student_Model extends Model{
             $where = $where." AND religion = $religion";
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE $where");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, fullname, gender, birthday, status, image, address, people_id, religion,
+        $query = $this->db->query("SELECT id, code, code_csdl, fullname, gender, birthday, status, image, address, people_id, religion,
                                 IF((SELECT COUNT(*) FROM tbl_student_class WHERE student_id = tbl_student.id) > 0,
                                 (SELECT title FROM tbldm_department WHERE tbldm_department.id = (SELECT department_id
                                 FROM tbl_student_class WHERE tbl_student_class.student_id = tbl_student.id
@@ -50,6 +52,16 @@ class Student_Model extends Model{
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE code = $code");
         if($id > 0){
             $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE code = $code
+                                        AND id != $id");
+        }
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function dupliObj_csdl($id, $code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE code_csdl = '$code'");
+        if($id > 0){
+            $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE code_csdl = '$code'
                                         AND id != $id");
         }
         $row = $query->fetchAll();
@@ -111,11 +123,11 @@ class Student_Model extends Model{
 
     function getFetObj_tmp($q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE status = 99");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE status = 99 AND fullname LIKE '%$q%'");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, fullname, gender, birthday, status, image, address, people_id, religion,
+        $query = $this->db->query("SELECT id, code, code_csdl, fullname, gender, birthday, status, image, address, people_id, religion,
                                 (SELECT title FROM tbldm_department WHERE tbldm_department.id = dep_temp) AS department
-                                FROM tbl_student WHERE status = 99 ORDER BY fullname ASC LIMIT $offset, $rows");
+                                FROM tbl_student WHERE status = 99 AND fullname LIKE '%$q%' ORDER BY fullname ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
@@ -128,6 +140,12 @@ class Student_Model extends Model{
 
     function check_dupli_code(){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student GROUP BY code HAVING Total > 1");
+        $row = $query->fetchAll();
+        return count($row);
+    }
+
+    function check_dupli_code_csdl(){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student GROUP BY code_csdl HAVING Total > 1");
         $row = $query->fetchAll();
         return count($row);
     }

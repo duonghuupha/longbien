@@ -11,6 +11,14 @@ class Convert{
 		return $text;
 	}
 
+    function convertDates($text) {
+		if ($text != '') {
+			list ( $date, $month, $year ) = explode ( "/", $text );
+			$text = $year . '-' . $month . '-' . $date;
+		}
+		return $text;
+	}
+
     function convert_file($txtname, $tiento){
         $extension = @end(explode(".", $txtname));
   		$prod = time();

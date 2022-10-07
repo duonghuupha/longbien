@@ -1,7 +1,8 @@
 var page = 1, keyword = '', url = '';
 $(function(){
     $('#list_personal').load(baseUrl + '/personal/content');
-    $('#level_id').load(baseUrl + '/other/combo_level'); $('#subject_id').load(baseUrl + '/other/combo_subject');
+    $('#level_id').load(baseUrl + '/other/combo_level'); 
+    $('#subject_id').load(baseUrl + '/other/combo_subject_point_no_null');
     $('#job_id').load(baseUrl + '/other/combo_job');
 });
 
@@ -22,11 +23,6 @@ function edit(idh){
         var subject = data.subject.split(",");
         $('#subject_id').val(subject).trigger('change'); $('#job_id').val(data.job_id).trigger('change');
         $('#description').val(data.description); $('#image_old').val(data.avatar);
-        if(data.avatar != ''){
-            $('#avatar').prop('required', false);
-        }else{
-            $('#avatar').prop('required', true);
-        }
     });
     $('#code').prop('readonly', true);
     $('#modal-personal').modal('show');

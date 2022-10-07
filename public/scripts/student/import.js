@@ -44,10 +44,11 @@ function edit(idh){
     var gender = $('#gender_'+idh).text(), birthday = $('#birthday_'+idh).text();
     var address = $('#address_'+idh).text(), datadc = $('#datadc_'+idh).text();
     var people = $('#people_'+idh).text(), religion = $('#religion_'+idh).text();
+    var codecsdl = $('#codecsdl_'+idh).text();
     data = JSON.parse(datadc); render_table(data); numbers_line = data.length;
     $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
     $('#birthday').val(birthday); $('#address').val(address); $('#people_id').val(people).trigger('change');
-    $('#religion').val(religion).trigger('change');
+    $('#religion').val(religion).trigger('change'); $('#code_csdl').val(codecsdl);
     $('#modal-student').modal('show');
     url = baseUrl + '/student/update_tmp?id='+idh;
 }
@@ -55,8 +56,7 @@ function edit(idh){
 function save_info(){
     var fullname = $('#fullname').val(), gender = $('#gender').val(), birthday = $("#birthday").val();
     var address = $('#address').val(); 
-    if(fullname.length > 0 && gender.length > 0 && birthday.length > 0 && address.length > 0 
-    && data.length > 0){
+    if(fullname.length > 0 && gender.length > 0 && birthday.length > 0 && address.length > 0){
         $('#datadc').val(JSON.stringify(data));
         save_form_modal('#fm_edit', url, '#modal-student', '#list_student_tmp',  baseUrl+'/student/content_tmp?departmentid='+departmentid+'&page='+page+'&q='+keyword); 
     }else{

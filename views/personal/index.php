@@ -154,7 +154,7 @@
                                 <label for="form-field-username">Chuyên môn</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn chuyên môn..."
-                                    style="width:100%" required="" id="subject_id" name="subject_id[]" multiple="">
+                                    style="width:100%" id="subject_id" name="subject_id[]" multiple="">
                                     </select>
                                 </div>
                             </div>
@@ -173,8 +173,7 @@
                             <div class="form-group">
                                 <label for="form-field-username">Hình ảnh</label>
                                 <div>
-                                    <input type="file" id="avatar" name="avatar" class="file_attach" style="width:100%"
-                                    required=""/>
+                                    <input type="file" id="avatar" name="avatar" class="file_attach" style="width:100%"/>
                                 </div>
                             </div>
                         </div>

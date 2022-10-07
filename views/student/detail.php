@@ -67,7 +67,7 @@ $item = $this->info;
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Tôn giáo </div>
                                 <div class="profile-info-value">
-                                    <span class="editable" id="country"><?php echo $item[0]['address'] ?></span>
+                                    <span class="editable" id="country">Không</span>
                                 </div>
                             </div>
                             <div class="profile-info-row">

@@ -213,7 +213,7 @@ class Personal extends Controller{
                     }elseif($j == 6){
                         $phone = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }elseif($j == 7){
-                        $email = $sheet->getCellByColumnAndRow($j, $i)->getValue();
+                        $email = trim($sheet->getCellByColumnAndRow($j, $i)->getValue());
                     }
                 }
                 $data = array("code" => $code, 'fullname' => $fullname, 'gender' => $gender,

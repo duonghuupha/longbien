@@ -161,3 +161,45 @@
 2022-09-18 09:26:53/1/Cập nhật dữ liệu/document_out/update
 2022-09-18 09:41:26/1/Cập nhật dữ liệu/document_out/update
 2022-09-26 00:50:16/7/Thêm mới dữ liệu/group_task/add
+2022-10-07 02:46:03/1/Cập nhật dữ liệu/subject/update
+2022-10-07 02:48:48/1/Thêm mới dữ liệu/subject/add
+2022-10-07 02:49:56/1/Cập nhật dữ liệu/subject/update
+2022-10-07 02:50:09/1/Thêm mới dữ liệu/subject/add
+2022-10-07 02:51:22/1/Thêm mới dữ liệu/subject/add
+2022-10-07 03:54:40/1/Xóa dữ liệu/department/del
+2022-10-07 03:54:48/1/Cập nhật dữ liệu/department/update
+2022-10-07 03:54:54/1/Xóa dữ liệu/department/del
+2022-10-07 03:54:56/1/Xóa dữ liệu/department/del
+2022-10-07 03:54:58/1/Xóa dữ liệu/department/del
+2022-10-07 03:55:01/1/Xóa dữ liệu/department/del
+2022-10-07 03:55:04/1/Xóa dữ liệu/department/del
+2022-10-07 03:55:07/1/Xóa dữ liệu/department/del
+2022-10-07 03:56:04/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:56:16/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:56:32/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:56:49/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:57:03/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:57:17/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:57:53/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:58:07/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:58:23/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:58:34/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:58:53/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:59:09/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:59:21/1/Thêm mới dữ liệu/department/add
+2022-10-07 03:59:35/1/Thêm mới dữ liệu/department/add
+2022-10-07 04:00:05/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:00:10/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:00:16/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:00:22/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:00:27/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:00:32/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:00:39/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:00:44/1/Thêm mới dữ liệu/physical_room/add
+2022-10-07 04:01:01/1/Thêm mới dữ liệu/department/add
+2022-10-07 04:01:10/1/Thêm mới dữ liệu/department/add
+2022-10-07 04:01:19/1/Thêm mới dữ liệu/department/add
+2022-10-07 04:01:26/1/Thêm mới dữ liệu/department/add
+2022-10-07 04:01:35/1/Thêm mới dữ liệu/department/add
+2022-10-07 04:01:42/1/Thêm mới dữ liệu/department/add
+2022-10-07 04:01:49/1/Thêm mới dữ liệu/department/add
