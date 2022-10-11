@@ -34,6 +34,8 @@ class Index extends Controller{
                     $jsonObj['msg'] = "Đăng nhập thành công";
                     $jsonObj['token'] = $token;
                     $jsonObj['success'] = true;
+                    $jsonObj['is_change'] = $_SESSION['data'][0]['is_change'];
+                    $jsonObj['user_id'] = $_SESSION['data'][0]['id'];
                     $this->view->jsonObj = json_encode($jsonObj);
                 }else{
                     $jsonObj['msg'] = 'Đăng nhập không thành công';

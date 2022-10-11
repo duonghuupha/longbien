@@ -14,7 +14,11 @@ function login(){
             success: function(data){
                 var result = JSON.parse(data);
                 if(result.success == true){
-                    window.location.href = baseUrl + '/index?token='+result.token;
+                    if(parseInt(result.is_change) != 0 || parseInt(result.user_id) == 1){
+                        window.location.href = baseUrl + '/index?token='+result.token;
+                    }else{
+                        window.location.href = baseUrl + '/profile/update_password';
+                    }
                     localStorage.setItem('token',result.token);
                 }else{
                     show_message('error', result.msg);

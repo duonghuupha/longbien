@@ -1,5 +1,11 @@
 <?php
 $info = $_SESSION['data'];
+if(isset($_REQUEST['url'])){
+	$arr_url = explode("/", $_REQUEST['url']);
+	$url = $arr_url[0];
+}else{
+	$url = 'index';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +35,8 @@ $info = $_SESSION['data'];
 		<script src="<?php echo URL ?>/styles/js/ace-extra.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/html2canvas.js"></script>
 		<script>
-			var baseUrl = '<?php echo URL ?>';
+			var baseUrl = '<?php echo URL ?>', is_change = <?php echo $this->_Info[0]['is_change'] ?>;
+			var url = '<?php echo $url ?>'
 			<?php  
 			if(isset($_SESSION['year'])){
 				echo 'var yearid = '.$_SESSION['year'][0]['id'].', userid = '.$info[0]['id'];
