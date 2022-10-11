@@ -41,6 +41,12 @@ class Dashboard_Model extends Model{
         return $query->fetchAll();
     }
 
+    function get_percent_year_old_student(){
+        $query = $this->db->query("SELECT COUNT(*) AS Total, DATE_FORMAT(birthday, '%Y') AS title FROM tbl_student WHERE status = 1 
+                                    GROUP BY DATE_FORMAT(birthday, '%Y')");
+        return $query->fetchAll();
+    }
+
     function get_percent_gender_personel(){
         $query = $this->db->query("SELECT COUNT(*) AS Total, 'Nam' AS title FROM tbl_personel WHERE status = 1 AND gender = 1
                                     UNION ALL

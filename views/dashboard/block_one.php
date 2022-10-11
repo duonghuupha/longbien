@@ -53,30 +53,21 @@
     </div>
 </div>
 <div class="space-6"></div>
-<div class="infobox infobox-green infobox-small infobox-dark">
+<div class="infobox infobox-green infobox-large infobox-dark">
     <div class="infobox-icon">
         <i class="ace-icon fa fa-university"></i>
     </div>
     <div class="infobox-data">
-        <div class="infobox-content">Lớp học</div>
+        <div class="infobox-content">Phòng học</div>
         <div class="infobox-content">10</div>
     </div>
 </div>
-<div class="infobox infobox-blue infobox-small infobox-dark">
-    <div class="infobox-progress">
-        <div class="easy-pie-chart percentage" data-percent="12" data-size="39">
-            <span class="percent">12</span>
-        </div>
+<div class="infobox infobox-blue infobox-large infobox-dark">
+<div class="infobox-icon">
+        <i class="ace-icon fa fa-university"></i>
     </div>
     <div class="infobox-data">
-        <div class="infobox-content">Phòng chức năng</div>
-    </div>
-</div>
-<div class="infobox infobox-grey infobox-small infobox-dark">
-    <div class="infobox-icon">
-        <i class="ace-icon fa fa-gear"></i>
-    </div>
-    <div class="infobox-data">
-        <div class="infobox-content">Khu hiệu bộ</div>
+        <div class="infobox-content">Phòng CN / Hiệu bộ</div>
+        <div class="infobox-content">10</div>
     </div>
 </div>

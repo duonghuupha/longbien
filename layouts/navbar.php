@@ -164,14 +164,14 @@ if(!isset($_SESSION['data'])){
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li>
+                        <!--<li>
                             <a href="#">
                                 <i class="ace-icon fa fa-cog"></i>
                                 Cài đặt
                             </a>
-                        </li>
+                        </li>-->
                         <li>
-                            <a href="profile.html">
+                            <a href="<?php echo URL.'/profile' ?>">
                                 <i class="ace-icon fa fa-user"></i>
                                 Tài khoản
                             </a>

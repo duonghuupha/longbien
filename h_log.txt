@@ -203,3 +203,8 @@
 2022-10-07 04:01:35/1/Thêm mới dữ liệu/department/add
 2022-10-07 04:01:42/1/Thêm mới dữ liệu/department/add
 2022-10-07 04:01:49/1/Thêm mới dữ liệu/department/add
+2022-10-07 18:34:45/1/Xóa dữ liệu/document_in/del
+2022-10-07 18:34:47/1/Xóa dữ liệu/document_in/del
+2022-10-07 18:34:49/1/Xóa dữ liệu/document_in/del
+2022-10-07 18:35:03/1/Thêm mới dữ liệu/document_out/del
+2022-10-07 18:35:04/1/Thêm mới dữ liệu/document_out/del

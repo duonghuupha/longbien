@@ -16,9 +16,11 @@ class Dashboard extends Controller{
 
     function block_two(){
         $id = $_REQUEST['id'];
-        if($id == 1){
+        if($id == 1){ // gioi tinh
             $this->view->jsonObj = $this->model->get_percent_gender_student();
-        }else{
+        }elseif($id ==2){ // do tuoi
+            $this->view->jsonObj = $this->model->get_percent_year_old_student();
+        }else{ // ban tru
             $this->view->jsonObj = [];
         }
         $this->view->render('dashboard/block_two');
