@@ -355,7 +355,7 @@
                         <div class="form-group">
                             <label for="form-field-username">Địa chỉ</label>
                             <div>
-                                <input type="text" id="saddress" name="saddress" required=""
+                                <input type="text" id="saddress" name="saddress"
                                 placeholder="Địa chỉ" style="width:100%" />
                             </div>
                         </div>

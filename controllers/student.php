@@ -160,6 +160,10 @@ class Student extends Controller{
         $this->view->info = $info;
         $relation = $this->model->get_student_relation($info[0]['code']);
         $this->view->relation = $relation;
+        $changeclass = $this->model->get_change_class_of_student($id);
+        $this->view->change = $changeclass;
+        $upclass = $this->model->get_up_class_of_student($id);
+        $this->view->upclass = $upclass;
         $this->view->render("student/detail");
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////

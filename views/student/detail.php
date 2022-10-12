@@ -58,62 +58,75 @@ $item = $this->info;
                     </div>
                     <div class="col-xs-12 col-sm-9">
                         <div class="profile-user-info profile-user-info-striped">
-                            <div class="profile-info-row">
-                                <div class="profile-info-name"> Dân tộc </div>
-                                <div class="profile-info-value">
-                                    <span class="editable" id="country"><?php echo $item[0]['people'] ?></span>
+                            <div class="col-sm-6">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Mã định danh </div>
+                                    <div class="profile-info-value">
+                                        <span class="editable" id="country"><?php echo $item[0]['code_csdl'] ?></span>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Dân tộc </div>
+                                    <div class="profile-info-value">
+                                        <span class="editable" id="country"><?php echo $item[0]['people'] ?></span>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Tôn giáo </div>
+                                    <div class="profile-info-value">
+                                        <span class="editable" id="country">Không</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="profile-info-row">
-                                <div class="profile-info-name"> Tôn giáo </div>
-                                <div class="profile-info-value">
-                                    <span class="editable" id="country">Không</span>
+                            <div class="col-sm-6">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Trạng thái </div>
+                                    <div class="profile-info-value">
+                                        <span class="editable" id="country">
+                                            <?php 
+                                            if($item[0]['status'] == 1){
+                                                echo "Đang đi học";
+                                            }elseif($item[0]['status'] == 2){
+                                                echo "Nghỉ học";
+                                            }elseif($item[0]['status'] == 3){
+                                                echo "Chuyển trường";
+                                            }else{
+                                                echo "Lưu tạm";
+                                            }
+                                            ?>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Lớp hiện tại </div>
+                                    <div class="profile-info-value">
+                                        <span class="editable" id="country">
+                                            <?php echo ($item[0]['department'] != '')? $item[0]['department'] : '<i>Chưa phân lớp</i>' ?>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="profile-info-row">
-                                <div class="profile-info-name"> Trạng thái </div>
-                                <div class="profile-info-value">
-                                    <span class="editable" id="country">
-                                        <?php 
-                                        if($item[0]['status'] == 1){
-                                            echo "Đang đi học";
-                                        }elseif($item[0]['status'] == 2){
-                                            echo "Nghỉ học";
-                                        }elseif($item[0]['status'] == 3){
-                                            echo "Chuyển trường";
-                                        }else{
-                                            echo "Lưu tạm";
-                                        }
-                                        ?>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="profile-info-row">
-                                <div class="profile-info-name"> Địa chỉ </div>
-                                <div class="profile-info-value">
-                                    <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                    <span class="editable" id="country"><?php echo $item[0]['address'] ?></span>
-                                </div>
-                            </div>
-                            <div class="profile-info-row">
-                                <div class="profile-info-name"> Lớp hiện tại </div>
-                                <div class="profile-info-value">
-                                    <span class="editable" id="country">
-                                        <?php echo ($item[0]['department'] != '')? $item[0]['department'] : '<i>Chưa phân lớp</i>' ?>
-                                    </span>
+                            <div class="col-sm-12">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Địa chỉ </div>
+                                    <div class="profile-info-value">
+                                        <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                        <span class="editable" id="country"><?php echo $item[0]['address'] ?></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="space-20"></div>
-                        
+                        <div class="space-10"></div>
                         <div class="tabbable">
                             <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
                                 <li class="active">
                                     <a data-toggle="tab" href="#relation">Thông tin quan hệ</a>
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#profile4">Quá trình học</a>
+                                    <a data-toggle="tab" href="#profile4">Chuyển lớp</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#profile5">Lên lớp</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -135,7 +148,7 @@ $item = $this->info;
                                         foreach($this->relation as $row){
                                         ?>
                                             <tr>
-                                                <td  class="text-center"><?php echo $row['relation'] ?></td>
+                                                <td class="text-center"><?php echo $row['relation'] ?></td>
                                                 <td><?php echo $row['fullname'] ?></td>
                                                 <td class="text-center"><?php echo $row['year'] ?></td>
                                                 <td class="text-center"><?php echo $row['phone'] ?></td>
@@ -148,7 +161,64 @@ $item = $this->info;
                                     </table>
                                 </div>
                                 <div id="profile4" class="tab-pane">
-                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                                    <table style="font-size:12px"
+                                        class="table table-striped table-bordered table-hover dataTable no-footer"
+                                        role="grid" aria-describedby="dynamic-table_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="text-center" rowspan="2">Ngày luân chuyển</th>
+                                                <th class="text-center" colspan="2">Từ</th>
+                                                <th class="text-center" colspan="2">Đến</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="t3xt-center">Năm học</th>
+                                                <th class="t3xt-center">Lớp học</th>
+                                                <th class="t3xt-center">Năm học</th>
+                                                <th class="t3xt-center">Lớp học</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach($this->change as $row){
+                                        ?>
+                                            <tr>
+                                                <td class="text-center"><?php echo date("d-m-Y", strtotime($row['create_at'])) ?></td>
+                                                <td class="text-center"><?php echo $this->_Data->return_title_year($row['year_id_from']) ?></td>
+                                                <td class="text-center"><?php echo $this->_Data->return_title_department($row['department_id_from']) ?></td>
+                                                <td class="text-center"><?php echo $this->_Data->return_title_year($row['year_id_tu']) ?></td>
+                                                <td class="text-center"><?php echo $this->_Data->return_title_department($row['department_id_to']) ?></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="profile5" class="tab-pane">
+                                    <table style="font-size:12px"
+                                        class="table table-striped table-bordered table-hover dataTable no-footer"
+                                        role="grid" aria-describedby="dynamic-table_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="text-center">Năm học</th>
+                                                <th class="text-center">Lớp học</th>
+                                                <th class="text-center">Ngày tạo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach($this->upclass as $row){
+                                        ?>
+                                            <tr>
+                                                <td class="text-center"><?php echo $this->_Data->return_title_year($row['year_id']) ?></td>
+                                                <td class="text-center"><?php echo $this->_Data->return_title_department($row['department_id']) ?></td>
+                                                <td class="text-center"><?php echo date("d-m-Y", strtotime($row['create_at'])) ?></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

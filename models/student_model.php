@@ -10,10 +10,14 @@ class Student_Model extends Model{
             $where = "status != 99";
         }else{
             $string = $this->get_department_assign($userid, $yearid);
-            $where = "status != 99 AND id IN (SELECT tbl_student_class.student_id FROM tbl_student_class 
-                    WHERE tbl_student_class.year_id = $yearid AND FIND_IN_SET(tbl_student_class.department_id, 
-                    (SELECT tbl_assign.department FROM tbl_assign WHERE tbl_assign.user_id = $userid 
-                    AND tbl_assign.year_id = $yearid)))";
+            if($string != ''){
+                $where = "status != 99 AND id IN (SELECT tbl_student_class.student_id FROM tbl_student_class 
+                        WHERE tbl_student_class.year_id = $yearid AND FIND_IN_SET(tbl_student_class.department_id, 
+                        (SELECT tbl_assign.department FROM tbl_assign WHERE tbl_assign.user_id = $userid 
+                        AND tbl_assign.year_id = $yearid)))";
+            }else{
+                $where = "status != 99";
+            }
         }
         if($q != '')
             $where = $where." AND fullname LIKE '%$q%'";
@@ -99,14 +103,14 @@ class Student_Model extends Model{
     }
 
     function get_info($id){
-        $query = $this->db->query("SELECT id, code, fullname, gender, birthday, people_id, religion,
+        $query = $this->db->query("SELECT id, code, code_csdl, fullname, gender, birthday, people_id, religion,
                                  address, image, status, (SELECT title FROM tbldm_people 
                                  WHERE tbldm_people.id = people_id) AS people FROM tbl_student WHERE id = $id");
         return $query->fetchAll();
     }
 
     function get_detail($id, $yearid){
-        $query = $this->db->query("SELECT id, code, fullname, gender, birthday, people_id, religion,
+        $query = $this->db->query("SELECT id, code, code_csdl, fullname, gender, birthday, people_id, religion,
                                  address, image, status, (SELECT title FROM tbldm_people 
                                  WHERE tbldm_people.id = people_id) AS people, (SELECT title FROM tbldm_department
                                  WHERE tbldm_department.id = (SELECT department_id FROM tbl_student_class
@@ -190,7 +194,24 @@ class Student_Model extends Model{
     function get_department_assign($userid, $yearid){
         $query = $this->db->query("SELECT department FROM tbl_assign WHERE user_id = $userid AND year_id = $yearid");
         $row = $query->fetchAll();
-        return $row[0]['department'];
+        if(count($row) > 0){
+            return $row[0]['department'];
+        }else{
+            return '';
+        }
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_change_class_of_student($id){
+        $query = $this->db->query("SELECT id, student_id, year_id_from, department_id_from, year_id_to,
+                                    department_id_to create_at FROM tbl_change_class WHERE student_id = $id
+                                    ORDER BY id");
+        return $query->fetchAll();
+    }
+
+    function get_up_class_of_student($id){
+        $query = $this->db->query("SELECT id, student_id, year_id, department_id, create_at FROM tbl_student_class
+                                    WHERE student_id = $id ORDER BY id DESC");
+        return $query->fetchAll();
     }
 }
 ?>
