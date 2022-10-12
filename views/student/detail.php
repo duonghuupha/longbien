@@ -21,10 +21,17 @@ $item = $this->info;
                                 src="<?php echo URL.'/public/student/'.$item[0] ['image']?>" />
                                 <?php 
                                 }else{
+                                    if($item[0]['gender'] == 1){ // nam
                                 ?>
                                 <img id="avatar" class="editable img-responsive" alt="<?php echo $item[0]['fullname'] ?>" 
-                                src="<?php echo URL ?>/styles/images/avatars/profile-pic.jpg" />
+                                src="<?php echo URL ?>/styles/images/avatars/male.png" />
                                 <?php
+                                    }else{
+                                ?>
+                                <img id="avatar" class="editable img-responsive" alt="<?php echo $item[0]['fullname'] ?>" 
+                                src="<?php echo URL ?>/styles/images/avatars/female.png" />
+                                <?php
+                                    }
                                 }
                                 ?>
                             </span>
@@ -169,6 +176,7 @@ $item = $this->info;
                                                 <th class="text-center" rowspan="2">Ngày luân chuyển</th>
                                                 <th class="text-center" colspan="2">Từ</th>
                                                 <th class="text-center" colspan="2">Đến</th>
+                                                <th class="text-center" rowspan="2">Lý do</th>
                                             </tr>
                                             <tr>
                                                 <th class="t3xt-center">Năm học</th>
@@ -185,8 +193,9 @@ $item = $this->info;
                                                 <td class="text-center"><?php echo date("d-m-Y", strtotime($row['create_at'])) ?></td>
                                                 <td class="text-center"><?php echo $this->_Data->return_title_year($row['year_id_from']) ?></td>
                                                 <td class="text-center"><?php echo $this->_Data->return_title_department($row['department_id_from']) ?></td>
-                                                <td class="text-center"><?php echo $this->_Data->return_title_year($row['year_id_tu']) ?></td>
+                                                <td class="text-center"><?php echo $this->_Data->return_title_year($row['year_id_to']) ?></td>
                                                 <td class="text-center"><?php echo $this->_Data->return_title_department($row['department_id_to']) ?></td>
+                                                <td class="text-left"><?php echo $row['content'] ?></td>
                                             </tr>
                                         <?php
                                         }

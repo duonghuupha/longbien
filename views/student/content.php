@@ -28,8 +28,10 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                 $status = "Đang đi học";
             }elseif($row['status'] = 2){
                 $status = "Nghỉ học";
-            }else{
+            }elseif($row['status'] == 3){
                 $status = "Chuyển trường";
+            }else{
+                $status = "Ra trường";
             }
         ?>
         <tr role="row" class="<?php echo $class ?>">

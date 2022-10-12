@@ -179,6 +179,7 @@
                                         <option value="1">Đang đi học</option>
                                         <option value="2">Nghỉ học</option>
                                         <option value="3">Chuyển trường</option>
+                                        <option value="4">Ra trường</option>
                                     </select>
                                 </div>
                             </div>
@@ -256,17 +257,20 @@
                                 Mã học sinh
                             </label>
                             <div>
-                                <input type="text" id="scode" name="scode" style="width:100%" onkeypress="validate(event)"/>
+                                <input type="text" id="scode" name="scode" style="width:100%" onkeypress="validate(event)"
+                                placeholder="Mã học sinh"/>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-xs-4">
                         <div class="form-group">
                             <label for="form-field-username">
                                 Mã định danh
                             </label>
                             <div>
-                                <input type="text" id="scodecsdl" name="scodecsdl" style="width:100%" onkeypress="validate(event)"/>
+                                <input type="text" id="scodecsdl" name="scodecsdl" style="width:100%" onkeypress="validate(event)"
+                                placeholder="Mã định danh"/>
                             </div>
                         </div>
                     </div>
@@ -276,7 +280,7 @@
                                 Họ và tên
                             </label>
                             <div>
-                                <input type="text" id="sfullname" name="sfullname" style="width:100%" />
+                                <input type="text" id="sfullname" name="sfullname" style="width:100%" placeholder="Họ và tên"/>
                             </div>
                         </div>
                     </div>
@@ -285,7 +289,7 @@
                             <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
                             <div>
                                 <input class="form-control input-mask-date" id="sbirthday" type="text" 
-                                name="sbirthday"/>
+                                name="sbirthday" placeholder="NGày sinh"/>
                             </div>
                         </div>
                     </div>
@@ -357,6 +361,21 @@
                             <div>
                                 <input type="text" id="saddress" name="saddress"
                                 placeholder="Địa chỉ" style="width:100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Trạng thái</label>
+                            <div>
+                                <select class="select2" data-placeholder="Lựa chọn trạng thái..."
+                                style="width:100%" id="sstatus" name="sstatus">
+                                    <option value="0">Tất cả</option>
+                                    <option value="1" selected="">Đang đi học</option>
+                                    <option value="2">Nghỉ học</option>
+                                    <option value="3">Chuyển trường</option>
+                                    <option value="4">Ra trường</option>
+                                </select>
                             </div>
                         </div>
                     </div>

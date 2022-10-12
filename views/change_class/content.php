@@ -13,6 +13,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th style="width:140px" rowspan="2">Họ và tên</th>
             <th class="text-center" style="width:150px" colspan="2">Từ</th>
             <th class="text-center" style="width:150px" colspan="2">Đến</th>
+            <th class="text-left" rowspan="2">Lý do</th>
         </tr>
         <tr>
             <th class="text-center">Năm học</th>
@@ -37,6 +38,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $row['department_from'] ?></td>
             <td class="text-center"><?php echo $row['year_to'] ?></td>
             <td class="text-center"><?php echo $row['department_to'] ?></td>
+            <td class="text-left"><?php echo $row['content'] ?></td>
         </tr>
         <?php
         }

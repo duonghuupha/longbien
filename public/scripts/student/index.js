@@ -1,6 +1,6 @@
 var page = 1, keyword = '', url = '', numbers_line = 0, data = [];
 var codes = '', names = '', dates = '', departments = '', addresss = '', genders = 0, peoples = '';
-var religions = 0, codecsdls = '';
+var religions = 0, codecsdls = '', sstatus = 1;
 $(function(){
     $('#list_student').load(baseUrl + '/student/content');
     $('#people_id').load(baseUrl + '/other/combo_people');
@@ -36,7 +36,7 @@ function edit(idh){
 
 function del(idh){
     var data_str = "id="+idh;
-    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl + '/student/del', '#list_student', baseUrl + '/student/content?page='+page+'&q='+keyword);
+    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl + '/student/del', '#list_student', baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page='+page+'&status='+sstatus);
 }
 
 function save(){
@@ -49,7 +49,7 @@ function save(){
     });
     if(allRequired && data.length > 0){
         $('#datadc').val(JSON.stringify(data));
-        save_form_modal('#fm', url, '#modal-student', '#list_student',  baseUrl+'/student/content?page='+page+'&q='+keyword); 
+        save_form_modal('#fm', url, '#modal-student', '#list_student',  baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page='+page+'&status='+sstatus); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -57,7 +57,7 @@ function save(){
 
 function view_page_student(pages){
     page = pages;
-    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page='+page);
+    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page='+page+'&status='+sstatus);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -157,11 +157,11 @@ function del_sdepartment(){
 }
 
 function search_adv(){
-    var code= $('#scode').val(), name = $('#sfullname').val(), date = $('#sbirthday').val();
+    var code= $('#scode').val(), name = $('#sfullname').val(), date = $('#sbirthday').val(), status = $('#sstatus').val();
     var classid = $('#sdepartment').val(), address = $('#saddress').val(), gender = $('#sgender').val();
     var peolpe = $('#speople').val(), religion = $('#sreligion').val(), codecsdl = $('#scodecsdl').val();
     if(code.length != 0 || name.length != 0 || date.length != 0 || classid.length != 0 || address.length != 0
-        || gender != 0 || peolpe.length != 0 || religion != 0 || codecsdl.length != 0){
+        || gender != 0 || peolpe.length != 0 || religion != 0 || codecsdl.length != 0 || status != 0){
         if(name.length != 0){
             names = name.replaceAll(" ", "$", 'g');
         }
@@ -169,11 +169,11 @@ function search_adv(){
             addresss = address.replaceAll(" ", "$", 'g');
         }
         codes = code; dates = date; departments = classid; genders = gender; 
-        peoples = peolpe; religions = religion; codecsdls = codecsdl;
+        peoples = peolpe; religions = religion; codecsdls = codecsdl; sstatus = status;
     }else{
         codes = ''; dates = ''; departments = ''; names = ''; addresss = ''; genders = 0; peoples =  '';
-        religions = 0; codecsdls = '';
+        religions = 0; codecsdls = ''; sstatus = 1;
     }
     $('#modal-search').modal('hide');
-    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&codecsdl='+codecsdls+'&page=1');
+    $('#list_student').load(baseUrl + '/student/content?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&codecsdl='+codecsdls+'&page=1'+'&status='+sstatus);
 }

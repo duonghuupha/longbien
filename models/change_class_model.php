@@ -26,7 +26,7 @@ class Change_class_Model extends Model{
                                 (SELECT tbl_student.id FROM tbl_student WHERE fullname LIKE '%$q%'
                                 OR code LIKE '%$q%')");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, student_id, year_id_from, department_id_from, year_id_to,
+        $query = $this->db->query("SELECT id, student_id, year_id_from, department_id_from, year_id_to, content,
                                     department_id_to, create_at, (SELECT fullname FROM tbl_student WHERE tbl_student.id =  student_id)
                                     AS fullname, (SELECT title FROM tbldm_years 
                                     WHERE tbldm_years.id = year_id_from) AS year_from, (SELECT title FROM tbldm_years 

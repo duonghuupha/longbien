@@ -34,10 +34,11 @@ class Change_class extends Controller{
 
     function add(){
         $student_id = $_REQUEST['student_id']; $classto = $_REQUEST['class_to'];
-        $classcurrent = $_REQUEST['class_current_id'];
+        $classcurrent = $_REQUEST['class_current_id']; $content = $_REQUEST['content'];
         $data = array("student_id" => $student_id, "year_id_from" => $this->_Year[0]['id'],
                         "department_id_from" => $classcurrent,  "year_id_to" => $this->_Year[0]['id'],
-                        "department_id_to" => $classto, "create_at" => date("Y-m-d H:i:s"));
+                        "department_id_to" => $classto, "create_at" => date("Y-m-d H:i:s"),
+                        "content" => $content);
         $temp = $this->model->addObj($data);
         if($temp){
             // cap nhat vao bang phan lop

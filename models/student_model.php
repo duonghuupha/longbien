@@ -4,19 +4,24 @@ class Student_Model extends Model{
         parent::__construct();
     }
 
-    function getFetObj($type, $userid, $q, $code, $codecsdl, $name, $date, $class, $address, $gender, $people, $religion, $yearid, $offset, $rows){
+    function getFetObj($type, $userid, $q, $code, $codecsdl, $name, $date, $class, $address, $gender, $people, $religion, $yearid, $status, $offset, $rows){
         $result = array();
-        if($type == 0){
+        if($status == 0){
             $where = "status != 99";
+        }else{
+            $where = "status = $status";
+        }
+        if($type == 0){
+            $where = $where;
         }else{
             $string = $this->get_department_assign($userid, $yearid);
             if($string != ''){
-                $where = "status != 99 AND id IN (SELECT tbl_student_class.student_id FROM tbl_student_class 
+                $where = $where." AND id IN (SELECT tbl_student_class.student_id FROM tbl_student_class 
                         WHERE tbl_student_class.year_id = $yearid AND FIND_IN_SET(tbl_student_class.department_id, 
                         (SELECT tbl_assign.department FROM tbl_assign WHERE tbl_assign.user_id = $userid 
                         AND tbl_assign.year_id = $yearid)))";
             }else{
-                $where = "status != 99";
+                $where = $where;
             }
         }
         if($q != '')
@@ -203,8 +208,8 @@ class Student_Model extends Model{
 //////////////////////////////////////////////////////////////////////////////////////////////////
     function get_change_class_of_student($id){
         $query = $this->db->query("SELECT id, student_id, year_id_from, department_id_from, year_id_to,
-                                    department_id_to create_at FROM tbl_change_class WHERE student_id = $id
-                                    ORDER BY id");
+                                    department_id_to, create_at,  content FROM tbl_change_class WHERE student_id = $id
+                                    ORDER BY id DESC");
         return $query->fetchAll();
     }
 
