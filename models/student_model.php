@@ -18,8 +18,7 @@ class Student_Model extends Model{
             if($string != ''){
                 $where = $where." AND id IN (SELECT tbl_student_class.student_id FROM tbl_student_class 
                         WHERE tbl_student_class.year_id = $yearid AND FIND_IN_SET(tbl_student_class.department_id, 
-                        (SELECT tbl_assign.department FROM tbl_assign WHERE tbl_assign.user_id = $userid 
-                        AND tbl_assign.year_id = $yearid)))";
+                        '$string'))";
             }else{
                 $where = $where;
             }
@@ -197,10 +196,18 @@ class Student_Model extends Model{
     }
 
     function get_department_assign($userid, $yearid){
-        $query = $this->db->query("SELECT department FROM tbl_assign WHERE user_id = $userid AND year_id = $yearid");
-        $row = $query->fetchAll();
-        if(count($row) > 0){
-            return $row[0]['department'];
+        $query = $this->db->query("SELECT department FROM tbl_assign_detail WHERE tbl_assign_detail.code = (SELECT tbl_assign.code 
+                                    FROM tbl_assign WHERE tbl_assign.user_id = $userid AND tbl_assign.year_id = $yearid)");
+        $result = $query->fetchAll();
+        if(count($result) > 0){ $arr = [];
+            foreach($result as $item){
+                $items = explode(",", $item['department']);
+                foreach($items as $row){
+                    array_push($arr, $row);
+                }
+            }
+            $arr_total = array_filter(array_unique($arr));
+            return implode(",", $arr_total);
         }else{
             return '';
         }
@@ -218,5 +225,6 @@ class Student_Model extends Model{
                                     WHERE student_id = $id ORDER BY id DESC");
         return $query->fetchAll();
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////
 }
 ?>

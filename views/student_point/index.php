@@ -38,7 +38,7 @@
                                 <label for="form-field-username">Lựa chọn môn học</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn môn học"
-                                    style="width:100%" id="subject_id" name="subject_id">
+                                    style="width:100%" id="subject_id" name="subject_id" onchange="set_dep()">
                                     </select>
                                 </div>
                             </div>

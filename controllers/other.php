@@ -193,9 +193,9 @@ class Other extends Controller{
     }
 
     function combo_department_user(){
-        $userid = $this->_Info[0]['id']; $yearid = $this->_Year[0]['id'];
+        $userid = $this->_Info[0]['id']; $yearid = $this->_Year[0]['id']; $subjectid = $_REQUEST['id'];
         $type = $this->model->check_user_is_teacher($userid);
-        $jsonObj = $this->model->get_combo_department_user($type, $userid, $yearid);
+        $jsonObj = $this->model->get_combo_department_user($type, $userid, $yearid, $subjectid);
         $this->view->jsonObj = $jsonObj;
         $this->view->render("other/combo_department_user");
     }

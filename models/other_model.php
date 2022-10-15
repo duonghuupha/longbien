@@ -125,20 +125,22 @@ class Other_Model extends Model{
                                         AND set_point = 1");
         }else{
             $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0 
-                                        AND set_point = 1 AND FIND_IN_SET(tbldm_subject.id, (SELECT tbl_assign.subject
-                                        FROM tbl_assign WHERE tbl_assign.user_id = $userid AND year_id = $yearid))");
+                                        AND set_point = 1 AND tbldm_subject.id IN (SELECT subject_id FROM tbl_assign_detail
+                                        WHERE tbl_assign_detail.code = (SELECT tbl_assign.code FROM tbl_assign 
+                                        WHERE user_id = $userid AND year_id = $yearid))");
         }
         return $query->fetchAll();
     }
 
-    function get_combo_department_user($type, $userid, $yearid){
+    function get_combo_department_user($type, $userid, $yearid, $subjectid){
         if($type == 0){
             $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid
                                         AND status = 0 AND class_study = 1");
         }else{
-            $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid AND class_study = 1
-                                        AND status = 0 AND FIND_IN_SET(tbldm_department.id, (SELECT tbl_assign.department
-                                        FROM tbl_assign WHERE tbl_assign.user_id = $userid AND year_id = $yearid))");
+            $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE FIND_IN_SET(tbldm_department.id,
+                                        (SELECT department FROM tbl_assign_detail WHERE tbl_assign_detail.subject_id = $subjectid
+                                        AND tbl_assign_detail.code = (SELECT tbl_assign.code FROM tbl_assign
+                                        WHERE tbl_assign.user_id = $userid AND year_id = $yearid)))");
         }
         return $query->fetchAll();
     }

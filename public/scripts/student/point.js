@@ -2,7 +2,6 @@ var page = 1, fullnames = '', semesters = '', subjects = '', departments = '', u
 $(function(){
     $('#list_student').load(baseUrl + '/student_point/content');
     $('#subject_id').load(baseUrl + '/other/combo_subject_user');
-    $('#department_id').load(baseUrl + '/other/combo_department_user');
 });
 
 function view_page_student(pages){
@@ -74,4 +73,9 @@ function save(){
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+function set_dep(){
+    var value = $('#subject_id').val();
+    $('#department_id').load(baseUrl + '/other/combo_department_user?id='+value);
 }

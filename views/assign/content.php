@@ -19,6 +19,18 @@ function return_department_title_assign($string){
     }
     return implode(", ", $array);
 }
+function return_total_department_selected($code){
+    $sql = new Model(); $arr = [];
+    $json_dep = $sql->get_all_assign_detail_via_code($code);
+    foreach($json_dep as $item){
+        $items = explode(",", $item['department']);
+        foreach($items as $row){
+            array_push($arr, $row);
+        }
+    }
+    $arr_total = array_filter(array_unique($arr));
+    return count($arr_total);
+}
 ?>
 <table 
     id="dynamic-table" 
@@ -52,7 +64,7 @@ function return_department_title_assign($string){
             </td>
             <td class="text-left" id="name_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
             <td class="text-left"><?php echo "Có ".$row['total_subject']." môn học được chọn" ?></td>
-            <td class="text-left"><?php echo "Có ".$this->_Convert->return_total_department_selected($row['code'])." lớp học được chọn" ?></td>
+            <td class="text-left"><?php echo "Có ".return_total_department_selected($row['code'])." lớp học được chọn" ?></td>
             <td class="text-center"><?php echo $row['namhoc'] ?></td>
             <td class="text-center"><?php echo date("H:i:s d-m-Y", strtotime($row['create_at'])) ?></td>
             <td class="text-center">

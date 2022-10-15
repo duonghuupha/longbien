@@ -444,18 +444,5 @@ class Convert{
             return $html;
         }
     }
-
-    function return_total_department_selected($code){
-        $sql = new Model(); $arr = [];
-        $json_dep = $sql->get_all_assign_detail_via_code($code);
-        foreach($json_dep as $item){
-            $items = explode(",", $item['department']);
-            foreach($items as $row){
-                array_push($arr, $row);
-            }
-        }
-        $arr_total = array_filter(array_unique($arr));
-        return count($arr_total);
-    }
 }
 ?>
