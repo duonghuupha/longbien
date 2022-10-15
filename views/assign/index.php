@@ -58,11 +58,13 @@
                 <div class="row">
                     <form id="fm" method="post" enctype="multipart/form-data">
                         <input id="user_id" name="user_id" type="hidden"/>
+                        <input id="datadc" name="datadc" type="hidden"/>
+                        <input id="code" name="code" type="hidden"/>
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn giáo viên</label>
                                 <div class="input-group">
-                                    <input type="text" id="fullname" name="fullname"
+                                    <input type="text" id="fullname" name="fullname" required=""
                                     placeholder="Click Go! để lựa chọn" style="width:100%;" readonly=""/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-sm btn-primary" type="button" onclick="select_user()"
@@ -75,29 +77,29 @@
                             </div>
                         </div>
                         <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn môn học</label>
-                                <div>
-                                    <select class="select2" placeholder="Lựa chọn môn học"
-                                    style="width:100%" required="" id="subject" name="subject[]"
-                                    multiple="" onchange="set_department()">
-                                    </select>
-                                </div>
-                            </div>
+                            <button class="btn btn-sm btn-success pull-right" onclick="add_line()"
+                            type="button" id="select_devices">
+                                <i class="ace-icon fa fa-list"></i>
+                                Thêm dòng (s)
+                            </button>
                         </div>
-                        <!--<div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn lớp học</label>
-                                <div>
-                                    <select class="select2" placeholder="Lựa chọn lớp học"
-                                    style="width:100%" required="" id="department" name="department[]"
-                                    multiple="">
-                                    </select>
-                                </div> 
+                        <div class="col-xs-12">
+                            <div class="dataTables_wrapper form-inline no-footer">
+                                <table id="quanhe"
+                                    class="table table-striped table-bordered table-hover dataTable no-footer"
+                                    role="grid" aria-describedby="dynamic-table_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="text-center" style="width:50px">#</th>
+                                            <th class="text-center" style="width:150px">Môn học</th>
+                                            <th class="">Lớp học</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>-->
-                        <div class="col-xs-12" id="select_department">
-
                         </div>
                     </form>
                 </div>
@@ -163,7 +165,78 @@
 </div>
 <!-- End formm don vi tinh-->
 
-<script>
-var array_subject = [];
-</script>
+<!--Form don vi tinh-->
+<div id="modal-subject" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách môn học
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-subject" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_subject()"/>
+                        <input id="idh_subject" name="idh_subject" type="hidden"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_subject" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-right" id="pager_subject">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-department" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header" id="title_header_dep">
+                    Danh sách lớp học
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-department" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_department()"/>
+                        <input id="idh_department" name="idh_department" type="hidden"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_department" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager_department">
+                    <!--display pagination-->
+                </small>
+                <button class="btn btn-sm btn-primary pull-right" onclick="confirm_department()">
+                    <i class="ace-icon fa fa-check"></i>
+                    Xác nhận
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 <script src="<?php echo URL.'/public/' ?>scripts/calendars/assign.js"></script>

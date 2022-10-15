@@ -10,7 +10,8 @@ class Assign_Model extends Model{
                                     FROM tbl_users WHERE tbl_users.hr_id IN (SELECT tbl_personel.id FROM tbl_personel
                                     WHERE tbl_personel.fullname LIKE '%$q%'))");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, user_id, subject, department, year_id, create_at,
+        $query = $this->db->query("SELECT id, code, user_id, year_id, create_at, (SELECT COUNT(*) FROM tbl_assign_detail
+                                    WHERE tbl_assign_detail.code = tbl_assign.code) AS total_subject,
                                     (SELECT title FROM tbldm_years WHERE tbldm_years.id = year_id) AS namhoc,
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
                                     FROM tbl_users WHERE tbl_users.id = user_id)) AS fullname
@@ -48,8 +49,18 @@ class Assign_Model extends Model{
         return $query;
     }
 
+    function addObj_detail($data){
+        $query = $this->insert("tbl_assign_detail", $data);
+        return $query;
+    }
+
+    function delObj_detail($code){
+        $query = $this->delete("tbl_assign_detail",  "code = $code");
+        return $query;
+    }
+
     function get_info($id){
-        $query = $this->db->query("SELECT id, code, user_id, subject, department, year_id, create_at,
+        $query = $this->db->query("SELECT id, code, user_id, year_id, create_at,
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
                                     FROM tbl_users WHERE tbl_users.id = user_id)) As fullname, (SELECT title
                                     FROM tbldm_years WHERE tbldm_years.id = year_id) AS namhoc FROM tbl_assign
@@ -80,6 +91,44 @@ class Assign_Model extends Model{
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id != 1 AND active = 1
                                 AND hr_id IN (SELECT tbl_personel.id FROM tbl_personel WHERE fullname LIKE '%$q%'
                                 AND job_id in (SELECT tbldm_job.id  FROM tbldm_job WHERE tbldm_job.is_teacher = 1))");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_subject($q, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_subject WHERE set_point = 1
+                                    AND status = 0 AND title LIKE '%$q%'");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE set_point = 1 AND status = 0
+                                    AND title LIKE '%$q%' ORDER BY id DESC LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_subject_total($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_subject WHERE set_point = 1
+                                    AND status = 0 AND title LIKE '%$q%'");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_department($q, $yearid, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE status = 0
+                                    AND class_study = 1 AND year_id = $yearid");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE status = 0 AND class_study = 1
+                                    AND year_id = $yearid ORDER BY id DESC LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;             
+    }
+
+    function get_data_department_total($q, $yearid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE status = 0
+                                    AND class_study = 1 AND year_id = $yearid");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }

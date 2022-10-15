@@ -1,24 +1,21 @@
-var page = 1, keyword = '', url = '', page_user = 1, keyword_user = '';
+var page = 1, keyword = '', url = '', page_user = 1, keyword_user = '', data = [];
+var numbers_line = 0, keyword_subject = '', page_subject = 1;
+var keyword_department = '', page_department = 1, data_dep = [],data_dep_title = [];
 $(function(){
     $('#list_assign').load(baseUrl + '/assign/content');
-    $('#subject').load(baseUrl + '/other/combo_subject_point_no_null');
-    $('#department').load(baseUrl + '/other/combo_department_no_null?yearid='+yearid);
-    add();
 });
 
 function add(){
     $('#user_id').val(null); $('#fullname').val(null); $('#subject').val(null).trigger('change');
-    $('#department').val(null).trigger('change'); $('#modal-assign').modal('show');
+    $('#department').val(null).trigger('change'); data = []; render_table(data);
+    $('#modal-assign').modal('show');
     url = baseUrl + '/assign/add';
 }
 
 function edit(idh){
-    var userid = $('#userid_'+idh).text(), fullname = $('#name_'+idh).text();
-    var subject = $('#subject_'+idh).text(), department = $('#department_'+idh).text();
-    $('#user_id').val(userid); $('#fullname').val(fullname);
-    subject =  subject.split(","); $('#subject').val(subject).trigger('change');
-    department = department.split(","); $('#department').val(department).trigger('change');
-    $('#modal-assign').modal('show');
+    var userid = $('#userid_'+idh).text(), fullname = $('#name_'+idh).text(), detail = $('#detail_'+idh).text();
+    $('#user_id').val(userid); $('#fullname').val(fullname); data = JSON.parse(detail); render_table(data);
+    $('#code').val($('#code_'+idh).text()); $('#modal-assign').modal('show');
     url = baseUrl + '/assign/update?id='+idh;
 }
 
@@ -29,14 +26,24 @@ function del(idh){
 
 function save(){
     var required = $('input,textarea,select').filter('[required]:visible');
-    var allRequired = true;
+    var allRequired = true, allline = true;
     required.each(function(){
         if($(this).val() == ''){
             allRequired = false;
         }
     });
-    if(allRequired){
-        save_form_modal('#fm', url, '#modal-assign', '#list_assign',  baseUrl + '/assign/content?page='+page+'&q='+keyword); 
+    if(allRequired && data.length > 0){
+        data.forEach((obj, i) => {
+            if(obj.subject_id == '' || obj.department_id == ''){
+                allline = false;
+            }
+        });
+        if(allline){
+            $('#datadc').val(JSON.stringify(data));
+            save_form_modal('#fm', url, '#modal-assign', '#list_assign',  baseUrl + '/assign/content?page='+page+'&q='+keyword);
+        }else{
+            show_message("error", "Chưa có bản ghi nào được chọn");
+        }
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -91,29 +98,139 @@ function confirm_user(idh){
     $('#modal-users').modal('hide');
 }
 /////////////////////////////////////////////////////////////////////////////////////////
-function set_department(){
-    //var value = $("#subject option:selected").html();
-    console.log($('#subject').val());
-    // Fetching Text
-    console.log($('#subject').find('option:selected').text());
-    //render_html(value)
+function add_line(){
+    numbers_line += 1;
+    var str = {'id': numbers_line, 'subject_id': '', 'department_id': '', 'subject': '', 'department': ''};
+    data.push(str);
+    render_table(data);
 }
 
-function render_html(value){
-    var html = ''; $('#select_department').empty();
-    for(var item in value){
-        html += '<div class="col-xs-4">';
-            html += '<ul id="tree1" class="tree tree-unselectable" role="tree">';
-                html += '<li class="tree-branch tree-open" role="treeitem" aria-expanded="true">';
-                    html += '<div class="tree-branch-header">';
-                        html += '<span class="tree-branch-name">';
-                            html += '<i class="icon-folder ace-icon tree-minus"></i>';
-                            html += '<span class="tree-label" style="font-weight:700">'+item+'</span>';
-                        html += '</span>';
-                    html += '</div>';
-                html += '</li>';
-            html += '</ul>';
-        html += '</div>';
+function render_table(data_json){
+    var html = '', j = 1; $('#tbody').empty();
+    for(i = 0; i < data_json.length; i++){
+        var subject = (data_json[i].subject != '') ? data_json[i].subject : 'Lựa chọn';
+        var department = (data_json[i].department != '') ? data_json[i].department : 'Lựa chọn';
+        html += '<tr id="line_'+data_json[i].id+'">';
+            html += '<td class="text-center">'+j+'</td>'
+            html += '<td class="text-center">';
+                html += '<a href="javascript:void(0)" onclick="select_subject('+data_json[i].id+')">'+subject+'</a>';
+            html += '</td>';
+            html += '<td>';
+                html += '<a href="javascript:void(0)" onclick="select_department('+data_json[i].id+')">'+department+'</a>';
+            html += '</td>';
+            html += '<td class="text-center">';
+                html += '<a href="javascript:void(0)" onclick="del_assign('+data_json[i].id+')">';
+                    html += '<i class="fa fa-trash" style="color:red"></i>';
+                html += '</a>';
+            html += '</td>';
+        html += '</tr>';
+        j++;
     }
-    $('#select_department').append(html);
+    $('#tbody').append(html);
+}
+
+function del_assign(idh){
+    data = data.filter(item => item.id != idh);
+    render_table(data);
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+function select_subject(idh){
+    $('#list_subject').load(baseUrl + '/assign/list_subject');
+    $('#pager_subject').load(baseUrl + '/assign/list_subject_page');
+    $('#idh_subject').val(idh); $('#modal-subject').modal('show');
+}
+
+function view_page_subject(pages){
+    page_subject = pages;
+    $('#list_subject').load(baseUrl + '/assign/list_subject?page='+page_subject+'&q='+keyword_subject);
+    $('#pager_subject').load(baseUrl + '/assign/list_subject_page?page='+page_subject+'&q='+keyword_subject);
+}
+
+function search_subject(){
+    var value = $('#nav-search-input-subject').val();
+	if(value.length != 0){
+        keyword_subject = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_subject = '';
+    }
+    $('#list_subject').load(baseUrl + '/assign/list_subject?page=1&q='+keyword_subject);
+    $('#pager_subject').load(baseUrl + '/assign/list_subject_page?page=1&q='+keyword_subject);
+}
+
+function confirm_subject(idh){
+    var id = parseInt($('#idh_subject').val()), subject = $('#titlesubject_'+idh).text();
+    var objIndex_subject = data.findIndex(item => item.subject_id === idh);
+    var objIndex = data.findIndex(item => item.id === id);
+    if(objIndex_subject != -1){
+        show_message("error", "Môn học đã được chọn, không thể chọn lại");
+        return false;
+    }else{
+        data[objIndex].subject_id = idh; data[objIndex].subject = subject;
+        //data.push(str);
+        render_table(data); $('#modal-subject').modal('hide');
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function select_department(idh){
+    var objIndex = data.findIndex(item => item.id === idh); data_dep = convert_string_to_array_number(data[objIndex].department_id);
+    data_dep_title = data[objIndex].department.split(", ").filter(item => item !== "");
+    $('#list_department').load(baseUrl + '/assign/list_department?checked='+btoa(data_dep.join(",")));
+    $('#pager_department').load(baseUrl + '/assign/list_department_page');
+    $('#idh_department').val(idh); 
+    var title = "Danh sách lớp học :: Đăng ký cho môn học "+data[objIndex].subject;
+    $('#title_header_dep').text(title);
+    $('#modal-department').modal('show');
+}
+
+function view_page_department(pages){
+    page_department = pages; var idh = $('#idh_department').val(); var objIndex = data.findIndex(item => item.id === idh);
+    $('#list_department').load(baseUrl + '/assign/list_department?page='+page_department+'&q='+keyword_department+'&checked='+btoa(data_dep.join(",")));
+    $('#pager_department').load(baseUrl + '/assign/list_department_page?page='+page_department+'&q='+keyword_department);
+}
+
+function search_department(){
+    var value = $('#nav-search-input-department').val(); var idh = $('#idh_department').val();
+    var objIndex = data.findIndex(item => item.id === idh);
+	if(value.length != 0){
+        keyword_department = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_department = '';
+    }
+    $('#list_department').load(baseUrl + '/assign/list_department?page=1&q='+keyword_department+'&checked='+btoa(data_dep.join(",")));
+    $('#pager_department').load(baseUrl + '/assign/list_department_page?page=1&q='+keyword_department);
+}
+
+function checked_department(idh){
+    var value = $('#ck_'+idh).is(':checked'), title = $('#titledep_'+idh).text();
+    if(value){
+        data_dep.push(idh); data_dep_title.push(title);
+    }else{
+        var datadep = data_dep.filter(item => item !== idh); 
+        var datadeptitle = data_dep_title.filter(item => item !== title);
+        data_dep = datadep; data_dep_title = datadeptitle;
+    }
+}
+
+function confirm_department(){
+    if(data_dep.length > 0){
+        var id = parseInt($('#idh_department').val());
+        var objIndex = data.findIndex(item => item.id === id);
+        data[objIndex].department_id = data_dep.join(","); 
+        data[objIndex].department = data_dep_title.join(", ");
+        render_table(data); $('#modal-department').modal('hide');
+        data_dep = []; data_dep_title = [];
+    }else{
+        show_message("error", "Chưa có bản ghi nào được chọn");
+    }
+}
+
+function convert_string_to_array_number(str){
+    var string = str.split(","), data_tmp = []; 
+    var arr_dep = string.filter(item => item !== "");
+    if(arr_dep.length > 0){
+        for(const item of arr_dep){
+            data_tmp.push(parseInt(item));
+        }
+    } 
+    return data_tmp;
 }

@@ -98,7 +98,7 @@ class Student extends Controller{
             $jsonObj['success'] = false;
             $this->view->jsonObj= json_encode($jsonObj);
         }else{
-            if($this->model->dupliObj_csdl(0, $codecsdl) > 0){
+            if($this->model->dupliObj_csdl($id, $codecsdl) > 0){
                 $jsonObj['msg'] = "Mã định danh đã tồn tại";
                 $jsonObj['success'] = false;
                 $this->view->jsonObj= json_encode($jsonObj);

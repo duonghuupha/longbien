@@ -331,6 +331,12 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function get_all_assign_detail_via_code($code){
+        $query = $this->db->query("SELECT subject_id, department, (SELECT title FROM tbldm_subject 
+                                    WHERE tbldm_subject.id = subject_id) AS `subject` FROM tbl_assign_detail 
+                                    WHERE code = $code");
+        return $query->fetchAll();
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

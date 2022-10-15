@@ -1,5 +1,24 @@
 <?php
 $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
+function return_detail_assign($code){
+    $sql = new Model();
+    $json = $sql->get_all_assign_detail_via_code($code);
+    $html = '['; $i = 0;
+    foreach($json as $row){
+        $i++;
+        $array []= '{"id": '.$i.', "subject_id": "'.$row['subject_id'].'", "department_id": "'.$row['department'].'", "subject": "'.$row['subject'].'", "department": "'.return_department_title_assign($row['department']).'"}';
+    }
+    $html .= implode(",", $array);
+    $html .= ']';
+    return $html;
+}
+function return_department_title_assign($string){
+    $str = explode(",", $string); $sql = new Model();
+    foreach($str as $row){
+        $array[] = $sql->return_title_department($row);
+    }
+    return implode(", ", $array);
+}
 ?>
 <table 
     id="dynamic-table" 
@@ -24,8 +43,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
-            $arr_subjcet = explode(",", $row['subject']);
-            $arr_department = explode(",", $row['department']);
+
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
@@ -33,8 +51,8 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                 <?php echo "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>".$row['code']."</a>" ?>
             </td>
             <td class="text-left" id="name_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
-            <td class="text-left"><?php echo "Có ".count($arr_subjcet)." môn học được chọn" ?></td>
-            <td class="text-left"><?php echo "Có ".count($arr_department)." lớp học được chọn" ?></td>
+            <td class="text-left"><?php echo "Có ".$row['total_subject']." môn học được chọn" ?></td>
+            <td class="text-left"><?php echo "Có ".$this->_Convert->return_total_department_selected($row['code'])." lớp học được chọn" ?></td>
             <td class="text-center"><?php echo $row['namhoc'] ?></td>
             <td class="text-center"><?php echo date("H:i:s d-m-Y", strtotime($row['create_at'])) ?></td>
             <td class="text-center">
@@ -58,8 +76,8 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                 </div>
             </td>
             <td class="hidden" id="userid_<?php echo $row['id'] ?>"><?php echo $row['user_id'] ?></td>
-            <td class="hidden" id="subject_<?php echo $row['id'] ?>"><?php echo $row['subject'] ?></td>
-            <td class="hidden" id="department_<?php echo $row['id'] ?>"><?php echo $row['department'] ?></td>
+            <td class="hidden" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
+            <td class="hidden" id="detail_<?php echo $row['id'] ?>"><?php echo return_detail_assign($row['code']) ?></td>
         </tr>
         <?php
         }
