@@ -185,7 +185,8 @@ class Other extends Controller{
     }
 
     function combo_subject_user(){
-        $userid = $this->_Info[0]['id']; $yearid = $this->_Year[0]['id'];
+        $userid = (isset($_REQUEST['id'])) ? $_REQUEST['id'] : $this->_Info[0]['id']; 
+        $yearid = $this->_Year[0]['id'];
         $type = $this->model->check_user_is_teacher($userid);
         $jsonObj = $this->model->get_combo_subject_via_user_id($type, $userid, $yearid);
         $this->view->jsonObj = $jsonObj;

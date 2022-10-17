@@ -56,7 +56,7 @@
             <div class="modal-body">
                 <div class="row">
                     <form id="fm" method="POST" enctype="multipart/form-data">
-                        <input id="user_id" name="user_id" type="hidden"/>
+                        <input id="user_id" name="user_id" type="hidden" <?php echo ($this->teacher == 1) ? 'value="'.$this->_Info[0]['id'].'"' : '' ?>/>
                         <input id="lesson_id" name="lesson_id" type="hidden"/>
                         <input id="subjectid" name="subjectid" type="hidden"/>
                         <input id="code" name="code" type="hidden"/>
@@ -64,11 +64,12 @@
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn giáo viên</label>
                                 <div class="input-group">
-                                    <input type="text" id="fullname" name="fullname"
-                                    placeholder="Click Go! để lựa chọn" style="width:100%;" readonly=""/>
+                                    <input type="text" id="fullname" name="fullname" required=""
+                                    placeholder="Click Go! để lựa chọn" style="width:100%;" readonly=""
+                                    <?php echo ($this->teacher == 1) ? 'value="'.$this->_Data->return_fullname_per($this->_Info[0]['hr_id']).'"' : '' ?>/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-sm btn-primary" type="button" onclick="select_user()"
-                                        id="select_users">
+                                        id="select_users" <?php echo ($this->teacher == 1) ? 'disabled=""' : '' ?>>
                                             <i class="ace-icon fa fa-users bigger-110"></i>
                                             Go!
                                         </button>
@@ -90,10 +91,20 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
+                                <label for="form-field-username">Lựa chọn môn học</label>
+                                <div>
+                                    <select class="select2" id="subject_id" name="subject_id" onchange="set_dep()"
+                                    data-placeholder="Lựa chọn môn học..." style="width:100%"></select>
+                                    <i class="title_subject" style="font-size:11px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
                                 <label for="form-field-username">Lựa chọn lớp học</label>
                                 <div>
                                     <select class="select2" id="department_id" name="department_id" required=""
-                                    data-placeholder="Lựa chọn lớp học..." style="width:100%" onchange="set_lesson()"></select>
+                                    data-placeholder="Lựa chọn lớp học..." style="width:100%"></select>
                                 </div>
                             </div>
                         </div>
@@ -104,16 +115,6 @@
                                     <select class="select2" id="lesson" name="lesson"
                                     data-placeholder="Lựa chọn tiết học..." style="width:100%"></select>
                                     <i class="title_lesson" style="font-size:11px;"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn môn học</label>
-                                <div>
-                                    <select class="select2" id="subject_id" name="subject_id"
-                                    data-placeholder="Lựa chọn môn học..." style="width:100%"></select>
-                                    <i class="title_subject" style="font-size:11px;"></i>
                                 </div>
                             </div>
                         </div>

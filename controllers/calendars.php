@@ -7,6 +7,8 @@ class Calendars extends Controller{
 
     function index(){
         require('layouts/header.php');
+        $teacher = $this->model->check_user_is_teacher($this->_Info[0]['id']);
+        $this->view->teacher = $teacher;
         $this->view->render('calendars/index');
         require('layouts/footer.php');
     }
@@ -28,126 +30,12 @@ class Calendars extends Controller{
     }
 
     function add(){
-        $userid = $_REQUEST['user_id']; $usercreate = $this->_Info[0]['id']; $datestudy = $this->_Convert->convertDate($_REQUEST['date_study']);
-        $department = $_REQUEST['department_id']; $lesson = $_REQUEST['lesson']; $subject = $_REQUEST['subject_id']; $lessonmain = $_REQUEST['lesson_export'];
-        $title = $_REQUEST['title']; $code = time();
-        $datadc = ($_REQUEST['datadc'] != '') ? json_decode($_REQUEST['datadc'], true) : [];
-        if($datestudy > date("Y-m-d")){
-            $jsonObj['msg'] = "Không báo giảng trước sau ngày hiện tại";
-            $jsonObj['success'] = false;
-            $this->view->jsonObj = json_encode($jsonObj);
-        }else{
-            if($this->model->dupliObj(0, $lesson, $department, $datestudy) > 0){
-                $jsonObj['msg'] = "Ngày ".$_REQUEST['date_study']." lớp ".$this->model->get_title_deparmentt($department)." vào tiết ".$lesson." đã có giờ dạy";
-                $jsonObj['success'] = false;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }else{
-                // kiem tra xem tiet hoc dc phan bo da ton tai chua
-                if($this->model->dupliObj_lessonmain(0, $lessonmain, $subject) > 0){
-                    $jsonObj['msg'] = "Tiết học ".$lessonmain."  theo chương trình phân bổ của môn học ".$this->_Data->return_title_subject($subject)." đã tồn tại";
-                    $jsonObj['success'] = false;
-                    $this->view->jsonObj = json_encode($jsonObj);
-                }else{
-                    $data = array("code" => $code, "user_id" => $userid, "user_create" => $usercreate, "lesson" => $lesson, "subject_id" => $subject,
-                                    "department_id" => $department, "lesson_export" => $lessonmain, "date_study" => $datestudy, "title" => $title,
-                                    "create_at" => date("Y-m-d H:i:s"));
-                    $temp = $this->model->addObj($data);
-                    if($temp){
-                        $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                        $jsonObj['success'] = true;
-                        $this->view->jsonObj = json_encode($jsonObj);
-                    }else{
-                        $jsonObj['msg'] = "Ghi dữ liệu không thành công";
-                        $jsonObj['success'] = false;
-                        $this->view->jsonObj = json_encode($jsonObj);
-                    }
-                }
-            }
-        }
+        
         $this->view->render('calendars/add');
     }
 
     function update(){
-        $id = $_REQUEST['id'];
-        $userid = $_REQUEST['user_id']; $usercreate = $this->_Info[0]['id']; $datestudy = $this->_Convert->convertDate($_REQUEST['date_study']);
-        $department = $_REQUEST['department_id']; 
-        $lesson = (isset($_REQUEST['lesson']) && $_REQUEST['lesson'] != '') ? $_REQUEST['lesson'] : $_REQUEST['lesson_id']; 
-        $subject = (isset($_REQUEST['subject_id']) && $_REQUEST['subject_id'] != '') ? $_REQUEST['subject_id'] : $_REQUEST['subjectid']; 
-        $lessonmain = $_REQUEST['lesson_export']; $title = $_REQUEST['title']; $code = $_REQUEST['code'];
-        $datadc = ($_REQUEST['datadc'] != '') ? json_decode($_REQUEST['datadc'], true) : [];
-        if($datestudy > date("Y-m-d")){
-            $jsonObj['msg'] = "Không báo giảng trước sau ngày hiện tại";
-            $jsonObj['success'] = false;
-            $this->view->jsonObj = json_encode($jsonObj);
-        }else{
-            if($this->model->dupliObj($id, $lesson, $department, $datestudy) > 0){
-                $jsonObj['msg'] = "Ngày ".$_REQUEST['date_study']." lớp ".$this->model->get_title_deparmentt($department)." vào tiết ".$lesson." đã có giờ dạy";
-                $jsonObj['success'] = false;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }else{
-                // kiem tra xem tiet hoc dc phan bo da ton tai chua
-                if($this->model->dupliObj_lessonmain($id, $lessonmain, $subject) > 0){
-                    $jsonObj['msg'] = "Tiết học ".$lessonmain."  theo chương trình phân bổ của môn học ".$this->_Data->return_title_subject($subject)." đã tồn tại";
-                    $jsonObj['success'] = false;
-                    $this->view->jsonObj = json_encode($jsonObj);
-                }else{
-                    $data = array("user_id" => $userid, "user_create" => $usercreate, "lesson" => $lesson, "subject_id" => $subject,
-                                    "department_id" => $department, "lesson_export" => $lessonmain, "date_study" => $datestudy, "title" => $title,
-                                    "create_at" => date("Y-m-d H:i:s"));
-                    $temp = $this->model->updateObj($id, $data);
-                    if($temp){
-                        // kiem tra xem co ton tai muon trang thiet bi hay do dung khong
-                        if(count($datadc) > 0){
-                            // kiem tra xem co du lieu muon thiet bi hay do dung khong
-                            $thietbi = 0; $dodung = 0; $phongban = 0;
-                            foreach($datadc as $row){
-                                $thietbi += ($row['type'] == 1) ? 1 : 0;
-                                $dodung += ($row['type'] == 2) ? 1 : 0;
-                                $phongban += ($row['type'] == 3) ? 1 : 0;
-                            }
-                            // thao tac khi co du lieu muon thiet bi
-                            if($thietbi == 0){ // khong muon thiet bi
-                                $this->action_loans_device($code);
-                            }else{ // co muon thiet bi
-                                $this->model->delObj_device_loans_detail($code); // xoa du lieu chi tiet muon thiet bi
-                                $this->action_loans_device_add($datadc, $code, $userid, $datestudy, $subject, $title);
-                            }
-                            // thao tac khi co du lieu muon do dung
-                            if($dodung == 0){ // khong muon do dung
-                                $this->action_loans_gear($code);
-                            }else{ // co muon do dung
-                                $this->model->delObj_gear_loan_detail($code); // xao du lieu chi tiett mmuon do dung
-                                $this->action_loans_gear_add($datadc, $code, $userid, $datestudy, $subject, $title);
-                            }
-                            // thao tac khi co du lieu muon phong chuc nang
-                            if($phongban == 0){
-                                $this->actiion_loans_department($code);
-                            }else{
-                                if($this->action_loan_department_add($datadc, $code, $userid, $datestudy, $subject, $title, $lesson)){
-                                    $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                                    $jsonObj['success'] = true;
-                                    $this->view->jsonObj = json_encode($jsonObj);
-                                }else{
-                                    $jsonObj['msg'] = "Vào tiết ".$lesson."  của ngày ".$datestudy." phòng  chức năng đã có người dạy";
-                                    $jsonObj['success'] = false;
-                                    $this->view->jsonObj = json_encode($jsonObj);
-                                }
-                            }
-                        }else{
-                            // thuc hien xoa du lieu muon hoac tra toan bo thiet bi do dung da muon
-                            $this->action_loans_device($code); $this->action_loans_gear($code); $this->actiion_loans_department($code);
-                        }
-                        $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                        $jsonObj['success'] = true;
-                        $this->view->jsonObj = json_encode($jsonObj);
-                    }else{
-                        $jsonObj['msg'] = "Ghi dữ liệu không thành công";
-                        $jsonObj['success'] = false;
-                        $this->view->jsonObj = json_encode($jsonObj);
-                    }
-                }
-            }
-        }
+        
         $this->view->render('calendars/update');
     }
 
@@ -167,18 +55,10 @@ class Calendars extends Controller{
     }
 
     function detail(){
-        $jsonObj = $this->model->get_info($_REQUEST['id']);
-        $this->view->jsonObj = $jsonObj;
-        $this->view->detail = $this->model->get_all_device_gear_loan_of_calendar($jsonObj[0]['code']);
+        
         $this->view->render('calendars/detail');
     }
 /////////////////////////////////////////////////////////////////////////////////
-    function data_edit(){
-        $id = $_REQUEST['id']; $jsonObj = $this->model->get_info($id);
-        $this->view->jsonObj  = json_encode($jsonObj[0]);
-        $this->view->render('calendars/data_edit');
-    }
-
     function list_user(){
         $rows = 10;
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
@@ -199,197 +79,9 @@ class Calendars extends Controller{
         $this->view->render('calendars/list_user_page');
     }
 
-    function combo_subject(){
-        $userid = $_REQUEST['userid'];
-        $jsonObj = $this->model->get_combo_subject($userid);
-        $this->view->jsonObj = $jsonObj;
-        $this->view->render("calendars/combo_subject");
-    }
-
     function combo_lesson(){
         $this->view->render("calendars/combo_lesson");
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
-    function list_device(){
-        $rows = 10;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-        $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_device($keyword, $offset, $rows);
-        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
-        $this->view->render("calendars/list_device");
-    }
-
-    function list_device_page(){
-        $rows = 10;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-        $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_device_total($keyword);
-        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
-        $this->view->render('calendars/list_device_page');
-    }
-
-    function list_gear(){
-        $rows = 10;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-        $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_gear($keyword, $offset, $rows);
-        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
-        $this->view->render('calendars/list_gear');
-    }
-
-    function list_gear_page(){
-        $rows = 10;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-        $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_date_gear_total($keyword);
-        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
-        $this->view->render('calendars/list_gear_page');
-    }
-
-    function list_department(){
-        $rows = 10;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-        $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_department($keyword, $offset, $rows);
-        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
-        $this->view->render('calendars/list_department');
-    }
-
-    function list_department_page(){
-        $rows = 10;
-        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-        $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_department_total($keyword);
-        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
-        $this->view->render('calendars/list_department_page');
-    }
-///////////////////////////////////////////////////////////////////////////////////////////////
-    function update_loan(){
-        $id = $_REQUEST['id']; $info = $this->model->get_info($id);
-        $datadc = json_decode($_REQUEST['datadc'], true);
-        if(count($datadc) > 0){
-            $status = true;
-            foreach($datadc as $row){
-                if($row['type'] == 1){ // thiet bi
-                    $device = explode(".", $row['id']);
-                    // kiem tra xem ton tai phieu muon thiet bi chua
-                    if($this->model->check_code_loans_device($info[0]['code']) > 0){ // da ton tai phieu muon thiet bi voi ma da cho
-                        if($this->add_item_loans_device_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
-                            $status = true;
-                        }else{
-                            $status = false;
-                        }
-                    }else{   // khong ton tai phieu muon thiet bi thi tao phieu moi
-                        if($this->add_item_loans_device($info[0]['code'], $info[0]['datestudy'], $info[0]['user_id'], $info[0]['subject_id'], $info[0]['title'])){
-                            if($this->add_item_loans_device_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
-                                $status = true;
-                            }else{
-                                $status = false;
-                            }
-                        }else{
-                            $status = false;
-                        }
-                    }
-                }elseif($row['type'] == 2){ /// do dung
-                    $device = explode(".", $row['id']);
-                    // kiem tra xem ton tai phieu muon do dung chua
-                    if($this->model->check_code_loans_gear($info[0]['code']) > 0){ // da ton tai phieu muon do dung voi ma da cho
-                        if($this->add_item_loans_gear_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
-                            $status = true;
-                        }else{
-                            $status = false;
-                        }
-                    }else{ // khong tin tai phieu muon do dung thi tao phieu moi
-                        if($this->add_item_loans_gear($info[0]['code'], $info[0]['datestudy'], $info[0]['user_id'], $info[0]['subject_id'], $info[0]['title'])){
-                            if($this->add_item_loans_gear_detail($info[0]['code'], $device[0], $device[1], $info[0]['datestudy'])){
-                                $status = true;
-                            }else{
-                                $status = false;
-                            }
-                        }else{
-                            $status = false;
-                        }
-                    }
-                }else{ // phong chuc nang
-                    // kiem tra xem ton tai phieu muon phong chuc nang hay khong
-                    if($this->add_item_loans_department($info[0]['code'], $info[0]['datestudy'],  $info[0]['user_id'], $info[0]['subject_id'], $info[0]['title'], $info[0]['lesson'], $row['id'])){
-                        $status = true;
-                    }else{
-                        $status = false;
-                    }
-                }
-            }
-            if($status){
-                $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                $jsonObj['success'] = true;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }else{
-                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
-                $jsonObj['success'] = false;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }
-        }else{
-            $jsonObj['msg'] = "Không có bản ghi nào được chọn";
-            $jsonObj['success'] =  false;
-            $this->view->jsonObj = json_encode($jsonObj);
-        }
-        $this->view->render("calendars/update_loan");
-    }
-/////////////////////////////////////////Thao tac muon thiet bi////////////////////////////////////////////////
-    function add_item_loans_device($code, $date, $userid, $subject, $title){
-        $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" =>  $date,
-                        "content" => "Phục vụ cho bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-        $temp = $this->model->addObj_device_loan($data);
-        return $temp;
-    }
-
-    function add_item_loans_device_detail($code, $deviceid, $subdevice, $date){
-        $data = array("code" => $code, "device_id" =>  $deviceid, "sub_device" => $subdevice, "date_return" => $date,
-                        "status" => 0);
-        if($this->model->check_device_loans_detail($deviceid, $subdevice) == 0){
-            $temp = false;
-        }else{
-            $temp = $this->model->addObj_device_loan_detail($data);
-        }
-        return $temp;
-    }
-//////////////////////////////////////Thao tac muon do dung//////////////////////////////////////////////////////
-    function add_item_loans_gear($code, $date, $userid, $subject, $title){
-        $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" =>  $date,
-                        "content" => "Phục vụ cho bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title,
-                        "status" => 3, "create_at" => date("Y-m-d H:i:s"));
-        $temp = $this->model->addObj_gear_loan($data);
-        return $temp;
-    }
-
-    function add_item_loans_gear_detail($code, $utesilsid, $subutensils, $date){
-        $data = array("code" => $code, "utensils_id" =>  $utesilsid, "sub_utensils" => $subutensils, "date_return" => $date,
-                        "status" => 0);
-        if($this->model->check_gear_loans_detail($utesilsid, $subutensils) == 0){
-            $temp = false;
-        }else{
-            $temp = $this->model->addObj_gear_loan_detail($data);
-        }
-        return $temp;
-    }
-/////////////////////////////////////Thao tac muon phong chuc nang////////////////////////////////////////////////
-    function add_item_loans_department($code, $date, $userid, $subject, $title, $lesson, $departmentid){
-        if($this->model->check_code_loans_department($date, $lesson, $departmentid) > 0){
-            return false;
-        }else{
-            $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" => $date,
-                            "department_id" => $departmentid, "lesson" => $lesson, "status" => 0, "create_at" => date("Y-m-d H:i:s"),
-                            "content" => "Phục vụ cho bài dạy môn ".$this->_Data->return_title_subject($subject).": ".$title);
-            $temp = $this->model->addObj_department_loan($data);
-            return $temp;
-        }
-    }
 }
 ?>

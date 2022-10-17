@@ -17,7 +17,7 @@
 		<script src="<?php echo URL.'/styles' ?>/js/jquery.toast.js"></script>
 		<script src="<?php echo URL.'/public' ?>/scripts/library.js"></script>
 		<script>
-			var baseUrl = '<?php echo URL ?>';
+			var baseUrl = '<?php echo URL ?>', url = '<?php echo $_REQUEST['url'] ?>';
 			$(document).keypress(function (e) {
 				if (e.which == 13) {
 					login();

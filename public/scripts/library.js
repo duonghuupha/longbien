@@ -27,9 +27,11 @@ $(function(){
         //console.log(data);
         $('#total_notify').text(data);
     });
-    if(userid != 1 && is_change == 0 && url != 'profile'){
+    ////////////////////////////////////////////////////////////////////
+    if(url != 'index/login' && userid != 1 && is_change == 0 && url != 'profile'){
         window.location.href = baseUrl + '/profile/update_password';
     }
+    //////////////////////////////////////////////////////////////////////
     setInterval(function(){
         load_total_notify();
     }, 5000);
