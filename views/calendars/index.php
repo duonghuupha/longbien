@@ -57,8 +57,6 @@
                 <div class="row">
                     <form id="fm" method="POST" enctype="multipart/form-data">
                         <input id="user_id" name="user_id" type="hidden" <?php echo ($this->teacher == 1) ? 'value="'.$this->_Info[0]['id'].'"' : '' ?>/>
-                        <input id="lesson_id" name="lesson_id" type="hidden"/>
-                        <input id="subjectid" name="subjectid" type="hidden"/>
                         <input id="code" name="code" type="hidden"/>
                         <div class="col-xs-6">
                             <div class="form-group">
@@ -91,30 +89,34 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="form-field-username">Lựa chọn môn học</label>
+                                <label for="form-field-username">
+                                    Lựa chọn môn học
+                                </label>
                                 <div>
                                     <select class="select2" id="subject_id" name="subject_id" onchange="set_dep()"
                                     data-placeholder="Lựa chọn môn học..." style="width:100%"></select>
-                                    <i class="title_subject" style="font-size:11px;"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="form-field-username">Lựa chọn lớp học</label>
+                                <label for="form-field-username">
+                                    Lựa chọn lớp học
+                                </label>
                                 <div>
                                     <select class="select2" id="department_id" name="department_id" required=""
-                                    data-placeholder="Lựa chọn lớp học..." style="width:100%"></select>
+                                    data-placeholder="Lựa chọn lớp học..." style="width:100%" onchange="set_lesson()"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="form-field-username">Lựa chọn tiết học</label>
+                                <label for="form-field-username">
+                                    Lựa chọn tiết học
+                                </label>
                                 <div>
-                                    <select class="select2" id="lesson" name="lesson"
+                                    <select class="select2" id="lesson" name="lesson" data-minimum-results-for-search="Infinity"
                                     data-placeholder="Lựa chọn tiết học..." style="width:100%"></select>
-                                    <i class="title_lesson" style="font-size:11px;"></i>
                                 </div>
                             </div>
                         </div>

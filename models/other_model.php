@@ -119,30 +119,30 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_subject_via_user_id($type, $userid, $yearid){
+    function get_combo_subject_via_user_id($type, $userid, $yearid, $q){
         if($type == 0){
             $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0 
-                                        AND set_point = 1");
+                                        AND set_point = 1 AND title LIKE '%$q%'");
         }else{
             $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0 
                                         AND set_point = 1 AND tbldm_subject.id IN (SELECT subject_id FROM tbl_assign_detail
                                         WHERE tbl_assign_detail.code = (SELECT tbl_assign.code FROM tbl_assign 
-                                        WHERE user_id = $userid AND year_id = $yearid))");
+                                        WHERE user_id = $userid AND year_id = $yearid)) AND title LIKE '%$q%'");
         }
-        return $query->fetchAll();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function get_combo_department_user($type, $userid, $yearid, $subjectid){
+    function get_combo_department_user($type, $userid, $yearid, $subjectid, $q){
         if($type == 0){
             $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid
-                                        AND status = 0 AND class_study = 1");
+                                        AND status = 0 AND class_study = 1 AND title LIKE '%$q%'");
         }else{
             $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE FIND_IN_SET(tbldm_department.id,
                                         (SELECT department FROM tbl_assign_detail WHERE tbl_assign_detail.subject_id = $subjectid
                                         AND tbl_assign_detail.code = (SELECT tbl_assign.code FROM tbl_assign
-                                        WHERE tbl_assign.user_id = $userid AND year_id = $yearid)))");
+                                        WHERE tbl_assign.user_id = $userid AND year_id = $yearid))) AND title LIKE '%$q%'");
         }
-        return $query->fetchAll();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){

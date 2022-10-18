@@ -21,11 +21,15 @@ class Student_point_Model extends Model{
         if($q != '')
             $where = $where." AND fullname LIKE '%$q%'";
         if($subject != '')
-            $where = $where." AND id IN (SELECT student_id FROM tbl_student_class WHERE year_id = $yearid
+            if($type == 0){
+                $where = $where;
+            }else{
+                $where = $where." AND id IN (SELECT student_id FROM tbl_student_class WHERE year_id = $yearid
                                 AND FIND_IN_SET(department_id, (SELECT department FROM tbl_assign_detail
                                 WHERE tbl_assign_detail.subject_id = $subject AND tbl_assign_detail.code = 
                                 (SELECT tbl_assign.code FROM tbl_assign WHERE tbl_assign.user_id = $userid
                                 AND year_id = $yearid))))";
+            }
         if($department != '')
             $where = $where." AND id IN (SELECT student_id FROM tbl_student_class WHERE year_id = $yearid AND department_id = $department)";
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE $where");

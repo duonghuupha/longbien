@@ -69,6 +69,16 @@ class Calendars_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+
+    function get_info($id){
+        $query = $this->db->query("SELECT id, code, user_id, user_create, lesson, lesson_export, subject_id, title, department_id, date_study AS datestudy,
+                                DATE_FORMAT(date_study, '%d-%m-%Y') AS date_study, create_at, (SELECT tbldm_subject.title FROM tbldm_subject WHERE tbldm_subject.id = subject_id) 
+                                AS `subject`, (SELECT tbldm_department.title FROM tbldm_department WHERE tbldm_department.id = department_id)
+                                AS department, (SELECT fullname FROM tbl_personel WHERE tbl_personel. id = (SELECT  hr_id FROM tbl_users
+                                WHERE tbl_users.id = user_id)) AS fullname, (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
+                                FROM tbl_users WHERE tbl_users.id = user_create)) AS fullname_create FROM tbl_schedule WHERE id = $id");
+        return $query->fetchAll();
+    }
 ///////////////////////////////////////////////////////////////////////////////////
     function get_data_users($q, $offset, $rows){
         $result = array();

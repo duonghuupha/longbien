@@ -30,12 +30,80 @@ class Calendars extends Controller{
     }
 
     function add(){
-        
+        $code = time(); $userid = $_REQUEST['user_id']; $datestudy = $this->_Convert->convertDate($_REQUEST['date_study']);
+        $subject = $_REQUEST['subject_id']; $department = $_REQUEST['department_id']; $lesson = $_REQUEST['lesson'];
+        $lesson_export = $_REQUEST['lesson_export']; $title = $_REQUEST['title'];
+        if($datestudy > date("Y-m-d")){
+            $jsonObj['msg'] = "Không báo giảng sau ngày hiện tại";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            if($this->model->dupliObj(0, $lesson, $department, $datestudy) > 0){
+                $jsonObj['msg'] = "Ngày ".$_REQUEST['date_study']." lớp ".$this->_Data->return_title_department($department)." vào tiết ".$lesson." đã có giờ dạy";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                if($this->model->dupliObj_lessonmain(0, $lesson_export, $subject) > 0){
+                    $jsonObj['msg'] = "Tiết học ".$lesson_export."  theo chương trình phân bổ của môn học ".$this->_Data->return_title_subject($subject)." đã tồn tại";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $data = array("code" => $code, "user_id" => $userid, "user_create" => $this->_Info[0]['id'],
+                                    "lesson" => $lesson, "subject_id" => $subject, "department_id" => $department,
+                                    "lesson_export" => $lesson_export, "date_study" => $datestudy, "title" => $title,
+                                    "create_at" => date("Y-m-d H:i:s"));
+                    $temp = $this->model->addObj($data);
+                    if($temp){
+                        $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                        $jsonObj['success'] = true;
+                        $this->view->jsonObj = json_encode($jsonObj);    
+                    }else{
+                        $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                        $jsonObj['success'] = false;
+                        $this->view->jsonObj = json_encode($jsonObj);   
+                    }
+                }
+            }
+        }
         $this->view->render('calendars/add');
     }
 
     function update(){
-        
+        $code = $_REQUEST['code']; $userid = $_REQUEST['user_id']; $datestudy = $this->_Convert->convertDate($_REQUEST['date_study']);
+        $subject = $_REQUEST['subject_id']; $department = $_REQUEST['department_id']; $lesson = $_REQUEST['lesson'];
+        $lesson_export = $_REQUEST['lesson_export']; $title = $_REQUEST['title']; $id = $_REQUEST['id'];
+        if($datestudy > date("Y-m-d")){
+            $jsonObj['msg'] = "Không báo giảng sau ngày hiện tại";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            if($this->model->dupliObj($id, $lesson, $department, $datestudy) > 0){
+                $jsonObj['msg'] = "Ngày ".$_REQUEST['date_study']." lớp ".$this->_Data->return_title_department($department)." vào tiết ".$lesson." đã có giờ dạy";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                if($this->model->dupliObj_lessonmain($id, $lesson_export, $subject) > 0){
+                    $jsonObj['msg'] = "Tiết học ".$lesson_export."  theo chương trình phân bổ của môn học ".$this->_Data->return_title_subject($subject)." đã tồn tại";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $data = array("user_id" => $userid, "user_create" => $this->_Info[0]['id'],
+                                    "lesson" => $lesson, "subject_id" => $subject, "department_id" => $department,
+                                    "lesson_export" => $lesson_export, "date_study" => $datestudy, "title" => $title,
+                                    "create_at" => date("Y-m-d H:i:s"));
+                    $temp = $this->model->updateObj($id, $data);
+                    if($temp){
+                        $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                        $jsonObj['success'] = true;
+                        $this->view->jsonObj = json_encode($jsonObj);    
+                    }else{
+                        $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                        $jsonObj['success'] = false;
+                        $this->view->jsonObj = json_encode($jsonObj);   
+                    }
+                }
+            }
+        }
         $this->view->render('calendars/update');
     }
 
@@ -83,5 +151,10 @@ class Calendars extends Controller{
         $this->view->render("calendars/combo_lesson");
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
+    function data_edit(){
+        $id = $_REQUEST['id']; $jsonObj = $this->model->get_info($id);
+        $this->view->jsonObj  = json_encode($jsonObj[0]);
+        $this->view->render('calendars/data_edit');
+    }
 }
 ?>

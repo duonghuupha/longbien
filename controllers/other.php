@@ -186,18 +186,21 @@ class Other extends Controller{
 
     function combo_subject_user(){
         $userid = (isset($_REQUEST['id'])) ? $_REQUEST['id'] : $this->_Info[0]['id']; 
-        $yearid = $this->_Year[0]['id'];
+        $yearid = $this->_Year[0]['id']; 
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : ''; 
         $type = $this->model->check_user_is_teacher($userid);
-        $jsonObj = $this->model->get_combo_subject_via_user_id($type, $userid, $yearid);
-        $this->view->jsonObj = $jsonObj;
+        $jsonObj = $this->model->get_combo_subject_via_user_id($type, $userid, $yearid, $keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_subject_user");
     }
 
     function combo_department_user(){
-        $userid = $this->_Info[0]['id']; $yearid = $this->_Year[0]['id']; $subjectid = $_REQUEST['id'];
+        $userid = (isset($_REQUEST['userid'])) ? $_REQUEST['userid'] : $this->_Info[0]['id']; 
+        $yearid = $this->_Year[0]['id']; $subjectid = $_REQUEST['id'];
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : ''; 
         $type = $this->model->check_user_is_teacher($userid);
-        $jsonObj = $this->model->get_combo_department_user($type, $userid, $yearid, $subjectid);
-        $this->view->jsonObj = $jsonObj;
+        $jsonObj = $this->model->get_combo_department_user($type, $userid, $yearid, $subjectid, $keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_department_user");
     }
 }
