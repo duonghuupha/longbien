@@ -90,7 +90,7 @@
                                 <div class="form-group">
                                     <label for="form-field-username">Lựa chọn nhóm công việc</label>
                                     <div>
-                                        <select class="select2" data-placeholder="Lựa chọn nhóm công việc..."
+                                        <select class="select2" data-placeholder="Lựa chọn nhóm công việc"
                                         style="width:100%" required="" id="group_id" name="group_id">
                                         </select>
                                     </div>

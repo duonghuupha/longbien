@@ -14,7 +14,7 @@ $html = '{';
     $html .= '"content": "'.$item[0]['content'].'", "date_work": "'.$item[0]['date_work'].'",';
     $html .= '"time_work": "'.$item[0]['time_work'].'", "user_share": "'.$item[0]['user_share'].'",';
     $html .= '"file": "'.$item[0]['file'].'", "users": "'.$usershare.'", "user_main": "'.$item[0]['user_main'].'",';
-    $html .= '"usermain": "'.$item[0]['usermain'].'"';
+    $html .= '"usermain": "'.$item[0]['usermain'].'", "group_task": "'.$item[0]['group_task'].'"';
 $html .=  '}';
 echo $html;
 ?>

@@ -11,7 +11,7 @@ class Tasks_Model extends Model{
                                     OR FIND_IN_SET($userid, user_share))");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, title, content, date_work, time_work, file, status, create_at, user_share,
-                                    (SELECT title FROM tbl_task_group WHERE tbl_task_group.id = group_id) AS group_task,
+                                    (SELECT title FROM tbl_task_group WHERE tbl_task_group.id = group_id) AS group_task, user_id,
                                     IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users
                                     WHERE tbl_users.id = user_id))) AS user_create, IF(user_main = 1, 'Administrator', (SELECT fullname FROM tbl_personel 
                                     WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users WHERE tbl_users.id = user_main))) AS usermain 
@@ -67,7 +67,8 @@ class Tasks_Model extends Model{
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
                                     FROM tbl_users WHERE tbl_users.id = user_main))) AS usermain, IF(user_id = 1, 'Administrator',
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
-                                    FROM tbl_users WHERE tbl_users.id = user_id))) AS user_create, status FROM tbl_tasks 
+                                    FROM tbl_users WHERE tbl_users.id = user_id))) AS user_create, (SELECT tbl_task_group.title
+                                    FROM tbl_task_group WHERE tbl_task_group.id = group_id) AS group_task, status FROM tbl_tasks 
                                     WHERE id = $id");
         return $query->fetchAll();
     }

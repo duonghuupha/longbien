@@ -2,7 +2,7 @@ var page = 1, keyword = '', url = '', page_user = 1, keyword_user = '', data_sel
 var data_select_user_f = [], type = 0;
 $(function(){
     $('#list_tasks').load(baseUrl + '/tasks/content');
-    $('#group_id').load(baseUrl + '/other/combo_task_group?userid='+userid);
+    //$('#group_id').load(baseUrl + '/other/combo_task_group?userid='+userid);
 });
 
 function add(){
@@ -10,6 +10,7 @@ function add(){
     let today = new Date(), ngay = today.getDate(), thang = (today.getMonth() + 1);
     var nam = today.getFullYear(), hientai = ngay+'-'+thang+'-'+nam; 
     $('#date_work').datepicker('setDate', hientai);
+    combo_select_2('#group_id', baseUrl + '/other/combo_task_group?userid='+userid, 0, '');
     $('#modal-tasks').modal('show');
     url = baseUrl + '/tasks/add';
 }
@@ -24,8 +25,7 @@ function edit(idh){
     $('#datadc').val(btoa(data_select_user.join(",")));
     $.getJSON(baseUrl + '/tasks/data_edit?id='+idh, function(result){
         $('#date_work').datepicker('setDate', result.date_work);
-        $('#time_work').val(result.time_work).trigger('change');
-        $('#group_id').val(result.group_id).trigger('change'); $('#title').val(result.title);
+        $('#time_work').val(result.time_work).trigger('change'); $('#title').val(result.title);
         $('#content').val(result.content); $('#file_old').val(result.file);
         data_select_user_f = result.users.split(", ");
         if(data_select_user.length > 2){
@@ -34,6 +34,7 @@ function edit(idh){
             $('#fullname').val(result.users);
         }
         $('#user_main_id').val(result.user_main); $('#user_main').val(result.usermain);
+        combo_select_2('#group_id', baseUrl + '/other/combo_task_group?userid='+userid, result.group_id, result.group_task);
     })
     $('#modal-tasks').modal('show');
     url = baseUrl + '/tasks/update?id='+idh;

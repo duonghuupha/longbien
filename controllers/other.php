@@ -101,8 +101,9 @@ class Other extends Controller{
     }
 
     function combo_task_group(){
-        $jsonObj = $this->model->get_combo_task_group($_REQUEST['userid']);
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : ''; 
+        $jsonObj = $this->model->get_combo_task_group($_REQUEST['userid'], $keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_task_group");
     }
 

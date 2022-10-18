@@ -58,8 +58,9 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_task_group($userid){
-        $query = $this->db->query("SELECT id, title FROM tbl_task_group WHERE user_id = $userid");
+    function get_combo_task_group($userid, $q){
+        $query = $this->db->query("SELECT id, title FROM tbl_task_group WHERE user_id = $userid
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 

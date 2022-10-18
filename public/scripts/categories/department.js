@@ -57,6 +57,7 @@ function save(){
 }
 
 function view_page_department(pages){
+    page = pages;
     $('#list_department').load(baseUrl + '/department/content?page='+page+'&q='+keyword);
 }
 
