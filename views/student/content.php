@@ -78,6 +78,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="hidden" id="datadc_<?php echo $row['id'] ?>"><?php echo $this->_Data->get_relation_via_code($row['code']) ?></td>
             <td class="hidden" id="codecsdl_<?php echo $row['id'] ?>"><?php echo $row['code_csdl'] ?></td>
             <td class="hidden" id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
+            <td class="hidden" id="peopletext_<?php echo $row['id'] ?>"><?php echo $row['people_text'] ?></td>
         </tr>
         <?php
         }

@@ -3,13 +3,14 @@ var codes = '', names = '', dates = '', departments = '', addresss = '', genders
 var religions = 0, codecsdls = '', sstatus = 1;
 $(function(){
     $('#list_student').load(baseUrl + '/student/content');
-    $('#people_id').load(baseUrl + '/other/combo_people');
+    //$('#people_id').load(baseUrl + '/other/combo_people');
 });
 
 function add(){
     var number = Math.floor(Math.random() * 999999999999); data = []; render_table(data);
     $('#code').val(number); $('#fullname').val(null); $('#gender').val(1).trigger('change');
-    $('#birthday').val(null); $('#address').val(null); $('#people_id').val(2).trigger('change');
+    $('#birthday').val(null); $('#address').val(null); 
+    combo_select_2('#people_id',  baseUrl + '/other/combo_people', 2, 'Kinh');
     $('#image_old').val(null); $('#status').val(1).trigger('change'); $('#refreshcode').show();
     $('#modal-student').modal('show'); $('#religion').val(1).trigger('change');
     url = baseUrl + '/student/add'
@@ -22,11 +23,12 @@ function edit(idh){
     var status = $('#status_'+idh).text(), people = $('#people_'+idh).text();
     var address = $('#address_'+idh).text(), image = $('#image_'+idh).text();
     var datadc = $('#datadc_'+idh).text(), religion = $('#religion_'+idh).text();
-    var codecsdl = $('#codecsdl_'+idh).text();
+    var codecsdl = $('#codecsdl_'+idh).text(), peoplet = $('#peopletext_'+idh).text();
     $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
-    $('#birthday').val(birthday); $('#address').val(address); $('#people_id').val(people).trigger('change');
+    $('#birthday').val(birthday); $('#address').val(address);
     $('#image_old').val(image); $('#status').val(status).trigger('change');
     $('#religion').val(religion).trigger('change'); $('#code_csdl').val(codecsdl);
+    combo_select_2('#people_id',  baseUrl + '/other/combo_people', people, peoplet);
     // data relation////////////////////////////////////////////////////////
     data = JSON.parse(datadc); numbers_line = data.length;
     render_table(data);
@@ -144,7 +146,7 @@ function export_card(){
 
 function filter(){
     $('#sdepartment').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    $('#speople').load(baseUrl + '/other/combo_people');
+    combo_select_2('#speople',  baseUrl + '/other/combo_people', 0, '');
     $('#modal-search').modal('show');
 }
 

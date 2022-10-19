@@ -118,7 +118,7 @@
                                 <label for="form-field-username">Giới tính</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn giới tính..."
-                                    style="width:100%" id="gender" name="gender">
+                                    style="width:100%" id="gender" name="gender" data-minimum-results-for-search="Infinity">
                                         <option value="1">Nam</option>
                                         <option value="2">Nữ</option>
                                     </select>
@@ -140,7 +140,8 @@
                                 <label for="form-field-username">Tôn giáo</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn tôn giáo..."
-                                    style="width:100%" id="religion" name="religion">
+                                    style="width:100%" id="religion" name="religion"
+                                    data-minimum-results-for-search="Infinity">
                                         <option value="1">Không</option>
                                         <option value="2">Phật giáo</option>
                                         <option value="3">Công giáo</option>
@@ -175,7 +176,8 @@
                                 <label for="form-field-username">Trạng thái</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn trạng thái..."
-                                    style="width:100%" required="" id="status" name="status">
+                                    style="width:100%" required="" id="status" name="status"
+                                    data-minimum-results-for-search="Infinity">
                                         <option value="1">Đang đi học</option>
                                         <option value="2">Nghỉ học</option>
                                         <option value="3">Chuyển trường</option>
@@ -246,7 +248,7 @@
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
-                    Lọc dữ liệu
+                    Lựa chọn điều kiện hiển thị dữ liệu
                 </div>
             </div>
             <div class="modal-body">
@@ -298,7 +300,7 @@
                             <label for="form-field-username">Giới tính</label>
                             <div>
                                 <select class="select2" data-placeholder="Lựa chọn giới tính..."
-                                style="width:100%" id="sgender" name="sgender">
+                                style="width:100%" id="sgender" name="sgender" data-minimum-results-for-search="Infinity">
                                     <option value="0">Tất cả</option>
                                     <option value="1">Nam</option>
                                     <option value="2">Nữ</option>
@@ -326,7 +328,7 @@
                             <label for="form-field-username">Tôn giáo</label>
                             <div>
                                 <select class="select2" data-placeholder="Lựa chọn tôn giáo..."
-                                style="width:100%" id="sreligion" name="sreligion">
+                                style="width:100%" id="sreligion" name="sreligion" data-minimum-results-for-search="Infinity">
                                     <option value="0">Tất cả</option>
                                     <option value="1">Không</option>
                                     <option value="2">Phật giáo</option>
@@ -369,7 +371,7 @@
                             <label for="form-field-username">Trạng thái</label>
                             <div>
                                 <select class="select2" data-placeholder="Lựa chọn trạng thái..."
-                                style="width:100%" id="sstatus" name="sstatus">
+                                style="width:100%" id="sstatus" name="sstatus" data-minimum-results-for-search="Infinity">
                                     <option value="0">Tất cả</option>
                                     <option value="1" selected="">Đang đi học</option>
                                     <option value="2">Nghỉ học</option>

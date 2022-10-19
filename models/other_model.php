@@ -82,8 +82,8 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_people(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_people");
+    function get_combo_people($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_people WHERE title LIKE '%$q%'");
         return $query->fetchAll();
     }
 

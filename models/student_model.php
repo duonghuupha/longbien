@@ -49,7 +49,8 @@ class Student_Model extends Model{
                                 IF((SELECT COUNT(*) FROM tbl_student_class WHERE student_id = tbl_student.id) > 0,
                                 (SELECT title FROM tbldm_department WHERE tbldm_department.id = (SELECT department_id
                                 FROM tbl_student_class WHERE tbl_student_class.student_id = tbl_student.id
-                                AND year_id = $yearid ORDER BY id DESC LIMIT 0, 1)), 'Chưa xếp lớp') AS department
+                                AND year_id = $yearid ORDER BY id DESC LIMIT 0, 1)), 'Chưa xếp lớp') AS department,
+                                (SELECT tbldm_people.title FROM tbldm_people WHERE tbldm_people.id = people_id) AS people_text
                                 FROM tbl_student WHERE $where ORDER BY fullname ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
