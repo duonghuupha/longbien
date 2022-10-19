@@ -17,14 +17,16 @@ class Other extends Controller{
     }
 
     function combo_level(){
-        $jsonObj= $this->model->get_combo_level();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : ''; 
+        $jsonObj= $this->model->get_combo_level($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_level");
     }
 
     function combo_subject(){
-        $jsonObj= $this->model->get_combo_subject();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : ''; 
+        $jsonObj= $this->model->get_combo_subject($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_subject");
     }
 
@@ -35,8 +37,9 @@ class Other extends Controller{
     }
 
     function combo_job(){
-        $jsonObj= $this->model->get_combo_job();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : ''; 
+        $jsonObj= $this->model->get_combo_job($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_job");
     }
 

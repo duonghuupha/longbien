@@ -1,14 +1,20 @@
 var page = 1, keyword = '', url = '';
 $(function(){
     $('#list_personal').load(baseUrl + '/personal/content');
-    $('#level_id').load(baseUrl + '/other/combo_level'); 
-    $('#subject_id').load(baseUrl + '/other/combo_subject_point_no_null');
+    //$('#level_id').load(baseUrl + '/other/combo_level'); 
+    //$('#subject_id').load(baseUrl + '/other/combo_subject_point_no_null');
     $('#job_id').load(baseUrl + '/other/combo_job');
 });
 
 function add(){
     var number = Math.floor(Math.random() * 9999999999);
     $('#code').val(number); $('#avatar').prop('required', true);
+    combo_select_2('#level_id', baseUrl + '/other/combo_level', 0, '');
+    combo_select_2('#job_id',   baseUrl + '/other/combo_job', 0, '');
+    combo_select_2_multiple('#subject_id', baseUrl + '/other/combo_subject', []);
+    $('#level_id').val(null).trigger('change'); $('#job_id').val(null).trigger('change');
+    $('#birthday').val(null); $('#address').val(null); $('#phone').val(null); $('#email').val(null);
+    $('#subject_id').val(null).trigger('change'); $('#description').val(null);
     $('#modal-personal').modal('show');
     url = baseUrl + '/personal/add';
 }
@@ -19,9 +25,9 @@ function edit(idh){
         $('#fullname').val(data.fullname); $('#gender').val(data.gender).trigger("change");
         $('#birthday').val(data.birthday); $('#address').val(data.address);
         $('#phone').val(data.phone); $('#email').val(data.email); 
-        $('#level_id').val(data.level_id).trigger('change');
-        var subject = data.subject.split(",");
-        $('#subject_id').val(subject).trigger('change'); $('#job_id').val(data.job_id).trigger('change');
+        combo_select_2('#level_id', baseUrl + '/other/combo_level', data.level_id, data.level);
+        combo_select_2('#job_id', baseUrl + '/other/combo_job', data.job_id, data.job);
+        combo_select_2_multiple('#subject_id', baseUrl + '/other/combo_subject', data.subjects);
         $('#description').val(data.description); $('#image_old').val(data.avatar);
     });
     $('#code').prop('readonly', true);

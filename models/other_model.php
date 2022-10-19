@@ -14,18 +14,21 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_level(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_level WHERE status = 0");
+    function get_combo_level($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_level WHERE status = 0
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 
-    function get_combo_job(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_job WHERE status = 0");
+    function get_combo_job($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_job WHERE status = 0
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 
-    function get_combo_subject(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0");
+    function get_combo_subject($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 

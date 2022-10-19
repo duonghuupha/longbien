@@ -431,7 +431,6 @@ function exec_del_modal(data_str, url_data, id_div, url_content, modal_id){
     });
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
-
 function combo_select_2(id, url_data, selected, title_selected){
     $(id).select2({
         ajax: {
@@ -460,6 +459,40 @@ function combo_select_2(id, url_data, selected, title_selected){
     if(selected != 0){
         var $option = $('<option selected>'+title_selected+'</option>').val(selected);
         $(id).append($option).trigger('change');
+    }
+}
+
+function combo_select_2_multiple(id, url_data, array_object){
+    $(id).select2({
+        multiple: true,
+        ajax: {
+            url: url_data,
+            dataType: 'json',
+            type: 'GET',
+            data: function (params) {
+                var queryParameters = {
+                    q: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.title,
+                            id: item.id,
+                            disabled: item.disabled
+                        }
+                    })
+                };
+            }
+        }
+    });
+    if(array_object.length != 0){
+        for(const item of array_object){
+            var $option = $('<option selected>'+item.title+'</option>').val(item.idh);
+            $(id).append($option).trigger('change');
+        }
     }
 }
 

@@ -135,7 +135,7 @@ class Personal extends Controller{
 //////////////////////////////////////////////////////////////////////////////////////////
     function data_edit(){
         $jsonObj = $this->model->get_info($_REQUEST['id']);
-        $this->view->jsonObj= json_encode($jsonObj[0]);
+        $this->view->jsonObj= $jsonObj;
         $this->view->render("personal/data_edit");
     }
 
