@@ -1,29 +1,25 @@
 var page = 1, keyword= '', url = '';
 $(function(){
     $('#list_device').load(baseUrl + '/devices/content');
-    $('#cate_id').load(baseUrl + '/other/combo_equipment');
+    //$('#cate_id').load(baseUrl + '/other/combo_equipment');
 });
 
 function add(){
     var number = Math.floor(Math.random() * 99999999);
-    $('#code').val(number);
-    $('#modal-info').modal('show');
+    $('#code').val(number); combo_select_2('#cate_id', baseUrl + '/other/combo_equipment', 0, '');
+    $('#title').val(null); $('#cate_id').val(null).trigger('change');
+    $('#origin').val(null); $('#price').val(null); $('#depreciation').val(null);
+    $('#year_work').val(null); $('#description').val(null); $('#modal-info').modal('show');
     url = baseUrl + '/devices/add';
 }
 
 function edit(idh){
-    $.ajax({
-        type: "POST",
-        url: baseUrl + '/devices/data_edit',
-        data: "id="+idh, // serializes the form's elements.
-        success: function(data){
-            var result = JSON.parse(data);
-            $('#code').val(result.code); $('#title').val(result.title);
-            $('#cate_id').val(result.cate_id).trigger('change');
-            $('#origin').val(result.origin); $('#price').val(formatNumber(result.price));
-            $('#depreciation').val(result.depreciation); $('#year_work').val(result.year_work);
-            $('#image_old').val(result.image); $('#description').val(result.description);
-        }
+    $.getJSON(baseUrl + '/devices/data_edit?id='+idh, function(result){
+        $('#code').val(result.code); $('#title').val(result.title);
+        combo_select_2('#cate_id', baseUrl + '/other/combo_equipment', result.cate_id, result.category);
+        $('#origin').val(result.origin); $('#price').val(formatNumber(result.price));
+        $('#depreciation').val(result.depreciation); $('#year_work').val(result.year_work);
+        $('#image_old').val(result.image); $('#description').val(result.description);
     });
     $('#code').attr('readonly', true); $('#modal-info').modal('show');
     url = baseUrl + '/devices/update?id='+idh;
@@ -70,6 +66,6 @@ function import_devices(){
 }
 
 function detail(idh){
-    $('#form').load(baseUrl + '/devices/form_info');
+    $('#form').load(baseUrl + '/devices/form_info?id='+idh);
     $('#modal-detail').modal('show');
 }

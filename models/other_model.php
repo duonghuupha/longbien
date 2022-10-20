@@ -9,8 +9,9 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_phhysical(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_physical_room WHERE status = 0");
+    function get_combo_phhysical($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_physical_room WHERE status = 0
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 
@@ -37,8 +38,9 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_equipment(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_equipment WHERE status = 0");
+    function get_combo_equipment($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_equipment WHERE status = 0
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 

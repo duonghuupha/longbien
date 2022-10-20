@@ -142,7 +142,7 @@
                             <div class="form-group">
                                 <label for="form-field-username">Mô tả / Thông số kỹ thuật</label>
                                 <div>
-                                    <textarea type="text" id="description" style="width:100%;resize:none;height:200px" name="description"></textarea>
+                                    <textarea type="text" id="description" style="width:100%;resize:none;height:100px" name="description"></textarea>
                                 </div>
                             </div>
                         </div>

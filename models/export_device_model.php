@@ -23,8 +23,9 @@ class Export_device_Model extends Model{
         return $result;
     }
 
-    function get_combo_device(){
-        $query = $this->db->query("SELECT id, title FROM tbl_devices WHERE status = 1");
+    function get_combo_device($q){
+        $query = $this->db->query("SELECT id, title FROM tbl_devices WHERE status = 1
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }    
 

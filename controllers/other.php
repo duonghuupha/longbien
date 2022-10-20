@@ -11,8 +11,9 @@ class Other extends Controller{
     }
 
     function combo_physical(){
-        $jsonObj= $this->model->get_combo_phhysical();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj= $this->model->get_combo_phhysical($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_physical");
     }
 
@@ -44,8 +45,9 @@ class Other extends Controller{
     }
 
     function combo_equipment(){
-        $jsonObj= $this->model->get_combo_equipment();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj= $this->model->get_combo_equipment($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_equipment");
     }
 

@@ -31,7 +31,7 @@
                         <input id="code" name="code" type="hidden"/>
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label for="form-field-username">Lựa chọn phòng</label>
+                                <label for="form-field-username">Lựa chọn phòng "Vật lý"</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn phòng..."
                                     style="width:100%" required="" id="physical_id" name="physical_id">
@@ -44,7 +44,7 @@
                                 <label for="form-field-username">Lựa chọn thiết bị</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn thiết bị..."
-                                    style="width:100%" required="" id="device_id" name="device_id"
+                                    style="width:100%" id="device_id" name="device_id"
                                     onchange="set_sub_device()">
                                     </select>
                                 </div>
@@ -55,7 +55,7 @@
                                 <label for="form-field-username">Lựa chọn thiết bị con</label>
                                 <div>
                                     <select class="select2" data-placeholder="Lựa chọn thiết bị con..."
-                                    style="width:100%" required="" id="sub_device" name="sub_device"
+                                    style="width:100%" id="sub_device" name="sub_device"
                                     onchange="set_device_selected()">
                                     </select>
                                 </div>

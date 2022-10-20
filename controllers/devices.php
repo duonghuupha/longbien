@@ -134,6 +134,9 @@ class Devices extends Controller{
     }  
 
     function form_info(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_info($id);
+        $this->view->jsonObj = $jsonObj;
         $this->view->render('devices/form_info');
     }
 

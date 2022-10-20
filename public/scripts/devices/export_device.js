@@ -1,19 +1,18 @@
 var url = baseUrl + '/export_device/add', thietbidachon = [], page = 1, keyword = '';
 $(function(){
     $('#list_export').load(baseUrl + '/export_device/content');
-    $('#physical_id').load(baseUrl + '/other/combo_physical');
-    $('#device_id').load(baseUrl + '/export_device/combo_devices');
+    combo_select_2('#physical_id', baseUrl+'/other/combo_physical', 0, '');
+    combo_select_2('#device_id', baseUrl + '/export_device/combo_devices', 0, '');
 });
 
 function set_sub_device(){
     var value = $('#device_id').val();
-    $('#sub_device').load(baseUrl + '/export_device/combo_sub_device?id='+value);
+    combo_select_2('#sub_device', baseUrl + '/export_device/combo_sub_device?id='+value);
 }
 
 function set_device_selected(){
     var value = $('#sub_device').val();
     thietbidachon.push(value); var dachon = thietbidachon.join(",");
-    //console.log(dachon);
     $('#device_export').load(baseUrl + '/export_device/list_device?data='+btoa(dachon));
     return_total_device_selected();
 }
@@ -42,14 +41,18 @@ function view_page_export_device(pages){
 
 function edit(idh){
     var physical = $('#physical_'+idh).text(), code = $('#code_'+idh).text();
-    $('#physical_id').val(physical).trigger('change'); $('#code').val(code.trim());
+    var titlephysical = $('#physicaltitle_'+idh).text(); $('#code').val(code.trim());
     var dachon = $('#tbdc_'+idh).text(); thietbidachon = dachon.split(",");
     $('#device_export').load(baseUrl + '/export_device/list_device?data='+btoa(dachon));
+    combo_select_2('#physical_id', baseUrl + '/other/combo_physical', physical, titlephysical);
     return_total_device_selected();
     url = baseUrl +  '/export_device/update?id='+idh;
 }
 
 function return_total_device_selected(){
+    var filtered = thietbidachon.filter(function(el){
+        return el != "";
+    }); thietbidachon = filtered;
     var total = thietbidachon.length;
     $('#total_device').text(total+'(s)');
 }

@@ -48,9 +48,6 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center hidden-480"><?php echo number_format($row['stock']) ?></td>
             <td class="text-center hidden-480">
                 <div class="action-buttons">
-                    <a class="blue hidden-480" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
-                    </a>
                     <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>

@@ -495,11 +495,7 @@ function combo_select_2_multiple(id, url_data, array_object){
         }
     }
 }
-
-function url_content(url){
-    return $.get(url);
-}
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function change_year(){
     $('#year_change_id').val(yearid).trigger('change');
     $('#modal-change-year').modal('show');

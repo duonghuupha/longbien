@@ -22,8 +22,9 @@ class Export_device extends Controller{
     }
 
     function combo_devices(){
-        $jsonObj = $this->model->get_combo_device();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj = $this->model->get_combo_device($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("export_device/combo_devices");
     }
 

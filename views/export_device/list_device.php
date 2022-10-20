@@ -1,5 +1,6 @@
 <?php
-$sql = new Model(); $data = base64_decode($_REQUEST['data']);
+$sql = new Model(); $data = base64_decode($_REQUEST['data']); $data = array_filter(array_unique(explode(",", $data)));
+$data = implode(",", $data);
 ?>
 <input id="datadc" name="datadc" type="hidden" value="<?php echo $data ?>"/>
 <ul>

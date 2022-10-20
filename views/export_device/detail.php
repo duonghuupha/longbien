@@ -26,7 +26,7 @@ $jsonObj = $this->jsonObj;
     <div class="col-xs-6">
         <div class="form-group">
             <label for="form-field-username">
-                <b>Cập nhật lần cuối:</b> <?php echo $jsonObj[0]['create_at'] ?>
+                <b>Cập nhật lần cuối:</b> <?php echo date("H:i:s d-m-Y", strtotime($jsonObj[0]['create_at'])) ?>
             </label>
         </div>
     </div>

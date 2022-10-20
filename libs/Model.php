@@ -191,7 +191,11 @@ class Model {
         $query = $this->db->query("SELECT `status` FROM tbl_returns_device WHERE device_id = $deviceid
                                     AND sub_device = $subdevice ORDER BY id DESC LIMIT 0, 1");
         $row = $query->fetchAll();
-        return $row[0]['status'];
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 0;
+        }
     }
     function check_restore_device($physical, $device, $sub){
         $query = $this->db->query("SELECT `status` FROM tbl_returns_device WHERE physical_id = $physical

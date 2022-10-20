@@ -43,12 +43,12 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
             <td class="text-center"><?php echo $row['namhoc'] ?></td>
-            <td class="text-center hidden-480"><?php echo $row['physical'] ?></td>
-            <td class="text-center hidden-480"><?php echo date("d-m-Y H:i:s", strtotime($row['create_at'])) ?></td>
-            <td class="text-left hidden-480"><?php echo implode("<br/>", $array[$i]) ?></td>
+            <td class="text-center" id="physicaltitle_<?php echo $row['id'] ?>"><?php echo $row['physical'] ?></td>
+            <td class="text-center"><?php echo date("d-m-Y H:i:s", strtotime($row['create_at'])) ?></td>
+            <td class="text-left"><?php echo implode("<br/>", $array[$i]) ?></td>
             <td class="text-center">
                 <div class="action-buttons">
-                    <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
+                    <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
                 </div>
