@@ -34,6 +34,20 @@ class Dashboard_Model extends Model{
         return $row[0]['Total'];    
     }
 
+    function get_total_department_class($yearid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE year_id = $yearid
+                                    AND status = 0 AND class_study = 1");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function get_total_department_function($yearid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE year_id = $yearid
+                                    AND status = 0 AND is_function = 2");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
     function get_percent_gender_student(){
         $query = $this->db->query("SELECT COUNT(*) AS Total, 'Nam' AS title FROM tbl_student WHERE status = 1 AND gender = 1
                                     UNION ALL
@@ -46,7 +60,7 @@ class Dashboard_Model extends Model{
                                     GROUP BY DATE_FORMAT(birthday, '%Y')");
         return $query->fetchAll();
     }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
     function get_percent_gender_personel(){
         $query = $this->db->query("SELECT COUNT(*) AS Total, 'Nam' AS title FROM tbl_personel WHERE status = 1 AND gender = 1
                                     UNION ALL
@@ -67,7 +81,7 @@ class Dashboard_Model extends Model{
                                     WHERE status = 1 GROUP BY job_id");
         return $query->fetchAll();
     }
-
+///////////////////////////////////////////////////////////////////////////////////////////////
     function get_schedule_today($department, $date){
         if($department == 0){
             $where = "";

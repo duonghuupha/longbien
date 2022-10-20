@@ -59,7 +59,7 @@
     </div>
     <div class="infobox-data">
         <div class="infobox-content">Phòng học</div>
-        <div class="infobox-content">10</div>
+        <div class="infobox-content"><?php echo $this->total_department_class ?></div>
     </div>
 </div>
 <div class="infobox infobox-blue infobox-large infobox-dark">
@@ -67,7 +67,7 @@
         <i class="ace-icon fa fa-university"></i>
     </div>
     <div class="infobox-data">
-        <div class="infobox-content">Phòng CN / Hiệu bộ</div>
-        <div class="infobox-content">10</div>
+        <div class="infobox-content">Phòng chức năng</div>
+        <div class="infobox-content"><?php echo $this->total_department_function ?></div>
     </div>
 </div>

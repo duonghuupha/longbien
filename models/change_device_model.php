@@ -4,11 +4,12 @@ class Change_device_Model extends Model{
         parent::__construct();
     }
 
-    function get_data_device($id){
-        $query = $this->db->query("SELECT id, code, device_id, sub_device, (SELECT title FROM tbl_devices
-                                    WHERE tbl_devices.id = device_id) AS title FROM tbl_export_detail
-                                    WHERE status = 0 AND code  = (SELECT tbl_export.code FROM tbl_export
-                                    WHERE tbl_export.physical_id = $id)");
+    function get_data_device($id, $q){
+        $query = $this->db->query("SELECT CONCAT((SELECT title FROM tbl_devices WHERE tbl_devices.id = device_id), 
+                                    ' - ', sub_device) AS title, CONCAT(device_id, '.', sub_device)
+                                    AS id FROM tbl_export_detail WHERE status = 0 AND code  = (SELECT tbl_export.code 
+                                    FROM tbl_export WHERE tbl_export.physical_id = $id) AND device_id IN
+                                    (SELECT tbl_devices.id FROM tbl_devices WHERE tbl_devices.title LIKE '%$q%')");
         return $query->fetchAll();  
     }
 

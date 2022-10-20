@@ -1,18 +1,18 @@
 var page = 1; keyword = '', url = '';
 $(function(){
     $('#list_return').load(baseUrl + '/returns/content');
-    $('#physical_id').load(baseUrl + '/returns/combo_department');
 });
 
 function add(){
     $('#title_modal').text('Thêm mới - Cập nhật thông tin phiếu thu hồi thiết bị');
+    combo_select_2('#physical_id', baseUrl+'/returns/combo_department', 0, '');
+    $('#physical_id').val(null).trigger('change'); $('#device_id').val(null).trigger('change');
     $('#modal-returns').modal('show');
     url = baseUrl + '/returns/add';
 }
 
 function set_device(value){
-    //console.log(row);
-    $('#device_id').load(baseUrl + '/returns/combo_devices?physicalid='+value);
+    combo_select_2('#device_id', baseUrl + '/returns/combo_devices?physicalid='+value);
 }
 
 function del(idh){

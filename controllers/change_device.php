@@ -23,8 +23,9 @@ class Change_device extends Controller{
 
     function list_device(){
         $id = $_REQUEST['id'];
-        $jsonObj = $this->model->get_data_device($id);
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj = $this->model->get_data_device($id, $keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render('change_device/list_device');
     }
 

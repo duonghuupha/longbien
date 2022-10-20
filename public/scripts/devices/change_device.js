@@ -1,8 +1,8 @@
 var url = baseUrl + '/change_device/add', page = 1, keyword = '';
 $(function(){
     $('#list_change').load(baseUrl + '/change_device/content');
-    $('#physical_from_id').load(baseUrl + '/other/combo_physical');
-    $('#physical_to_id').load(baseUrl + '/other/combo_physical');
+    combo_select_2('#physical_from_id', baseUrl + '/other/combo_physical', 0, '');
+    combo_select_2('#physical_to_id', baseUrl + '/other/combo_physical', 0, '');
 });
 
 function save(){
@@ -36,6 +36,13 @@ function search(){
 
 function set_device(){
     var value = $('#physical_from_id').val();
-    console.log(value);
-    $('#device_id').load(baseUrl + '/change_device/list_device?id='+value);
+    combo_select_2('#device_id', baseUrl + '/change_device/list_device?id='+value);
+}
+
+function check_dep_to(){
+    var from_dep = $('#physical_from_id').val(), to_dep = $('#physical_to_id').val();
+    if(from_dep == to_dep){
+        show_message("error", "KHông thể luân chuyển thiết bị đến cùng phòng");
+        $('#physical_to_id').val(null).trigger('change');
+    }
 }

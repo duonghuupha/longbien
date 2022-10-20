@@ -95,10 +95,10 @@ function search_user(){
 
 function selected_user(idh){
     $('#user_loan').val(idh); var fullname = $('#fullname_'+idh).text();
-    $('#fullname').val(fullname);
+    $('#fullname').val(fullname); $('#personel_code').attr('disabled', true);
     $('#modal-users').modal('hide');
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 function select_device(){
     $('#list_device').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device+'&checked='); 
     $('#pager_device').load(baseUrl + '/loans/list_device_page?page='+page_device+'&q='+keyword_device);
@@ -134,7 +134,7 @@ function confirm_device(idh){
         render_table(data); $('#modal-device').modal('hide');
     }
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 function render_table(data_json){
     $('#tbody').empty(); var html = '', j = 1;
     for(var i = 0; i < data_json.length; i++){
@@ -176,7 +176,7 @@ function del_selected(idh){
     data = data.filter(item => item.id != idh);
     render_table(data);
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 function return_device(idh){
     var idx = idh.toString().replace(".", "");
     var value = $('#return_'+idx).prop('checked');

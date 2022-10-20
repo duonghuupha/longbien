@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label for="form-field-username">Lựa chọn phòng</label>
                                         <div>
-                                            <select class="select2" data-placeholder="Lựa chọn phòng..."
+                                            <select class="select2" data-placeholder="Lựa chọn phòng..." onchange="check_dep_to()"
                                             style="width:100%" required="" id="physical_to_id" name="physical_to_id">
                                             </select>
                                         </div>

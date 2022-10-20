@@ -1,9 +1,9 @@
-<option value="">Lựa chọn thiết bị</option>
 <?php
-$jsonObj = $this->jsonObj;
-foreach($jsonObj as $row){
-?>
-<option value="<?php echo $row['physical_id']?>"><?php echo $row['physical'].' - '.$row['title'] ?></option>
-<?php
-}
+$html = '[';
+    foreach($this->jsonObj as $row){
+        $array[] = '{"id": "'.$row['physical_id'].'", "title": "'.$row['physical'].' - '.$row['title'].'"}';
+    }
+    $html .= implode(",", $array);
+$html .= ']';
+echo $html;
 ?>

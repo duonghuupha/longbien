@@ -11,6 +11,8 @@ class Dashboard extends Controller{
         $this->view->total_utensils = $this->model->get_total_utensils();
         $this->view->total_book_old = $this->model->get_total_book(1);
         $this->view->total_book_new = $this->model->get_total_book(2);
+        $this->view->total_department_class = $this->model->get_total_department_class($this->_Year[0]['id']);
+        $this->view->total_department_function = $this->model->get_total_department_function($this->_Year[0]['id']);
         $this->view->render('dashboard/block_one');
     }
 
