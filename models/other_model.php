@@ -4,8 +4,9 @@ class Other_Model extends Model{
         parent::__construct();
     }
 
-    function get_combo_years(){
-        $query = $this->db->query("SELECT id, title, active FROM tbldm_years WHERE status = 0");
+    function get_combo_years($q){
+        $query = $this->db->query("SELECT id, title, active FROM tbldm_years WHERE status = 0
+                                AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 
@@ -57,9 +58,9 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_department($yearid){
+    function get_combo_department($yearid, $q){
         $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE year_id = $yearid
-                                    AND class_study = 1 AND status = 0");
+                                    AND class_study = 1 AND status = 0 AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 

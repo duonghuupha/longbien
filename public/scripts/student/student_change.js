@@ -1,8 +1,9 @@
 var page = 1, years = '', genders = 0, fullnames = '', page_check = 1, data = [], departmentid = 0;
 var page_class = 1;
 $(function(){
-    $('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    //$('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
     $('#list_student').load(baseUrl + '/student_change/content');
+    combo_select_2('#department_id', baseUrl + '/other/combo_department?yearid='+yearid);
 });
 
 function search(){

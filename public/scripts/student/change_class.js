@@ -1,7 +1,8 @@
 var page = 1, keyword = '';
 $(function(){
     $('#list_change').load(baseUrl + '/change_class/content');
-    $('#class_to').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    //$('#class_to').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    combo_select_2('#class_to', baseUrl + '/other/combo_department?yearid='+yearid, 0, '');
     combo_select2_student('#student_id', baseUrl + '/change_class/student');
 });
 

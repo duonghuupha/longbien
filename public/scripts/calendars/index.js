@@ -89,7 +89,7 @@ function view_page_user(pages){
 function confirm_user(idh){
 	$('#user_id').val(idh); var fullname = $('#fullname_'+idh).text();
 	$('#fullname').val(fullname);
-	$('#subject_id').load(baseUrl + '/other/combo_subject_user?id='+idh);
+	combo_select_2('#subject_id', baseUrl + '/other/combo_subject_user?id='+idh, 0, '');
 	$('#modal-users').modal('hide');
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////

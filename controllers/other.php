@@ -5,8 +5,9 @@ class Other extends Controller{
     }
 
     function combo_years(){
-        $jsonObj= $this->model->get_combo_years();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj= $this->model->get_combo_years($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_years");
     }
 
@@ -52,8 +53,9 @@ class Other extends Controller{
     }
 
     function combo_department(){
-        $jsonObj= $this->model->get_combo_department($_REQUEST['yearid']);
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj= $this->model->get_combo_department($_REQUEST['yearid'], $keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_department");
     }
 

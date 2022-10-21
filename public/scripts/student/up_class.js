@@ -1,10 +1,9 @@
 var page = 1;
 $(function(){
     $('#list_change').load(baseUrl + '/up_class/content');
-    ///////////////////////////////////////////////////////////////////////////
-    $('#department_from').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    combo_select_2('#department_from', baseUrl + '/other/combo_department?yearid='+yearid);
     ////////////////////////////////////////////////////////////////////////////////
-    $('#year_to').load(baseUrl + '/other/combo_years');
+    combo_select_2('#year_to', baseUrl + '/other/combo_years', 0, '');
 });
 
 function view_page_change(pages){
@@ -19,7 +18,8 @@ function set_department(){
         $('#year_to').val(null).trigger("change");
         return false;
     }else{
-        $('#department_to').load(baseUrl + '/other/combo_department?yearid='+value);
+        //$('#department_to').load(baseUrl + '/other/combo_department?yearid='+value);
+        combo_select_2('#department_to', baseUrl + '/other/combo_department?yearid='+value);
     }
 }
 

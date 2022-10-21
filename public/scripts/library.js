@@ -1,5 +1,7 @@
 $(function(){
-    $('.select2').select2();
+    $('.select2').select2({
+        closeOnSelect: false
+    });
     $('.date-picker').datepicker({
         autoclose: true,
         todayHighlight: true
@@ -35,6 +37,12 @@ $(function(){
     setInterval(function(){
         load_total_notify();
     }, 5000);
+    ///////////////////////////////////////////////////////////////////////////
+    $('.select2').on("select2:selecting", function(e) {
+        var currselspan = $('.select2').next().find('.select2-selection--multiple').first();
+        console.log('scrollTop = ' + $(currselspan).scrollTop() + ' scrollHeight = ' + $(currselspan).prop('scrollHeight'));
+        $(currselspan).scrollTop($(currselspan).prop('scrollHeight'));
+    });
 });
 
 function style_option(value){
@@ -494,6 +502,18 @@ function combo_select_2_multiple(id, url_data, array_object){
             $(id).append($option).trigger('change');
         }
     }
+}
+
+function format_content(row){
+    //console.log(Object.keys(row).length);
+    if(Object.keys(row).length > 3){
+        var $strdata = $(
+            '<div>'+row.text+'</div><div style="color:gray">'+row.content+'</div>'
+        );
+    }else{
+        var $strdata = '';
+    }
+    return $strdata;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function change_year(){
