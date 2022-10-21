@@ -1,27 +1,29 @@
 var page = 1, url = '', title_s = '', cate_s = '', manu_s = '', author_s = '';
 $(function(){
     $('#list_library').load(baseUrl + '/library/content');
-    $('#cate_id').load(baseUrl + '/other/combo_book_cate');
-    $('#manu_id').load(baseUrl + '/other/combo_book_manu');
-    $('#cate_s').load(baseUrl + '/other/combo_book_cate');
-    $('#manu_s').load(baseUrl + '/other/combo_book_manu');
+    combo_select_2('#cate_s', baseUrl + '/other/combo_book_cate', 0, '');
+    combo_select_2('#manu_s', baseUrl + '/other/combo_book_manu', 0, '');
 });
 
 function add(){
     $('#fm')[0].reset(); $('.select2').val(null).trigger('change');
     var number = Math.floor(Math.random() * 99999999); $('#id').val(0);
     $('#code').val(number); $('#type').val(1).trigger('change');
+    combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', 0, '');
+    combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', 0, '');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/add';
 }
 
 function edit(idh){
     $.getJSON(baseUrl + '/library/data_edit?id='+idh, function(data){
-        $('#code').val(data.code); $('#manu_id').val(data.manu_id).trigger('change');
-        $('#cate_id').val(data.cate_id).trigger('change'); $('#number_page').val(data.number_page);
+        console.log(data.category);
+        $('#code').val(data.code); $('#number_page').val(data.number_page);
         $('#author').val(data.author); $('#title').val(data.title); $('#content').val(data.content);
         $('#type').val(data.type).trigger('change'); $('#stock').val(data.stock);
         $('#id').val(idh); $('#file_old').val(data.file); $('#image_old').val(data.image);
+        combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', data.cate_id, data.category);
+        combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', data.manu_id, data.manuafactory);
     });
     $('#modal-library').modal('show');
     url = baseUrl + '/library/update?id='+idh;

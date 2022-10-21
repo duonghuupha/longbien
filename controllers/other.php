@@ -119,14 +119,16 @@ class Other extends Controller{
     }
 
     function combo_book_cate(){
-        $jsonObj = $this->model->get_combo_book_cate();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj = $this->model->get_combo_book_cate($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_book_cate");
     }
 
     function combo_book_manu(){
-        $jsonObj = $this->model->get_combo_book_manu();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj = $this->model->get_combo_book_manu($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_book_manu");
     }
 
@@ -138,8 +140,9 @@ class Other extends Controller{
     }
 
     function combo_utensils(){
-        $jsonObj = $this->model->get_combo_utensils();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : ''; 
+        $jsonObj = $this->model->get_combo_utensils($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_utensils");
     }
 

@@ -73,7 +73,7 @@
                 <div class="row">
                     <form id="fm" method="POST" enctype="multipart/form-data">
                         <input id="utensils_id" name="utensils_id" type="hidden"/>
-                        <div class="col-xs-6">
+                        <div class="col-xs-9">
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn đồ dùng</label>
                                 <div class="input-group">
@@ -89,12 +89,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-3">
                             <div class="form-group">
                                 <label for="form-field-username">Số con</label>
                                 <div>
                                     <input type="text" id="sub_utensils" name="sub_utensils" required=""
-                                    placeholder="Click Go! để lựa chọn" style="width:100%" readonly=""/>
+                                    placeholder="Số phụ của đồ dùng" style="width:100%" readonly=""/>
                                 </div>
                             </div>
                         </div>

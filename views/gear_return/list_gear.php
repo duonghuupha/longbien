@@ -9,7 +9,7 @@ $jsonObj = $this->jsonObj;
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
-            <th class="text-center" style="width:120px">Mã đồ dùng</th>
+            <th class="text-center" style="width:80px">Mã đồ dùng</th>
             <th class="" style="width:350px;">Tiêu đề</th>
             <th class="text-center">Danh mục</th>
             <th class="text-center" style="width:100px">Số con</th>

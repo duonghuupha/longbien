@@ -1,13 +1,14 @@
 var page = 1, codes = '', titles = '', cates = '', url = '';
 $(function(){
     $('#list_gear').load(baseUrl + '/gear/content');
-    $('#cate_id').load(baseUrl + '/other/combo_utensils');
+    //$('#cate_id').load(baseUrl + '/other/combo_utensils');
     $('#cate_s').load(baseUrl + '/other/combo_utensils');
 });
 
 function add(){
     var number = Math.floor(Math.random() * 99999999);
     $('#code').val(number); $('#title').val(null);
+    combo_select_2('#cate_id', baseUrl + '/other/combo_utensils', 0, '');
     $('#cate_id').val(null).trigger('change'); $('#content').val(null);
     $('#stock').val(null); $('#modal-gear').modal('show');
     url = baseUrl + '/gear/add';
@@ -16,7 +17,7 @@ function add(){
 function edit(idh){
     $.getJSON(baseUrl + '/gear/data_edit?id='+idh, function(data){
         $('#code').val(data.code); $('#title').val(data.title);
-        $('#cate_id').val(data.cate_id).trigger('change');
+        combo_select_2('#cate_id', baseUrl + '/other/combo_utensils', data.cate_id, data.category);
         $('#image_old').val(data.image); $('#content').val(data.content);
         $('#stock').val(data.stock);
     });

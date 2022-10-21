@@ -74,13 +74,15 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_book_cate(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_book WHERE status = 0");
+    function get_combo_book_cate($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_book WHERE status = 0
+                                AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 
-    function get_combo_book_manu(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_book_manu WHERE status = 0");
+    function get_combo_book_manu($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_book_manu WHERE status = 0
+                                AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
 
@@ -89,8 +91,9 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_utensils(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_utensils WHERE status = 0");
+    function get_combo_utensils($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_utensils WHERE status = 0
+                                    AND title LIKE '%$q%'");
         return $query->fetchAll();
     }
     
