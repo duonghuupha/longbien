@@ -72,6 +72,15 @@ class Student_point_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+
+    function check_role_update_point($userid, $yearid, $subjectid, $studentid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_assign_detail WHERE subject_id = $subjectid
+                                    AND FIND_IN_SET((SELECT department_id FROM tbl_student_class WHERE tbl_student_class.student_id = $studentid
+                                    AND tbl_student_class.year_id = $yearid), department) AND code = (SELECT tbl_assign.code
+                                    FROM tbl_assign WHERE tbl_assign.user_id = $userid AND tbl_assign.year_id = $yearid)");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////
     function check_user_is_teacher($userid){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id = $userid

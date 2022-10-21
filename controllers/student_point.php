@@ -30,24 +30,29 @@ class Student_point extends Controller{
         $point = $_REQUEST['point']; $yearid = $this->_Year[0]['id']; $semester = $_REQUEST['semesterid'];
         $createat = date("Y-m-d H:i:s");
         // kiem tra userid co quyen cap nhat diem  khong
-        
-        if($this->model->dupliObj($studentid, $type_point, $yearid, $semester, $subjectid) > 0){
-            $jsonObj['msg'] = "Học sinh đã tồn tại điểm cho môn học này";
+        if($this->model->check_role_update_point($userid, $yearid, $subjectid, $studentid) == 0){
+            $jsonObj['msg'] = "Bạn không có quyền cập nhật điểm cho học sinh này";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $data = array("code" => $code, "student_id" => $studentid, "user_id" => $userid, "subject_id" => $subjectid,
-                            "type_point" => $type_point, "point" => $point, "year_id" => $yearid, "semester" => $semester,
-                            "create_at" => $createat);
-            $temp = $this->model->addObj($data);
-            if($temp){
-                $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                $jsonObj['success'] = true;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }else{
-                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+            if($this->model->dupliObj($studentid, $type_point, $yearid, $semester, $subjectid) > 0){
+                $jsonObj['msg'] = "Học sinh đã tồn tại điểm cho môn học này";
                 $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $data = array("code" => $code, "student_id" => $studentid, "user_id" => $userid, "subject_id" => $subjectid,
+                                "type_point" => $type_point, "point" => $point, "year_id" => $yearid, "semester" => $semester,
+                                "create_at" => $createat);
+                $temp = $this->model->addObj($data);
+                if($temp){
+                    $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                    $jsonObj['success'] = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
             }
         }
         $this->view->render('student_point/add');

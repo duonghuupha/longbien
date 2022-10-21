@@ -102,8 +102,12 @@ function sl_works(idh){
 }
 
 function confirm_works(){
-    $('#datadc').val(data.join(",")); $('#fullname').val("Đã chọn "+data.length+" danh mục");
-    $('#modal-works-cate').modal('hide');
+    if(data.length != 0){
+        $('#datadc').val(data.join(",")); $('#fullname').val("Đã chọn "+data.length+" danh mục");
+        $('#modal-works-cate').modal('hide');
+    }else{
+        show_message("error", "Không có bản ghi nào được chọn");
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 function detail(idh){

@@ -35,7 +35,7 @@ function set_point(idh, seme, sub){
         $('#info_student').load(baseUrl + '/student_point/info?id='+idh+'&seme='+seme+'&subject='+sub);
         $('#tbody').load(baseUrl + '/student_point/point_of_student?id='+idh+'&seme='+seme+'&subject='+sub)
         $('#studentid').val(idh); $('#semesterid').val(seme); $('#subjectid').val(sub);
-        $('#type_point').val(1).trigger('change'); $('#modal-point').modal('show'); 
+        $('#type_point').val(1).trigger('change'); $('#point').val(null); $('#modal-point').modal('show'); 
         var diem = $('#diem1_'+idh).text();
         if(diem.length > 0){
             $('#ly_do').show(); $('#content').attr('required', true);

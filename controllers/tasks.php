@@ -81,7 +81,8 @@ class Tasks extends Controller{
     function update(){
         $id = $_REQUEST['id']; $datework = $this->_Convert->convertDate($_REQUEST['date_work']);
         $timework = $_REQUEST['time_work']; $title = $_REQUEST['title']; $groupid = $_REQUEST['group_id'];
-        $content = addslashes($_REQUEST['content']); $datadc = base64_decode($_REQUEST['datadc']); $usermain = $_REQUEST['user_main_id'];
+        $content = addslashes($_REQUEST['content']); $datadc = base64_decode($_REQUEST['datadc']); 
+        $usermain = (isset($_REQUEST['user_main_id']) && $_REQUEST['user_main_id'] != '') ? $_REQUEST['user_main_id'] : $this->_Info[0]['id'];
         $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'tasks') : $_REQUEST['file_old'];
         $data = array("title" => $title, "content" => $content, "date_work" => $datework, "time_work" => $timework, 
                         "user_id" => $this->_Info[0]['id'], "user_share" => $datadc, "file" => $file, 
