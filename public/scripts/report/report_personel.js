@@ -1,8 +1,9 @@
 var page = 1, gender = 0, level = '', job = '', subject = '';
 $(function(){
     $('#list_personel').load(baseUrl + '/report_personel/content?page='+page+'&gender='+gender+'&level='+level+'&job='+job+'&subject='+subject);
-    $('#level_s').load(baseUrl + '/other/combo_level'); $('#job_s').load(baseUrl + '/other/combo_job');
-    $('#subject_s').load(baseUrl + '/other/combo_subject');
+    combo_select_2('#level_s', baseUrl + '/other/combo_level', 0, '');
+    combo_select_2('#job_s', baseUrl + '/other/combo_job', 0, '');
+    combo_select_2('#subject_s', baseUrl + '/other/combo_subject', 0, '');
 });
 
 function del_level(){

@@ -341,6 +341,12 @@ class Model {
                                     WHERE code = $code");
         return $query->fetchAll();
     }
+    function get_detail_import_detail($code){
+        $query = $this->db->query("SELECT device_id AS id, quantily AS qty, (SELECT title FROM tbl_devices
+                                    WHERE tbl_devices.id = device_id) AS title, (SELECT tbl_devices.code FROM tbl_devices
+                                    WHERE tbl_devices.id = device_id) AS code FROM tbl_device_import_detail WHERE code = $code");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 
