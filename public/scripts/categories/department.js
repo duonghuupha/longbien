@@ -1,10 +1,8 @@
 var page = 1, keyword = '', url = baseUrl +'/department/add';
 $(function(){
     $('#list_department').load(baseUrl + '/department/content');
-    $('#year_id').load(baseUrl + '/other/combo_years');
-    $('#physical_id').load(baseUrl + '/other/combo_physical');
-    $('#sidebar').removeClass('menu-min');
-    $('#year_from').load(baseUrl + '/other/combo_years'); $('#year_to').load(baseUrl + '/other/combo_years');
+    combo_select_2('#year_id', baseUrl + '/other/combo_years', 0, '');
+    combo_select_2('#physical_id', baseUrl + '/other/combo_physical', 0, '');
     $('#is_function').attr('disabled', true);
 });
 
@@ -73,8 +71,8 @@ function search(){
 }
 //////////////////////////////////////////////////////////////////////////////
 function copy(){
-    $('#year_from').val(yearid).trigger('change'); //var year = $('#year_from').val();
-    //$('#department_id').load(baseUrl + '/department/list_department?id='+year);
+    combo_select_2('#year_from', baseUrl + '/other/combo_years', yearid, year_title);
+    combo_select_2('#year_to', baseUrl + '/other/combo_years', 0, '');
     var demo1 = $('select[name="department_id[]"]').bootstrapDualListbox({
         infoTextFiltered: '<span class="label label-purple label-lg">Kết quả tìm kiếm</span>',
         filterPlaceHolder: 'Tìm kiếm',
@@ -89,10 +87,8 @@ function copy(){
 
 function set_list_department(){
     var year = $('#year_from').val();
-    //$('#department_id').load(baseUrl + '/department/list_department?id='+year);
     $('#department_id').empty();
     $.getJSON(baseUrl + '/department/list_department?id='+year, function(data){
-        //$("#department_id").children().remove();
         $.each(data, function(i, val){
             var opt = "<option value=\'"+val.id+"\'>"+val.title+"</option>";
             $('#department_id').append(opt);
@@ -104,13 +100,6 @@ function set_list_department(){
 function save_copy(){
     var department = $('#department_id').val();
     var yearfrom = $('#year_from').val(), yearto = $('#year_to').val();
-    /*if(allRequired && yearfrom != yearto){
-        console.log('ok');
-        //save_form_modal('#fm_copy',  baseUrl+'/department/copy', '#modal-copy', '#list_department', baseUrl + '/department/content'); 
-    }else{
-        //show_message("error", "Chưa điền đủ thông tin hoặc không thể copy dữ liệu cho cùng năm học");
-        console.log(allRequired);
-    }*/
     if(department !== null && yearfrom.length > 0 && yearto.length > 0){
         if(yearfrom != yearto){
             save_form_modal('#fm_copy',  baseUrl+'/department/copy', '#modal-copy', '#list_department', baseUrl + '/department/content'); 

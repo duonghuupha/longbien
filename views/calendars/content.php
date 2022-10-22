@@ -16,7 +16,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center">Lớp học</th>
             <th class="text-center">Tiêt theo <br/>phân bổ C/trình</th>
             <th>Đầu bài dạy</th>
-            <th class="text-center" style="width:100px">Thao tác</th>
+            <th class="text-center" style="width:80px">Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -41,14 +41,6 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center">
                 <div class="action-buttons">
                     <?php
-                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
-                    ?>
-                    <a class="blue" href="javascript:void(0)" onclick="select_device_gear_de(<?php echo $row['id'] ?>)"
-                    title="Đăng ký mượn thiết bị / đồ dùng/ sử dụng phòng chức năng">
-                        <i class="ace-icon fa fa-plug bigger-130"></i>
-                    </a>
-                    <?php
-                    }
                     if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 2) > 0){                    
                     ?>
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">

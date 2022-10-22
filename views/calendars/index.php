@@ -46,7 +46,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-cal" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:50%">
+    <div class="modal-dialog" style="width:70%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
@@ -58,85 +58,112 @@
                     <form id="fm" method="POST" enctype="multipart/form-data">
                         <input id="user_id" name="user_id" type="hidden" <?php echo ($this->teacher == 1) ? 'value="'.$this->_Info[0]['id'].'"' : '' ?>/>
                         <input id="code" name="code" type="hidden"/>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn giáo viên</label>
-                                <div class="input-group">
-                                    <input type="text" id="fullname" name="fullname" required=""
-                                    placeholder="Click Go! để lựa chọn" style="width:100%;" readonly=""
-                                    <?php echo ($this->teacher == 1) ? 'value="'.$this->_Data->return_fullname_per($this->_Info[0]['hr_id']).'"' : '' ?>/>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary" type="button" onclick="select_user()"
-                                        id="select_users" <?php echo ($this->teacher == 1) ? 'disabled=""' : '' ?>>
-                                            <i class="ace-icon fa fa-users bigger-110"></i>
-                                            Go!
-                                        </button>
-                                    </span>
+                        <div class="col-xs-7" style="border-right:1px solid #000">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">Lựa chọn giáo viên</label>
+                                    <div class="input-group">
+                                        <input type="text" id="fullname" name="fullname" required=""
+                                        placeholder="Click Go! để lựa chọn" style="width:100%;" readonly=""
+                                        <?php echo ($this->teacher == 1) ? 'value="'.$this->_Data->return_fullname_per($this->_Info[0]['hr_id']).'"' : '' ?>/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary" type="button" onclick="select_user()"
+                                            id="select_users" <?php echo ($this->teacher == 1) ? 'disabled=""' : '' ?>>
+                                                <i class="ace-icon fa fa-users bigger-110"></i>
+                                                Go!
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">Ngày dạy</label>
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" id="date_study" type="text" 
+                                        name="date_study" required="" data-date-format="dd-mm-yyyy" readonly=""/>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">
+                                        Lựa chọn môn học
+                                    </label>
+                                    <div>
+                                        <select class="select2" id="subject_id" name="subject_id" onchange="set_dep()"
+                                        data-placeholder="Lựa chọn môn học..." style="width:100%"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">
+                                        Lựa chọn lớp học
+                                    </label>
+                                    <div>
+                                        <select class="select2" id="department_id" name="department_id" required=""
+                                        data-placeholder="Lựa chọn lớp học..." style="width:100%" onchange="set_lesson()"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">
+                                        Lựa chọn tiết học
+                                    </label>
+                                    <div>
+                                        <select class="select2" id="lesson" name="lesson" data-minimum-results-for-search="Infinity"
+                                        data-placeholder="Lựa chọn tiết học..." style="width:100%"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">Tiết học theo C/trình PP</label>
+                                    <div>
+                                        <input type="text" id="lesson_export" name="lesson_export" required=""
+                                        placeholder="Tiết học theo chương trình phân bổ" style="width:100%"
+                                        onkeypress="validate(event)"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Đầu bài dạy</label>
+                                    <div>
+                                        <input type="text" id="title" name="title" required=""
+                                        placeholder="Đầu bài dạy" style="width:100%"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Ngày dạy</label>
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="date_study" type="text" 
-                                    name="date_study" required="" data-date-format="dd-mm-yyyy" readonly=""/>
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar bigger-110"></i>
-                                    </span>
-                                </div>
+                        <div class="col-xs-5">
+                            <div class="col-xs-12">
+                                <button class="btn btn-white btn-info btn-bolds" type="button"
+                                onclick="select_device()">
+                                    <i class="ace-icon fa fa-cubes bigger-120 blue"></i>
+                                    Thiết bị
+                                </button>
+                                <button class="btn btn-white btn-info btn-bolds" type="button"
+                                onclick="select_gear()">
+                                    <i class="ace-icon fa fa-flask bigger-120 blue"></i>
+                                    Đồ dùng
+                                </button>
+                                <button class="btn btn-white btn-info btn-bolds" type="button"
+                                onclick="select_dep()">
+                                    <i class="ace-icon fa fa-sitemap bigger-120 blue"></i>
+                                    Phòng CN
+                                </button>
                             </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">
-                                    Lựa chọn môn học
-                                </label>
-                                <div>
-                                    <select class="select2" id="subject_id" name="subject_id" onchange="set_dep()"
-                                    data-placeholder="Lựa chọn môn học..." style="width:100%"></select>
-                                </div>
+                            <div class="col-xs-12">
+                                <div class="space-6"></div>
                             </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">
-                                    Lựa chọn lớp học
-                                </label>
-                                <div>
-                                    <select class="select2" id="department_id" name="department_id" required=""
-                                    data-placeholder="Lựa chọn lớp học..." style="width:100%" onchange="set_lesson()"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">
-                                    Lựa chọn tiết học
-                                </label>
-                                <div>
-                                    <select class="select2" id="lesson" name="lesson" data-minimum-results-for-search="Infinity"
-                                    data-placeholder="Lựa chọn tiết học..." style="width:100%"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="form-field-username">Tiết học theo C/trình PP</label>
-                                <div>
-                                    <input type="text" id="lesson_export" name="lesson_export" required=""
-                                    placeholder="Tiết học theo chương trình phân bổ" style="width:100%"
-                                    onkeypress="validate(event)"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Đầu bài dạy</label>
-                                <div>
-                                    <input type="text" id="title" name="title" required=""
-                                    placeholder="Đầu bài dạy" style="width:100%"/>
-                                </div>
+                            <div class="col-xs-12">
+                                <ol id="tbody"></ol>
                             </div>
                         </div>
                     </form>
@@ -159,7 +186,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-users" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:55%">
+    <div class="modal-dialog" style="width:70%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
@@ -216,65 +243,70 @@
 <!-- End formm don vi tinh-->
 
 <!--Form don vi tinh-->
-<div id="modal-device-gear-dep" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:60%">
+<div id="modal-device" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:70%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
-                    Đăng ký sử dụng trang thiết bị / đồ dùng / phòng chức năng
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách trang thiết bị có thể mượn
                 </div>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height:520px;">
                 <div class="row">
-                    <form id="fm_loan">
-                        <input id="datadc" name="datadc" type="hidden"/>
-                        <div class="col-xs-4 col-sm-4">
-                            <select class="select2" id="data_type" name="data_type" style="width:100%"
-                            onchange="set_data_list()">
-                                <option value="1">Trang thiết bị</option>
-                                <option value="2">Đồ dùng dạy học</option>
-                                <option value="3">Phòng chức năng</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-8 col-sm-8">
-                            <input class="form-control" id="nav-search-input-device-gear-dep" type="text" style="width:100%"
-                            placeholder="Tìm kiếm" onkeyup="search_device_gear_dep()"/>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="space-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8 col-sm-8">
-                                <div id="list_data" class="dataTables_wrapper form-inline no-footer" style="overflow:hidden"></div>
-                            </div><!-- /.col -->
-                            <div class="col-xs-4 col-sm-4">
-                                <div class="col-xs-12">
-                                    <div class="form-group">
-                                        <label for="form-field-username">Thiết bị, đồ dùng, phòng CN chuẩn bị</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <ul class="list-unstyled spaced" id="list_prepare" style="font-size:12px;">
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-device" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_device()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_device" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
                 </div>
             </div>
-            <div class="modal-footer">
-                <small class="pull-left" id="pager_data">
+            <div class="modal-footer no-margin-top">
+                <small class="pull-right" id="pager_device">
                     <!--display pagination-->
                 </small>
-                <small class="pull-right">
-                    <button class="btn btn-sm btn-danger" onclick="cancel_loan()">
-                        <i class="ace-icon fa fa-times"></i>
-                        Đóng
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-gear" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:70%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
                     </button>
-                    <button class="btn btn-sm btn-primary" onclick="save_loan()">
-                        <i class="ace-icon fa fa-save"></i>
-                        Ghi dữ liệu
-                    </button>
+                    Danh sách đồ dùng có thể mượn
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-gear" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_gear()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_gear" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer no-margin-top">
+                <small class="pull-right" id="pager_gear">
+                    <!--display pagination-->
                 </small>
             </div>
         </div><!-- /.modal-content -->

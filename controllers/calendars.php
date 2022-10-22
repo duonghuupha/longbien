@@ -156,5 +156,45 @@ class Calendars extends Controller{
         $this->view->jsonObj  = json_encode($jsonObj[0]);
         $this->view->render('calendars/data_edit');
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_device(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_device($keyword, $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render("calendars/list_device");
+    }
+
+    function list_device_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_device_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_device_page');
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_gear(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_gear($keyword, $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_gear');
+    }
+
+    function list_gear_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_date_gear_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('calendars/list_gear_page');
+    }
 }
 ?>
