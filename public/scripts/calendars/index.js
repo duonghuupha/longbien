@@ -1,9 +1,9 @@
 var page = 1, url = '', page_user = 1, keyword_user = '', data = [];
 var page_device  = 1,   keyword_device = '';
 var page_gear = 1, keyword_gear = '';
+var page_dep = 1, keyword_dep  = '', date_loan = '';
 $(function(){
     $('#list_task').load(baseUrl + '/calendars/content');
-	add();
 });
 
 function add(){
@@ -16,6 +16,7 @@ function add(){
 	if($userid.length != 0){
 		combo_select_2('#subject_id', baseUrl + '/other/combo_subject_user', 0, '');
 	}
+	data = []; render_table(data);
 	url = baseUrl + '/calendars/add';
 }
 
@@ -27,14 +28,14 @@ function edit(idh){
 		combo_select_2('#department_id', baseUrl + '/other/combo_department_user?id='+data.subject_id+'&userid='+data.user_id, data.department_id, data.department);
 		combo_select_2('#lesson', baseUrl + '/calendars/combo_lesson?id='+data.department_id+'&date_study='+data.date_study+'&lesson_id='+data.lesson, data.lesson, 'Tiết '+data.lesson);
 		$('#lesson_export').val(data.lesson_export); $('#title').val(data.title);
-	});
+	}); var datadc = $('#datadc_'+idh).text(); data = JSON.parse(datadc); render_table(data);
 	$('#modal-cal').modal('show');
 	url = baseUrl + '/calendars/update?id='+idh;
 }
 
 function del(idh){
 	var data_str = "id="+idh;
-	del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/calendars/del', '#list_task', baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher+'&department_id='+department+'&subject_id='+subjects);
+	del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/calendars/del', '#list_task', baseUrl + '/calendars/content?page='+page);
 }
 
 function save(){
@@ -46,6 +47,7 @@ function save(){
         }
     });
     if(allRequired){
+		$('#datadc').val(JSON.stringify(data));
         save_form_modal('#fm', url, '#modal-cal', '#list_task',  baseUrl + '/calendars/content?page='+page); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
@@ -141,8 +143,8 @@ function view_page_device(pages){
 
 function confirm_device(idh){
 	var title = $('#title_'+idh).text(), sub_code = $('#device_'+idh).val();
-	var str = {'id': idh+'.'+sub_code, 'title': title, 'type': 1};
-	var objIndex =  data.findIndex(item => item.id == idh+"."+sub_code && item.type == 1);
+	var str = {'id': idh+'.'+sub_code+".1", 'title': title, 'type': 1, 'id_detail': 0};
+	var objIndex =  data.findIndex(item => item.id == idh+"."+sub_code+".1");
 	if(objIndex != -1){
 		show_message("error", "Thiết bị đã được chọn, không thể chọn lại được");
 	}else{
@@ -181,8 +183,8 @@ function view_page_gear(pages){
 
 function confirm_gear(idh){
 	var title = $('#title_'+idh).text(), sub_code = $('#gear_'+idh).val();
-	var str = {'id': idh+'.'+sub_code, 'title': title, 'type': 2};
-	var objIndex =  data.findIndex(item => item.id == idh+"."+sub_code && item.type == 2);
+	var str = {'id': idh+'.'+sub_code+'.2', 'title': title, 'type': 2, 'id_detail': 0};
+	var objIndex =  data.findIndex(item => item.id == idh+"."+sub_code+".2");
 	if(objIndex != -1){
 		show_message("error", "Đồ dùng đã được chọn, không thể chọn lại được");
 	}else{
@@ -190,10 +192,51 @@ function confirm_gear(idh){
 		render_table(data);
 	}
 }
+////////////////////////////////////////////////////////////////////////////////////////////////
+function select_dep(){
+	var date_study = $('#date_study').val();
+	if(date_study.length != 0){
+		date_loan = date_study;
+		$('#list_dep').load(baseUrl + '/calendars/list_dep?date='+date_loan);
+		$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?date='+date_loan);
+		$('#modal-dep').modal('show');
+	}else{
+		show_message("error", "Để thực hiện đăng ký sử phòng chức năng bạn phải chọn ngày dạy");
+	}
+}
+
+function search_dep(){
+	var value = $('#nav-search-input-dep').val();
+	if(value.length != 0){
+        keyword_dep = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_dep = '';
+    }
+	$('#list_dep').load(baseUrl + '/calendars/list_dep?page=1&q='+keyword_dep+'&date='+date_loan);
+	$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?page=1&q='+keyword_dep+'&date='+date_loan);
+}
+
+function view_page_dep(pages){
+	page_dep = pages;
+	$('#list_dep').load(baseUrl + '/calendars/list_dep?page='+page_dep+'&q='+keyword_dep+'&date='+date_loan);
+	$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?page='+page_dep+'&q='+keyword_dep+'&date='+date_loan);
+}
+
+function confirm_dep(idh){
+	var title = $('#title_'+idh).text();
+	var str = {'id': idh+'.3', 'title': title, 'type': 3, 'id_detail': 0};
+	var objIndex =  data.findIndex(item => item.id == idh+'.3');
+	if(objIndex != -1){
+		show_message("error", "Phòng chức năng đã được chọn, không thể chọn lại được");
+	}else{
+    	data.push(str); $('#modal-dep').modal('hide');
+		render_table(data);
+	}
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////
-function del_selected(idh, type){
-	data = data.filter(item => item.id != idh && item.type != type);
-	render_table(data); console.log(data);
+function del_selected(idh){
+	data = data.filter(item => item.id != idh);
+	render_table(data);
 }
 
 function render_table(data_json){
@@ -201,7 +244,7 @@ function render_table(data_json){
 	for(i = 0; i < data_json.length; i++){
 		html += '<li class="text-primary">';
 			html += data_json[i].title+" | ";
-			html += '<a href="javascript:void(0)" onclick="del_selected('+data_json[i].id+', '+data_json[i].type+')">';
+			html += '<a href="javascript:void(0)" onclick="del_selected(\''+data_json[i].id+'\')">';
 				html += '<i class="fa fa-trash" style="color:red"></i>';
 			html += '</a>';
 		html += '</li>';

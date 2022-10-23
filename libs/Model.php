@@ -223,16 +223,17 @@ class Model {
         return $row[0]['Total'];
     }
     function get_device_gear_loan($code){
-        $query = $this->db->query("SELECT CONCAT(device_id, '.', sub_device) AS id, (SELECT title FROM tbl_devices 
-                                    WHERE tbl_devices.id = device_id) AS title, sub_device AS sub, 1 AS type FROM tbl_loans_detail 
-                                    WHERE code = $code
+        $query = $this->db->query("SELECT id AS id_detail, CONCAT(device_id, '.', sub_device, '.1') AS id, (SELECT title 
+                                    FROM tbl_devices  WHERE tbl_devices.id = device_id) AS title, 
+                                    1 AS type FROM tbl_loans_detail WHERE code = $code
                                     UNION ALL
-                                    SELECT CONCAT(utensils_id, '.', sub_utensils) AS id, (SELECT title FROM tbl_utensils 
-                                    WHERE tbl_utensils.id = utensils_id) AS title, sub_utensils AS sub, 2 AS type FROM tbl_utensils_loan_detail 
-                                    WHERE code = $code
+                                    SELECT id AS id_detail, CONCAT(utensils_id, '.', sub_utensils, '.2') AS id, (SELECT title 
+                                    FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS title, 2 AS type
+                                    FROM tbl_utensils_loan_detail WHERE code = $code
                                     UNION  ALL
-                                    SELECT department_id AS id, (SELECT title FROM tbldm_department WHERE tbldm_department.id = department_id)
-                                    AS title, 0 AS sub, 3 AS type FROM tbl_department_loan WHERE code = $code");
+                                    SELECT id AS id_detail, CONCAT(department_id, '.3') AS id, (SELECT title FROM tbldm_department 
+                                    WHERE tbldm_department.id = department_id) AS title, 3 AS type 
+                                    FROM tbl_department_loan WHERE code = $code");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
     function checked_role($id, $role){

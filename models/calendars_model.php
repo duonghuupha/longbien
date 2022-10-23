@@ -79,6 +79,77 @@ class Calendars_Model extends Model{
                                 FROM tbl_users WHERE tbl_users.id = user_create)) AS fullname_create FROM tbl_schedule WHERE id = $id");
         return $query->fetchAll();
     }
+
+    function get_device_gear_loan($code){
+        $query = $this->db->query("SELECT CONCAT(device_id, '.', sub_device) AS id, (SELECT title 
+                                    FROM tbl_devices  WHERE tbl_devices.id = device_id) AS title, 
+                                    (SELECT tbl_devices.code FROM tbl_devices  WHERE tbl_devices.id = device_id) 
+                                    AS code_cal, 1 AS type, sub_device AS sub FROM tbl_loans_detail 
+                                    WHERE code = $code
+                                    UNION ALL
+                                    SELECT CONCAT(utensils_id, '.', sub_utensils) AS id, (SELECT title 
+                                    FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS title,
+                                    (SELECT tbl_utensils.code FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) 
+                                    AS code_cal, 2 AS type, sub_utensils AS sub FROM tbl_utensils_loan_detail
+                                    WHERE code = $code
+                                    UNION  ALL
+                                    SELECT department_id AS id, (SELECT title FROM tbldm_department 
+                                    WHERE tbldm_department.id = department_id) AS title, (SELECT title FROM tbldm_physical_room
+                                    WHERE tbldm_physical_room.id = (SELECT physical_id FROM tbldm_department
+                                    WHERE tbldm_department.id = department_id)) AS code_cal, 3 AS type, 0 AS sub
+                                    FROM tbl_department_loan WHERE code = $code");
+        return $query->fetchAll();
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function addObj_device($data){
+        $query = $this->insert("tbl_loans", $data);
+        return $query;
+    }
+
+    function addObj_device_detail($data){
+        $query = $this->insert("tbl_loans_detail", $data);
+        return $query;
+    }
+
+    function updateObj_device($code, $data){
+        $query = $this->update("tbl_loans", $data, "code = $code");
+        return $query;
+    }
+
+    function updateObj_device_detail($id, $data){
+        $query = $this->update("tbl_loans_detail", $data, "id = $id");
+        return $query;
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////
+    function addObj_gear($data){
+        $query = $this->insert("tbl_utensils_loan", $data);
+        return $query;
+    }
+
+    function addObj_gear_detail($data){
+        $query = $this->insert("tbl_utensils_loan_detail", $data);
+        return $query;
+    }
+
+    function updateObj_gear($code, $data){
+        $query = $this->update("tbl_utensils_loan", $data, "code = $code");
+        return $query;
+    }
+
+    function updateObj_gear_detail($id, $data){
+        $query = $this->update("tbl_utensils_loan_detail", $data, "id = $id");
+        return $query;
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function addObj_department($data){
+        $query = $this->insert("tbl_department_loan", $data);
+        return $query;
+    }
+
+    function updateObj_department($code, $data){
+        $query = $this->update("tbl_department_loan", $data, "code = $code");
+        return $query;
+    }
 ///////////////////////////////////////////////////////////////////////////////////
     function get_data_users($q, $offset, $rows){
         $result = array();
@@ -159,10 +230,93 @@ class Calendars_Model extends Model{
         return $result;
     }
 
-    function get_date_gear_total($q){
+    function get_data_gear_total($q){
         $query= $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE title LIKE '%$q%' AND status = 0");
         $row = $query->fetchAll();
         return $row[0]['Total'];
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_dep($q, $date, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE status = 0
+                                    AND is_function = 2 AND id NOT IN (SELECT tbl_department_loan.department_id
+                                    FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date')");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE status = 0 
+                                    AND is_function = 2 AND id NOT IN (SELECT tbl_department_loan.department_id
+                                    FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date')
+                                    ORDER BY id DESC LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_dep_total($q, $date){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE status = 0
+                                AND is_function = 2 AND id NOT IN (SELECT tbl_department_loan.department_id
+                                FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date')");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_code_loan_device($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function check_code_loan_gear($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function check_code_loan_dep($code){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_department_loan WHERE code = $code");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    function delObj_device_loan($code){
+        $query = $this->delete("tbl_loans", "code = $code");
+        return $query;
+    }
+
+    function delObj_gear_loan($code){
+        $query = $this->delete("tbl_utensils_loan", "code = $code");
+        return $query;
+    }
+
+    function delObj_department_loan($code){
+        $query = $this->delete("tbl_department_loan", "code = $code");
+        return $query;
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_device_gear_dep_loan($code){
+        $query = $this->db->query("SELECT CONCAT(device_id, '.', sub_device, '.1') AS id
+                                    FROM tbl_loans_detail WHERE code = $code
+                                    UNION ALL
+                                    SELECT CONCAT(utensils_id, '.', sub_utensils, '.2') AS id
+                                    FROM tbl_utensils_loan_detail WHERE code = $code
+                                    UNION  ALL
+                                    SELECT CONCAT(department_id, '.3') AS id 
+                                    FROM tbl_department_loan WHERE code = $code");
+        return $query->fetchAll();
+    }
+
+    function delObj_device_detail($code, $deviceid, $sub){
+        $query = $this->delete("tbl_loans_detail", "code = $code AND device_id = $deviceid AND sub_device = $sub");
+        return $query;
+    }
+
+    function delObj_gear_detail($code, $id, $sub){
+        $query = $this->delete("tbl_utensils_loan_detail", "code = $code AND utensils_id = $id AND sub_utensils = $sub");
+        return $query;
+    }
+
+    function delObj_department_loan_update($code, $id){
+        $query = $this->delete("tbl_department_loan", "code = $code AND department_id = $id");
+        return $query;
     }
 }
 ?>

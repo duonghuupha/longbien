@@ -58,6 +58,7 @@
                     <form id="fm" method="POST" enctype="multipart/form-data">
                         <input id="user_id" name="user_id" type="hidden" <?php echo ($this->teacher == 1) ? 'value="'.$this->_Info[0]['id'].'"' : '' ?>/>
                         <input id="code" name="code" type="hidden"/>
+                        <input id="datadc" name="datadc" type="hidden"/>
                         <div class="col-xs-7" style="border-right:1px solid #000">
                             <div class="col-xs-6">
                                 <div class="form-group">
@@ -306,6 +307,42 @@
             </div>
             <div class="modal-footer no-margin-top">
                 <small class="pull-right" id="pager_gear">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-dep" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:70%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách phòng chức năng có thể đăng ký sử dụng
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-dep" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_dep()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_dep" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer no-margin-top">
+                <small class="pull-right" id="pager_dep">
                     <!--display pagination-->
                 </small>
             </div>
