@@ -88,9 +88,10 @@ class Model {
                                 FROM tbl_loans_detail WHERE code = $code AND status = 0");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
-    function check_exit_sub_device_loans($deviceid, $subdevice){
+    function check_exit_sub_device_loans($deviceid, $subdevice, $date){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_loans_detail WHERE device_id = $deviceid
-                                    AND sub_device = $subdevice AND status = 0");
+                                    AND sub_device = $subdevice AND status = 0 AND code = (SELECT tbl_loans.code
+                                    FROM tbl_loans WHERE tbl_loans.date_loan = '$date')");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
@@ -153,9 +154,10 @@ class Model {
         $query = $this->db->query("SELECT * FROM tbl_utensils WHERE id = $id");
         return $query->fetchAll();
     }
-    function check_gear_loan($gearid, $subgear){
+    function check_gear_loan($gearid, $subgear, $date){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan_detail WHERE utensils_id = $gearid
-                                    AND sub_utensils = $subgear AND status = 0");
+                                    AND sub_utensils = $subgear AND status = 0 AND code = (SELECT tbl_utensils_loan.code
+                                    FROM tbl_utensils_loan WHERE tbl_utensils_loan.date_loan = '$date')");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }

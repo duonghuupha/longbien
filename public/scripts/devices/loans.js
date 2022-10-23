@@ -1,5 +1,5 @@
 var page = 1, keyword = '',  url = '', page_user = 1, keyword_user = '', data = [];
-var keyword_device = '', page_device = 1;
+var keyword_device = '', page_device = 1, dateloan = '';
 $(function(){
     $('#list_loan').load(baseUrl + '/loans/content');
 });
@@ -100,14 +100,15 @@ function selected_user(idh){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 function select_device(){
-    $('#list_device').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device+'&checked='); 
+    dateloan = $('#date_loan').val();
+    $('#list_device').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device+'&checked=&date='+dateloan); 
     $('#pager_device').load(baseUrl + '/loans/list_device_page?page='+page_device+'&q='+keyword_device);
     $('#modal-device').modal('show');
 }
 
 function view_page_device(pages){
     page_device = pages;
-    $('#list_device').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device+'&checked='); 
+    $('#list_device').load(baseUrl + '/loans/list_device?page='+page_device+'&q='+keyword_device+'&checked=&date='+dateloan); 
     $('#pager_device').load(baseUrl + '/loans/list_device_page?page='+page_device+'&q='+keyword_device);
 }
 
@@ -118,7 +119,7 @@ function search_device(){
     }else{
         keyword_device = '';
     }
-    $('#list_device').load(baseUrl + '/loans/list_device?page=1&q='+keyword_device+'&checked='); 
+    $('#list_device').load(baseUrl + '/loans/list_device?page=1&q='+keyword_device+'&checked=&date='+dateloan); 
     $('#pager_device').load(baseUrl + '/loans/list_device_page?page=1&q='+keyword_device);
 }
 
@@ -202,8 +203,8 @@ function set_user_loan(){
 }
 
 function set_device_loan(){
-    var value = $('#device_code').val();
-    $.getJSON(baseUrl+'/other/info_device_scan?code='+value, function(result) {
+    var value = $('#device_code').val(), dateloan = $('#date_loan').val();
+    $.getJSON(baseUrl+'/other/info_device_scan?code='+value+'&date='+dateloan, function(result) {
         if(result.total == 1){
             var str = {'id': result.record.id, 'code': result.record.code, 'title': result.record.title, 'sub_device': result.record.sub_device};
             var objIndex = data.findIndex(item => item.id === result.record.id);

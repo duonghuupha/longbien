@@ -29,11 +29,11 @@ $jsonObj = $this->jsonObj;
             <td class="text-center"><?php echo $row['category'] ?></td>
             <td class="text-center">
                 <select class="form-control select2" style="width:100%" id="gear_<?php echo $row['id'] ?>"
-                onchange="confirm_gear(<?php echo $row['id'] ?>)" data-placeholder="">
-                <option value=""></option>
+                onchange="confirm_gear(<?php echo $row['id'] ?>)" data-minimum-results-for-search="Infinity">
+                <option value="">Lựa chọn</option>
                 <?php
                 for($z = 1; $z <= $row['stock']; $z++){
-                    if($this->_Data->check_gear_loan($row['id'], $z) == 0
+                    if($this->_Data->check_gear_loan($row['id'], $z, $this->_Convert->convertDate($_REQUEST['date'])) == 0
                     && $this->_Data->check_gear_return($row['id'], $z) != 1){
                         echo '<option value="'.$z.'">'.$z.'</option>';
                     }

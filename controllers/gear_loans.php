@@ -142,13 +142,14 @@ class Gear_loans extends Controller{
 
     function info_gear(){
         $data = $_REQUEST['data']; $data = explode(".", $data);
+        $date = $this->_Convert->convertDate($_REQUEST['date']);
         if(count($data) > 1){
             $utensilscode = $data[0]; $subutensils = $data[1];
             // kiem tra xem co ton tai do dug khong
             $detail = $this->model->get_info_utensils($utensilscode);
             if(count($detail) > 0){
                 // kiem tra xem do dung co kha nang muon nua khong
-                if($this->model->check_utensils_loan($utensilscode, $subutensils) > 0
+                if($this->model->check_utensils_loan($utensilscode, $subutensils, $date) > 0
                 || $this->model->check_utensils_return($utensilscode, $subutensils) == 1){
                     $jsonObj['msg'] = "Đồ dùng đang cho mượn hoặc đồ dùng đã bị thu hồi, không thể mượn tiếp";
                     $jsonObj['success']  = false;

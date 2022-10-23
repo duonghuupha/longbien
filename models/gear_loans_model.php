@@ -131,10 +131,11 @@ class Gear_loans_Model extends Model{
         return $query->fetchAll();
     }
 
-    function check_utensils_loan($code, $sub){
+    function check_utensils_loan($code, $sub, $date){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils_loan_detail WHERE sub_utensils = $sub
                                 AND status = 0 AND utensils_id = (SELECT tbl_utensils.id FROM tbl_utensils
-                                WHERE tbl_utensils.code = $code)");
+                                WHERE tbl_utensils.code = $code) AND code = (SELECT tbl_utensils_loan.code
+                                FROM tbl_utensils_loan WHERE tbl_utensils_loan.date_loan = '$date')");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }

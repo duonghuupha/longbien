@@ -67,12 +67,13 @@ class Other extends Controller{
     }
 
     function info_device_scan(){
-        $code_device = explode(".",  $_REQUEST['code']);  $code_device = array_filter(array_unique($code_device));
+        $code_device = explode(".",  $_REQUEST['code']); $date = $this->_Convert->convertDate($_REQUEST['date']);
+        $code_device = array_filter(array_unique($code_device));
         if(count($code_device) > 1){
             $info = $this->model->get_info_device_pass_code_scan($code_device[0]);
             // kiem tra xem thiet bi co ton tai khong
             if($this->_Data->check_exit_sub_device($info[0]['id'], $code_device[1]) > 0
-            || $this->_Data->check_exit_sub_device_loans($info[0]['id'], $code_device[1]) > 0
+            || $this->_Data->check_exit_sub_device_loans($info[0]['id'], $code_device[1], $date) > 0
             || $this->_Data->check_exit_sub_device_return($info[0]['id'], $code_device[1]) == 1){
                 $jsonObj['total'] = 0;
                 $jsonObj['record'] = [];

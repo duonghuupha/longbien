@@ -1,5 +1,5 @@
 var page = 1, page_user = 1, keyword_user = '', page_gear = 1, keyword_gear = '', data = []. url = '';
-var names = '', dateloans = '',   datereturns = '', titles =  '';
+var names = '', dateloans = '',   datereturns = '', titles =  '', dateloan = '';
 $(function(){
     $('#list_loan').load(baseUrl + '/gear_loans/content');
 });
@@ -52,7 +52,7 @@ function view_page_loan(pages){
     page = pages;
     $('#list_loan').load(baseUrl + '/gear_loans/content?page='+page+'&name='+names+'&title='+titles+'&date_loan='+dateloans+'&date_return='+datereturns);
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 function select_user(){
     $('#list_users').load(baseUrl + '/gear_loans/list_user');
     $('#pager').load(baseUrl +'/gear_loans/list_user_page');
@@ -80,16 +80,17 @@ function confirm_user(idh){
     $('#user_loan').val(idh); $('#fullname').val($('#fullname_'+idh).text());
     $('#modal-users').modal('hide');
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 function select_gear(){
-    $('#list_gear').load(baseUrl + '/gear_loans/list_gear');
+    dateloan = $('#date_loan').val();
+    $('#list_gear').load(baseUrl + '/gear_loans/list_gear?date='+dateloan);
     $('#pager_gear').load(baseUrl + '/gear_loans/list_gear_page');
     $('#modal-gear').modal('show');
 }
 
 function view_page_gear(pages){
     page_gear = pages;
-    $('#list_gear').load(baseUrl + '/gear_loans/list_gear?page='+page_gear+'&q='+keyword_gear);
+    $('#list_gear').load(baseUrl + '/gear_loans/list_gear?page='+page_gear+'&q='+keyword_gear+'&date='+dateloan);
     $('#pager_gear').load(baseUrl +'/gear_loans/list_gear_page?page='+page_gear+'&q='+keyword_gear);
 }
 
@@ -100,7 +101,7 @@ function search_gear(){
     }else{
         keyword_gear = '';
     }
-    $('#list_gear').load(baseUrl + '/gear_loans/list_gear?page=1&q='+keyword_gear);
+    $('#list_gear').load(baseUrl + '/gear_loans/list_gear?page=1&q='+keyword_gear+'&date='+dateloan);
     $('#pager_gear').load(baseUrl +'/gear_loans/list_gear_page?page=1&q='+keyword_gear);
 }
 
@@ -116,7 +117,7 @@ function confirm_gear(idh){
         render_table(data); $('#modal-gear').modal('hide');
     }
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
 function render_table(data_json){
     $('#tbody').empty(); var html = '', j = 1;
     for(var i = 0; i < data_json.length; i++){
@@ -158,7 +159,7 @@ function del_selected(idh){
     data = data.filter(item => item.id != idh);
     render_table(data);
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 function return_device(idh){
     var idx = idh.toString().replace(".", "");
     var value = $('#return_'+idx).prop('checked');
@@ -208,8 +209,8 @@ function set_user_loan(){
 }
 
 function set_gear_loan(){
-    var value = $('#gear_code').val();
-    $.getJSON(baseUrl  + '/gear_loans/info_gear?data='+value, function(result){
+    var value = $('#gear_code').val(); dateloan = $('#date_loan').val();
+    $.getJSON(baseUrl  + '/gear_loans/info_gear?data='+value+'&date='+date, function(result){
         if(result.success == true){
             show_message("success", result.msg);
             var str = {'id': result.id+'.'+result.sub, 'code': result.code, 'title': result.title, 'sub_utensils': result.sub};

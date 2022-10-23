@@ -11,7 +11,7 @@ $jsonObj = $this->jsonObj;
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã TB</th>
             <th class="">Tiêu đề</th>
-            <th class="text-center" style="width:80px">Số con(s)</th>
+            <th class="text-center" style="width:100px">Số con(s)</th>
         </tr>
     </thead>
     <tbody id="listPage">
@@ -27,15 +27,13 @@ $jsonObj = $this->jsonObj;
             <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
             <td class="text-center">
                 <select class="form-control select2" style="width:100%" id="device_<?php echo $row['id'] ?>"
-                onchange="confirm_device(<?php echo $row['id'] ?>)" data-placeholder="">
-                <option value=""></option>
+                onchange="confirm_device(<?php echo $row['id'] ?>)" data-minimum-results-for-search="Infinity">
+                <option value="">Lựa chọn</option>
                 <?php
                 for($z = 1; $z <= $row['stock']; $z++){
                     if($this->_Data->check_exit_sub_device($row['id'], $z) == 0 
-                    && $this->_Data->check_exit_sub_device_loans($row['id'], $z) == 0
-                    && ($this->_Data->check_exit_sub_device_return($row['id'], $z) == 0
-                    || $this->_Data->check_exit_sub_device_return($row['id'], $z) == 2
-                    || $this->_Data->check_exit_sub_device_return($row['id'], $z) == 3)){
+                    && $this->_Data->check_exit_sub_device_loans($row['id'], $z, $this->_Convert->convertDate($_REQUEST['date'])) == 0
+                    && $this->_Data->check_exit_sub_device_return($row['id'], $z) != 1){
                         echo '<option value="'.$z.'">'.$z.'</option>';
                     }
                 }

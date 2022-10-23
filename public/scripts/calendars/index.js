@@ -116,7 +116,8 @@ function set_lesson(){
 function select_device(){
 	var date_study = $('#date_study').val();
 	if(date_study.length != 0){
-		$('#list_device').load(baseUrl + '/calendars/list_device');
+		date_loan = date_study;
+		$('#list_device').load(baseUrl + '/calendars/list_device?date='+date_loan);
 		$('#pager_device').load(baseUrl + '/calendars/list_device_page');
 		$('#modal-device').modal('show');
 	}else{
@@ -131,13 +132,13 @@ function search_device(){
     }else{
         keyword_device = '';
     }
-	$('#list_device').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device);
+	$('#list_device').load(baseUrl + '/calendars/list_device?page=1&q='+keyword_device+'&date='+date_loan);
 	$('#pager_device').load(baseUrl + '/calendars/list_device_page?page=1&q='+keyword_device);
 }
 
 function view_page_device(pages){
 	page_device = pages;
-	$('#list_device').load(baseUrl + '/calendars/list_device?page='+page_device+'&q='+keyword_device);
+	$('#list_device').load(baseUrl + '/calendars/list_device?page='+page_device+'&q='+keyword_device+'&date='+date_loan);
 	$('#pager_device').load(baseUrl + '/calendars/list_device_page?page='+page_device+'&q='+keyword_device);
 }
 
@@ -156,7 +157,8 @@ function confirm_device(idh){
 function select_gear(){
 	var date_study = $('#date_study').val();
 	if(date_study.length != 0){
-		$('#list_gear').load(baseUrl + '/calendars/list_gear');
+		date_loan = date_study;
+		$('#list_gear').load(baseUrl + '/calendars/list_gear?date='+date_loan);
 		$('#pager_gear').load(baseUrl + '/calendars/list_gear_page');
 		$('#modal-gear').modal('show');
 	}else{
@@ -171,13 +173,13 @@ function search_gear(){
     }else{
         keyword_gear = '';
     }
-	$('#list_gear').load(baseUrl + '/calendars/list_gear?page=1&q='+keyword_gear);
+	$('#list_gear').load(baseUrl + '/calendars/list_gear?page=1&q='+keyword_gear+'&date='+date_loan);
 	$('#pager_gear').load(baseUrl + '/calendars/list_gear_page?page=1&q='+keyword_gear);
 }
 
 function view_page_gear(pages){
 	page_gear = pages;
-	$('#list_gear').load(baseUrl + '/calendars/list_gear?page='+page_gear+'&q='+keyword_gear);
+	$('#list_gear').load(baseUrl + '/calendars/list_gear?page='+page_gear+'&q='+keyword_gear+'&date='+date_loan);
 	$('#pager_gear').load(baseUrl + '/calendars/list_gear_page?page='+page_gear+'&q='+keyword_gear);
 }
 
