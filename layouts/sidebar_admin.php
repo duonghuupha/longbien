@@ -387,6 +387,15 @@
         </li>
     </ul>
 </li>
+<li class="hover">
+    <a href="<?php echo URL.'/dep_loan' ?>">
+        <i class="menu-icon fa fa-sitemap"></i>
+        <span class="menu-text">
+            Đăng ký phòng CN
+        </span>
+    </a>
+    <b class="arrow"></b>
+</li>
 <!------------------------------------Bao cao thong ke----------------------------------------->
 <li class="hover">
     <a href="#" class="dropdown-toggle">

@@ -342,13 +342,16 @@ class Calendars extends Controller{
             if($this->model->check_code_loan_dep($code) > 0){ // da ton tai phieu
                 // thuc hien cap nhat du lieu
                 $data = array("user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" => $date,
-                                "department_id" => $id, "lesson" => $lesson, "content" => '', "create_at" => date("Y-m-d H:i:s"));
+                                "department_id" => $id, "lesson" => $lesson, "content" => 'Phục vụ công tác giảng dạy 
+                                môn '.$this->_Data->return_title_subject($subject).": ".$title, 
+                                "create_at" => date("Y-m-d H:i:s"));
                 $temp = $this->model->updateObj_department($code, $data);
                 return ($temp) ? true : false;
             }else{
                 $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" => $date,
-                                "department_id" => $id, "lesson" => $lesson, "content" => '', "create_at" => date("Y-m-d H:i:s"),
-                                "status" => 0);
+                                "department_id" => $id, "lesson" => $lesson, "content" => 'Phục vụ công tác giảng dạy 
+                                môn '.$this->_Data->return_title_subject($subject).": ".$title, 
+                                "create_at" => date("Y-m-d H:i:s"), "status" => 0);
                 $temp = $this->model->addObj_department($data);
                 return ($temp) ? true : false;
             }

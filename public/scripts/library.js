@@ -1,7 +1,5 @@
 $(function(){
-    $('.select2').select2({
-        closeOnSelect: false
-    });
+    $('.select2').select2();
     $('.date-picker').datepicker({
         autoclose: true,
         todayHighlight: true
@@ -38,11 +36,6 @@ $(function(){
         load_total_notify();
     }, 5000);
     ///////////////////////////////////////////////////////////////////////////
-    $('.select2').on("select2:selecting", function(e) {
-        var currselspan = $('.select2').next().find('.select2-selection--multiple').first();
-        console.log('scrollTop = ' + $(currselspan).scrollTop() + ' scrollHeight = ' + $(currselspan).prop('scrollHeight'));
-        $(currselspan).scrollTop($(currselspan).prop('scrollHeight'));
-    });
 });
 
 function style_option(value){
