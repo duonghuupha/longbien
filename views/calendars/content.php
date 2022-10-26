@@ -10,6 +10,9 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã</th>
+            <?php
+            echo ($this->teacher == 0) ? '<th>Giáo viên</th>' : '';
+            ?>
             <th class="text-center">Ngày học</th>
             <th class="text-center">Tiết học</th>
             <th class="text-center">Môn học</th>
@@ -32,6 +35,9 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center">
                 <?php echo "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>".$row['code']."</a>" ?>
             </td>
+            <?php
+            echo ($this->teacher == 0) ? '<td>'.$row['fullname'].'</td>' : '';
+            ?>
             <td class="text-center"><?php echo date("d-m-Y", strtotime($row['date_study'])) ?></td>
             <td class="text-center"><?php echo $row['lesson'] ?></td>
             <td class="text-center"><?php echo $row['subject'] ?></td>

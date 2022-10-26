@@ -7,17 +7,13 @@ require 'libs/Model.php';
 require 'libs/View.php';
 require 'libs/Convert.php';
 require 'libs/Log.php';
-
 // Library
 require 'libs/Database.php';
 require 'libs/Session.php';
-
 require 'libs/config/paths.php';
 require 'libs/config/database.php';
-
 // Barcode
 require 'libs/vendor/autoload.php';
-
 /**
 * PHPExcel_IOFactory
 */
@@ -28,6 +24,8 @@ include ("libs/PHPExcel/PHPEXCHelper.php");
 */
 include 'libs/Excel.php';
 require_once 'libs/PHPExcel/PHPExcel.php';
+// Calendar
+include('libs/Calendar.php');
 $app = new Bootstrap();
 
 ?>

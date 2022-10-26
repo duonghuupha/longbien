@@ -6,7 +6,11 @@ class Calendars_Model extends Model{
 
     function getFetObj($userid, $title, $date, $lesson, $lessonexport, $teacher, $department, $subject, $offset, $rows){
         $result = array();
-        $where = "(user_id = $userid OR user_create = $userid) AND title LIKE '%$title%'";
+        if($this->check_user_is_teacher($userid) > 0){ // la giao vien
+            $where = "(user_id = $userid OR user_create = $userid) AND title LIKE '%$title%'";
+        }else{ // khong la giao vien
+            $where = "title LIKE '%$title%'";
+        }
         if($date != '')
             $where = $where." AND date_study = '$date'";
         if($lesson != 0)
@@ -60,11 +64,12 @@ class Calendars_Model extends Model{
         return $row[0]['Total'];
     }
 
-    function dupliObj_lessonmain($id, $lessonmain, $subjectid){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_schedule WHERE subject_id = $subjectid AND lesson_export = $lessonmain");
+    function dupliObj_lessonmain($id, $lessonmain, $subjectid, $departmentid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_schedule WHERE subject_id = $subjectid AND lesson_export = $lessonmain
+                                    AND department_id = $departmentid");
         if($id > 0){
             $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_schedule WHERE subject_id = $subjectid AND lesson_export = $lessonmain
-                                        AND id != $id");
+                                        AND department_id = $departmentid AND id != $id");
         }
         $row = $query->fetchAll();
         return $row[0]['Total'];
@@ -236,25 +241,27 @@ class Calendars_Model extends Model{
         return $row[0]['Total'];
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-    function get_data_dep($q, $date, $offset, $rows){
+    function get_data_dep($q, $date, $lesson, $offset, $rows){
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE status = 0
                                     AND is_function = 2 AND id NOT IN (SELECT tbl_department_loan.department_id
-                                    FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date')");
+                                    FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date'
+                                    AND lesson = $lesson)");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE status = 0 
                                     AND is_function = 2 AND id NOT IN (SELECT tbl_department_loan.department_id
-                                    FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date')
-                                    ORDER BY id DESC LIMIT $offset, $rows");
+                                    FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date'
+                                    AND lesson = $lesson) ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
     }
 
-    function get_data_dep_total($q, $date){
+    function get_data_dep_total($q, $date, $lesson){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_department WHERE status = 0
                                 AND is_function = 2 AND id NOT IN (SELECT tbl_department_loan.department_id
-                                FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date')");
+                                FROM tbl_department_loan WHERE DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date'
+                                AND lesson = $lesson)");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
@@ -317,6 +324,17 @@ class Calendars_Model extends Model{
     function delObj_department_loan_update($code, $id){
         $query = $this->delete("tbl_department_loan", "code = $code AND department_id = $id");
         return $query;
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_all_event_in_month_of_year($time, $userid){
+        if($userid == 0){
+            $where = "DATE_FORMAT(date_study, '%m-%Y') = '$time'";
+        }else{
+            $where = "user_id = $userid AND DATE_FORMAT(date_study, '%m-%Y') = '$time'";
+        }
+        $query = $this->db->query("SELECT id, lesson, date_study, title FROM tbl_schedule WHERE $where 
+                                    ORDER BY lesson ASC");
+        return $query->fetchAll();
     }
 }
 ?>

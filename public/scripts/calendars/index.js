@@ -1,7 +1,8 @@
 var page = 1, url = '', page_user = 1, keyword_user = '', data = [];
 var page_device  = 1,   keyword_device = '';
 var page_gear = 1, keyword_gear = '';
-var page_dep = 1, keyword_dep  = '', date_loan = '';
+var page_dep = 1, keyword_dep  = '', date_loan = '', lesson = '';
+var dates = '', less = '', deps = '', subjects = '', exps = '', titles = '', teachers = '';
 $(function(){
     $('#list_task').load(baseUrl + '/calendars/content');
 });
@@ -12,7 +13,7 @@ function add(){
     $('#date_study').datepicker('setDate', hientai); $('#modal-cal').modal('show');
 	var $userid = $('#user_id').val(); $('#lesson_export').val(''); $('#title').val('');  
 	$('#subject_id').val(null).trigger('change'); $('#department_id').val(null).trigger('change');
-	combo_select_2('#lesson', baseUrl + '/calendars/combo_lesson', 0, ''); $('#lesson').val(null).trigger('change');
+	combo_select_2('#lesson', baseUrl + '/calendars/combo_lesson', 0, ''); $('#lesson').val('').trigger('change');
 	if($userid.length != 0){
 		combo_select_2('#subject_id', baseUrl + '/other/combo_subject_user', 0, '');
 	}
@@ -62,10 +63,6 @@ function detail(idh){
 function view_page_task(pages){
 	page = pages;
 	//$('#list_task').load(baseUrl + '/calendars/content?page='+page+'&title='+titles+'&date='+datestudy+'&lesson='+lessons+'&lesson_export='+lessonexps+'&teacher='+teacher+'&department_id='+department+'&subject_id='+subjects);
-}
-
-function search(){
-	
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function select_user(){
@@ -196,14 +193,14 @@ function confirm_gear(idh){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 function select_dep(){
-	var date_study = $('#date_study').val();
-	if(date_study.length != 0){
-		date_loan = date_study;
-		$('#list_dep').load(baseUrl + '/calendars/list_dep?date='+date_loan);
-		$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?date='+date_loan);
+	var date_study = $('#date_study').val(), lessonloan = $('#lesson').val();
+	if(date_study.length != 0 && lessonloan != null){
+		date_loan = date_study; lesson = lessonloan;
+		$('#list_dep').load(baseUrl + '/calendars/list_dep?date='+date_loan+'&lesson='+lesson);
+		$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?date='+date_loan+'&lesson='+lesson);
 		$('#modal-dep').modal('show');
 	}else{
-		show_message("error", "Để thực hiện đăng ký sử phòng chức năng bạn phải chọn ngày dạy");
+		show_message("error", "Để thực hiện đăng ký sử phòng chức năng bạn phải chọn ngày dạy và tiết học");
 	}
 }
 
@@ -214,14 +211,14 @@ function search_dep(){
     }else{
         keyword_dep = '';
     }
-	$('#list_dep').load(baseUrl + '/calendars/list_dep?page=1&q='+keyword_dep+'&date='+date_loan);
-	$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?page=1&q='+keyword_dep+'&date='+date_loan);
+	$('#list_dep').load(baseUrl + '/calendars/list_dep?page=1&q='+keyword_dep+'&date='+date_loan+'&lesson='+lesson);
+	$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?page=1&q='+keyword_dep+'&date='+date_loan+'&lesson='+lesson);
 }
 
 function view_page_dep(pages){
 	page_dep = pages;
-	$('#list_dep').load(baseUrl + '/calendars/list_dep?page='+page_dep+'&q='+keyword_dep+'&date='+date_loan);
-	$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?page='+page_dep+'&q='+keyword_dep+'&date='+date_loan);
+	$('#list_dep').load(baseUrl + '/calendars/list_dep?page='+page_dep+'&q='+keyword_dep+'&date='+date_loan+'&lesson='+lesson);
+	$('#pager_dep').load(baseUrl + '/calendars/list_dep_page?page='+page_dep+'&q='+keyword_dep+'&date='+date_loan+'&lesson='+lesson);
 }
 
 function confirm_dep(idh){
@@ -252,4 +249,42 @@ function render_table(data_json){
 		html += '</li>';
     }
     $('#tbody').append(html);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+function filter(){
+	combo_select_2('#subjects', baseUrl + '/other/combo_subject');
+	combo_select_2('#deps',  baseUrl + '/other/combo_department?yearid='+yearid);
+	$('#modal-search').modal('show');
+}
+
+function search(){
+	var date = $('#dates').val(), subject = $('#subjects').val(), dep = $('#deps').val();
+	var les = $('#less').val(), exp = $('#exps').val(), title = $('#titles').val();
+	var teacher = $('#teachers').val();
+	if(date.length != 0 || subject.length != 0 || dep.length != 0 || les.length != 0
+	|| exp.length != 0 || title.length != 0 || teacher.length != 0){
+		if(title.length != 0){
+			titles = title.replaceAll(" ", "$", 'g');
+		}else{
+			titles = '';
+		}
+		if(teacher.length != 0){
+			teachers = teacher.replaceAll(" ", "$", 'g');
+		}else{
+			teachers = '';
+		}
+		dates = date; subjects = subject; deps = dep; less = les; exps = exp;
+	}else{
+		dates = ''; subjecs = ''; deps = ''; less = ''; exps = ''; titles = '', teachers = '';
+	}
+	$('#list_task').load(baseUrl + '/calendars/content?page=1&date='+dates+'&title='+titles+'&lesson='+less+'&lesson_export='+exps+'&department_id='+deps+'&subject_id='+subjects+'&teacher='+teachers);
+	$('#modal-search').modal('hide');
+}
+
+function del_combo_sub(){
+	$('#subjects').val('').trigger('change');
+}
+
+function del_combo_dep(){
+	$('#deps').val('').trigger('change');
 }

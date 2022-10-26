@@ -26,6 +26,7 @@ class Calendars extends Controller{
         $offset = ($get_pages-1)*$rows;
         $jsonObj = $this->model->getFetObj($this->_Info[0]['id'], $title, $date, $lesson, $lesson_export, $teacher, $department_id, $subject_id, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->teacher = $this->model->check_user_is_teacher($this->_Info[0]['id']);
         $this->view->render('calendars/content');
     }
 
@@ -43,7 +44,7 @@ class Calendars extends Controller{
                 $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
             }else{
-                if($this->model->dupliObj_lessonmain(0, $lesson_export, $subject) > 0){
+                if($this->model->dupliObj_lessonmain(0, $lesson_export, $subject, $department) > 0){
                     $jsonObj['msg'] = "Tiết học ".$lesson_export."  theo chương trình phân bổ của môn học ".$this->_Data->return_title_subject($subject)." đã tồn tại";
                     $jsonObj['success'] = false;
                     $this->view->jsonObj = json_encode($jsonObj);
@@ -243,9 +244,10 @@ class Calendars extends Controller{
         $rows = 10;
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $date = $this->_Convert->convertDate($_REQUEST['date']);
+        $lesson = $_REQUEST['lesson'];
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_dep($keyword, $date, $offset, $rows);
+        $jsonObj = $this->model->get_data_dep($keyword, $date, $lesson, $offset, $rows);
         $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('calendars/list_dep');
     }
@@ -254,9 +256,10 @@ class Calendars extends Controller{
         $rows = 10;
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $date = $this->_Convert->convertDate($_REQUEST['date']);
+        $lesson = $_REQUEST['lesson'];
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->get_data_dep_total($keyword, $date);
+        $jsonObj = $this->model->get_data_dep_total($keyword, $date, $lesson);
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('calendars/list_dep_page');
     }
@@ -401,6 +404,20 @@ class Calendars extends Controller{
             $this->model->delObj_device_loan($code); $this->model->delObj_gear_loan($code);
             $this->model->delObj_department_loan($code);
         }
+    }
+    
+    function view_cal(){
+        require('layouts/header.php');
+        $this->view->render('calendars/view_cal');
+        require('layouts/footer.php');
+    }
+
+    function content_cal(){
+        $thang = $_REQUEST['month']; $nam = $_REQUEST['year'];
+        $userid = ($this->model->check_user_is_teacher($this->_Info[0]['id']) == 0) ? 0 : $this->_Info[0]['id'];
+        $jsonObj = $this->model->get_all_event_in_month_of_year($thang.'-'.$nam, $userid);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("calendars/content_cal");
     }
 }
 ?>

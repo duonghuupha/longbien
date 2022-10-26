@@ -28,6 +28,7 @@ if(isset($_REQUEST['url'])){
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-duallistbox.min.css" />
+		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/calendar.css"/>
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-rtl.min.css" />
 		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/Logo.png" />

@@ -8,31 +8,31 @@
                 </li>
                 <li class="active">Chuyên môn</li>
             </ul><!-- /.breadcrumb -->
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- /.nav-search -->
         </div>
         <div class="page-content">
             <div class="page-header">
                 <h1>
                     Lịch báo  giảng
-                    <?php
-                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
-                    ?>
-                    <small class="pull-right hidden-480">
+                    <small class="pull-right">
+                        <button type="button" class="btn btn-success btn-sm" onclick="filter()">
+                            <i class="fa fa-search"></i>
+                            Lọc dữ liệu
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm" onclick="window.location.href='<?php echo URL.'/calendars/view_cal' ?>'">
+                            <i class="fa fa-calendar"></i>
+                            Hiển thị dạng lịch
+                        </button>
+                        <?php
+                        if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 1) > 0){
+                        ?>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
                         </button>
+                        <?php
+                        }
+                        ?>
                     </small>
-                    <?php
-                    }
-                    ?>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -345,6 +345,122 @@
                 <small class="pull-right" id="pager_dep">
                     <!--display pagination-->
                 </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-search" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    Lựa chọn điều kiện lọc dữ liệu
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">Giáo viên</label>
+                            <div>
+                                <input type="text" id="teachers" name="teachers" placeholder="Giáo viên" 
+                                style="width:100%" <?php echo ($this->teacher == 0) ? '' : 'readonly=""' ?>/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">Ngày dạy</label>
+                            <div class="input-group">
+                                <input class="form-control date-picker" id="dates" type="text" 
+                                name="dates" data-date-format="dd-mm-yyyy" readonly=""/>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar bigger-110"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Lựa chọn môn học
+                                &nbsp;
+                                <a href="javascript:void(0)" style="color:red" onclick="del_combo_sub()">
+                                    <i class="ace-icon fa fa-trash"></i>
+                                </a>
+                            </label>
+                            <div>
+                                <select class="select2" id="subjects" name="subjects"
+                                data-placeholder="Lựa chọn môn học..." style="width:100%"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Lựa chọn lớp học
+                                &nbsp;
+                                <a href="javascript:void(0)" style="color:red" onclick="del_combo_dep()">
+                                    <i class="ace-icon fa fa-trash"></i>
+                                </a>
+                            </label>
+                            <div>
+                                <select class="select2" id="deps" name="deps"
+                                data-placeholder="Lựa chọn lớp học..." style="width:100%"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Lựa chọn tiết học
+                            </label>
+                            <div>
+                                <select class="select2" id="less" name="less" data-minimum-results-for-search="Infinity"
+                                data-placeholder="Lựa chọn tiết học..." style="width:100%">
+                                    <option value="0">Tất cả</option>
+                                    <option value="1">Tiết 1</option>
+                                    <option value="2">Tiết 2</option>
+                                    <option value="3">Tiết 3</option>
+                                    <option value="4">Tiết 4</option>
+                                    <option value="5">Tiết 5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">Tiết học theo C/trình PP</label>
+                            <div>
+                                <input type="text" id="exps" name="exps"
+                                placeholder="Tiết học theo chương trình phân bổ" style="width:100%"
+                                onkeypress="validate(event)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Đầu bài dạy</label>
+                            <div>
+                                <input type="text" id="titles" name="titles"
+                                placeholder="Đầu bài dạy" style="width:100%"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="search()">
+                    <i class="ace-icon fa fa-search"></i>
+                    Tìm kiếm
+                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
