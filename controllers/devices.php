@@ -151,7 +151,7 @@ class Devices extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj_tmp($keyword,  $offset, $rows);
+        $jsonObj = $this->model->getFetObj_tmp($this->_Info[0]['id'], $keyword,  $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('devices/content_tmp');
     }
@@ -193,7 +193,8 @@ class Devices extends Controller{
                 }
                 $data = array("code" => $code, 'title' => $title, 'origin' => $origin,
                                 'year_work' => $year_work,  'price' => $price, 'depreciation' => $depreciation,
-                                'description' => $description, 'status' => 99, "stock" =>     $stock);
+                                'description' => $description, 'status' => 99, "stock" => $stock,
+                                'user_id' => $this->_Info[0]['id']);
                 $this->model->addObj($data);
             }
             $jsonObj['msg'] = "Import dữ liệu thành công";
@@ -255,7 +256,7 @@ class Devices extends Controller{
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $temp = $this->model->update_all_tmp();
+            $temp = $this->model->update_all_tmp($this->_Info[0]['id']);
             if($temp){
                 $jsonObj['msg'] = 'Ghi dữ liệu thành công';
                 $jsonObj['success']  = true;
