@@ -1,8 +1,9 @@
 var page = 1, url = '', keyword = '';
 $(function(){
     $('#list_gear').load(baseUrl + '/gear/content_tmp');
-    $('#cate_id').load(baseUrl + '/other/combo_utensils');
-    $('#cate_imp').load(baseUrl + '/other/combo_utensils');
+    /*$('#cate_id').load(baseUrl + '/other/combo_utensils');
+    $('#cate_imp').load(baseUrl + '/other/combo_utensils');*/
+    combo_select_2('#cate_imp', baseUrl + '/other/combo_utensils');
 });
 
 function search(){

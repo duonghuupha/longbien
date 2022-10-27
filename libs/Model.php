@@ -344,10 +344,16 @@ class Model {
                                     WHERE code = $code");
         return $query->fetchAll();
     }
-    function get_detail_import_detail($code){
+    function get_detail_import_device($code){
         $query = $this->db->query("SELECT device_id AS id, quantily AS qty, (SELECT title FROM tbl_devices
                                     WHERE tbl_devices.id = device_id) AS title, (SELECT tbl_devices.code FROM tbl_devices
                                     WHERE tbl_devices.id = device_id) AS code FROM tbl_device_import_detail WHERE code = $code");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function get_detail_import_gear($code){
+        $query = $this->db->query("SELECT utensils_id AS id, quantily AS qty, (SELECT title FROM tbl_utensils
+                                    WHERE tbl_utensils.id = utensils_id) AS title, (SELECT tbl_utensils.code FROM tbl_utensils
+                                    WHERE tbl_utensils.id = utensils_id) AS code FROM tbl_utensils_imp_detail WHERE code = $code");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////

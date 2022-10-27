@@ -12,9 +12,9 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center" style="width:120px">Mã hệ thống</th>
             <th class="text-center">Ngày nhập</th>
             <th class="text-left">Người thực hiện</th>
-            <th class="text-left">Nguồn trang thiết bị</th>
-            <th class="text-center">Tổng đầu thiết bị</th>
-            <th class="text-center">Tổng số lượng thiết bị</th>
+            <th class="text-left">Nguồn đồ dùng</th>
+            <th class="text-center">Tổng đầu đồ  dùng</th>
+            <th class="text-center">Tổng số lượng đò dùng</th>
             <th class="text-center">Cập nhật lần cuối</th>
             <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
@@ -25,7 +25,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd';
-            $detail = $this->_Data->get_detail_import_device($row['code']);
+            $detail = $this->_Data->get_detail_import_gear($row['code']);
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
@@ -33,7 +33,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center" id="dateimport_<?php echo $row['id'] ?>"><?php echo date("d-m-Y", strtotime($row['date_import'])) ?></td>
             <td class="text-left"><?php echo $row['fullname'] ?></td>
             <td class="text-left" id="source_<?php echo $row['id'] ?>"><?php echo $row['source'] ?></td>
-            <td class="text-center"><?php echo $row['total_device'] ?></td>
+            <td class="text-center"><?php echo $row['total_gear'] ?></td>
             <td class="text-center"><?php echo $row['total_qty'] ?></td>
             <td class="text-center"><?php echo date("H:i:s d-m-Y", strtotime($row['create_at'])) ?></td>
             <td class="text-center">

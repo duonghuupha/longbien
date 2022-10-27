@@ -1,30 +1,31 @@
-var page = 1, keyword = '', url = '', keyword_device = '', page_device = 1, data = [];
+var page = 1, keyword  = '', url = '', data = [];
+var page_gear = 1, keyword_gear = '';
 $(function(){
-    $('#list_import').load(baseUrl + '/import_device/content');
+    $('#list_import').load(baseUrl + '/gear_imp/content');
 });
 
 function add(){
     let today = new Date(); var ngay = today.getDate(), thang = (today.getMonth() + 1);
     var nam = today.getFullYear(), hientai = ngay+'-'+thang+'-'+nam;
     $('#date_import').datepicker('setDate', hientai); $('#source').val(null);$('#notes').val(null);
-    $('#list_device').load(baseUrl + '/import_device/content_device'); $('#code').val(null);
-    $('#modal-import').modal('show');
-    url = baseUrl + '/import_device/add';
+    $('#list_gear').load(baseUrl + '/gear_imp/content_gear');
+    $('#modal-gear').modal('show');
+    url = baseUrl + '/gear_imp/add';
 }
 
 function edit(idh){
     var dateimport = $('#dateimport_'+idh).text(), source = $('#source_'+idh).text(), notes = $('#notes_'+idh).text();
     var datadc = $('#detail_'+idh).text(), code = $('#code_'+idh).text(); data = JSON.parse(datadc); render_table(data);
     $('#date_import').datepicker('setDate', dateimport); $('#source').val(source);$('#notes').val(notes);
-    $('#code').val(code); $('#list_device').load(baseUrl + '/import_device/content_device');
-    $('#modal-import').modal('show');
-    url = baseUrl + '/import_device/update?id='+idh;
+    $('#code').val(code); $('#list_gear').load(baseUrl + '/gear_imp/content_gear');
+    $('#modal-gear').modal('show');
+    url = baseUrl + '/gear_imp/update?id='+idh;
 }
 
 function del(idh){
     var data_str = "id="+idh;
-    del_data(data_str, "Nếu bản ghi này bị xóa đồng nghĩa tồn kho của trang thiết bị sẽ bị thay đổi. Bạn có chắc chắn muốn xóa bản ghi này ?",
-            baseUrl + '/import_device/del', '#list_import', baseUrl + '/import_device?content?page='+page);
+    del_data(data_str, "Nếu bản ghi này bị xóa đồng nghĩa tồn kho của đồ dùng sẽ bị thay đổi. Bạn có chắc chắn muốn xóa bản ghi này ?",
+            baseUrl + '/gear_imp/del', '#list_import', baseUrl + '/gear_imp/content?page='+page);
 }
 
 function save(){
@@ -43,9 +44,9 @@ function save(){
         }
         if(requiredata){
             $('#datadc').val(JSON.stringify(data));
-            save_form_modal('#fm', url, '#modal-import', '#list_import',  baseUrl+'/import_device/content?page='+page+'&q='+keyword); 
+            save_form_modal('#fm', url, '#modal-gear', '#list_import',  baseUrl+'/gear_imp/content?page='+page+'&q='+keyword); 
         }else{
-            show_message("error", "Các thiết bị được chọn phải có số lượng lớn hơn 0");
+            show_message("error", "Các Đồ dùng được chọn phải có số lượng lớn hơn 0");
         }
     }else{
         show_message("error", "Chưa điền đủ thông tin");
@@ -62,38 +63,37 @@ function search(){
 }
 
 function detail(idh){
-    $('#detail').load(baseUrl + '/import_device/detail?id='+idh);
+    $('#detail').load(baseUrl + '/gear_imp/detail?id='+idh);
     $('#modal-detail').modal('show');
 }
-//////////////////////////////////////////////////////////////////////////////////////////////
-function view_page_device(pages){
-    page_device = pages;
-    $('#list_device').load(baseUrl + '/import_device/content_device?page='+page_device+'&q='+keyword_device);
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+function view_page_gear(pages){
+    page_gear = pages;
+    $('#list_gear').load(baseUrl + '/gear_imp/content_gear?page='+page_gear+'&q='+keyword_gear);
 }
 
-function search_device(){
-    var value = $('#nav-search-device').val();
+function search_gear(){
+    var value = $('#nav-search-gear').val();
     if(value.length != 0){
-        keyword_device = value.replaceAll(" ", "$", 'g');
+        keyword_gear = value.replaceAll(" ", "$", 'g');
     }else{
-        keyword_device = '';
+        keyword_gear = '';
     }
-    $('#list_device').load(baseUrl + '/import_device/content_device?page=1&q='+keyword_device);
+    $('#list_gear').load(baseUrl + '/gear_imp/content_gear?page=1&q='+keyword_gear);
 }
 
-function selected_device(idh){
-    //console.log(idh);
+function selected_gear(idh){
     var code = $('#code_'+idh).text(), title = $('#title_'+idh).text();
     var str = {'id': idh.toString(), 'code': code, 'title': title, 'qty': 0};
     var objIndex = data.findIndex(item => item.id === idh.toString());
     if(objIndex != -1){
-        show_message("error", "Thiết bị đã được chọn, không thể chọn lại");
+        show_message("error", "Đồ dùng đã được chọn, không thể chọn lại");
         return false;
     }else{
         data.push(str);
         render_table(data);
-        $('#table-device').animate({
-            scrollTop: $('#table-device').get(0).scrollHeight
+        $('#table-gear').animate({
+            scrollTop: $('#table-gear').get(0).scrollHeight
         }, 1500);
     }
 }

@@ -1,7 +1,7 @@
 <?php $item = $this->jsonObj; ?>
 <div class="modal-header no-padding">
     <div class="table-header">
-        Thông tin chi tiết phiếu tiếp nhận trang thiết bị
+        Thông tin chi tiết phiếu tiếp nhận đồ dùng dạy học
     </div>
 </div>
 <div class="modal-body">
@@ -49,14 +49,14 @@
                     <thead>
                         <tr role="row">
                             <th class="text-center" style="width:50px">#</th>
-                            <th class="text-center" style="width:100px">Mã thiết bị</th>
-                            <th class="">Tên trang thiết bị</th>
+                            <th class="text-center" style="width:100px">Mã đồ dùng</th>
+                            <th class="">Tên đồ dùng</th>
                             <th class="text-center" style="width:100px">Số lượng</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $json = $this->_Data->get_detail_import_device($item[0]['code']); $i = 0;
+                        $json = $this->_Data->get_detail_import_gear($item[0]['code']); $i = 0;
                         foreach($json as $row){
                             $i++;
                         ?>
