@@ -10,7 +10,8 @@ function add(){
     $('#code').val(number); $('#title').val(null);
     combo_select_2('#cate_id', baseUrl + '/other/combo_utensils', 0, '');
     $('#cate_id').val(null).trigger('change'); $('#content').val(null);
-    $('#stock').val(null); $('#modal-gear').modal('show');
+    $('#stock').val(0); $('#stock').attr('readonly', false);
+    $('#modal-gear').modal('show');
     url = baseUrl + '/gear/add';
 }
 
@@ -20,6 +21,11 @@ function edit(idh){
         combo_select_2('#cate_id', baseUrl + '/other/combo_utensils', data.cate_id, data.category);
         $('#image_old').val(data.image); $('#content').val(data.content);
         $('#stock').val(data.stock);
+        if(data.stock != 0){
+            $('#stock').attr('readonly', true);
+        }else{
+            $('#stock').attr('readonly', false);
+        }
     });
     $('#modal-gear').modal('show');
     url = baseUrl + '/gear/update?id='+idh;
