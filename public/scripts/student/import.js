@@ -2,8 +2,6 @@ var page = 1, keyword = '', numbers_line = 0, data = [], url = '', departmentid 
 $(function(){
     $('#list_student_tmp').load(baseUrl + '/student/content_tmp');
     combo_select_2('#department_id', baseUrl + '/other/combo_department?yearid='+yearid, 0, '');
-    //$('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    //$('#people_id').load(baseUrl + '/other/combo_people');
 });
 
 function save(){
