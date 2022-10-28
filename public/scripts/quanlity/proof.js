@@ -1,14 +1,20 @@
 var page = 1, keyword = '', url =  '', page_criteria = 1, keyword_criteria = '';
 var standards = '', criterias = '', codeproofs = '', titles  = '';
+var page_doc = 1, keyword_doc = '';
 $(function(){
     $('#list_proof').load(baseUrl + '/proof/content');
     $('#standards').load(baseUrl + '/other/combo_tieu_chuan');
+    $('.remove').click(function(){
+        $('#file_select').empty(); $('#doc_id').val(null);
+        $('#select_doc').attr('disabled', false);
+    });
 });
 
 function add(){
     $('#criteria_id').val(null); $('#fullname').val(null);
     $('#code_proof').val(null); $('#title').val(null);
     $('#file_old').val(null); $('#file').val(null);
+
     $('#modal-proof').modal('show');
     url = baseUrl + '/proof/add';
 }
@@ -17,8 +23,10 @@ function edit(idh){
     $.getJSON(baseUrl + '/proof/data_edit?id='+idh, function(result){
         $('#criteria_id').val(result.criteria_id); $('#fullname').val(result.criteria);
         $('#code_proof').val(result.code_proof); $('#title').val(result.title);
-        $('#file_old').val(result.file);
+        $('#file_old').val(result.file); $('#code').val(result.code);
     });
+    $('#file_select').empty(); $('#doc_id').val(null);
+    $('#file').attr('disabled', false); $('#file').val(null);
     $('#modal-proof').modal('show');
     url = baseUrl + '/proof/update?id='+idh;
 }
@@ -37,7 +45,15 @@ function save(){
         }
     });
     if(allRequired){
-        save_form_modal('#fm', url, '#modal-proof', '#list_proof', baseUrl + '/proof/content?page='+page+'&standard='+standards+'&criteria='+criterias+'&codeproof='+codeproofs+'&title='+titles); 
+        if($('#file_old').val().length == 0){
+            if($('#file').val().length == 0 && $('#doc_id').val().length == 0){
+                show_message('error', "Bạn chưa chọn Tệp đính kèm");
+            }else{
+                save_form_modal('#fm', url, '#modal-proof', '#list_proof', baseUrl + '/proof/content?page='+page+'&standard='+standards+'&criteria='+criterias+'&codeproof='+codeproofs+'&title='+titles);
+            }
+        }else{
+            save_form_modal('#fm', url, '#modal-proof', '#list_proof', baseUrl + '/proof/content?page='+page+'&standard='+standards+'&criteria='+criterias+'&codeproof='+codeproofs+'&title='+titles); 
+        }
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -110,4 +126,49 @@ function search_criteria(){
 function confirm_criteria(idh){
     $('#criteria_id').val(idh); var title = $('#title_'+idh).text();
     $('#fullname').val(title); $('#modal-criteria').modal('hide');
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+function select_document(){
+    $('#list_doc').load(baseUrl + '/proof/list_doc');
+    $('#pager_doc').load(baseUrl + '/proof/list_doc_page');
+    $('#modal-doc').modal('show');
+}
+
+function view_page_doc(pages){
+    page_doc = pages;
+    $('#list_doc').load(baseUrl + '/proof/list_doc?page='+page_doc+'&q='+keyword_doc);
+    $('#pager_doc').load(baseUrl + '/proof/list_doc_page?page='+page_doc+'&q='+keyword_doc);
+}
+
+function search_doc(){
+    var value = $('#nav-search-input-doc').val();
+    if(value.length != 0){
+        keyword_doc = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_doc = '';
+    }
+    $('#list_doc').load(baseUrl + '/proof/list_doc?page=1&q='+keyword_doc);
+    $('#pager_doc').load(baseUrl + '/proof/list_doc_page?page=1&q='+keyword_doc);
+}
+
+function confirm_doc(idh){
+    $('#doc_id').val(idh); var html = '';
+    html += '<i>';
+        html += '<b>Loại văn bản: </b>'+$('#type_'+idh).text()+'<br/>';
+        html += '<b>Tiêu đề văn bản: </b>'+$('#title_'+idh).text()+'<br/>';
+        html += '<b>Danh mục: </b>'+$('#cate_'+idh).text()+'<br/>';
+        html += '<a href="javascript:void(0)" style="color:red" onclick="del_file_select()"><i class="ace-icon fa fa-trash"></i></a>'
+    html += '</i>';
+    $('#file_select').html(html); $('#file').attr('disabled', true);
+    $('#modal-doc').modal('hide');
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+function del_file_select(){
+    $('#file_select').empty(); $('#doc_id').val(null);
+    $('#file').attr('disabled', false); 
+}
+
+function set_attr_btn(){
+    $('#file_select').empty(); $('#doc_id').val(null);
+    $('#select_doc').attr('disabled', true);
 }

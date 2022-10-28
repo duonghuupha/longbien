@@ -54,6 +54,8 @@
                     <form id="fm" method="POST" enctype="multipart/form-data">
                         <input id="criteria_id" name="criteria_id" type="hidden"/>
                         <input id="file_old" name="file_old" type="hidden"/>
+                        <input id="code" name="code" type="hidden"/>
+                        <input id="doc_id" name="doc_id" type="hidden"/>
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn tiêu chí</label>
@@ -92,7 +94,27 @@
                             <div class="form-group">
                                 <label for="form-field-username">Tài liệu đính kèm</label>
                                 <div>
-                                    <input type="file" id="file" name="file" class="file_attach" style="width:100%"/>
+                                    <input type="file" id="file" name="file" class="file_attach" style="width:100%"
+                                    onchange="set_attr_btn()"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="form-group">
+                                <label for="form-field-username">Hoặc lựa chọn từ văn bản</label>
+                                <div>
+                                    <button class="btn btn-sm btn-success" onclick="select_document()" type="button"
+                                    id="select_doc">
+                                        <i class="ace-icon fa fa-tags"></i>
+                                        Lựa chọn văn bản
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="form-group">
+                                <div id="file_select">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -223,4 +245,41 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-doc" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:70%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách văn bản
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-doc" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_doc()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_doc" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer no-margin-top">
+                <small class="pull-right" id="pager_doc">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
 <script src="<?php echo URL.'/public/' ?>scripts/quanlity/proof.js"></script>

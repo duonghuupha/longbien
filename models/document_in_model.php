@@ -95,7 +95,11 @@ class Document_in_Model extends Model{
         $query = $this->db->query("SELECT number_in FROM  tbl_document_in WHERE status = 0
                                     ORDER BY id DESC LIMIT 0, 1");
         $row = $query->fetchAll();
-        return $row[0]['number_in'];
+        if(count($row) > 0){
+            return $row[0]['number_in'];
+        }else{
+            return 0;
+        }
     }
 }
 ?>

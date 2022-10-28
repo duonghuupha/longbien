@@ -163,9 +163,13 @@ function del_cate(){
 function set_numberdc(){
     var value = $('#type_dc').val();
     if($('#id').val() == 0){
-        $.getJSON(baseUrl + '/document_out/general_number_dc?type='+value, function(data){
-            $('#number_dc').val(data.code);
-        });
+        if(value != 5){
+            $.getJSON(baseUrl + '/document_out/general_number_dc?type='+value, function(data){
+                $('#number_dc').val(data.code); $('#number_dc').attr("readonly", true); 
+            });
+        }else{
+            $('#number_dc').attr("readonly", false); $('#number_dc').val(null);
+        }
     }
 }
 

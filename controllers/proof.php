@@ -27,7 +27,7 @@ class Proof extends Controller{
     function add(){
         $code = time(); $criteria = $_REQUEST['criteria_id']; $codeproof = $_REQUEST['code_proof'];
         $title = $_REQUEST['title']; $createat = date("Y-m-d H:i:s"); $status = 1;
-        $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'],'proof') : '';
+        $file = isset($_FILES['file']['name']) ? $this->_Convert->convert_file($_FILES['file']['name'],'proof') : '';
         if($this->model->dupliObj(0, $codeproof) > 0){
             $jsonObj['msg'] = "Mã hóa minh chứng đã tồn tại";
             $jsonObj['success'] = false;
@@ -38,12 +38,11 @@ class Proof extends Controller{
                             "user_id" => $this->_Info[0]['id'], "status" => $status);
             $temp = $this->model->addObj($data);
             if($temp){
-                if($_FILES['file']['name'] != ''){
-                    // kiem tra xem co ton tai folder khong
-                    $dirname = DIR_UPLOAD.'/proof_quanlity/'.$criteria;
-                    if(!file_exists($dirname)){
-                        mkdir($dirname, 0777);
-                    }
+                $dirname = DIR_UPLOAD.'/proof_quanlity/'.$criteria;
+                if(!file_exists($dirname)){
+                    mkdir($dirname, 0777);
+                }
+                if(isset($_FILES['file']['name'])){
                     if(move_uploaded_file($_FILES['file']['tmp_name'], $dirname.'/'.$file)){
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
@@ -54,9 +53,28 @@ class Proof extends Controller{
                         $this->view->jsonObj = json_encode($jsonObj);
                     }
                 }else{
-                    $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                    $jsonObj['success'] = true;
-                    $this->view->jsonObj = json_encode($jsonObj);
+                    // lay thong tin file tu van ban
+                    $docid  = $_REQUEST['doc_id']; $docid = explode("_", $docid);
+                    $document_id = $docid[0]; $document_type = $docid[1];
+                    $json_doc = $this->model->get_info_document($document_id, $document_type);
+                    $data_u = array("file" => $json_doc[0]['file']);
+                    $tmp = $this->model->updateObj_by_code($code, $data_u);
+                    if($tmp){
+                        if(copy(DIR_UPLOAD.'/'.$json_doc[0]['folder'].'/'.$json_doc[0]['cate_id'].'/'.$json_doc[0]['file'],
+                                DIR_UPLOAD.'/proof_quanlity/'.$criteria.'/'.$json_doc[0]['file'])){
+                            $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                            $jsonObj['success'] = true;
+                            $this->view->jsonObj = json_encode($jsonObj);   
+                        }else{
+                            $jsonObj['msg'] = "Thông tin minh chứng được lưu thành công, quá trình tải file gặp lỗi";
+                            $jsonObj['success'] = true;
+                            $this->view->jsonObj = json_encode($jsonObj);
+                        }
+                    }else{
+                        $jsonObj['msg'] = "Thông tin minh chứng được lưu thành công, quá trình tải file gặp lỗi";
+                        $jsonObj['success'] = true;
+                        $this->view->jsonObj = json_encode($jsonObj);
+                    }
                 }
             }else{
                 $jsonObj['msg'] = "Ghi dữ liệu không thành công";
@@ -69,8 +87,8 @@ class Proof extends Controller{
 
     function update(){
         $id = $_REQUEST['id']; $criteria = $_REQUEST['criteria_id']; $codeproof = $_REQUEST['code_proof'];
-        $title = $_REQUEST['title']; $createat = date("Y-m-d H:i:s");
-        $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'],'proof') : $_REQUEST['file_old'];
+        $title = $_REQUEST['title']; $createat = date("Y-m-d H:i:s"); $code = $_REQUEST['code'];
+        $file = isset($_FILES['file']['name']) ? $this->_Convert->convert_file($_FILES['file']['name'],'proof') : $_REQUEST['file_old'];
         if($this->model->dupliObj($id, $codeproof) > 0){
             $jsonObj['msg'] = "Mã hóa minh chứng đã tồn tại";
             $jsonObj['success'] = false;
@@ -81,25 +99,44 @@ class Proof extends Controller{
                             "user_id" => $this->_Info[0]['id']);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
-                if($_FILES['file']['name'] != ''){
-                    // kiem tra xem co ton tai folder khong
-                    $dirname = DIR_UPLOAD.'/proof_quanlity/'.$criteria;
-                    if(!file_exists($dirname)){
-                        mkdir($dirname, 0777);
-                    }
+                // kiem tra xem co ton tai folder khong
+                $dirname = DIR_UPLOAD.'/proof_quanlity/'.$criteria;
+                if(!file_exists($dirname)){
+                    mkdir($dirname, 0777);
+                }
+                if(isset($_FILES['file']['name'])){
                     if(move_uploaded_file($_FILES['file']['tmp_name'], $dirname.'/'.$file)){
                         $jsonObj['msg'] = "Ghi dữ liệu thành công";
                         $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }else{
-                        $jsonObj['msg'] = "Ghi dữ liệu không thành công";
-                        $jsonObj['success'] = false;
+                        $jsonObj['msg'] = "Thông tin minh chứng được lưu thành công, quá trình tải file gặp lỗi";
+                        $jsonObj['success'] = true;
                         $this->view->jsonObj = json_encode($jsonObj);
                     }
                 }else{
-                    $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                    $jsonObj['success'] = true;
-                    $this->view->jsonObj = json_encode($jsonObj);
+                    // lay thong tin file tu van ban
+                    $docid  = $_REQUEST['doc_id']; $docid = explode("_", $docid);
+                    $document_id = $docid[0]; $document_type = $docid[1];
+                    $json_doc = $this->model->get_info_document($document_id, $document_type);
+                    $data_u = array("file" => $json_doc[0]['file']);
+                    $tmp = $this->model->updateObj_by_code($code, $data_u);
+                    if($tmp){
+                        if(copy(DIR_UPLOAD.'/'.$json_doc[0]['folder'].'/'.$json_doc[0]['cate_id'].'/'.$json_doc[0]['file'],
+                                DIR_UPLOAD.'/proof_quanlity/'.$criteria.'/'.$json_doc[0]['file'])){
+                            $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                            $jsonObj['success'] = true;
+                            $this->view->jsonObj = json_encode($jsonObj);   
+                        }else{
+                            $jsonObj['msg'] = "Thông tin minh chứng được lưu thành công, quá trình tải file gặp lỗi";
+                            $jsonObj['success'] = true;
+                            $this->view->jsonObj = json_encode($jsonObj);
+                        }
+                    }else{
+                        $jsonObj['msg'] = "Thông tin minh chứng được lưu thành công, quá trình tải file gặp lỗi";
+                        $jsonObj['success'] = true;
+                        $this->view->jsonObj = json_encode($jsonObj);
+                    }
                 }
             }else{
                 $jsonObj['msg'] = "Ghi dữ liệu không thành công";
@@ -185,6 +222,26 @@ class Proof extends Controller{
         $jsonObj = $this->model->get_data_criteria_total($keyword, $array_id);
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('proof/list_criteria_page');
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_doc(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_document($keyword, $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render("proof/list_doc");
+    }
+
+    function list_doc_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_document_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('proof/list_doc_page');
     }
 }
 ?>
