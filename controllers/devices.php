@@ -158,7 +158,7 @@ class Devices extends Controller{
 
     function do_import(){
         // xoa het nhung ban ghi tam
-        $tmp = $this->model->delObj_temp();
+        $tmp = $this->model->delObj_temp($this->_Info[0]['id']);
         if($tmp){
             $file = $_FILES['file_asset']['tmp_name'];
             $objFile = PHPExcel_IOFactory::identify($file);
@@ -209,7 +209,7 @@ class Devices extends Controller{
     }
 
     function del_tmp(){
-        $temp = $this->model->delObj_temp();
+        $temp = $this->model->delObj_temp($this->_Info[0]['id']);
         if($temp){
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
@@ -251,20 +251,26 @@ class Devices extends Controller{
     }
 
     function update_all(){
-        if($this->model->check_dupli_code() > 0){
-            $jsonObj['msg']=  "Có thiết bị trùng mã, vui lòng kiểm tra lại";
+        if($this->model->return_total_temp($this->_Info[0]['id']) == 0){
+            $jsonObj['msg']=  "Không có bản ghi nào được chọn";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $temp = $this->model->update_all_tmp($this->_Info[0]['id']);
-            if($temp){
-                $jsonObj['msg'] = 'Ghi dữ liệu thành công';
-                $jsonObj['success']  = true;
+            if($this->model->check_dupli_code() > 0){
+                $jsonObj['msg']=  "Có thiết bị trùng mã, vui lòng kiểm tra lại";
+                $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
             }else{
-                $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
-                $jsonObj['success']  = false;
-                $this->view->jsonObj = json_encode($jsonObj);
+                $temp = $this->model->update_all_tmp($this->_Info[0]['id']);
+                if($temp){
+                    $jsonObj['msg'] = 'Ghi dữ liệu thành công';
+                    $jsonObj['success']  = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
+                    $jsonObj['success']  = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
             }
         }
         $this->view->render("personal/update_all");

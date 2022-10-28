@@ -66,8 +66,8 @@ class Devices_Model extends Model{
         return $result;
     }
 
-    function delObj_temp(){
-        $query = $this->delete("tbl_devices", "status = 99");
+    function delObj_temp($userid){
+        $query = $this->delete("tbl_devices", "status = 99 AND user_id = $userid");
         return $query;
     }
 
@@ -85,7 +85,7 @@ class Devices_Model extends Model{
     function return_total_temp($userid){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE status = 99 AND user_id = $userid");
         $row = $query->fetchAll();
-        return $ro[0]['Total'];
+        return $row[0]['Total'];
     }
 }
 ?>
