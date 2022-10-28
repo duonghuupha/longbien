@@ -64,6 +64,7 @@ $pages = $this->page; $sql = new Model();
             <td class="hidden" id="religion_<?php echo $row['id'] ?>"><?php echo $row['religion'] ?></td>
             <td class="hidden" id="codecsdl_<?php echo $row['id'] ?>"><?php echo $row['code_csdl'] ?></td>
             <td class="hidden" id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
+            <td class="hidden" id="peoplet_<?php echo $row['id'] ?>"><?php echo $row['people_text'] ?></td>
         </tr>
         <?php
         }

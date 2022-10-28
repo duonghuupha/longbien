@@ -1,7 +1,7 @@
 var page = 1, keyword = '', numbers_line = 0, data = [], url = '', departmentid = 0;
 $(function(){
     $('#list_student_tmp').load(baseUrl + '/student/content_tmp');
-    combo_select_2('#department_id', baseUrl + '/other/combo_department?yearid='+yearid);
+    combo_select_2('#department_id', baseUrl + '/other/combo_department?yearid='+yearid, 0, '');
     //$('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
     //$('#people_id').load(baseUrl + '/other/combo_people');
 });
@@ -45,11 +45,12 @@ function edit(idh){
     var gender = $('#gender_'+idh).text(), birthday = $('#birthday_'+idh).text();
     var address = $('#address_'+idh).text(), datadc = $('#datadc_'+idh).text();
     var people = $('#people_'+idh).text(), religion = $('#religion_'+idh).text();
-    var codecsdl = $('#codecsdl_'+idh).text();
+    var codecsdl = $('#codecsdl_'+idh).text(), peolpe_text = $('#peoplet_'+idh).text();
     data = JSON.parse(datadc); render_table(data); numbers_line = data.length;
     $('#code').val(code); $('#fullname').val(fullname); $('#gender').val(gender).trigger('change');
     $('#birthday').val(birthday); $('#address').val(address); $('#people_id').val(people).trigger('change');
     $('#religion').val(religion).trigger('change'); $('#code_csdl').val(codecsdl);
+    combo_select_2('#people_id', baseUrl + '/other/combo_people?yearid='+yearid, people, peolpe_text);
     $('#modal-student').modal('show');
     url = baseUrl + '/student/update_tmp?id='+idh;
 }

@@ -136,7 +136,8 @@ class Student_Model extends Model{
                                     AND user_id = $userid");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, code_csdl, fullname, gender, birthday, status, image, address, people_id, religion,
-                                (SELECT title FROM tbldm_department WHERE tbldm_department.id = dep_temp) AS department
+                                (SELECT title FROM tbldm_department WHERE tbldm_department.id = dep_temp) AS department,
+                                (SELECT tbldm_people.title FROM tbldm_people WHERE tbldm_people.id = people_id) AS people_text
                                 FROM tbl_student WHERE status = 99 AND fullname LIKE '%$q%' AND user_id = $userid 
                                 ORDER BY fullname ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
