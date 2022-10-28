@@ -187,20 +187,26 @@ class Gear extends Controller{
     }
 
     function update_all(){
-        if($this->model->check_dupli_code() > 0){
-            $jsonObj['msg']=  "Có đồ dùng trùng mã, vui lòng kiểm tra lại";
+        if($this->model->return_total_temp($this->_Info[0]['id']) == 0){
+            $jsonObj['msg'] = "Không có bản ghi nào được chọn";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $temp = $this->model->updateObj_all($this->_Info[0]['id']);
-            if($temp){
-                $jsonObj['msg'] = 'Ghi dữ liệu thành công';
-                $jsonObj['success']  = true;
+            if($this->model->check_dupli_code() > 0){
+                $jsonObj['msg']=  "Có đồ dùng trùng mã, vui lòng kiểm tra lại";
+                $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
             }else{
-                $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
-                $jsonObj['success']  = false;
-                $this->view->jsonObj = json_encode($jsonObj);
+                $temp = $this->model->updateObj_all($this->_Info[0]['id']);
+                if($temp){
+                    $jsonObj['msg'] = 'Ghi dữ liệu thành công';
+                    $jsonObj['success']  = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
+                    $jsonObj['success']  = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
             }
         }
         $this->view->render("gear/update_all");

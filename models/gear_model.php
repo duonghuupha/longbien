@@ -84,5 +84,11 @@ class Gear_model extends Model{
         $query = $this->db->query("UPDATE tbl_utensils SET status = 0 WHERE status = 99 AND user_id = $userid");
         return $query;
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function return_total_temp($userid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE status = 99 AND user_id = $userid");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>
