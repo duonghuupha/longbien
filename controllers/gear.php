@@ -136,7 +136,7 @@ class Gear extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj_tmp($keyword, $offset, $rows);
+        $jsonObj = $this->model->getFetObj_tmp($this->_Info[0]['id'], $keyword, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('gear/content_tmp');
     } 
@@ -171,7 +171,8 @@ class Gear extends Controller{
                 }
                 $data = array("code" => $code, 'title' => $title, 'cate_id' => $cate,
                                 'content' => $content,  'stock' => $stock,
-                                'create_at' => date("Y-m-d H:i:s"), 'status' => 99);
+                                'create_at' => date("Y-m-d H:i:s"), 'status' => 99,
+                                'user_id' => $this->_Info[0]['id']);
                 $this->model->addObj($data);
             }
             $jsonObj['msg'] = "Import dữ liệu thành công";
@@ -191,7 +192,7 @@ class Gear extends Controller{
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $temp = $this->model->updateObj_all();
+            $temp = $this->model->updateObj_all($this->_Info[0]['id']);
             if($temp){
                 $jsonObj['msg'] = 'Ghi dữ liệu thành công';
                 $jsonObj['success']  = true;
@@ -221,7 +222,7 @@ class Gear extends Controller{
     }
 
     function del_all(){
-        $temp = $this->model->delObj_tmp();
+        $temp = $this->model->delObj_tmp($this->_Info[0]['id']);
         if($temp){
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;

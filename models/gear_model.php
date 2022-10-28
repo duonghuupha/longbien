@@ -55,22 +55,22 @@ class Gear_model extends Model{
         return $query->fetchAll();
     }
 
-    function getFetObj_tmp($q, $offset, $rows){
+    function getFetObj_tmp($userid, $q, $offset, $rows){
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE status = 99
-                                    AND title LIKE '%$q%'");
+                                    AND title LIKE '%$q%' AND user_id = $userid");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, title, content, image, stock, cate_id, create_at,
                                 (SELECT tbldm_utensils.title FROM tbldm_utensils WHERE tbldm_utensils.id= cate_id)
-                                AS category FROM tbl_utensils WHERE status = 99
-                                AND title LIKE '%$q%' ORDER BY id DESC LIMIT $offset, $rows");
+                                AS category FROM tbl_utensils WHERE status = 99 AND title LIKE '%$q%' 
+                                AND user_id = $userid ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
     }
 
-    function delObj_tmp(){
-        $query = $this->delete("tbl_utensils", "status = 99");
+    function delObj_tmp($userid){
+        $query = $this->delete("tbl_utensils", "status = 99 AND user_id = $userid");
         return $query;
     }
 
@@ -80,8 +80,8 @@ class Gear_model extends Model{
         return count($row);
     }
 
-    function updateObj_all(){
-        $query = $this->db->query("UPDATE tbl_utensils SET status = 0 WHERE status = 99");
+    function updateObj_all($userid){
+        $query = $this->db->query("UPDATE tbl_utensils SET status = 0 WHERE status = 99 AND user_id = $userid");
         return $query;
     }
 }
