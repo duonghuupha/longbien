@@ -1,8 +1,9 @@
 var page = 1, keyword = '', numbers_line = 0, data = [], url = '', departmentid = 0;
 $(function(){
     $('#list_student_tmp').load(baseUrl + '/student/content_tmp');
-    $('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    $('#people_id').load(baseUrl + '/other/combo_people');
+    combo_select_2('#department_id', baseUrl + '/other/combo_department?yearid='+yearid);
+    //$('#department_id').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    //$('#people_id').load(baseUrl + '/other/combo_people');
 });
 
 function save(){

@@ -130,20 +130,22 @@ class Student_Model extends Model{
         return $query->fetchAll();
     }
 
-    function getFetObj_tmp($q, $offset, $rows){
+    function getFetObj_tmp($userid, $q, $offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE status = 99 AND fullname LIKE '%$q%'");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE status = 99 AND fullname LIKE '%$q%'
+                                    AND user_id = $userid");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, code_csdl, fullname, gender, birthday, status, image, address, people_id, religion,
                                 (SELECT title FROM tbldm_department WHERE tbldm_department.id = dep_temp) AS department
-                                FROM tbl_student WHERE status = 99 AND fullname LIKE '%$q%' ORDER BY fullname ASC LIMIT $offset, $rows");
+                                FROM tbl_student WHERE status = 99 AND fullname LIKE '%$q%' AND user_id = $userid 
+                                ORDER BY fullname ASC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
     }
 
-    function delObj_tmp(){
-        $query = $this->delete("tbl_student", "status = 99");
+    function delObj_tmp($userid){
+        $query = $this->delete("tbl_student", "status = 99 AND user_id = $userid");
         return $query;
     }
 

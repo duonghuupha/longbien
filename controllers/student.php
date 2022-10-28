@@ -179,14 +179,14 @@ class Student extends Controller{
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj_tmp($keyword, $offset, $rows);
+        $jsonObj = $this->model->getFetObj_tmp($this->_Info[0]['id'], $keyword, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('student/content_tmp');
     }
 
     function do_import(){
         // xoa het nhung ban ghi tam
-        $tmp = $this->model->delObj_tmp();
+        $tmp = $this->model->delObj_tmp($this->_Info[0]['id']);
         if($tmp){
             $department = $_REQUEST['department_id'];
             $file = $_FILES['file_tmp']['tmp_name'];
@@ -232,7 +232,8 @@ class Student extends Controller{
                 }
                 $data = array("code_csdl" => $code, 'fullname' => $fullname, 'gender' => $gender, "people_id" => 2,
                                 'birthday' => $birthday,  'address' => $address, 'status' => 99, "religion" => 1,
-                                'dep_temp' => $department, "code" => rand(111111111111,999999999999));
+                                'dep_temp' => $department, "code" => rand(111111111111,999999999999),
+                                "user_id" => $this->_Info[0]['id']);
                 $temp = $this->model->addObj($data);
                     if($temp){
                     if($namefa != ''){
@@ -257,7 +258,7 @@ class Student extends Controller{
     }
 
     function del_all(){
-        $temp = $this->model->delObj_tmp();
+        $temp = $this->model->delObj_tmp($this->_Info[0]['id']);
         if($temp){
             $jsonObj['msg'] = "Xóa dữ liệu thành công";
             $jsonObj['success'] = true;
