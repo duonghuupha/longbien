@@ -154,6 +154,13 @@ class Other_Model extends Model{
         }
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function get_combo_department_all($yearid){
+        $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE status = 0 AND class_study = 1 AND year_id = $yearid
+                                    UNION ALL
+                                    SELECT id, title FROM tbldm_department WHERE status = 0 AND class_study = 0");
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////
     function get_info_device_pass_code_scan($code){
         $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE code = $code");

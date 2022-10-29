@@ -216,5 +216,11 @@ class Other extends Controller{
         $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_department_user");
     }
+
+    function combo_department_all(){
+        $jsonObj = $this->model->get_combo_department_all($this->_Year[0]['id']);
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("other/combo_department_all");
+    }
 }
 ?>

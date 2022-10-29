@@ -1,4 +1,4 @@
-var page = 1; keyword = '';
+var page = 1; keyword = '', data_dep = [];
 $(function(){
     $('#list_device').load(baseUrl + '/qrcode_device/content');
 });
@@ -19,53 +19,44 @@ function search(){
     }
 }
 
-function print_code(){
-    let myArray = (function() {
-        let a = [];
-        $(".ck_inma:checked").each(function() {
-            var qty = $('#qty_'+this.value).val();
-            a.push(this.value+'.'+qty);
-        });
-        return a;
-    })()
-    if(myArray.length > 0){
-        window.open(baseUrl + '/qrcode_device/print_code?data='+btoa(myArray.join(",")));
-    }else{
-        show_message('error', 'Không có bản ghi nào được chọn');
-        return false;
-    }
-}
-
-function print_barcode(){
-    let myArray = (function() {
-        let a = [];
-        $(".ck_inma:checked").each(function() {
-            var qty = $('#qty_'+this.value).val();
-            a.push(this.value+'.'+qty);
-        });
-        return a;
-    })()
-    if(myArray.length > 0){
-        window.open(baseUrl + '/qrcode_device/print_barcode?data='+btoa(myArray.join(",")));
-    }else{
-        show_message('error', 'Không có bản ghi nào được chọn');
-        return false;
-    }
-}
-
 function print_allcode(){
-    let myArray = (function() {
-        let a = [];
-        $(".ck_inma:checked").each(function() {
-            var qty = $('#qty_'+this.value).val();
-            a.push(this.value+'.'+qty);
-        });
-        return a;
-    })()
-    if(myArray.length > 0){
-        window.open(baseUrl + '/qrcode_device/print_allcode?data='+btoa(myArray.join(",")));
+    
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+function view_device_dep(){
+    combo_select_2('#dep_id', baseUrl + '/other/combo_department_all');
+    data_dep= []; $('#modal-dep').modal('show');
+}
+
+function load_device_dep (){
+    var value = $('#dep_id').val();
+    $('#list_dep').load(baseUrl + '/qrcode_device/content_dep?id='+value);
+}
+
+function selected_device_dep(idh){
+    var value = $('#ck_dep_'+idh).is(':checked');
+    if(value){
+        var sub = $('#sub_'+idh).text(), qty = $('#qty_dep_'+idh).val();
+        var str = {'id': idh, 'sub': sub, 'qty': qty};
+        data_dep.push(str);
     }else{
-        show_message('error', 'Không có bản ghi nào được chọn');
-        return false;
+        data_dep = data_dep.filter(item => item.id != idh);
+    }
+}
+
+function set_qty_dep(idh){
+    var objIndex = data_dep.findIndex(item => item.id === idh);
+    var qty = $('#qty_dep_'+idh).val();
+    if(data_dep.length != 0){
+        data_dep[objIndex].qty = qty;
+    }
+}
+
+function print_code_dep(){
+    if(data_dep.length != 0){
+        $('#datadc_dep').val(JSON.stringify(data_dep));
+        save_reject_open('#fm-dep', baseUrl + '/qrcode_device/add_code_dep', baseUrl + '/qrcode_device/code_dep');
+    }else{
+        show_message("error", "Không có bản ghi nào được chọn");
     }
 }
