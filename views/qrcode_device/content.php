@@ -31,10 +31,10 @@ $(function(){
             <th class="text_center"></th>
             <th class="text-center" style="width:80px">Mã TB</th>
             <th class="">Tiêu đề</th>
-            <th class="text-center hidden-480">Danh mục</th>
-            <th class="text-center hidden-480">Xuất sứ</th>
-            <th class="text-center hidden-480">Năm sử dụng</th>
-            <th class="text-right hidden-480">Nguyên giá</th>
+            <th class="text-center">Danh mục</th>
+            <th class="text-center">Xuất sứ</th>
+            <th class="text-center">Năm sử dụng</th>
+            <th class="text-center">Số con</th>
             <th class="text-center">SL tem</th>
         </tr>
     </thead>
@@ -58,17 +58,30 @@ $(function(){
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center">
                 <input id="ck_<?php echo $row['id'] ?>" name="ck_<?php echo $row['id'] ?>"
-                type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma"/>
+                type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma"
+                onclick="selected_device(<?php echo $row['id'] ?>)"/>
             </td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
-            <td class="text-center hidden-480"><?php echo $danhmuc ?></td>
-            <td class="text-center hidden-480"><?php echo $row['origin'] ?></td>
-            <td class="text-center hidden-480"><?php echo $row['year_work'] ?></td>
-            <td class="text-right hidden-480"><?php echo number_format($row['price']) ?></td>
+            <td class="text-center"><?php echo $danhmuc ?></td>
+            <td class="text-center"><?php echo $row['origin'] ?></td>
+            <td class="text-center"><?php echo $row['year_work'] ?></td>
+            <td class="center">
+                <select class="select2" id="device_<?php echo $row['id'] ?>"
+                data-minimum-results-for-search="Infinity" data-placeholder="Lựa chọn"
+                onchange="set_select_sub_device(<?php echo $row['id'] ?>)">
+                    <option value="">Lựa chọn</option>
+                    <?php
+                    for($i = 1; $i  <= $row['stock']; $i++){
+                        echo '<option value="'.$i.'">'.$i.'</option>';
+                    }
+                    ?>
+                </select>
+            </td>
             <td class="text-center">
                 <input id="qty_<?php echo $row['id'] ?>" name="qty_<?php echo $row['id'] ?>"
-                value="1" size="1" class="form-control" style="text-align:center"/>
+                value="1" size="1" class="form-control" style="text-align:center"
+                onchange="set_qty(<?php echo $row['id'] ?>)"/>
             </td>
         </tr>
         <?php
@@ -98,3 +111,8 @@ $(function(){
         ?>
     </div>
 </div>
+<script>
+    $(function(){
+        $('.select2').select2();
+    })
+</script>

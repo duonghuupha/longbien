@@ -36,6 +36,9 @@
             </div><!-- /.page-header -->
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
+                    <form id="fm" method="post">
+                        <input id="datadc" name="datadc" type="hidden"/>
+                    </form>
                     <div id="list_device" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
