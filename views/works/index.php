@@ -54,6 +54,8 @@
                     <form id="fm" method="POST" enctype="multipart/form-data">
                         <input id="datadc" name="datadc" type="hidden"/>
                         <input id="fileold" name="fileold" type="hidden"/>
+                        <input id="code" name="code" type="hidden"/>
+                        <input id="doc_id" name="doc_id" type="hidden"/>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="form-field-username">Lựa chọn danh mục</label>

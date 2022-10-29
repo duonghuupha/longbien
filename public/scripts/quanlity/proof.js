@@ -13,8 +13,8 @@ $(function(){
 function add(){
     $('#criteria_id').val(null); $('#fullname').val(null);
     $('#code_proof').val(null); $('#title').val(null);
-    $('#file_old').val(null); $('#file').val(null);
-
+    $('#file_old').val(null); $('#file').ace_file_input('reset_input');
+    $('#file_select').empty(); $('#select_doc').attr('disabled', false);
     $('#modal-proof').modal('show');
     url = baseUrl + '/proof/add';
 }
@@ -25,8 +25,8 @@ function edit(idh){
         $('#code_proof').val(result.code_proof); $('#title').val(result.title);
         $('#file_old').val(result.file); $('#code').val(result.code);
     });
-    $('#file_select').empty(); $('#doc_id').val(null);
-    $('#file').attr('disabled', false); $('#file').val(null);
+    $('#file_select').empty(); $('#doc_id').val(null); $('#select_doc').attr('disabled', false);
+    $('#file').attr('disabled', false); $('#file').ace_file_input('reset_input');
     $('#modal-proof').modal('show');
     url = baseUrl + '/proof/update?id='+idh;
 }
