@@ -3,7 +3,7 @@ class Gear_loans_Model extends Model{
     function __construct(){
         parent::__construct();
     }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_users($q, $offset, $rows){
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE id != 1 AND active = 1
@@ -27,25 +27,27 @@ class Gear_loans_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_gear($q, $offset, $rows){
         $result = array();
-        $query= $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE title LIKE '%$q%' AND status = 0");
+        $query= $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE title LIKE '%$q%' AND status = 0
+                                AND stock != 0");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, title, content, image, cate_id, stock, (SELECT tbldm_utensils.title
                                     FROM tbldm_utensils WHERE tbldm_utensils.id = cate_id) AS category FROM tbl_utensils WHERE status = 0
-                                    AND title LIKE '%$q%' ORDER BY id DESC LIMIT $offset, $rows");
+                                    AND title LIKE '%$q%' AND stock != 0 ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
     }
 
     function get_date_gear_total($q){
-        $query= $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE title LIKE '%$q%' AND status = 0");
+        $query= $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE title LIKE '%$q%' AND status = 0
+                                    AND stock != 0");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
     function addObj($data){
         $query = $this->insert("tbl_utensils_loan", $data);
         return $query;

@@ -27,7 +27,8 @@ $jsonObj = $this->jsonObj;
             <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
             <td class="text-center">
                 <select class="form-control select2" style="width:100%" id="device_<?php echo $row['id'] ?>"
-                onchange="confirm_device(<?php echo $row['id'] ?>)" data-minimum-results-for-search="Infinity">
+                onchange="confirm_device(<?php echo $row['id'] ?>)" data-minimum-results-for-search="Infinity"
+                data-placeholder="Lựa chọn">
                 <option value="">Lựa chọn</option>
                 <?php
                 for($z = 1; $z <= $row['stock']; $z++){
