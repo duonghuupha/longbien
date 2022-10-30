@@ -7,6 +7,7 @@ class Gear_code extends Controller{
 
     function index(){
         require('layouts/header.php');
+        unset($_SESSION['code_gear']);
         $this->view->render('gear_code/index');
         require('layouts/footer.php');
     }
@@ -23,15 +24,25 @@ class Gear_code extends Controller{
         $this->view->render('gear_code/content');
     }
 
-    function print_code(){
-        // xoa het ban ghi tam trong folder
-        $dirname = DIR_UPLOAD.'/barcode/utensils/*';
-        array_map('unlink', array_filter((array) glob($dirname)));
-        $this->view->render('gear_code/print_code');
+    function qrcode(){
+        $this->view->render("gear_code/qrcode");
     }
 
-    function qrcode(){
-        $this->view->render("lib_code/qrcode");
+    function add_code(){
+        $datadc = json_decode($_REQUEST['datadc'], true);
+        if(count($datadc) > 0){
+            $_SESSION['code_gear'] = $datadc;
+        }else{
+            $_SESSION['code_gear'] = [];
+        }
+        $jsonObj['msg'] = "Load code thành công";
+        $jsonObj['success']  = true;
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("gear_code/add_code");
+    }
+
+    function code(){
+        $this->view->render("gear_code/code");
     }
 }
 ?>

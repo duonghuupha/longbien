@@ -85,6 +85,9 @@
                     </form>
                 </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-9">
+                    <form id="fm" method="post">
+                        <input id="datadc" name="datadc" type="hidden"/>
+                    </form>
                     <div id="list_gear" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
