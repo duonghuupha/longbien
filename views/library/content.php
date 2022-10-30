@@ -27,7 +27,11 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center">
                 <?php 
-                echo "<img src='".URL.'/public/library/images/'.$row['image']."' width='50' height='50' style='border-radius:50%;border:1px solid #ccc;padding:2px;'/>"; 
+                if($row['image'] != ''){
+                    echo "<img src='".URL."/public/library/images/".$row['image']."' width='50' height='50' style='border-radius:50%;border:1px solid #ccc;padding:2px;'/>";
+                }else{
+                    echo "<img src='".URL."/styles/images/noimg.jpg' width='50' height='50' style='border-radius:50%;border:1px solid #ccc;padding:2px;'/>";
+                }
                 ?>
             </td>
             <td class="text-center"><?php echo $row['code'] ?></td>

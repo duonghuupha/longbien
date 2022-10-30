@@ -1,4 +1,4 @@
-var page = 1, keyword = '';
+var page = 1, keyword = '', data = [];
 $(function(){
     $('#list_library').load(baseUrl + '/lib_code/content');
 });
@@ -18,20 +18,33 @@ function search(){
         $('#list_library').load(baseUrl + '/lib_code/content?page=1&q='+keyword);
     }
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
 function print_code(){
-    let myArray = (function() {
-        let a = [];
-        $(".ck_inma:checked").each(function() {
-            var qty = $('#qty_'+this.value).val();
-            a.push(this.value+'.'+qty);
-        });
-        return a;
-    })()
-    if(myArray.length > 0){
-        window.open(baseUrl + '/lib_code/print_code?data='+btoa(myArray.join(",")));
-    }else{
-        show_message('error', 'Không có bản ghi nào được chọn');
-        return false;
-    }
+    
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function select_cate(){
+    combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', 0, '');
+    data = []; render_table_cate(data); $('#modal-cate').modal('show');
+}
+
+function selected_cate(idh){
+    
+}
+
+function render_table_cate(data_json){
+    $('#tbody').empty(); var html = '', j = 1;
+    for(i = 0; i < data_json.length; i++){
+        html += '<tr id="linecate_'+data_json[i].id+'">';
+            html += '<td>'+j+'</td>';
+            html += '<td>'+data_json[i].title+'</td>'
+        html += '</tr>';
+        j++;
+    }
+    $('#tbody').append(html);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+function select_manu(){
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////

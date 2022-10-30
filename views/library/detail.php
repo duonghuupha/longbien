@@ -10,8 +10,19 @@ $jsonObj = $this->jsonObj;
     <div class="row">
         <div class="col-xs-4" style="border-right:1px solid #000">
             <div class="col-xs-12">
+                <?php
+                if($jsonObj[0]['image'] != ''){
+                ?>
                 <img src="<?php echo URL.'/public/library/images/'.$jsonObj[0]['image'] ?>"
                 class="img-responsive" width="205" height="205"/>
+                <?php
+                }else{
+                ?>
+                <img src="<?php echo URL.'/styles/images/noimg.jpg' ?>"
+                class="img-responsive" width="205" height="205"/>
+                <?php
+                }
+                ?>
             </div>
             <div class="col-xs-12">
                 <label for="form-field-username">
