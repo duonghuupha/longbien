@@ -356,6 +356,13 @@ class Model {
                                     WHERE tbl_utensils.id = utensils_id) AS code FROM tbl_utensils_imp_detail WHERE code = $code");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    function get_detail_repair_device($code){
+        $query = $this->db->query("SELECT device_id AS id, sub_device AS sub, content_error AS error, 
+                                content_repair AS fixed, CONCAT((SELECT title FROM tbl_devices 
+                                WHERE tbl_devices.id = device_id)) AS title  FROM tbl_device_repair_detail 
+                                WHERE code = $code");
+        return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 

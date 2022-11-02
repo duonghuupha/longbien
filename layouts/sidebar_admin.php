@@ -283,7 +283,7 @@
             <b class="arrow"></b>
         </li>
         <li class="hover">
-            <a href="<?php echo URL.'/repairs' ?>">
+            <a href="<?php echo URL.'/repair' ?>">
                 <i class="menu-icon fa fa-caret-right"></i>
                 Sửa chữa nâng cấp
             </a>
