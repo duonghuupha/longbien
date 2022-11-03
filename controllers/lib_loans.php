@@ -147,7 +147,7 @@ class Lib_loans extends Controller{
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $data = array("code" => $code, "user_id" => $userid, "student_id" => $studentid,
+            $data = array("code" => $code, "user_id" => $userid, "student_id" => $studentid, "user_create" => $this->_Info[0]['id'],
                             "book_id" => $bookid, "sub_book" => $subbook, "date_loan" => date("Y-m-d H:i:s"),
                             "date_return" => '', "status" => 0, "create_at" => date("Y-m-d H:i:s"));
             $temp = $this->model->addObj($data);

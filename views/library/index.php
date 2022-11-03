@@ -248,4 +248,41 @@
 </div>
 <!-- End formm don vi tinh-->
 
+<!--Form don vi tinh-->
+<div id="modal-read" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    <span id="title_modal_h"></span>
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-read" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_read()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <input id="id_book" name="id_book" type="hidden"/>
+                        <div id="list_read" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager_read">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
 <script src="<?php echo URL.'/public/' ?>scripts/library/index.js"></script>

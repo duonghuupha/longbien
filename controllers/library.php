@@ -136,5 +136,34 @@ class Library extends Controller{
         $this->view->jsonObj = json_encode($jsonObj[0]);
         $this->view->render("library/data_edit");
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+    function content_h(){
+        $rows = 10; $id = $_REQUEST['id']; $detail = $this->model->get_info($id);
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        if($detail[0]['type'] == 1){ // sach ruyen thong
+            $jsonObj = $this->model->get_data_loan_book($id, $keyword, $offset, $rows);
+        }else{
+            $jsonObj = $this->model->get_data_read_book($id, $offset, $rows);
+        }
+        $this->view->jsonObj = $jsonObj; $this->view->type = $detail[0]['type'];
+        //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('library/content_h');
+    }
+
+    function content_h_page(){
+        $rows = 10; $id = $_REQUEST['id']; $detail = $this->model->get_info($id);
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        if($detail[0]['type'] == 1){ // sach ruyen thong
+            $jsonObj = $this->model->get_data_loan_book_total($id, $keyword);
+        }else{
+            $jsonObj=  $this->model->get_data_read_book_total($id, $keyword);
+        }
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('library/content_h_page');
+    }
 }
 ?>

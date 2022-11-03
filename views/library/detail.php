@@ -53,35 +53,24 @@ $jsonObj = $this->jsonObj;
         <div class="col-xs-8">
             <div class="col-xs-12">
                 <label for="form-field-username">
+                    <b>Loại sách:</b> <?php echo ($jsonObj[0]['type'] == 1) ? 'Sách truyền thống' : 'Sách nói, sách điện tử' ?>
+                </label>
+            </div>
+            <div class="col-xs-12">
+                <label for="form-field-username">
                     <b>Tiêu đề:</b> <?php echo $jsonObj[0]['title'] ?>
                 </label>
             </div>
             <div class="col-xs-12">
                 <label for="form-field-username" style="text-align:justify">
-                    <b>Tóm tắt nội dung:</b> <?php echo $jsonObj[0]['content'] ?>
+                    <b>Tóm tắt nội dung:</b>
                 </label>
-            </div>
-            <div class="col-xs-12">
-                <label for="form-field-username">
-                    <b>Loại sách:</b> <?php echo ($jsonObj[0]['type'] == 1) ? 'Sách truyền thống' : 'Sách nói, sách điện tử' ?>
-                </label>
+                <div style="text-align:justify;max-height:230px;overflow:auto;padding:0 10px 0 0;">
+                    <?php echo $jsonObj[0]['content'] ?>
+                </div>
             </div>
             <?php
             if($jsonObj[0]['type'] == 2){
-                $ext = explode(".", $jsonObj[0]['file']); $extension = end($ext);
-                if($extension == 'pdf' || $extension == 'PDF'){
-            ?>
-            <div class="col-sm-12">
-                <iframe
-                    src="<?php echo URL.'/public/library/file/'.$jsonObj[0]['cate_id'].'/'.$jsonObj[0]['file'] ?>"
-                    frameBorder="0"
-                    scrolling="auto"
-                    height="300px"
-                    width="100%"
-                ></iframe>
-            </div>
-            <?php
-                }else{
             ?>
             <div class="col-xs-12">
                 <label for="form-field-username">
@@ -89,9 +78,19 @@ $jsonObj = $this->jsonObj;
                 </label>
             </div>
             <?php
-                }
             }
             ?>
+            <div class="col-xs-12">
+                <div class="space-4"></div>
+            </div>
+            <div class="col-xs-12">
+                <label for="form-field-username">
+                    <b>Lượt đọc / mượn:</b> 
+                    <a href="javascript:void(0)" onclick="detail_read(<?php echo $jsonObj[0]['id'] ?>, '<?php echo $jsonObj[0]['title'] ?>')">
+                        <?php echo number_format($jsonObj[0]['total_read']) ?> lần
+                    </a>
+                </label>
+            </div>
         </div>
     </div>
 </div>

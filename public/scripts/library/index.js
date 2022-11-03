@@ -1,4 +1,5 @@
 var page = 1, url = '', title_s = '', cate_s = '', manu_s = '', author_s = '';
+var page_read = 1, keyword_read = '';
 $(function(){
     $('#list_library').load(baseUrl + '/library/content');
     combo_select_2('#cate_s', baseUrl + '/other/combo_book_cate', 0, '');
@@ -110,4 +111,24 @@ function del_cate(){
 
 function del_nb(){
     $('#manu_s').val(null).trigger('change');
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+function detail_read(idh, title){
+    $('#title_modal_h').text("Lịch sử mượn - trả / đọc sách :: "+title);
+    $('#list_read').load(baseUrl + '/library/content_h?id='+idh);
+    $('#pager_read').load(baseUrl + '/library/content_h_page?id='+idh);
+    $('#id_book').val(idh); $('#modal-read').modal('show');
+}
+
+function view_page_read(pages){
+    page_read = pages; var idh = $('#id_book').val();
+    $('#list_read').load(baseUrl + '/library/content_h?id='+idh+'&page='+page_read+'&q='+keyword_read);
+    $('#pager_read').load(baseUrl + '/library/content_h_page?id='+idh+'&page='+page_read+'&q='+keyword_read);
+}
+
+function search_read(){
+    var idh = $('#id_book').val(), value = $('#nav-search-input-read').val();
+    keyword_read = (value.length != 0) ? value.replaceAll(" ", "$", 'g') : '';
+    $('#list_read').load(baseUrl + '/library/content_h?id='+idh+'&page=1&q='+keyword_read);
+    $('#pager_read').load(baseUrl + '/library/content_h_page?id='+idh+'&page=1&q='+keyword_read);
 }
