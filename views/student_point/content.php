@@ -30,14 +30,7 @@ $subject = (isset($_REQUEST['subject']) && $_REQUEST['subject'] != '') ? $_REQUE
         $i = 0;
         foreach($jsonObj['rows'] as $row){
             $i++;
-            $class = ($i%2 == 0) ? 'even' : 'odd'; 
-            if($row['status'] == 1){
-                $status = "Đang đi học";
-            }elseif($row['status'] = 2){
-                $status = "Nghỉ học";
-            }else{
-                $status = "Chuyển trường";
-            }
+            $class = ($i%2 == 0) ? 'even' : 'odd';
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
@@ -58,9 +51,10 @@ $subject = (isset($_REQUEST['subject']) && $_REQUEST['subject'] != '') ? $_REQUE
             <td class="text-center"><?php echo $row['department'] ?></td>
             <?php
             for($z = 1; $z <= 6; $z++){
-                $bold = ($this->_Data->check_change_point($row['id'], $z, $this->_Year[0]['id'], $subject, $semester) > 0) ? 'style="color:red"' : '';
+                $bold = ($this->_Data->check_change_point($row['id'], $z, $this->_Year[0]['id'], $subject, $semester) > 0) ? 'style="font-weight:bold"' : '';
+                $changing = ($this->_Data->check_change_pointing($row['id'], $z, $this->_Year[0]['id'], $subject, $semester) == 0) ? 'style="color:red"' : '';
             ?>
-            <td class="text-center" id="diem<?php echo $z ?>_<?php echo $row['id'] ?>" <?php echo $bold ?>><?php echo $this->_Data->return_point_of_student($z, $row['id'], $this->_Year[0]['id'], $semester, $subject) ?></td>
+            <td class="text-center" id="diem<?php echo $z ?>_<?php echo $row['id'] ?>" <?php echo $bold.' '.$changing ?>><?php echo $this->_Data->return_point_of_student($z, $row['id'], $this->_Year[0]['id'], $semester, $subject) ?></td>
             <?php
             }
             ?>

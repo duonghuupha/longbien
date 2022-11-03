@@ -123,8 +123,55 @@ class Student_point_Model extends Model{
         return $query->fetchAll();
     }
 //////////////////////////////////////////////////////////////////////////////////////////////
-    function check_user_update_point($userid, $subjecid, $departmentid){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl");
+    function get_data_point_app($q, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_change_point WHERE status = 0
+                                AND point_id IN (SELECT tbl_student_point.id FROM tbl_student_point
+                                WHERE tbl_student_point.student_id IN (SELECT tbl_student.id FROM tbl_student
+                                WHERE tbl_student.fullname LIKE '%$q%'))");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, code, point_id, user_id, point, status, user_app, content, create_at, file,
+                                    (SELECT fullname FROM tbl_student WHERE tbl_student.id = (SELECT student_id
+                                    FROM tbl_student_point WHERE tbl_student_point.id = point_id)) AS fullname,
+                                    (SELECT tbl_student.code FROM tbl_student WHERE tbl_student.id = (SELECT student_id
+                                    FROM tbl_student_point WHERE tbl_student_point.id = point_id)) AS code_hs,
+                                    (SELECT student_id FROM tbl_student_point WHERE tbl_student_point.id = point_id) AS student_id,
+                                    (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users
+                                    WHERE tbl_users.id= user_id)) AS fullname_create, (SELECT type_point FROM tbl_student_point
+                                    WHERE tbl_student_point.id = point_id) AS type_point, (SELECT tbl_student_point.point
+                                    FROM tbl_student_point WHERE tbl_student_point.id = point_id) AS point_old
+                                    FROM tbl_change_point WHERE status = 0 AND point_id IN (SELECT tbl_student_point.id 
+                                    FROM tbl_student_point WHERE tbl_student_point.student_id IN (SELECT tbl_student.id 
+                                    FROM tbl_student WHERE tbl_student.fullname LIKE '%$q%')) ORDER BY id DESC
+                                    LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_point_app_total($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_change_point WHERE status = 0
+                                AND point_id IN (SELECT tbl_student_point.id FROM tbl_student_point
+                                WHERE tbl_student_point.student_id IN (SELECT tbl_student.id FROM tbl_student
+                                WHERE tbl_student.fullname LIKE '%$q%'))");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+////////////////////////////////////////////////////////////////////////////////////////////
+    function updateObj_change_point($id,  $data){
+        $query = $this->update("tbl_change_point", $data, "id = $id");
+        return $query;
+    }
+
+    function updateObj_point($id, $data){
+        $query = $this->update("tbl_student_point", $data, "id = (SELECT point_id FROM tbl_change_point
+                                WHERE tbl_change_point.id = $id)");
+        return $query;
+    }
+
+    function get_info_change_point($id){
+        $query = $this->db->query("SELECT * FROM tbl_change_point WHERE id = $id");
+        return $query->fetchAll();
     }
 }
 ?>

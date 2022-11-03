@@ -328,6 +328,18 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+    function check_change_pointing($studentid, $typepoint, $yearid, $subject, $semester){
+        $query = $this->db->query("SELECT status FROM tbl_change_point WHERE point_id = (SELECT tbl_student_point.id
+                                FROM tbl_student_point WHERE student_id = $studentid AND type_point = $typepoint
+                                AND year_id = $yearid AND subject_id = $subject AND semester = $semester) AND status = 0
+                                ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 1;
+        }
+    }
     function check_dupli_code_student($code){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE code = $code");
         $row = $query->fetchAll();

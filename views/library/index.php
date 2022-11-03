@@ -206,7 +206,8 @@
                                 <div class="form-group">
                                     <label for="form-field-username">Tệp dữ liệu</label>
                                     <div>
-                                        <input type="file" id="file" name="file" class="file_attach" style="width:100%"/>
+                                        <input type="file" id="file" name="file" class="file_attach" style="width:100%"
+                                        onchange="check_ext()"/>
                                     </div>
                                 </div>
                             </div>

@@ -12,6 +12,7 @@ function add(){
     $('#code').val(number); $('#type').val(1).trigger('change');
     combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', 0, '');
     combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', 0, '');
+    $('#type').val(1).trigger('change'); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/add';
 }
@@ -25,7 +26,7 @@ function edit(idh){
         $('#id').val(idh); $('#file_old').val(data.file); $('#image_old').val(data.image);
         combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', data.cate_id, data.category);
         combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', data.manu_id, data.manuafactory);
-    });
+    }); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/update?id='+idh;
 }
@@ -44,22 +45,7 @@ function save(){
         }
     });
     if(allRequired){
-        // kiem tra dinh dang file
-        var file = $('#file').val().split(".").pop();
-        var audio = ['mp3', 'mp4', 'pdf'];
-        if($('#type').val() == 2){
-            if($('#file').val().length != 0){
-                if(audio.includes(file)){
-                    save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
-                }else{
-                    show_message("error", "Định dạng tệp dữ liệu không đúng. Sách điện tử, sách nói phải có định dạng: mp3, mp4, pdf");
-                }
-            }else{
-                save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
-            }
-        }else{
-            save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
-        }
+        save_form_modal('#fm', url, '#modal-library', '#list_library',  baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s); 
     }else{
         show_message("error", "Chưa điền đủ thông tin");
     }
@@ -72,11 +58,6 @@ function view_page_library(pages){
 
 function search(){
     var title = $('#title_s').val(), cate = $('#cate_s').val(), manu = $('#manu_s').val(), author = $('#author_s').val();
-    /*if(value.length != 0){
-        keyword = value.replaceAll(" ", "$", 'g');
-    }else{
-        keyword = '';
-    }*/
     title_s = (title.length != 0) ? title.replaceAll(" ", "$", 'g') : '';
     cate_s = (cate.length != 0) ? cate : ''; manu_s = (manu.length != 0) ? manu : '';
     author = (author.length != 0) ? author.replaceAll(" ", "$", 'g') : ''
@@ -91,12 +72,24 @@ function detail(idh){
 function set_required(value){
     if($('#id').val()  == 0){
         if(value == 2){
-            $('#file').prop('required', true);
+            $('#file').attr('disabled', false); $('#file').prop('required', true);
+            $('#file').ace_file_input('reset_input');
         }else{
-            $('#file').prop('required', false);
+            $('#file').attr('disabled', true);  $('#file').prop('required', false);
+            $('#file').ace_file_input('reset_input');
         }
     }else{
-        $('#file').prop('required', false);
+        $('#file').attr('disabled', true); $('#file').prop('required', false);
+        $('#file').ace_file_input('reset_input');
+    }
+}
+
+function check_ext(){
+    var file_data = $('#file').val();
+    var ext = file_data.split(".").pop();
+    if(ext != 'pdf' && ext != 'PDF' && ext != 'mp4' && ext != 'mp3'){
+        show_message("error", "File dữ liệu không đung định dạng");
+        $('#file').ace_file_input('reset_input');
     }
 }
 

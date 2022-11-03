@@ -13,9 +13,18 @@
             <div class="page-header">
                 <h1>
                     Sổ điểm
-                    <small>
-                        Quản lý điểm các môn học của học sinh
+                    <?php
+                    if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 7) > 0){
+                    ?>
+                    <small class="pull-right">
+                        <button class="btn btn-sm btn-primary" type="button" onclick="app_point()">
+                            <i class="ace-icon fa fa-check"></i>
+                            Duyệt sửa điểm
+                        </button>
                     </small>
+                    <?php
+                    }
+                    ?>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
@@ -93,10 +102,10 @@
                         <input id="studentid" name="studentid" type="hidden"/>
                         <input id="semesterid" name="semesterid" type="hidden"/>
                         <input id="subjectid" name="subjectid" type="hidden"/>
-                        <div class="col-xs-5" style="border-right:1px solid #000" id="info_student">
+                        <div class="col-xs-5" id="info_student">
                             
                         </div>
-                        <div class="col-xs-7">
+                        <div class="col-xs-7" style="border-left:1px solid #000">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="form-field-username">Loại điểm</label>
@@ -128,6 +137,14 @@
                                     <label for="form-field-username">Lý do sửa điểm</label>
                                     <div>
                                         <input type="text" id="content" name="content" placeholder="Lý do sửa điểm" style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" id="file_bb">
+                                <div class="form-group">
+                                    <label for="form-field-username">Tệp minh chứng</label>
+                                    <div>
+                                        <input type="file" id="image" name="image" class="file_attach" style="width:100%"/>
                                     </div>
                                 </div>
                             </div>
@@ -173,4 +190,41 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-app" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:80%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Duyệt sửa điểm
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-app" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_app()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_app" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager_app">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 <script src="<?php echo URL.'/public/' ?>scripts/student/point.js"></script>
+

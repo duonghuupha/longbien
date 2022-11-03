@@ -30,7 +30,11 @@ class Library extends Controller{
         $content = addslashes($_REQUEST['content']); $type = $_REQUEST['type'];
         $stock = ($type == 1) ? $_REQUEST['stock'] : 0;
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], 'img_library') : '';
-        $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'file_library') : '';
+        if($type == 2){
+            $file = $this->_Convert->convert_file($_FILES['file']['name'], 'file_library');
+        }else{
+            $file = '';
+        }
         if($this->model->dupliObj(0,$code) > 0){
             $jsonObj['msg'] = "Mã sách đã tồn tại";
             $jsonObj['success'] = false;
@@ -47,7 +51,7 @@ class Library extends Controller{
                 if($_FILES['image']['name'] != ''){
                     move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/library/images/'.$image);
                 }
-                if($_FILES['file']['name'] != ''){
+                if(isset($_FILES['file']['name'])){
                     $dirname = DIR_UPLOAD.'/library/file/'.$cateid;
                     if(!file_exists($dirname)){
                         mkdir($dirname, 0777);
@@ -73,7 +77,11 @@ class Library extends Controller{
         $content = addslashes($_REQUEST['content']); $type = $_REQUEST['type'];
         $stock = ($type == 1) ? $_REQUEST['stock'] : 0;
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], 'img_library') : $_REQUEST['image_old'];
-        $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'file_library') : $_REQUEST['file_old'];
+        if($type == 2){
+            $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'file_library') : $_REQUEST['file_old'];
+        }else{
+            $file = '';
+        }
         if($this->model->dupliObj($id,$code) > 0){
             $jsonObj['msg'] = "Mã sách đã tồn tại";
             $jsonObj['success'] = false;
@@ -89,7 +97,7 @@ class Library extends Controller{
                 if($_FILES['image']['name'] != ''){
                     move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/library/images/'.$image);
                 }
-                if($_FILES['file']['name'] != ''){
+                if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
                     $dirname = DIR_UPLOAD.'/library/file/'.$cateid;
                     if(!file_exists($dirname)){
                         mkdir($dirname, 0777);

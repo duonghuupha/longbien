@@ -63,41 +63,85 @@ class Student_point extends Controller{
         $subjectid = $_REQUEST['subjectid']; $type_point = $_REQUEST['type_point'];
         $point = $_REQUEST['point']; $yearid = $this->_Year[0]['id']; $semester = $_REQUEST['semesterid'];
         $createat = date("Y-m-d H:i:s"); $content = $_REQUEST['content'];
+        $file = isset($_FILES['image']['name']) ? $this->_Convert->convert_file($_FILES['image']['name'], 'change_point') : '';
         $detail = $this->model->get_info_point($studentid, $this->_Year[0]['id'], $type_point, $subjectid, $semester);
-        if($type_point <= 4){ // dc cap nhat diem truc tiep
-            $data = array("code" => $code, "point_id" => $detail[0]['id'], "user_id" => $userid, "point" => $point,
-                            "status" => 1, "user_app" => $userid, "content" => $content, "create_at" => date("Y-m-d H:i:s"));
-            $temp = $this->model->addObj_change($data);
-            if($temp){
-                $data_u = array("point" => $point);
-                $this->model->updateObj($detail[0]['id'], $data_u);
-                $jsonObj['msg'] = 'Ghi dữ liệu thành công';
-                $jsonObj['success'] = true;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }else{
-                $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
-                $jsonObj['success'] = false;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }
+        // kiem tra xem user co quyen su diem khong
+        if($userid != $detail[0]['user_id']){
+            $jsonObj['msg'] = "Bạn không có quyền sửa điểm cho học sinh này";
+            $jsonObj['success'] =  false;
+            $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $data = array("code" => $code, "point_id" => $detail[0]['id'], "user_id" => $userid, "point" => $point,
-                            "status" => 0, "user_app" => 0, "content" => $content, "create_at" => date("Y-m-d H:i:s"));
-            $temp = $this->model->addObj_change($data);
-            if($temp){
-                $jsonObj['msg'] = 'Ghi dữ liệu thành công. Điểm sẽ được cập nhật sau khi Ban giám hiệu duyệt';
-                $jsonObj['success'] = true;
-                $this->view->jsonObj = json_encode($jsonObj);
+            if($type_point <= 4){ // dc cap nhat diem truc tiep
+                $data = array("code" => $code, "point_id" => $detail[0]['id'], "user_id" => $userid, "point" => $point,
+                                "status" => 1, "user_app" => $userid, "content" => $content, "create_at" => date("Y-m-d H:i:s"),
+                                "file" => '');
+                $temp = $this->model->addObj_change($data);
+                if($temp){
+                    $data_u = array("point" => $point);
+                    $this->model->updateObj($detail[0]['id'], $data_u);
+                    $jsonObj['msg'] = 'Ghi dữ liệu thành công';
+                    $jsonObj['success'] = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
             }else{
-                $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
-                $jsonObj['success'] = false;
-                $this->view->jsonObj = json_encode($jsonObj);
+                $data = array("code" => $code, "point_id" => $detail[0]['id'], "user_id" => $userid, "point" => $point,
+                                "status" => 0, "user_app" => 0, "content" => $content, "create_at" => date("Y-m-d H:i:s"),
+                                "file" => $file);
+                $temp = $this->model->addObj_change($data);
+                if($temp){
+                    if(move_uploaded_file($_FILES['image']['tmp_name'], DIR_UPLOAD.'/student_point/'.$file)){
+                        $jsonObj['msg'] = 'Ghi dữ liệu thành công. Điểm sẽ được cập nhật sau khi Ban giám hiệu duyệt';
+                        $jsonObj['success'] = true;
+                        $this->view->jsonObj = json_encode($jsonObj);
+                    }else{
+                        $jsonObj['msg'] = 'Ghi dữ liệu thành công. Minh chứng chưa được cập nhật, vui lòng thử lại';
+                        $jsonObj['success'] = false;
+                        $this->view->jsonObj = json_encode($jsonObj);
+                    }
+                }else{
+                    $jsonObj['msg'] = 'Ghi dữ liệu không thành công';
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
             }
         }
         $this->view->render('student_point/update');
     }
 
-    function del(){
-        $this->view->render('student_point/del');
+    function app_point(){
+        $id = $_REQUEST['id']; $type = $_REQUEST['type'];
+        $data = array("status" => $type, "user_app" =>  $this->_Info[0]['id'], "create_at" => date("Y-m-d H:i:s"));
+        if($type == 1){ // duyet diem
+            $temp = $this->model->updateObj_change_point($id, $data);
+            if($temp){
+                $detail = $this->model->get_info_change_point($id);
+                $datact = array("point" => $detail[0]['point']);
+                $this->model->updateObj_point($id, $datact);
+                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{ // khong duyet diem
+            $temp = $this->model->updateObj_change_point($id, $data);
+            if($temp){
+                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }
+        $this->view->render('student_point/app_point');
     }
 ////////////////////////////////////////////////////////////////////////////////////////////
     function info(){
@@ -117,6 +161,26 @@ class Student_point extends Controller{
         $total = $this->model->dupliObj($student, $typepoint, $this->_Year[0]['id'], $semester, $subject);
         $this->view->total = $total;
         $this->view->render("student_point/check_exit_point");
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_app(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_point_app($keyword, $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('student_point/list_app');
+    }
+
+    function list_app_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_point_app_total($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('student_point/list_app_page');
     }
 }
 ?>
