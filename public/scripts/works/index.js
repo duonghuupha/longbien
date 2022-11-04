@@ -13,7 +13,7 @@ function add(){
     $('#datadc').val(null); $('#title').val(null); data = []; $('#content').val(null);
     $('#fullname').val(null); $('#file_old').val(null); $('#file').ace_file_input('reset_input');
     $('#file_select').empty(); $('#select_doc').attr('disabled', false);
-    $('#modal-works').modal('show');
+    $('#doc_id').val(null); $('#modal-works').modal('show');
     url = baseUrl + '/works/add';
 }
 
@@ -22,9 +22,9 @@ function edit(idh){
     $('#fullname').val("Đã chọn "+data.length+" danh mục");
     $.getJSON(baseUrl + '/works/data_edit?id='+idh, function(result){
         $('#title').val(result.title); $('#content').val(result.content);
-        $('#fileold').val(result.file);
+        $('#fileold').val(result.file); $('#doc_id').val(result.file_link);
     });
-    $('#file_select').empty(); $('#doc_id').val(null); $('#select_doc').attr('disabled', false);
+    $('#file_select').empty(); $('#select_doc').attr('disabled', false);
     $('#file').attr('disabled', false); $('#file').ace_file_input('reset_input');
     $('#modal-works').modal('show');
     url = baseUrl + '/works/update?id='+idh;
@@ -178,4 +178,9 @@ function del_file_select(){
 function set_attr_btn(){
     $('#file_select').empty(); $('#doc_id').val(null);
     $('#select_doc').attr('disabled', true);
+    var value = $('#file').val(); ext = value.split().pop();
+    if(ext != 'pdf' || ext != 'PDF'){
+        show_message("error", "Tệp đính kèm phải là dạng PDF");
+        $('#file').ace_file_input('reset_input');
+    }
 }

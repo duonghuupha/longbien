@@ -44,12 +44,12 @@ function search_cate(){
         keyword_cate = '';
     }
     $('#list_cate').load(baseUrl + '/lib_code/list_cate?page=1&q='+keyword_cate);
-    $('#pager_cate').load(baseUrl + '/lib_code/list_cate_page?page=1&q='+keyword_cates);
+    $('#pager_cate').load(baseUrl + '/lib_code/list_cate_page?page=1&q='+keyword_cate);
 }
 
 function confirm_cate(idh){
-    var value= $('#ck_'+idh).is(':checked');
-    console.log(value);
+    var checked = $('#ck_'+idh).is(':checked');
+    console.log(checked);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 function select_manu(){

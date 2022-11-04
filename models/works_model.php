@@ -17,7 +17,7 @@ class Works_Model extends Model{
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, works_id, title, content, file, user_id, create_at, status,
                                     IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
-                                    FROM tbl_users WHERE tbl_users.id = user_id))) AS fullname
+                                    FROM tbl_users WHERE tbl_users.id = user_id))) AS fullname, file_link
                                     FROM tbl_works WHERE $where ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
@@ -43,7 +43,7 @@ class Works_Model extends Model{
         $query = $this->db->query("SELECT id, code, title, works_id, content, file, user_id, create_at, status,
                                     IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel 
                                     WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users WHERE tbl_users.id = user_id)))
-                                    AS fullname FROM tbl_works WHERE id = $id");
+                                    AS fullname, file_link FROM tbl_works WHERE id = $id");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 //////////////////////////////////////////////////////////////////////////////////////////////

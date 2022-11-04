@@ -38,7 +38,21 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td><?php echo implode("; ", $array[$i]); ?></td>
             <td><?php echo $row['title'] ?></td>
             <td class="text-center">
-                <a href="<?php echo URL.'/public/works/'.$row['file'] ?>" target="_blank">
+                <?php
+                    if($row['file']  != ''){
+                        $url = URL.'/public/works/'.$row['file'];
+                    }else{
+                        $link = explode("_", $row['file_link']);
+                        if($link[1] == 1){ // van ban den
+                            $detail = $this->_Data->get_info_document_in($link[0]);
+                            $url = URL.'/public/document_in/'.$detail[0]['cate_id'].'/'.$detail[0]['file'];
+                        }else{ // van ban di
+                            $detail = $this->_Data->get_info_document_out($link[0]);
+                            $url = URL.'/public/document_out/'.$detail[0]['cate_id'].'/'.$detail[0]['file'];
+                        }
+                    }
+                    ?>
+                <a href="<?php echo $url ?>" target="_blank">
                     Truy cập file
                 </a>
             </td>

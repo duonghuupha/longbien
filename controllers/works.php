@@ -26,11 +26,11 @@ class Works extends Controller{
     function add(){
         $code   = time(); $works = $_REQUEST['datadc']; $title = $_REQUEST['title'];
         $content = addslashes($_REQUEST['content']); $userid = $this->_Info[0]['id'];
-        $createat = date("Y-m-d H:i:s"); $status = 1;
+        $createat = date("Y-m-d H:i:s"); $status = 1; $docid = $_REQUEST['doc_id'];
         $file = isset($_FILES['file']['name']) ? $this->_Convert->convert_file($_FILES['file']['name'], 'works') : '';
         $data = array("code" => $code, "works_id" => $works, "title" => $title, "content" => $content,
                         "file" => $file, "user_id" => $userid, "create_at" => $createat,
-                        "status" => $status);
+                        "status" => $status, "file_link" => $docid);
         $temp = $this->model->addObj($data);
         if($temp){
             if(isset($_FILES['file']['name'])){
@@ -44,28 +44,9 @@ class Works extends Controller{
                     $this->view->jsonObj = json_encode($jsonObj);
                 }
             }else{
-                // lay thong tin file tu van ban
-                $docid  = $_REQUEST['doc_id']; $docid = explode("_", $docid);
-                $document_id = $docid[0]; $document_type = $docid[1];
-                $json_doc = $this->model->get_info_document($document_id, $document_type);
-                $data_u = array("file" => $json_doc[0]['file']);
-                $tmp = $this->model->updateObj_by_code($code, $data_u);
-                if($tmp){
-                    if(copy(DIR_UPLOAD.'/'.$json_doc[0]['folder'].'/'.$json_doc[0]['cate_id'].'/'.$json_doc[0]['file'],
-                            DIR_UPLOAD.'/works/'.$json_doc[0]['file'])){
-                        $jsonObj['msg'] = "Ghi dữ liệu thành công";
-                        $jsonObj['success'] = true;
-                        $this->view->jsonObj = json_encode($jsonObj);   
-                    }else{
-                        $jsonObj['msg'] = "Thông tin hồ sơ đã được lưu, quá trình tải file gặp lỗi";
-                        $jsonObj['success'] = true;
-                        $this->view->jsonObj = json_encode($jsonObj);
-                    }
-                }else{
-                    $jsonObj['msg'] = "Thông tin hồ sơ đã được lưu, quá trình tải file gặp lỗi";
-                    $jsonObj['success'] = true;
-                    $this->view->jsonObj = json_encode($jsonObj);
-                }
+                $jsonObj['msg'] = "Ghi dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
             }
         }else{
             $jsonObj['msg'] = "Ghi dữ liệu không thành công";
@@ -78,12 +59,13 @@ class Works extends Controller{
     function update(){
         $id = $_REQUEST['id']; $works = $_REQUEST['datadc']; $title = $_REQUEST['title'];
         $content = addslashes($_REQUEST['content']); $createat = date("Y-m-d H:i:s");
-        $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'works') : $_REQUEST['fileold'];
+        $docid = $_REQUEST['doc_id'];
+        $file = ($_FILES['file']['name'] != '' && isset($_FILES['file']['name'])) ? $this->_Convert->convert_file($_FILES['file']['name'], 'works') : $_REQUEST['fileold'];
         $data = array("works_id" => $works, "title" => $title, "content" => $content,
-                        "file" => $file, "create_at" => $createat);
+                        "file" => $file, "create_at" => $createat, "file_link" => $docid);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
-            if($_FILES['file']['name'] != ''){
+            if($_FILES['file']['name'] != '' && isset($_FILES['file']['name'])){
                 if(move_uploaded_file($_FILES['file']['tmp_name'], DIR_UPLOAD.'/works/'.$file)){
                     $jsonObj['msg'] = "Ghi dữ liệu thành công";
                     $jsonObj['success'] = true;

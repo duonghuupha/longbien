@@ -15,7 +15,7 @@ function add(){
     $('#code_proof').val(null); $('#title').val(null);
     $('#file_old').val(null); $('#file').ace_file_input('reset_input');
     $('#file_select').empty(); $('#select_doc').attr('disabled', false);
-    $('#modal-proof').modal('show');
+    $('#doc_id').val(null); $('#modal-proof').modal('show');
     url = baseUrl + '/proof/add';
 }
 
@@ -24,8 +24,9 @@ function edit(idh){
         $('#criteria_id').val(result.criteria_id); $('#fullname').val(result.criteria);
         $('#code_proof').val(result.code_proof); $('#title').val(result.title);
         $('#file_old').val(result.file); $('#code').val(result.code);
+        $('#doc_id').val(result.file_link);
     });
-    $('#file_select').empty(); $('#doc_id').val(null); $('#select_doc').attr('disabled', false);
+    $('#file_select').empty(); $('#select_doc').attr('disabled', false);
     $('#file').attr('disabled', false); $('#file').ace_file_input('reset_input');
     $('#modal-proof').modal('show');
     url = baseUrl + '/proof/update?id='+idh;
@@ -171,4 +172,9 @@ function del_file_select(){
 function set_attr_btn(){
     $('#file_select').empty(); $('#doc_id').val(null);
     $('#select_doc').attr('disabled', true);
+    var value = $('#file').val(); ext = value.split().pop();
+    if(ext != 'pdf' || ext != 'PDF'){
+        show_message("error", "Tệp đính kèm phải là dạng PDF");
+        $('#file').ace_file_input('reset_input');
+    }
 }

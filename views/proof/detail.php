@@ -47,13 +47,21 @@ $item = $this->jsonObj;
             <div class="form-group">
                 <label for="form-field-username">
                     <b>File đính kèm:</b> 
-                    <?php 
-                        if($item[0]['file'] != ''){
-                            echo "<a href='".URL."/public/proof_quanlity/".$item[0]['criteria_id']."/".$item[0]['file']."' target='_blank'>".$item[0]['file']."</a>";
-                        }else{
-                            echo "<i>Không có file đính kèm</i>";
+                    <?php
+                    if($item[0]['file']  != ''){
+                        $url = URL.'/public/proof_quanlity/'.$item[0]['file'];
+                    }else{
+                        $link = explode("_", $item[0]['file_link']);
+                        if($link[1] == 1){ // van ban den
+                            $detail = $this->_Data->get_info_document_in($link[0]);
+                            $url = URL.'/public/document_in/'.$detail[0]['cate_id'].'/'.$detail[0]['file'];
+                        }else{ // van ban di
+                            $detail = $this->_Data->get_info_document_out($link[0]);
+                            $url = URL.'/public/document_out/'.$detail[0]['cate_id'].'/'.$detail[0]['file'];
                         }
+                    }
                     ?>
+                    <a href="<?php echo $url ?>" target="_blank">Xem tệp đính kèm</a>
                 </label>
             </div>
         </div>

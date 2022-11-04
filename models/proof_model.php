@@ -63,8 +63,7 @@ class Proof_Model extends Model{
                                     (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users
                                     WHERE tbl_users.id = user_id)) AS fullname, (SELECT tbldm_quanlity_standard.title FROM tbldm_quanlity_standard
                                     WHERE tbldm_quanlity_standard.id = (SELECT tbldm_quanlity_criteria.standard_id FROM tbldm_quanlity_criteria
-                                    WHERE tbldm_quanlity_criteria.id = criteria_id))
-                                    AS `standard` FROM tbl_proof WHERE id = $id");
+                                    WHERE tbldm_quanlity_criteria.id = criteria_id)) AS `standard`,file_link FROM tbl_proof WHERE id = $id");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 //////////////////////////////////////////////////////////////////////////////////////////
