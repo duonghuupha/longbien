@@ -53,59 +53,33 @@
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
                     In mã sách theo danh mục
                 </div>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form id="fm-dep" method="post" enctype="multipart/form-data">
-                        <input id="datadc_dep" name="datadc_dep" type="hidden"/>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn danh mục</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Lựa chọn danh mục"
-                                    style="width:100%"  id="cate_id" name="cate_id"
-                                    onchange="selected_cate(this.value)">
-                                    </select>
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="dataTables_wrapper form-inline no-footer">
-                                <table
-                                    class="table table-striped table-bordered table-hover dataTable no-footer"
-                                    role="grid" aria-describedby="dynamic-table_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="text-center" style="width:30px">#</th>
-                                            <th class="">Danh mục</th>
-                                            <th class="text-center" style="width:150px">
-                                                Số lượng tem<br/>
-                                                <small style="font-weight:normal;font-style:italic">
-                                                    Mỗi đầu sách thuộc danh mục sẽ được 
-                                                    in ra số lượng tem như cấu hình
-                                                </small>
-                                            </th>
-                                            <th class="text-center"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-cate" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_cate()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_cate" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-                    <i class="ace-icon fa fa-times"></i>
-                    Đóng
-                </button>
-                <button class="btn btn-sm btn-primary pull-right" onclick="print_code_dep()">
+                <small class="pull-left" id="pager_cate">
+                    <!--display pagination-->
+                </small>
+                <button class="btn btn-sm btn-primary pull-right" onclick="print_code_cate()">
                     <i class="ace-icon fa fa-print"></i>
-                    In mã thiết bị
+                    In mã
                 </button>
             </div>
         </div><!-- /.modal-content -->

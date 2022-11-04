@@ -18,5 +18,24 @@ class Lib_code_Model extends Model{
         $result['rows'] = $query->fetchAll();
         return $result;
     }
+///////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_cate($q, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_book WHERE status = 0
+                                    AND title LIKE '%$q%'");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, title FROM tbldm_book WHERE status = 0
+                                    AND title LIKE '%$q%' LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_cate_total($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_book WHERE status = 0
+                                    AND title LIKE '%$q%'");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>

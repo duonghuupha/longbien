@@ -1,4 +1,5 @@
 var page = 1, keyword = '', data = [];
+var page_cate = 1, keyword_cate=  '';
 $(function(){
     $('#list_library').load(baseUrl + '/lib_code/content');
 });
@@ -24,24 +25,31 @@ function print_code(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function select_cate(){
-    combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', 0, '');
-    data = []; render_table_cate(data); $('#modal-cate').modal('show');
+    $('#list_cate').load(baseUrl + '/lib_code/list_cate');
+    $('#pager_cate').load(baseUrl + '/lib_code/list_cate_page');
+    $('#modal-cate').modal('show');
 }
 
-function selected_cate(idh){
-    
+function view_page_cate(pages){
+    page_cate = pages;
+    $('#list_cate').load(baseUrl + '/lib_code/list_cate?page='+page_cate+'&q='+keyword_cate);
+    $('#pager_cate').load(baseUrl + '/lib_code/list_cate_page?page='+page_cate+'&q='+keyword_cate);
 }
 
-function render_table_cate(data_json){
-    $('#tbody').empty(); var html = '', j = 1;
-    for(i = 0; i < data_json.length; i++){
-        html += '<tr id="linecate_'+data_json[i].id+'">';
-            html += '<td>'+j+'</td>';
-            html += '<td>'+data_json[i].title+'</td>'
-        html += '</tr>';
-        j++;
+function search_cate(){
+    var value = $('#nav-search-input-cate').val();
+    if(value.length != 0){
+        keyword_cate = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_cate = '';
     }
-    $('#tbody').append(html);
+    $('#list_cate').load(baseUrl + '/lib_code/list_cate?page=1&q='+keyword_cate);
+    $('#pager_cate').load(baseUrl + '/lib_code/list_cate_page?page=1&q='+keyword_cates);
+}
+
+function confirm_cate(idh){
+    var value= $('#ck_'+idh).is(':checked');
+    console.log(value);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 function select_manu(){
