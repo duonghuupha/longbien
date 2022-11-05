@@ -86,5 +86,19 @@ class  Document_out_Model extends Model{
         $row = $query->fetchAll();
         return $row;
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+    function return_exit_proof($id){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_proof WHERE file_link = CONCAT($id, '_1')
+                                    OR file_link = CONCAT($id, '_2')");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function return_exit_works($id){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_works WHERE file_link = CONCAT($id, '_1')
+                                    OR file_link = CONCAT($id, '_2')");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>

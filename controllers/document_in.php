@@ -142,16 +142,22 @@ class Document_in extends Controller{
 
     function del(){
         $id = $_REQUEST['id']; $data = array("status" => 1);
-        $temp = $this->model->updateObj($id, $data);
-        if($temp){
-            $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
-            $jsonObj['msg'] = "Xóa dữ liệu thành công";
-            $jsonObj['success'] = true;
-            $this->view->jsonObj = json_encode($jsonObj);
-        }else{
-            $jsonObj['msg'] = "Xóa dữ liệu không thành công";
+        if($this->model->return_exit_proof($id) > 0 || $this->model->return_exit_works($id) > 0){
+            $jsonObj['msg'] = "Văn bản được liên kế với module Kiểm định chất lượng hoặc Hồ sơ công việc. Bạn không thể xóa";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $temp = $this->model->updateObj($id, $data);
+            if($temp){
+                $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
+                $jsonObj['msg'] = "Xóa dữ liệu thành công";
+                $jsonObj['success'] = true;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Xóa dữ liệu không thành công";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
         }
         $this->view->render("document_in/del");
     }

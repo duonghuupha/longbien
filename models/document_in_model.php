@@ -101,5 +101,19 @@ class Document_in_Model extends Model{
             return 0;
         }
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+    function return_exit_proof($id){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_proof WHERE file_link = CONCAT($id, '_1')
+                                    OR file_link = CONCAT($id, '_2')");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
+    function return_exit_works($id){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_works WHERE file_link = CONCAT($id, '_1')
+                                    OR file_link = CONCAT($id, '_2')");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>
