@@ -12,9 +12,9 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã</th>
             <th class="">Tên đăng nhập</th>
-            <th class="text-center">Họ tên nhân sự</th>
+            <th class="text-left">Họ tên nhân sự</th>
             <th class="text-center">Đăng nhập lần cuối</th>
-            <th class="text-center" style="width:250px">Thông tin đăng nhập</th>
+            <th class="text-center">Quyền sử dụng</th>
             <th class="text-center">Trạng thái</th>
             <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
@@ -30,9 +30,9 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td id="username_<?php echo $row['id'] ?>"><?php echo $row['username'] ?></td>
-            <td class="text-center" id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
+            <td class="text-left" id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>
             <td class="text-center"><?php echo $row['last_login'] ?></td>
-            <td class="text-center"><?php echo $row['info_login'] ?></td>
+            <td class="text-center"><?php echo $row['group_role'] ?></td>
             <td class="text-center">
                 <?php
                 if($row['active'] == 1){

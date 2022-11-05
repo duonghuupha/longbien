@@ -11,7 +11,8 @@ class Users_Model extends Model{
                                     WHERE tbl_personel.fullname LIKE '%$q%'))");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, code, username, last_login, info_login, hr_id, active, group_role_id,
-                                (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = hr_id) AS fullname
+                                (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = hr_id) AS fullname,
+                                (SELECT title FROM tbl_group_role WHERE tbl_group_role.id = group_role_id) AS group_role
                                 FROM tbl_users WHERE id != 1 AND active != 2 AND (username LIKE '%$q%' OR hr_id 
                                 IN (SELECT tbl_personel.id FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$q%'))
                                 ORDER BY id DESC LIMIT $offset, $rows");
