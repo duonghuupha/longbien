@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION['data'])){
+    header("Location: ".URL.'/index/logout');
+}
 $info = $_SESSION['data'];
 if(isset($_REQUEST['url'])){
 	$arr_url = explode("/", $_REQUEST['url']);
@@ -40,7 +43,7 @@ if(isset($_REQUEST['url'])){
 			var url = '<?php echo $url ?>', year_title = '<?php echo $_SESSION['year'][0]['title'] ?>';
 			var yearid = <?php echo $_SESSION['year'][0]['id'] ?>, userid = <?php echo  $info[0]['id'] ?>;
 		</script>
-		<script src="<?php echo URL ?>/public./scripts/library.js"></script>
+		<script src="<?php echo URL ?>/public/scripts/library.js"></script>
 	</head>
 
 	<body class="no-skin">
