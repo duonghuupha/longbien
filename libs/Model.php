@@ -251,7 +251,7 @@ class Model {
     }
     function get_menu_via_user($grouproleid, $parentid){
         $query = $this->db->query("SELECT id, title, link, functions, parent_id, icon FROM tbl_roles WHERE FIND_IN_SET(tbl_roles.id,
-                                (SELECT roles FROM tbl_group_role WHERE tbl_group_role.id = $grouproleid)) AND parent_id = $parentid
+                                (SELECT roles FROM tbl_group_role WHERE tbl_group_role.id = $grouproleid AND status = 1)) AND parent_id = $parentid
                                 ORDER BY order_position ASC");
         return $query->fetchAll();
     }
@@ -263,7 +263,7 @@ class Model {
     function check_role_controller($grouproleid, $link){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_group_role WHERE id = $grouproleid 
                                     AND FIND_IN_SET((SELECT tbl_roles.id FROM tbl_roles 
-                                    WHERE tbl_roles.link = '$link'), roles); ");
+                                    WHERE tbl_roles.link = '$link'), roles) AND status = 1");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }

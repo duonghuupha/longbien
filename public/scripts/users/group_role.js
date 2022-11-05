@@ -95,11 +95,11 @@ function detail(idh){
 }
 
 function change(status, idh){
-    var value = $('#total_'+idh).text();
-    if(value == 0 && status == 1){
-        var data_str = "id="+idh+'&status='+status;
-        del_data(data_str, "Bạn có chắc chắn muốn thay đổi trạng thái của bản ghi này?", baseUrl + '/group_role/change', '#list_role', baseUrl+'/group_role/content?page='+page+'&q='+keyword);
-    }else{
-        show_message("error", "Nhóm quyền đã được phân cho người dùng, bạn không thể tắt kích hoạt");
-    }
+    //var value = $('#total_'+idh).text();
+    //if(value == 0 && status == 0){
+    var data_str = "id="+idh+'&status='+status;
+    del_data(data_str, "Nếu bỏ kích hoạt bản ghi này sẽ ảnh hưởng đến quyền sử dụng của những người dùng đã được cấp quyền. Bạn có chắc chắn muốn thay đổi trạng thái của bản ghi này?", baseUrl + '/group_role/change', '#list_role', baseUrl+'/group_role/content?page='+page+'&q='+keyword);
+    //}else{
+    //show_message("error", "Nhóm quyền đã được phân cho người dùng, bạn không thể tắt kích hoạt");
+    //}
 }
