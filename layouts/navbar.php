@@ -37,7 +37,7 @@ if(!isset($_SESSION['data'])){
 
                     </ul>
                 </li>
-
+                <!--
                 <li class="green dropdown-modal">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
@@ -146,7 +146,7 @@ if(!isset($_SESSION['data'])){
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
 
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
