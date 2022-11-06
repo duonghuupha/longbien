@@ -45,7 +45,7 @@ class Assign_Model extends Model{
     }
 
     function delObj($id){
-        $query = $this->delete("ttbl_assign", "id = $id");
+        $query = $this->delete("tbl_assign", "id = $id");
         return $query;
     }
 
