@@ -108,8 +108,8 @@ function confirm_user(idh){
 function select_dep(){
     if($('#date_loan').val().length != 0 && $('#lesson').val().length != 0){
         dateloan = $('#date_loan').val(); lessonloan = $('#lesson').val();
-        $('#list_dep').load(baseUrl + '/dep_loan/list_dep?date='+dateloan+'&lesson='+lessonloan);
-        $('#pager_dep').load(baseUrl + '/dep_loan/list_dep_page?date='+dateloan+'&lesson='+lessonloan);
+        $('#list_deps').load(baseUrl + '/dep_loan/list_dep?date='+dateloan+'&lesson='+lessonloan);
+        $('#pager_deps').load(baseUrl + '/dep_loan/list_dep_page?date='+dateloan+'&lesson='+lessonloan);
         $('#modal-department').modal('show');
     }else{
         show_message("error",  "Để đăng ký sử dụng phòng chức năng bạn phải chọn ngày sử dụng và tiết  học");
@@ -118,8 +118,8 @@ function select_dep(){
 
 function view_page_dep(pages){
     page_dep = pages;
-    $('#list_dep').load(baseUrl + '/dep_loan/list_dep?page='+page_dep+'&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
-    $('#pager_dep').load(baseUrl + '/dep_loan/list_dep_page?page='+page_dep+'&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
+    $('#list_deps').load(baseUrl + '/dep_loan/list_dep?page='+page_dep+'&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
+    $('#pager_deps').load(baseUrl + '/dep_loan/list_dep_page?page='+page_dep+'&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
 }
 
 function search_dep(){
@@ -129,8 +129,8 @@ function search_dep(){
     }else{
         keyword_dep = '';
     }
-	$('#list_dep').load(baseUrl + '/dep_loan/list_dep?page=1&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
-    $('#pager_dep').load(baseUrl + '/dep_loan/list_dep_page?page=1&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
+	$('#list_deps').load(baseUrl + '/dep_loan/list_dep?page=1&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
+    $('#pager_deps').load(baseUrl + '/dep_loan/list_dep_page?page=1&q='+keyword_dep+'&date='+dateloan+'&lesson='+lessonloan);
 }
 
 function confirm_dep(idh){

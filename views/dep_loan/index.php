@@ -248,12 +248,12 @@
                         <div class="space-6"></div>
                     </div>
                     <div class="col-xs-12 col-sm-12">
-                        <div id="list_dep" class="dataTables_wrapper form-inline no-footer"></div>
+                        <div id="list_deps" class="dataTables_wrapper form-inline no-footer"></div>
                     </div><!-- /.col -->
                 </div>
             </div>
             <div class="modal-footer">
-                <small class="pull-right" id="pager_dep">
+                <small class="pull-right" id="pager_deps">
                     <!--display pagination-->
                 </small>
             </div>
