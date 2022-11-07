@@ -10,7 +10,7 @@ function filter(){
 
 function search(){
     var sgroup = $('#sgroup').val().length != 0 ? $('#sgroup').val() : '';
-    var scate = $('#scate').val().length != 0 ? $('#scate').val() : '';
+    var scate = $('#scate').val() != null ? $('#scate').val() : '';
     var stitle = $('#stitle').val().length != 0 ? $('#stitle').val().replaceAll(" ", "$", 'g') : '';
     $('#list_works').load(baseUrl+'/report_works/content?page=1&group='+sgroup+'&cate='+scate+'&title='+stitle);
     $('#modal-search').modal('hide');
