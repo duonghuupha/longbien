@@ -32,7 +32,8 @@ function search(){
             $('#ck_'+item.id).prop('checked',  true);
             $('#gear_'+item.id).val(item.sub).trigger('change');
         }
-    }, 200);}
+    }, 200);
+}
 
 function print_code(){
     if(data.length != 0){
@@ -82,5 +83,4 @@ function set_qty_gear(idh){
         show_message("error", "Số lượng tem không thể để trống hoặc bằng 0");
         $('#qty_'+idh).val(1);
     }
-    console.log(data);
 }

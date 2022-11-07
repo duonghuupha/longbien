@@ -1,27 +1,24 @@
 <title>Trường THCS Long Biên - Quận Long Biên</title>
 <body onload="print()">
 <?php
-$data = base64_decode($_REQUEST['data']); $data = explode(",", $data);
-foreach($data as $row){
-    $value = explode(".", $row); $detail = $this->_Data->return_info_book($value[0]);
-    for($z = 1; $z <= $detail[0]['stock']; $z++){
-        $this->_Convert->generateBarcode_book($data = array('sku'=> $detail[0]['code'].'.'.$z), 'book');
-        $title_file = $detail[0]['code'].'_'.$z;
-        for($i = 1; $i <= $value[1]; $i++){
+$jsonObj = $this->jsonObj;
+foreach($jsonObj as $row){
+    for($z = 1; $z <= $row['stock']; $z++){
+        $this->_Convert->generateBarcode_book($data = array('sku'=> $row['code'].'.'.$z), 'book');
+        $title_file = $row['code'].'_'.$z;
 ?>
 <div class="item">
-    <img src="<?php echo URL.'/lib_code/qrcode?data='.base64_encode($detail[0]['code']."-".$z).'&size=200x200' ?>"/>
+    <img src="<?php echo URL.'/lib_code/qrcode?data='.base64_encode($row['code']."-".$z).'&size=200x200' ?>"/>
     <img src="<?php echo URL.'/public/barcode/book/'.$title_file.'.png' ?>" width="190" height="50"/>
-    <span><?php echo $detail[0]['code'].'.'.$z ?></span>
+    <span><?php echo $row['code'].'.'.$z ?></span>
     <div>
         <span>
             <i>Trường THCS Long Biên</i>
-            <i><?php echo $detail[0]['title'].' - '.$z ?></i>
+            <i><?php echo $row['title'].' - '.$z ?></i>
         </span>
     </div>
 </div>
 <?php
-        }
     }
 }
 ?>

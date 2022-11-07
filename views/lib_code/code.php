@@ -1,18 +1,18 @@
 <title>Trường THCS Long Biên - Quận Long Biên</title>
 <body onload="print()">
 <?php
-if(count($_SESSION['code_gear']) != 0){
-    foreach($_SESSION['code_gear'] as $row){
-        $detail = $this->_Data->return_info_utensils($row['id']);
+if(count($_SESSION['code_lib']) != 0){
+    foreach($_SESSION['code_lib'] as $row){
+        $detail = $this->_Data->return_info_book($row['id']);
         if($row['sub'] == 0){
             for($z = 1; $z <= $detail[0]['stock']; $z++){
-                $this->_Convert->generateBarcode_book($data = array('sku'=> $detail[0]['code'].'.'.$z), 'utensils');
+                $this->_Convert->generateBarcode_book($data = array('sku'=> $detail[0]['code'].'.'.$z), 'book');
                 $title_file = $detail[0]['code'].'_'.$z;
                 for($i = 1; $i <= $row['qty']; $i++){
 ?>
 <div class="item">
-    <img src="<?php echo URL.'/gear_code/qrcode?data='.base64_encode($detail[0]['code']."-".$z).'&size=200x200' ?>"/>
-    <img src="<?php echo URL.'/public/barcode/utensils/'.$title_file.'.png' ?>" width="190" height="50"/>
+    <img src="<?php echo URL.'/lib_code/qrcode?data='.base64_encode($detail[0]['code']."-".$z).'&size=200x200' ?>"/>
+    <img src="<?php echo URL.'/public/barcode/book/'.$title_file.'.png' ?>" width="190" height="50"/>
     <span><?php echo $detail[0]['code'].'.'.$z ?></span>
     <div>
         <span>
@@ -25,13 +25,13 @@ if(count($_SESSION['code_gear']) != 0){
                 }
             }
         }else{
-            $this->_Convert->generateBarcode_book($data = array('sku'=> $detail[0]['code'].'.'.$row['sub']), 'utensils');
+            $this->_Convert->generateBarcode_book($data = array('sku'=> $detail[0]['code'].'.'.$row['sub']), 'book');
             $title_file = $detail[0]['code'].'_'.$row['sub'];
             for($i = 1; $i <= $row['qty']; $i++){
 ?>
 <div class="item">
-    <img src="<?php echo URL.'/gear_code/qrcode?data='.base64_encode($detail[0]['code']."-".$row['sub']).'&size=200x200' ?>"/>
-    <img src="<?php echo URL.'/public/barcode/utensils/'.$title_file.'.png' ?>" width="190" height="50"/>
+    <img src="<?php echo URL.'/lib_code/qrcode?data='.base64_encode($detail[0]['code']."-".$row['sub']).'&size=200x200' ?>"/>
+    <img src="<?php echo URL.'/public/barcode/book/'.$title_file.'.png' ?>" width="190" height="50"/>
     <span><?php echo $detail[0]['code'].'.'.$row['sub'] ?></span>
     <div>
         <span>

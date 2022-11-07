@@ -40,6 +40,9 @@
             </div><!-- /.page-header -->
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
+                    <form id="fm" method="post">
+                        <input id="datadc" name="datadc" type="hidden"/>
+                    </form>
                     <div id="list_library" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -69,6 +72,9 @@
                         <div class="space-6"></div>
                     </div>
                     <div class="col-xs-12 col-sm-12">
+                        <form id="fm_cate" method="post">
+                            <input id="data_cate" name="data_cate" type="hidden"/>
+                        </form>
                         <div id="list_cate" class="dataTables_wrapper form-inline no-footer"></div>
                     </div><!-- /.col -->
                 </div>
@@ -86,4 +92,48 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-manu" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    In mã sách theo Nhà xuất bản
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-manu" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_manu()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <form id="fm_manu" method="post">
+                            <input id="data_manu" name="data_manu" type="hidden"/>
+                        </form>
+                        <div id="list_manu" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager_manu">
+                    <!--display pagination-->
+                </small>
+                <button class="btn btn-sm btn-primary pull-right" onclick="print_code_manu()">
+                    <i class="ace-icon fa fa-print"></i>
+                    In mã
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
 <script src="<?php echo URL.'/public/' ?>scripts/library/qrcode.js"></script>

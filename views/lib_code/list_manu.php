@@ -24,8 +24,8 @@ $jsonObj = $this->jsonObj;
             <td class="text-center"><?php echo $i ?></td>
             <td><?php echo $row['title'] ?></td>
             <td class="text-center">
-                <input id="ckcate_<?php echo $row['id'] ?>" name="ckcate_<?php echo $row['id'] ?>"
-                type="checkbox" value="<?php echo $row['id'] ?>" onclick="confirm_cate(<?php echo $row['id'] ?>)"/>
+                <input id="ckmanu_<?php echo $row['id'] ?>" name="ckmanu_<?php echo $row['id'] ?>"
+                type="checkbox" value="<?php echo $row['id'] ?>" onclick="confirm_manu(<?php echo $row['id'] ?>)"/>
             </td>
         </tr>
         <?php
