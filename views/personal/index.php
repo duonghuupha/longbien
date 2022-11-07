@@ -40,14 +40,6 @@
                         </button>
                         <?php
                         }
-                        if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 5) > 0){
-                        ?>
-                        <button type="button" class="btn btn-success btn-sm" onclick="export_card()">
-                            <i class="fa fa-credit-card-alt"></i>
-                            Xuất thẻ
-                        </button>
-                        <?php
-                        }
                         ?>
                     </small>
                 </h1>

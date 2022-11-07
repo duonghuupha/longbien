@@ -1139,6 +1139,22 @@ class User_Excel {
 				)
 		) );
 	}
+	function setStyle_Align_Left_Italic($sheet, $colRowStart, $colRowStop) {
+		$_sheet = $sheet;
+		$_sheet->getStyle ( $colRowStart . ':' . $colRowStop )->applyFromArray ( array (
+                'font' => array (
+						'name' => 'Times New Roman',
+						'bold' => false,
+						'italic' => true,
+						'size' => 12
+				),
+				'alignment' => array (
+						'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+						'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+						'wrap' => true
+				)
+		) );
+	}
 	/**
 	 * Hàm này được dùng định dạng style cho các tiêu đề của doc
 	 */
