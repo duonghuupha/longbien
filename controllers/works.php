@@ -12,7 +12,7 @@ class Works extends Controller{
     }
 
     function content(){
-        $rows = 5;
+        $rows = 15;
         $group = isset($_REQUEST['group']) ? $_REQUEST['group'] : '';
         $cate = (isset($_REQUEST['works']) && $_REQUEST['works']  != 'null') ? $_REQUEST['works'] : '';
         $title = isset($_REQUEST['title']) ? str_replace("$", " ", $_REQUEST['title']) : '';
