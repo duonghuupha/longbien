@@ -14,6 +14,7 @@ require 'libs/config/paths.php';
 require 'libs/config/database.php';
 // Barcode
 require 'libs/vendor/autoload.php';
+include('libs/phpqrcode/qrlib.php'); 
 /**
 * PHPExcel_IOFactory
 */

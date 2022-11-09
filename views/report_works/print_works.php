@@ -36,7 +36,7 @@
                         <td class="text-center"><?php echo $row['code'] ?></a></td>
                         <td class="text-center">
                             <?php
-                                echo  '<img src="'.URL.'/report_works/qrcode?data='.base64_encode($row['code'].'_2').'&size=100x100"/>';
+                                echo  '<img src="'.URL.'/report_works/qrcode?data='.base64_encode($row['code'].'_2').'"/>';
                             ?>
                         </td>
                         <td><?php echo implode("; ", $array[$i]); ?></td>

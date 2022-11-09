@@ -35,7 +35,8 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $row['code'] ?></a></td>
             <td class="text-center">
                 <?php
-                    echo  '<img src="'.URL.'/report_works/qrcode?data='.base64_encode($row['code'].'_2').'&size=50x50"/>';
+                    echo  '<img src="'.URL.'/report_works/qrcode?data='.base64_encode($row['code'].'_2').'"
+                    width="70"/>';
                 ?>
             </td>
             <td><?php echo implode("; ", $array[$i]); ?></td>

@@ -32,7 +32,8 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $row['code_proof'] ?></td>
             <td class="text-center">
                 <?php
-                    echo  '<img src="'.URL.'/report_proof/qrcode?data='.base64_encode($row['code_proof'].'_1').'&size=50x50"/>';
+                    echo  '<img src="'.URL.'/report_proof/qrcode?data='.base64_encode($row['code_proof'].'_1').'"
+                            width="70"/>';
                 ?>
             </td>
             <td><?php echo "<b><i>".$row['standard']."</i></b><br/>".$row['criteria'] ?></td>

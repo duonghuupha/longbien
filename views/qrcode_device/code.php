@@ -11,7 +11,8 @@ if(count($_SESSION['code']) != 0){
         for($i = 1; $i <= $row['qty']; $i++){
 ?>
 <div class="item">
-    <img src="<?php echo URL.'/qrcode_device/qrcode?data='.base64_encode($detail[0]['code']."-".$row['sub']).'&size=200x200' ?>"/>
+    <img src="<?php echo URL.'/qrcode_device/qrcode?data='.base64_encode($detail[0]['code']."-".$row['sub'].'_6') ?>"
+    width="200"/>
     <img src="<?php echo URL.'/public/assets/barcode/'.$title_file.'.png' ?>" width="190" height="50"/>
     <span><?php echo $detail[0]['code'].'.'.$row['sub'] ?></span>
     <div>

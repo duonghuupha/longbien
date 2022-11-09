@@ -8,7 +8,7 @@ foreach($jsonObj as $row){
         $title_file = $row['code'].'_'.$z;
 ?>
 <div class="item">
-    <img src="<?php echo URL.'/lib_code/qrcode?data='.base64_encode($row['code']."-".$z).'&size=200x200' ?>"/>
+    <img src="<?php echo URL.'/lib_code/qrcode?data='.base64_encode($row['code']."-".$z.'_5')?>" width="200"/>
     <img src="<?php echo URL.'/public/barcode/book/'.$title_file.'.png' ?>" width="190" height="50"/>
     <span><?php echo $row['code'].'.'.$z ?></span>
     <div>
