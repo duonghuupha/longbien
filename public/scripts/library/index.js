@@ -88,7 +88,7 @@ function check_ext(){
     var file_data = $('#file').val();
     var ext = file_data.split(".").pop();
     if(ext != 'pdf' && ext != 'PDF' && ext != 'mp4' && ext != 'mp3'){
-        show_message("error", "File dữ liệu không đung định dạng");
+        show_message("error", "File dữ liệu phải file PDF, MP3 hoặc MP4");
         $('#file').ace_file_input('reset_input');
     }
 }
