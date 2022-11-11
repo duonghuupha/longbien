@@ -1,5 +1,4 @@
 <?php
-session_start();
 define('URL', 'http://'.$_SERVER['HTTP_HOST']);
 define('URL_OUT', 'http://longbiensearch:81');
 $dirtionary = realpath($_SERVER['DOCUMENT_ROOT']);
