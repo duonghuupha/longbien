@@ -77,7 +77,7 @@
                     </div>
                     <div class="infobox infobox-green report" onclick="window.location.href='<?php echo URL.'/report_point' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-sort-numeric-desc"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="infobox infobox-blue report" onclick="window.location.href='<?php echo URL.'/report_device' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-cubes"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="infobox infobox-red report" onclick="window.location.href='<?php echo URL.'/report_device_dep' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-cube"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="infobox infobox-orange report" onclick="window.location.href='<?php echo URL.'/report_device_imp' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-cloud-download"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="infobox infobox-orange2 report" onclick="window.location.href='<?php echo URL.'/report_device_change' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-exchange"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="infobox infobox-pink report" onclick="window.location.href='<?php echo URL.'/report_device_loan' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-magnet"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -131,7 +131,7 @@
                     </div>
                     <div class="infobox infobox-blue2 report" onclick="window.location.href='<?php echo URL.'/report_device_repair' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-wrench"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="infobox infobox-blue report" onclick="window.location.href='<?php echo URL.'/report_device_return' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-recycle"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="infobox infobox-green report" onclick="window.location.href='<?php echo URL.'/report_device_detail' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-sitemap"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -158,7 +158,7 @@
                     </div>
                     <div class="infobox infobox-blue2 report" onclick="window.location.href='<?php echo URL.'/report_gear' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-flask"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -167,7 +167,7 @@
                     </div>
                     <div class="infobox infobox-orange report" onclick="window.location.href='<?php echo URL.'/report_gear_imp' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-cloud-download"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -176,7 +176,7 @@
                     </div>
                     <div class="infobox infobox-orange2 report" onclick="window.location.href='<?php echo URL.'/report_gear_loan' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-magnet"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -185,7 +185,7 @@
                     </div>
                     <div class="infobox infobox-green report" onclick="window.location.href='<?php echo URL.'/report_gear_return' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-recycle"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="infobox infobox-green report" onclick="window.location.href='<?php echo URL.'/report_book_loan' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-street-view"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -212,7 +212,7 @@
                     </div>
                     <div class="infobox infobox-red report" onclick="window.location.href='<?php echo URL.'/report_book_return' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-refresh"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
@@ -221,7 +221,7 @@
                     </div>
                     <div class="infobox infobox-blue2 report" onclick="window.location.href='<?php echo URL.'/report_dep_loan' ?>'">
                         <div class="infobox-icon">
-                            <i class="ace-icon fa fa-book"></i>
+                            <i class="ace-icon fa fa-truck"></i>
                         </div>
                         <div class="infobox-data">
                             <span class="infobox-data-number"></span>
