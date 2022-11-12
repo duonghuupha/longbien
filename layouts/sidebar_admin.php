@@ -405,79 +405,13 @@
 </li>
 <!------------------------------------Bao cao thong ke----------------------------------------->
 <li class="hover">
-    <a href="#" class="dropdown-toggle">
+    <a href="<?php echo URL.'/report' ?>" class="dropdown-toggle">
         <i class="menu-icon fa fa-bar-chart"></i>
         <span class="menu-text">
             Báo cáo - Thống kê
         </span>
-        <b class="arrow fa fa-angle-down"></b>
     </a>
     <b class="arrow"></b>
-    <ul class="submenu">
-        <li class="hover">
-            <a href="<?php echo URL.'/lib_cate' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Lịch báo giảng
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a href="<?php echo URL.'/report_document' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Văn bản
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a href="<?php echo URL.'/report_proof' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Kiểm định chất lượng
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a href="<?php echo URL.'/report_works' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Hồ sơ công việc
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a href="<?php echo URL.'/report_personel' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Nhân sự
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a href="<?php echo URL.'/report_student' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Học sinh
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Trang thiết bị
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a a href="<?php echo URL.'/lib_loans' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Đồ dùng
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="hover">
-            <a a href="<?php echo URL.'/lib_loans' ?>">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Thư viện
-            </a>
-            <b class="arrow"></b>
-        </li>
-    </ul>
 </li>
 <!------------------------------------Quan ly nguoi dung----------------------------------------->
 <li class="hover">

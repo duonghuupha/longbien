@@ -141,3 +141,8 @@ function del_selected(idh, sub){
 function del_date_search(){
     $('#dates').val(null);
 }
+
+function detail(idh){
+    $('#detail').load(baseUrl + '/repair/detail?id='+idh);
+    $('#modal-detail').modal('show');
+}

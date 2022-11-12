@@ -69,5 +69,13 @@ class Repair_Model extends Model{
                                 agency, file_bb, user_id, create_at FROM tbl_device_repair WHERE id = $id");
         return $query->fetchAll();
     }
+
+    function get_detail_repair_device($code){
+        $query = $this->db->query("SELECT device_id AS id, sub_device AS sub, content_error AS error, 
+                                content_repair AS fixed, CONCAT((SELECT title FROM tbl_devices 
+                                WHERE tbl_devices.id = device_id)) AS title  FROM tbl_device_repair_detail 
+                                WHERE code = $code");
+        return $query->fetchAll();
+    }
 }
 ?>

@@ -127,5 +127,13 @@ class Repair extends Controller{
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('repair/list_device');
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    function detail(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_info($id);
+        $detail = $this->model->get_detail_repair_device($jsonObj[0]['code']);
+        $this->view->jsonObj = $jsonObj; $this->view->detail = $detail;
+        $this->view->render("repair/detail");
+    }
 }
 ?>
