@@ -20789,3 +20789,17 @@ input.typeahead.scrollable~.tt-menu {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8', endColorstr='#ffececec', GradientType=0)
 }
 /************************************************************/
+.btn-report{
+    width:auto !important;
+    padding:5px 10px 5px 10px !important;
+}
+
+.report{
+    border:1px  dashed;
+    border-color: #ccc !important;
+    cursor: pointer;
+}
+
+.report:hover{
+    background-color: #D8D8D8;
+}

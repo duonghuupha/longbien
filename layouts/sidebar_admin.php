@@ -405,7 +405,7 @@
 </li>
 <!------------------------------------Bao cao thong ke----------------------------------------->
 <li class="hover">
-    <a href="<?php echo URL.'/report' ?>" class="dropdown-toggle">
+    <a href="<?php echo URL.'/report' ?>">
         <i class="menu-icon fa fa-bar-chart"></i>
         <span class="menu-text">
             Báo cáo - Thống kê
