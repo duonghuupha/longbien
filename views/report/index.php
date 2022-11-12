@@ -30,7 +30,7 @@
                             <div class="infobox-content">Báo giảng</div>
                         </div>
                     </div>
-                    <div class="infobox infobox-blue report" onclick="window.location.href='<?php echo URL.'/report_documentd' ?>'">
+                    <div class="infobox infobox-blue report" onclick="window.location.href='<?php echo URL.'/report_document' ?>'">
                         <div class="infobox-icon">
                             <i class="ace-icon fa fa-book"></i>
                         </div>
