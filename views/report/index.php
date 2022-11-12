@@ -233,4 +233,3 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
-<script src="<?php echo URL.'/public/' ?>scripts/report/index.js"></script>
