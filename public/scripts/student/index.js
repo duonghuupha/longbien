@@ -145,8 +145,9 @@ function export_card(){
 }
 
 function filter(){
-    $('#sdepartment').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    combo_select_2('#speople',  baseUrl + '/other/combo_people', 0, '');
+    //$('#sdepartment').load(baseUrl + '/other/combo_department?yearid='+yearid);
+    combo_select_2('#sdepartment', baseUrl + '/other/combo_department?yearid='+yearid);
+    combo_select_2('#speople',  baseUrl + '/other/combo_people');
     $('#modal-search').modal('show');
 }
 
