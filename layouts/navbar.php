@@ -15,7 +15,7 @@ if(!isset($_SESSION['data'])){
             <a href="<?php echo URL.'/index' ?>" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    LBMS Manager
+                    LBSS Manager
                 </small>
             </a>
         </div>
