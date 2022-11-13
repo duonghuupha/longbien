@@ -290,8 +290,7 @@ class Calendars extends Controller{
             }else{ // chua to tai thi tien hanh tao moi 
                 // thuc hien tao ban ghi moi vaf them cac ban ghi chi tiet
                 $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid,  "date_loan" => $date,
-                                "date_return" => $date, "content" => 'Phục vụ công tác giảng dạy 
-                                môn '.$this->_Data->return_title_subject($subject).": ".$title, "notes" => '', "status" => 0,
+                                "date_return" => $date, "content" => 'Phục vụ công tác giảng dạy môn '.$this->_Data->return_title_subject($subject).": ".$title, "notes" => '', "status" => 0,
                                 "create_at" => date("Y-m-d H:i:s"));
                 $temp = $this->model->addObj_device($data);
                 if($temp){
@@ -327,8 +326,7 @@ class Calendars extends Controller{
                 }
             }else{ // chua ton tai thi tien hanh tao moi ban ghi
                 $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date,
-                                "date_return" => $date, "content" => 'Phục vụ công tác giảng dạy 
-                                môn '.$this->_Data->return_title_subject($subject).": ".$title, "notes" => '', "status" => 0,
+                                "date_return" => $date, "content" => 'Phục vụ công tác giảng dạy môn '.$this->_Data->return_title_subject($subject).": ".$title, "notes" => '', "status" => 0,
                                 "create_at" => date("Y-m-d H:i:s"));
                 $temp = $this->model->addObj_gear($data);
                 if($temp){
@@ -345,15 +343,13 @@ class Calendars extends Controller{
             if($this->model->check_code_loan_dep($code) > 0){ // da ton tai phieu
                 // thuc hien cap nhat du lieu
                 $data = array("user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" => $date,
-                                "department_id" => $id, "lesson" => $lesson, "content" => 'Phục vụ công tác giảng dạy 
-                                môn '.$this->_Data->return_title_subject($subject).": ".$title, 
+                                "department_id" => $id, "lesson" => $lesson, "content" => 'Phục vụ công tác giảng dạy môn '.$this->_Data->return_title_subject($subject).": ".$title, 
                                 "create_at" => date("Y-m-d H:i:s"));
                 $temp = $this->model->updateObj_department($code, $data);
                 return ($temp) ? true : false;
             }else{
                 $data = array("code" => $code, "user_id" => $userid, "user_loan" => $userid, "date_loan" => $date, "date_return" => $date,
-                                "department_id" => $id, "lesson" => $lesson, "content" => 'Phục vụ công tác giảng dạy 
-                                môn '.$this->_Data->return_title_subject($subject).": ".$title, 
+                                "department_id" => $id, "lesson" => $lesson, "content" => 'Phục vụ công tác giảng dạy môn '.$this->_Data->return_title_subject($subject).": ".$title, 
                                 "create_at" => date("Y-m-d H:i:s"), "status" => 0);
                 $temp = $this->model->addObj_department($data);
                 return ($temp) ? true : false;

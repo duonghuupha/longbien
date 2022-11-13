@@ -13,6 +13,12 @@
             <div class="page-header">
                 <h1>
                     Trang thiết bị
+                    <small class="pull-right">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='<?php echo URL.'/report' ?>'">
+                            <i class="fa fa-arrow-left"></i>
+                            Quay lại
+                        </button>
+                    </small>
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">

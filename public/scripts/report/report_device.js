@@ -1,6 +1,8 @@
 var page = 1, type_data = 0, cates = '';
 $(function(){
-    $('#cate_s').load(baseUrl + '/other/combo_equipment');
+    //$('#cate_s').load(baseUrl + '/other/combo_equipment');
+    $('#list_device').load(baseUrl + '/report_device/content');
+    combo_select_2('#cate_s', baseUrl + '/other/combo_equipment');
     $('#type_data').val(type_data).trigger('change');
 });
 

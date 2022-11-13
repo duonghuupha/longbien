@@ -9,11 +9,11 @@ function view_page_proof(pages){
 }
 
 function search_adv(){
-    var squan = $('#squan').val().length != 0 ? $('#squan').val() : '';
-    var sstand = $('#sstand').val().length != 0 ? $('#sstand').val() : '';
-    var scriteria = $('#scriteria').val().length != 0 ? $('#scriteria').val() : '';
-    var scode = $('#scode').val().length != 0 ? $('#scode').val().replaceAll(" ", "$", 'g') : '';
-    var stitle = $('#stitle').val().length != 0 ? $('#stitle').val().replaceAll(" ", "$", 'g') : '';
+    squan = $('#squan').val().length != 0 ? $('#squan').val() : '';
+    sstand = $('#sstand').val().length != 0 ? $('#sstand').val() : '';
+    scriteria = $('#scriteria').val().length != 0 ? $('#scriteria').val() : '';
+    scode = $('#scode').val().length != 0 ? $('#scode').val().replaceAll(" ", "$", 'g') : '';
+    stitle = $('#stitle').val().length != 0 ? $('#stitle').val().replaceAll(" ", "$", 'g') : '';
     $('#list_proof').load(baseUrl + '/report_proof/content?page=1&quan='+squan+'&stand='+sstand+'&criteria='+scriteria+'&code='+scode+'&title='+stitle);
     $('#modal-search').modal('hide');
 }
