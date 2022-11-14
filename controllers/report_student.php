@@ -85,8 +85,7 @@ class Report_student extends Controller{
         $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Ngày sinh', $colIndex );
         $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Địa chỉ', $colIndex );
         $helpExport->setStyle_11_TNR_B_C ( $sheet, $colStart . $rowIndex, $colIndex . $rowIndex );
-        $objPHPExcel->getActiveSheet()->getStyle('B')->getNumberFormat()->setFormatCode('@');
-
+        $objPHPExcel->getActiveSheet()->getStyle('A6:H1177')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
         $jsonObj = $this->model->getFetObj_export($keyword, $code, $codecsdl, $name, $date, $class, $address, $gender, $people, $religion, $this->_Year[0]['id'], $status);
         $i = 0;
         foreach($jsonObj as $rows){
@@ -95,8 +94,8 @@ class Report_student extends Controller{
             $colIndex = $colStart; $gender = ($rows['gender'] == 1) ? "Nam" : 'Nữ';
             //$objPHPExcel->getActiveSheet()->getStyle($colIndex.$rowIndex.':'.$colIndex.$rowIndex)->getAlignment()->setWrapText(true);
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $i, $colIndex );
-            $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $rows['code'].' ', $colIndex );
-            $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $rows['code_csdl'].' ', $colIndex );
+            $colIndex = $helpExport->setValueAndTypeForSheet ( $sheet, $colIndex . $rowIndex, $rows['code'], PHPExcel_Cell_DataType::TYPE_STRING, $colIndex );
+            $colIndex = $helpExport->setValueAndTypeForSheet ( $sheet, $colIndex . $rowIndex, $rows['code_csdl'], PHPExcel_Cell_DataType::TYPE_STRING, $colIndex );
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $rows['fullname'], $colIndex );
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $rows['department'], $colIndex );
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $gender, $colIndex );
