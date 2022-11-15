@@ -41,7 +41,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-role" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:70%">
+    <div class="modal-dialog" style="width:80%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
