@@ -1,5 +1,7 @@
 <?php
 $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
+$semester = (isset($_REQUEST['semester']) && $_REQUEST['semester'] != '') ?  $_REQUEST['semester'] : 1;
+$subject = (isset($_REQUEST['subject']) && $_REQUEST['subject'] != '') ? $_REQUEST['subject'] : 0;
 ?>
 <table 
     id="dynamic-table" 
@@ -8,14 +10,19 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
     aria-describedby="dynamic-table_info">
     <thead>
         <tr role="row">
-            <th class="text-center" style="width:20px">#</th>
-            <th class="text-center" style="width:80px">Mã HS</th>
-            <th class="">Họ và tên</th>
-            <th class="text-center">Giới tính</th>
-            <th class="text-center">Ngày sinh</th>
-            <th class="text-center">Lớp học</th>
-            <th class="text-left">Địa chỉ</th>
-            <th class="text-center">Trạng thái</th>
+            <th class="text-center" style="width:20px" rowspan="2">#</th>
+            <th class="" rowspan="2">Họ và tên</th>
+            <th class="text-center" rowspan="2">Ngày sinh</th>
+            <th class="text-center" rowspan="2">Lớp học</th>
+            <th class="text-center" colspan="4">ĐĐGtx</th>
+            <th class="text-center" rowspan="2">ĐĐGgk</th>
+            <th class="text-center" rowspan="2">ĐĐGck</th>
+        </tr>
+        <tr>
+            <th class="text-center">1</th>
+            <th class="text-center">2</th>
+            <th class="text-center">3</th>
+            <th class="text-center">4</th>
         </tr>
     </thead>
     <tbody>
@@ -23,29 +30,22 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         $i = 0;
         foreach($jsonObj['rows'] as $row){
             $i++;
-            $class = ($i%2 == 0) ? 'even' : 'odd'; 
-            if($row['status'] == 1){
-                $status = "Đang đi học";
-            }elseif($row['status'] = 2){
-                $status = "Nghỉ học";
-            }elseif($row['status'] == 3){
-                $status = "Chuyển trường";
-            }else{
-                $status = "Ra trường";
-            }
+            $class = ($i%2 == 0) ? 'even' : 'odd';
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
-            <td>
-                <?php echo $row['fullname'] ?><br/>
-                <small style="color:gray">Mã định danh: <?php echo $row['code_csdl'] ?></small>
-            </td>
-            <td class="text-center"><?php echo ($row['gender'] == 1) ? 'Nam' : 'Nữ' ?></td>
+            <td><?php echo $row['fullname'] ?></td>
             <td class="text-center" id="birthday_<?php echo $row['id'] ?>"><?php echo date("d-m-Y", strtotime($row['birthday'])) ?></td>
             <td class="text-center"><?php echo $row['department'] ?></td>
-            <td class="text-center"><?php echo $status ?></td>
-            <td class="text-left"><?php echo $row['address'] ?></td>
+            <?php
+            for($z = 1; $z <= 6; $z++){
+                $bold = ($this->_Data->check_change_point($row['id'], $z, $this->_Year[0]['id'], $subject, $semester) > 0) ? 'style="font-weight:bold"' : '';
+                $changing = ($this->_Data->check_change_pointing($row['id'], $z, $this->_Year[0]['id'], $subject, $semester) == 0) ? 'style="color:red"' : '';
+            ?>
+            <td class="text-center" id="diem<?php echo $z ?>_<?php echo $row['id'] ?>" <?php echo $bold.' '.$changing ?>><?php echo $this->_Data->return_point_of_student($z, $row['id'], $this->_Year[0]['id'], $semester, $subject) ?></td>
+            <?php
+            }
+            ?>
         </tr>
         <?php
         }
