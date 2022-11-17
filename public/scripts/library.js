@@ -1,5 +1,5 @@
 $(function(){
-    $('.select2').select2();
+    $('.select2').select2(); $('.tool_tip').tooltip();
     $('.date-picker').datepicker({
         autoclose: true,
         todayHighlight: true
