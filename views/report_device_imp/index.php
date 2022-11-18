@@ -18,10 +18,20 @@
                             <i class="fa fa-plus"></i>
                             Lọc dữ  liệu
                         </button>
-                        <button type="button" class="btn btn-success btn-sm" onclick="export_xlsx()">
-                            <i class="fa fa-plus"></i>
-                            Xuất file excel
-                        </button>
+                        <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-primary btn-white dropdown-toggle" aria-expanded="false">
+                                Xuất file excel
+                                <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javscript:void(0)" onclick="export_xlsx()">Tổng hợp</a>
+                                </li>
+                                <li>
+                                    <a href="javscript:void(0)" onclick="export_detail()">Chi tiết</a>
+                                </li>
+                            </ul>
+                        </div>
                         <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='<?php echo URL.'/report' ?>'">
                             <i class="fa fa-arrow-left"></i>
                             Quay lại

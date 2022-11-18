@@ -37,6 +37,10 @@ function export_xlsx(){
     window.open(baseUrl + '/report_device_imp/export_xlsx?fromdate='+fromdate+'&todate='+todate+'&source='+source);
 }
 
+function export_detail(){
+    window.open(baseUrl + '/report_device_imp/export_detail?fromdate='+fromdate+'&todate='+todate+'&source='+source);
+}
+
 function convert_date(date){
     var item = date.split("-");
     return item[2]+'-'+item[1]+'-'+item[0];;

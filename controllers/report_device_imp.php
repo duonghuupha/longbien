@@ -107,5 +107,100 @@ class Report_device_imp extends Controller{
 		$objWriter = PHPExcel_IOFactory::createWriter ( $objPHPExcel, 'Excel2007' );
 		$objWriter->save ( 'php://output' );
     }
+
+    function export_detail(){
+        $source = isset($_REQUEST['source']) ? str_replace("$", " ", $_REQUEST['source']) : '';
+        $fromdate = (isset($_REQUEST['fromdate']) && $_REQUEST['fromdate']) ? $this->_Convert->convertDate($_REQUEST['fromdate']) : '';
+        $todate = (isset($_REQUEST['todate']) && $_REQUEST['todate']) ? $this->_Convert->convertDate($_REQUEST['todate']) : '';
+        $helpExport = new User_Excel ();
+		$objReader = PHPExcel_IOFactory::createReader ( "Excel2007" );
+		$colIndex = '';
+		$rowIndex = 0;
+
+        $objPHPExcel = new PHPExcel ();
+		$sheet = $objPHPExcel->getActiveSheet ();
+        //$objPHPExcel->getActiveSheet()->freezePane('D8');
+
+		$sheet->setCellValue ( 'A1', 'TRƯỜNG THCS LONG BIÊN' );
+		$sheet->mergeCellsByColumnAndRow ( 0, 1, 3, 1 );
+		$helpExport->setStyle_12_TNR_B_L ( $sheet, 'A1', 'A1' );
+		$sheet->setCellValue ( 'A3', 'BÁO CÁO CHI TIẾT QUÁ TRÌNH NHẬP TRANG THIẾT BỊ');
+		$sheet->mergeCellsByColumnAndRow ( 0, 3, 4, 3 );
+		$helpExport->setStyle_14_TNR_B_C ( $sheet, 'A3', 'A3' );
+
+		$rowStart = 5;
+		$colStart = 'A';
+		$rowIndex = $rowStart;
+		$colIndex = $colStart;
+		$sheet = $objPHPExcel->getActiveSheet ();
+		// BEGIN set width for column
+		$sheet->getColumnDimension ( 'A' )->setWidth ( 5 );
+		$sheet->getColumnDimension ( 'B' )->setWidth ( 18 );
+		$sheet->getColumnDimension ( 'C' )->setWidth ( 32 );
+        $sheet->getColumnDimension ( 'D' )->setWidth ( 23 );
+		$sheet->getColumnDimension ( 'E' )->setWidth ( 14 );
+        $sheet->getRowDimension('3')->setRowHeight(25);
+        $sheet->getRowDimension('5')->setRowHeight(30);
+		// END set width for column
+		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'STT', $colIndex );
+		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Mã thiết bị', $colIndex );
+		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Tên thiết bị', $colIndex );
+		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Danh mục', $colIndex );
+		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Số lượng nhập', $colIndex );
+        $helpExport->setStyle_11_TNR_B_C ( $sheet, $colStart . $rowIndex, $colIndex . $rowIndex );
+        $helpExport->setStyle_Align_Left ( $sheet, 'C' . $rowIndex, 'D' . $rowIndex );
+
+        $jsonObj = $this->model->getFetObj_export($fromdate, $todate, $source);
+        foreach($jsonObj as $rows){
+            $rowIndex += 1;
+            $colIndex = $colStart;
+            //$objPHPExcel->getActiveSheet()->getStyle($colIndex.$rowIndex.':'.$colIndex.$rowIndex)->getAlignment()->setWrapText(true);
+            $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Mã nhập: '.$rows['code'].' - Ngày nhập: '.$rows['date_import'], $colIndex );
+            $sheet->mergeCellsByColumnAndRow(0, $rowIndex, 4, $rowIndex);
+            $helpExport->setStyle_11_TNR_B_L ( $sheet, $colStart . $rowIndex, $colIndex . $rowIndex );
+            // thong tin chi tiet 
+            $json = $this->_Data->get_detail_import_device($rows['code']); $i = 0;
+            foreach($json as $item){
+                $i++;
+                $rowIndex += 1;
+                $colIndex = $colStart;
+                if($item['cate_id'] == 0){
+                    if($item['price'] >= 10000000){
+                        $danhmuc = "Tài sản cố định";
+                    }else{
+                        $danhmuc = "Công cụ dụng cụ";
+                    }
+                }else{
+                    $danhmuc = $item['category'];
+                }
+                $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $i, $colIndex );
+                $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $item['code'], $colIndex );
+                $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $item['title'], $colIndex );
+                $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $danhmuc, $colIndex );
+                $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $item['qty'], $colIndex );
+                $helpExport->setStyle_11_TNR_N_L ( $sheet, $colStart . $rowIndex, $colIndex . $rowIndex );
+                $helpExport->setStyle_Align_Center ( $sheet, 'A' . $rowIndex, 'B' . $rowIndex );
+                $helpExport->setStyle_Align_Center ( $sheet, 'E' . $rowIndex, 'E' . $rowIndex );
+            }
+            //$helpExport->setStyle_Align_Center ( $sheet, 'A' . $rowIndex, 'C' . $rowIndex );
+            //$helpExport->setStyle_Align_Center ( $sheet, 'F' . $rowIndex, 'H' . $rowIndex );
+        }
+
+		$sheet->getStyle ( 'A' . $rowStart . ':' . 'E' . $rowIndex )->getBorders ()->getOutline ()->setBorderStyle ( PHPExcel_Style_Border::BORDER_THIN );
+		$sheet->getStyle ( 'A' . $rowStart . ':' . 'E' . $rowIndex )->getBorders ()->getInside ()->setBorderStyle ( PHPExcel_Style_Border::BORDER_THIN );
+
+        ////set dinh dang giay a5 cho ban in ra////////////
+		$objPHPExcel->getActiveSheet ()->getPageSetup ()->setOrientation ( PHPExcel_Worksheet_PageSetup::ORIENTATION_PORTRAIT );
+		$objPHPExcel->getActiveSheet ()->getPageSetup ()->setPaperSize ( PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4 );
+        $pageMargin = $sheet->getPageMargins ();
+		$pageMargin->setTop ( .5 );
+		$pageMargin->setLeft ( 0.5 );
+		$pageMargin->setRight ( 0.5 );
+        header ( 'Content-Type: application/vnd.ms-excel' );
+		header ( 'Content-Disposition: attachment;filename=Bao_cao_qua_trinh_nhap_trang_thiet_bi_chi_tiet.xlsx"' );
+		header ( 'Cache-Control: max-age=0' );
+		$objWriter = PHPExcel_IOFactory::createWriter ( $objPHPExcel, 'Excel2007' );
+		$objWriter->save ( 'php://output' );
+    }
 }
 ?>
