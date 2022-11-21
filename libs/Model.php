@@ -84,8 +84,8 @@ class Model {
     function get_device_selected($code){
         $query = $this->db->query("SELECT CONCAT(device_id, '.', sub_device) AS id, (SELECT title FROM tbl_devices
                                 WHERE tbl_devices.id = device_id) AS title, (SELECT tbl_devices.code
-                                FROM tbl_devices WHERE tbl_devices.id = device_id) AS code, status,  sub_device
-                                FROM tbl_loans_detail WHERE code = $code AND status = 0");
+                                FROM tbl_devices WHERE tbl_devices.id = device_id) AS code, status,  sub_device,
+                                date_return FROM tbl_loans_detail WHERE code = $code AND status = 0");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
     function check_exit_sub_device_loans($deviceid, $subdevice, $date){

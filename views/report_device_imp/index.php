@@ -48,7 +48,6 @@
     </div>
 </div><!-- /.main-content -->
 
-
 <!--Form don vi tinh-->
 <div id="modal-search" class="modal fade" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
@@ -90,7 +89,7 @@
                                 Nguồn trang thiết bị
                             </label>
                             <div>
-                                <input type="text" id="ssource" name="ssource" style="width:100%" onkeypress="validate(event)"
+                                <input type="text" id="ssource" name="ssource" style="width:100%"
                                 placeholder="Mã học sinh"/>
                             </div>
                         </div>

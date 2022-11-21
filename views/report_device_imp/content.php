@@ -49,27 +49,27 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                 class="table table-striped table-bordered table-hover dataTable no-footer" 
                 role="grid"
                 aria-describedby="dynamic-table_info">
-                <thead>
-                    <tr role="row">
-                        <th class="text-center" style="width:120px">Mã thiết bị</th>
-                        <th class="text-left">Tên trang thiết bị</th>
-                        <th class="text-center">Số lượng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach($detail as $item){
-                    ?>
-                    <tr>
-                        <td class="text-center"><?php echo $item['code'] ?></td>
-                        <td><?php echo $item['title'] ?></td>
-                        <td class="text-center"><?php echo $item['qty'] ?></td>
-                    </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
+                    <thead>
+                        <tr role="row">
+                            <th class="text-center" style="width:120px">Mã thiết bị</th>
+                            <th class="text-left">Tên trang thiết bị</th>
+                            <th class="text-center">Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach($detail as $item){
+                        ?>
+                        <tr>
+                            <td class="text-center"><?php echo $item['code'] ?></td>
+                            <td><?php echo $item['title'] ?></td>
+                            <td class="text-center"><?php echo $item['qty'] ?></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </td>
         </tr>
         <?php
