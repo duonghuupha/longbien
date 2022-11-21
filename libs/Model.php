@@ -375,8 +375,9 @@ class Model {
     function get_detail_repair_device($code){
         $query = $this->db->query("SELECT device_id AS id, sub_device AS sub, content_error AS error, 
                                 content_repair AS fixed, CONCAT((SELECT title FROM tbl_devices 
-                                WHERE tbl_devices.id = device_id)) AS title  FROM tbl_device_repair_detail 
-                                WHERE code = $code");
+                                WHERE tbl_devices.id = device_id), ' - ', sub_device) AS title,
+                                (SELECT tbl_devices.code FROM tbl_devices WHERE tbl_devices.id = device_id) AS code_d  
+                                FROM tbl_device_repair_detail WHERE code = $code");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
     function get_info_document_in($id){
