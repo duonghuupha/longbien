@@ -1,8 +1,7 @@
 var page = 1, codes = '', titles = '', cates = '', url = '';
 $(function(){
     $('#list_gear').load(baseUrl + '/gear/content');
-    //$('#cate_id').load(baseUrl + '/other/combo_utensils');
-    $('#cate_s').load(baseUrl + '/other/combo_utensils');
+    combo_select_2('#cate_s', baseUrl + '/other/combo_utensils');
 });
 
 function add(){
