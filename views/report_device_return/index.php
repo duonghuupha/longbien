@@ -12,7 +12,7 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Thu hồi - Khôi phục trang thiết bị
+                    Báo cáo thu hồi - Khôi phục trang thiết bị
                     <small class="pull-right">
                         <button class="btn btn-sm btn-primary" type="button" onclick="filter()">
                             <i class="ace-icon fa fa-search"></i>
