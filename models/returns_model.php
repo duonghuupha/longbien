@@ -59,7 +59,11 @@ class Returns_Model extends Model{
                                     AND device_id = $deviceid AND sub_device = $subdevice ORDER BY id DESC
                                     LIMIT 0, 1");
         $row = $query->fetchAll();
-        return $row[0]['status'];
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 4;
+        }
     }
 
     function delObj($id){

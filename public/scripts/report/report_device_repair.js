@@ -10,7 +10,7 @@ function search(){
     devices = ($('#devices').val().length != 0) ? $('#devices').val().replaceAll(" ", "$", 'g') : '';
     if(fromdate.length != 0 || todate.length != 0){
         if(fromdate.length != 0 && todate.length != 0){ 
-            let date3 = new Date(convert_date(fromdatereturn)); let date4 = new Date(convert_date(todatereturn));
+            let date3 = new Date(convert_date(fromdate)); let date4 = new Date(convert_date(todate));
             if(date3 <= date4){
                 $('#list_repair').load(baseUrl + '/report_device_repair/content?page=1&fromdate='+fromdate+'&todate='+todate+'&agency='+agencys+'&device='+devices);
             }else{
@@ -36,7 +36,7 @@ function export_xlsx(){
     devices = ($('#devices').val().length != 0) ? $('#devices').val().replaceAll(" ", "$", 'g') : '';
     if(fromdate.length != 0 || todate.length != 0){
         if(fromdate.length != 0 && todate.length != 0){ 
-            let date3 = new Date(convert_date(fromdatereturn)); let date4 = new Date(convert_date(todatereturn));
+            let date3 = new Date(convert_date(fromdate)); let date4 = new Date(convert_date(todate));
             if(date3 <= date4){
                 window.open(baseUrl + '/report_device_repair/export_xlsx?fromdate='+fromdate+'&todate='+todate+'&agency='+agencys+'&device='+devices);
             }else{
@@ -57,7 +57,7 @@ function export_detail(){
     devices = ($('#devices').val().length != 0) ? $('#devices').val().replaceAll(" ", "$", 'g') : '';
     if(fromdate.length != 0 || todate.length != 0){
         if(fromdate.length != 0 && todate.length != 0){ 
-            let date3 = new Date(convert_date(fromdatereturn)); let date4 = new Date(convert_date(todatereturn));
+            let date3 = new Date(convert_date(fromdate)); let date4 = new Date(convert_date(todate));
             if(date3 <= date4){
                 window.open(baseUrl + '/report_device_repair/export_detail?fromdate='+fromdate+'&todate='+todate+'&agency='+agencys+'&device='+devices);
             }else{

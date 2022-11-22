@@ -26,18 +26,29 @@ $pages = $this->page; $sql = new Model();
             $class = ($i%2 == 0) ? 'even' : 'odd';
             $device = $sql->return_list_device_export($row['code']);
             $z = 0;
-            foreach($device as $item){
-                $z++;
-                $array[$i][] = '* '.$item['device'].' - '.$item['sub_device'];
-                if($z == 2){
-                    $array[$i][] = "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>Xem thêm</a>";
-                    break;
+            if(count($device) > 0){
+                foreach($device as $item){
+                    $z++;
+                    $array[$i][] = '* '.$item['device'].' - '.$item['sub_device'];
+                    if($z == 2){
+                        $array[$i][] = "<a href='javascript:void(0)' onclick='detail(".$row['id'].")'>Xem thêm</a>";
+                        break;
+                    }
                 }
-            }
-            foreach($device as $items){
-                $tbdc[$i][] = $items['device_id'].'.'.$items['sub_device'];
+                foreach($device as $items){
+                    $tbdc[$i][] = $items['device_id'].'.'.$items['sub_device'];
+                }
+            }else{
+                $array[$i] = [];
+                $tbdc[$i] = [];
             }
 
+            
+            if(count($array[$i]) != 0){
+                $thietbi = implode("<br/>", $array[$i]);
+            }else{
+                $thietbi = "<i>Thiết bị thuộc phòng ban đã bị thu hồi vì lý do khách quan</i>";
+            }
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
@@ -45,7 +56,7 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center"><?php echo $row['namhoc'] ?></td>
             <td class="text-center" id="physicaltitle_<?php echo $row['id'] ?>"><?php echo $row['physical'] ?></td>
             <td class="text-center"><?php echo date("d-m-Y H:i:s", strtotime($row['create_at'])) ?></td>
-            <td class="text-left"><?php echo implode("<br/>", $array[$i]) ?></td>
+            <td class="text-left"><?php echo $thietbi ?></td>
             <td class="text-center">
                 <div class="action-buttons">
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">

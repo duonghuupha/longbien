@@ -41,11 +41,11 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center">
                 <?php
                 if($row['status'] == 0){
-                    echo '<span class="label label-sm label-warning">Chưa duyệt</span>';
+                    echo '<span class="label label-sm label-warning">Thu hồi - Chưa duyệt</span>';
                 }elseif($row['status'] == 1){
-                    echo '<span class="label label-sm label-success">Đã duyệt</span>';
+                    echo '<span class="label label-sm label-success">Thu hồi - Đã duyệt</span>';
                 }elseif($row['status'] == 2){
-                    echo '<span class="label label-sm label-danger">Từ chối</span>';
+                    echo '<span class="label label-sm label-danger">Thu hồi - Từ chối</span>';
                 }elseif($row['status'] == 3){
                     echo '<span class="label label-sm label-primary">Khôi phục</span>';
                 }

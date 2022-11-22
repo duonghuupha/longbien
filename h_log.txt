@@ -225,3 +225,7 @@
 2022-11-12 23:56:52/1/Cập nhật dữ liệu/gear_loans/update
 2022-11-18 16:06:06/1/Thêm mới dữ liệu/change_device/add
 2022-11-18 16:08:12/1/Thêm mới dữ liệu/loans/add
+2022-11-22 00:09:00/1/Thêm mới dữ liệu/returns/add
+2022-11-22 00:09:32/1/Cập nhật dữ liệu/returns/approval
+2022-11-22 00:14:42/1/Thêm mới dữ liệu/returns/restore
+2022-11-22 00:54:02/1/Cập nhật dữ liệu/export_device/update

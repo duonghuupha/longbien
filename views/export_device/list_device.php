@@ -1,5 +1,5 @@
 <?php
-$sql = new Model(); $data = base64_decode($_REQUEST['data']); $data = array_filter(array_unique(explode(",", $data)));
+$data = base64_decode($_REQUEST['data']); $data = array_filter(array_unique(explode(",", $data)));
 $data = implode(",", $data);
 ?>
 <input id="datadc" name="datadc" type="hidden" value="<?php echo $data ?>"/>
@@ -12,9 +12,9 @@ if($data != ''){
 
 ?>
     <li id="tb_<?php echo $value[0].'_'.$value[1] ?>">
-        <?php echo $sql->return_title_device($value[0]).' - '.$value[1] ?>
+        <?php echo $this->_Data->return_title_device($value[0]).' - '.$value[1] ?>
         <?php
-        if($sql->check_exit_sub_device($value[0], $value[1]) == 0){
+        if($this->_Data->check_exit_sub_device($value[0], $value[1]) == 0){
         ?>
         |
         <a href="javascript:void(0)" onclick="del_device_selected('<?php echo $item ?>')" style="color:red" title="Xóa">
@@ -26,6 +26,8 @@ if($data != ''){
     </li> 
 <?php
     }
+}else{
+    echo '<i>Thiết bị thuộc phòng ban đã bị thu hồi vì lý do khách quan</i>';
 }
 ?>
 </ul>
