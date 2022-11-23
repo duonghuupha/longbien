@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main padding-4">
-                                        
+                                        <i>Đang cập nhật</i>
                                     </div><!-- /.widget-main -->
                                 </div><!-- /.widget-body -->
                             </div><!-- /.widget-box -->
@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="widget-body">
                                     <div class="widget-main no-padding">
-                                        
+                                        <i>Đang cập nhật</i>
                                     </div><!-- /.widget-main -->
                                 </div><!-- /.widget-body -->
                             </div><!-- /.widget-box -->
