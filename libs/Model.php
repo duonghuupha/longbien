@@ -369,7 +369,9 @@ class Model {
     function get_detail_import_gear($code){
         $query = $this->db->query("SELECT utensils_id AS id, quantily AS qty, (SELECT title FROM tbl_utensils
                                     WHERE tbl_utensils.id = utensils_id) AS title, (SELECT tbl_utensils.code FROM tbl_utensils
-                                    WHERE tbl_utensils.id = utensils_id) AS code FROM tbl_utensils_imp_detail WHERE code = $code");
+                                    WHERE tbl_utensils.id = utensils_id) AS code, (SELECT tbldm_utensils.title FROM tbldm_utensils
+                                    WHERE tbldm_utensils.id = (SELECT tbl_utensils.cate_id FROM tbl_utensils 
+                                    WHERE tbl_utensils.id = utensils_id)) AS category FROM tbl_utensils_imp_detail WHERE code = $code");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
     function get_detail_repair_device($code){

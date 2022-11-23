@@ -14,7 +14,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-left">Người thực hiện</th>
             <th class="text-left">Nguồn đồ dùng</th>
             <th class="text-center">Tổng đầu đồ  dùng</th>
-            <th class="text-center">Tổng số lượng đò dùng</th>
+            <th class="text-center">Tổng số lượng đồ dùng</th>
             <th class="text-center">Cập nhật lần cuối</th>
             <th class="text-center" style="width:100px">Thao tác</th>
         </tr>
