@@ -2,8 +2,8 @@ var page = 1, url = '', title_s = '', cate_s = '', manu_s = '', author_s = '';
 var page_read = 1, keyword_read = '';
 $(function(){
     $('#list_library').load(baseUrl + '/library/content');
-    combo_select_2('#cate_s', baseUrl + '/other/combo_book_cate', 0, '');
-    combo_select_2('#manu_s', baseUrl + '/other/combo_book_manu', 0, '');
+    combo_select_2('#cate_s', baseUrl + '/other/combo_book_cate');
+    combo_select_2('#manu_s', baseUrl + '/other/combo_book_manu');
 });
 
 function add(){
@@ -99,11 +99,11 @@ function refresh_code(){
 }
 
 function del_cate(){
-    $('#cate_s').val(null).trigger('change');
+    $('#cate_s').val('').trigger('change');
 }
 
 function del_nb(){
-    $('#manu_s').val(null).trigger('change');
+    $('#manu_s').val('').trigger('change');
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 function detail_read(idh, title){
