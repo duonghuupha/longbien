@@ -33,7 +33,7 @@ $jsonObj = $this->jsonObj;
                 <option value=""></option>
                 <?php
                 for($z = 1; $z <= $row['stock']; $z++){
-                    if($this->_Data->check_gear_loan($row['id'], $z) == 0){
+                    if($this->_Data->check_gear_loan($row['id'], $z, date("Y-m-d")) == 0){
                         echo '<option value="'.$z.'">'.$z.'</option>';
                     }
                 }
