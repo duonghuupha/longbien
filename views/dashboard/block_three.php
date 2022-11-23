@@ -3,7 +3,7 @@ $id = $_REQUEST['id']; $jsonObj = $this->jsonObj;
 if(count($jsonObj) > 0){
     $html = '[';
     foreach($jsonObj as $row){
-        $array[] = '{data: '.$row['Total'].', label: "'.$row['title'].'"}';
+        $array[] = '{data: '.$row['Total'].', label: "'.$row['title'].' - '.$row['Total'].'"}';
     }
     $html .= implode(",", $array);
     $html .= ']';
