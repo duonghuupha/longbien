@@ -102,7 +102,7 @@ class Report_gear_imp extends Controller{
 		$pageMargin->setLeft ( 0.35 );
 		$pageMargin->setRight ( 0.35 );
         header ( 'Content-Type: application/vnd.ms-excel' );
-		header ( 'Content-Disposition: attachment;filename=Bao_cao_qua_trinh_nhap_do_dung_day_hoc.xlsx"' );
+		header ( 'Content-Disposition: attachment;filename="Bao_cao_qua_trinh_nhap_do_dung_day_hoc.xlsx"' );
 		header ( 'Cache-Control: max-age=0' );
 		$objWriter = PHPExcel_IOFactory::createWriter ( $objPHPExcel, 'Excel2007' );
 		$objWriter->save ( 'php://output' );
@@ -188,7 +188,7 @@ class Report_gear_imp extends Controller{
 		$pageMargin->setLeft ( 0.5 );
 		$pageMargin->setRight ( 0.5 );
         header ( 'Content-Type: application/vnd.ms-excel' );
-		header ( 'Content-Disposition: attachment;filename=Bao_cao_qua_trinh_nhap_do_dung_day_hoc_chi_tiet.xlsx"' );
+		header ( 'Content-Disposition: attachment;filename="Bao_cao_qua_trinh_nhap_do_dung_day_hoc_chi_tiet.xlsx"' );
 		header ( 'Cache-Control: max-age=0' );
 		$objWriter = PHPExcel_IOFactory::createWriter ( $objPHPExcel, 'Excel2007' );
 		$objWriter->save ( 'php://output' );

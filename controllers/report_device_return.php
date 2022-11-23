@@ -111,7 +111,7 @@ class Report_device_return extends Controller{
 		$pageMargin->setLeft ( 0.25 );
 		$pageMargin->setRight ( 0.25 );
         header ( 'Content-Type: application/vnd.ms-excel' );
-		header ( 'Content-Disposition: attachment;filename=Bao_cao_thu_hoi_khoi_phuc_trang_thiet_bi.xlsx"' );
+		header ( 'Content-Disposition: attachment;filename="Bao_cao_thu_hoi_khoi_phuc_trang_thiet_bi.xlsx"' );
 		header ( 'Cache-Control: max-age=0' );
 		$objWriter = PHPExcel_IOFactory::createWriter ( $objPHPExcel, 'Excel2007' );
 		$objWriter->save ( 'php://output' );

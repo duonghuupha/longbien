@@ -103,7 +103,7 @@ class Report_gear_return extends Controller{
 		$pageMargin->setLeft ( 0.5 );
 		$pageMargin->setRight ( 0.5 );
         header ( 'Content-Type: application/vnd.ms-excel' );
-		header ( 'Content-Disposition: attachment;filename=Bao_cao_thu_hoi_khoi_phuc_do_dung_day_hoc.xlsx"' );
+		header ( 'Content-Disposition: attachment;filename="Bao_cao_thu_hoi_khoi_phuc_do_dung_day_hoc.xlsx"' );
 		header ( 'Cache-Control: max-age=0' );
 		$objWriter = PHPExcel_IOFactory::createWriter ( $objPHPExcel, 'Excel2007' );
 		$objWriter->save ( 'php://output' );
