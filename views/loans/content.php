@@ -26,7 +26,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd';
-            $detail = $sql->get_device_selected($row['code']);
+            $detail = $this->_Data->get_device_selected($row['code']);
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>

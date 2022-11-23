@@ -164,7 +164,7 @@ class Model {
     function get_gear_selected($code){
         $query = $this->db->query("SELECT CONCAT(utensils_id, '.', sub_utensils) AS id, (SELECT title FROM tbl_utensils
                                 WHERE tbl_utensils.id = utensils_id) AS title, (SELECT tbl_utensils.code
-                                FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS code, status,  sub_utensils
+                                FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS code_u, status,  sub_utensils
                                 FROM tbl_utensils_loan_detail WHERE code = $code AND status = 0");
         return json_encode($query->fetchAll(PDO::FETCH_ASSOC));
     }
@@ -388,6 +388,18 @@ class Model {
     }
     function get_info_document_out($id){
         $query = $this->db->query("SELECT id, cate_id, file FROM tbl_document_out WHERE id = $id");
+        return $query->fetchAll();
+    }
+    function get_device_selected_report($code){
+        $query = $this->db->query("SELECT (SELECT title FROM tbl_devices WHERE tbl_devices.id = device_id) AS title, 
+                                (SELECT tbl_devices.code FROM tbl_devices WHERE tbl_devices.id = device_id) AS code_d, 
+                                status,  sub_device, date_return FROM tbl_loans_detail WHERE code = $code");
+        return $query->fetchAll();
+    }
+    function get_gear_selected_report($code){
+        $query = $this->db->query("SELECT (SELECT title FROM tbl_utensils  WHERE tbl_utensils.id = utensils_id) AS title, 
+                                (SELECT tbl_utensils.code FROM tbl_utensils WHERE tbl_utensils.id = utensils_id) AS code_u, 
+                                status, sub_utensils, date_return FROM tbl_utensils_loan_detail WHERE code = $code");
         return $query->fetchAll();
     }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////

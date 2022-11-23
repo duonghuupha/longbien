@@ -107,7 +107,7 @@ function search_gear(){
 
 function confirm_gear(idh){
     var value = $('#gear_'+idh).val(), code = $('#code_'+idh).text(), title = $('#title_'+idh).text();
-    var str = {'id': idh+'.'+value, 'code': code, 'title': title, 'sub_utensils': value};
+    var str = {'id': idh+'.'+value, 'code_u': code, 'title': title, 'sub_utensils': value};
     var objIndex = data.findIndex(item => item.id === idh+'.'+value);
     if(objIndex != -1){
         show_message("error", "Đồ dùng đã được chọn, không thể chọn lại");
@@ -123,7 +123,7 @@ function render_table(data_json){
     for(var i = 0; i < data_json.length; i++){
         html += '<tr role="row">';
             html += '<td class="text-center">'+j+'</td>';
-            html += '<td class="text-center">'+data_json[i].code+'</td>';
+            html += '<td class="text-center">'+data_json[i].code_u+'</td>';
             html += '<td class="text-left">'+data_json[i].title+'</td>';
             html += '<td class="text-center">'+data_json[i].sub_utensils+'</td>';
             html += '<td class="text-center">';
@@ -143,7 +143,7 @@ function render_table_edit(data_json){
         var idh = data_json[i].id.replace(".", "");
         html += '<tr role="row">';
             html += '<td class="text-center">'+j+'</td>';
-            html += '<td class="text-center">'+data_json[i].code+'</td>';
+            html += '<td class="text-center">'+data_json[i].code_u+'</td>';
             html += '<td class="text-left">'+data_json[i].title+'</td>';
             html += '<td class="text-center">'+data_json[i].sub_utensils+'</td>';
             html += '<td class="text-center">';

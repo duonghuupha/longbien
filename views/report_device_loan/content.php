@@ -24,7 +24,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd';
-            $detail = json_decode($this->_Data->get_device_selected($row['code']), true);
+            $detail = $this->_Data->get_device_selected_report($row['code']);
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
@@ -79,7 +79,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                         foreach($detail as $item){
                         ?>
                         <tr>
-                            <td class="text-center"><?php echo $item['code'] ?></td>
+                            <td class="text-center"><?php echo $item['code_d'] ?></td>
                             <td class="text-center"><?php echo $item['sub_device'] ?></td>
                             <td><?php echo $item['title'] ?></td>
                             <td class="text-center"><?php echo date("d-m-Y",  strtotime($item['date_return'])) ?></td>

@@ -172,7 +172,7 @@ class Report_device_loan extends Controller{
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Mã: '.$rows['code'].' - Ngày mượn: '.date('d-m-Y',  strtotime($rows['date_loan'])).' - Người mượn: '.$rows['fullname_loan'], $colIndex );
             $sheet->mergeCellsByColumnAndRow(0, $rowIndex, 5, $rowIndex);
             $helpExport->setStyle_11_TNR_B_L ( $sheet, $colStart . $rowIndex, $colIndex . $rowIndex );
-            $json = json_decode($this->_Data->get_device_selected($rows['code']), true); $i = 0;
+            $json = $this->_Data->get_device_selected_report($rows['code']); $i = 0;
             foreach($json as $item){
                 $i++;
                 $rowIndex += 1;
