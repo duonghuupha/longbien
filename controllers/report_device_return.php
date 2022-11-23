@@ -43,7 +43,7 @@ class Report_device_return extends Controller{
 		$sheet->setCellValue ( 'A1', 'TRƯỜNG THCS LONG BIÊN' );
 		$sheet->mergeCellsByColumnAndRow ( 0, 1, 3, 1 );
 		$helpExport->setStyle_12_TNR_B_L ( $sheet, 'A1', 'A1' );
-		$sheet->setCellValue ( 'A3', 'BÁO CÁO BẢO  TRÌ - SỬA CHỮA - NÂNG CẤP TRANG THIẾT BỊ');
+		$sheet->setCellValue ( 'A3', 'BÁO CÁO THU HỒI - KHÔI PHỤC TRANG THIẾT BỊ');
 		$sheet->mergeCellsByColumnAndRow ( 0, 3, 6, 3 );
 		$helpExport->setStyle_14_TNR_B_C ( $sheet, 'A3', 'A3' );
 
@@ -94,6 +94,7 @@ class Report_device_return extends Controller{
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, date("d-m-Y", strtotime($rows['create_at'])), $colIndex );
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $rows['physical'].' - '.$rows['department'], $colIndex );
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $rows['device'].'-'.$rows['sub_device'], $colIndex );
+            $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $rows['content'], $colIndex );
             $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, $status, $colIndex );
             $helpExport->setStyle_11_TNR_N_C ( $sheet, $colStart . $rowIndex, $colIndex . $rowIndex );
             $helpExport->setStyle_Align_Left ( $sheet, 'E' . $rowIndex, 'F' . $rowIndex );
@@ -110,7 +111,7 @@ class Report_device_return extends Controller{
 		$pageMargin->setLeft ( 0.25 );
 		$pageMargin->setRight ( 0.25 );
         header ( 'Content-Type: application/vnd.ms-excel' );
-		header ( 'Content-Disposition: attachment;filename=Bao_cao_bao_tri_sua_chua_nang_cap_trang_thiet_bi.xlsx"' );
+		header ( 'Content-Disposition: attachment;filename=Bao_cao_thu_hoi_khoi_phuc_trang_thiet_bi.xlsx"' );
 		header ( 'Cache-Control: max-age=0' );
 		$objWriter = PHPExcel_IOFactory::createWriter ( $objPHPExcel, 'Excel2007' );
 		$objWriter->save ( 'php://output' );
