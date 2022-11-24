@@ -6,7 +6,7 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="#">Trang chủ</a>
                 </li>
-                <li class="active">Báo cáo thu hồi - khôi phục đồ dùng dạy học</li>
+                <li class="active">Báo cáo - Thống kê</li>
             </ul><!-- /.breadcrumb -->
         </div>
         <div class="page-content">

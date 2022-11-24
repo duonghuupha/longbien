@@ -27,7 +27,6 @@ class Report_gear_return extends Controller{
     function export_xlsx(){
         $status = (isset($_REQUEST['status'])) ? $_REQUEST['status'] : 0;
         $title = (isset($_REQUEST['title']) && $_REQUEST['title'] != '') ? str_replace("$", " ", $_REQUEST['title']) : '';
-        $dep = (isset($_REQUEST['dep']) && $_REQUEST['dep'] != '') ? $_REQUEST['dep'] : '';
         $fromdate = (isset($_REQUEST['fromdate']) && $_REQUEST['fromdate'] != '') ? $this->_Convert->convertDate($_REQUEST['fromdate']) : '';
         $todate = (isset($_REQUEST['todate']) && $_REQUEST['todate'] != '') ? $this->_Convert->convertDate($_REQUEST['todate']) : '';
         $helpExport = new User_Excel ();
@@ -64,13 +63,13 @@ class Report_gear_return extends Controller{
 		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'STT', $colIndex );
 		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Mã', $colIndex );
 		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Ngày tạo', $colIndex );
-		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Thiết bị', $colIndex );
+		$colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Tên đồ dùng', $colIndex );
         $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Lý do thu hồi / Khôi phục', $colIndex );
         $colIndex = $helpExport->setValueForSheet ( $sheet, $colIndex . $rowIndex, 'Trạng thái', $colIndex );
         $helpExport->setStyle_11_TNR_B_C ( $sheet, $colStart . $rowIndex, $colIndex . $rowIndex );
         $helpExport->setStyle_Align_Left ( $sheet, 'D' . $rowIndex, 'E' . $rowIndex );
 
-        $jsonObj = $this->model->getFetObj_export($fromdate, $todate, $dep, $title, $status);
+        $jsonObj = $this->model->getFetObj_export($fromdate, $todate, $title, $status);
         $i = 0;
         foreach($jsonObj as $rows){
             $i++;
