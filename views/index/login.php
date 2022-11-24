@@ -36,7 +36,7 @@
 								<h1>
 									<i class="ace-icon fa fa-leaf green"></i>
 									<span class="red">LB</span>
-									<span class="white" id="id-text2">Secondary School</span>
+									<span class="grey" id="id-text2">Secondary School</span>
 								</h1>
 								<h4 class="blue" id="id-company-text">&copy; THCS Long Biên</h4>
 							</div>
