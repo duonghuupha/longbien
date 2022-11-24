@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
-                            <label for="form-field-username">Ngày trả (Đến ngày)</label>
+                            <label for="form-field-username">Ngày mượn (Đến ngày)</label>
                             <div class="input-group">
                                 <input class="form-control date-picker" id="to_date_loan" type="text" 
                                 name="to_date_loan" data-date-format="dd-mm-yyyy" readonly=""/>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
-                            <label for="form-field-username">Ngày mượn (Đến ngày)</label>
+                            <label for="form-field-username">Ngày trả (Đến ngày)</label>
                             <div class="input-group">
                                 <input class="form-control date-picker" id="to_date_return" type="text" 
                                 name="to_date_return" data-date-format="dd-mm-yyyy" readonly=""/>

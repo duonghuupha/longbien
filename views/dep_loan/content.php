@@ -44,7 +44,6 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                     </a>
                 </div>
             </td>
-            <td class="hidden" id="detail_<?php echo $row['id'] ?>"><?php echo $detail ?></td>
         </tr>
         <?php
         }

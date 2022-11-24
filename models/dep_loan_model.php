@@ -10,7 +10,7 @@ class Dep_loan_Model extends Model{
             $where = $where." AND user_loan IN (SELECT tbl_users.id FROM tbl_users WHERE hr_id IN (SELECT tbl_personel.id
                             FROM tbl_personel WHERE tbl_personel.fullname LIKE '%$name%'))";
         if($date != '')
-            $where = $where." AND date_loan = '$date'";
+            $where = $where." AND DATE_FORMAT(date_loan, '%Y-%m-%d') = '$date'";
         if($dep != '')
             $where = $where." AND department_id IN (SELECT tbldm_department.id FROM tbldm_department
                             WHERE tbldm_department.title LIKE '%$q%')";
