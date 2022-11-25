@@ -72,7 +72,8 @@ class Repair_Model extends Model{
 
     function get_detail_repair_device($code){
         $query = $this->db->query("SELECT device_id AS id, sub_device AS sub, content_error AS error, 
-                                content_repair AS fixed, CONCAT((SELECT title FROM tbl_devices 
+                                (SELECT tbl_devices.code FROM tbl_devices WHERE tbl_devices.id = device_id) 
+                                AS code_d, content_repair AS fixed, CONCAT((SELECT title FROM tbl_devices 
                                 WHERE tbl_devices.id = device_id)) AS title  FROM tbl_device_repair_detail 
                                 WHERE code = $code");
         return $query->fetchAll();

@@ -53,6 +53,8 @@ $item = $this->jsonObj;
                         <thead>
                             <tr role="row">
                                 <th class="text-center" style="width:20px">#</th>
+                                <th class="text-center">Mã thiết bị</th>
+                                <th class="text-center">Số con</th>
                                 <th class="">Tên trang thiết bị</th>
                                 <th class="text-left">Nội dung lỗi</th>
                                 <th class="text-left">Nội dung khắc phục</th>
@@ -66,6 +68,8 @@ $item = $this->jsonObj;
                             ?>
                             <tr>
                                 <td class="text-center"><?php echo $i ?></td>
+                                <td class="text-center"><?php echo $row['code_d'] ?></td>
+                                <td class="text-center"><?php echo $row['sub'] ?></td>
                                 <td><?php echo $row['title'] ?></td>
                                 <td><?php echo $row['error'] ?></td>
                                 <td ><?php echo $row['fixed'] ?></td>
