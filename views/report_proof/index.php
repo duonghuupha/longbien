@@ -22,6 +22,10 @@
                             <i class="fa fa-print"></i>
                             In
                         </button>
+                        <button type="button" class="btn btn-info btn-sm" onclick="export_xlsx()">
+                            <i class="fa fa-file-excel-o"></i>
+                            Xuất file excel
+                        </button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='<?php echo URL.'/report' ?>'">
                             <i class="fa fa-arrow-left"></i>
                             Quay lại

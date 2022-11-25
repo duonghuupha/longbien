@@ -22,6 +22,10 @@ function print_proof(){
     window.open(baseUrl + '/report_proof/print_proof?quan='+squan+'&stand='+sstand+'&criteria='+scriteria+'&code='+scode+'&title='+stitle);
 }
 
+function export_xlsx(){
+    window.open(baseUrl + '/report_proof/export_xlsx?quan='+squan+'&stand='+sstand+'&criteria='+scriteria+'&code='+scode+'&title='+stitle);
+}
+
 function filter(){
     combo_select_2('#squan',   baseUrl + '/report_proof/combo_quan');
     $('#modal-search').modal('show');
