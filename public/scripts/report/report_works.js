@@ -25,6 +25,10 @@ function print_works(){
     window.open(baseUrl+'/report_works/print_works?group='+sgroup+'&cate='+scate+'&title='+stitle);
 }
 
+function export_xlsx(){
+    window.open(baseUrl+'/report_works/export_xlsx?group='+sgroup+'&cate='+scate+'&title='+stitle);
+}
+
 function set_cate(){
     var value = $('#sgroup').val();
     $('#scate').load(baseUrl + '/other/combo_works_cate?id='+value);
