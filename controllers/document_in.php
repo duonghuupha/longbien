@@ -146,8 +146,10 @@ class Document_in extends Controller{
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
+            $detail = $this->model->get_info($id);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
+                unlink(DIR_UPLOAD.'/document_in/'.$detail[0]['cate_id'].'/'.$detail[0]['file']);
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'del');
                 $jsonObj['msg'] = "Xóa dữ liệu thành công";
                 $jsonObj['success'] = true;
