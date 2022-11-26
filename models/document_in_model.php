@@ -32,6 +32,11 @@ class Document_in_Model extends Model{
         return $query;
     }
 
+    function updateObj_code($code, $data){
+        $query = $this->update("tbl_document_in", $data, "code = $code");
+        return $query;
+    }
+
     function delObj($id){
         $query = $this->delete("tbl_document_in", "id = $id");
         return $query;

@@ -444,5 +444,15 @@ class Convert{
             return $html;
         }
     }
+
+    function merger_file_pdf($array_obj, $tiento, $folder, $filename){
+        $outputname = $folder.'/'.$filename;
+        $cmd = "gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=$outputname ";
+        foreach($array_obj as $file){
+            $cmd .= $file." ";
+        }
+        $result = shell_exec($cmd);
+        return $result;
+    }
 }
 ?>
