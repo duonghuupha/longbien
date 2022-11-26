@@ -234,3 +234,7 @@
 2022-11-26 16:34:16/1/Thêm mới dữ liệu/document_in/add
 2022-11-26 17:34:29/1/Cập nhật dữ liệu/document_in/update
 2022-11-26 23:08:26/1/Cập nhật dữ liệu/document_in/update
+2022-11-26 23:49:48/1/Xóa dữ liệu/document_in/del
+2022-11-26 23:50:31/1/Thêm mới dữ liệu/document_in/add
+2022-11-26 23:50:51/1/Xóa dữ liệu/document_in/del
+2022-11-26 23:55:53/1/Thêm mới dữ liệu/document_in/add

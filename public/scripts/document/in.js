@@ -180,16 +180,10 @@ function del_cate(){
     $('#cate_s').val(null).trigger('change');
 }
 
-function check_ext_file(aray_obj){
-    var check_ext = true;
-    for(item of aray_obj){
-        ext = item.name.split('.');
-        if(ext[1] != 'pdf' && ext[1] != 'PDF'){
-            check_ext = false;
-        }
-    }
-    if(!check_ext){
-        show_message("error", "Một số tệp đính kèm phải là dạng PDF");
+function check_ext_file(){
+    var value = $('#file').val(); ext = value.split().pop();
+    if(ext != 'pdf' || ext != 'PDF'){
+        show_message("error", "Tệp đính kèm phải là dạng PDF");
         $('#file').ace_file_input('reset_input');
     }
 }

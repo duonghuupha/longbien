@@ -186,8 +186,8 @@
                                 <div class="form-group">
                                     <label for="form-field-username">Tệp văn bản</label>
                                     <div>
-                                        <input type="file" id="file" name="file[]" style="width:100%"
-                                        multiple=""/>
+                                        <input type="file" id="file" name="file" class="file_attach" style="width:100%"
+                                        onchange="check_ext_file()"/>
                                     </div>
                                 </div>
                             </div>
