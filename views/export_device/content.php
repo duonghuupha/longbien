@@ -47,7 +47,7 @@ $pages = $this->page; $sql = new Model();
             if(count($array[$i]) != 0){
                 $thietbi = implode("<br/>", $array[$i]);
             }else{
-                $thietbi = "<i>Thiết bị thuộc phòng ban đã bị thu hồi vì lý do khách quan</i>";
+                $thietbi = "<i>Thiết bị thuộc phòng ban đã bị thu hồi hoặc luân chuyển đến phòng ban khác vì lý do khách quan</i>";
             }
         ?>
         <tr role="row" class="<?php echo $class ?>">

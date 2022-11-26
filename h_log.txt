@@ -230,3 +230,4 @@
 2022-11-22 00:14:42/1/Thêm mới dữ liệu/returns/restore
 2022-11-22 00:54:02/1/Cập nhật dữ liệu/export_device/update
 2022-11-23 20:09:49/1/Cập nhật dữ liệu/loans/update
+2022-11-26 08:59:07/1/Thêm mới dữ liệu/change_device/add

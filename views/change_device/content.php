@@ -16,6 +16,7 @@ $pages = $this->page; $sql = new Model();
             <th class="text-left">Nơi đến</th>
             <th class="text-left">Thiết bị được luân chuyển</th>
             <th class="text-center">Cập nhật lần cuối</th>
+            <th class="text-center">Trạng thái</th>
         </tr>
     </thead>
     <tbody>
@@ -28,12 +29,27 @@ $pages = $this->page; $sql = new Model();
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center"><?php echo $row['code'] ?></td>
+            <td class="text-center">
+                <a href="javascript:void(0)" onclick="approval(<?php echo $row['id'] ?>)">
+                    <?php echo $row['code'] ?>
+                </a>
+            </td>
             <td class="text-center"><?php echo $row['namhoc'] ?></td>
             <td class="text-left"><?php echo $row['physical_from'] ?></td>
             <td class="text-left"><?php echo $row['physical_to'] ?></td>
             <td class="text-left"><?php echo $row['device'].'-'.$row['sub_device'] ?></td>
             <td class="text-center"><?php echo date("m-d-Y H:i:s", strtotime($row['create_at'])) ?></td>
+            <td class="text-center">
+            <?php
+                if($row['status'] == 0){
+                    echo '<span class="label label-sm label-warning">Chờ duyệt</span>';
+                }elseif($row['status'] == 1){
+                    echo '<span class="label label-sm label-success">Đã duyệt</span>';
+                }elseif($row['status'] == 2){
+                    echo '<span class="label label-sm label-danger">Từ chối</span>';
+                }
+                ?>
+            </td>
         </tr>
         <?php
         }

@@ -72,6 +72,13 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="form-field-username">Lý do chuyển đến</label>
+                                        <div>
+                                            <input class="form-control" placeholder="Lý do chuyển thiết bị đến"
+                                            style="width:100%" required="" id="conent" name="content"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,5 +105,15 @@
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+
+<!--Form don vi tinh-->
+<div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content" id="detail">
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 
 <script src="<?php echo URL.'/public/' ?>scripts/devices/change_device.js"></script>
