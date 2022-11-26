@@ -6,7 +6,9 @@ class Report_device_change_Model extends Model{
 
     function getFetObj($from, $to, $title, $offset, $rows){
         $result = array();
-        $where = "device_id IN (SELECT tbl_devices.id FROM tbl_devices WHERE tbl_devices.title LIKE '%$title%')";
+        $where = "status = 1";
+        if($title != '')
+            $where = $where." AND device_id IN (SELECT tbl_devices.id FROM tbl_devices WHERE tbl_devices.title LIKE '%$title%')";
         if($from != '')
             $where = $where." AND physical_from_id = $from";
         if($to != '')
@@ -27,7 +29,9 @@ class Report_device_change_Model extends Model{
 
     function getFetObj_export($from, $to, $title){
         $result = array();
-        $where = "device_id IN (SELECT tbl_devices.id FROM tbl_devices WHERE tbl_devices.title LIKE '%$title%')";
+        $where = "status = 1";
+        if($title != '')
+            $where = $where." AND device_id IN (SELECT tbl_devices.id FROM tbl_devices WHERE tbl_devices.title LIKE '%$title%')";
         if($from != '')
             $where = $where." AND physical_from_id = $from";
         if($to != '')
