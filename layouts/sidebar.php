@@ -25,7 +25,7 @@ $userid = $this->_Info[0]['id']; $role = $this->_Info[0]['group_role_id'];
         </div>
     </div><!-- /.sidebar-shortcuts -->
     <ul class="nav nav-list">
-        <li class="active hover">
+        <li class="hover">
             <a href="<?php echo URL.'/index' ?>">
                 <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Bàn làm việc </span>
