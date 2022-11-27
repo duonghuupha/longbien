@@ -11,6 +11,7 @@ class Controller {
         $this->_Convert = new Convert();
         $this->_Year = (isset($_SESSION['year'])) ? $_SESSION['year'] : [];
         $this->_Log = new Log();
+        $this->_Url = isset($_REQUEST['url']) ? explode("/", $_REQUEST['url']) : ['index'];
 	}
 
 	public function loadModel($name) {
