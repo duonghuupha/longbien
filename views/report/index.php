@@ -23,7 +23,7 @@ $array = ['red', 'green', 'blue', 'orange', 'blue2', 'orange2', 'pink'];
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-                <div class="col-xs-12 col-sm-12 infobox-container">
+                <div class="col-xs-12 col-sm-12 infobox-container" style="text-align:left">
                     <?php
                     foreach($this->jsonObj as $row){
                         $randkey = array_rand($array, 2);
