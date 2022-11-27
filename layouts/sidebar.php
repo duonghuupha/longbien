@@ -71,14 +71,11 @@ $userid = $this->_Info[0]['id']; $role = $this->_Info[0]['group_role_id'];
         </li>
         <?php
         }
-        if($userid == 1){
-            require('sidebar_admin.php');
-        }else{
-            $jsonObj  = $this->_Data->get_menu_via_user($role, 0);
-            foreach($jsonObj as $row_0){
-                $json_sub  = $this->_Data->get_menu_via_user($role, $row_0['id']);
-                $span = (count($json_sub) > 0 && $row_0['is_submenu'] == 0) ? '<b class="arrow fa fa-angle-down"></b>' : '';
-                $class = (count($json_sub) > 0 && $row_0['is_submenu'] == 0) ? 'class="dropdown-toggle"' : ''
+        $jsonObj  = $this->_Data->get_menu_via_user($this->_Info[0]['id'], $role, 0);
+        foreach($jsonObj as $row_0){
+            $json_sub  = $this->_Data->get_menu_via_user($this->_Info[0]['id'], $role, $row_0['id']);
+            $span = (count($json_sub) > 0 && $row_0['is_submenu'] == 0) ? '<b class="arrow fa fa-angle-down"></b>' : '';
+            $class = (count($json_sub) > 0 && $row_0['is_submenu'] == 0) ? 'class="dropdown-toggle"' : ''
         ?>
         <li class="hover">
             <a href="<?php echo ($row_0['link'] == '#') ? '#' : URL.'/'.$row_0['link'] ?>" <?php echo $class ?>>
@@ -108,7 +105,6 @@ $userid = $this->_Info[0]['id']; $role = $this->_Info[0]['group_role_id'];
             ?>
         </li>
         <?php
-            }
         }
         ?>
     </ul><!-- /.nav-list -->
