@@ -250,7 +250,7 @@ class Model {
         return $query->fetchAll();
     }
     function get_menu_via_user($grouproleid, $parentid){
-        $query = $this->db->query("SELECT id, title, link, functions, parent_id, icon FROM tbl_roles WHERE FIND_IN_SET(tbl_roles.id,
+        $query = $this->db->query("SELECT id, title, link, functions, parent_id, icon, is_submenu FROM tbl_roles WHERE FIND_IN_SET(tbl_roles.id,
                                 (SELECT roles FROM tbl_group_role WHERE tbl_group_role.id = $grouproleid AND status = 1)) AND parent_id = $parentid
                                 ORDER BY order_position ASC");
         return $query->fetchAll();

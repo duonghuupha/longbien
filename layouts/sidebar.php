@@ -77,8 +77,8 @@ $userid = $this->_Info[0]['id']; $role = $this->_Info[0]['group_role_id'];
             $jsonObj  = $this->_Data->get_menu_via_user($role, 0);
             foreach($jsonObj as $row_0){
                 $json_sub  = $this->_Data->get_menu_via_user($role, $row_0['id']);
-                $span = (count($json_sub) > 0) ? '<b class="arrow fa fa-angle-down"></b>' : '';
-                $class = (count($json_sub) > 0) ? 'class="dropdown-toggle"' : ''
+                $span = (count($json_sub) > 0 && $row_0['is_submenu'] == 0) ? '<b class="arrow fa fa-angle-down"></b>' : '';
+                $class = (count($json_sub) > 0 && $row_0['is_submenu'] == 0) ? 'class="dropdown-toggle"' : ''
         ?>
         <li class="hover">
             <a href="<?php echo ($row_0['link'] == '#') ? '#' : URL.'/'.$row_0['link'] ?>" <?php echo $class ?>>
@@ -90,7 +90,7 @@ $userid = $this->_Info[0]['id']; $role = $this->_Info[0]['group_role_id'];
             </a>
             <b class="arrow"></b>
             <?php
-            if(count($json_sub) > 0){
+            if(count($json_sub) > 0 && $row_0['is_submenu'] == 0){
                 echo '<ul class="submenu">';
                 foreach($json_sub as $row_1){
                 ?>
