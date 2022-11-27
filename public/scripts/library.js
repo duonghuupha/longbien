@@ -47,7 +47,7 @@ function show_message(icon, msg){
         text: msg,
         showHideTransition: 'fade',
         icon: icon,
-        position: 'top-right'
+        position: 'bottom-right'
     })
 }
 
