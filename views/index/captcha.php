@@ -1,6 +1,5 @@
 <?php
-	$text = rand(10000,99999); 
-	$_SESSION["captcha"] = $text; 
+	$text = $_SESSION['captcha'];
 	$height = 25; 
 	$width = 65;   
 	$image_p = imagecreate($width, $height); 

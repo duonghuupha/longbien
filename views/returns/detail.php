@@ -72,7 +72,8 @@ $item = $this->jsonObj; $sql = new Model();
         Đóng
     </button>
     <?php
-    if($item[0]['status'] == 0){
+    if($item[0]['status'] == 0 && 
+    $this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 7) > 0){
     ?>
     <button class="btn btn-sm btn-success pull-right" onclick="approval(<?php echo $_REQUEST['id'] ?>)">
         <i class="ace-icon fa fa-check"></i>
