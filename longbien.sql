@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 05, 2022 at 03:10 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 28, 2022 at 08:25 PM
+-- Server version: 5.7.39
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `longbien`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `data_all_search`
+-- (See below for the actual view)
+--
+CREATE TABLE `data_all_search` (
+`id` int(11)
+,`code` varchar(255)
+,`title` mediumtext
+,`create_at` datetime
+,`type` bigint(20)
+);
 
 -- --------------------------------------------------------
 
@@ -727,7 +741,7 @@ CREATE TABLE `tbl_book_loan` (
 --
 
 INSERT INTO `tbl_book_loan` (`id`, `code`, `user_create`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
-(1, 1667407156, 1, 0, 1097, 1, 1, '2022-11-02 23:39:16', '0000-00-00 00:00:00', 0, '2022-11-02 23:39:16');
+(1, 1667407156, 1, 0, 1097, 1, 1, '2022-11-02 23:39:16', '2022-11-24 02:29:24', 1, '2022-11-02 23:39:16');
 
 -- --------------------------------------------------------
 
@@ -741,6 +755,13 @@ CREATE TABLE `tbl_book_read` (
   `time_read` datetime NOT NULL,
   `info_read` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_book_read`
+--
+
+INSERT INTO `tbl_book_read` (`id`, `book_id`, `time_read`, `info_read`) VALUES
+(1, 4, '2022-11-10 13:51:12', '127.0.0.1::Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0');
 
 -- --------------------------------------------------------
 
@@ -758,6 +779,13 @@ CREATE TABLE `tbl_book_return` (
   `create_at` datetime NOT NULL,
   `status` int(11) NOT NULL COMMENT '1 la thu hoi; 2 la khoi phuc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_book_return`
+--
+
+INSERT INTO `tbl_book_return` (`id`, `code`, `user_id`, `book_id`, `sub_book`, `content`, `create_at`, `status`) VALUES
+(1, 1669231812, 1, 5, 1, 'Sách không đủ điều kiện để  phục vụ cho công tác thư viện', '2022-11-24 02:30:12', 1);
 
 -- --------------------------------------------------------
 
@@ -793,13 +821,25 @@ INSERT INTO `tbl_change_class` (`id`, `student_id`, `year_id_from`, `department_
 CREATE TABLE `tbl_change_device` (
   `id` int(11) NOT NULL,
   `code` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `year_id` int(11) NOT NULL,
   `physical_from_id` int(11) NOT NULL,
   `physical_to_id` int(11) NOT NULL,
   `device_id` int(11) NOT NULL,
   `sub_device` int(11) NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0 là chưa duyệt, 1 là đã duyệt;  2 lad từ chối',
+  `user_app` int(11) NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_change_device`
+--
+
+INSERT INTO `tbl_change_device` (`id`, `code`, `user_id`, `year_id`, `physical_from_id`, `physical_to_id`, `device_id`, `sub_device`, `content`, `status`, `user_app`, `create_at`) VALUES
+(1, 1669427947, 1, 2, 1, 2, 26, 1, 'Phục vụ công tác thi giáo viên dạy giỏi', 1, 1, '2022-11-26 08:59:07'),
+(2, 1669540264, 1, 2, 2, 1, 31, 1, 'Trả lại sau khi hoàn thành nhiệm vụ', 1, 1, '2022-11-27 16:11:04');
 
 -- --------------------------------------------------------
 
@@ -848,6 +888,13 @@ CREATE TABLE `tbl_department_loan` (
   `status` int(11) NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_department_loan`
+--
+
+INSERT INTO `tbl_department_loan` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `date_return`, `department_id`, `lesson`, `content`, `status`, `create_at`) VALUES
+(1, 1669298223, 1, 59, '2022-11-24 00:00:00', '2022-11-24 00:00:00', 40, 1, 'Thực hành thí nghiệm khúc xạ ánh sáng', 0, '2022-11-24 20:57:03');
 
 -- --------------------------------------------------------
 
@@ -1036,7 +1083,8 @@ CREATE TABLE `tbl_document_in` (
 --
 
 INSERT INTO `tbl_document_in` (`id`, `code`, `cate_id`, `number_in`, `date_in`, `number_dc`, `date_dc`, `title`, `content`, `user_id`, `user_share`, `create_at`, `file`, `status`) VALUES
-(4, 1666972114, 1, 1, '2022-10-28', '01/KH-UBND', '2022-10-01', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, '', '2022-10-28 22:48:34', '1666972114_document_in.pdf', 0);
+(4, 1666972114, 1, 1, '2022-10-28', '01/KH-UBND', '2022-10-01', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, '', '2022-10-28 22:48:34', '1666972114_document_in.pdf', 0),
+(5, 1669455256, 1, 2, '2022-11-26', '02/KH-UBND', '2022-11-25', 'Be careful as to how you elevate privileges to your php script', 'It\'s a good idea to use caution and planing.  It is easy to open up huge security holes.  Here are a couple of helpful hints I\'ve gathered from experimentation and Unix documentation.', 1, '', '2022-11-26 23:08:26', '1669478906_document_in.pdf', 1);
 
 -- --------------------------------------------------------
 
@@ -1089,8 +1137,9 @@ CREATE TABLE `tbl_export` (
 --
 
 INSERT INTO `tbl_export` (`id`, `code`, `year_id`, `physical_id`, `create_at`) VALUES
-(9, 1657388721, 2, 1, '2022-08-29 01:46:26'),
-(10, 1657388764, 2, 3, '2022-10-20 11:32:34');
+(9, 1657388721, 2, 1, '2022-11-22 00:54:02'),
+(10, 1657388764, 2, 3, '2022-10-20 11:32:34'),
+(11, 1668762366, 2, 2, '2022-11-18 16:06:06');
 
 --
 -- Triggers `tbl_export`
@@ -1120,10 +1169,12 @@ CREATE TABLE `tbl_export_detail` (
 --
 
 INSERT INTO `tbl_export_detail` (`id`, `code`, `device_id`, `sub_device`, `status`, `create_at`) VALUES
-(24, 1657388721, 31, 1, 0, '2022-08-29 01:46:26'),
-(25, 1657388721, 26, 1, 0, '2022-08-29 01:46:26'),
 (26, 1657388764, 34, 1, 0, '2022-10-20 11:32:34'),
-(27, 1657388764, 26, 2, 0, '2022-10-20 11:32:34');
+(27, 1657388764, 26, 2, 0, '2022-10-20 11:32:34'),
+(28, 1668762366, 31, 1, 1, '2022-11-18 16:06:06'),
+(29, 1657388721, 26, 1, 1, '2022-11-22 00:54:02'),
+(31, 1668762366, 26, 1, 0, '2022-11-26 09:07:45'),
+(32, 1657388721, 31, 1, 0, '2022-11-27 16:11:39');
 
 -- --------------------------------------------------------
 
@@ -1148,7 +1199,7 @@ INSERT INTO `tbl_group_role` (`id`, `code`, `title`, `roles`, `status`, `create_
 (1, 1663899640, 'Giáo viên', '6,8,9,10,52,52_1,52_2,52_3,11,55,55_1,55_2,55_3,13,14,18,19,25,25_6,28,31,31_6,33,37,39,40,40_5,43,43_5,56,5,5_1,5_2,5_3', 1, '2022-10-31 09:17:48'),
 (2, 1664127781, 'Hành chính nhân sự', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,7,7_1,7_2,7_3,8,8_1,8_2,8_3,9,9_1,9_2,9_3,10,11,12,12_1,12_2,12_3,12_4,12_5,13,14,14_1,14_2,14_3,14_4,14_5,15,16,17,19,20,20_1,20_2,20_3,20_4,21,22,23,24,25,25_1,25_6,26,27,27_1,28,29,29_1,29_2,29_3,29_4,30,31,31_1', 1, '2022-09-26 01:04:09'),
 (3, 1665055113, 'Quản trị', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,7,7_1,7_2,7_3,8,8_1,8_2,8_3,9,9_1,9_2,9_3,10,50,51,51_1,51_2,51_3,52,52_1,52_2,52_3,11,53,54,55,55_1,55_2,55_3,12,12_1,12_2,12_3,12_4,12_5,13,14,14_1,14_2,14_3,14_4,14_5,15,16,17,18,18_7,19,20,20_1,20_2,20_3,20_4,21,22,23,24,25,25_1,25_6,26,27,27_1,28,29,29_1,29_2,29_3,29_4,30,31,31_1,31_6,32,32_1,33,34,34_1,34_2,34_3,35,35_1,35_2,35_3,36,37,37_1,38,38_1,39,40,40_5,41,41_5,42,42_5,43,43_5,44,44_5,45,45_5,46,46_5,47,48,48_1,48_2,48_3,49,49_1,49_2,49_3,56,57,57_1,57_2,57_3,5,5_1,5_2,5_3', 1, '2022-10-06 18:22:50'),
-(4, 1665055629, 'Hiệ trưởng', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,8,9,10,50,51,51_1,51_2,51_3,52,52_1,52_2,52_3,11,53,54,55,55_1,55_2,55_3,12,12_1,13,14,15,16,17,18,18_7,19,20,24,25,26,27,28,29,31,32,33,34,35,37,38,39,40,40_5,41,41_5,42,42_5,43,43_5,44,44_5,45,45_5,46,46_5,56,57,57_1,57_2,57_3,5', 1, '2022-10-06 18:27:09');
+(4, 1665055629, 'Hiệu trưởng', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,8,9,10,50,51,51_1,51_2,51_3,52,52_1,52_2,52_3,11,53,54,55,55_1,55_2,55_3,12,12_1,13,14,15,16,17,18,18_7,19,20,24,24_7,25,26,27,27_7,28,29,31,32,33,34,35,37,38,39,62,62_5,63,63_5,56,57,57_1,57_2,57_3,5', 1, '2022-11-27 08:03:05');
 
 -- --------------------------------------------------------
 
@@ -1168,6 +1219,13 @@ CREATE TABLE `tbl_loans` (
   `status` int(11) NOT NULL COMMENT '0 la mượn; 1 là trả hết, 2 là trả một phần, 3 là đặt lịch trước',
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_loans`
+--
+
+INSERT INTO `tbl_loans` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `date_return`, `content`, `notes`, `status`, `create_at`) VALUES
+(1, 1668762492, 1, 59, '2022-11-18 16:08:12', '2022-11-23 20:09:49', 'Phục vụ công tác giảng dạy', '', 1, '2022-11-18 16:08:12');
 
 --
 -- Triggers `tbl_loans`
@@ -1191,6 +1249,13 @@ CREATE TABLE `tbl_loans_detail` (
   `status` int(11) NOT NULL,
   `date_return` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_loans_detail`
+--
+
+INSERT INTO `tbl_loans_detail` (`id`, `code`, `device_id`, `sub_device`, `status`, `date_return`) VALUES
+(1, 1668762492, 28, 1, 1, '2022-11-23 20:09:49');
 
 -- --------------------------------------------------------
 
@@ -1362,6 +1427,14 @@ CREATE TABLE `tbl_returns_device` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tbl_returns_device`
+--
+
+INSERT INTO `tbl_returns_device` (`id`, `code`, `create_at`, `year_id`, `physical_id`, `device_id`, `sub_device`, `content`, `status`, `user_id`) VALUES
+(1, 1669050540, '2022-11-22 00:09:00', 2, 1, 26, 1, 'Thiết bị không đủ điều kiện phục vụ công tác giảng dạy', 1, 1),
+(2, 1669050881, '2022-11-22 00:14:41', 2, 1, 26, 1, 'Thiết bị đã được sửa chữa và nâng cấp đủ điều kiện phục vụ công tác giảng dạy', 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -1375,71 +1448,88 @@ CREATE TABLE `tbl_roles` (
   `link` text COLLATE utf8_unicode_ci NOT NULL,
   `functions` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `order_position` int(11) NOT NULL,
-  `icon` text COLLATE utf8_unicode_ci NOT NULL
+  `icon` text COLLATE utf8_unicode_ci,
+  `is_submenu` int(11) NOT NULL COMMENT '0 là có,1 là không'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_roles`
 --
 
-INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`, `order_position`, `icon`) VALUES
-(1, 0, 'Lịch làm việc', '#', '', 2, 'calendar'),
-(2, 1, 'Nhóm công việc', 'group_task', '1,2,3', 1, ''),
-(3, 1, 'Công việc', 'tasks', '1,2,3', 2, ''),
-(4, 1, 'Lịch công tác', 'weekly', '5', 3, ''),
-(5, 56, 'Lịch báo giảng', 'calendars', '1,2,3', 2, 'calendar-check-o'),
-(6, 0, 'Văn bản', '#', '', 4, 'book'),
-(7, 6, 'Danh mục', 'document_cate', '1,2,3', 1, ''),
-(8, 6, 'Văn bản đến', 'document_in', '1,2,3', 2, ''),
-(9, 6, 'Văn bản đi', 'document_out', '1,2,3', 3, ''),
-(10, 0, 'Kiểm định CL', '#', '', 5, 'balance-scale'),
-(11, 0, 'Hồ sơ công việc', '#', '', 6, 'briefcase'),
-(12, 0, 'Nhân sự', 'personal', '1,2,3,4,5', 7, 'users'),
-(13, 0, 'Học sinh', '#', '', 8, 'graduation-cap'),
-(14, 13, 'Thông tin học sinh', 'student', '1,2,3,4,5', 1, ''),
-(15, 13, 'Phân lớp', 'student_change', '', 2, ''),
-(16, 13, 'Chuyển lớp', 'change_class', '', 3, ''),
-(17, 13, 'Lên lớp', 'up_class', '', 4, ''),
-(18, 13, 'Sổ điểm', 'student_point', '7', 5, ''),
-(19, 0, 'Trang thiết bị', '#', '', 9, 'cubes'),
-(20, 19, 'Thông tin thiết bị', 'devices', '1,2,3,4', 1, ''),
-(21, 19, 'Nhập kho', 'import_device', '', 2, ''),
-(22, 19, 'Phân bổ', 'export_device', '', 3, ''),
-(23, 19, 'In mã thiết bị', 'qrcode_device', '', 4, ''),
-(24, 19, 'Luân chuyển thiết bị', 'change_device', '', 5, ''),
-(25, 19, 'Mượn - trả', 'loans', '1,6', 6, ''),
-(26, 19, 'Sửa chữa nâng cấp', 'repair', '1,2,3', 7, ''),
-(27, 19, 'Thu hồi - Khôi phục', 'returns', '1', 8, ''),
-(28, 0, 'Đồ dùng dạy học', '#', '', 10, 'flask'),
-(29, 28, 'Thông tin', 'gear', '1,2,3,4', 1, ''),
-(30, 28, 'In mã đồ dùng', 'gear_code', '', 2, ''),
-(31, 28, 'Mượn - trả', 'gear_loans', '1,6', 3, ''),
-(32, 28, 'Thu hồi - Khôi phục', 'gear_return', '1', 4, ''),
-(33, 0, 'Thư viện', '#', '', 11, 'book'),
-(34, 33, 'Danh mục', 'lib_cate', '1,2,3', 1, ''),
-(35, 33, 'Quản lý đầu sách', 'library', '1,2,3', 2, ''),
-(36, 33, 'In mã đầu sách', 'lib_code', '', 3, ''),
-(37, 33, 'Mượn - trả', 'lib_loans', '1', 4, ''),
-(38, 33, 'Thu hồi - khôi phục', 'lib_return', '1', 5, ''),
-(39, 0, 'Báo  cáo - Thống kê', '#', '', 12, 'bar-chart'),
-(40, 39, 'Lịch báo giảng', '#', '5', 1, ''),
-(41, 39, 'Văn bản', 'report_document', '5', 2, ''),
-(42, 39, 'Nhân sự', 'report_personel', '5', 3, ''),
-(43, 39, 'Học sinh', '#', '5', 4, ''),
-(44, 39, 'Trang thiết bị', 'report_device', '5', 5, ''),
-(45, 39, 'Đồ dùng dạy học', '#', '5', 6, ''),
-(46, 39, 'Thư viện', '#', '5', 7, ''),
-(47, 0, 'Quản lý người dùng', '#', '', 13, 'user'),
-(48, 47, 'Quản lý người dùng', 'users', '1,2,3', 1, ''),
-(49, 47, 'Nhóm quyền sử dụng', 'group_role', '1,2,3', 2, ''),
-(50, 10, 'Danh mục', 'quanlity_cate', '', 1, ''),
-(51, 10, 'Phân quyền tiêu chí', 'quanlity_role', '1,2,3', 2, ''),
-(52, 10, 'Quản lý minh chứng', 'proof', '1,2,3', 3, ''),
-(53, 11, 'Danh mục', '#', '', 1, ''),
-(54, 11, 'Phân quyền danh mục', '#', '', 2, ''),
-(55, 11, 'Quản lý hồ sơ', 'works', '1,2,3', 3, ''),
-(56, 0, 'Chuyên môn', '#', '', 3, 'calendar-check-o'),
-(57, 56, 'Phân công giáo viên', 'assign', '1,2,3', 1, '');
+INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`, `order_position`, `icon`, `is_submenu`) VALUES
+(1, 0, 'Lịch làm việc', '#', '', 2, 'calendar', 0),
+(2, 1, 'Nhóm công việc', 'group_task', '1,2,3', 1, '', 0),
+(3, 1, 'Công việc', 'tasks', '1,2,3', 2, '', 0),
+(4, 1, 'Lịch công tác', 'weekly', '5', 3, '', 0),
+(5, 56, 'Lịch báo giảng', 'calendars', '1,2,3', 2, 'calendar-check-o', 0),
+(6, 0, 'Văn bản', '#', '', 4, 'book', 0),
+(7, 6, 'Danh mục', 'document_cate', '1,2,3', 1, '', 0),
+(8, 6, 'Văn bản đến', 'document_in', '1,2,3', 2, '', 0),
+(9, 6, 'Văn bản đi', 'document_out', '1,2,3', 3, '', 0),
+(10, 0, 'Kiểm định CL', '#', '', 5, 'balance-scale', 0),
+(11, 0, 'Hồ sơ công việc', '#', '', 6, 'briefcase', 0),
+(12, 0, 'Nhân sự', 'personal', '1,2,3,4,5', 7, 'users', 0),
+(13, 0, 'Học sinh', '#', '', 8, 'graduation-cap', 0),
+(14, 13, 'Thông tin học sinh', 'student', '1,2,3,4,5', 1, '', 0),
+(15, 13, 'Phân lớp', 'student_change', '', 2, '', 0),
+(16, 13, 'Chuyển lớp', 'change_class', '', 3, '', 0),
+(17, 13, 'Lên lớp', 'up_class', '', 4, '', 0),
+(18, 13, 'Sổ điểm', 'student_point', '7', 5, '', 0),
+(19, 0, 'Trang thiết bị', '#', '', 9, 'cubes', 0),
+(20, 19, 'Thông tin thiết bị', 'devices', '1,2,3,4', 1, '', 0),
+(21, 19, 'Nhập kho', 'import_device', '', 2, '', 0),
+(22, 19, 'Phân bổ', 'export_device', '', 3, '', 0),
+(23, 19, 'In mã thiết bị', 'qrcode_device', '', 4, '', 0),
+(24, 19, 'Luân chuyển thiết bị', 'change_device', '1,7', 5, '', 0),
+(25, 19, 'Mượn - trả', 'loans', '1,6', 6, '', 0),
+(26, 19, 'Sửa chữa nâng cấp', 'repair', '1,2,3', 7, '', 0),
+(27, 19, 'Thu hồi - Khôi phục', 'returns', '1,7', 8, '', 0),
+(28, 0, 'Đồ dùng dạy học', '#', '', 10, 'flask', 0),
+(29, 28, 'Thông tin', 'gear', '1,2,3,4', 1, '', 0),
+(30, 28, 'In mã đồ dùng', 'gear_code', '', 2, '', 0),
+(31, 28, 'Mượn - trả', 'gear_loans', '1,6', 3, '', 0),
+(32, 28, 'Thu hồi - Khôi phục', 'gear_return', '1', 4, '', 0),
+(33, 0, 'Thư viện', '#', '', 11, 'book', 0),
+(34, 33, 'Danh mục', 'lib_cate', '1,2,3', 1, '', 0),
+(35, 33, 'Quản lý đầu sách', 'library', '1,2,3', 2, '', 0),
+(36, 33, 'In mã đầu sách', 'lib_code', '', 3, '', 0),
+(37, 33, 'Mượn - trả', 'lib_loans', '1', 4, '', 0),
+(38, 33, 'Thu hồi - khôi phục', 'lib_return', '1', 5, '', 0),
+(39, 0, 'Báo  cáo - Thống kê', 'report', '', 12, 'bar-chart', 1),
+(47, 0, 'Quản lý người dùng', '#', '', 13, 'user', 0),
+(48, 47, 'Quản lý người dùng', 'users', '1,2,3', 1, '', 0),
+(49, 47, 'Nhóm quyền sử dụng', 'group_role', '1,2,3', 2, '', 0),
+(50, 10, 'Danh mục', 'quanlity_cate', '', 1, '', 0),
+(51, 10, 'Phân quyền tiêu chí', 'quanlity_role', '1,2,3', 2, '', 0),
+(52, 10, 'Quản lý minh chứng', 'proof', '1,2,3', 3, '', 0),
+(53, 11, 'Danh mục', '#', '', 1, '', 0),
+(54, 11, 'Phân quyền danh mục', '#', '', 2, '', 0),
+(55, 11, 'Quản lý hồ sơ', 'works', '1,2,3', 3, '', 0),
+(56, 0, 'Chuyên môn', '#', '', 3, 'calendar-check-o', 0),
+(57, 56, 'Phân công giáo viên', 'assign', '1,2,3', 1, '', 0),
+(60, 39, 'Báo giảng', 'report_cal', '5', 1, 'calendar', 0),
+(61, 39, 'Văn bản', 'report_document', '5', 2, 'book', 0),
+(62, 39, 'Kiểm định chất lượng', 'report_proof', '5', 3, 'balance-scale', 0),
+(63, 39, 'Hồ sơ công việc', 'report_works', '5', 4, 'briefcase', 0),
+(64, 39, 'Nhân sự', 'report_personel', '5', 5, 'users', 0),
+(65, 39, 'Danh sách học sinh', 'report_student', '5', 6, 'graduation-cap', 0),
+(66, 39, 'Sổ điểm học sinh', 'report_point', '5', 7, 'sort-numeric-desc', 0),
+(67, 39, 'Danh sách trang thiết bị', 'report_device', '5', 8, 'cubes', 0),
+(68, 39, 'Báo  cáo trang thiết bị phòng ban', 'report_device_dep', '5', 9, 'cube', 0),
+(69, 39, 'Báo cáo quá trình nhập trang thiết bị', 'report_device_imp', '5', 10, 'cloud-download', 0),
+(70, 39, 'Báo cáo luân chuyển trang thiết bị', 'report_device_change', '5', 11, 'exchange', 0),
+(71, 39, 'Báo cáo mượn - trả trang thiết bị', 'report_device_loan', '5', 12, 'magnet', 0),
+(72, 39, 'Báo cáo bảo trì - bảo dưỡng trang thiết bị', 'report_device_repair', '5', 13, 'wrench', 0),
+(73, 39, 'Báo cáo thu hồi - khôi phục trang thiết bị', 'report_device_return', '5', 14, 'recycle', 0),
+(74, 39, 'Hồ sơ trang thiết bị', 'report_device_detail', '5', 15, 'sitemap', 0),
+(75, 39, 'Danh sách đồ dùng dạy học', 'report_gear', '5', 16, 'flask', 0),
+(76, 39, 'Báo cáo quá trình nhập đồ dùng', 'report_gear_imp', '5', 17, 'cloud-download', 0),
+(77, 39, 'Báo cáo quá trình mượn - trả đồ dùng', 'report_gear_loan', '5', 18, 'magnet', 0),
+(78, 39, 'Báo cáo thu hồi - khôi phục đồ dùng', 'report_gear_return', '5', 19, 'recycle', 0),
+(79, 39, 'Danh sách sách trong thư viện', 'report_book', '5', 20, 'book', 0),
+(80, 39, 'Báo cáo mượn trả - trả sách', 'report_book_loan', '5', 21, 'street-view', 0),
+(81, 39, 'Báo cáo thu hồi - khôi phục sách', 'report_book_return', '5', 22, 'refresh', 0),
+(82, 39, 'Báo cáo sử dụng phòng chức năng', 'report_dep_loan', '5', 23, 'truck', 0);
 
 -- --------------------------------------------------------
 
@@ -2688,7 +2778,12 @@ INSERT INTO `tbl_student` (`id`, `code`, `code_csdl`, `fullname`, `gender`, `bir
 -- Triggers `tbl_student`
 --
 DELIMITER $$
-CREATE TRIGGER `del_student_realtion_after_del_student` AFTER DELETE ON `tbl_student` FOR EACH ROW DELETE FROM tbl_student_relation WHERE tbl_student_relation.code = old.code
+CREATE TRIGGER `del_student_realtion_after_del_student` AFTER DELETE ON `tbl_student` FOR EACH ROW BEGIN
+DELETE FROM tbl_student_relation WHERE tbl_student_relation.code = old.code;
+DELETE FROM tbl_student_class WHERE tbl_student_class.student_id = old.id;
+DELETE FROM tbl_student_point WHERE tbl_student_point.student_id = old.id;
+DELETE FROM tbl_change_class WHERE tbl_change_class.student_id = old.id;
+END
 $$
 DELIMITER ;
 
@@ -3928,132 +4023,6 @@ CREATE TABLE `tbl_student_relation` (
   `job` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_student_relation`
---
-
-INSERT INTO `tbl_student_relation` (`id`, `code`, `relation`, `fullname`, `year`, `phone`, `job`) VALUES
-(1, 123456789101, 'Bố', 'Đào Văn C', 1988, '0987654315', 'Tự do'),
-(2, 123456789101, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654321', 'Tự do'),
-(3, 123456789102, 'Bố', 'Đào Văn C', 1988, '0987654316', 'Tự do'),
-(4, 123456789102, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654322', 'Tự do'),
-(5, 123456789103, 'Bố', 'Đào Văn C', 1988, '0987654317', 'Tự do'),
-(6, 123456789103, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654323', 'Tự do'),
-(7, 123456789104, 'Bố', 'Đào Văn C', 1988, '0987654318', 'Tự do'),
-(8, 123456789104, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654324', 'Tự do'),
-(9, 123456789105, 'Bố', 'Đào Văn C', 1988, '0987654319', 'Tự do'),
-(10, 123456789105, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654325', 'Tự do'),
-(11, 123456789106, 'Bố', 'Đào Văn C', 1988, '0987654320', 'Tự do'),
-(12, 123456789106, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654326', 'Tự do'),
-(13, 123456789107, 'Bố', 'Đào Văn C', 1988, '0987654321', 'Tự do'),
-(14, 123456789107, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654327', 'Tự do'),
-(15, 123456789108, 'Bố', 'Đào Văn C', 1988, '0987654322', 'Tự do'),
-(16, 123456789108, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654328', 'Tự do'),
-(17, 123456789109, 'Bố', 'Đào Văn C', 1988, '0987654323', 'Tự do'),
-(18, 123456789109, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654329', 'Tự do'),
-(19, 123456789110, 'Bố', 'Đào Văn C', 1988, '0987654324', 'Tự do'),
-(20, 123456789110, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654330', 'Tự do'),
-(21, 123456789111, 'Bố', 'Đào Văn C', 1988, '0987654325', 'Tự do'),
-(22, 123456789111, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654331', 'Tự do'),
-(23, 123456789112, 'Bố', 'Đào Văn C', 1988, '0987654326', 'Tự do'),
-(24, 123456789112, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654332', 'Tự do'),
-(25, 123456789113, 'Bố', 'Đào Văn C', 1988, '0987654327', 'Tự do'),
-(26, 123456789113, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654333', 'Tự do'),
-(27, 123456789114, 'Bố', 'Đào Văn C', 1988, '0987654328', 'Tự do'),
-(28, 123456789114, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654334', 'Tự do'),
-(29, 123456789115, 'Bố', 'Đào Văn C', 1988, '0987654329', 'Tự do'),
-(30, 123456789115, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654335', 'Tự do'),
-(31, 123456789116, 'Bố', 'Đào Văn C', 1988, '0987654330', 'Tự do'),
-(32, 123456789116, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654336', 'Tự do'),
-(33, 123456789117, 'Bố', 'Đào Văn C', 1988, '0987654331', 'Tự do'),
-(34, 123456789117, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654337', 'Tự do'),
-(35, 123456789118, 'Bố', 'Đào Văn C', 1988, '0987654332', 'Tự do'),
-(36, 123456789118, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654338', 'Tự do'),
-(37, 123456789119, 'Bố', 'Đào Văn C', 1988, '0987654333', 'Tự do'),
-(38, 123456789119, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654339', 'Tự do'),
-(39, 123456789120, 'Bố', 'Đào Văn C', 1988, '0987654334', 'Tự do'),
-(40, 123456789120, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654340', 'Tự do'),
-(41, 123456789101, 'Bố', 'Đào Văn C', 1988, '0987654315', 'Tự do'),
-(42, 123456789101, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654321', 'Tự do'),
-(43, 123456789102, 'Bố', 'Đào Văn C', 1988, '0987654316', 'Tự do'),
-(44, 123456789102, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654322', 'Tự do'),
-(45, 123456789103, 'Bố', 'Đào Văn C', 1988, '0987654317', 'Tự do'),
-(46, 123456789103, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654323', 'Tự do'),
-(47, 123456789104, 'Bố', 'Đào Văn C', 1988, '0987654318', 'Tự do'),
-(48, 123456789104, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654324', 'Tự do'),
-(49, 123456789105, 'Bố', 'Đào Văn C', 1988, '0987654319', 'Tự do'),
-(50, 123456789105, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654325', 'Tự do'),
-(51, 123456789106, 'Bố', 'Đào Văn C', 1988, '0987654320', 'Tự do'),
-(52, 123456789106, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654326', 'Tự do'),
-(53, 123456789107, 'Bố', 'Đào Văn C', 1988, '0987654321', 'Tự do'),
-(54, 123456789107, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654327', 'Tự do'),
-(55, 123456789108, 'Bố', 'Đào Văn C', 1988, '0987654322', 'Tự do'),
-(56, 123456789108, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654328', 'Tự do'),
-(57, 123456789109, 'Bố', 'Đào Văn C', 1988, '0987654323', 'Tự do'),
-(58, 123456789109, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654329', 'Tự do'),
-(59, 123456789110, 'Bố', 'Đào Văn C', 1988, '0987654324', 'Tự do'),
-(60, 123456789110, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654330', 'Tự do'),
-(61, 123456789111, 'Bố', 'Đào Văn C', 1988, '0987654325', 'Tự do'),
-(62, 123456789111, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654331', 'Tự do'),
-(63, 123456789112, 'Bố', 'Đào Văn C', 1988, '0987654326', 'Tự do'),
-(64, 123456789112, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654332', 'Tự do'),
-(65, 123456789113, 'Bố', 'Đào Văn C', 1988, '0987654327', 'Tự do'),
-(66, 123456789113, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654333', 'Tự do'),
-(67, 123456789114, 'Bố', 'Đào Văn C', 1988, '0987654328', 'Tự do'),
-(68, 123456789114, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654334', 'Tự do'),
-(69, 123456789115, 'Bố', 'Đào Văn C', 1988, '0987654329', 'Tự do'),
-(70, 123456789115, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654335', 'Tự do'),
-(71, 123456789116, 'Bố', 'Đào Văn C', 1988, '0987654330', 'Tự do'),
-(72, 123456789116, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654336', 'Tự do'),
-(73, 123456789117, 'Bố', 'Đào Văn C', 1988, '0987654331', 'Tự do'),
-(74, 123456789117, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654337', 'Tự do'),
-(75, 123456789118, 'Bố', 'Đào Văn C', 1988, '0987654332', 'Tự do'),
-(76, 123456789118, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654338', 'Tự do'),
-(77, 123456789119, 'Bố', 'Đào Văn C', 1988, '0987654333', 'Tự do'),
-(78, 123456789119, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654339', 'Tự do'),
-(79, 123456789120, 'Bố', 'Đào Văn C', 1988, '0987654334', 'Tự do'),
-(80, 123456789120, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654340', 'Tự do'),
-(81, 123456789101, 'Bố', 'Đào Văn C', 1988, '0987654315', 'Tự do'),
-(82, 123456789101, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654321', 'Tự do'),
-(83, 123456789102, 'Bố', 'Đào Văn C', 1988, '0987654316', 'Tự do'),
-(84, 123456789102, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654322', 'Tự do'),
-(85, 123456789103, 'Bố', 'Đào Văn C', 1988, '0987654317', 'Tự do'),
-(86, 123456789103, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654323', 'Tự do'),
-(87, 123456789104, 'Bố', 'Đào Văn C', 1988, '0987654318', 'Tự do'),
-(88, 123456789104, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654324', 'Tự do'),
-(89, 123456789105, 'Bố', 'Đào Văn C', 1988, '0987654319', 'Tự do'),
-(90, 123456789105, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654325', 'Tự do'),
-(91, 123456789106, 'Bố', 'Đào Văn C', 1988, '0987654320', 'Tự do'),
-(92, 123456789106, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654326', 'Tự do'),
-(93, 123456789107, 'Bố', 'Đào Văn C', 1988, '0987654321', 'Tự do'),
-(94, 123456789107, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654327', 'Tự do'),
-(95, 123456789108, 'Bố', 'Đào Văn C', 1988, '0987654322', 'Tự do'),
-(96, 123456789108, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654328', 'Tự do'),
-(97, 123456789109, 'Bố', 'Đào Văn C', 1988, '0987654323', 'Tự do'),
-(98, 123456789109, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654329', 'Tự do'),
-(99, 123456789110, 'Bố', 'Đào Văn C', 1988, '0987654324', 'Tự do'),
-(100, 123456789110, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654330', 'Tự do'),
-(101, 123456789111, 'Bố', 'Đào Văn C', 1988, '0987654325', 'Tự do'),
-(102, 123456789111, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654331', 'Tự do'),
-(103, 123456789112, 'Bố', 'Đào Văn C', 1988, '0987654326', 'Tự do'),
-(104, 123456789112, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654332', 'Tự do'),
-(105, 123456789113, 'Bố', 'Đào Văn C', 1988, '0987654327', 'Tự do'),
-(106, 123456789113, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654333', 'Tự do'),
-(107, 123456789114, 'Bố', 'Đào Văn C', 1988, '0987654328', 'Tự do'),
-(108, 123456789114, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654334', 'Tự do'),
-(109, 123456789115, 'Bố', 'Đào Văn C', 1988, '0987654329', 'Tự do'),
-(110, 123456789115, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654335', 'Tự do'),
-(111, 123456789116, 'Bố', 'Đào Văn C', 1988, '0987654330', 'Tự do'),
-(112, 123456789116, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654336', 'Tự do'),
-(113, 123456789117, 'Bố', 'Đào Văn C', 1988, '0987654331', 'Tự do'),
-(114, 123456789117, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654337', 'Tự do'),
-(115, 123456789118, 'Bố', 'Đào Văn C', 1988, '0987654332', 'Tự do'),
-(116, 123456789118, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654338', 'Tự do'),
-(117, 123456789119, 'Bố', 'Đào Văn C', 1988, '0987654333', 'Tự do'),
-(118, 123456789119, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654339', 'Tự do'),
-(119, 123456789120, 'Bố', 'Đào Văn C', 1988, '0987654334', 'Tự do'),
-(120, 123456789120, 'Mẹ', 'Nguyễn Thị C', 1988, '0987654340', 'Tự do');
-
 -- --------------------------------------------------------
 
 --
@@ -4161,7 +4130,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `group_role_id`, `avatar`, `is_change`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-11-04 23:11:08', 'd9432fcc488a7c17808511b3f237fb38f7a541c7', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0', 0, 0, '', 0),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-11-28 23:34:15', '5a5f160307c133c67ecdcf07025757895a93bb6d', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0', 0, 0, '', 0),
 (10, 1665086234, 'huyenltt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 204, 1, '', 0),
 (11, 1665086258, 'thanhnt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 203, 2, '', 0),
 (12, 1665086266, 'hiennt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 202, 2, '', 0),
@@ -4212,7 +4181,7 @@ INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_l
 (57, 1665086779, 'thoattk', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 157, 1, '', 0),
 (58, 1665086787, 'thanhmh', '61d6504733ca7757e259c644acd085c4dd471019', 1, '2022-11-03 22:30:03', 'aef0ecda19afaaf31cd0fb75ad46409cb65b8f3b', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0', 156, 1, '', 1),
 (59, 1665086795, 'anhctp', '61d6504733ca7757e259c644acd085c4dd471019', 1, '2022-10-16 00:23:26', '208aa5aaa1bc321925c6604b6101d5f3d88435aa', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 155, 1, '', 1),
-(60, 1665086803, 'thuyntd', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 154, 4, '', 0);
+(60, 1665086803, 'thuyntd', 'b227cbd22eaa96019ebfc4aff35ad2add2a47439', 1, '2022-11-27 23:49:05', 'd2c78855aeed41a5bbdbfc29498612b93f0588fa', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 154, 4, '', 1);
 
 -- --------------------------------------------------------
 
@@ -4350,7 +4319,7 @@ CREATE TABLE `tbl_utensils_loan` (
 --
 
 INSERT INTO `tbl_utensils_loan` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `date_return`, `content`, `notes`, `status`, `create_at`) VALUES
-(4, 1666773709, 58, 58, '2022-10-26 00:00:00', '2022-10-26 00:00:00', 'Phục vụ công tác giảng dạy \r\n                                môn Vật  lý: Khúc xạ ánh sáng', '', 0, '2022-10-26 15:41:49');
+(4, 1666773709, 58, 58, '2022-10-26 00:00:00', '2022-11-12 23:56:52', 'Phục vụ công tác giảng dạy \r\n                                môn Vật  lý: Khúc xạ ánh sáng', '', 1, '2022-10-26 15:41:49');
 
 --
 -- Triggers `tbl_utensils_loan`
@@ -4380,7 +4349,7 @@ CREATE TABLE `tbl_utensils_loan_detail` (
 --
 
 INSERT INTO `tbl_utensils_loan_detail` (`id`, `code`, `utensils_id`, `sub_utensils`, `status`, `date_return`) VALUES
-(4, 1666773709, 16, 1, 0, '0000-00-00 00:00:00');
+(4, 1666773709, 16, 1, 1, '2022-11-12 23:56:52');
 
 -- --------------------------------------------------------
 
@@ -4398,6 +4367,14 @@ CREATE TABLE `tbl_utensils_return` (
   `create_at` datetime NOT NULL,
   `status` int(11) NOT NULL COMMENT '1 la thu hoi; 2 la khoi phuc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_utensils_return`
+--
+
+INSERT INTO `tbl_utensils_return` (`id`, `code`, `user_id`, `utensils_id`, `sub_utensils`, `content`, `create_at`, `status`) VALUES
+(1, 1669210464, 1, 20, 1, 'Không đủ điều kiện để phục vụ công tác dạy học', '2022-11-23 20:34:24', 1),
+(2, 1669218087, 1, 20, 1, 'Đã nâng cấp đủ điều kiện phục vụ công tác dạy học', '2022-11-23 22:41:27', 2);
 
 -- --------------------------------------------------------
 
@@ -4450,11 +4427,20 @@ INSERT INTO `tbl_works_role` (`id`, `code`, `user_id`, `works`, `status`, `creat
 -- --------------------------------------------------------
 
 --
+-- Structure for view `data_all_search`
+--
+DROP TABLE IF EXISTS `data_all_search`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `data_all_search`  AS SELECT `tbl_proof`.`id` AS `id`, `tbl_proof`.`code_proof` AS `code`, `tbl_proof`.`title` AS `title`, `tbl_proof`.`create_at` AS `create_at`, 1 AS `type` FROM `tbl_proof` WHERE (`tbl_proof`.`status` = 1) union all select `tbl_works`.`id` AS `id`,`tbl_works`.`code` AS `code`,`tbl_works`.`title` AS `title`,`tbl_works`.`create_at` AS `create_at`,2 AS `type` from `tbl_works` where (`tbl_works`.`status` = 1) union all select `tbl_document_in`.`id` AS `id`,`tbl_document_in`.`number_in` AS `code`,`tbl_document_in`.`title` AS `title`,`tbl_document_in`.`create_at` AS `create_at`,3 AS `type` from `tbl_document_in` where (`tbl_document_in`.`status` = 0) union all select `tbl_document_out`.`id` AS `id`,`tbl_document_out`.`number_dc` AS `code`,`tbl_document_out`.`title` AS `title`,`tbl_document_out`.`create_at` AS `create_at`,4 AS `type` from `tbl_document_out` where (`tbl_document_out`.`status` = 0) union all select `tbl_book`.`id` AS `id`,`tbl_book`.`code` AS `code`,`tbl_book`.`title` AS `title`,`tbl_book`.`create_at` AS `create_at`,5 AS `type` from `tbl_book` where (`tbl_book`.`status` = 0)  ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `document_all`
 --
 DROP TABLE IF EXISTS `document_all`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `document_all`  AS SELECT concat(`tbl_document_in`.`id`,'_1') AS `id`, `tbl_document_in`.`title` AS `title`, 'Văn bản đến' AS `type`, (select `tbldm_document`.`title` from `tbldm_document` where `tbldm_document`.`id` = `tbl_document_in`.`cate_id`) AS `category` FROM `tbl_document_in` WHERE `tbl_document_in`.`status` = 0 union all select concat(`tbl_document_out`.`id`,'_2') AS `id`,`tbl_document_out`.`title` AS `title`,'Văn bản đi' AS `type`,(select `tbldm_document`.`title` from `tbldm_document` where `tbldm_document`.`id` = `tbl_document_out`.`cate_id`) AS `category` from `tbl_document_out` where `tbl_document_out`.`status` = 0  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `document_all`  AS SELECT concat(`tbl_document_in`.`id`,'_1') AS `id`, `tbl_document_in`.`title` AS `title`, 'Văn bản đến' AS `type`, (select `tbldm_document`.`title` from `tbldm_document` where (`tbldm_document`.`id` = `tbl_document_in`.`cate_id`)) AS `category` FROM `tbl_document_in` WHERE (`tbl_document_in`.`status` = 0) union all select concat(`tbl_document_out`.`id`,'_2') AS `id`,`tbl_document_out`.`title` AS `title`,'Văn bản đi' AS `type`,(select `tbldm_document`.`title` from `tbldm_document` where (`tbldm_document`.`id` = `tbl_document_out`.`cate_id`)) AS `category` from `tbl_document_out` where (`tbl_document_out`.`status` = 0)  ;
 
 --
 -- Indexes for dumped tables
@@ -4912,7 +4898,7 @@ ALTER TABLE `tbldm_physical_room`
 -- AUTO_INCREMENT for table `tbldm_quanlity`
 --
 ALTER TABLE `tbldm_quanlity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbldm_quanlity_criteria`
@@ -4996,13 +4982,13 @@ ALTER TABLE `tbl_book_loan`
 -- AUTO_INCREMENT for table `tbl_book_read`
 --
 ALTER TABLE `tbl_book_read`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_book_return`
 --
 ALTER TABLE `tbl_book_return`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_class`
@@ -5014,7 +5000,7 @@ ALTER TABLE `tbl_change_class`
 -- AUTO_INCREMENT for table `tbl_change_device`
 --
 ALTER TABLE `tbl_change_device`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_point`
@@ -5026,7 +5012,7 @@ ALTER TABLE `tbl_change_point`
 -- AUTO_INCREMENT for table `tbl_department_loan`
 --
 ALTER TABLE `tbl_department_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_devices`
@@ -5062,7 +5048,7 @@ ALTER TABLE `tbl_device_repair_detail`
 -- AUTO_INCREMENT for table `tbl_document_in`
 --
 ALTER TABLE `tbl_document_in`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_document_out`
@@ -5074,13 +5060,13 @@ ALTER TABLE `tbl_document_out`
 -- AUTO_INCREMENT for table `tbl_export`
 --
 ALTER TABLE `tbl_export`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_export_detail`
 --
 ALTER TABLE `tbl_export_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tbl_group_role`
@@ -5092,13 +5078,13 @@ ALTER TABLE `tbl_group_role`
 -- AUTO_INCREMENT for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans_detail`
 --
 ALTER TABLE `tbl_loans_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_notify`
@@ -5122,19 +5108,19 @@ ALTER TABLE `tbl_proof`
 -- AUTO_INCREMENT for table `tbl_quanlity_role`
 --
 ALTER TABLE `tbl_quanlity_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_returns_device`
 --
 ALTER TABLE `tbl_returns_device`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_roles`
 --
 ALTER TABLE `tbl_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`
@@ -5146,7 +5132,7 @@ ALTER TABLE `tbl_schedule`
 -- AUTO_INCREMENT for table `tbl_student`
 --
 ALTER TABLE `tbl_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1388;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1328;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_class`
@@ -5164,7 +5150,7 @@ ALTER TABLE `tbl_student_point`
 -- AUTO_INCREMENT for table `tbl_student_relation`
 --
 ALTER TABLE `tbl_student_relation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_tasks`
@@ -5200,7 +5186,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_utensils`
 --
 ALTER TABLE `tbl_utensils`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_imp`
@@ -5230,7 +5216,7 @@ ALTER TABLE `tbl_utensils_loan_detail`
 -- AUTO_INCREMENT for table `tbl_utensils_return`
 --
 ALTER TABLE `tbl_utensils_return`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_works`
@@ -5242,7 +5228,7 @@ ALTER TABLE `tbl_works`
 -- AUTO_INCREMENT for table `tbl_works_role`
 --
 ALTER TABLE `tbl_works_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

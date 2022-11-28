@@ -3,7 +3,8 @@ $(function(){
 });
 
 function select_device(){
-
+    console.log('hi');
+    $('#modal-search').modal('show');
 }
 
 function search_device(){
