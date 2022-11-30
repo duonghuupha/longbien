@@ -1,4 +1,5 @@
 var page = 1, keyword = '', url = '', data = [];
+var page_user = 1, keyword_user = '';
 $(function(){
     $('#list_role').load(baseUrl + '/works_role/content');
 });
