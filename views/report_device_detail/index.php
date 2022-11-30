@@ -55,7 +55,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-search" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:60%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
@@ -64,40 +64,21 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-4">
                         <div class="form-group">
-                            <label for="form-field-username">Ngày nhập (Từ ngày)</label>
-                            <div class="input-group">
-                                <input class="form-control date-picker" id="from_date" type="text" 
-                                name="from_date" required="" data-date-format="dd-mm-yyyy" readonly=""/>
-                                <span class="input-group-addon">
-                                    <i class="fa fa-calendar bigger-110"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="form-field-username">Ngày nhập (Đến ngày)</label>
-                            <div class="input-group">
-                                <input class="form-control date-picker" id="to_date" type="text" 
-                                name="to_date" required="" data-date-format="dd-mm-yyyy" readonly=""/>
-                                <span class="input-group-addon">
-                                    <i class="fa fa-calendar bigger-110"></i>
-                                </span>
+                            <label for="form-field-username">Lựa chọn dữ liệu</label>
+                            <div>
+                                <select class="select2" data-placeholder="Lựa chọn dữ liệu"
+                                style="width:100%" id="type_data" name="type_data" onchange="set_data()">
+                                    <option value="">Lựa chọn dữ liệu</option>    
+                                    <option value="1">Danh sách trang thiết bị</option>
+                                    <option value="2">Theo phòng ban</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="form-field-username">
-                                Nguồn trang thiết bị
-                            </label>
-                            <div>
-                                <input type="text" id="ssource" name="ssource" style="width:100%"
-                                placeholder="Mã học sinh"/>
-                            </div>
-                        </div>
+                        <div id="data_content" class="dataTables_wrapper form-inline no-footer"></div>
                     </div>
                 </div>
             </div>
