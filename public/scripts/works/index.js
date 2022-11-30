@@ -179,7 +179,7 @@ function set_attr_btn(){
     $('#file_select').empty(); $('#doc_id').val(null);
     $('#select_doc').attr('disabled', true);
     var value = $('#file').val(); ext = value.split().pop();
-    if(ext != 'pdf' || ext != 'PDF'){
+    if(ext != 'pdf' && ext != 'PDF'){
         show_message("error", "Tệp đính kèm phải là dạng PDF");
         $('#file').ace_file_input('reset_input');
     }

@@ -182,7 +182,7 @@ function del_cate(){
 
 function check_ext_file(){
     var value = $('#file').val(); ext = value.split().pop();
-    if(ext != 'pdf' || ext != 'PDF'){
+    if(ext != 'pdf' && ext != 'PDF'){
         show_message("error", "Tệp đính kèm phải là dạng PDF");
         $('#file').ace_file_input('reset_input');
     }
