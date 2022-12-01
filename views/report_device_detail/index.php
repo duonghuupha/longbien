@@ -77,6 +77,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-8" id="search_device">
+                        <div class="form-group">
+                            <label for="form-field-username">Từ khóa</label>
+                            <div>
+                                <input id="nav-search-input-device" name="nav-search-input-device" type="text"
+                                style="width:100%;" placeholder="Từ khóa" onkeyup="search_device()"/>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xs-12">
                         <div id="data_content" class="dataTables_wrapper form-inline no-footer"></div>
                     </div>

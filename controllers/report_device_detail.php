@@ -26,7 +26,7 @@ class Report_device_detail extends Controller{
         $offset = ($get_pages-1)*$rows;
         $jsonObj = $this->model->get_data_device($keyword, $offset, $rows);
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
-        $this->view->render("calendars/list_device");
+        $this->view->render("report_device_detail/list_device");
     }
 }
 ?>
