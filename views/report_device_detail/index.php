@@ -59,6 +59,9 @@
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
                     Lựa chọn điều kiện hiển thị dữ liệu
                 </div>
             </div>
@@ -90,16 +93,6 @@
                         <div id="data_content" class="dataTables_wrapper form-inline no-footer"></div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-                    <i class="ace-icon fa fa-times"></i>
-                    Đóng
-                </button>
-                <button type="button" class="btn btn-primary btn-sm pull-right" onclick="search()">
-                    <i class="fa fa-search"></i>
-                    Tìm kiếm
-                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
