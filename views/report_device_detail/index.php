@@ -46,6 +46,7 @@
                     </form>
                 </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-9">
+                    <input id="device_id" name="device_id" type="hidden"/>
                     <div id="list_device" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->

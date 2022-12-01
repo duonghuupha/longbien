@@ -12,6 +12,18 @@ class Report_device_detail extends Controller{
     }
 
     function content(){
+        $id = $_REQUEST['id']; $id = explode(".", $id);
+        $device_id = $id[0]; $sub_device = $id[1];
+
+        $info = $this->model->get_info_device($device_id);
+        $this->view->info = $info;
+        $export = $this->model->get_info_export_detail($device_id, $sub_device);
+        $this->view->export = $export;
+        $change = $this->model->get_info_change_device($device_id, $sub_device);
+        $this->view->change = $change;
+        $repair = $this->model->get_info_repair_device($device_id, $sub_device);
+        $this->view->repair = $repair;
+
         $this->view->render('report_device_detail/content');
     }
 
