@@ -58,5 +58,28 @@ class Report_device_detail_Model extends Model{
                                 ORDER BY id ASC");
         return $query->fetchAll();
     }
+
+    function get_info_loan_device($id, $sub){
+        $query = $this->db->query("SELECT id, code, device_id, sub_device, (SELECT date_loan FROM tbl_loans
+                                WHERE tbl_loans.code = tbl_loans_detail.code) AS date_loan, (SELECT content
+                                FROM tbl_loans WHERE tbl_loans.code = tbl_loans_detail.code) AS content,
+                                IF((SELECT user_id FROM tbl_loans WHERE tbl_loans.code = tbl_loans_detail.code) = 1,
+                                'Administrator', (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id
+                                FROM tbl_users WHERE tbl_users.id = (SELECT user_id FROM tbl_loans WHERE tbl_loans.code 
+                                = tbl_loans_detail.code)))) AS fullname FROM tbl_loans_detail WHERE device_id = $id 
+                                AND sub_device = $sub ORDER BY id ASC");
+        return $query->fetchAll();
+    }
+
+    function get_info_return_device($id, $sub){
+        $query = $this->db->query("SELECT id, code, create_at, year_id, physical_id, device_id, sub_device,
+                                    content, status, (SELECT title FROM tbldm_years WHERE tbldm_years.id = year_id)
+                                    AS nam_hoc, (SELECT title FROM tbldm_physical_room WHERE tbldm_physical_room.id = physical_id)
+                                    AS physical, (SELECT title FROM tbldm_department WHERE tbldm_department.physical_id 
+                                    = tbl_returns_device.physical_id AND tbldm_department.year_id = tbl_returns_device.year_id) 
+                                    AS department FROM tbl_returns_device WHERE device_id = $id AND sub_device = $sub
+                                    AND (status = 1 OR status = 3) ORDER BY id ASC");
+        return $query->fetchAll();
+    }
 }
 ?>

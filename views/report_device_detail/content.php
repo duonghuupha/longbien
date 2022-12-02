@@ -1,5 +1,6 @@
 <?php
 $info = $this->info; $export = $this->export; $change = $this->change; $repair = $this->repair;
+$loan = $this->loan; $return = $this->return;
 ?>
 <div class="tabbable">
     <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
@@ -176,13 +177,80 @@ $info = $this->info; $export = $this->export; $change = $this->change; $repair =
                 </div>
             </div>
         </div>
-        <div id="tab4" class="tab-pane">
-            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro
-                fanny pack lo-fi farm-to-table readymade.</p>
+        <div id="tab4" class="tab-pane" style="max-height:500px;overflow:auto">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                    <?php
+                    foreach($loan as $row_l){
+                    ?>
+                    <div class="timeline-container timeline-style2">
+                        <span class="timeline-label">
+                            <b><?php echo date("d-m-Y", strtotime($row_l['date_loan'])) ?></b>
+                        </span>
+                        <div class="timeline-items">
+                            <div class="timeline-item clearfix">
+                                <div class="timeline-info">
+                                    <span class="timeline-date"><i class="ace-icon fa fa-magnet"></i></span>
+                                    <i class="timeline-indicator btn btn-success no-hover"></i>
+                                </div>
+                                <div class="widget-box transparent">
+                                    <div class="widget-body">
+                                        <div class="widget-main no-padding">
+                                            Người mượn: <b><?php echo $row_l['fullname'] ?></b><br/>
+                                            Nội dung:  <b><?php echo $row_l['content'] ?></b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.timeline-items -->
+                    </div><!-- /.timeline-container -->
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
-        <div id="tab5" class="tab-pane">
-            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro
-                fanny pack lo-fi farm-to-table readymade.</p>
+        <div id="tab5" class="tab-pane" style="max-height:500px;overflow:auto">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                    <?php
+                    foreach($return as $row_r){
+                    ?>
+                    <div class="timeline-container timeline-style2">
+                        <span class="timeline-label">
+                            <b><?php echo date("d-m-Y", strtotime($row_r['create_at'])) ?></b>
+                        </span>
+                        <div class="timeline-items">
+                            <div class="timeline-item clearfix">
+                                <div class="timeline-info">
+                                    <span class="timeline-date">
+                                        <?php
+                                            echo ($row_r['status'] == 1) ? 'Thu hồi' : 'Khôi phục'
+                                        ?>
+                                    </span>
+                                    <i class="timeline-indicator btn btn-success no-hover"></i>
+                                </div>
+                                <div class="widget-box transparent">
+                                    <div class="widget-body">
+                                        <div class="widget-main no-padding">
+                                            <span class="bigger-110">
+                                                <a href="javascript:void(0)" class="purple bolder">
+                                                    <?php echo $row_r['nam_hoc'] ?>
+                                                </a>
+                                                <?php echo '- '.$row_r['physical'].' - '.$export[0]['department'] ?><br/>
+                                                Lý do: <?php echo $row_r['content'] ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.timeline-items -->
+                    </div><!-- /.timeline-container -->
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

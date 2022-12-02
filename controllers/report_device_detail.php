@@ -23,6 +23,10 @@ class Report_device_detail extends Controller{
         $this->view->change = $change;
         $repair = $this->model->get_info_repair_device($device_id, $sub_device);
         $this->view->repair = $repair;
+        $loan = $this->model->get_info_loan_device($device_id, $sub_device);
+        $this->view->loan = $loan;
+        $return = $this->model->get_info_return_device($device_id, $sub_device);
+        $this->view->return = $return;
 
         $this->view->render('report_device_detail/content');
     }
