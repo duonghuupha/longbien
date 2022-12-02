@@ -44,5 +44,19 @@ class Report_device_detail extends Controller{
         $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render("report_device_detail/list_device");
     }
+
+    function combo_department(){
+        $jsonObj = $this->model->get_combo_department($this->_Year[0]['id']);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("report_device_detail/combo_department");
+    }
+
+    function combo_devices(){
+        $id = $_REQUEST['physicalid'];
+        $jsonObj = $this->model->get_combo_device($id);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("report_device_detail/combo_devices");
+    }
+
 }
 ?>

@@ -93,6 +93,26 @@
                     <div class="col-xs-12">
                         <div id="data_content" class="dataTables_wrapper form-inline no-footer"></div>
                     </div>
+                    <div class="col-xs-6" id="select_dep">
+                        <div class="form-group" style="width:100%">
+                            <label for="form-field-username">Lựa chọn phòng ban / Lớp học</label>
+                            <div>
+                                <select class="select2" data-placeholder="Lựa chọn phòng..." style="width:100%" required=""
+                                    id="physical_id" name="physical_id" onchange="set_device(this.value)">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6"  id="select_dev">
+                        <div class="form-group" style="width:100%">
+                            <label for="form-field-username">Lựa chọn trang thiết bị</label>
+                            <div>
+                                <select class="select2" data-placeholder="Lựa chọn thiết bị..." style="width:100%" required=""
+                                    id="device_s" name="device_s" onchange="set_ho_so()">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><!-- /.modal-content -->

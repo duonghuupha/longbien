@@ -81,5 +81,21 @@ class Report_device_detail_Model extends Model{
                                     AND (status = 1 OR status = 3) ORDER BY id ASC");
         return $query->fetchAll();
     }
+
+    function get_combo_department($yearid){
+        $query = $this->db->query("SELECT id, title, physical_id, (SELECT tbldm_physical_room.title FROM tbldm_physical_room
+                                    WHERE tbldm_physical_room.id = physical_id) AS physical FROM tbldm_department
+                                    WHERE year_id = $yearid OR is_default = 0");
+        return $query->fetchAll();
+    }
+
+    function get_combo_device($physicalid){
+        $query = $this->db->query("SELECT code, device_id, sub_device, id, status, (SELECT tbl_devices.title 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id) AS title, (SELECT tbl_devices.code 
+                                    FROM tbl_devices WHERE tbl_devices.id = device_id) AS code_dv FROM tbl_export_detail
+                                    WHERE code = (SELECT tbl_export.code FROM tbl_export WHERE physical_id = $physicalid)
+                                    AND status = 0");
+        return $query->fetchAll();
+    }
 }
 ?>
