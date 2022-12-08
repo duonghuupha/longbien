@@ -28,7 +28,6 @@ class Library extends Controller{
         $code = $_REQUEST['code']; $manuid = $_REQUEST['manu_id']; $cateid = $_REQUEST['cate_id'];
         $numberpage = $_REQUEST['number_page'];  $author = $_REQUEST['author']; $title = $_REQUEST['title'];
         $content = addslashes($_REQUEST['content']); $type = $_REQUEST['type'];
-        $stock = ($type == 1) ? $_REQUEST['stock'] : 0;
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], 'img_library') : '';
         if($type == 2){
             $file = $this->_Convert->convert_file($_FILES['file']['name'], 'file_library');
@@ -43,8 +42,7 @@ class Library extends Controller{
             $data = array("code" => $code, "cate_id" => $cateid, "manu_id" => $manuid, "title" => $title,
                             "content" => $content, "number_page" => $numberpage, "author" => $author,
                             "image" => $image, "type" => $type, "file" => $file, "status" => 0,
-                            "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d  H:i:s"),
-                            "stock" =>  $stock);
+                            "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d  H:i:s"));
             $temp = $this->model->addObj($data);
             if($temp){
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
@@ -75,7 +73,6 @@ class Library extends Controller{
         $code = $_REQUEST['code']; $manuid = $_REQUEST['manu_id']; $cateid = $_REQUEST['cate_id'];
         $numberpage = $_REQUEST['number_page'];  $author = $_REQUEST['author']; $title = $_REQUEST['title'];
         $content = addslashes($_REQUEST['content']); $type = $_REQUEST['type'];
-        $stock = ($type == 1) ? $_REQUEST['stock'] : 0;
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], 'img_library') : $_REQUEST['image_old'];
         if($type == 2){
             $file = ($_FILES['file']['name'] != '') ? $this->_Convert->convert_file($_FILES['file']['name'], 'file_library') : $_REQUEST['file_old'];
@@ -89,8 +86,7 @@ class Library extends Controller{
         }else{
             $data = array("cate_id" => $cateid, "manu_id" => $manuid, "title" => $title,
                             "content" => $content, "number_page" => $numberpage, "author" => $author,
-                            "image" => $image, "type" => $type, "file" => $file, "create_at" => date("Y-m-d  H:i:s"),
-                            "stock" =>  $stock);
+                            "image" => $image, "type" => $type, "file" => $file, "create_at" => date("Y-m-d  H:i:s"));
             $temp = $this->model->updateObj($id, $data);
             if($temp){
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');

@@ -62,6 +62,7 @@ function search(){
     cate_s = (cate.length != 0) ? cate : ''; manu_s = (manu.length != 0) ? manu : '';
     author = (author.length != 0) ? author.replaceAll(" ", "$", 'g') : ''
     $('#list_library').load(baseUrl + '/library/content?page=1&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s);
+    $('#modal-search').modal('hide');
 }
 
 function detail(idh){
@@ -102,7 +103,7 @@ function del_cate(){
     $('#cate_s').val('').trigger('change');
 }
 
-function del_nb(){
+function del_nxb(){
     $('#manu_s').val('').trigger('change');
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,4 +125,8 @@ function search_read(){
     keyword_read = (value.length != 0) ? value.replaceAll(" ", "$", 'g') : '';
     $('#list_read').load(baseUrl + '/library/content_h?id='+idh+'&page=1&q='+keyword_read);
     $('#pager_read').load(baseUrl + '/library/content_h_page?id='+idh+'&page=1&q='+keyword_read);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+function filter(){
+    $('#modal-search').modal('show');
 }

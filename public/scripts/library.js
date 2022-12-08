@@ -4,7 +4,6 @@ $(function(){
         autoclose: true,
         todayHighlight: true
     });
-    $('#sidebar').removeClass('menu-min');
     $('.file_attach').ace_file_input({
         no_file:'Không có file ...',
         btn_choose:'Lựa chọn',

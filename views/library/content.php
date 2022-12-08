@@ -9,10 +9,11 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
-            <th class="text-center" style="width:80px">Hình ảnh</th>
             <th class="text-center" style="width:80px">Mã sách</th>
-            <th class="" style="width:350px">Tiêu đề</th>
-            <th class="text-center">Tác giả</th>
+            <th class="">Tiêu đề</th>
+            <th class="">Danh mục</th>
+            <th class="">Nhà xuất bản</th>
+            <th>Tác giả</th>
             <th class="text-center" style="width:90px">Thao tác</th>
         </tr>
     </thead>
@@ -25,24 +26,11 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center">
-                <?php 
-                if($row['image'] != ''){
-                    echo "<img src='".URL."/public/library/images/".$row['image']."' width='50' height='50' style='border-radius:50%;border:1px solid #ccc;padding:2px;'/>";
-                }else{
-                    echo "<img src='".URL."/styles/images/noimg.jpg' width='50' height='50' style='border-radius:50%;border:1px solid #ccc;padding:2px;'/>";
-                }
-                ?>
-            </td>
             <td class="text-center"><?php echo $row['code'] ?></td>
-            <td>
-                <?php echo $row['title'].'<br/>';?>
-                <small style="color:gray">
-                    Danh mục: <?php echo $row['category']."<br/>" ?>
-                    NXB: <?php echo $row['manufactory'] ?>
-                </small>
-            </td>
-            <td class="text-center"><?php echo $row['author'] ?></td>
+            <td><?php echo $row['title'] ?></td>
+            <td><?php echo $row['category'] ?></td>
+            <td><?php echo $row['manufactory'] ?></td>
+            <td><?php echo $row['author'] ?></td>
             <td class="text-center">
                 <div class="action-buttons">
                     <a class="blue hidden-480" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">

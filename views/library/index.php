@@ -14,6 +14,10 @@
                 <h1>
                     Quản lý đầu sách
                     <small class="pull-right hidden-480">
+                        <button type="button" class="btn btn-info btn-sm" onclick="filter()">
+                            <i class="fa fa-search"></i>
+                            Lọc dữ liệu
+                        </button>
                         <button type="button" class="btn btn-primary btn-sm" onclick="add()">
                             <i class="fa fa-plus"></i>
                             Thêm mới
@@ -22,69 +26,7 @@
                 </h1>
             </div><!-- /.page-header -->
             <div class="row">
-                <div class="col-xs-12 col-sm-3">
-                    <form id="fm-search" method="post">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="form-field-username">Tiêu đề</label>
-                                    <div>
-                                        <input type="text" id="title_s" name="title_s"
-                                        placeholder="Từ kh ...." style="width:100%" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="form-field-username">
-                                        Lựa chọn danh mục
-                                        &nbsp;
-                                        <a class="red" href="javascript:void(0)" onclick="del_cate()" title="Xóa người tham gia">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </label>
-                                    <div>
-                                        <select class="select2" data-placeholder="Lựa chọn danh mục"
-                                        style="width:100%" id="cate_s" name="cate_s">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="form-field-username">
-                                        Lựa chọn NXB
-                                        &nbsp;
-                                        <a class="red" href="javascript:void(0)" onclick="del_nxb()" title="Xóa người tham gia">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </label>
-                                    <div>
-                                        <select class="select2" data-placeholder="Lựa chọn NXB"
-                                        style="width:100%" id="manu_s" name="manu_s">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="form-field-username">Tác giả</label>
-                                    <div>
-                                        <input type="text" id="author_s" name="author_s"
-                                        placeholder="Tác giả ...." style="width:100%" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 text-center">
-                                <button class="btn btn-sm btn-primary" type="button" onclick="search()">
-                                    <i class="ace-icon fa fa-search"></i>
-                                    Lọc dữ liệu
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div><!-- /.col -->
-                <div class="col-xs-12 col-sm-9">
+                <div class="col-xs-12 col-sm-12">
                     <div id="list_library" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -202,21 +144,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-8">
+                            <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="form-field-username">Tệp dữ liệu</label>
                                     <div>
                                         <input type="file" id="file" name="file" class="file_attach" style="width:100%"
                                         onchange="check_ext()"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="form-group">
-                                    <label for="form-field-username">Số lượng</label>
-                                    <div>
-                                        <input class="form-control" id="stock" type="text" 
-                                        name="stock" placeholder="Số lượng tồn kho" onkeypress="validate(event)"/>
                                     </div>
                                 </div>
                             </div>
@@ -231,6 +164,84 @@
                 </button>
                 <button class="btn btn-sm btn-primary pull-right" onclick="save()">
                     <i class="ace-icon fa fa-save"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-search" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    Lựa chọn điều kiện hiển thị dữ liệu
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Tiêu đề</label>
+                            <div>
+                                <input type="text" id="title_s" name="title_s"
+                                placeholder="Từ khóa ...." style="width:100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Lựa chọn danh mục
+                                &nbsp;
+                                <a class="red" href="javascript:void(0)" onclick="del_cate()" title="Xóa người tham gia">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </label>
+                            <div>
+                                <select class="select2" data-placeholder="Lựa chọn danh mục"
+                                style="width:100%" id="cate_s" name="cate_s">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Lựa chọn NXB
+                                &nbsp;
+                                <a class="red" href="javascript:void(0)" onclick="del_nxb()" title="Xóa người tham gia">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </label>
+                            <div>
+                                <select class="select2" data-placeholder="Lựa chọn NXB"
+                                style="width:100%" id="manu_s" name="manu_s">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Tác giả</label>
+                            <div>
+                                <input type="text" id="author_s" name="author_s"
+                                placeholder="Tác giả ...." style="width:100%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="search()">
+                    <i class="ace-icon fa fa-search"></i>
                     Ghi dữ liệu
                 </button>
             </div>
