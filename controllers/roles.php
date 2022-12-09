@@ -26,7 +26,7 @@ class Roles extends Controller{
         $function = isset($_REQUEST['functions']) ? implode(",", $_REQUEST['functions']) : '';
         $parent = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0;
         $data = array("title" => $title, "link" => $link, "functions" => $function, "parent_id" => $parent,
-                        "order_position" => $order);
+                        "order_position" => $order, 'is_submenu' => 0);
         $temp = $this->model->addObj($data);
         if($temp){
             $jsonObj['msg'] = "Ghi dữ  liệu thành công";
