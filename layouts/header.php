@@ -25,13 +25,14 @@ if(isset($_REQUEST['url'])){
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/fullcalendar.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/font-awesome/4.5.0/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/jquery.toast.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/chosen.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/bootstrap-duallistbox.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/calendar.css"/>
+		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ui.jqgrid.min.css" />
+		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace.min.css"/>
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?php echo URL ?>/styles/css/ace-rtl.min.css" />
 		<link rel="shortcut icon" href="<?php echo URL ?>/styles/images/Logo.png" />

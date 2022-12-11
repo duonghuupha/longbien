@@ -407,6 +407,14 @@ class Model {
                                 status, sub_utensils, date_return FROM tbl_utensils_loan_detail WHERE code = $code");
         return $query->fetchAll();
     }
+    function get_detail_import_book($code){
+        $query = $this->db->query("SELECT book_id AS id, quanlity AS qty, (SELECT title FROM tbl_book
+                                    WHERE tbl_book.id = book_id) AS title, (SELECT tbl_book.code FROM tbl_book
+                                    WHERE tbl_book.id = book_id) AS code, (SELECT tbldm_book.title FROM tbldm_book
+                                    WHERE tbldm_book.id = (SELECT tbl_book.cate_id FROM tbl_book 
+                                    WHERE tbl_book.id = book_id)) AS category FROM tbl_book_import_detail WHERE code = $code");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 
