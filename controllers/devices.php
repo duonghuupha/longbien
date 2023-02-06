@@ -186,14 +186,12 @@ class Devices extends Controller{
                     }elseif($j == 6){
                         $depreciation = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }elseif($j == 7){
-                        $stock = $sheet->getCellByColumnAndRow($j, $i)->getValue();
-                    }elseif($j == 8){
                         $description = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }
                 }
                 $data = array("code" => $code, 'title' => $title, 'origin' => $origin,
                                 'year_work' => $year_work,  'price' => $price, 'depreciation' => $depreciation,
-                                'description' => $description, 'status' => 99, "stock" => $stock,
+                                'description' => $description, 'status' => 99, "stock" => 0,
                                 'user_id' => $this->_Info[0]['id']);
                 $this->model->addObj($data);
             }

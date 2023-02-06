@@ -16,7 +16,6 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center hidden-480">Xuất sứ</th>
             <th class="text-center hidden-480">Năm sử dụng</th>
             <th class="text-right hidden-480">Nguyên giá</th>
-            <th class="text-center hidden-480">Tồn kho</th>
             <th class="text-center hidden-480">Thao tác</th>
         </tr>
     </thead>
@@ -45,7 +44,6 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center hidden-480"><?php echo $row['origin'] ?></td>
             <td class="text-center hidden-480"><?php echo $row['year_work'] ?></td>
             <td class="text-right hidden-480"><?php echo number_format($row['price']) ?></td>
-            <td class="text-center hidden-480"><?php echo number_format($row['stock']) ?></td>
             <td class="text-center hidden-480">
                 <div class="action-buttons">
                     <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
