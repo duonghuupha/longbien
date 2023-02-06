@@ -26,14 +26,14 @@ class Gear extends Controller{
     function add(){
         $code = $_REQUEST['code']; $title = $_REQUEST['title']; $cateid = $_REQUEST['cate_id'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], $code) : '';
-        $content = addslashes($_REQUEST['content']); $stock = $_REQUEST['stock'];
+        $content = addslashes($_REQUEST['content']);
         if($this->model->dupliObj(0, $code) > 0){
             $jsonObj['msg'] = "Mã đồ dùng đã tồn tại";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
             $data = array("code" => $code, "title" => $title, "cate_id" => $cateid, "image" => $image,
-                            "content" => $content, "stock" => $stock, "status" => 0, "create_at" => date("Y-m-d H:i:s"));
+                            "content" => $content, "stock" => 0, "status" => 0, "create_at" => date("Y-m-d H:i:s"));
             $temp = $this->model->addObj($data);
             if($temp){
                 if($_FILES['image']['name'] != ''){
@@ -64,14 +64,14 @@ class Gear extends Controller{
         $id = $_REQUEST['id'];
         $code = $_REQUEST['code']; $title = $_REQUEST['title']; $cateid = $_REQUEST['cate_id'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], $code) : $_REQUEST['image_old'];
-        $content = addslashes($_REQUEST['content']); $stock = $_REQUEST['stock'];
+        $content = addslashes($_REQUEST['content']);
         if($this->model->dupliObj($id, $code) > 0){
             $jsonObj['msg'] = "Mã đồ dùng đã tồn tại";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
             $data = array("title" => $title, "cate_id" => $cateid, "image" => $image,
-                            "content" => $content, "stock" => $stock, "create_at" => date("Y-m-d H:i:s"));
+                            "content" => $content, "create_at" => date("Y-m-d H:i:s"));
             $temp = $this->model->updateObj($id, $data);
             if($temp){
                 if($_FILES['image']['name'] != ''){
@@ -165,12 +165,10 @@ class Gear extends Controller{
                         $title = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }elseif($j == 3){
                         $content = $sheet->getCellByColumnAndRow($j, $i)->getValue();
-                    }elseif($j == 4){
-                        $stock = $sheet->getCellByColumnAndRow($j, $i)->getValue();
                     }
                 }
                 $data = array("code" => $code, 'title' => $title, 'cate_id' => $cate,
-                                'content' => $content,  'stock' => $stock,
+                                'content' => $content,  'stock' => 0,
                                 'create_at' => date("Y-m-d H:i:s"), 'status' => 99,
                                 'user_id' => $this->_Info[0]['id']);
                 $this->model->addObj($data);

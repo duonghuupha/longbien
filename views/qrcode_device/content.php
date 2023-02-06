@@ -22,10 +22,10 @@ $pages = $this->page; $sql = new Model();
     </thead>
     <tbody>
         <?php
-        $i = 0;
+        $j = 0;
         foreach($jsonObj['rows'] as $row){
-            $i++;
-            $class = ($i%2 == 0) ? 'even' : 'odd'; 
+            $j++;
+            $class = ($j%2 == 0) ? 'even' : 'odd'; 
             if($row['cate_id'] == 0){
                 if($row['price'] >= 10000000){
                     $danhmuc = "Tài sản cố định";
@@ -37,7 +37,7 @@ $pages = $this->page; $sql = new Model();
             }
         ?>
         <tr role="row" class="<?php echo $class ?>">
-            <td class="text-center"><?php echo $i ?></td>
+            <td class="text-center"><?php echo $j ?></td>
             <td class="text-center">
                 <input id="ck_<?php echo $row['id'] ?>" name="ck_<?php echo $row['id'] ?>"
                 type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma"

@@ -12,7 +12,6 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center" style="width:120px">Mã đồ dùng</th>
             <th class="" style="width:350px;">Tiêu đề</th>
             <th class="text-center hidden-480">Danh mục</th>
-            <th class="text-center hidden-480">Số lượng</th>
             <th class="text-center">Thao tác</th>
         </tr>
     </thead>
@@ -29,7 +28,6 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center" <?php echo $style_code ?>><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
             <td class="text-center"><?php echo $row['category'] ?></td>
-            <td class="text-center"><?php echo $row['stock'] ?></td>
             <td class="text-center">
                 <div class="action-buttons">
                     <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">

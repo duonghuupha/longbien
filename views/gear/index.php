@@ -147,15 +147,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Số lượng</label>
-                                <div>
-                                    <input type="text" id="stock" name="stock" style="width:100%"
-                                    required="" onkeypress="validate(event)"/>
-                                </div>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

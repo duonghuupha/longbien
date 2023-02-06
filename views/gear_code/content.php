@@ -18,13 +18,13 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
     </thead>
     <tbody>
         <?php
-        $i = 0;
+        $j = 0;
         foreach($jsonObj['rows'] as $row){
-            $i++;
-            $class = ($i%2 == 0) ? 'even' : 'odd'; 
+            $j++;
+            $class = ($j%2 == 0) ? 'even' : 'odd'; 
         ?>
         <tr role="row" class="<?php echo $class ?>">
-            <td class="text-center"><?php echo $i ?></td>
+            <td class="text-center"><?php echo $j ?></td>
             <td class="text-center">
                 <input id="ck_<?php echo $row['id'] ?>" name="checkbox_utensils"
                 type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma"
