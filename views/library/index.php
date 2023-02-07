@@ -103,6 +103,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Năm xuất bản</label>
+                                    <div>
+                                        <input class="form-control" id="year_publish" type="text" onkeypress="validate(event)"
+                                        name="year_publish" required="" placeholder="Năm xuất bản sách"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Nơi xuất bản</label>
+                                    <div>
+                                        <input class="form-control" id="position_publish" type="text" 
+                                        name="position_publish" required="" placeholder="Nơi xuất bản sách"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-xs-8">
                             <div class="col-xs-12">

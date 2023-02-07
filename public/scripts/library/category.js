@@ -1,7 +1,9 @@
-var page_book =1, page_manu = 1, url = '';
+var page_book =1, page_manu = 1, url = '', page_bin = 1, page_floor = 1;
 $(function(){
     $('#list_book').load(baseUrl + '/cate_book/content');
     $('#list_manu').load(baseUrl + '/cate_book_manu/content');
+    $('#list_bin').load(baseUrl + '/bin/content');
+    $('#list_floor').load(baseUrl + '/floor/content');
 });
 //////////////////////////////////////////////////////////////////////////////////////////
 function add_book_cate(){
@@ -76,4 +78,78 @@ function save_book_cate_manu(){
 function view_page_book_cate_manu(pages){
     page_manu = pages;
     $('#list_manu').load(baseUrl + '/cate_book_manu/content?page='+page_manu);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function add_bin(){
+    $('#form').load(baseUrl + '/bin/form');
+    $('#modal-form').modal('show');
+    url = baseUrl + '/bin/add';
+}
+
+function edit_bin(idh){
+    $('#form').load(baseUrl + '/bin/form?id='+idh);
+    $('#modal-form').modal('show');
+    url = baseUrl + '/bin/update';
+}
+
+function del_bin(idh){
+    var data_str = "id="+idh;
+    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này ?", baseUrl+'/bin/del', '#list_bin', baseUrl+'/bin/content?page='+page_bin);
+}
+
+function save_bin(){
+    var required = $('input,textarea,select').filter('[required]:visible');
+    var allRequired = true;
+    required.each(function(){
+        if($(this).val() == ''){
+            allRequired = false;
+        }
+    });
+    if(allRequired){
+        save_form_modal('#fm', url, '#modal-form', '#list_bin',  baseUrl+'/bin/content?page='+page_bin); 
+    }else{
+        show_message("error", "Chưa điền đủ thông tin");
+    }
+}
+
+function view_page_bin(pages){
+    page_bin = pages;
+    $('#list_bin').load(baseUrl + '/bin/content?page='+page_bin);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function add_floor(){
+    $('#form').load(baseUrl + '/floor/form');
+    $('#modal-form').modal('show');
+    url = baseUrl + '/floor/add';
+}
+
+function edit_floor(idh){
+    $('#form').load(baseUrl + '/floor/form?id='+idh);
+    $('#modal-form').modal('show');
+    url = baseUrl + '/floor/update';
+}
+
+function del_floor(idh){
+    var data_str = "id="+idh;
+    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này ?", baseUrl+'/floor/del', '#list_floor', baseUrl+'/floor/content?page='+page_floor);
+}
+
+function save_floor(){
+    var required = $('input,textarea,select').filter('[required]:visible');
+    var allRequired = true;
+    required.each(function(){
+        if($(this).val() == ''){
+            allRequired = false;
+        }
+    });
+    if(allRequired){
+        save_form_modal('#fm', url, '#modal-form', '#list_floor',  baseUrl+'/floor/content?page='+page_floor); 
+    }else{
+        show_message("error", "Chưa điền đủ thông tin");
+    }
+}
+
+function view_page_floor(pages){
+    page_bin = pages;
+    $('#list_floor').load(baseUrl + '/floor/content?page='+page_floor);
 }

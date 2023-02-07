@@ -241,3 +241,5 @@
 2022-11-27 01:55:11/1/Xóa dữ liệu/document_in/del
 2022-11-27 01:58:23/1/Xóa dữ liệu/document_in/del
 2022-11-27 16:11:04/1/Thêm mới dữ liệu/change_device/add
+2023-02-07 12:32:22/1/Thêm mới dữ liệu/bin/add
+2023-02-07 12:32:41/1/Thêm mới dữ liệu/bin/add
