@@ -52,7 +52,7 @@ $pages = $this->page; $sql = new Model();
                 <select class="select2" id="device_<?php echo $row['id'] ?>"
                 data-minimum-results-for-search="Infinity" data-placeholder="Lựa chọn"
                 onchange="set_select_sub_device(<?php echo $row['id'] ?>)">
-                    <option value="">Lựa chọn</option>
+                    <option value="0">Tất cả</option>
                     <?php
                     for($i = 1; $i  <= $row['stock']; $i++){
                         echo '<option value="'.$i.'">'.$i.'</option>';
