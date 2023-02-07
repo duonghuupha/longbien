@@ -129,6 +129,11 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
+    function get_combo_bin(){
+        $query = $this->db->query("SELECT id, title FROM tbldm_bin");
+        return $query->fetchAll();
+    }
+
     function get_combo_subject_via_user_id($type, $userid, $yearid, $q){
         if($type == 0){
             $query = $this->db->query("SELECT id, title FROM tbldm_subject WHERE status = 0 

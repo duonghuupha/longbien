@@ -43,6 +43,15 @@
                     </h3>
                     <div id="list_bin" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
+                <div class="col-xs-12 col-sm-6">
+                    <h3 class="header smaller lighter blue">
+                        Danh sách các tầng của kệ sách
+                        <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_floor()">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </h3>
+                    <div id="list_floor" class="dataTables_wrapper form-inline no-footer"></div>
+                </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>

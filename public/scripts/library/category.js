@@ -118,7 +118,7 @@ function view_page_bin(pages){
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function add_floor(){
-    $('#form').load(baseUrl + '/floor/form');
+    $('#form').load(baseUrl + '/floor/form'); 
     $('#modal-form').modal('show');
     url = baseUrl + '/floor/add';
 }

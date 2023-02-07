@@ -222,5 +222,11 @@ class Other extends Controller{
         $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_department_all");
     }
+
+    function combo_bin(){
+        $jsonObj= $this->model->get_combo_bin();
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("other/combo_bin");
+    }
 }
 ?>

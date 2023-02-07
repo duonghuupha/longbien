@@ -15,8 +15,8 @@ class Floor extends Controller{
     }
 
     function add(){
-        $title = $_REQUEST['title']; $binid = $_REQUEST['bin_id']
-        $data = array('title' => $title, 'bin' => $binid);
+        $title = $_REQUEST['title']; $binid = $_REQUEST['bin_id'];
+        $data = array('title' => $title, 'bin_id' => $binid);
         $temp = $this->model->addObj($data);
         if($temp){
             $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');

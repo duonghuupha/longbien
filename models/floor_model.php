@@ -6,10 +6,10 @@ class Floor_Model extends Model{
 
     function getFetObj($offset, $rows){
         $result = array();
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_floor WHERE status = 0");
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbldm_floor");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT id, title, bin_id, (SELECT tbldm_bin.title FROM tbldm_bin
-                                    WHERE tbldm_bin.id = bin_id) AS bin FROM tbldm_floor WHERE status = 0 
+                                    WHERE tbldm_bin.id = bin_id) AS bin FROM tbldm_floor
                                     ORDER BY id DESC LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
