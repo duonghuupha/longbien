@@ -23,7 +23,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td id="titlelevel_<?php echo $row['id'] ?>"><?php echo $row['bin'] ?></td>
+            <td id="titlebin_<?php echo $row['id'] ?>"><?php echo $row['bin'] ?></td>
             <td id="titlelevel_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
             <td class="text-center">
                 <div class="hidden-sm hidden-xs action-buttons">
@@ -35,6 +35,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                     </a>
                 </div>
             </td>
+            <td class="hidden" id="binid_<?php echo $row['id'] ?>"><?php echo $row['bin_id'] ?></td>
         </tr>
         <?php
         }

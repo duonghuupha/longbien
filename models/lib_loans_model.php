@@ -43,7 +43,10 @@ class Lib_loans_Model extends Model{
     function get_info_book($code){
         $query = $this->db->query("SELECT id, code, title, (SELECT tbldm_book.title FROM tbldm_book
                                 WHERE tbldm_book.id = cate_id) AS category, (SELECT tbldm_book_manu.title
-                                FROM tbldm_book_manu WHERE tbldm_book_manu.id = manu_id) AS manufactory
+                                FROM tbldm_book_manu WHERE tbldm_book_manu.id = manu_id) AS manufactory,
+                                position_publish, year_publish, bin_id, floor_id, (SELECT tbldm_bin.title
+                                FROM tbldm_bin WHERE tbldm_bin.id = bin_id) AS bin, (SELECT tbldm_floor.title
+                                FROM tbldm_floor WHERE tbldm_floor.id = floor_id) AS floor
                                 FROM tbl_book WHERE code = '$code'");
         return $query->fetchAll();
     }

@@ -120,12 +120,25 @@ function view_page_bin(pages){
 function add_floor(){
     $('#form').load(baseUrl + '/floor/form'); 
     $('#modal-form').modal('show');
+    setTimeout(
+        function(){
+            combo_select_2('#bin_id', baseUrl + '/other/combo_bin', 0, '');
+        },
+        300
+    )
     url = baseUrl + '/floor/add';
 }
 
 function edit_floor(idh){
+    var binid = $('#binid_'+idh).text(), title_bin = $('#titlebin_'+idh).text();
     $('#form').load(baseUrl + '/floor/form?id='+idh);
     $('#modal-form').modal('show');
+    setTimeout(
+        function(){
+            combo_select_2('#bin_id', baseUrl + '/other/combo_bin', binid, title_bin);
+        },
+        300
+    );
     url = baseUrl + '/floor/update';
 }
 

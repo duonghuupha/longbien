@@ -224,9 +224,16 @@ class Other extends Controller{
     }
 
     function combo_bin(){
-        $jsonObj= $this->model->get_combo_bin();
-        $this->view->jsonObj = $jsonObj;
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj= $this->model->get_combo_bin($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
         $this->view->render("other/combo_bin");
+    }
+
+    function combo_floor(){
+        $jsonObj= $this->model->get_combo_floor($_REQUEST['binid']);
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("other/combo_floor");
     }
 }
 ?>

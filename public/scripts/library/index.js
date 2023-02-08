@@ -12,6 +12,7 @@ function add(){
     $('#code').val(number); $('#type').val(1).trigger('change');
     combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', 0, '');
     combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', 0, '');
+    combo_select_2('#bin_id', baseUrl + '/other/combo_bin', 0, '');
     $('#type').val(1).trigger('change'); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/add';
@@ -19,13 +20,13 @@ function add(){
 
 function edit(idh){
     $.getJSON(baseUrl + '/library/data_edit?id='+idh, function(data){
-        console.log(data.category);
         $('#code').val(data.code); $('#number_page').val(data.number_page);
         $('#author').val(data.author); $('#title').val(data.title); $('#content').val(data.content);
         $('#type').val(data.type).trigger('change'); $('#stock').val(data.stock);
         $('#id').val(idh); $('#file_old').val(data.file); $('#image_old').val(data.image);
         combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', data.cate_id, data.category);
         combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', data.manu_id, data.manuafactory);
+        combo_select_2('#bin_id', baseUrl + '/other/combo_bin', data.bin_id, data.bin);
     }); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/update?id='+idh;
@@ -129,4 +130,8 @@ function search_read(){
 //////////////////////////////////////////////////////////////////////////////////////////
 function filter(){
     $('#modal-search').modal('show');
+}
+
+function set_data_floor(value){
+    $('#floor_id').load(baseUrl + '/other/combo_floor?binid='+value);
 }

@@ -129,8 +129,13 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_bin(){
-        $query = $this->db->query("SELECT id, title FROM tbldm_bin");
+    function get_combo_bin($q){
+        $query = $this->db->query("SELECT id, title FROM tbldm_bin WHERE title LIKE '%$q%'");
+        return $query->fetchAll();
+    }
+
+    function get_combo_floor($id){
+        $query = $this->db->query("SELECT id, title FROM tbldm_floor WHERE bin_id = $id");
         return $query->fetchAll();
     }
 

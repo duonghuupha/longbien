@@ -35,7 +35,7 @@
         <i class="ace-icon fa fa-times"></i>
         Đóng
     </button>
-    <button class="btn btn-sm btn-primary pull-right" onclick="save_bin()">
+    <button class="btn btn-sm btn-primary pull-right" onclick="save_floor()">
         <i class="ace-icon fa fa-save"></i>
         Ghi dữ liệu
     </button>
@@ -43,6 +43,6 @@
 <script>
 $(function(){
     $('.select2').select2();
-    $('#bin_id').load(baseUrl + '/other/combo_bin');
+    //$('#bin_id').load(baseUrl + '/other/combo_bin?id=1');
 })
 </script>

@@ -29,6 +29,8 @@ class Library extends Controller{
         $numberpage = $_REQUEST['number_page'];  $author = $_REQUEST['author']; $title = $_REQUEST['title'];
         $content = addslashes($_REQUEST['content']); $type = $_REQUEST['type'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], 'img_library') : '';
+        $yearp = $_REQUEST['year_publish']; $positionp = $_REQUEST['position_publish'];
+        $binid = $_REQUEST['bin_id']; $floor = $_REQUEST['floor_id'];
         if($type == 2){
             $file = $this->_Convert->convert_file($_FILES['file']['name'], 'file_library');
         }else{
@@ -41,8 +43,10 @@ class Library extends Controller{
         }else{
             $data = array("code" => $code, "cate_id" => $cateid, "manu_id" => $manuid, "title" => $title,
                             "content" => $content, "number_page" => $numberpage, "author" => $author,
-                            "image" => $image, "type" => $type, "file" => $file, "status" => 0,
-                            "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d  H:i:s"));
+                            "image" => $image, "type" => $type, "file" => $file, "status" => 0, "stock" => 0,
+                            "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d  H:i:s"),
+                            "year_publish" => $yearp, "position_publish" => $positionp, "bin_id" => $binid,
+                            "floor_id" => $floor);
             $temp = $this->model->addObj($data);
             if($temp){
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
@@ -79,6 +83,8 @@ class Library extends Controller{
         }else{
             $file = '';
         }
+        $yearp = $_REQUEST['year_publish']; $positionp = $_REQUEST['position_publish'];
+        $binid = $_REQUEST['bin_id']; $floor = $_REQUEST['floor_id'];
         if($this->model->dupliObj($id,$code) > 0){
             $jsonObj['msg'] = "Mã sách đã tồn tại";
             $jsonObj['success'] = false;
@@ -86,7 +92,9 @@ class Library extends Controller{
         }else{
             $data = array("cate_id" => $cateid, "manu_id" => $manuid, "title" => $title,
                             "content" => $content, "number_page" => $numberpage, "author" => $author,
-                            "image" => $image, "type" => $type, "file" => $file, "create_at" => date("Y-m-d  H:i:s"));
+                            "image" => $image, "type" => $type, "file" => $file, "create_at" => date("Y-m-d  H:i:s"),
+                            "year_publish" => $yearp, "position_publish" => $positionp, "bin_id" => $binid,
+                            "floor_id" => $floor);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');

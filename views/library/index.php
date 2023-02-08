@@ -171,6 +171,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">Giá/kệ</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn giá kệ..."
+                                        style="width:100%" required="" id="bin_id" name="bin_id"
+                                        onchange="set_data_floor(this.value)">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">Tầng</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn tầng..."
+                                        style="width:100%" required="" id="floor_id" name="floor_id">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
