@@ -12,10 +12,10 @@ $pages = $this->page; $sql = new Model();
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã TB</th>
             <th class="">Tiêu đề</th>
-            <th class="text-center hidden-480">Danh mục</th>
-            <th class="text-center hidden-480">Xuất sứ</th>
-            <th class="text-center hidden-480">Năm sử dụng</th>
-            <th class="text-right hidden-480">Nguyên giá</th>
+            <th class="text-left" style="width:200px">Danh mục</th>
+            <th class="text-center">Xuất sứ</th>
+            <th class="text-center">Năm sử dụng</th>
+            <th class="text-right">Nguyên giá</th>
             <th class="text-center">Thao tác</th>
         </tr>
     </thead>
@@ -39,10 +39,10 @@ $pages = $this->page; $sql = new Model();
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
-            <td class="text-center hidden-480"><?php echo $danhmuc ?></td>
-            <td class="text-center hidden-480"><?php echo $row['origin'] ?></td>
-            <td class="text-center hidden-480"><?php echo $row['year_work'] ?></td>
-            <td class="text-right hidden-480"><?php echo number_format($row['price']) ?></td>
+            <td class="text-left"><?php echo $this->_Convert->cut($danhmuc, 40) ?></td>
+            <td class="text-center"><?php echo $row['origin'] ?></td>
+            <td class="text-center"><?php echo $row['year_work'] ?></td>
+            <td class="text-right"><?php echo number_format($row['price']) ?></td>
             <td class="text-center">
                 <div class="action-buttons">
                     <a class="blue" href="javascript:void(0)" onclick="detail(<?php echo $row['id'] ?>)">
@@ -51,14 +51,14 @@ $pages = $this->page; $sql = new Model();
                     <?php
                     if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 2) > 0){
                     ?>
-                    <a class="green hidden-480" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
+                    <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
                     <?php
                     }
                     if($this->_Data->check_role_view($this->_Info[0]['id'], $this->_Info[0]['group_role_id'], $this->_Url[0], 3) > 0){
                     ?>
-                    <a class="red hidden-480" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
+                    <a class="red" href="javascript:void(0)" onclick="del(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                     </a>
                     <?php
