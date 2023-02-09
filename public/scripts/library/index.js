@@ -27,6 +27,8 @@ function edit(idh){
         combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', data.cate_id, data.category);
         combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', data.manu_id, data.manuafactory);
         combo_select_2('#bin_id', baseUrl + '/other/combo_bin', data.bin_id, data.bin);
+        combo_select_2('#floor_id', baseUrl + '/other/combo_floor?binid='+data.bin_id, data.floor_id, data.floor);
+        $('#year_publish').val(data.year_publish); $('#position_publish').val(data.position_publish);
     }); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/update?id='+idh;
@@ -34,7 +36,7 @@ function edit(idh){
 
 function del(idh){
     var data_str = "id="+idh;
-    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/library/del', '#list_library', baseUrl +  '/library/content?page='+page+'&q='+keyword);
+    del_data(data_str, "Bạn có chắc chắn muốn xóa bản ghi này?", baseUrl+'/library/del', '#list_library', baseUrl + '/library/content?page='+page+'&t='+title_s+'&c='+cate_s+'&m='+manu_s+'&a='+author_s);
 }
 
 function save(){
@@ -133,5 +135,5 @@ function filter(){
 }
 
 function set_data_floor(value){
-    $('#floor_id').load(baseUrl + '/other/combo_floor?binid='+value);
+    combo_select_2('#floor_id', baseUrl + '/other/combo_floor?binid='+value, 0, '');
 }

@@ -49,11 +49,26 @@ $jsonObj = $this->jsonObj;
                     <b>Tác giả:</b> <?php echo $jsonObj[0]['author'] ?>
                 </label>
             </div>
+            <div class="col-xs-12">
+                <label for="form-field-username">
+                    <b>Năm xuất bản:</b> <?php echo $jsonObj[0]['year_publish'] ?>
+                </label>
+            </div>
+            <div class="col-xs-12">
+                <label for="form-field-username">
+                    <b>Nơi xuất bản:</b> <?php echo $jsonObj[0]['position_publish'] ?>
+                </label>
+            </div>
         </div>
         <div class="col-xs-8">
             <div class="col-xs-12">
                 <label for="form-field-username">
                     <b>Loại sách:</b> <?php echo ($jsonObj[0]['type'] == 1) ? 'Sách truyền thống' : 'Sách nói, sách điện tử' ?>
+                </label>
+            </div>
+            <div class="col-xs-12">
+                <label for="form-field-username">
+                    <b>Vị trí giá kệ:</b> <?php echo $jsonObj[0]['bin'].' - '.$jsonObj[0]['floor'] ?>
                 </label>
             </div>
             <div class="col-xs-12">

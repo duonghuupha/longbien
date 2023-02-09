@@ -87,6 +87,13 @@ $(function(){
                         Bán trú
                     </a>
                 </li>
+                <li>
+                    <a href="javascript:void(0)" <?php echo ($id == 4) ? 'class="blue"' : '' ?>
+                    onclick="reload_block_two(4)">
+                        <i class="ace-icon fa fa-caret-right bigger-110 <?php echo ($id == 4) ? '' : 'invisible' ?>">&nbsp;</i>
+                        Dân tộc
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

@@ -17,11 +17,13 @@ class  Library_Model extends Model{
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book WHERE $where");
         $row= $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, title, image, type, author, cate_id, manu_id, content,
-                                    number_page, type, file, stock, create_at, user_id, (SELECT tbldm_book.title
+        $query = $this->db->query("SELECT id, code, title, image, type, author, cate_id, manu_id, content, year_publish,
+                                    number_page, type, file, stock, create_at, user_id, position_publish, (SELECT tbldm_book.title
                                     FROM tbldm_book WHERE tbldm_book.id = cate_id) AS category, (SELECT tbldm_book_manu.title
-                                    FROM tbldm_book_manu WHERE tbldm_book_manu.id = manu_id) AS manufactory FROM tbl_book WHERE $where
-                                    ORDER BY id DESC LIMIT $offset, $rows");
+                                    FROM tbldm_book_manu WHERE tbldm_book_manu.id = manu_id) AS manufactory,
+                                    (SELECT tbldm_bin.title FROM tbldm_bin WHERE tbldm_bin.id = bin_id) AS bin,
+                                    (SELECT tbldm_floor.title FROM tbldm_floor WHERE tbldm_floor.id = floor_id) AS floor
+                                    FROM tbl_book WHERE $where ORDER BY id DESC LIMIT $offset, $rows");
         $result['total']= $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
@@ -49,13 +51,14 @@ class  Library_Model extends Model{
 
     function get_info($id){
         $query = $this->db->query("SELECT id, code, cate_id, manu_id, title, content, number_page, author,
-                                    image, type, file, status, stock, (SELECT tbldm_book_manu.title
-                                    FROM tbldm_book_manu WHERE tbldm_book_manu.id = manu_id) AS manuafactory,
+                                    image, type, file, status, stock, year_publish, position_publish, bin_id, floor_id,
+                                    (SELECT tbldm_bin.title FROM tbldm_bin WHERE tbldm_bin.id = bin_id) AS bin,
+                                    (SELECT tbldm_floor.title FROM tbldm_floor WHERE tbldm_floor.id = floor_id) AS floor,
+                                    (SELECT tbldm_book_manu.title FROM tbldm_book_manu WHERE tbldm_book_manu.id = manu_id) AS manuafactory,
                                     (SELECT tbldm_book.title FROM tbldm_book WHERE tbldm_book.id = cate_id) AS category,
                                     IF(type = 1, (SELECT COUNT(*) FROM tbl_book_loan WHERE tbl_book_loan.id = tbl_book.id),
                                     (SELECT COUNT(*) FROM tbl_book_read WHERE tbl_book_read.book_id = tbl_book.id))
-                                    AS total_read
-                                    FROM tbl_book WHERE id =  $id");
+                                    AS total_read FROM tbl_book WHERE id =  $id");
         return $query->fetchAll();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////
