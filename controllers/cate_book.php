@@ -2,7 +2,6 @@
 class Cate_book extends Controller{
     function __construct(){
         parent::__construct();
-        parent::PhadhInt();
     }
 
     function content(){
