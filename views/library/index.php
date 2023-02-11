@@ -176,8 +176,7 @@
                                     <label for="form-field-username">Giá/kệ</label>
                                     <div>
                                         <select class="select2" data-placeholder="Lựa chọn giá kệ..."
-                                        style="width:100%" required="" id="bin_id" name="bin_id"
-                                        onchange="set_data_floor(this.value)">
+                                        style="width:100%" id="bin_id" name="bin_id" onchange="set_data_floor(this.value)">
                                         </select>
                                     </div>
                                 </div>
@@ -187,8 +186,17 @@
                                     <label for="form-field-username">Tầng</label>
                                     <div>
                                         <select class="select2" data-placeholder="Lựa chọn tầng..."
-                                        style="width:100%" required="" id="floor_id" name="floor_id">
+                                        style="width:100%" id="floor_id" name="floor_id">
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Số lượng</label>
+                                    <div>
+                                        <input class="form-control" id="stock" type="text" onkeypress="validate(event)"
+                                        name="stock" required="" placeholder="Số lượng tồn kho của sách"/>
                                     </div>
                                 </div>
                             </div>
