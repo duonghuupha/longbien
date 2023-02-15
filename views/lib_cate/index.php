@@ -23,7 +23,7 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </h3>
-                    <div id="list_book" class="dataTables_wrapper form-inline no-footer"></div>
+                    <div id="list_book" class="dataTables_wrapper form-inline no-footer" style="height:500px;overflow:auto"></div>
                 </div><!-- /.col -->
                 <div class="col-xs-12 col-sm-6">
                     <h3 class="header smaller lighter blue">
@@ -34,7 +34,7 @@
                     </h3>
                     <div id="list_manu" class="dataTables_wrapper form-inline no-footer"></div>
                 </div><!-- /.col -->
-                <div class="col-xs-12 col-sm-6">
+                <!--<div class="col-xs-12 col-sm-6">
                     <h3 class="header smaller lighter blue">
                         Danh sách giá kệ sách
                         <a href="javascript:void(0)" class="btn-sm" title="Thêm mới" onclick="add_bin()">
@@ -42,7 +42,7 @@
                         </a>
                     </h3>
                     <div id="list_bin" class="dataTables_wrapper form-inline no-footer"></div>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-xs-12 col-sm-6">
                     <h3 class="header smaller lighter blue">
                         Danh sách các tầng của kệ sách
@@ -51,7 +51,7 @@
                         </a>
                     </h3>
                     <div id="list_floor" class="dataTables_wrapper form-inline no-footer"></div>
-                </div><!-- /.col -->
+                </div>-->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>

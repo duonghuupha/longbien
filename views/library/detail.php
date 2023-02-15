@@ -51,12 +51,7 @@ $jsonObj = $this->jsonObj;
             </div>
             <div class="col-xs-12">
                 <label for="form-field-username">
-                    <b>Năm xuất bản:</b> <?php echo $jsonObj[0]['year_publish'] ?>
-                </label>
-            </div>
-            <div class="col-xs-12">
-                <label for="form-field-username">
-                    <b>Nơi xuất bản:</b> <?php echo $jsonObj[0]['position_publish'] ?>
+                    <b>Giá tiền:</b> <?php echo number_format($jsonObj[0]['price']) ?>
                 </label>
             </div>
         </div>
@@ -66,9 +61,19 @@ $jsonObj = $this->jsonObj;
                     <b>Loại sách:</b> <?php echo ($jsonObj[0]['type'] == 1) ? 'Sách truyền thống' : 'Sách nói, sách điện tử' ?>
                 </label>
             </div>
+            <div class="col-xs-6">
+                <label for="form-field-username">
+                    <b>Năm xuất bản:</b> <?php echo $jsonObj[0]['year_publish'] ?>
+                </label>
+            </div>
+            <div class="col-xs-6">
+                <label for="form-field-username">
+                    <b>Nơi xuất bản:</b> <?php echo $jsonObj[0]['position_publish'] ?>
+                </label>
+            </div>
             <div class="col-xs-12">
                 <label for="form-field-username">
-                    <b>Vị trí giá kệ:</b> <?php echo $jsonObj[0]['bin'].' - '.$jsonObj[0]['floor'] ?>
+                    <b>Môn / Loại:</b> <?php echo $jsonObj[0]['subject'] ?>
                 </label>
             </div>
             <div class="col-xs-12">

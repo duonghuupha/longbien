@@ -30,8 +30,7 @@ class Library extends Controller{
         $content = addslashes($_REQUEST['content']); $type = $_REQUEST['type'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], 'img_library') : '';
         $yearp = $_REQUEST['year_publish']; $positionp = $_REQUEST['position_publish'];
-        $binid = isset($_REQUEST['bin_id']) ? $_REQUEST['bin_id'] : 0; 
-        $floor = isset($_REQUEST['floor_id']) ? $_REQUEST['floor_id'] : 0; 
+        $price = str_replace(",", "", $_REQUEST['price']); $subject = $_REQUEST['subject'];
         $stock = $_REQUEST['stock'];
         if($type == 2){
             $file = $this->_Convert->convert_file($_FILES['file']['name'], 'file_library');
@@ -47,8 +46,8 @@ class Library extends Controller{
                             "content" => $content, "number_page" => $numberpage, "author" => $author,
                             "image" => $image, "type" => $type, "file" => $file, "status" => 0, "stock" => $stock,
                             "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d  H:i:s"),
-                            "year_publish" => $yearp, "position_publish" => $positionp, "bin_id" => $binid,
-                            "floor_id" => $floor);
+                            "year_publish" => $yearp, "position_publish" => $positionp, "price" => $price,
+                            "subject" => $subject);
             $temp = $this->model->addObj($data);
             if($temp){
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
@@ -86,8 +85,7 @@ class Library extends Controller{
             $file = '';
         }
         $yearp = $_REQUEST['year_publish']; $positionp = $_REQUEST['position_publish'];
-        $binid = isset($_REQUEST['bin_id']) ? $_REQUEST['bin_id'] : 0; 
-        $floor = isset($_REQUEST['floor_id']) ? $_REQUEST['floor_id'] : 0; 
+        $price = str_replace(",", "", $_REQUEST['price']); $subject = $_REQUEST['subject'];
         $stock = $_REQUEST['stock'];
         if($this->model->dupliObj($id,$code) > 0){
             $jsonObj['msg'] = "Mã sách đã tồn tại";
@@ -97,8 +95,8 @@ class Library extends Controller{
             $data = array("cate_id" => $cateid, "manu_id" => $manuid, "title" => $title,
                             "content" => $content, "number_page" => $numberpage, "author" => $author,
                             "image" => $image, "type" => $type, "file" => $file, "create_at" => date("Y-m-d  H:i:s"),
-                            "year_publish" => $yearp, "position_publish" => $positionp, "bin_id" => $binid,
-                            "floor_id" => $floor, 'stock' => $stock);
+                            "year_publish" => $yearp, "position_publish" => $positionp, "price" => $price,
+                            "subject" => $subject, 'stock' => $stock);
             $temp = $this->model->updateObj($id, $data);
             if($temp){
                 $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');

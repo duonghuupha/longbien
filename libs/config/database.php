@@ -1,5 +1,5 @@
 <?php
-/**define('DB_TYPE', 'mysql');
+/*define('DB_TYPE', 'mysql');
 define('DB_HOST', '103.138.88.81');
 define('DB_NAME', 'thc99669_db');
 define('DB_USER', 'thc99669_root');

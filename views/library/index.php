@@ -36,7 +36,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-library" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:60%">
+    <div class="modal-dialog" style="width:70%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
@@ -171,27 +171,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label for="form-field-username">Giá/kệ</label>
-                                    <div>
-                                        <select class="select2" data-placeholder="Lựa chọn giá kệ..."
-                                        style="width:100%" id="bin_id" name="bin_id" onchange="set_data_floor(this.value)">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label for="form-field-username">Tầng</label>
-                                    <div>
-                                        <select class="select2" data-placeholder="Lựa chọn tầng..."
-                                        style="width:100%" id="floor_id" name="floor_id">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Môn / Loại</label>
+                                    <div>
+                                        <input class="form-control" id="subject" type="text" 
+                                        name="subject" required="" placeholder="Môn / loại sách"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="form-field-username">Giá tiền</label>
+                                    <div>
+                                        <input class="form-control" id="price" type="text" 
+                                        name="price" required="" placeholder="Giá của một quyển sách"
+                                        data-type='currency'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
                                 <div class="form-group">
                                     <label for="form-field-username">Số lượng</label>
                                     <div>

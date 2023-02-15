@@ -75,10 +75,9 @@ class Other_Model extends Model{
         return $query->fetchAll();
     }
 
-    function get_combo_book_cate($q){
-        $query = $this->db->query("SELECT id, title FROM tbldm_book WHERE status = 0
-                                AND title LIKE '%$q%'");
-        return $query->fetchAll();
+    function get_combo_book_cate(){
+        $query = $this->db->query("SELECT id, title, parent_id FROM tbldm_book WHERE status = 0");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function get_combo_book_manu($q){

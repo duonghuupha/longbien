@@ -1,65 +1,31 @@
 <?php
-$jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
+$jsonObj = $this->jsonObj;
+function showCategories($categories, $parent_id = 0, $char = ''){
+    // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
+    $cate_child = array();
+    foreach ($categories as $key => $item){
+        // Nếu là chuyên mục con thì hiển thị
+        if ($item['parent_id'] == $parent_id){
+            $cate_child[] = $item;
+            unset($categories[$key]);
+        }
+    }
+     
+    // BƯỚC 2.2: HIỂN THỊ DANH SÁCH CHUYÊN MỤC CON NẾU CÓ
+    if ($cate_child){
+        echo '<ul style="list-style:none;line-height:2em">';
+        foreach ($cate_child as $key => $item){
+            // Hiển thị tiêu đề chuyên mục
+            echo '<li style="line-height:2em">'.$char.$item['title'];
+            echo '<span style="margin-left:10px;">';
+            echo '<a href="javascript:void(0)" class="green" onclick="edit_book_cate('.$item['id'].', '.$item['parent_id'].')"><i class="ace-icon fa fa-pencil"></i></a>';
+            echo ' | <a href="" class="red"><i class="ace-icon fa fa-trash"></i></a></span>';
+            // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
+            showCategories($categories, $item['id'], $char.'|---');
+            echo '</li>';
+        }
+        echo '</ul>';
+    }
+}
+showCategories($jsonObj);
 ?>
-<table 
-    id="dynamic-table" 
-    class="table table-striped table-bordered table-hover dataTable no-footer" 
-    role="grid"
-    aria-describedby="dynamic-table_info">
-    <thead>
-        <tr role="row">
-            <th class="text-center" style="width:20px">#</th>
-            <th class="">Tiêu đề</th>
-            <th class="text-center" style="width:180px">Cập nhật lần cuối</th>
-            <th class="text-center" style="width:100px">Thao tác</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $i = 0;
-        foreach($jsonObj['rows'] as $row){
-            $i++;
-            $class = ($i % 2 == 0) ? 'even' : 'odd'; 
-        ?>
-        <tr role="row" class="<?php echo $class ?>">
-            <td class="text-center"><?php echo $i ?></td>
-            <td id="titlelevel_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
-            <td class="text-center"><?php echo date("H:i:s d-m-Y", strtotime($row['create_at'])) ?></td>
-            <td class="text-center">
-                <div class="hidden-sm hidden-xs action-buttons">
-                    <a class="green" href="javascript:void(0)" onclick="edit_book_cate(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                    </a>
-                    <a class="red" href="javascript:void(0)" onclick="del_book_cate(<?php echo $row['id'] ?>)">
-                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                    </a>
-                </div>
-            </td>
-        </tr>
-        <?php
-        }
-        ?>
-    </tbody>
-</table>
-<div class="row mini">
-    <div class="col-xs-12 col-sm-6">
-        <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
-            <?php echo $this->_Convert->return_show_entries($jsonObj['total'], $perpage,  $pages) ?>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6">
-        <?php
-        if($jsonObj['total'] > $perpage){
-            $pagination = $this->_Convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_book_cate', 1);
-        ?>
-        <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
-            <ul class="pagination">
-                <?php echo $createlink ?>
-            </ul>
-        </div>
-        <?php
-        }
-        ?>
-    </div>
-</div>

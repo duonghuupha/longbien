@@ -7,7 +7,17 @@
     <div class="row">
         <form id="fm" method="post">
             <input id="id" name="id" type="hidden" value="<?php echo (isset($_REQUEST['id'])) ? $this->jsonObj[0]['id'] : 0 ?>"/>
-            <div class="col-xs-12">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="form-field-username">Danh mục cha</label>
+                    <div>
+                        <select class="select2" data-placeholder="Lựa chọn danh mục cha"
+                        style="width:100%" id="parent_id" name="parent_id">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
                 <div class="form-group">
                     <label for="form-field-username">Tiêu đề</label>
                     <div>
@@ -30,3 +40,8 @@
         Ghi dữ liệu
     </button>
 </div>
+<script>
+$(function(){
+    $('.select2').select2();
+})
+</script>

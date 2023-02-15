@@ -5,7 +5,7 @@ class Cate_book_manu extends Controller{
     }
 
     function content(){
-        $rows = 5;
+        $rows = 12;
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
         $jsonObj = $this->model->getFetObj($offset, $rows);

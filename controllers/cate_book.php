@@ -5,18 +5,16 @@ class Cate_book extends Controller{
     }
 
     function content(){
-        $rows = 5;
-        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-        $offset = ($get_pages-1)*$rows;
-        $jsonObj = $this->model->getFetObj($offset, $rows);
-        $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $jsonObj = $this->model->getFetObj();
+        $this->view->jsonObj = $jsonObj;
         $this->view->render('cate_book/content');
     }
 
     function add(){
+        $parentid = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0;
         $title = $_REQUEST['title'];
         $data = array('title' => $title, "user_id" => $this->_Info[0]['id'],
-                        "create_at" => date("Y-m-d H:i:s"), "status" => 0);
+                        "create_at" => date("Y-m-d H:i:s"), "status" => 0, 'parent_id' => $parentid);
         $temp = $this->model->addObj($data);
         if($temp){
             $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'add');
@@ -32,10 +30,11 @@ class Cate_book extends Controller{
     }
 
     function update(){
+        $parentid = isset($_REQUEST['parent_id']) ? $_REQUEST['parent_id'] : 0;
         $id = $_REQUEST['id'];
         $title = $_REQUEST['title'];
         $data = array('title' => $title, "user_id" => $this->_Info[0]['id'],
-                        "create_at" => date("Y-m-d H:i:s"));
+                        "create_at" => date("Y-m-d H:i:s"), 'parent_id' => $parentid);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
             $this->_Log->save_log(date("Y-m-d H:i:s"), $this->_Info[0]['id'], 'edit');

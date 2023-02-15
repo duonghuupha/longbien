@@ -2,7 +2,7 @@ var page = 1, url = '', title_s = '', cate_s = '', manu_s = '', author_s = '';
 var page_read = 1, keyword_read = '';
 $(function(){
     $('#list_library').load(baseUrl + '/library/content');
-    combo_select_2('#cate_s', baseUrl + '/other/combo_book_cate');
+    $('#cate_s').load(baseUrl + '/other/combo_book_cate');
     combo_select_2('#manu_s', baseUrl + '/other/combo_book_manu');
 });
 
@@ -10,24 +10,23 @@ function add(){
     $('#fm')[0].reset(); $('.select2').val(null).trigger('change');
     var number = Math.floor(Math.random() * 99999999); $('#id').val(0);
     $('#code').val(number); $('#type').val(1).trigger('change');
-    combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', 0, '');
+    $('#cate_id').load(baseUrl + '/other/combo_book_cate');
     combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', 0, '');
-    combo_select_2('#bin_id', baseUrl + '/other/combo_bin', 0, '');
     $('#type').val(1).trigger('change'); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/add';
 }
 
 function edit(idh){
+    $('#cate_id').load(baseUrl + '/other/combo_book_cate');
     $.getJSON(baseUrl + '/library/data_edit?id='+idh, function(data){
         $('#code').val(data.code); $('#number_page').val(data.number_page);
         $('#author').val(data.author); $('#title').val(data.title); $('#content').val(data.content);
         $('#type').val(data.type).trigger('change'); $('#stock').val(data.stock);
         $('#id').val(idh); $('#file_old').val(data.file); $('#image_old').val(data.image);
-        combo_select_2('#cate_id', baseUrl + '/other/combo_book_cate', data.cate_id, data.category);
+        $('#cate_id').val(data.cate_id).trigger('change'); $('#subject').val(data.subject);
+        $('#price').val(CurrencyFormatted(data.price));
         combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', data.manu_id, data.manuafactory);
-        combo_select_2('#bin_id', baseUrl + '/other/combo_bin', data.bin_id, data.bin);
-        combo_select_2('#floor_id', baseUrl + '/other/combo_floor?binid='+data.bin_id, data.floor_id, data.floor);
         $('#year_publish').val(data.year_publish); $('#position_publish').val(data.position_publish);
     }); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
@@ -132,8 +131,4 @@ function search_read(){
 //////////////////////////////////////////////////////////////////////////////////////////
 function filter(){
     $('#modal-search').modal('show');
-}
-
-function set_data_floor(value){
-    combo_select_2('#floor_id', baseUrl + '/other/combo_floor?binid='+value, 0, '');
 }

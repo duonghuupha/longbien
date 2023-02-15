@@ -10,12 +10,21 @@ function add_book_cate(){
     $('#form').load(baseUrl + '/cate_book/form');
     $('#modal-form').modal('show');
     url = baseUrl + '/cate_book/add';
+    setTimeout(function(){
+        $('#parent_id').load(baseUrl + '/other/combo_book_cate');
+    }, 300)
 }
 
-function edit_book_cate(idh){
+function edit_book_cate(idh, parent_id){
     $('#form').load(baseUrl + '/cate_book/form?id='+idh);
     $('#modal-form').modal('show');
     url = baseUrl + '/cate_book/update';
+    setTimeout(function(){
+        $('#parent_id').load(baseUrl + '/other/combo_book_cate');
+    }, 300);
+    setTimeout(function(){
+        $('#parent_id').val(parent_id).trigger('change');
+    }, 400)
 }
 
 function del_book_cate(idh){
