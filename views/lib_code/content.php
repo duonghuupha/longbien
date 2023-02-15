@@ -11,10 +11,9 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <th class="text-center" style="width:20px">#</th>
             <th class="text_center"></th>
             <th class="text-center" style="width:80px">Mã sách</th>
-            <th class="">Tiêu đề</th>
-            <th class="text-center hidden-480">Danh mục</th>
-            <th class="text-center hidden-480">NXB</th>
-            <th class="text-center hidden-480">Tác giả</th>
+            <th class="" style="width: 400px">Tiêu đề</th>
+            <th class="">NXB</th>
+            <th class="">Tác giả</th>
             <th class="text-center">Số con</th>
             <th class="text-center">SL tem</th>
         </tr>
@@ -35,9 +34,8 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             </td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
-            <td class="text-center"><?php echo $row['category'] ?></td>
-            <td class="text-center"><?php echo $row['manufactory'] ?></td>
-            <td class="text-center"><?php echo $row['author'] ?></td>
+            <td><?php echo $row['manufactory'] ?></td>
+            <td><?php echo $row['author'] ?></td>
             <td class="text-center">
                 <select class="select2" id="lib_<?php echo $row['id'] ?>"
                 data-minimum-results-for-search="Infinity"

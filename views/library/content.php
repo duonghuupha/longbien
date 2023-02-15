@@ -10,8 +10,8 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
             <th class="text-center" style="width:80px">Mã sách</th>
-            <th class="">Tiêu đề</th>
-            <th class="">Danh mục</th>
+            <th class="" style="width: 400px">Tiêu đề</th>
+            <th class="" style="width: 150px">Danh mục</th>
             <th class="">Nhà xuất bản</th>
             <th>Tác giả</th>
             <th class="text-center" style="width:90px">Thao tác</th>
@@ -27,7 +27,9 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
-            <td><?php echo $row['title'] ?></td>
+            <td title="<?php echo $row['title'] ?>">
+                <?php echo $this->_Convert->cut($row['title'], 150) ?>
+            </td>
             <td><?php echo $row['category'] ?></td>
             <td><?php echo $row['manufactory'] ?></td>
             <td><?php echo $row['author'] ?></td>
