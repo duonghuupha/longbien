@@ -50,7 +50,7 @@ class Lib_code_Model extends Model{
                                     AND status = 0");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT  id, title  FROM tbldm_book_manu WHERE title LIKE '%$q%'
-                                    AND status = 0");
+                                    AND status = 0 LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;
