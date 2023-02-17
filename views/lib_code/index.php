@@ -23,10 +23,10 @@
                 <h1>
                     In mã sách
                     <small class="pull-right hidden-480">
-                        <button type="button" class="btn btn-info btn-sm" onclick="select_cate()">
+                        <!--<button type="button" class="btn btn-info btn-sm" onclick="select_cate()">
                             <i class="fa fa-print"></i>
                             In theo danh mục
-                        </button>
+                        </button>-->
                         <button type="button" class="btn btn-primary btn-sm" onclick="select_manu()">
                             <i class="fa fa-print"></i>
                             In theo NXB
@@ -34,6 +34,10 @@
                         <button type="button" class="btn btn-success btn-sm" onclick="print_code()">
                             <i class="fa fa-print"></i>
                             In mã tổng hợp
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" onclick="print_code_option()">
+                            <i class="fa fa-print"></i>
+                            In mã tùy chọn
                         </button>
                     </small>
                 </h1>
@@ -127,6 +131,61 @@
                     <!--display pagination-->
                 </small>
                 <button class="btn btn-sm btn-primary pull-right" onclick="print_code_manu()">
+                    <i class="ace-icon fa fa-print"></i>
+                    In mã
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-option" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    In mã sách tùy chọn
+                </div>
+            </div>
+            <div class="modal-body" style="height:500px;overflow:auto">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="col-xs-12 col-sm-12">
+                            <input class="form-control" id="nav-search-input-book" type="text" style="width:100%"
+                            placeholder="Nhập từ khóa tìm kiếm"/>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="space-6"></div>
+                        </div>
+                        <form id="fm_option" method="post">
+                            <input id="data_code" name="data_code" type="hidden"/>
+                        </form>
+                        <table id="dynamic-table" 
+                            class="table table-striped table-bordered table-hover dataTable no-footer" 
+                            role="grid"
+                            aria-describedby="dynamic-table_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="text-center" style="width:20px">#</th>
+                                    <th class="text-center" style="width:80px">Mã sách</th>
+                                    <th class="" style="width: 400px">Tiêu đề</th>
+                                    <th class="" style="width:200px">Số con</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-option">
+                            </tbody>
+                        </table>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-primary pull-right" onclick="print_code_option_action()">
                     <i class="ace-icon fa fa-print"></i>
                     In mã
                 </button>

@@ -1,4 +1,4 @@
-var page = 1, keyword = '', data = [];
+var page = 1, keyword = '', data = [], data_book = [];
 var page_cate = 1, keyword_cate=  '';
 var page_manu = 1, keyword_manu = '';
 $(function(){
@@ -185,4 +185,87 @@ function set_qty_lib(idh){
         show_message("error", "Số lượng tem không thể để trống hoặc bằng 0");
         $('#qty_'+idh).val(1);
     }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+function print_code_option(){
+    data_book = []; render_table(data_book);
+    $('#nav-search-input-book').autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: baseUrl + '/lib_code/list_book',
+                dataType: 'jsonp',
+                data:{
+                    term: request.term
+                },
+                success: function(data){
+                    response(data);
+                }
+            });
+        },
+        select: function(event, ui){
+            select_book(ui.item);
+        }
+    });
+    $('#modal-option').modal('show'); 
+}
+
+function select_book(array_object){
+    var str = {'id': array_object.id, 'title': array_object.label, 'code': array_object.code, 'stock': array_object.stock, 'selected': ''};
+    var objIndex = data_book.findIndex(item => item.id == array_object.id);
+    if(objIndex == -1){
+        data_book.push(str);
+        render_table(data_book);
+    }else{
+        show_message("error", "Sách đã được chọn, vui lòng chỉnh sửa lại");
+    }
+}
+
+function render_table(data_json){
+    $('#tbody-option').empty(); var html = '', j = 1;
+    for(var i = 0; i < data_json.length; i++){
+        let sub_select = data_json[i].selected.split(",").filter(n => n);
+        html += '<tr role="row">';
+            html += '<td class="text-center">'+j+'</td>';
+            html += '<td class="text-center">'+data_json[i].code+'</td>';
+            html += '<td class="text-left">'+data_json[i].title+'</td>';
+            html += '<td>';
+                html += '<ul style="list-style:none;float:left;width:100%;margin:0">';
+                    for(var j = 1; j <= data_json[i].stock; j++){
+                        if(sub_select.includes(j.toString())){
+                            var checked = 'checked=""';
+                        }else{
+                            var checked = '';
+                        }
+                        html += '<li style="float:left;width:25%">';
+                        html += '<input id="option_'+data_json[i].id+'" type="checkbox" value="'+j+'"';
+                        html += 'onclick="checked_book('+data_json[i].id+', '+j+')" '+checked+'/> - '+j+'</li>';
+                    }
+                html += '</ul>';
+            html += '</td>';
+            html += '<td class="text-center">';
+                html += '<a href="javascript:void(0)" onclick="del_selected('+data_json[i].id+')">';
+                    html += '<i class="fa fa-trash" style="color:red"></i>';
+                html += '</a>';
+            html += '</td>';
+        html += '</tr>';
+        j++;
+    }
+    $('#tbody-option').append(html);
+}
+
+function del_selected(idh){
+    data_book = data_book.filter(item => item.id != idh);
+    render_table(data_book);
+}
+
+function checked_book(idh, sub_number){
+    var objIndex = data_book.findIndex(item => item.id === idh.toString());
+    let sub_select = data_book[objIndex].selected.split(",").filter(n => n);
+    if($('#option_'+idh).is(':checked')){
+        sub_select.push(sub_number.toString());
+    }else{
+        sub_select = sub_select.filter(item => item != sub_number.toString());
+    }
+    data_book[objIndex].selected = sub_select.join(",");
+    console.log(data_book);
 }

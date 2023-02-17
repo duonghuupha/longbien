@@ -122,5 +122,12 @@ class Lib_code extends Controller{
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('lib_code/list_manu_page');
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_book(){
+        $keyword = isset($_REQUEST['term']) ? $_REQUEST['term'] : '';
+        $jsonObj = $this->model->get_data_book($keyword);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render('lib_code/list_book');
+    }
 }
 ?>

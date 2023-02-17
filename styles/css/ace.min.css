@@ -10489,7 +10489,7 @@ td .lbl:only-child, th .lbl:only-child {
     line-height: 38px;
     padding-left: 12px;
     margin-bottom: 1px;
-    text-align:center;
+    text-align: center;
 }
 
 .table-header .close {
@@ -16067,9 +16067,7 @@ div.dataTables_processing {
     display: none
 }
 
-.tree .tree-branch-name, .tree .tree-item-name {
-    
-}
+.tree .tree-branch-name, .tree .tree-item-name {}
 
 .tree .icon-caret {
     vertical-align: baseline !important
@@ -16078,7 +16076,7 @@ div.dataTables_processing {
 .tree .tree-branch {
     width: auto;
     min-height: 20px;
-    
+
 }
 
 .tree .tree-branch .tree-branch-header {
@@ -20705,16 +20703,19 @@ input.typeahead.scrollable~.tt-menu {
         border: 1px solid #666 !important
     }
 }
+
 /***************************************************************/
-.mini{
-    font-size:11px !important;
-    padding-top:5px !important;
+.mini {
+    font-size: 11px !important;
+    padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
-.mini .dataTables_info{
-    font-size: 11px  !important;
+
+.mini .dataTables_info {
+    font-size: 11px !important;
     line-height: 3em;
 }
+
 .overlay {
     left: 0;
     top: 0;
@@ -20725,6 +20726,7 @@ input.typeahead.scrollable~.tt-menu {
     opacity: 0.5;
     z-index: 9999;
 }
+
 .overlay__inner {
     left: 0;
     top: 0;
@@ -20732,12 +20734,14 @@ input.typeahead.scrollable~.tt-menu {
     height: 100%;
     position: absolute;
 }
+
 .overlay__content {
     left: 50%;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
 .spinner {
     width: 75px;
     height: 75px;
@@ -20749,23 +20753,27 @@ input.typeahead.scrollable~.tt-menu {
     border-radius: 100%;
     border-style: solid;
 }
+
 @keyframes spin {
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 }
-.year_school{
+
+.year_school {
     background: none !important;
 }
 
-.img_border{
-    border-radius:100%;
+.img_border {
+    border-radius: 100%;
     border: 2px solid #ccc;
 }
+
 .tableFixHead {
     overflow-y: auto;
     height: 450px;
 }
+
 .tableFixHead thead th {
     position: sticky;
     top: 0;
@@ -20773,14 +20781,17 @@ input.typeahead.scrollable~.tt-menu {
     border: 1px solid #ddd;
     border-bottom-width: 2px;
 }
+
 .tableFixHead table {
     border-collapse: collapse;
     width: 100%;
 }
+
 .tableFixHead th, .tableFixHead td {
     padding: 5px 8px;
     border: 1px solid #ddd;
 }
+
 .tableFixHead th {
     background: repeat-x #F2F2F2;
     background-image: -webkit-linear-gradient(top, #F8F8F8 0, #ECECEC 100%);
@@ -20788,18 +20799,70 @@ input.typeahead.scrollable~.tt-menu {
     background-image: linear-gradient(to bottom, #F8F8F8 0, #ECECEC 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8', endColorstr='#ffececec', GradientType=0)
 }
+
 /************************************************************/
-.btn-report{
-    width:auto !important;
-    padding:5px 10px 5px 10px !important;
+.btn-report {
+    width: auto !important;
+    padding: 5px 10px 5px 10px !important;
 }
 
-.report{
-    border:1px  dashed;
+.report {
+    border: 1px dashed;
     border-color: #ccc !important;
     cursor: pointer;
 }
 
-.report:hover{
+.report:hover {
     background-color: #D8D8D8;
+}
+
+.ui-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1051 !important;
+    float: left;
+    display: none;
+    min-width: 160px;
+    _width: 160px;
+    padding: 4px 0;
+    margin: 2px 0 0 0;
+    list-style: none;
+    background-color: #ffffff;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+}
+
+.ui-menu-item>a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.ui-state-hover, .ui-state-active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #0088cc;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-image: none;
 }

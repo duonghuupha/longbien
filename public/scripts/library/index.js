@@ -28,6 +28,11 @@ function edit(idh){
         $('#price').val(CurrencyFormatted(data.price));
         combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', data.manu_id, data.manuafactory);
         $('#year_publish').val(data.year_publish); $('#position_publish').val(data.position_publish);
+        if(data.stock != 0){
+            $('#stock').attr('readonly', true);
+        }else{
+            $('#stock').attr('readonly', false);
+        }
     }); $('#file').ace_file_input('reset_input');
     $('#modal-library').modal('show');
     url = baseUrl + '/library/update?id='+idh;

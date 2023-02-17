@@ -68,5 +68,11 @@ class Lib_code_Model extends Model{
                                     AND status = 0 AND type = 1");
         return $query->fetchAll();
     }
+////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_book($q){
+        $query = $this->db->query("SELECT id, code, title, stock FROM tbl_book WHERE title LIKE '%$q%'
+                                    ORDER BY title DESC");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
