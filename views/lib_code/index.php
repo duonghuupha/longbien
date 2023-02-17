@@ -175,7 +175,7 @@
                                     <th class="text-center" style="width:80px">Mã sách</th>
                                     <th class="" style="width: 400px">Tiêu đề</th>
                                     <th class="" style="width:200px">Số con</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center" style="width:20px"></th>
                                 </tr>
                             </thead>
                             <tbody id="tbody-option">

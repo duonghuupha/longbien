@@ -129,5 +129,9 @@ class Lib_code extends Controller{
         $this->view->jsonObj = $jsonObj;
         $this->view->render('lib_code/list_book');
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function code_option(){
+        $this->view->render('lib_code/code_option');
+    }
 }
 ?>

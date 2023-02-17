@@ -267,5 +267,17 @@ function checked_book(idh, sub_number){
         sub_select = sub_select.filter(item => item != sub_number.toString());
     }
     data_book[objIndex].selected = sub_select.join(",");
-    console.log(data_book);
+}
+
+function print_code_option_action(){
+    let str_data = [];
+    if(data_book.length != 0){
+        for(var i = 0; i < data_book.length; i++){
+            str = {'id': data_book[i].id, 'selected': data_book[i].selected};
+            str_data.push(str);
+        }
+        window.open(baseUrl + '/lib_code/code_option?data='+btoa(JSON.stringify(str_data)));
+    }else{
+        show_message("error", "Không có bản ghi nào được chọn");
+    }
 }

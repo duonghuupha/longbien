@@ -415,6 +415,10 @@ class Model {
                                     WHERE tbl_book.id = book_id)) AS category FROM tbl_book_import_detail WHERE code = $code");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    function get_info_book_pass_id($id){
+        $query = $this->db->query("SELECT id, code, title FROM tbl_book WHERE id = $id");
+        return $query->fetchAll();
+    }
 /////////////////////////////////////end cac ham khac ///////////////////////////////////////////////////////////////////////
 }
 
