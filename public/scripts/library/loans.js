@@ -4,11 +4,10 @@ $(function(){
     $('#per_stu_code').autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: "search.php",
+                url: baseUrl + "/lib_loans/list_per_stu",
                 dataType: "jsonp",
                 data: {
-                    q: request.term,
-                    type: $('#type').val()
+                    q: request.term
                 },
                 success: function (data) {
                     response(data);
@@ -17,7 +16,7 @@ $(function(){
         },
         minLength: 2,
         select: function (event, ui) {
-            log("Selected: " + ui.item.value + " aka " + ui.item.id);
+            console.log(ui.item);
         }
     });
 });
@@ -58,5 +57,5 @@ function save(){
 }
 
 function search_per_stu(){
-    console.log('asd');
+    
 }

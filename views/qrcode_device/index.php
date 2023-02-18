@@ -31,6 +31,10 @@
                             <i class="fa fa-print"></i>
                             In mã theo lớp / phòng ban
                         </button>
+                        <button type="button" class="btn btn-default btn-sm" onclick="print_code_options()">
+                            <i class="fa fa-print"></i>
+                            In mã tùy chọn
+                        </button>
                     </small>
                 </h1>
             </div><!-- /.page-header -->

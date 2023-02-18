@@ -36,8 +36,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>
-                                        <input name="switch-field-1" class="ace ace-switch ace-switch-7" type="checkbox" checked="" id="type">
-                                        <span class="lbl" data-lbl="GV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HS"></span>
+                                        Mã/Họ tên giáo viên hoặc học sinh
                                     </label>
                                     <div>
                                         <input type="text" id="per_stu_code" name="per_stu_code" required="" autofocus=""
@@ -55,7 +54,7 @@
                             </div>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label for="form-field-username">Mã sách</label>
+                                    <label for="form-field-username">Mã / Tên sách</label>
                                     <div>
                                         <input type="text" id="book_code" name="book_code" required=""
                                         placeholder="Mã sách" style="width:100%"/>

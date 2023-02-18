@@ -154,5 +154,15 @@ class Lib_loans_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['status'];
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_info_per_stu($q){
+        $query = $this->db->query("SELECT id, fullname, code, birthday, 1 AS type FROM tbl_student WHERE fullname LIKE '%$q%'
+                                    UNION ALL
+                                    SELECT hr_id AS id, (SELECT fullname FROM tbl_personel WHERE tbl_psersonel.id = hr_id) AS fullname,
+                                    (SELECT tbl_personel.code FROM tbl_personel WHERE tbl_personel.id = hr_id) AS code, '' AS birthday,
+                                    2 AS type FROM tbl_users WHERE id != 1 AND active = 1 AND hr_id IN (SELECT fullname FROM tbl_personel
+                                    WHERE tbl_personel.fullname LIKE '%$q%')");
+        return $query->fetchAll();
+    }
 }
 ?>

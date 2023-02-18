@@ -271,5 +271,12 @@ class Lib_loans extends Controller{
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('lib_loans/list_book_page');
     }
+
+    function list_per_stu(){
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj = $this->model->get_info_per_stu($keyword);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("lib_loans/list_per_stu");
+    }
 }
 ?>
