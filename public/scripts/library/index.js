@@ -13,7 +13,7 @@ function add(){
     $('#cate_id').load(baseUrl + '/other/combo_book_cate');
     combo_select_2('#manu_id', baseUrl + '/other/combo_book_manu', 0, '');
     $('#type').val(1).trigger('change'); $('#file').ace_file_input('reset_input');
-    $('#modal-library').modal('show');
+    $('#stock').attr('readonly', false); $('#modal-library').modal('show');
     url = baseUrl + '/library/add';
 }
 
