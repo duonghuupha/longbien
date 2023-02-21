@@ -16,13 +16,13 @@ $jsonObj = $this->jsonObj;
     </thead>
     <tbody id="listPage">
         <?php
-        $i = 0;
+        $j = 0;
         foreach($jsonObj['rows'] as $row){
-            $i++;
+            $j++;
             $class = ($i%2 == 0) ? 'even' : 'odd'; 
         ?>
         <tr role="row" class="<?php echo $class ?>">
-            <td class="text-center"><?php echo $i ?></td>
+            <td class="text-center"><?php echo $j ?></td>
             <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
             <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
             <td class="text-center">
@@ -32,7 +32,9 @@ $jsonObj = $this->jsonObj;
                 <option value="">Lựa chọn</option>
                     <?php
                     for($i = 1; $i <= $row['stock']; $i++){
-                        echo '<option value="'.$i.'">'.$i.'</option>';
+                        if($this->_Data->check_book_loan($row['id'], $i) == 0){
+                            echo '<option value="'.$i.'">'.$i.'</option>';
+                        }
                     }
                     ?>
                 </select>

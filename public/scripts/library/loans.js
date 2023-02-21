@@ -1,4 +1,4 @@
-var page = 1, url = '', page_book = 1, key_book = '', page_stu = 1, key_stu = '';
+var page = 1, url = '', page_book = 1, key_book = '', page_stu = 1, key_stu = '', page_per = 1, key_per = '';
 var data_book = [];
 $(function(){
     $('#list_loans').load(baseUrl + '/lib_loans/content');
@@ -10,10 +10,10 @@ function add(){
     var hientai = ngay+'-'+thang+'-'+nam; $('#date_loan').datepicker('setDate', hientai);
     $('#date_return').datepicker('setDate', hientai); $('#user_loan').val(0);
     $('#student_loan').val(0); $('#datadc').val(null); $('#modal-loan').modal('show');
-    url = baseUrl + '/lin_loans/add';
+    url = baseUrl + '/lib_loans/add';
 }
 
-function save(){
+function save_loan(){
     var required = $('input,textarea,select').filter('[required]:visible');
     var allRequired = true;
     required.each(function(){
@@ -23,7 +23,7 @@ function save(){
     });
     if(allRequired && data_book.length != 0){
         $('#datadc').val(JSON.stringify(data_book));
-        save_form_modal('#fm', url, '#modal-loan', '#list_loans', baseUrl + '/lib_loans/content?page='+page); 
+        save_form_modal('#fm-loan', url, '#modal-loan', '#list_loans', baseUrl + '/lib_loans/content?page='+page); 
     }else{
         show_message("error", "Bạn chưa điền đủ thông tin");
     }
@@ -61,6 +61,7 @@ function confirm_book(idh){
     var objIndex = data_book.findIndex(item => item.id == idh && item.sub == value);
     var str = {'id': idh, 'title': title, 'code': code, 'sub': value};
     if(objIndex == -1){
+        data_book = [];
         data_book.push(str); render_table(data_book);
         $('#modal-book').modal('hide');
     }else{
@@ -116,7 +117,7 @@ function search_student(){
 }
 
 function confirm_student(idh){
-    var fullname = $('#fullname_'+idh).text();
+    var fullname = $('#fullname_'+idh).text(); $('#fullname_personel').attr('required', false);
     $('#user_loan').val(0); $('#student_loan').val(idh);
     $('#fullname_personel').val(null); $('#fullname_student').val(fullname);
     $('#modal-student').modal('hide'); $('#select_users').attr('disabled', true);
@@ -126,7 +127,7 @@ function confirm_student(idh){
 }
 
 function cancel_stu(){
-    $('#user_loan').val(0); $('#student_loan').val(null);
+    $('#user_loan').val(0); $('#student_loan').val(0); $('#fullname_personel').attr('required', true);
     $('#fullname_personel').val(null); $('#fullname_student').val(null);
     $('#select_users').attr('disabled', false);
     $('#select_stu').html('<i class="ace-icon fa fa-graduation-cap bigger-110"></i> Go!');
@@ -134,3 +135,44 @@ function cancel_stu(){
     $('#select_stu').attr('onclick', 'select_student()');
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+function select_personel(){
+    $('#list_personel').load(baseUrl + '/lib_loans/list_personel');
+    $('#pager-personel').load(baseUrl + '/lib_loans/list_personel_page');
+    $('#modal-personel').modal('show');
+}
+
+function view_page_personel(pages){
+    page_per = pages;
+    $('#list_personel').load(baseUrl + '/lib_loans/list_personel?page='+page_per+'&q='+key_per);
+    $('#pager-personel').load(baseUrl + '/lib_loans/list_personel_page?page='+page_per+'&q='+key_per);
+}
+
+function search_personel(){
+    var value = $('#nav-search-input-personel').val();
+    if(value.length != 0){
+        key_per = value.replaceAll(" ", "$", 'g');
+    }else{
+        key_per = '';
+    }
+    $('#list_personel').load(baseUrl + '/lib_loans/list_personel?page=1&q='+key_per);
+    $('#pager-personel').load(baseUrl + '/lib_loans/list_personel_page?page=1&q='+key_per);
+}
+
+function confirm_personel(idh){
+    var fullname = $('#fullname_'+idh).text(); $('#fullname_student').attr('required', false);
+    $('#user_loan').val(idh); $('#student_loan').val(0);
+    $('#fullname_personel').val(fullname); $('#fullname_student').val(null);
+    $('#modal-personel').modal('hide'); $('#select_stu').attr('disabled', true);
+    $('#select_users').html('<i class="ace-icon fa fa-times bigger-110"></i> Bỏ!');
+    $('#select_users').removeClass('btn-primary').addClass('btn-danger');
+    $('#select_users').attr('onclick', 'cancel_per()');
+}
+
+function cancel_per(){
+    $('#user_loan').val(0); $('#student_loan').val(0); $('#fullname_student').attr('required', true);
+    $('#fullname_personel').val(null); $('#fullname_student').val(null);
+    $('#select_stu').attr('disabled', false);
+    $('#select_users').html('<i class="ace-icon fa fa-graduation-cap bigger-110"></i> Go!');
+    $('#select_users').removeClass('btn-danger').addClass('btn-primary');
+    $('#select_users').attr('onclick', 'select_personel()');
+}

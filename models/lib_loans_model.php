@@ -70,5 +70,30 @@ class Lib_loans_Model extends Model{
         return $row[0]['Total'];
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_personel($q, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_personel WHERE status = 1 AND fullname LIKE '%$q%'");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, code, fullname, birthday, gender, (SELECT title FROM tbldm_level
+                                    WHERE tbldm_level.id = level_id) AS level, (SELECT title FROM tbldm_job WHERE tbldm_job.id = job_id)
+                                    AS job FROM tbl_personel WHERE status = 1 AND fullname LIKE '%$q%' ORDER BY fullname ASC
+                                    LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_personel_page($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_personel WHERE status = 1 AND fullname LIKE '%$q%'");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_return_book($bookid, $sub){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book_loan WHERE status = 0 AND book_id = $bookid
+                                    AND sub_book = $sub");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 ?>

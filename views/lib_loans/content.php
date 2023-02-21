@@ -9,11 +9,11 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
-            <th class="text-center">Ngày mượn</th>
-            <th>Người mượn</th>
+            <th class="text-center" style="width:100px">Ngày mượn</th>
+            <th style="width:180px">Người mượn</th>
             <th>Tiêu đề sách</th>
-            <th class="text-center">Ngày trả</th>
-            <th class="text-center">Trạng thái</th>
+            <th class="text-center" style="width:100px">Ngày trả</th>
+            <th class="text-center" style="width:80px">Trạng thái</th>
             <th class="text-center" style="width:80px">Thao tác</th>
         </tr>
     </thead>
@@ -38,7 +38,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
                 ?>
             </td>
             <td><?php echo $row['fullname'].' - <i>'.$detail.'</i>' ?></td>
-            <td><?php echo $row['book'].' - <i>Quyển số '.$row['sub_book']."</i>" ?></td>
+            <td title="<?php echo $row['book'] ?>"><?php echo $this->_Convert->cut($row['book'], 160).' - <i>Quyển số '.$row['sub_book']."</i>" ?></td>
             <td class="text-center">
                 <?php 
                 if($row['status'] == 1){

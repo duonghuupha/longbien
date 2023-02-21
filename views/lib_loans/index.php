@@ -108,7 +108,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form id="fm" method="POST" enctype="multipart/form-data">
+                    <form id="fm-loan" method="POST" enctype="multipart/form-data">
                         <input id="user_loan" name="user_loan" type="hidden" value="0"/>
                         <input id="student_loan" name="student_loan" type="hidden" value="0"/>
                         <input id="datadc" name="datadc" type="hidden"/>
@@ -210,7 +210,7 @@
                     <i class="ace-icon fa fa-times"></i>
                     Đóng
                 </button>
-                <button class="btn btn-sm btn-primary pull-right" onclick="save()">
+                <button class="btn btn-sm btn-primary pull-right" onclick="save_loan()">
                     <i class="ace-icon fa fa-save"></i>
                     Ghi dữ liệu
                 </button>
@@ -242,7 +242,7 @@
                         <div class="space-6"></div>
                     </div>
                     <div class="col-xs-12 col-sm-12">
-                        <div id="list_book" class="dataTables_wrapper form-inline no-footer"></div>
+                        <div id="list_book" class="dataTables_wrapper form-inline no-footer" style="height:457px;overflow:auto"></div>
                     </div><!-- /.col -->
                 </div>
             </div>
@@ -284,6 +284,42 @@
             </div>
             <div class="modal-footer">
                 <small class="pull-left" id="pager-student">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-personel" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:66%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách học sinh
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-personel" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_personel()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_personel" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager-personel">
                     <!--display pagination-->
                 </small>
             </div>
