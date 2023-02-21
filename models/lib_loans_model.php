@@ -31,9 +31,9 @@ class Lib_loans_Model extends Model{
     function get_data_book($q, $offset, $rows){
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book WHERE status = 0
-                                    AND (title LIKE '%$q%' OR code LIKE '%$q%')");
+                                    AND stock != 0 AND (title LIKE '%$q%' OR code LIKE '%$q%')");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, title, stock, code FROM tbl_book WHERE status = 0
+        $query = $this->db->query("SELECT id, title, stock, code FROM tbl_book WHERE status = 0 AND stock != 0
                                     AND (title LIKE '%$q%' OR code LIKE '%$q%') ORDER BY title ASC
                                     LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
@@ -43,9 +43,32 @@ class Lib_loans_Model extends Model{
 
     function get_data_book_total($q){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book WHERE status = 0
-                                    AND (title LIKE '%$q%' OR code LIKE '%$q%')");
+                                    AND stock != 0 AND (title LIKE '%$q%' OR code LIKE '%$q%')");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_student($q, $yearid, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE fullname LIKE '%$q%'
+                                    AND status = 1");
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, fullname, code, birthday, gender, (SELECT title FROM tbldm_department
+                                    WHERE tbldm_department.id = (SELECT department_id FROM tbl_student_class
+                                    WHERE tbl_student_class.year_id = $yearid AND tbl_student_class.student_id = tbl_student.id))
+                                    AS department FROM tbl_student WHERE status = 1 AND fullname LIKE '%$q%' ORDER BY fullname ASC
+                                    LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
+    }
+
+    function get_data_student_page($q){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student WHERE fullname LIKE '%$q%'
+                                    AND status = 1");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 ?>

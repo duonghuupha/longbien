@@ -40,5 +40,26 @@ class Lib_loans extends Controller{
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('lib_loans/list_book_page');
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_student(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_student($keyword, $this->_Year[0]['id'], $offset, $rows);
+        $this->view->jsonObj = $jsonObj; //$this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('lib_loans/list_student');
+    }
+
+    function list_student_page(){
+        $rows = 10;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_data_student_page($keyword);
+        $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('lib_loans/list_student_page');
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 ?>

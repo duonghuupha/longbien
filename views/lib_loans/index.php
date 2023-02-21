@@ -109,7 +109,8 @@
             <div class="modal-body">
                 <div class="row">
                     <form id="fm" method="POST" enctype="multipart/form-data">
-                        <input id="user_loan" name="user_loan" type="hidden"/>
+                        <input id="user_loan" name="user_loan" type="hidden" value="0"/>
+                        <input id="student_loan" name="student_loan" type="hidden" value="0"/>
                         <input id="datadc" name="datadc" type="hidden"/>
                         <div class="col-xs-6">
                             <div class="form-group">
@@ -119,7 +120,7 @@
                                     placeholder="Click Go! để lựa chọn" style="width:100%" readonly=""/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-sm btn-primary" type="button" onclick="select_student()"
-                                        id="select_users">
+                                        id="select_stu">
                                             <i class="ace-icon fa fa-graduation-cap bigger-110"></i>
                                             Go!
                                         </button>
@@ -147,7 +148,7 @@
                             <div class="form-group">
                                 <label for="form-field-username">Ngày mượn</label>
                                 <div class="input-group">
-                                    <input class="form-control date-timepicker" id="date_loan" type="text" 
+                                    <input class="form-control date-picker" id="date_loan" type="text" 
                                     name="date_loan" required="" data-date-format="dd-mm-yyyy" readonly=""/>
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
@@ -190,7 +191,7 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="text-center" style="width:20px">#</th>
-                                            <th class="text-center" style="width:120px">Mã</th>
+                                            <th class="text-center" style="width:100px">Mã</th>
                                             <th class="">Tên sách</th>
                                             <th class="text-center" style="width:60px">Số con</th>
                                             <th class="text-center" style="width:20px"></th>
@@ -247,6 +248,42 @@
             </div>
             <div class="modal-footer">
                 <small class="pull-left" id="pager-book">
+                    <!--display pagination-->
+                </small>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-student" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:66%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    Danh sách học sinh
+                </div>
+            </div>
+            <div class="modal-body" style="height:520px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <input class="form-control" id="nav-search-input-student" type="text" style="width:100%"
+                        placeholder="Tìm kiếm" onkeyup="search_student()"/>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="space-6"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div id="list_student" class="dataTables_wrapper form-inline no-footer"></div>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <small class="pull-left" id="pager-student">
                     <!--display pagination-->
                 </small>
             </div>
