@@ -27,6 +27,22 @@ class Lib_loans_Model extends Model{
         $query = $this->insert("tbl_book_loan", $data);
         return $query;
     }
+
+    function updateObj($id, $data){
+        $query = $this->update("tbl_book_loan", $data, "id = $id");
+        return $query;
+    }
+
+    function get_info_book_loan($id){
+        $query = $this->db->query("SELECT id, code, user_create, user_id, student_id, book_id, sub_book,
+                                    date_loan, date_return, status, create_at, (SELECT fullname FROM tbl_personel
+                                    WHERE tbl_personel.id = (SELECT hr_id FROM tbl_users WHERE tbl_users.id = user_create))
+                                    AS nguoi_tao, (SELECT fullname FROM tbl_personel WHERE tbl_personel.id = (SELECT hr_id 
+                                    FROM tbl_users WHERE tbl_users.id = user_id)) AS nguoi_muon, (SELECT fullname FROM tbl_student
+                                    WHERE tbl_student.id = student_id) AS hoc_sinh, (SELECT title FROM tbl_book
+                                    WHERE tbl_book.id = book_id) AS sach FROM tbl_book_loan WHERE id = $id");
+        return $query->fetchAll();
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_book($q, $offset, $rows){
         $result = array();
@@ -94,6 +110,36 @@ class Lib_loans_Model extends Model{
                                     AND sub_book = $sub");
         $row = $query->fetchAll();
         return $row[0]['Total'];
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_exit_code_book($code){
+        $query = $this->db->query("SELECT stock FROM tbl_book WHERE code = $code");
+        $row = $query->fetchAll();
+        if(count($row) > 0){
+            return $row[0]['stock'];
+        }else{
+            return -1;
+        }
+    }
+
+    function get_info_book($code){
+        $query = $this->db->query("SELECT id, title, code, stock FROM tbl_book WHERE code = $code");
+        return $query->fetchAll();
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_info_per($code){
+        $query = $this->db->query("SELECT code, fullname, (SELECT title FROM tbldm_job WHERE tbldm_job.id = job_id)
+                                    AS job, (SELECT tbl_users.id FROM tbl_users WHERE tbl_users.hr_id = tbl_personel.id)
+                                    AS id_per FROM tbl_personel WHERE code = $code");
+        return $query->fetchAll();
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_info_student($code, $year_id){
+        $query = $this->db->query("SELECT id, code, fullname, (SELECT title FROM tbldm_department
+                                WHERE tbldm_department.id = (SELECT department_id FROM tbl_student_class
+                                WHERE tbl_student_class.student_id = tbl_student.id AND tbl_student_class.year_id = $year_id))
+                                AS department FROM tbl_student WHERE code = $code");
+        return $query->fetchAll();
     }
 }
 ?>

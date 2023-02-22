@@ -52,6 +52,29 @@ class Lib_loans extends Controller{
         }
         $this->view->render('lib_loans/add');
     }
+
+    function update(){
+        $id = $_REQUEST['id']; $status = 1; $datereturn = date("Y-m-d H:i:s");
+        $data = array("status" => $status, "date_return" => $datereturn);
+        $temp = $this->model->updateObj($id, $data);
+        if($temp){
+            $jsonObj['msg'] = "Trả sách thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Trả sách không  thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("lib_loans/update");
+    }
+
+    function detail(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_info_book_loan($id);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("lib_loans/detail");
+    }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     function list_book(){
         $rows = 10;
@@ -111,6 +134,103 @@ class Lib_loans extends Controller{
         $jsonObj = $this->model->get_data_personel_page($keyword);
         $this->view->total = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
         $this->view->render('lib_loans/list_personel_page');
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_exit_book_pass_code(){
+        $code = $_REQUEST['code']; $code = explode(".", $code);
+        if(count($code) == 2){
+            if($this->model->check_exit_code_book($code[0]) >= 0){// ton tai thong tin sach
+                if($this->model->check_exit_code_book($code[0]) == 0){ // sach chua co ton kho
+                    $jsonObj['msg'] = "Sách chưa được nhập kho";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{ // ton tai sach da nhap kho
+                    if($code[1] > $this->model->check_exit_code_book($code[0])){ // so con co ton tai khong
+                        $jsonObj['msg'] = "Số đặc biệt của sách không tồn tại";
+                        $jsonObj['success'] = false;
+                        $this->view->jsonObj = json_encode($jsonObj);
+                    }else{
+                        $detail = $this->model->get_info_book($code[0]);
+                        // kiem tra tra sach
+                        if($this->model->check_return_book($detail[0]['id'], $code[1]) > 0){
+                            $jsonObj['msg'] = "Sách chưa được trả";
+                            $jsonObj['success'] = false;
+                            $this->view->jsonObj = json_encode($jsonObj);
+                        }else{
+                            $jsonObj['msg'] = "";
+                            $jsonObj['success'] = true;
+                            $jsonObj['data'] = array("code" => $code[0], "title" => $detail[0]['title'], "sub" => $code[1], 
+                                                "id" => $detail[0]['id']);
+                            $this->view->jsonObj = json_encode($jsonObj);
+                        }
+                    }
+                }
+            }else{ // khong ton tai thong tin sach
+                $jsonObj['msg'] = "Mã sách không đúng";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{
+            $jsonObj['msg'] = "Định dạng mã không chính xác";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("lib_loans/check_exit_book_pass_code");
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_exit_per_stu_pass_code(){
+        $code = $_REQUEST['code'];
+        if(strlen($code) == 10){ // personel
+            $detail = $this->model->get_info_per($code);
+            if(count($detail) > 0){
+                $jsonObj['msg'] = "";
+                $jsonObj['success'] = true;
+                $jsonObj['type'] = 1;
+                $jsonObj['data'] = array("id" => $detail[0]['id_per'], "code" => $detail[0]['code'],
+                                    "fullname" => $detail[0]['fullname'], "job" => $detail[0]['job']);
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Mã CBGVNV không chính xác hoặc không tồn tại thông tin";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{ // student
+            $detail = $this->model->get_info_student($code, $this->_Year[0]['id']);
+            if(count($detail) > 0){
+                $jsonObj['msg'] = "";
+                $jsonObj['success'] = true;
+                $jsonObj['type'] = 2;
+                $jsonObj['data'] = array("id" => $detail[0]['id'], "code" => $detail[0]['code'],
+                                    "fullname" => $detail[0]['fullname'], "department" => $detail[0]['department']);
+                $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $jsonObj['msg'] = "Mã học sinh không chính xác hoặc không tồn tại thông tin";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }
+        $this->view->render("lib_loans/check_exit_per_stu_pass_code");
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    function add_scan(){
+        $book = $_REQUEST['book_id']; $stuid = $_REQUEST['stu_id']; $perid = $_REQUEST['per_id'];
+        $code = time(); $dateloan = date("Y-m-d H:i:s"); $datereturn = date("Y-m-d");
+        $status = 0; $book = explode(".", $book);
+        $data = array("code" => $code, "user_create" => $this->_Info[0]['id'], 'user_id' => $perid,
+                        "student_id" => $stuid, "date_loan" => $dateloan, "date_return" => $datereturn,
+                        "status" => $status, "create_at" => date("Y-m-d H:i:s"), "book_id" => $book[0],
+                        "sub_book" => $book[1]);
+        $temp = $this->model->addObj($data);
+        if($temp){
+            $jsonObj['msg'] = "Ghi dữ liệu thành công";
+            $jsonObj['success'] = true;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }else{
+            $jsonObj['msg'] = "Ghi dữ liệu không thành công";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("lib_loans/add_scan");
     }
 }
 ?>

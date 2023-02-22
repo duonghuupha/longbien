@@ -1,10 +1,11 @@
 var page = 1, url = '', page_book = 1, key_book = '', page_stu = 1, key_stu = '', page_per = 1, key_per = '';
-var data_book = [];
+let data_book = [];
 $(function(){
     $('#list_loans').load(baseUrl + '/lib_loans/content');
 });
 
 function add(){
+    clear_form();
     let today = new Date(); var ngay = today.getDate(), thang = (today.getMonth() + 1);
     var nam = today.getFullYear(); data_book = []; render_table(data_book);
     var hientai = ngay+'-'+thang+'-'+nam; $('#date_loan').datepicker('setDate', hientai);
@@ -31,6 +32,16 @@ function save_loan(){
 
 function view_page_loans(pages){
     page = pages;
+}
+
+function detail(idh){
+    $('#detail').load(baseUrl + '/lib_loans/detail?id='+idh);
+    $('#modal-detail').modal('show');
+}
+
+function edit(idh){
+    var data_str = "id="+idh;
+    del_data(data_str, "Bạn chắc chắn trả sách này ?", baseUrl + '/lib_loans/update', '#list_loans', baseUrl + '/lib_loans/content?page='+page);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function select_book(){ 
@@ -175,4 +186,92 @@ function cancel_per(){
     $('#select_users').html('<i class="ace-icon fa fa-graduation-cap bigger-110"></i> Go!');
     $('#select_users').removeClass('btn-danger').addClass('btn-primary');
     $('#select_users').attr('onclick', 'select_personel()');
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+function set_book_loan(){
+    let value = $('#book_code_form').val();
+    $.getJSON(baseUrl + '/lib_loans/check_exit_book_pass_code?code='+value, function(data){
+        if(data.success){
+            //console.log(data.data.id);
+            var str = {'id': data.data.id, 'title': data.data.title, 'code': data.data.code, 'sub': data.data.sub};
+            data_book = []; data_book.push(str); render_table(data_book);
+            $('#book_code_form').val(null);
+        }else{
+            show_message("error", data.msg);
+        }
+    });
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function set_info_book(value){
+    $.getJSON(baseUrl + '/lib_loans/check_exit_book_pass_code?code='+value, function(data){
+        if(data.success){
+            //console.log(data.data.id);
+            var html = '';
+            html += '<b>Tiêu đề:</b> '+data.data.title+"<br/>";
+            html += '<b>Quyển số:</b> '+data.data.sub;
+            $('#book_info').html(html); $('#book_id').val(data.data.id+'.'+data.data.sub);
+            $('#per_stu_code').focus();
+        }else{
+            show_message("error", data.msg);
+            $('#book_info').empty(); $('#book_code').val(null);
+        }
+    });
+}
+
+function set_info_per_stu(value){
+    if(value.length != 10 && value.length != 12){
+        show_message("error", "Định dạng mã không chính xác. Mã Học sinh 12 số, Mã CBGVNV 10 số");
+        return false;
+    }else{
+        if(isNaN(value)){
+            show_message("error", "Mã phải là dạng số");
+            return false;
+        }else{
+            $.getJSON(baseUrl + '/lib_loans/check_exit_per_stu_pass_code?code='+value, function(data){
+                if(data.success){
+                    var html = '';
+                    if(data.type == 1){
+                        html += '<b>Họ và tên:</b> '+data.data.fullname+"<br/>";
+                        html += '<b>Nhiệm vụ:</b> '+data.data.job;
+                        $('#per_stu_info').html(html); $('#per_id').val(data.data.id);
+                        $('#stu_id').val(0);
+                    }else{
+                        html += '<b>Họ và tên:</b> '+data.data.fullname+"<br/>";
+                        html += '<b>Lớp:</b> '+data.data.department;
+                        $('#per_stu_info').html(html); $('#stu_id').val(data.data.id);
+                        $('#per_id').val(0);
+                    }
+                    $('#book_code').focus();
+                }else{
+                    show_message("error", data.msg);
+                    $('#per_stu_info').empty(); $('#per_stu_code').val(null);
+                }
+            });
+        }
+    }
+}
+
+function save(){
+    let bookid = $('#book_id').val(), stuid = $('#stu_id').val(), perid = $('#per_id').val();
+    if(bookid.length != 0 && (stuid != 0 || perid != 0)){
+        save_form_reset_form('#fm', baseUrl + '/lib_loans/add_scan', '#list_loans', baseUrl + '/lib_loans/content');
+    }else{
+        show_message("error", "Chưa nhập đủ thông tin");
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function clear_form(){
+    $('#user_loan').val(0); $('#student_loan').val(0); 
+    $('#fullname_student').attr('required', true); $('#fullname_personel').attr('required', true);
+    $('#fullname_personel').val(null); $('#fullname_student').val(null);
+    $('#select_stu').attr('disabled', false); $('#select_users').attr('disabled', false);
+    /*************************************************************************************** */
+    $('#select_users').html('<i class="ace-icon fa fa-graduation-cap bigger-110"></i> Go!');
+    $('#select_users').removeClass('btn-danger').addClass('btn-primary');
+    $('#select_users').attr('onclick', 'select_personel()');
+    /************************************************************************************** */
+    $('#select_stu').html('<i class="ace-icon fa fa-graduation-cap bigger-110"></i> Go!');
+    $('#select_stu').removeClass('btn-danger').addClass('btn-primary');
+    $('#select_stu').attr('onclick', 'select_student()');
+    data_book = []; render_table(data_book);
 }

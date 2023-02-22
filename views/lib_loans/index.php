@@ -33,15 +33,18 @@
                 ?>
                 <div class="col-xs-12 col-sm-3">
                     <form id="fm" method="post">
+                        <input id="book_id" name="book_id" value="" type="hidden"/>
+                        <input id="per_id" name="per_id" value="0" type="hidden"/>
+                        <input id="stu_id" name="stu_id" value="0" type="hidden"/>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>
-                                        Mã giáo viên hoặc học sinh <b>(SCAN)</b>
+                                        Mã giáo viên/học sinh <b>(SCAN)</b>
                                     </label>
                                     <div>
                                         <input type="text" id="per_stu_code" name="per_stu_code" autofocus=""
-                                        placeholder="Mã học sinh hoặc giáo viên" style="width:100%"
+                                        placeholder="Mã học sinh / giáo viên" style="width:100%"
                                         onchange="set_info_per_stu(this.value)"/>
                                     </div>
                                 </div>
@@ -60,7 +63,7 @@
                                         Mã sách <b>(SCAN)</b>
                                     </label>
                                     <div>
-                                        <input type="text" id="book_code" name="book_code" 
+                                        <input type="text" id="book_code" name="book_code"
                                         placeholder="Mã sách" style="width:100%" onchange="set_info_book(this.value)"/>
                                     </div>
                                 </div>
@@ -171,8 +174,8 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <div>
-                                    <input type="text" id="device_code" name="device_code"
-                                    placeholder="Sử dụng mã của từng sách" style="width:100%" onchange="set_book_loan()"/>
+                                    <input type="text" id="book_code_form" name="book_code_form" onchange="set_book_loan()"
+                                    placeholder="Sử dụng mã của từng sách" style="width:100%"/>
                                 </div>
                             </div>
                         </div>
@@ -330,7 +333,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-detail" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:62%">
+    <div class="modal-dialog" style="width:40%">
         <div class="modal-content" id="detail">
             
         </div><!-- /.modal-content -->
