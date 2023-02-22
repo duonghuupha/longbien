@@ -23,10 +23,6 @@
                 <h1>
                     Quản lý mượn / trả
                     <small class="pull-right">
-                        <button class="btn btn-sm btn-info" type="button" onclick="filter()">
-                            <i class="ace-icon fa fa-search"></i>
-                            Lọc dữ liệu
-                        </button>
                         <button class="btn btn-sm btn-primary" type="button" onclick="add()">
                             <i class="ace-icon fa fa-plus"></i>
                             Thêm mới
