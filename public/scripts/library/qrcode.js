@@ -237,7 +237,7 @@ function render_table(data_json){
                             var checked = '';
                         }
                         html += '<li style="float:left;width:25%">';
-                        html += '<input id="option_'+data_json[i].id+'" type="checkbox" value="'+j+'"';
+                        html += '<input id="option_'+data_json[i].id+'_'+j+'" type="checkbox" value="'+j+'"';
                         html += 'onclick="checked_book('+data_json[i].id+', '+j+')" '+checked+'/> - '+j+'</li>';
                     }
                 html += '</ul>';
@@ -261,12 +261,18 @@ function del_selected(idh){
 function checked_book(idh, sub_number){
     var objIndex = data_book.findIndex(item => item.id === idh.toString());
     let sub_select = data_book[objIndex].selected.split(",").filter(n => n);
-    if($('#option_'+idh).is(':checked')){
+    if($('#option_'+idh+'_'+sub_number).is(':checked')){
         sub_select.push(sub_number.toString());
+        data_book[objIndex].selected = sub_select.join(",");
     }else{
-        sub_select = sub_select.filter(item => item != sub_number.toString());
+        sub_select = sub_select.filter(item => item !== sub_number.toString());
+        if(sub_select.length != 0){
+            data_book[objIndex].selected = sub_select.join(",");
+        }else{
+            data_book = data_book.filter(item => item.id != idh);
+            render_table(data_book);
+        }
     }
-    data_book[objIndex].selected = sub_select.join(",");
 }
 
 function print_code_option_action(){
