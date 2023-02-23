@@ -53,7 +53,7 @@
                                 <div class="space-6"></div>
                             </div>
                             <div class="col-xs-12">
-                                <div id="list_book" class="dataTables_wrapper form-inline no-footer"></div>
+                                <div id="list_book" class="dataTables_wrapper form-inline no-footer" style="height:476px; overflow:auto"></div>
                             </div><!-- /.col -->
                         </div>
                         <div class="col-xs-8">
