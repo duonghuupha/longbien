@@ -8,7 +8,9 @@ class Dashboard extends Controller{
         $this->view->total_per = $this->model->get_total_personel();
         $this->view->total_stu = $this->model->get_total_student();
         $this->view->total_device = $this->model->get_total_device();
+        $this->view->total_device_stock = $this->model->get_total_device_stock();
         $this->view->total_utensils = $this->model->get_total_utensils();
+        $this->view->total_utensils_stock = $this->model->get_total_utensils_stock();
         $this->view->total_book_old = $this->model->get_total_book(1);
         $this->view->total_stock_book_old = $this->model->get_total_stock_book(1);
         $this->view->total_book_new = $this->model->get_total_book(2);

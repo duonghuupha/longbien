@@ -22,8 +22,20 @@ class Dashboard_Model extends Model{
         return $row[0]['Total'];    
     }
 
+    function get_total_device_stock(){
+        $query = $this->db->query("SELECT SUM(stock) AS Total FROM tbl_devices WHERE status = 1");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];    
+    }
+
     function get_total_utensils(){
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_utensils WHERE status = 0");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];    
+    }
+
+    function get_total_utensils_stock(){
+        $query = $this->db->query("SELECT SUM(stock) AS Total FROM tbl_utensils WHERE status = 0");
         $row = $query->fetchAll();
         return $row[0]['Total'];    
     }

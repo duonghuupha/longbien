@@ -21,7 +21,7 @@
         <i class="ace-icon fa fa-cubes"></i>
     </div>
     <div class="infobox-data">
-        <span class="infobox-data-number"><?php echo $this->total_device ?></span>
+        <span class="infobox-data-number"><?php echo $this->total_device.'/'.$this->total_device_stock ?></span>
         <div class="infobox-content">Trang thiết bị</div>
     </div>
 </div>
@@ -30,7 +30,7 @@
         <i class="ace-icon fa fa-flask"></i>
     </div>
     <div class="infobox-data">
-        <span class="infobox-data-number"><?php echo $this->total_utensils ?></span>
+        <span class="infobox-data-number"><?php echo $this->total_utensils.'/'.$this->total_utensils_stock ?></span>
         <div class="infobox-content">Đồ dùng dạy học</div>
     </div>
 </div>
