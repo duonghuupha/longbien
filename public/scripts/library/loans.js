@@ -1,5 +1,5 @@
 var page = 1, url = '', page_book = 1, key_book = '', page_stu = 1, key_stu = '', page_per = 1, key_per = '';
-let data_book = [];
+let data_book = [], keyword = '';
 $(function(){
     $('#list_loans').load(baseUrl + '/lib_loans/content');
 });
@@ -24,7 +24,7 @@ function save_loan(){
     });
     if(allRequired && data_book.length != 0){
         $('#datadc').val(JSON.stringify(data_book));
-        save_form_modal('#fm-loan', url, '#modal-loan', '#list_loans', baseUrl + '/lib_loans/content?page='+page); 
+        save_form_modal('#fm-loan', url, '#modal-loan', '#list_loans', baseUrl + '/lib_loans/content?page='+page+'&q='+keyword); 
     }else{
         show_message("error", "Bạn chưa điền đủ thông tin");
     }
@@ -32,6 +32,17 @@ function save_loan(){
 
 function view_page_loans(pages){
     page = pages;
+    $('#list_loans').load(baseUrl + '/lib_loans/content?page='+page+'&q='+keyword);
+}
+
+function search(){
+    var value = $('#nav-search-input').val();
+    if(value.length != 0){
+        keyword = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword = '';
+    }
+    $('#list_loans').load(baseUrl + '/lib_loans/content?page=1&q='+keyword);
 }
 
 function detail(idh){
@@ -41,7 +52,7 @@ function detail(idh){
 
 function edit(idh){
     var data_str = "id="+idh;
-    del_data(data_str, "Bạn chắc chắn trả sách này ?", baseUrl + '/lib_loans/update', '#list_loans', baseUrl + '/lib_loans/content?page='+page);
+    del_data(data_str, "Bạn chắc chắn trả sách này ?", baseUrl + '/lib_loans/update', '#list_loans', baseUrl + '/lib_loans/content?page='+page+'&q='+keyword);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function select_book(){ 

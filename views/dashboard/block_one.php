@@ -39,7 +39,7 @@
         <i class="ace-icon fa fa-book"></i>
     </div>
     <div class="infobox-data">
-        <span class="infobox-data-number"><?php echo $this->total_book_old ?></span>
+        <span class="infobox-data-number"><?php echo $this->total_book_old.'/'.$this->total_stock_book_old ?></span>
         <div class="infobox-content">Sách truyền thống</div>
     </div>
 </div>

@@ -8,16 +8,21 @@
                 </li>
                 <li class="active">Thư viện</li>
             </ul><!-- /.breadcrumb -->
+            <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off"
+                        onkeyup="search()"/>
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div><!-- /.nav-search -->
         </div>
         <div class="page-content">
             <div class="page-header">
                 <h1>
                     Quản lý mượn / trả
                     <small class="pull-right">
-                        <button class="btn btn-sm btn-info" type="button" onclick="filter()">
-                            <i class="ace-icon fa fa-search"></i>
-                            Lọc dữ liệu
-                        </button>
                         <button class="btn btn-sm btn-primary" type="button" onclick="add()">
                             <i class="ace-icon fa fa-plus"></i>
                             Thêm mới
