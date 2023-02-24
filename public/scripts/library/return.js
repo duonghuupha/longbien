@@ -32,8 +32,8 @@ function search_book(){
 
 function view_page_book(pages){
     page_book = pages;
-    $('#list_data').load(baseUrl + '/lib_return/list_student?page='+page_book+'&q='+keyword_book); 
-    $('#pager').load(baseUrl + '/lib_return/list_student_page?page='+page_book+'&q='+keyword_book);
+    $('#list_data').load(baseUrl + '/lib_return/list_book?page='+page_book+'&q='+keyword_book); 
+    $('#pager').load(baseUrl + '/lib_return/list_book_page?page='+page_book+'&q='+keyword_book);
 }
 
 function confirm_book(idh){

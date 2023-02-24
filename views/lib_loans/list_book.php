@@ -32,7 +32,8 @@ $jsonObj = $this->jsonObj;
                 <option value="">Lựa chọn</option>
                     <?php
                     for($i = 1; $i <= $row['stock']; $i++){
-                        if($this->_Data->check_book_loan($row['id'], $i) == 0){
+                        if($this->_Data->check_book_loan($row['id'], $i) == 0
+                        && $this->_Data->check_restore_book($row['id'], $i) != 1){
                             echo '<option value="'.$i.'">'.$i.'</option>';
                         }
                     }

@@ -29,7 +29,7 @@ $jsonObj = $this->jsonObj; //$perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $this->_Convert->cut($row['author'], 30) ?></td>
             <td class="text-center">
                 <select class="form-control select2" style="width:100%" id="book_<?php echo $row['id'] ?>"
-                onchange="confirm_book(<?php echo $row['id'] ?>)" data-placeholder="">
+                onchange="confirm_book(<?php echo $row['id'] ?>)" data-placeholder="" data-minimum-results-for-search="Infinity">
                 <option value=""></option>
                 <?php
                 for($z = 1; $z <= $row['stock']; $z++){

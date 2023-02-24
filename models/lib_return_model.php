@@ -12,7 +12,8 @@ class Lib_return_Model extends Model{
         $query = $this->db->query("SELECT id, code, title, cate_id, manu_id, stock, author,
                                     (SELECT tbldm_book.title FROM tbldm_book WHERE tbldm_book.id = cate_id) AS category,
                                     (SELECT tbldm_book_manu.title FROM tbldm_book_manu WHERE tbldm_book_manu.id = manu_id) AS manufactory
-                                    FROM tbl_book WHERE status = 0 AND type = 1 AND (title LIKE '%$q%' OR code LIKE '%$q%')");
+                                    FROM tbl_book WHERE status = 0 AND type = 1 AND (title LIKE '%$q%' OR code LIKE '%$q%')
+                                    LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

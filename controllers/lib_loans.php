@@ -151,17 +151,24 @@ class Lib_loans extends Controller{
                         $this->view->jsonObj = json_encode($jsonObj);
                     }else{
                         $detail = $this->model->get_info_book($code[0]);
-                        // kiem tra tra sach
-                        if($this->model->check_return_book($detail[0]['id'], $code[1]) > 0){
-                            $jsonObj['msg'] = "Sách chưa được trả";
+                        // kiem tra sach co bi thu hoi khong
+                        if($this->_Data->check_restore_book($detail[0]['id'], $code[1]) == 1){
+                            $jsonObj['msg'] = "Sách đã bị thu hồi, không thể mượn";
                             $jsonObj['success'] = false;
                             $this->view->jsonObj = json_encode($jsonObj);
                         }else{
-                            $jsonObj['msg'] = "";
-                            $jsonObj['success'] = true;
-                            $jsonObj['data'] = array("code" => $code[0], "title" => $detail[0]['title'], "sub" => $code[1], 
-                                                "id" => $detail[0]['id']);
-                            $this->view->jsonObj = json_encode($jsonObj);
+                            // kiem tra tra sach
+                            if($this->model->check_return_book($detail[0]['id'], $code[1]) > 0){
+                                $jsonObj['msg'] = "Sách chưa được trả";
+                                $jsonObj['success'] = false;
+                                $this->view->jsonObj = json_encode($jsonObj);
+                            }else{
+                                $jsonObj['msg'] = "";
+                                $jsonObj['success'] = true;
+                                $jsonObj['data'] = array("code" => $code[0], "title" => $detail[0]['title'], "sub" => $code[1], 
+                                                    "id" => $detail[0]['id']);
+                                $this->view->jsonObj = json_encode($jsonObj);
+                            }
                         }
                     }
                 }
