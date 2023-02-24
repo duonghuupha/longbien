@@ -1,7 +1,7 @@
 var page = 1, title_s = '', cate_s = '', manu_s = '', author_s = '';
 $(function(){
     $('#list_library').load(baseUrl + '/report_book/content');
-    combo_select_2('#cate_s', baseUrl + '/other/combo_book_cate');
+    $('#cate_s').load(baseUrl + '/other/combo_book_cate');
     combo_select_2('#manu_s', baseUrl + '/other/combo_book_manu');
 });
 

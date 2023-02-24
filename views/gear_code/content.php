@@ -10,7 +10,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
             <th class="text_center" style="width:50px"></th>
-            <th class="text-center" style="width:80px">Mã đồ dùng</th>
+            <th class="text-center" style="width:100px">Mã đồ dùng</th>
             <th class="">Tiêu đề</th>
             <th class="text-center">Số con</th>
             <th class="text-center" style="width:100px">Số  lượng tem</th>
