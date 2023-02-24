@@ -239,5 +239,60 @@ class Lib_loans extends Controller{
         }
         $this->view->render("lib_loans/add_scan");
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    function return_quick(){
+        $code = $_REQUEST['data']; $code = explode(".", $code);
+        if(count($code) == 2){
+            if($this->model->check_exit_code_book($code[0]) >= 0){// ton tai thong tin sach
+                if($this->model->check_exit_code_book($code[0]) == 0){ // sach chua co ton kho
+                    $jsonObj['msg'] = "Sách chưa được nhập kho";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{ // ton tai sach da nhap kho
+                    if($code[1] > $this->model->check_exit_code_book($code[0])){ // so con co ton tai khong
+                        $jsonObj['msg'] = "Số đặc biệt của sách không tồn tại";
+                        $jsonObj['success'] = false;
+                        $this->view->jsonObj = json_encode($jsonObj);
+                    }else{
+                        $detail = $this->model->get_info_book($code[0]);
+                        // kiem tra sach co bi thu hoi khong
+                        if($this->_Data->check_restore_book($detail[0]['id'], $code[1]) == 1){
+                            $jsonObj['msg'] = "Sách đã bị thu hồi, không thể mượn";
+                            $jsonObj['success'] = false;
+                            $this->view->jsonObj = json_encode($jsonObj);
+                        }else{
+                            // kiem tra tra sach
+                            if($this->model->check_returned_book($detail[0]['id'], $code[1]) > 0){
+                                $jsonObj['msg'] = "Sách đã được trả";
+                                $jsonObj['success'] = false;
+                                $this->view->jsonObj = json_encode($jsonObj);
+                            }else{
+                                $data = array("status" => 1, "date_return" => date("Y-m-d H:i:s"));
+                                $temp = $this->model->updateObj_pass_option($detail[0]['id'], $code[1], 0, $data);
+                                if($temp){
+                                    $jsonObj['msg'] = "Trả sách thành công";
+                                    $jsonObj['success'] = true;
+                                    $this->view->jsonObj = json_encode($jsonObj);
+                                }else{
+                                    $jsonObj['msg'] = "Trả sách không  thành công";
+                                    $jsonObj['success'] = false;
+                                    $this->view->jsonObj = json_encode($jsonObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{ // khong ton tai thong tin sach
+                $jsonObj['msg'] = "Mã sách không đúng";
+                $jsonObj['success'] = false;
+                $this->view->jsonObj = json_encode($jsonObj);
+            }
+        }else{
+            $jsonObj['msg'] = "Định dạng mã không chính xác";
+            $jsonObj['success'] = false;
+            $this->view->jsonObj = json_encode($jsonObj);
+        }
+        $this->view->render("lib_loans/return_quick");
+    }
 }
 ?>

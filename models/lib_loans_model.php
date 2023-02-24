@@ -43,6 +43,11 @@ class Lib_loans_Model extends Model{
                                     WHERE tbl_book.id = book_id) AS sach FROM tbl_book_loan WHERE id = $id");
         return $query->fetchAll();
     }
+
+    function updateObj_pass_option($book_id, $sub_book, $status, $data){
+        $query = $this->update("tbl_book_loan", $data, "book_id = $book_id AND sub_book = $sub_book AND status = $status");
+        return $query;
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function get_data_book($q, $offset, $rows){
         $result = array();
@@ -140,6 +145,13 @@ class Lib_loans_Model extends Model{
                                 WHERE tbl_student_class.student_id = tbl_student.id AND tbl_student_class.year_id = $year_id))
                                 AS department FROM tbl_student WHERE code = $code");
         return $query->fetchAll();
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    function check_returned_book($bookid, $sub){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book_loan WHERE status = 1 AND book_id = $bookid
+                                    AND sub_book = $sub");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
     }
 }
 ?>

@@ -286,3 +286,30 @@ function clear_form(){
     $('#select_stu').attr('onclick', 'select_student()');
     data_book = []; render_table(data_book);
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function clear_form_loan(){
+    $('#per_stu_code').val(null); $('#book_code').val(null);
+    $('#per_stu_info').empty(); $('#book_info').empty();
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function return_quick_book(value){
+    var data_str = "data="+value;
+    $('.overlay').show();
+    $.ajax({
+        type: "POST",
+        url: baseUrl + '/lib_loans/return_quick',
+        data: data_str, // serializes the form's elements.
+        success: function(data){
+            var result = JSON.parse(data);
+            if(result.success == true){
+                $('.overlay').hide();
+                show_message('success', result.msg);
+                $('#list_loans').load(baseUrl + '/lib_loans/content?page='+page+'&q='+keyword);
+            }else{
+                $('.overlay').hide();
+                show_message('error', result.msg);
+                return false;
+            }
+        }
+    });
+}

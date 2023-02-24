@@ -93,6 +93,24 @@
                             </div>
                         </div>
                     </form>
+                    <hr style="border:1px solid #ccc"/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>
+                                    <b>Trả nhanh sách</b>
+                                </label>
+                                <div>
+                                    <input type="text" id="book_code_return" name="book_code_return"
+                                    placeholder="Mã sách" style="width:100%" onchange="return_quick_book(this.value)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="font-size:12px;font-style:italic">
+                            Module hỗ trợ nhân viên thư viện cập nhật tình trạng trả sách bằng cách sử dụng thiết bị đọc mã vạch.
+                            Rút ngắn thời gian nếu sử dụng sổ sách
+                        </div>
+                    </div>
                 </div><!-- /.col -->
                 <?php
                 }
