@@ -6,7 +6,7 @@ class Gear_code_Model extends Model{
 
     function getFetObj($title, $code, $cate, $offset, $rows){
         $result = array();
-        $where = "status = 0";
+        $where = "status = 0 AND stock != 0";
         if($title != '')
             $where = $where." AND title LIKE '%$title%'";
         if($code != '')
