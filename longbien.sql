@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 28, 2022 at 08:25 PM
+-- Generation Time: Mar 03, 2023 at 07:22 PM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.30
 
@@ -51,11 +51,30 @@ CREATE TABLE `document_all` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbldm_bin`
+--
+
+CREATE TABLE `tbldm_bin` (
+  `id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbldm_bin`
+--
+
+INSERT INTO `tbldm_bin` (`id`, `title`) VALUES
+(1, 'Kệ số 1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbldm_book`
 --
 
 CREATE TABLE `tbldm_book` (
   `id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `status` int(11) NOT NULL,
@@ -66,14 +85,38 @@ CREATE TABLE `tbldm_book` (
 -- Dumping data for table `tbldm_book`
 --
 
-INSERT INTO `tbldm_book` (`id`, `title`, `user_id`, `status`, `create_at`) VALUES
-(1, 'Sách tự nhiên - xã hội', 1, 0, '2022-07-24 22:22:58'),
-(2, 'Sách xã hội - nhân văn', 1, 0, '2022-07-24 22:24:14'),
-(3, 'Sách giáo khoa', 1, 0, '2022-07-24 22:24:40'),
-(4, 'Sách tham khảo', 1, 0, '2022-07-24 22:24:52'),
-(5, 'Thơ, truyện', 1, 0, '2022-07-24 22:25:46'),
-(6, 'Sách, báo', 1, 0, '2022-07-24 22:25:18'),
-(7, 'Truyện cổ tích', 1, 0, '2022-11-03 23:54:11');
+INSERT INTO `tbldm_book` (`id`, `parent_id`, `title`, `user_id`, `status`, `create_at`) VALUES
+(8, 23, 'Sách giáo khoa 6', 1, 0, '2023-02-15 23:31:53'),
+(9, 18, 'Sách tham khảo 6', 1, 0, '2023-02-15 23:32:41'),
+(10, 23, 'Sách giáo khoa 7', 1, 0, '2023-02-15 23:31:59'),
+(11, 18, 'Sách tham khảo 7', 1, 0, '2023-02-15 23:32:36'),
+(12, 23, 'Sách giáo khoa 8', 1, 0, '2023-02-15 23:32:04'),
+(13, 18, 'Sách tham khảo 8', 1, 0, '2023-02-15 23:32:30'),
+(14, 23, 'Sách giáo khoa 9', 1, 0, '2023-02-15 23:32:10'),
+(15, 18, 'Sách tham khảo 9', 1, 0, '2023-02-15 23:32:25'),
+(16, 0, 'Sách khoa học tự nhiên', 1, 0, '2022-12-08 14:01:19'),
+(17, 0, 'Sách xã hội nhân văn', 1, 0, '2022-12-08 14:01:31'),
+(18, 0, 'Sách tham khảo', 1, 0, '2022-12-09 00:12:30'),
+(19, 18, 'Danh mục sách lịch sử', 1, 0, '2023-02-15 23:33:37'),
+(20, 18, 'Sách pháp luật', 1, 0, '2023-02-15 23:33:31'),
+(21, 18, 'Sách Hà Nội', 1, 0, '2023-02-15 23:33:27'),
+(22, 18, 'Sách Văn học', 1, 0, '2023-02-15 23:33:22'),
+(23, 0, 'Sách giáo khoa', 1, 0, '2023-02-15 23:31:41'),
+(24, 18, 'Danh nhân', 11, 0, '2023-02-19 09:23:56'),
+(25, 18, 'Sách khoa học', 11, 0, '2023-02-20 10:28:15'),
+(26, 18, 'Biển đảo', 11, 0, '2023-02-20 11:33:46'),
+(27, 18, 'Sách Bác Hồ', 11, 0, '2023-02-20 14:05:47'),
+(28, 18, 'Sách kĩ năng sống', 11, 0, '2023-02-21 13:57:02'),
+(29, 9, 'Sách Ngữ văn 6', 11, 0, '2023-02-21 16:18:23'),
+(30, 11, 'Sách Ngữ văn 7', 11, 0, '2023-02-21 16:54:26'),
+(31, 9, 'Sách Khoa học tự nhiên', 11, 0, '2023-02-22 07:48:22'),
+(32, 11, 'Sách Toán học 7', 11, 0, '2023-02-22 07:59:40'),
+(33, 9, 'Sách Toán học 6', 11, 0, '2023-02-22 08:03:22'),
+(34, 11, 'Sách Lịch sử 7', 11, 0, '2023-02-22 08:28:55'),
+(35, 11, 'Sách Vật lí 7', 11, 0, '2023-02-22 08:29:27'),
+(36, 18, 'Môn Địa lí', 11, 0, '2023-02-22 16:49:54'),
+(37, 0, 'Sách nghiệp vụ', 11, 0, '2023-02-23 10:54:40'),
+(38, 37, 'Ngữ văn 9', 11, 0, '2023-02-23 10:55:05');
 
 -- --------------------------------------------------------
 
@@ -94,12 +137,40 @@ CREATE TABLE `tbldm_book_manu` (
 --
 
 INSERT INTO `tbldm_book_manu` (`id`, `title`, `user_id`, `status`, `create_at`) VALUES
-(1, 'Nhà xuất bản giáo dục', 1, 0, '2022-07-24 22:25:56'),
+(1, 'Nhà xuất bản giáo dục Việt Nam', 1, 0, '2022-12-08 14:34:49'),
 (2, 'Nhà xuất bản lao động', 1, 0, '2022-07-24 22:26:04'),
 (3, 'Nhà xuất bản quân hội', 1, 0, '2022-07-24 22:26:12'),
 (4, 'Nhà xuất bản đại học quốc gia', 1, 0, '2022-07-24 22:26:26'),
 (5, 'Nhà xuất bản phụ nữ', 1, 0, '2022-07-24 22:26:40'),
-(6, 'Nhà xuất bản kim đồng', 1, 0, '2022-07-24 22:26:48');
+(6, 'Nhà xuất bản kim đồng', 1, 0, '2022-07-24 22:26:48'),
+(7, 'Nhà xuất bản đại học sư phạm thành phố Hồ Chí Minh', 1, 0, '2022-12-08 23:51:18'),
+(8, 'Nhà xuất bản Hà Nội', 1, 0, '2022-12-09 00:05:31'),
+(9, 'Nhà xuất bản Văn học', 1, 0, '2022-12-09 00:07:31'),
+(10, 'Nhà xuất bản Hồng Đức', 1, 0, '2022-12-09 00:08:52'),
+(11, 'Nhà xuất bản Trẻ', 1, 0, '2022-12-09 00:11:05'),
+(12, 'Nhà xuất bản đại học sư phạm', 1, 0, '2022-12-09 00:19:13'),
+(13, 'Nhà xuất bản đại học Huế', 1, 0, '2022-12-09 01:37:54'),
+(14, 'Nhà xuất bản thời đại', 1, 0, '2023-02-10 09:46:10'),
+(15, 'Nhà xuất bản Thống Kê', 11, 0, '2023-02-14 14:44:25'),
+(16, 'Nhà xuất bản Tài chính', 11, 0, '2023-02-14 14:51:56'),
+(17, 'Nhà xuất bản Lao động -Xã hội', 11, 0, '2023-02-14 15:03:25'),
+(18, 'Nhà xuất bản Chính trị quốc gia Sự thật', 11, 0, '2023-02-15 10:07:52'),
+(19, 'Nhà xuất bản Chính trị Quốc gia', 11, 0, '2023-02-15 10:47:49'),
+(20, 'Nhà xuất bản Y học', 11, 0, '2023-02-15 16:47:10'),
+(21, 'Nhà xuất bản Thanh Niên', 11, 0, '2023-02-15 16:50:17'),
+(22, 'Nhà xuất bản Đại học Sư phạm', 11, 0, '2023-02-15 16:55:23'),
+(23, 'Nhà xuất bản Thế giới', 11, 0, '2023-02-15 17:04:30'),
+(24, 'Nhà xuất bản Dân trí', 11, 0, '2023-02-16 08:44:11'),
+(25, 'Nhà xuất bản Giáo dục', 11, 0, '2023-02-16 09:09:25'),
+(26, 'Nhà xuất bản Hồng Bàng', 11, 0, '2023-02-24 08:32:32'),
+(27, 'Nhà xuất bản Phụ nữ Việt Nam', 11, 0, '2023-02-24 10:03:01'),
+(28, 'Nhà xuất bản Khoa học và kỹ thuật', 11, 0, '2023-02-24 10:15:05'),
+(29, 'Nhà xuất bản Mỹ Thuật', 11, 0, '2023-02-24 10:23:22'),
+(30, 'Nhà xuất bản Công thương', 11, 0, '2023-02-24 11:17:08'),
+(31, 'Nhà xuất bản Đà Nẵng', 11, 0, '2023-02-24 14:19:42'),
+(32, 'Nhà xuất bản Hội nhà văn', 11, 0, '2023-02-24 15:25:03'),
+(33, 'Nhà xuất bản Từ điển Bách Khoa', 11, 0, '2023-02-24 15:37:26'),
+(34, 'Nhà xuất bản Văn hóa Thông tin', 11, 0, '2023-02-24 16:12:13');
 
 -- --------------------------------------------------------
 
@@ -205,6 +276,25 @@ INSERT INTO `tbldm_equipment` (`id`, `title`, `user_id`, `create_at`, `status`) 
 (2, 'Máy móc, thiết bị phục vụ hoạt động chung của cơ quan, tổ chức, đơn vị', 1, '2022-07-13 21:48:43', 0),
 (3, 'Máy móc, thiết bị chuyên dùng', 1, '2022-07-13 21:48:56', 0),
 (4, 'Máy móc thiết bị khác', 1, '2022-07-13 21:50:03', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbldm_floor`
+--
+
+CREATE TABLE `tbldm_floor` (
+  `id` int(11) NOT NULL,
+  `bin_id` int(11) NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbldm_floor`
+--
+
+INSERT INTO `tbldm_floor` (`id`, `bin_id`, `title`) VALUES
+(1, 1, 'Khoang 1 tầng 1');
 
 -- --------------------------------------------------------
 
@@ -426,10 +516,34 @@ CREATE TABLE `tbldm_quanlity_criteria` (
 --
 
 INSERT INTO `tbldm_quanlity_criteria` (`id`, `quanlity_id`, `standard_id`, `title`) VALUES
-(1, 1, 1, 'Tiêu chí 1: Quyết định thành lập hội đồng trường'),
-(3, 1, 1, 'Tiêu chí 2: Kế hoạch thực hiện nhiệm vụ năm học'),
-(4, 1, 3, 'Tiêu chí 1: Hồ sơ dự giờ của ban giám hiệu'),
-(5, 1, 3, 'Tiêu chí 2: Sổ điểm học sinh');
+(6, 1, 1, 'Tiêu chí 1.1: Phương hướng, chiến lược xây dựng và phát triển nhà trường'),
+(7, 1, 1, 'Tiêu chí 1.2: Hội đồng trường ( Hội đồng quản trị đối với  trường tư thục) và các hội đồng khác'),
+(8, 1, 1, 'Tiêu chí 1.3: Tổ chức Đảng Cộng sản Việt Nam, các đoàn thể và tổ chức  khác trong nhà trường'),
+(9, 1, 1, 'Tiêu chí 1.4: Hiệu trưởng, Phó hiệu trưởng, tổ chuyên môn và tổ văn phòng'),
+(10, 1, 1, 'Tiêu chí 1.5: Lớp học'),
+(11, 1, 1, 'Tiêu chí 1.6: Quản lý hành chính, tài chính và tài sản'),
+(12, 1, 1, 'Tiêu chí 1.7: Quản lý cán bộ, giáo viên và nhân viên'),
+(13, 1, 1, 'Tiêu chí 1.8: Quản lý các hoạt động giáo dục'),
+(14, 1, 1, 'Tiêu chí 1.9: Thực hiện quy chế dân chủ cơ sở'),
+(15, 1, 1, 'Tiêu chí 1.10: Đảm bảo an ninh trật tự, an toàn trường học'),
+(16, 1, 3, 'Tiêu chí 2.1: Đối với Hiệu trưởng, Phó Hiệu trưởng'),
+(17, 1, 3, 'Tiêu chí 2.2: Đối với giáo viên'),
+(18, 1, 3, 'Tiêu chí 2.3: Đối với nhân viên'),
+(19, 1, 3, 'Tiêu chí 2.4: Đối với học sinh'),
+(20, 1, 4, 'Tiêu chí 3.1: Khuôn viên,  khu sân chơi, bãi tập'),
+(21, 1, 4, 'Tiêu chí  3.2: Phòng học, phòng học bộ môn và khối phục vụ học tập'),
+(22, 1, 4, 'Tiêu chí 3.3: Khối hành chính - quản trị'),
+(23, 1, 4, 'Tiêu chí 3.4: Khu vệ sinh, hệ thống cấp thoát nước'),
+(24, 1, 4, 'Tiêu chí 3.5: Thiết bị'),
+(25, 1, 4, 'Tiêu chí 3.6: Thư viện'),
+(26, 1, 5, 'Tiêu chí 4.1: Ban đại diện cha mẹ học sinh'),
+(27, 1, 5, 'Tiêu chí 4.2: Công tác tham mưu cấp ủy Đảng, chính quyền và phối hợp với các tổ chức, cá nhân của nhà trường'),
+(28, 1, 6, 'Tiêu chí 5.1: Thực hiện Chương trình giáo dục phổ thông'),
+(29, 1, 6, 'Tiêu chí 5.2: Tổ chức hoạt động giáo dục cho học sinh cáo hoàn cảnh khó khăn, học sinh có năng khiếu, học sinh gặp khó khăn trong học tập và rèn luyện'),
+(30, 1, 6, 'Tiêu chí 5.3: Thực hiện nội dung giáo dục địa phương theo quy định'),
+(31, 1, 6, 'Tiêu chí 5.4: Các hoạt động trải nghiệm và hướng nghiệp'),
+(32, 1, 6, 'Tiêu chí 5.5: Hình thành,  phát triển các kỹ năng sống cho học sinh'),
+(33, 1, 6, 'Tiêu chí 5.6: Kết quả giáo dục');
 
 -- --------------------------------------------------------
 
@@ -448,8 +562,11 @@ CREATE TABLE `tbldm_quanlity_standard` (
 --
 
 INSERT INTO `tbldm_quanlity_standard` (`id`, `quanlity_id`, `title`) VALUES
-(1, 1, 'Tiêu chuẩn 1:  Hồ sơ quản lý'),
-(3, 1, 'Tiêu chuẩn 2:  Công tác chuyên môn');
+(1, 1, 'Tiêu chuẩn 1:  Tổ chức và quản lý nhà trường'),
+(3, 1, 'Tiêu chuẩn 2:  Cán bộ quản lý, giáo viên, nhân viên và học sinh'),
+(4, 1, 'Tiêu chuẩn 3: Cơ sở vật chất và trang thiết bị dạy học'),
+(5, 1, 'Tiêu chuẩn 4: Quan hệ giữa nhà trường,  gia đình và xã hội'),
+(6, 1, 'Tiêu chuẩn 5: Hoạt động giáo dục và kết quả giáo dục');
 
 -- --------------------------------------------------------
 
@@ -543,7 +660,10 @@ INSERT INTO `tbldm_utensils` (`id`, `title`, `user_id`, `create_at`, `status`) V
 (2, 'Đồ dùng Hóa Học', 1, '2022-07-13 21:56:28', 0),
 (3, 'Đồ dùng Địa lý', 1, '2022-07-13 21:58:18', 0),
 (4, 'Đồ dùng Sinh học', 1, '2022-07-13 21:58:29', 0),
-(5, 'Đồ dùng GDTC', 1, '2022-07-13 21:58:41', 0);
+(5, 'Đồ dùng GDTC', 1, '2022-07-13 21:58:41', 0),
+(6, 'Đồ dùng Toán học', 1, '2023-02-24 09:49:30', 0),
+(7, 'Đồ dùng Lịch sử', 1, '2023-02-24 09:49:50', 0),
+(8, 'Đồ dùng Công nghệ', 1, '2023-02-24 09:50:04', 0);
 
 -- --------------------------------------------------------
 
@@ -564,10 +684,18 @@ CREATE TABLE `tbldm_works` (
 --
 
 INSERT INTO `tbldm_works` (`id`, `group_id`, `title`, `create_at`, `status`) VALUES
-(1, 4, 'Tài chính', '2022-10-01 23:58:37', 1),
-(2, 4, 'Chuyên môn', '2022-10-01 23:58:09', 1),
-(3, 4, 'Mô hình trường học điện tử', '2022-10-01 23:58:20', 1),
-(4, 4, 'Văn thư lưu trữ', '2022-10-01 23:58:27', 1);
+(1, 4, 'Học sinh giỏi', '2022-11-30 10:47:12', 1),
+(2, 4, 'Giáo viên giỏi', '2022-11-30 10:47:21', 1),
+(3, 4, 'Quy chế dân chủ', '2022-11-30 10:47:34', 1),
+(4, 4, 'Thi đua khen thưởng', '2022-11-30 10:47:46', 1),
+(5, 4, 'Đánh giá xếp loại tháng', '2022-11-30 10:48:10', 1),
+(6, 4, 'Đánh giá xếp loại năm học', '2022-11-30 10:48:25', 1),
+(7, 4, 'Kế hoạch thực hiện nhiệm vụ năm học', '2022-11-30 10:48:41', 1),
+(8, 4, 'Cha mẹ học sinh', '2022-11-30 10:48:54', 1),
+(9, 4, 'Thu - Chi', '2022-11-30 10:49:05', 1),
+(10, 4, 'Kế hoạch tháng', '2022-11-30 10:49:15', 1),
+(11, 4, 'Ngoại khóa', '2022-11-30 10:49:29', 1),
+(12, 4, 'Stem', '2022-11-30 10:49:53', 1);
 
 -- --------------------------------------------------------
 
@@ -588,7 +716,7 @@ CREATE TABLE `tbldm_works_group` (
 
 INSERT INTO `tbldm_works_group` (`id`, `title`, `create_at`, `status`) VALUES
 (4, 'Hồ sơ kiêm tra công vụ năm học 2022-2023', '2022-10-01 23:51:00', 1),
-(5, 'Hồ sơ kiểm tra mô hình trường học điện tử năm học 2022-2023', '2022-10-02 00:20:12', 1);
+(5, 'Công nghệ thông tin - Chuyển đổi số', '2022-11-30 10:50:15', 1);
 
 -- --------------------------------------------------------
 
@@ -613,7 +741,8 @@ INSERT INTO `tbldm_years` (`id`, `title`, `active`, `user_id`, `create_at`, `sta
 (1, 'Năm học 2000 - 2001', 0, 1, '2022-07-11 18:28:39', 1),
 (2, 'Năm học 2022-2023', 1, 1, '2022-07-12 17:05:30', 0),
 (3, 'Năm học 2023-2022', 0, 1, '2022-07-12 17:06:35', 1),
-(4, 'Năm học 2023-2024', 0, 1, '2022-07-12 21:34:25', 1);
+(4, 'Năm học 2023-2024', 0, 1, '2022-07-12 21:34:25', 1),
+(5, 'Năm học 2023-2024', 0, 1, '2023-02-17 23:54:01', 0);
 
 -- --------------------------------------------------------
 
@@ -628,14 +757,6 @@ CREATE TABLE `tbl_assign` (
   `year_id` int(11) NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_assign`
---
-
-INSERT INTO `tbl_assign` (`id`, `code`, `user_id`, `year_id`, `create_at`) VALUES
-(1, 1665727701, 59, 2, '2022-10-14 13:08:21'),
-(2, 1665744816, 58, 2, '2022-10-15 23:43:08');
 
 --
 -- Triggers `tbl_assign`
@@ -658,15 +779,6 @@ CREATE TABLE `tbl_assign_detail` (
   `department` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_assign_detail`
---
-
-INSERT INTO `tbl_assign_detail` (`id`, `code`, `subject_id`, `department`, `create_at`) VALUES
-(1, 1665727701, 18, '38,39,37', '2022-10-14 00:00:00'),
-(4, 1665744816, 8, '39,38,37,36', '2022-10-15 23:43:08'),
-(5, 1665744816, 1, '32,31,30', '2022-10-15 23:43:08');
 
 -- --------------------------------------------------------
 
@@ -702,19 +814,351 @@ CREATE TABLE `tbl_book` (
   `status` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `create_at` datetime NOT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) NOT NULL,
+  `year_publish` int(11) NOT NULL,
+  `position_publish` text COLLATE utf8_unicode_ci NOT NULL,
+  `price` double NOT NULL,
+  `subject` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_book`
 --
 
-INSERT INTO `tbl_book` (`id`, `code`, `cate_id`, `manu_id`, `title`, `content`, `number_page`, `author`, `image`, `type`, `file`, `status`, `user_id`, `create_at`, `stock`) VALUES
-(1, 24208023, 1, 1, 'Bài Tập Tiếng Anh Lớp 8 - Không Đáp Án (2020)', 'Bài Tập Tiếng Anh 8 được biên soạn dưới dạng vở bài tập, dựa theo sách giáo khoa Tiếng Anh 8 của Bộ Giáo Dục và Đào Tạo.\r\nBài Tập Tiếng Anh 8 là tập hợp các bài tập thực hành về từ vựng (vocabulary), ngữ pháp (grammar), đàm thoại (conversation) và đọc hiểu (reading comprehension), nhằm giúp học sinh luyện tập các nội dung trọng tâm của bài học. Các bài tập được biên soạn theo từng đơn vị bài học (Unit), gồm hai phần A và B có nội dung tương ứng với các phần bài học trong sách giáo khoa.\r\nSau phần bài tập của mỗi đơn vị bài học có một bài kiểm tra (Test For Unit), sau 4 đơn vị bài học có bài tự kiểm tra (Test Yourself) được soạn như bài kiểm tra một tiết và sau Unit 8 và Unit 16 có hai bài kiểm tra học kì nhằm giúp các em ôn luyện và củng cố kiến thức đã học.', 128, 'Mai Lan Hương, Nguyễn Thanh Loan', '1658719665_img_library.jpg', 1, '1658719665_file_library.jpg', 0, 1, '2022-07-26 22:35:43', 12),
-(2, 51823420, 3, 1, 'Sách giáo khoa học sinh toán 6 tập 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 115, 'Nhóm  tác giả chân trời sáng tạo', '1658857260_img_library.png', 2, '1658857260_file_library.pdf', 0, 1, '2022-08-30 09:48:58', 0),
-(3, 48664542, 1, 1, 'Sách giáo khoa tin học 6 - tập 1', 'Làm quen với máy tính', 120, 'Nhóm tác giả kết nối tri thức', '', 1, '', 0, 1, '2022-10-30 22:22:12', 10),
-(4, 84327607, 1, 1, 'Pythton rất là cơ bản', 'Hiện nay, Python là một trong những ngôn ngữ lập trình\r\nđang được chú ý bởi tính đa dạng về ứng dụng, thư viện\r\nphong phú và cộng đồng đông đảo.', 92, 'Võ Duy Tuấn', '', 2, '1667490712_file_library.pdf', 0, 1, '2022-11-03 22:51:52', 0),
-(5, 89255879, 2, 1, 'Sách giáo khoa ngữ văn 6 tập 1', 'Sách giáo khoa ngữ văn 6 tập 1', 120, 'Nhóm tác giả kết nối tri thức', '', 1, '', 0, 1, '2022-11-03 22:53:30', 5);
+INSERT INTO `tbl_book` (`id`, `code`, `cate_id`, `manu_id`, `title`, `content`, `number_page`, `author`, `image`, `type`, `file`, `status`, `user_id`, `create_at`, `stock`, `year_publish`, `position_publish`, `price`, `subject`) VALUES
+(6, 70456055, 8, 1, 'Khoa học tự nhiên 6 - KNTTCS', 'Sách giáo hoa khoa học tự nhiện 6 - Kết nối tri thức và cuộc sống', 100, 'Vũ Văn Hùng', '', 1, '', 0, 1, '2022-12-08 23:49:57', 0, 0, '', 0, '0'),
+(7, 83724678, 8, 1, 'Bài tập khoa học tự nhiên 6 - KNTTCS', 'Sách bài tập khoa học tự nhiên 6 - Kết nối tri thức với cuộc sống', 100, 'Vũ Văn Hùng', '', 1, '', 0, 1, '2022-12-08 23:50:08', 0, 0, '', 0, '0'),
+(8, 53384531, 8, 1, 'Âm nhạc 6 - KNTTCS', 'Sách giáo khoa âm nhạc 6 - kết nối tri thức và cuộc sống', 80, 'Hoàng Long - Đỗ Thị Minh Chính', '', 1, '', 0, 1, '2022-12-08 23:50:19', 0, 0, '', 0, '0'),
+(9, 25369974, 8, 1, 'Lịch sử và Địa lí 6 - KNTTCS', 'Sách giáo khoa Lịch sử và Địa lí 6 - Kết nối tri thức và cuộc sống', 100, 'Vũ Minh Giang, Nghiêm Đình Vỹ, Đinh Ngọc Bảo', '', 1, '', 0, 1, '2022-12-08 23:50:29', 0, 0, '', 0, '0'),
+(10, 14374488, 8, 7, 'Ngữ Văn 6 - Tập 1 - Cánh diều', 'Sách giáo khoa ngữ văn 6 tập 1 - Cánh diều', 100, 'Nguyễn Minh Tuyết', '', 1, '', 0, 1, '2022-12-08 23:52:28', 0, 0, '', 0, '0'),
+(11, 63237495, 8, 1, 'Tiếng Anh 6 - Tập 1 (Sách bài tập)', 'Sách bài tập tiếng anh 6 tập 1  Global success', 100, 'Nguyễn Thị Chi', '', 1, '', 0, 1, '2022-12-08 23:54:40', 0, 0, '', 0, '0'),
+(12, 24199743, 8, 1, 'Tiếng Anh 6 - Tập 2 (Sách bài tập)', 'Sách bài tập tiếng anh 6 tập 2 - Global success', 100, 'Nguyễn Thị Chi', '', 1, '', 0, 1, '2022-12-08 23:56:06', 0, 0, '', 0, '0'),
+(13, 60955962, 8, 1, 'Tiếng Anh 6 - Tập 2 (Sách học sinh)', 'Sách học sinh tiếng anh 6 tập 2 - Global success', 100, 'Nguyễn Thị Chi', '', 1, '', 0, 1, '2022-12-08 23:57:15', 0, 0, '', 0, '0'),
+(14, 57949502, 8, 1, 'Tiếng Anh 6 - Tập 1 (Sách học sinh)', 'Sách học sinh tiếng anh 6 tập 1 - Global success', 100, 'Nguyễn Thị Chi', '', 1, '', 0, 1, '2022-12-08 23:58:16', 0, 0, '', 0, '0'),
+(15, 34063263, 8, 1, 'Giáo dục công dân 6 - KNTTCS', 'Sách giáo khoa giáo dục công dân 6 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Thị Toan', '', 1, '', 0, 1, '2022-12-08 23:59:19', 0, 0, '', 0, '0'),
+(16, 75361308, 8, 1, 'Giáo dục thể chất 6 - KNTTCS', 'Sách giáo khoa giáo dục thể chất 6 - Kết nối  tri thức cuộc sống', 100, 'Hồ Đắc Sơn -  Nguyễn Duy Quyết', '', 1, '', 0, 1, '2022-12-09 00:04:08', 0, 0, '', 0, '0'),
+(17, 73519365, 8, 1, 'Bài tập Tin học 6 - KNTTCS', 'Sách bài tập Tin học 6 - Kết nối tri thức cuộc sống', 100, 'Hà Đặng Cao Tùng', '', 1, '', 0, 1, '2022-12-09 00:01:10', 0, 0, '', 0, '0'),
+(18, 15656438, 8, 1, 'Công nghệ 6 - KNTTCS', 'Sách giáo khoa Công nghệ 6 - Kết nối tri thức cuộc sống', 100, 'Lê Huy Hoàng', '', 1, '', 0, 1, '2022-12-09 00:02:11', 0, 0, '', 0, '0'),
+(19, 31963073, 8, 7, 'Bài tập Ngữ Văn 6 -Tập 2 - Cánh diều', 'Sách bài tập ngữ văn 6 tập 2  - Cánh diều', 100, 'Nguyễn Minh Tuyết - Đỗ Ngọc Thống', '', 1, '', 0, 1, '2022-12-09 00:03:28', 0, 0, '', 0, '0'),
+(20, 1645072, 8, 1, 'Bài tập Giáo dục công dân 6 - KNTTCS', 'Sách bài tập giáo dục công dân 6 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Thị Toan', '', 1, '', 0, 1, '2022-12-09 00:05:03', 0, 0, '', 0, '0'),
+(21, 80368231, 17, 8, 'Tài liệu Lịch sử Hà Nội', 'Tài liệu lịch sử Hà Nội - Chương trình đại phương (Sách dùng cho học sinh trung học cơ sở)', 100, 'Ngô Thị Hiền Thúy', '', 1, '', 0, 1, '2022-12-09 00:07:01', 0, 0, '', 0, '0'),
+(22, 58063347, 17, 9, 'Không gia đình', 'Tiểu thuyết không gia đình', 100, 'Hector Malot - Huỳnh Lý (dịch)', '', 1, '', 0, 1, '2022-12-09 00:08:25', 0, 0, '', 0, '0'),
+(23, 57752438, 17, 10, 'Hỏi đáp về biên giới Việt Nam - Lào', 'Bộ câu hỏi về biên giới Việt Nam - Lào', 100, 'Bộ Ngoại giao - Ủy ban biên giới Quốc gia', '', 1, '', 0, 1, '2022-12-09 00:10:44', 0, 0, '', 0, '0'),
+(24, 68801490, 17, 11, 'Bí ẩn mãi mãi là bí ẩn', 'SÁch tham khảo bí ẩn mãi mãi là  bí ẩn', 100, 'Nhiều tác giả', '', 1, '', 0, 1, '2022-12-09 00:11:48', 0, 0, '', 0, '0'),
+(25, 57982507, 18, 5, 'Hướng dẫn học tập - Bản tổng quát', 'Sách hướng dẫn học tập do bộ giáo dục Nhật Bản năm Showa 22(1947)', 100, 'Bộ giáo dục Nhật bản - Nguyễn Quốc Vương (dịch)', '', 1, '', 0, 1, '2022-12-09 00:14:05', 0, 0, '', 0, '0'),
+(26, 84367765, 18, 6, 'Học cách hoàn thiện bản thân', 'Kỹ năng vàng cho học sinh trung học - Học cách hoàn thiện bản thân', 200, 'Liu Yong - Thanh Uyên (dịch)', '', 1, '', 0, 1, '2022-12-09 00:15:48', 0, 0, '', 0, '0'),
+(27, 14963843, 16, 1, 'Atlat địa lí Việt Nam', 'Atlat địa lí Việt Nam', 100, 'Bộ giáo dục và đào tạo', '', 1, '', 0, 1, '2022-12-09 00:16:59', 0, 0, '', 0, '0'),
+(28, 25236556, 8, 7, 'Ngữ văn 6 - Tập 2 - Cánh diều', 'Sách giáo khoa ngữ văn 6 tập 2 - Cánh diều', 100, 'Nguyễn Minh Tuyết - Đỗ Ngọc Thống', '', 1, '', 0, 1, '2022-12-09 00:18:33', 0, 0, '', 0, '0'),
+(29, 1887290, 8, 12, 'Bài tập Toán 6 - Tập 1 - Cánh diều', 'Sách bài tập toaons 6 tập 1 - Cánh diều', 100, 'Đỗ Đức Thái', '', 1, '', 0, 1, '2022-12-09 00:20:06', 0, 0, '', 0, '0'),
+(30, 25768873, 8, 12, 'Toán 6 - Tập 1 - Cánh diều', 'Sách giáo khoa toán 6 tập 1 - Cánh diều', 100, 'Đỗ Đức Thái', '', 1, '', 0, 1, '2022-12-09 00:20:56', 0, 0, '', 0, '0'),
+(31, 48860608, 8, 12, 'Toán 6 - Tập 2 - Cánh diều', 'Sách giáo khoa toán 6 tập 2 - Cánh diều', 100, 'Đỗ Đức   Thái', '', 1, '', 0, 1, '2022-12-09 00:21:55', 0, 0, '', 0, '0'),
+(32, 16100577, 8, 12, 'Bài tập Toán 6 - Tập 2 - Cánh diều', 'Sách bài tập toán 6 tập 2 - Cánh diều', 100, 'Đỗ Đức  Thai', '', 1, '', 0, 1, '2022-12-09 00:23:03', 0, 0, '', 0, '0'),
+(33, 91544114, 10, 7, 'Ngữ Văn 7 - Tập 2 - Cánh diều', 'Sách giáo khoa ngữ văn 7 tập 2 - Cánh diều', 100, 'Nguyễn Minh Tuyết - Đỗ Ngọc Thống', '', 1, '', 0, 1, '2022-12-09 00:25:10', 0, 0, '', 0, '0'),
+(34, 19331918, 10, 7, 'Ngữ Văn 7 - Tập 1 - Cánh diều', 'Sách giáo khoa ngữ văn 7 tập 1 - Cánh diều', 100, 'Nguyễn Minh Tuyết - Đỗ Ngọc Thống', '', 1, '', 0, 1, '2022-12-09 00:26:15', 0, 0, '', 0, '0'),
+(35, 11855488, 10, 12, 'Toán 7 - Tập 2 - Cánh diều', 'Sách giáo khoa toán 7 tập 2 - Cánh diều', 100, 'Đỗ Đức Thái', '', 1, '', 0, 1, '2022-12-09 00:27:06', 0, 0, '', 0, '0'),
+(36, 8350752, 10, 12, 'Toán 7 - Tập 1 - Cánh diều', 'Sách giáo khoan toán 7 tập 1 - Cánh diều', 100, 'Đỗ Đức Thái', '', 1, '', 0, 1, '2022-12-09 00:28:02', 0, 0, '', 0, '0'),
+(37, 86383385, 10, 1, 'Giáo dục công dân 7 - KNTTCS', 'Sách giáo khoa giáo dục công dân 7 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Thị Toan', '', 1, '', 0, 1, '2022-12-09 00:28:52', 0, 0, '', 0, '0'),
+(38, 69830980, 10, 1, 'Khoa học tự nhiên 7 - KNTTCS', 'Sách giáo khoa khoa học tự nhiên 7 - Kết nối tri thức cuộc sống', 100, 'Vũ Văn Hùng', '', 1, '', 0, 1, '2022-12-09 00:30:05', 0, 0, '', 0, '0'),
+(39, 83804869, 10, 1, 'Lịch sử và Địa lí 7 - KNTTCS', 'Sách giáo khoa lịch sử và địa lí 7 - Kết nối tri thức cuộc sống', 100, 'Vũ Minh Giang', '', 1, '', 0, 1, '2022-12-09 00:31:12', 0, 0, '', 0, '0'),
+(40, 25712953, 10, 1, 'Tin Học 7 - KNTTCS', 'Sách giáo khoa tin học 7 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Chí Công', '', 1, '', 0, 1, '2022-12-09 00:32:20', 0, 0, '', 0, '0'),
+(41, 91325197, 8, 12, 'Khoa học tự nhiên 6 - Cánh diều', 'Sách giáo khoa khoa học tự nhiên 6 - Cánh diều', 100, 'Mai Sỹ Tuấn', '', 1, '', 0, 1, '2022-12-09 01:21:11', 0, 0, '', 0, '0'),
+(42, 19759193, 8, 7, 'Công nghệ 6 - Cánh diều', 'Sách giáo khoa công nghệ 6 - Cánh diều', 100, 'Nguyễn Tất Thắng', '', 1, '', 0, 1, '2022-12-09 01:21:54', 0, 0, '', 0, '0'),
+(43, 18344751, 8, 1, 'Bài tập Âm nhạc 6 - KNTTCS', 'Sách bài tập âm nhạc 6 - Kết nối tri thức cuộc sống', 100, 'Hoàng Long - Đỗ Thị Minh Chính', '', 1, '', 0, 1, '2022-12-09 01:23:00', 0, 0, '', 0, '0'),
+(44, 41426105, 8, 1, 'Mỹ thuật 6 - KNTTCS', 'Sách giáo khoa mỹ thuật 6 - Kết nối tri thức cuộc sống', 100, 'Đoàn Thị Mỹ Hương - Đinh Gia Lê', '', 1, '', 0, 1, '2022-12-09 01:24:01', 0, 0, '', 0, '0'),
+(45, 93130164, 8, 1, 'Công nghệ 6 - Chân trời sáng tạo', 'Sách giáo khoa công nghệ 6  - Chân trời sáng tạo', 100, 'Bùi Văn Hồng', '', 1, '', 0, 1, '2022-12-09 01:25:08', 0, 0, '', 0, '0'),
+(46, 14649609, 8, 1, 'Bài tập công nghệ 6 - KNTTCS', 'Sách bài tập công nghệ 6 - Kết nối tri thức cuộc sống', 1000, 'Lê Huy Hoàng', '', 1, '', 0, 1, '2022-12-09 01:26:04', 0, 0, '', 0, '0'),
+(47, 98142508, 8, 1, 'Bài tập Mỹ Thuật 6 - Chân trời sáng tạo', 'Sách bài tập mỹ thuật 6 - Chân trời sáng tạo', 100, 'Nguyễn Thị Nhung - Nguyễn Xuân Tiến', '', 1, '', 0, 1, '2022-12-09 01:27:37', 0, 0, '', 0, '0'),
+(48, 49972286, 10, 1, 'Mỹ thuật 7 - KNTTCS', 'Sách giáo khoa mỹ thuật 7 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Xuân Nghị', '', 1, '', 0, 1, '2022-12-09 01:28:38', 0, 0, '', 0, '0'),
+(49, 85181210, 10, 1, 'Toán 7 - Tập 2- KNTTCS', 'Sách giáo khoa toán 7 tập 2 - Kết nối tri thức cuộc sống', 100, 'Hà Huy Khoái', '', 1, '', 0, 1, '2022-12-09 01:29:46', 0, 0, '', 0, '0'),
+(50, 6829091, 10, 1, 'Toán 7 - Tập 1 - KNTTCS', 'Sách giáo khoa toán 7 tập 1 - Kết nối tri thức cuộc sống', 100, 'Hà Huy Khoái', '', 1, '', 0, 1, '2022-12-09 01:30:46', 0, 0, '', 0, '0'),
+(51, 92518481, 10, 1, 'Ngữ văn 7 - Tập 2 - KNTTCS', 'Sách giáo khoa ngữ văn 7 tập 2 - Kết nối tri thức cuộc sống', 100, 'Bùi Mạnh Hùng', '', 1, '', 0, 1, '2022-12-09 01:31:59', 0, 0, '', 0, '0'),
+(52, 3672736, 10, 1, 'Ngữ Văn 7 - Tập 1 - KNTTCS', 'Sách giáo khoa ngữ văn 7 tập 1 - Kết nối tri thức cuộc sống', 100, 'Bùi Mạnh Hùng', '', 1, '', 0, 1, '2022-12-09 01:32:50', 0, 0, '', 0, '0'),
+(53, 35219709, 10, 1, 'Hoạt động trải nghiệm, hướng nghiệp 7 - KNTTCS', 'Sách giáo khoa hoạt động trải nghiệm, hướng nghiệp 7 - Kết nối tri thức cuộc sống', 100, 'Lưu Thu Thủy', '', 1, '', 0, 1, '2022-12-09 01:34:15', 0, 0, '', 0, '0'),
+(54, 71178737, 10, 7, 'Hoạt động trải nghiệm, hướng nghiệp 7 - Cánh diều', 'Sách giáo khoa hoạt động trải nghiệm, hướng nghiệp 7 - Cánh diều', 100, 'Nguyễn Dục Quang', '', 1, '', 0, 1, '2022-12-09 01:35:45', 0, 0, '', 0, '0'),
+(55, 23538682, 10, 12, 'Khoa học tự nhiên 7 - Cánh diều', 'Sách giáo khoa khoa học tự nhiên 7 - Cánh diều', 100, 'Mai Sỹ Tuấn', '', 1, '', 0, 1, '2022-12-09 01:36:54', 0, 0, '', 0, '0'),
+(56, 36368201, 10, 13, 'Giáo dục công dân 7 - Cánh diều', 'Sách giáo khoa giáo dục công dân 7 - Cánh diều', 100, 'Nguyễn Thị Mỹ Lộc', '', 1, '', 0, 1, '2022-12-09 01:38:39', 0, 0, '', 0, '0'),
+(57, 36137999, 10, 12, 'Lịch sử và Địa lí 7 - Cánh diều', 'Sách giáo khoa lịch sử và địa  lí 7 - Cánh diều', 100, 'Đỗ Thanh Bình', '', 1, '', 0, 1, '2022-12-09 01:40:00', 0, 0, '', 0, '0'),
+(58, 18195885, 10, 1, 'Khoa học tự nhiên 7 - Chân trời sáng tạo', 'Sách giáo khoa khoa học tự nhiên 7- Chân trời sáng tạo', 100, 'Cao Cự Giác', '', 1, '', 0, 1, '2022-12-09 01:41:28', 0, 0, '', 0, '0'),
+(59, 33844833, 10, 1, 'Tin học 7 - Chân trời sáng tạo', 'Sách giáo khoa tin học 7 - Chân trời sáng tạo', 100, 'Quách Tất Kiên', '', 1, '', 0, 1, '2022-12-09 06:25:42', 0, 0, '', 0, '0'),
+(60, 17672924, 10, 1, 'Âm nhạc 7 - Chân trời sáng tạo', 'Sách giáo khoa âm nhạc 7 - Chân trời sáng tạo', 100, 'Hồ Ngọc Khải, Nguyễn Thị Tố Mai', '', 1, '', 0, 1, '2022-12-10 00:42:19', 0, 0, '', 0, '0'),
+(61, 12301600, 10, 1, 'Giáo dục công dân 7 - Chân trời sáng tạo', 'Sách giáo khoa giáo dục công dân 7 - Chân trời sáng tạo', 100, 'Huỳnh Văn Sơn, Bùi Hồng Quân', '', 1, '', 0, 1, '2022-12-10 00:43:47', 0, 0, '', 0, '0'),
+(62, 68014467, 8, 1, 'Ngữ văn 6 - Tập 2 - KNTTCS', 'Sách giáo khoa ngữ văn 6 tập 2 - Kết nối tri thức cuộc sống', 100, 'Bùi Mạnh Hùng, Nguyễn Thị Ngân Hoa', '', 1, '', 0, 1, '2022-12-10 00:45:29', 0, 0, '', 0, '0'),
+(63, 33339420, 8, 1, 'Toán 6 - Tập 1 - KNTTCS', 'Sách gáo khoa toán 6 tập 1 - Kết nối tri thức cuộc sống', 100, 'Hà Huy Khoái,  Nguyễn Huy Đoan', '', 1, '', 0, 1, '2022-12-10 00:47:18', 0, 0, '', 0, '0'),
+(64, 27948740, 8, 1, 'Toán 6 - Tập 2 - KNTTCS', 'Sách giáo khoa toán 6 tạp 2 - Kết nối tri thức cuộc sống', 100, 'Hà Huy Khoái, Nguyên Huy Đoan', '', 1, '', 0, 1, '2022-12-10 00:48:28', 0, 0, '', 0, '0'),
+(65, 77557272, 8, 1, 'Tin học 6 - KNTTCS', 'Sách giáo khoa tin học 6 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Chí Công', '', 1, '', 0, 1, '2022-12-10 00:51:11', 0, 0, '', 0, '0'),
+(66, 8711056, 8, 1, 'Hoạt động trải nghiệm, hướng nghiệp 6 - Chân trời sáng tạo', 'Sách giáo khoa hoạt động trải nghiệm, hướng nghiệp 6 - Chân trời sáng tạo', 100, 'Đinh Thị Kim Thoa, Vũ Quan Tuyên', '', 1, '', 0, 1, '2022-12-10 00:53:40', 0, 0, '', 0, '0'),
+(67, 46616400, 8, 1, 'Mỹ Thuật 6 - Chân trời sáng tạo', 'Sách giáo khoa mỹ thuật 6 - Chân trời sáng tạo', 100, 'Nguyễn Thị Nhung, Nguyễn Xuân Tiến', '', 1, '', 0, 1, '2022-12-10 00:55:02', 17, 0, '', 0, '0'),
+(68, 89605136, 8, 1, 'Bài tập toán 6 - Tập 1 - KNTTCS', 'Sách bài tập toán 6 tập 1 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Huy Đoan', '', 1, '', 0, 1, '2022-12-10 00:56:12', 11, 0, '', 0, '0'),
+(69, 1025604, 8, 1, 'Bài tập hoạt động trải nghiệm, hướng nghiệp 6 - Chân trời sáng tạo', 'Sách bài tập hoạt động trải nghiệm, hướng nghiệp 6 - Chân trời sáng tạo', 100, 'Đinh Thị Kim Thoa, Vũ Quang Tuyên', '', 1, '', 0, 1, '2022-12-10 00:57:57', 8, 0, '', 0, '0'),
+(70, 35645662, 8, 1, 'Bài tập ngữ văn 6 - Tập 2 - KNTTCS', 'Sách bài tập ngữ văn 6 tập 2 - Kết nối tri thức cuộc sống', 100, 'Bùi Mạnh Hùng', '', 1, '', 0, 1, '2022-12-10 00:59:10', 11, 0, '', 0, '0'),
+(71, 70207562, 8, 1, 'Bài tập Lịch sử và Địa lí 6 - Phần địa lí - KNTTCS', 'Sách bài tập lịch sử và địa lí 6 - Phần địa lí - Kết nối tri thức cuộc sống', 100, 'Đào Ngọc Hùng', '', 1, '', 0, 1, '2022-12-10 01:01:37', 22, 0, '', 0, '0'),
+(72, 85916652, 8, 7, 'Bài tập ngữ văn 6 - Tập 1 - Cánh diều', 'Sách bài tập ngữ văn 6 tập 1 - Cánh diều', 100, 'Nguyễn Minh Tuyết, Đỗ Ngọc Thống', '', 1, '', 0, 1, '2022-12-10 01:03:13', 8, 0, '', 0, '0'),
+(73, 52684539, 8, 1, 'Bài tập Lịch sử và Địa lí 6 - Phần lịch sử - KNTTCS', 'Sách bài tập lịch sử và Điaị lí 6 - Phần lịch sử - Kết nối tri thức cuộc sống', 100, 'Đinh Ngọc Bảo', '', 1, '', 0, 1, '2022-12-10 01:09:56', 9, 0, '', 0, '0'),
+(74, 82239720, 9, 8, 'Ôn tập Tiếng Anh cho học sinh lớp 6', 'Sách tham khảo ôn tập tiếng anh cho học sinh lớp 6', 100, 'Lê Hoàng An', '', 1, '', 0, 1, '2022-12-10 01:11:03', 8, 0, '', 0, '0'),
+(75, 45604632, 8, 1, 'Bài tập toán 6 - Tập 2 - KNTTCS', 'Sách bài tập toán 6 tập 2 - Kết nối tri thức cuộc sống', 100, 'Nguyễn Huy Đoan', '', 1, '', 0, 1, '2022-12-10 01:12:07', 11, 0, '', 0, '0'),
+(76, 84969426, 11, 8, 'Ôn tập Tiếng Anh cho học sinh lớp 7', 'Sách tham khảo ôn tập tiếng anh cho học sinh lớp 7', 100, 'Lê Hoàng An', '', 1, '', 0, 1, '2022-12-10 01:12:56', 10, 0, '', 0, '0'),
+(77, 59440943, 20, 2, 'Luật thư viện các kĩ năng hướng dẫn nghiệp vụ thư viện', 'Cuốn sách gồm 7 phần chính: Luật thư viện 2019; Tiêu chuẩn quốc gia Việt Nam về bộ chỉ số đánh giá hoạt động thư viện; Kĩ năng và nghiệp vụ CBTV cần biết; Điều lệ hội thư viện VN; Quy chuẩn, quy chế mẫu thư viện; Quy định về điều kiện thành lập sử dụng phí thư viện; Tiêu chuẩn chức danh nghề nghiệp chuyên ngành thư viện.', 388, 'Vũ Tươi', '', 1, '', 0, 11, '2023-02-14 09:10:27', 1, 2020, 'Hà Nội', 0, '0'),
+(78, 41475234, 20, 2, 'Bộ luật lao động mới (Có hiệu lực từ 1/5/2013) Chính sách tiền lương, tiền công, bảo hiểm xã  hội, nghỉ hưu, thai sản, làm thêm giờ kí kết hợp đồng lao động', 'Cuốn sách gồm 8 phần: Bộ luật lao động mới có hiệu lực từ 1.5.2013; Quy định mới về lao động, việc làm, an toàn lao động; Chế độ chính sách về lương hưu, BHXH...', 447, 'Lê Huy Hòa', '', 1, '', 0, 11, '2023-02-14 14:33:58', 1, 2012, 'Hà Nội', 0, '0'),
+(79, 19356700, 20, 2, 'Luật Bảo hiểm xã hội', 'Cuốn sách gồm hai phần: Luật Bảo hiểm xã hội (Số 71 / 2006/QH 11 ngày 29/6/2006 của Quốc hội nước CHXHCN Việt Nam; Nghị định số 152/2006/ NĐ-CP ngày 22 tháng 12 năm 2006 của Chính phủ hướng dẫn một số điều của luật BHXH Việt Nam', 118, 'Nguyễn Đình Thiêm', '', 1, '', 0, 11, '2023-02-14 14:42:28', 1, 2007, 'Hà Nội', 0, '0'),
+(80, 78406640, 20, 15, 'Tìm hiểu các quy định về tiền lương, Bảo hiểm xã hội và chế độ khác của người lao động', 'Cuốn sách gồm các văn bản: Bộ luật lao động; Quy định về việc làm, học nghề; Quy định về hợp đồng lao động và thỏa ước lao động tập thể; Quy định về tiền lương và các khoản phụ cấp; Quy định về thời gờ làm việc, thời gờ nghỉ ngơi; Quy định về kỉ luật lao động và trách nhiệm vật chất; Quy định về an toàn lao động và vệ sinh lao động; Quy định đối với lao động nữ; Quy định về lao động chưa thành niên và những lao động khác;  Quy định về Bảo hiểm xã hội; Quy định về giải quyết tranh chấp lao động và xử lí vi phạm.', 909, 'Hoàng Trung Tiếu, Hoàng Hoa', '', 1, '', 0, 11, '2023-02-14 14:51:13', 1, 1998, 'Hà Nội', 0, '0'),
+(81, 28275838, 20, 16, 'Hướng dẫn nghiệp vụ về kế toán trường học và quy định mới về quản lí công tác thu chi, đấu thầu mua sắm sử dụng tài sản năm 2012-2013', 'Cuốn sách gồm 8 phần: Quy định mới về kế toán trong trường học; Quy định mới về dạy thêm, học thêm và chưng trình khung năm học 2012-2013; Cơ chế quản lí tài chính, sử dụng kinh phí trong trường học....', 462, 'Thùy Linh, Việt Trinh', '', 1, '', 0, 11, '2023-02-14 14:55:56', 1, 2012, 'Hà Nội', 0, '0'),
+(82, 25286777, 21, 18, 'Bách khoa thư Hà Nội: Phần mở rộng - Phong tục, lễ hội', 'Cuốn sách viết về Phong tục _ Lễ hội Hà Nội', 583, 'Nguyễn Viết Chức', '', 1, '', 0, 11, '2023-02-15 10:15:58', 1, 2017, 'Hà Nội', 0, '0'),
+(83, 97237853, 21, 18, 'Bách khoa thư Hà Nội: Phần mở rộng - Nghệ thuật', 'Cuốn sách viết về các hoạt động nghệ thuật của Hà Nội: Sân khấu, Âm nhạc; Múa; Mỹ thuật; Kiến trúc; Nhiếp ảnh; Điện ảnh...', 551, 'Nguyễn Vĩnh Các', '', 1, '', 0, 11, '2023-02-15 10:21:19', 1, 2017, 'Hà Nội', 0, '0'),
+(84, 48384317, 22, 10, 'Các tác giả văn chương Việt Nam: Tập 1', 'Cuốn sách phác thảo chân dung, sự nghiệp sáng tạo của hơn 1.700 nhà văn, nhà thơ, nhà lí luận phê bình, nhà dịch thuật văn học, kịch gia... Từ thời Đinh, Lê, Lý, Trần, Lê, Nguyễn, Đến thời đại Hồ Chí Minh, từ nhà văn  Đại sư Khuông Việt đến nhà văn, nhà thơ còn trẻ tuổi...', 1559, 'Trần Mạnh Thường', '', 1, '', 0, 11, '2023-02-15 10:45:12', 1, 2015, 'Hà Nội', 0, '0'),
+(85, 18937177, 22, 10, 'Các tác giả Văn chương  Việt Nam: Tập 2', 'Cuốn sách phác thảo chân dung, sự nghiệp sáng tạo của hơn 1.700 nhà văn, nhà thơ, nhà lí luận phê bình, nhà dịch thuật văn học, kịch gia... Từ thời Đinh, Lê, Lý, Trần, Lê, Nguyễn, Đến thời đại Hồ Chí Minh, từ nhà văn  Đại sư Khuông Việt đến nhà văn, nhà thơ còn trẻ tuổi...', 1587, 'Trần ', '', 1, '', 0, 11, '2023-02-15 10:46:45', 1, 2015, 'Hà Nội', 0, '0'),
+(86, 44631654, 20, 19, 'Văn bản pháp luật về Giáo dục: Trường học, học sinh, sinh viên', 'Cuốn sách bao gồm hướng dẫn thi hành pháp luật về giáo dục và đào tạo cũng như các quy định cụ thể về các vấn đề cụ thể như: Phổ cập giáo dục Tiểu học; Chính sách giáo dục đối với học sinh dân tộc miền núi; Tuyển sinh vào các trường học...', 862, 'Lê Minh Nghĩa', '', 1, '', 0, 11, '2023-02-15 10:52:22', 1, 2004, 'Hà Nội', 0, '0'),
+(87, 20061093, 21, 8, 'Thăng Long - Hà Nội qua các thời kì lịch sử', 'Cuốn sách viết lại dấu ấn Việt Nam tù thưở đất nước buổi bình minh; Thưở những vì sao lấp lánh trong đêm dài nô lệ; Khi đất nước vùng lên khôi phục sự tự chủ và trong buổi đầu nôn sông giành độc lập...', 479, 'Đặng Duy Phúc', '', 1, '', 0, 11, '2023-02-15 10:58:13', 1, 2019, 'Hà Nội', 0, '0'),
+(88, 43455448, 21, 8, 'Người Thăng Long', 'Người Thăng Long không chỉ tái hiện một thời đại oai hùng nhất của lịch sử chống giặc ngoại xâm của dân tộc, Vương triều Trần, mà ông còn làm sống dậy những anh hùng hào kiệt mang hào khí Đông A.', 378, 'Hà Ân', '', 1, '', 0, 11, '2023-02-15 11:17:18', 1, 2019, 'Hà Nội', 0, '0'),
+(89, 23378091, 20, 16, 'Hướng dẫn: Đăng ký và sử dụng tài khoản tại kho bạc nhà nước; chế độ kế toán ngân sách nhà nước,...', 'Cuốn sách gồm 6 phần: Hướng dẫn sử dụng tài khoản tại kho bạc nhà nước và các quy định mới thuộc lĩnh vực kho bạc nhà nước; Quy định về chế độ quản lí, tạm ứng và vay ngân quỹ nhà nước; quy định về sử phạt vi phạm hành chính,...', 451, 'Phan Ngọc Chính', '', 1, '', 0, 11, '2023-02-15 11:23:43', 1, 2020, 'Hà Nội', 0, '0'),
+(90, 95202102, 20, 17, 'Chế độ mới về điều chỉnh tiền lương - Tiền công bảo hiểm xã hội, y tế chính sách đối với cán bộ công chức; người lao động, chế độ công tác phí', 'Cuốn sách gồm: Nghị định số 33/2009/NĐCP ngày 06/04/2009 quy định mức tiền lương tối thiểu chung thực hiện từ 01/05/2009; Nghị định số 34/ 2009/ NĐCP ngày 06/4/2009 điều chỉnh lương hưu...', 895, 'Nguyễn Thị Quỳnh', '', 1, '', 0, 11, '2023-02-15 11:29:39', 1, 2009, 'Hà Nội', 0, '0'),
+(91, 94639067, 20, 17, 'Hệ thống các văn bản quy phạm pháp luật hiện hành về thanh tra, kiểm tra trong lĩnh vực giáo dục', 'Cuốn sách gồm 5 phần: Các quy định  chung về thanh tra; Các quy định về thanh tra trong lĩnh vực giáo dục; Các  quy định về chống tham nhũng tiêu cực trong thi cử và khắc phục bệnh thành tích; Các quy định về thanh tra, kiểm tra tài chính; Các quy định về xử phạt vi phạm hành chính.', 847, 'Nguyễn Đình Thiêm', '', 1, '', 0, 11, '2023-02-15 14:13:31', 1, 2007, 'Hà Nội', 0, '0'),
+(92, 66140437, 20, 16, 'Nghiệp vụ kiểm soát, thanh toán và thực hiện quy trình, thủ tục giao dịch các khoản chi thường xuyên từ ngân sách nhà nước', 'Cuốn sách gồm 10 phần: Hướng dẫn kiểm soát, thanh toán các khoản chi thường xuyên từ ngân sách nhà nước qua kho bạc nhà nước...', 415, 'Tăng Bình, Ái Phương', '', 1, '', 0, 11, '2023-02-15 14:19:49', 1, 2020, 'Hà Nội', 0, '0'),
+(93, 22361140, 20, 2, 'Chế độ chính sách mới về BHXH, BHYT và các quy định cần biết', 'Sách gồm 5  phần: 98 câu hỏi và giải đáp về Luật BHXH; Hệ thống văn bản pháp luật mới về BHXH; Các văn bản hướng dẫn thực hiện chế độ BHYT; Các văn bản hướng dẫn thực hiện chế độ phụ cấp, phụ cấp ưu đãi đối với người có công với cách mạng; các văn bản ban hành có liên quan đến BHXH, BHYT.', 831, 'Phan Đào Nguyên', '', 1, '', 0, 11, '2023-02-15 14:39:15', 1, 2006, 'Hà Nội', 0, '0'),
+(94, 53824054, 20, 15, 'Các văn bản hiện hành về Giáo dục - Đào tạo: Các quy định về nhà trường.', 'Cuốn sách gồm: Các quy định về nhà trường có 14 mục lớn: Các luật về GD ĐT; Về tổ chức hoạt động của nhà trường; Về thu chi quản lý tài chính trong nhà trường; Về hiệu trưởng cán bộ quản lý; Về hoạt động giảng dạy...', 1330, 'Đỗ Văn Chiến, Nguyễn Đức Cường', '', 1, '', 0, 11, '2023-02-15 14:46:15', 1, 2001, 'Hà Nội', 0, '0'),
+(95, 31928836, 21, 8, 'Hà Nội ngày ấy', 'Cuốn sách là tập hợp những bài viết về Hà Nội từ thành Thăng Long Nhà Lý đến thành Vauban thời Nguyễn...', 278, 'Nguyễn Bá Đạm', '', 1, '', 0, 11, '2023-02-15 15:08:57', 1, 2019, 'Hà Nội', 0, '0'),
+(96, 16622649, 21, 8, 'Trinh sát Hà Nội', 'Trinh sát Hà Nội Thuộc thể loại sách trinh thám viết về người thực, việc thực...', 367, 'Tôn Ái Nhân', '', 1, '', 0, 11, '2023-02-15 15:12:36', 1, 2019, 'Hà Nội', 0, '0'),
+(97, 50068756, 21, 8, 'Hà Nội từ góc nhìn văn chương', 'Với 35 bài viết của 34 tác giả được chắt lọc kĩ càng chọn lọc hơn 1/4 thế kỉ, tác giả đã đem đến cho người đọc về những kiến thức sâu sắc về nhiều tác giả, tác phẩm nổi tiếng sinh sống và làm việc tại Hà Nội....', 316, 'Bùi Việt Thắng', '', 1, '', 0, 11, '2023-02-15 15:16:10', 1, 2019, 'Hà Nội', 0, '0'),
+(98, 26295260, 21, 8, 'Thăng Long Rồng vẫn bay', 'Tiểu thuyết Thăng Long Rồng vẫn bay khắc họa thời kì đầu tực dân Pháp chiếm thành Hà Nội', 175, 'Hồ Phương', '', 1, '', 0, 11, '2023-02-15 15:18:43', 1, 2019, 'Hà Nội', 0, '0'),
+(99, 18496185, 21, 8, 'Một vùng văn hóa Hà Thành: Tuyển thơ', 'Cuốn sách là tập hợ rất nhiều bài thơ của các nhà thơ nổi tiếng như: Bằng Việt, Nguyễn Huệ Chi, Hữu Thỉnh,Ngô Văn Phú...', 279, 'Nguyễn Hòa Bình', '', 1, '', 0, 11, '2023-02-15 15:22:25', 1, 2019, 'Hà Nội', 0, '0'),
+(100, 71461037, 20, 16, 'Chế độ tự chủ về tài chính, biên chế đối với cơ quan nhà nước đơn vị sự nghiệp công lập', 'Cuốn sách gồm 4 phần: Quy định chung; Chế độ tự chủ đối với đơn vị sự nghiệp công lập; Chế độ tự chủ đối với cơ quan nhà nước; Một số tiêu chuẩn định mức nội dung chi và mức chi áp dụng cho cơ quan nhà nước sự nghiệp', 425, 'Phạm Ngọc Quyết', '', 1, '', 0, 11, '2023-02-15 15:26:20', 1, 2007, 'Hà Nội', 0, '0'),
+(101, 15320088, 20, 16, 'Xử lý tình huống cầm tay chỉ việc những nội dung cơ bản về Kế toán hành chính sự nghiệp áp dụng cho đơn vị giáo dục đào tạo', 'Xử lý tình huống cầm tay chỉ việc những nội dung cơ bản về Kế toán hành chính sự nghiệp áp dụng cho đơn vị giáo dục đào tạo ( đã cập nhật theo thông tư số 107/TT-BTC ngày 10/10/ 2017 của Bộ Tài chính', 243, 'Phạm Văn Đăng', '', 1, '', 0, 11, '2023-02-16 10:58:20', 2, 2018, 'Hà Nội', 0, '0'),
+(102, 26902815, 20, 16, 'Chế độ quản lý tài sản nhà nước điều hành ngân sách nhà nước thanh quyết toán vốn đầu tư: Chế độ tiền lương, trợ cấp, phụ cấp trong các cơ quan đơn vị nhà nước', 'Chế độ quản lý tài sản nhà nước điều hành ngân sách nhà nước thanh quyết toán vốn đầu tư: Chế độ tiền lương, trợ cấp, phụ cấp trong các cơ quan đơn vị nhà nước gồm 6 phần: Chế độ quản lý tài sản nhà nước điều hành; Chế độ đấu thầu đấu giá;...', 447, 'Tăng Bình', '', 1, '', 0, 11, '2023-02-15 15:34:33', 1, 2012, 'Hà Nội', 0, '0'),
+(103, 19869207, 20, 16, 'Những quy định về cải cách chính sách tiền lương, Bảo hiểm y tế, bảo hiểm xã hội mới nhất', 'Cuốn sách gồm 3 phần: Quy định về tiền lương; Quy định về chương trình hưu trí, bổ sung tự nguyện; Quy định về BHXH, BHYT', 443, 'Phan Ngọc Chính', '', 1, '', 0, 11, '2023-02-15 16:00:34', 1, 2019, 'Hà Nội', 1, '0'),
+(104, 91892872, 20, 16, 'Hệ thống mục lục ngân sách nhà nước: Đã sửa đổi bổ sung từ tháng 8/2012- Quản lý tài chính các quỹ, kinh phí ngân sách năm 2013', 'Cuốn sách gồm 6 phần: Luật ngân sách và hệ thống mục lục ngân sách nhà nước áp dụng từ tháng 8/2012; hướng dẫn xây dựng dự toán ngân sách nhà nước năm 2013...', 2012, 'Thu Huyền, Ái Phươg', '', 1, '', 0, 11, '2023-02-15 16:04:32', 1, 2012, 'Hà Nội', 0, '0'),
+(105, 12191044, 20, 17, 'Luật quản lý sử dụng tài sản nhà nước luật trưng mua, trưng dụng tài sản, hệ thống mục lục ngân sách nhà nước và quy định mới nhất về mua sắm quản lý, sử dụng tài sản công quản lý, lập dự toán và quyết toán..', 'Sách gồm 6 phần: Hệ thống mục lục ngân sách nhà nước 2009; Luật quản lý tài sản, sử dụng tài sản nhà nước 2008-2009; Chế độ mới về  mua sắm, quản lý sử dụng tài sản nhà nước 2008-2009; Chế độ mới về quyền tự chủ...\r\n', 871, 'Hà Tất Thắng', '', 1, '', 0, 11, '2023-02-15 16:09:48', 1, 2008, 'Hà Nội', 0, '0'),
+(106, 21241424, 20, 17, 'Chế độ mới về tự chủ công khai minh bạch trong quản lý tài ch,.ính đối với ngành giáo dục đào tạo, dạy nghề, y tế, văn hóa thông tin , thể dục thể thao, khoa học và công nghệ, chế độ chính sách đối với giáo viên, học sinh, cán bộ giáo dục', 'Sách gồm 5 phần: Quy định chung về quản lý tài chính đối với cơ quan nhà nước và đơn vị sự nghiệp công lập; quy định về quản lý tài chính đối với ngành giáo dục đào tạo dạy nghề; Quy định về quản lý tài chính đối với ngành Y tế, BHYT; ', 831, 'Nguyễn Đình Thiêm', '', 1, '', 0, 11, '2023-02-15 16:15:46', 1, 2007, 'Hà Nội', 0, '0'),
+(107, 16188668, 20, 16, 'Hướng dẫn công tác quản lý tài chính kế toán trong trường học: Tập 2', 'Gốm 4 phần: các quy định về chế độ chính sách đối với giáo viên, cán bộ công  chức ngành GD ĐT; Các quy định về công khai tài chính, tự kiểm tra tài chính kế toán; Các quy định về thanh tra sử phạt hành chính trong lĩnh vực GD ĐT;  Chế độ kế toán hành chính sự nghiệp...', 927, 'Phạm Ngọc Quyết', '', 1, '', 0, 11, '2023-02-15 16:37:19', 1, 2007, 'Hà Nội', 0, '0'),
+(108, 94803744, 20, 14, 'Năm học đổi mới quản lý và nâng cao chất lượng giáo dục', 'Sách gồm 9 phần: Nhiệm vụ hướng dẫn thực hiện nhiệm vụ năm học 2009-2010 và chương trình hành động của ngành GD ĐT đến năm 2020; Đổi mới cơ chế tài chính đối với trường học...', 839, 'Đỗ Thêu', '', 1, '', 0, 11, '2023-02-15 16:40:46', 1, 2009, 'Hà Nội', 0, '0'),
+(109, 33030428, 20, 2, 'Đổi mới quản lý, đổi mới cơ chế tài chính thực hiện công khai ngành Giáo dục đào tạo', 'Sách gồm 7 phần: Luật giáo dục đào tạo ( đã sửa đổi bổ sung) và quy định đổi mới của ngành giáo dục đào tạo; ..', 521, 'Thu Huyền, Ái Phương', '', 1, '', 0, 11, '2023-02-15 16:46:31', 1, 2010, 'Hà Nội', 0, '0'),
+(110, 24295628, 20, 20, 'Tuyển tập 1059 câu giải đáp các tình huống đối với công tác quản lý hoạt động y tế trong các trường học', 'Tuyển tập 1059 câu giải đáp các tình huống đối với công tác quản lý hoạt động y tế trong các trường học...', 499, 'Quý Long, Kim Thư', '', 1, '', 0, 11, '2023-02-15 16:49:19', 1, 2011, 'Hà Nội', 0, '0'),
+(111, 19554000, 20, 21, 'Tài liệu bồi dưỡng nâng cao nghiệp vụ PCCC', 'Sách gồm 5 phần: Một số thủ tục hành chính về PCCC; Lập hồ sơ quản lý và theo dõi hoạt động PCCC của cơ sở; ....', 79, 'Nguyễn Xuân Trường', '', 1, '', 0, 11, '2023-02-15 16:52:43', 2, 2016, 'Hà Nội', 0, '0'),
+(112, 70998860, 20, 22, 'Quy định mới về ứng dụng Công nghệ thông tin vào đổi mới  dạy - học trong nhà trường', 'Sách gồm 3 phần: Định hướng chung; Quy định chung về ứng dụng CNTT ;Quy định mới về ứng dụng Công nghệ thông tin vào đổi mới  dạy - học trong nhà trường.', 583, 'Phạm Văn Tây', '', 1, '', 0, 11, '2023-02-16 08:11:04', 2, 2009, 'Hà Nội', 0, '0'),
+(113, 1372980, 20, 2, 'Các văn bản hướng dẫn pháp luật dành cho Hiệu trưởng về quản lý tài chính, công khai tài chính', 'Các văn bản hướng dẫn pháp luật dành cho Hiệu trưởng về quản lý tài chính, công khai tài chính gồm 2 phần: Những quy định chung; Những quy định cụ thể', 715, 'Nguyễn Thành Long', '', 1, '', 0, 11, '2023-02-15 17:00:53', 1, 2007, 'Hà Nội', 0, '0'),
+(114, 10492673, 20, 2, 'Tuyển tập các mẫu diễn văn bài phát biểu và các mẫu văn bản thường dùng trong ngành GD ĐT', 'Sách gồm 5 phần: Mẫu diễn văn, phát biểu thư từ...', 479, 'Thu Huyền, Ái Phương', '', 1, '', 0, 11, '2023-02-15 17:03:23', 1, 2011, 'Hà Nội', 0, '0'),
+(115, 23512497, 20, 23, 'Luật Phòng cháy chữa cháy, kỹ năng thoát hiểm và phòng cháy chữa cháy  khi sảy ra hỏa hoạn', 'Luật Phòng cháy chữa cháy, kỹ năng thoát hiểm và phòng cháy chữa cháy  khi sảy ra hỏa hoạn gồm 5 phần: Luật Phòng cháy chữa cháy; Quy định về sử dụng AT điện...', 411, 'Nguyễn Quý, Nguyễn Đức', '', 1, '', 0, 11, '2023-02-15 17:07:29', 1, 2017, 'Hà Nội', 0, '0'),
+(116, 51202571, 20, 2, 'Sổ tay phòng cháy chữa cháy quy định chi tiết thi hành luật PCCC kỹ năng thoát hiểm cứu hộ cứu nạn trong các hộ gia định, cơ quan, đơn vị, doanh nghiệp', 'Sổ tay phòng cháy chữa cháy quy định chi tiết thi hành luật PCCC kỹ năng thoát hiểm cứu hộ cứu nạn trong các hộ gia định, cơ quan, đơn vị, doanh nghiệp gồm 6 phần: Luật PCCC, văn bản hướng dẫn thi hành; Quy định về công tác cứu nạn, cứu hộ phòng cháy chữa cháy; Luật quản lý...', 390, 'Phương Vũ', '', 1, '', 0, 11, '2023-02-16 14:30:43', 2, 2019, 'Hà Nội', 395000, '3'),
+(117, 4361770, 20, 16, '945 cách xử lý tình huống trong công tác chi tiêu  công tác phí tiếp khách chi tiêu nội bộ phương tiện đi lại và mua sắm hàng hóa  tại các cơ quan đơn vị hành chính sự nghiệp', 'Sách gồm 7 phần: Xử lý các tình huống về đầu tư mua sắm hàng hóa, tài sản bằng nguồn vốn nhà nước; Xử lý các tình huống về đấu thầu; Xử lý các tình huống , sắp xếp, sử dụng tài sản tại các đơn vị sử dụng ngân sách nhà nước;  Xử lý các tình huống về chế dộ công tác phí;  Xử lý các tình huống về quy trình kiểm toán ngân sách nhà nước;  Xử lý các tình huống  về chế độ chính sách; Các văn bản PL mới nhất  về chế độ tiền lương.', 457, 'Thu Huyền, Ái Phương', '', 1, '', 0, 11, '2023-02-16 08:38:30', 1, 2011, 'Hà Nội', 298000, '3'),
+(118, 48552346, 20, 17, 'Quy định pháp luật mới về cải cách tài chính và phát triển công nghệ thông tin trong lĩnh vự GD ĐT', 'Sách gồm 4 phần: Quy định chung; Ứng dụng công nghệ TT trong trường học; Đấu thầu mua sắm hàng hóa sản phẩm công nghệ TT trong trường học; Xây dựng dự toán quản lý thu chi trong trường học .', 711, 'Nguyễn Thị Quỳnh', '', 1, '', 0, 11, '2023-02-16 08:42:49', 1, 2008, 'Hà Nội', 295000, '3'),
+(119, 23974705, 20, 24, 'Quy chế khen thưởng trong hệ thống Công đoàn giáo dục và những quy định mới về công tác công đoàn trong nhà trường', 'Sách gồm 6 phần: Một số hình ảnh tiêu biểu về hoạt động của Công đoàn ngành giáo dục; Hướng dẫn công tác thi đua khen thưởng  trong hệ thống Công đoàn ngành giáo dục; Quy định mới về công tác Công đoàn ngành giáo dục; Quy định mới về thu chi quản lý tài chính trong công đoàn cơ sở; Công đoàn tham gia xây dựng và thực hiện quy chế dân chủ; Hướng dẫn tổ chức Đại hội Công đoàn ngành giáo dục.', 399, 'Vũ Thiên Bình', '', 1, '', 0, 11, '2023-02-16 08:53:04', 1, 2017, 'Hà Nội', 345000, '3'),
+(120, 16002770, 20, 16, 'Quy định mới về quản lý tài chính thu chi ngân sách mua sắm thiết bị và sr dụng tài sản nhà nước', 'Sách gồm 3 phần: Các quy định về quản lý tài chính, thu chi ngân sách nhà nước; Các quy định về quản lý, sử dụng tài sản nhà nước; Quy định mới về thanh tra, kiểm tra tài chính', 1141, 'Nguyễn Văn Túc', '', 1, '', 0, 11, '2023-02-16 09:01:55', 1, 2008, 'Hà Nội', 295000, '3'),
+(121, 17384298, 20, 25, 'Thực hành kế toán trong trường học', 'Sach gồm 10 chương: Tổ chức công tác trong trường học; Kế toán tiền; Kế toán vật tư; Kế toán Tài sản cố định; Kế toán Thanh toán; Kế toán nguồn kinh phí;Kế toán các khoản thu; Kế toán các khoản chi; Báo cáo tài chính; Phân tích tài chính trong nhà trường.', 783, 'Nguyễn Duy Liễu', '', 1, '', 0, 11, '2023-02-16 09:14:33', 1, 2008, 'Hà Nội', 265000, '3'),
+(122, 40610408, 16, 1, 'DEmo', 'asdf', 234, 'sfdgdf', '1676516460_img_library.jpg', 1, '', 1, 1, '2023-02-16 10:01:00', 2, 245, 'sadfsdafas', 245234, 'asdfasdf'),
+(123, 75845735, 20, 20, 'Quy chuẩn quốc gia về vệ sinh phòng bệnh truyền nhiễm trong các cơ sở giáo dục hướng dẫn tìm hiểu phòng chống chuẩn đoán điều trị một số bệnh dịch, bệnh tật trường hocjm ', 'Sách gồm 10 phần: Quy chuẩn quốc gia về vệ sinh phòng dịch bệnh truyền nhiễm trong các cơ swor GD; Hướng dẫn tìm hiểu chuẩn đoán điều trị một số bệnh dịch...', 465, 'Quý Long, Kim Thư', '', 1, '', 0, 11, '2023-02-16 10:35:07', 1, 2011, 'Hà Nội', 298000, '6'),
+(124, 45803566, 20, 16, 'Chế độ kế toán ngân sách nhà nước các văn bản mới nhất hướng dẫn lập dự toán, quản lý sử dụng kinh phí ngân sách nhà nước theo mục lục ngân sách mới 2009', 'Sách gồm 5 phần: Chế độ kế toán ngân sách nhà nước; Hệ thống mục ngân sách nhà nước; Quy định mới nhất về nhập dự toán; Quy định mới nhất về thu chi; Quy định mới nhất về sử dụng, quản lý tài sản nhà nước.', 613, 'Ái Phương ', '', 1, '', 0, 11, '2023-02-16 10:39:29', 1, 2009, 'Hà Nội', 295000, '3'),
+(125, 87512804, 20, 16, 'Hướng dẫn mới nhất quản lý điều hành và thực hiện dự toán thu chi ngân sách nhà nước năm 2011 hệ thống mục lục ngân sách mới', 'Sách gồm 8 phần: Hướng dẫn mới nhất về quản lý điều hành và thực hiện dự toán ngân sách nhà nước năm 2011; Định mức phân bổ dự toán chi thường xuyên ngân sách nhà nước năm 2011; Các quy định mới về quản lý tài chính công;  Hướng dẫn mới về lập, quản lý, quyết toán thu, chi; Chế độ chi tiêu, công tác phí; Quy định mới về chế độ quản lý; Các quy định mới có liên quan.', 520, 'Hoàng Anh', '', 1, '', 0, 11, '2023-02-16 10:45:56', 1, 2011, 'Hà Nội', 299000, '3'),
+(126, 70316613, 20, 16, 'Ngiệp vụ kế toán kiểm toán trường học và các cơ sở giáo dục đào tạo', 'Sách gồm 13 chương: Tổ chức công tác kế toán trong các trường học; Kế  toán vốn bằng tiền; Kế toán vật tư và sản phẩm hàng hóa; Kế toán tài sản cố định; Kế toán các khoản thanh toán; Kế toán các khoản thu; Kế toán các khoản chi; Kế toán nguồn kinh phí, nguồn vốn, quỹ; Báo cáo tài chính; Phân tích tài chính trong trường học; Một số vấn đề cơ bản trong trường học; ...', 543, 'Ngô Thế Chi, Nguyễn Mạnh Thiều', '', 1, '', 0, 11, '2023-02-16 10:56:09', 1, 2009, 'Hà Nội', 289000, '3'),
+(127, 16607227, 20, 16, 'Các văn bản mới về công tác quản lý tài chính hướng dẫn sử dụng chứng từ thanh toán qua hệ thống kho bạc nhà nước', 'Sách gồm 7 phần: Quản lý các khoản thu ngân sách nhà nước qua kho bạc NN; 49 mẫu chứng từ kế toán dùng trong thanh toán qua kho bạc; Hướng dẫn nhập báo cáo Tài chính; Quản lý tài sản nhà nước; Trách nhiệm của người đứng đầu trong cơ quan nhà nước; Quy định về công tác phí...', 577, 'Nguyễn Văn Túc', '', 1, '', 0, 11, '2023-02-16 14:14:52', 1, 2010, 'Hà Nội', 296000, '3'),
+(128, 92371136, 20, 2, 'Đổi mới luật giáo dục Việt Nam (sửa đổi bổ sung) và các văn bản mới nhất về các đề án Giáo dục, quy chế tài chính quy chế tuyển sinh', 'Sách gồm 5 phần: Sơ lược lịch sử phát triển của giáo dục Việt Nam; Giáo dục Việt Nam trong thời kì đổi mới; Các văn bản mới về giáo dục đào tạo; Những bài phát biểu và các bài viết của các đồng chí lãnh đạo Đảng, Nhà nước; Những văn bản pháp quy đổi  mới nhất trong việc đổi mới ngành Giáo dục Việt Nam.', 659, 'Khải Nguyên', '', 1, '', 0, 11, '2023-02-16 14:21:11', 1, 2010, 'Hà Nội', 295000, '3'),
+(129, 19523991, 20, 16, 'Chế độ kế toán hành chính sự nghiệp', 'Sách gồm 5 phần: Hệ thống chứng từ kế toán; Hệ thống tài khoản  kế toán; Hệ thống sổ  kế toán; Hệ thống báo cáo tài chính; Các sơ đồ  kế toán chủ yếu.', 565, 'Phạm Ngọc Quyết', '', 1, '', 0, 11, '2023-02-16 14:29:30', 1, 2006, 'Hà Nội', 110000, '3'),
+(130, 78223269, 20, 16, 'Sổ tay hướng dãn luật báo cáo tài chính cho các cơ quan hành chính đơn vị sự nghiệp', 'Sách gồm 6 phần: Luật Kế toán và các văn bản hướng dẫn thi hành; Hệ thống báo cáo tài chính, báo cáo quyết toán; Hệ thống báo cáo tài chính;Hệ thống báo cáo tài chính nhà nước; Quy định gia hạn về nộp thuế  và tiền thuê đất; Quy định về hóa đơn điện tử khi bán hàng hóa cung cấp dịch vụ.', 459, 'Phan Ngọc Chính', '', 1, '', 0, 11, '2023-02-16 14:43:06', 1, 2020, 'Hà Nội', 350000, '3'),
+(131, 64518626, 20, 16, 'Cẩm nang Kế toán trường học', 'Sách gồm 6 chương: Những vấn đề chung trong vấn đề kế toán trường học; Hệ thống chứng từ kế toán áp dụng cho các trường học; Hệ thống tài khoản Kế toán; Sổ kế toán và hình thức Kế toán; Hệ thống báo cáo tài chính; Sơ đồ hạch toán kế toán.', 413, 'Tạ Huy Đăng', '', 1, '', 0, 11, '2023-02-16 14:46:42', 1, 2003, 'Hà Nội', 85000, '3'),
+(132, 19464942, 20, 15, 'Hướng dẫn kê khai nộp và quyết toán thuế thu nhập cá nhân', 'Sách có 4 phần: Hướng dẫn kê khai nộp và quyết toán thuế thu nhập cá nhân; Hướng dẫn luật thuế cá nhân theo nội dung quy định của PL, Luật thuế thu nhập cá nhân; Các văn bản liên quan Hướng dẫn kê khai nộp và quyết toán thuế thu nhập cá nhân.\r\n\r\n', 511, 'Nguyễn Thị Quỳnh', '', 1, '', 0, 11, '2023-02-16 14:50:21', 1, 2009, 'Hà Nội', 295000, '3'),
+(133, 77528554, 20, 12, 'Những văn bản pháp quy mới nhất về công tác thanh tra giáo dục', 'Sách có 4 phần: Những văn bản pháp quy phục vụ công tác thanh tra do quốc hội, chính phủ, thanh tra chính phủ ban hành; Những văn bản pháp quy phục vụ công tác thanh tra  giáo dục của Bộ giáo dục và đào tạo.', 518, 'Đặng Ngọc Hậu', '', 1, '', 0, 11, '2023-02-16 16:20:26', 1, 2011, 'Hà Nội', 225000, '3'),
+(134, 32206190, 20, 2, 'Luật giáo dục quy tắc ứng xử trong môi trường giáo dục bảo đảm an toàn, lành mạnh, thân thiện', 'Sách gồm 6 phần: Luật giáo dục năm 2019 và luật giáo dục đại học; Quy định quy tắc ứng xử trong nhà trường và đảm bảo giáo dục an toàn, lành mạnh trong  nhà trường; Các quy định mới trong ngành giáo dục; Quy định chuẩn nghề nghiệp giáo viên, Hiệu trưởng; Chế độ chính sách đối với nhà giáo; Quy định về Kiểm định chất lượng.', 391, 'Thu Phương', '', 1, '', 0, 11, '2023-02-17 07:53:10', 1, 2019, 'Hà Nội', 350000, '3'),
+(135, 2280515, 20, 2, 'Hệ thống các văn bản mới nhất về thanh tra, kiểm tra, thi đua, khen thưởng và kỉ luật', 'Sách gồm  2 phần: Các quy định chung; Các quy định cụ  thể.', 715, 'Nguyễn Thành Long', '', 1, '', 0, 11, '2023-02-17 07:58:06', 1, 2008, 'Hà Nội', 250000, '3'),
+(136, 42131908, 20, 1, 'Sổ tay hướng dẫn thực hiện kiểm định chất lượng giáo dục và công nhận đạt chuẩn quốc gia đối với trường THCS, Trường THPT  và trường Phổ thông có nhiều cấp học', 'Cuốn sách chia làm 6 phần: Phần 1: Một số vấn đề chung ; Phần 2: Bộ tiêu chuẩn đánh giá chất lượng giáo dục trường trung học;Phần 3: Hướng dẫn xác định nội hàm, gợi ý tìm minh chứng theo tiêu chuẩn đánh giá chất lượng trường trung học; Phần 4: Hướng dẫn tự đánh giá trường Trung học;  Phần 5: Hướng dẫn đánh giá ngoài trường trung học; Phần 6: Một số kĩ thuật, tình huống trong đánh giá.', 247, 'Lê Đức Ngọc...', '', 1, '', 0, 11, '2023-02-17 14:22:53', 4, 2022, 'Hà Nội', 195000, '3'),
+(137, 80343449, 20, 2, 'Quy định mới nhất về mức lương tối thiểu chung tăng lương hưu trợ cấp Bảo hiểm xã hội và trơn cấp hàng tháng áp dụng từ 01-05-2011 Bộ luật lao động', 'Sách gồm bảy phần: Phần 1: Quy định về mức lương tối thiểu chung; Phần 2: Quy định mới về chính sách tiền lương, phụ cấp, trợ cấp,  trong các cơ quan đơn vị hành chính sự nghiệp; Phần 3: Quy định đổi mới chính sách mới đối với người lao động; Phần 4: Hướng dẫn mới về bảo hiểm xã hội; Phần 5: Bộ luật Lao động mới sửa đổi; Phần 6: Quy định về công tác an toàn Lao động; Phần 7: Xử phạt hành chính trong lĩnh vực lao động.', 503, 'Thùy Linh, Việt Trinh', '', 1, '', 0, 11, '2023-02-17 16:29:53', 1, 2011, 'Hà Nội', 325000, '3'),
+(138, 15252637, 20, 22, 'Đổi mới cơ chế tài chính tăng quyền tự chủ, tự chịu trách nhiệm mở rộng quy mô sử dụng kinh phí có hiệu qur trong nâng cao chất lượng giáo dục', 'Sách gồm 3 phần: Phần 1: Quản lý nhà trường, văn bản tra cứu dành cho Hiệu trưởng và lãnh đạo nhà trường; Văn bản tra cứu dành cho kế toán trong nhà trường; Phần 3: Đổi mới quản lí tài chính trong nhà trường.', 654, 'Đinh Thị Dung', '', 1, '', 0, 11, '2023-02-17 16:55:50', 1, 2009, 'Hà Nội', 285000, '3'),
+(139, 32066979, 20, 17, 'Chế độ, chính sách mới về lao động  tiền lương phụ cấp BHXH, BHYT chính sách tinh giản biên chế', 'Sách gồm 6 phần: Mức lương tối thiểu chung và hệ thống thang bảng lương; Phần 2: Các văn bản hướng dẫn thực hiện chế độ tiền lương trong khu vực hành chính sự nghiệp; Phần 3: Các văn bản hướng dẫn thực hiện chế độ BHYT; Phần 4: Chế độ chính sách mới; Phần 5:Các văn bản hướng dẫn thực hiện chế độ BHYT; Phần 6: Chính sách đối với Cán bộ CC, người lao động.', 862, 'Nguyễn Thị Quỳnh', '', 1, '', 0, 11, '2023-02-17 17:29:28', 1, 2007, 'Hà Nội', 298000, '3'),
+(140, 570303, 18, 4, 'Tiếng anh trên 5 đầu ngón tay', 'Sách gồm 5 chương: Mọi vấn đề đều có giải pháp; Bắt đầu học tiếng anh từ đâu?; Quy luật logic ngữ âm; Tư duy tiếng anh trên 5 đầu ngón tay; Luyện siêu trí nhớ từ vựng theo phương pháp của người Do Thái.', 359, 'Nguyễn Anh Đức', '', 1, '', 0, 11, '2023-02-18 14:46:31', 7, 2018, 'Hà Nội', 450000, '4'),
+(141, 90339873, 18, 1, 'Hoạt động giáo dục Stem lớp 6', 'Gồm 5 chủ đề: Chủ đề 1: Cân chính xác; Chủ đề 2: Ánh sáng và lá phổi xanh; Chủ đề 3: Quạt điện thông minh;Chủ đề 4: Chất tạo màu tự nhiên; Chủ đề 5: Sản xuất nước sạch.', 99, 'Tưởng Duy Hải', '', 1, '', 0, 11, '2023-02-19 09:16:27', 3, 2021, 'Hà Nội', 35000, '5'),
+(142, 51332147, 18, 1, 'Hoạt động giáo dục Stem lớp 7', 'Sách gồm 5 chủ đề: Chủ đề 1: Lò sấy nông sản dùng năng lượng mặt trời; Chủ đề 2:Cuộc chạy đua sắc màu; Chủ đề 3: Nhà cách âm; Chủ đề4: Nhà kính thông minh; Chủ đề 5: Sự đa dạng của thế giới sống dưới kính hiển vi.', 107, 'Nguyễn Anh Thuấn', '', 1, '', 0, 11, '2023-02-19 09:19:58', 3, 2021, 'Hà Nội', 35000, '5'),
+(143, 20067928, 24, 4, 'Danh nhân thế giới', 'Cuốn sách với 34 bài viết về 34 danh nhân thế giới như: ALBERTEINSTEIN; ANDERSEN; CERVAVTES...', 242, 'Nguyễn Trang Hương', '', 1, '', 0, 11, '2023-02-19 09:30:19', 3, 2010, 'Hà Nội', 40000, '0'),
+(144, 79496722, 18, 8, 'Thầy cô giáo hạnh phúc sẽ thay đổi thế giới- Tập 1: Cẩm nang hạnh phúc', 'Cuốn sách là cuốn cẩm nang hạnh phúc. Tiếng nói kinh nghiệm thực tiễn của những nhà giáo được vang lên xuyên suốt trong bộ sách.', 314, 'Thích Nhất Hạnh, Katherine Weare', '', 1, '', 0, 11, '2023-02-20 08:40:45', 1, 2018, 'Hà Nội', 109000, '3'),
+(145, 44450881, 18, 8, 'Thầy cô giáo hạnh phúc sẽ thay đổi thế giới - Tập 2: Đi như một dòng sông', 'Sách gồm 3 chương: Chương 1: Chế tác năng lượng chánh niệm nơi tự thân; Chương 2: Nuôi dưỡng chánh niệm cho học sinh và trong lớp học; Chương3: Thực tập chánh niệm trong nhà trường', 212, 'Thích Nhất Hạnh, Katherine Weare', '', 1, '', 0, 11, '2023-02-20 08:45:24', 1, 2018, 'Hà Nội', 89000, '3'),
+(146, 93056680, 22, 6, 'Lĩnh Nam Chích quái', 'Cuốn sách là tấm gương phản chiếu đời sống tinh thần ở một thời kì   mà mối quan hệ đạo lí  giữa người với người còn cởi mở, chưa bị những khuôn sáo, tín điều gò bó. Toàn bộ những câu chuyện thấm nhuần một tinh thần nhân đạo chủ nghĩa Văn học dân gian. Đặc biệt hơn cả bạn đang cầm trên  tay cuốn sách Lĩnh Nam chích quái đầu tiên và duy nhất ở Việt Nam có tranh minh họa.', 255, 'Trần Thế Pháp', '', 1, '', 0, 11, '2023-02-20 09:04:10', 1, 2017, 'Hà Nội', 350000, '8'),
+(147, 52192841, 25, 23, 'Wow! Những bí mật kì diệu dành cho học sinh: Bí mật cơ thể người', 'Cuốn sách với phong cách viết hài hước , vui vẻ, và đầy tính trí tuệ sẽ dẫn dắt bạn đọc bước vào thế giới kiến thức khoa học với những cuộc phưu lưu, khám phá kì thú.', 152, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 10:42:03', 3, 2019, 'Hà Nội', 55000, '0'),
+(148, 55073889, 25, 23, 'Wow! Những bí mật kì diệu cho học sinh: Vật lí với cuộc sống', 'Cuốn sách với phong cách viết hài hước , vui vẻ, và đầy tính trí tuệ sẽ dẫn dắt bạn đọc bước vào thế giới kiến thức khoa học với những cuộc phưu lưu, khám phá kì thú.', 152, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 10:49:56', 3, 2019, 'Hà Nội', 55000, '0'),
+(149, 30136760, 25, 23, 'Wow! Những bí mật kì diệu dành cho học sinh: Khám phá các loài chim', 'Cuốn sách với phong cách viết hài hước , vui vẻ, và đầy tính trí tuệ sẽ dẫn dắt bạn đọc bước vào thế giới kiến thức khoa học với những cuộc phưu lưu, khám phá kì thú.', 152, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 10:52:57', 3, 2019, 'Hà Nội', 55000, '0'),
+(150, 70455400, 19, 6, 'Người lính Điện Biên kể chuyện', 'Cuốn sách là câu chuyện giản dị, mộc mạc, chân thật về những con người đã làm  nên chiến thắng đã quyết định để đất nước được độc lập, tự do và hào bình.', 102, 'Đỗ Cao Sơn', '', 1, '', 0, 11, '2023-02-20 11:03:34', 3, 2022, 'Hà Nội', 35000, '9'),
+(151, 67800562, 19, 24, 'Đường lối chiến tranh nhân  dân trong tư duy quân sự Võ Nguyên Giáp', 'Cuốn sách giúp bạn đọc nhận thức sâu sắc về những đóng góp của Đại tướng Võ Ngyên Giáp đối với việc xây dựng và phát triển đường lối chiến tranh rất độc đâó của nước ta.', 199, 'Đông Phương', '', 1, '', 0, 11, '2023-02-20 11:11:29', 3, 2022, 'Hà Nội', 79000, '9'),
+(152, 92099828, 19, 24, 'Anh Văn trong trái tim nhân dân Việt Nam và bạn bè quốc tế', 'Cuốn sách tìm hiểu thêm về đức độ, tài năng cũng như đóng góp của Đại tướng cho sự nghiệp cách mạng của Đảng và nhân dan ta , từ đó không ngừng tu dưỡng , rèn luyện thành công trong cuộc sống.', 199, 'Đông Phương', '', 1, '', 0, 11, '2023-02-20 11:31:18', 3, 2022, 'Hà Nội', 79000, '9'),
+(153, 1750128, 26, 24, 'Bảo vệ vững chắc chủ quyền biển, đảo, thềm lục địa của tổ quốc trong tình hình mới', 'Cuốn sách góp phần nâng cao ý thức trách nhiệm của mỗi người con đất Việt trong Bảo vệ vững chắc chủ quyền biển, đảo, thềm lục địa của tổ quốc trong tình hình mới.', 199, 'Sơn Hải', '', 1, '', 0, 11, '2023-02-20 11:36:43', 3, 2022, 'Hà Nội', 86000, '9'),
+(154, 79430090, 26, 24, 'Hỏi đáp về biển đảo Việt Nam không ngừng khám phá cho người dân và thế hệ trẻ Việt Nam', 'Cuốn sách sẽ cho bạn những khám phá thú vị về phong cảnh, kì quan biển đảo; về sự giàu có tài nguyên  mà tạo hóa thiên nhiên ban tặng cho biển đảo Việt Nam.', 215, 'Phan Thị Ánh Tuyết', '', 1, '', 0, 11, '2023-02-20 11:40:30', 3, 2019, 'Hà Nội', 72000, '9'),
+(155, 34606754, 27, 24, 'Bác chỉ muốn các cháu được học hành lớn lên  xây dựng đất nước', 'Cuốn sách gồm những câu chuyện nhỏ về tấm lòng yêu quê hương đất nước sâu sắc lòng nhân ái đối với con người của Bác. Giúp rèn luyện nhân cách, đạo đức của bản thân mình.', 219, 'Phan Tuyết', '', 1, '', 0, 11, '2023-02-20 14:10:24', 3, 2021, 'Hà Nội', 68000, '0'),
+(156, 33957937, 27, 24, 'Chuyện kể Bác Hồ với học sinh', 'Cuốn sách chia làm hai phần: Phần 1: Một số bài nói, bài viết, thư của Bác Hồ với Học sinh; Phần 2: Những chuyện về Bác Hồ với học sinh.', 218, 'Phan Tuyết', '', 1, '', 0, 11, '2023-02-20 14:16:39', 3, 2018, 'Hà Nội', 68000, '0'),
+(157, 71647059, 19, 2, 'Kể chuyện lịch sử bằng ảnh tư liệu: Cách mạng tháng tám và quốc khánh ngày 2 tháng 9 năm 1945', 'Kể chuyện lịch sử bằng ảnh tư liệu: Cách mạng tháng tám và quốc khánh ngày 2 tháng 9 năm 1945 đã tái hiện không khí sục sôi, khẩn trương của quân và dân trong cả nước trong những ngày cách mạng tháng 8.', 63, 'Phan Anh', '', 1, '', 0, 11, '2023-02-20 14:21:17', 3, 2015, 'Hà Nội', 60000, '9'),
+(158, 97927687, 19, 2, 'Kể chuyện lịch sử bằng ảnh tư liệu: Chiến dịch Điện Biên Phủ (1954)', 'Kể chuyện lịch sử bằng ảnh tư liệu: Chiến dịch Điện Biên Phủ (1954) đã tái hiện sinh động tiến trình chiến dịch Điện Biên Phủ, từ giai đoạn chuẩn bị, tổng tiến công đến lúc giành thắng lợi.', 64, 'Phan Anh', '', 1, '', 0, 11, '2023-02-20 14:35:35', 3, 2015, 'Hà Nội', 60000, '9'),
+(159, 19204704, 25, 21, '10 vạn câu hỏi vì sao: Cuộc sống muôn màu: Dành cho trẻ  từ 5-15 tuổi', '10 vạn câu hỏi vì sao: Cuộc sống muôn màu trả lời bạn đọc những câu hỏi về cuộc sống muôn màu như: Tại sao có động đất...', 140, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 14:40:59', 3, 2022, 'Hà Nội', 55000, '0'),
+(160, 75913830, 25, 21, '10 vạn câu hỏi vì sao: Khoa học quanh ta', 'Sách gồm 30 cau chuyện nhỏ với các cuộc sống như: Tại sao khi sốt cao không nên ăn trứng gà; Tại sao ăn nhiều kẹo sâu răng...', 140, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 15:52:36', 3, 2022, 'Hà Nội', 55000, '0'),
+(161, 34682489, 25, 21, '10 vạn câu hỏi vì sao- Khoa học quanh ta: Dành cho trẻ em 5-15 tuổi', '10 vạn câu hỏi vì sao- Khoa học quanh ta: Dành cho trẻ em 5-15 tuổi như: Tại sao nói nước vo gạo rất quý; Tại sao quốc gia khác nhau lại có tiền tệ khác nhau...', 140, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 16:14:24', 3, 2022, 'Hà Nội', 55000, '0'),
+(162, 39074871, 25, 21, '10 vạn câu hỏi vì sao- Khám phá thế giới động vật: Bay lên bầu trời: Dành cho trẻ em 5-15 tuổi', '10 vạn câu hỏi vì sao- Khám phá thế giới động vật: Bay lên bầu trời trả lười câu hỏi về các loài chim.', 140, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 16:27:39', 3, 2022, 'Hà Nội', 55000, '0'),
+(163, 67360162, 25, 21, '10 vạn câu hỏi vì sao- Vật lý vui: Dành cho  trẻ từ 5-15 tuổi', '10 vạn câu hỏi vì sao- Vật lý vui: gồm 34 câu chuyện nhỏ về vật lý như: Tại sao nhiệt kế có thể đo nhiệt độ...', 140, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 16:36:38', 3, 2022, 'Hà Nội', 55000, '0');
+INSERT INTO `tbl_book` (`id`, `code`, `cate_id`, `manu_id`, `title`, `content`, `number_page`, `author`, `image`, `type`, `file`, `status`, `user_id`, `create_at`, `stock`, `year_publish`, `position_publish`, `price`, `subject`) VALUES
+(164, 92276413, 25, 21, '10 vạn câu hỏi vì sao- Khám phá thế giới động vật: Chạy trên mặt đất', '10 vạn câu hỏi vì sao- Khám phá thế giới động vật: Chạy trên mặt đấ: Gồm 44 câu chuyện về các loài trên mặt đất như:rắn;Lạc đà...', 140, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-20 16:41:11', 3, 2022, 'Hà Nội', 55000, '0'),
+(165, 33633426, 25, 21, 'Bách khoa tri thức dành cho học sinh - Những điều thú vị về cơ thể người: Với những kiến thức thú vị nhất, kỳ lạ nhất, khó tin nhất! Dành cho trẻ em từ 5-15 tuổi', 'Bách khoa tri thức dành cho học sinh - Những điều  thú vị về cơ thể người: Với những kiến thức thú vị nhất, kỳ lạ nhất, khó tin nhất! Dành cho trẻ em từ 5-15 tuổi', 148, 'Tin Man Arts', '', 1, '', 0, 11, '2023-02-20 16:47:24', 3, 2021, 'Hà Nội', 69000, '0'),
+(166, 89586798, 25, 21, 'Bách khoa tri thức dành cho học sinh - Từ trái đất đến vũ trụ bao la: Với những kiến thức thú vị nhất, kì lạ nhất, khó tin nhất ! Dành cho trẻ em từ 5-15 tuổi', 'Bách khoa tri thức dành cho học sinh - Từ trái đất đến vũ trụ bao la: Với những kiến thức thú vị nhất, kì lạ nhất, khó tin nhất ! Dành cho trẻ em từ 5-15 tuổi', 152, 'Tin Man Arts', '', 1, '', 0, 11, '2023-02-20 16:50:06', 3, 2021, 'Hà Nội', 69000, '0'),
+(167, 42875681, 25, 21, 'Bách khoa tri thức dành cho học sinh - Khoa học kỹ thuật và cuộc sống trong tương lai: Với những kiến thức thú vị nhất , kỳ lạ nhất,  khó tin nhất: Dành cho trẻ em từ 5-15 tuổi.', 'Bách khoa tri thức dành cho học sinh - Khoa học kỹ thuật và cuộc sống trong tương lai: Với những kiến thức thú vị nhất , kỳ lạ nhất,  khó tin nhất với 21 câu chuyện.', 152, 'Tin Man Arts', '', 1, '', 0, 11, '2023-02-20 16:59:09', 3, 2021, 'Hà Nội', 69000, '0'),
+(168, 70540596, 25, 21, 'Bách khoa tri thức dành cho học sinh -  Các nền văn minh cổ và những bí ẩn trên thế giới: Với những kiến thức thú vị nhất , kỳ lạ nhất,  khó tin nhất dành cho trẻ em từ 5-15 tuổi.', 'Bách khoa tri thức dành cho học sinh -  Các nền văn minh cổ và những bí ẩn trên thế giới: Với những kiến thức thú vị nhất , kỳ lạ nhất,  khó tin nhất dành cho trẻ em từ 5-15 tuổi.', 152, 'Tin Man Arts', '', 1, '', 0, 11, '2023-02-20 17:03:56', 3, 2021, 'Hà Nội', 69000, '0'),
+(169, 51357333, 18, 21, 'Học và thực hành Stem đơn giản: Toán học kèm kiến thức bổ trợ', 'Sách chia làm 32 đề mục nhỏ: Siêu Stem; Siêu tổng; Phép nhân... Cuối bài có phần đáp án cho bạn đọc tham khảo', 64, 'Hanah Wilson', '', 1, '', 0, 11, '2023-02-21 10:00:32', 3, 2022, 'Hà Nội', 59000, '5'),
+(170, 97101486, 18, 21, 'Học và thực hành Stem đơn giản: Công nghệ : 60 bài thực hành bổ ích: Dành cho độ tuổi từ 5-15 tuổi', 'Học và thực hành Stem đơn giản: Công nghệ : 60 bài thực hành bổ ích giúp bạn đọc có những bài học trong cuộc sống như:  Thức dậy nào; Những cỗ máy đơn giản...', 64, 'Dickmann, Nancy', '', 1, '', 0, 11, '2023-02-21 10:11:18', 3, 2022, 'Hà Nội', 59000, '6'),
+(171, 1108676, 18, 21, 'Học và thực hành Stem đơn giản: Kỹ thuật- 60 bài thực hành bổ ích: Dành cho độ tuổi 6-15.', 'Học và thực hành Stem đơn giản: Kỹ thuật- 60 bài thực hành bổ ích: Dành cho độ tuổi 6-15. Với 30 đề mục, cuối cuốn sách sẽ là đáp án giải đáp của các bài tập.', 64, 'Dickmann, Nancy', '', 1, '', 0, 11, '2023-02-21 13:50:09', 3, 2022, 'Hà Nội', 59000, '6'),
+(172, 16679816, 18, 21, 'Học và thực hành Stem đơn giản: Công nghệ- Kiến thức kèm bài tập bổ trợ!: dành cho độ tuổi 6-15 tuổi', 'Học và thực hành Stem đơn giản: Công nghệ- Kiến thức kèm bài tập bổ trợ!: dành cho độ tuổi 6-15 tuổi với 38 đề mục nhỏ từ: Siêu Stem; Lực quay và lực kéo; Các vật liệu nhân tạo và đáp án...', 64, 'Sipi, Claire', '', 1, '', 0, 11, '2023-02-21 13:54:24', 3, 2022, 'Hà Nội', 59000, '6'),
+(173, 42429588, 28, 21, 'Tuổi dậy thì: Từ cậu bé đến anh chàng', 'Từng trang sách mở ra như một người bạn đồng hành ở bên cạnh sẵn sàng chia sẻ với các em về giới tính, đến việc xử lý cảm xúc tiêu cực...', 283, 'Lê Thanh Hà', '', 1, '', 0, 11, '2023-02-21 14:03:15', 3, 2022, 'Hà Nội', 69000, '3'),
+(174, 74635564, 28, 21, 'Tuổi dậy thì: Từ cô bé đến cô nàng', 'Từng trang sách mở ra như một người bạn đồng hành ở bên cạnh sẵn sàng chia sẻ với các em về giới tính, đến việc xử lý cảm xúc tiêu cực. Sẽ là người bạn đồng hành của em trên hành trình dậy thì , khi em bắt đầu thay đổi từ môt em nhỏ trở thành người lớn.', 271, 'Lê Thanh Hà', '', 1, '', 0, 11, '2023-02-21 14:06:52', 3, 2022, 'Hà Nội', 69000, '3'),
+(175, 38285280, 28, 8, 'Tuổi dậy thì ti tỉ chuyện', 'Từng trang sách mở ra như một người bạn đồng hành ở bên cạnh sẵn sàng chia sẻ với các em về giới tính, đến việc xử lý cảm xúc tiêu cực. Sẽ là người bạn đồng hành của em trên hành trình dậy thì. Cùng với đó là những bí kíp, tuyệt chiêu chia sẻ ngắn ở cuối mỗi câu chuyện như một lời gợi ý để bạn đọc tham khảo.', 172, 'Nam Kha', '', 1, '', 0, 11, '2023-02-21 14:10:40', 3, 2022, 'Hà Nội', 89000, '6'),
+(176, 6403347, 28, 8, '100++ kỹ năng tự bảo vệ bản thân cho trẻ- Ứng phó với thiên tai', '100++ kỹ năng tự bảo vệ bản thân cho trẻ- Ứng phó với thiên tai với các kiến thức đã được hệ thống hóa một cách phù hợp với đặc điểm tư duy, biết phân biệt tốt xấu ngay từ trong tiềm thức, đồng thời có khả năng ứng phó với các tình huống xảy ra khi gặp thiên tai.', 132, 'Tiểu Mạch Đông Thái', '', 1, '', 0, 11, '2023-02-21 14:15:39', 3, 2022, 'Hà Nội', 79000, '3'),
+(177, 22947438, 28, 8, '100++ kỹ năng tự bảo vệ bản thân cho trẻ: Ứng phó với nguy hiểm', '100++ kỹ năng tự bảo vệ bản thân cho trẻ: Ứng phó với nguy hiểm với các kiến thức đã được hệ thống hóa một cách phù hợp với đặc điểm tư duy, biết phân biệt tốt xấu ngay từ trong tiềm thức, đồng thời có khả năng ứng phó với các tình huống xảy ra khi gặp nguy hiểm trong cuộc sống.', 220, 'Tiểu Mạch Đông Thái', '', 1, '', 0, 11, '2023-02-21 14:18:59', 3, 2022, 'Hà Nội', 109000, '3'),
+(178, 7129440, 28, 8, '1001  bí quyết dành cho tuổi học trò: Tớ đã tỏa sáng và thu hút trước mọi người như thế đó: Dành cho trẻ 9-15 tuổi', '1001  bí quyết dành cho tuổi học trò: Tớ đã tỏa sáng và thu hút trước mọi người như thế đó: Dành cho trẻ 9-15 tuổi gồm 4 chương: Chương 1: Nhập môn nghệ thuật thu hút; Chương 2: Tập trung vào chính bạn; Chương 3:  Chào mừng đến với học viện ngôi sao; Chương  cuối: Bạn tỏa sáng và thu hút vì bạn xứng đáng.', 183, 'Hoàng Anh Tú', '', 1, '', 0, 11, '2023-02-21 14:31:20', 2, 2021, 'Hà Nội', 69000, '3'),
+(179, 31317771, 28, 8, '1001 bí quyết dành cho tuổi học trò: Hướng dẫn sử dụng tình bạn', '1001 bí quyết dành cho tuổi học trò: Hướng dẫn sử dụng tình bạn gồm 6 chương: Chương 1: Sửa soạn mình để sẵn sàng kết bạn; Chương 2: Mở rộng kết nối; Chương 3: Bạn thật- Bạn giả; Chương 4: Nuôi lớn tình bạn; Chương 5: Giải trí cùng người bạn; Chương cuối: Phần buồn nhất của cuốn sách này.', 152, 'Hoàng Anh Tú', '', 1, '', 0, 11, '2023-02-21 14:45:34', 3, 2021, 'Hà Nội', 69000, '3'),
+(180, 84905601, 28, 8, 'Nghĩ tích cực - Sống tự tin = My mind - My rule: Hướng dẫn kiểm soát suy nghĩ và cảm xúc dành cho tuổi teen', 'Nghĩ tích cực - Sống tự tin = My mind - My rule: Hướng dẫn kiểm soát suy nghĩ và cảm xúc dành cho tuổi teen với 8 chương: Chương 1: Tại sao bạn không thể kiểm soát bản thân; Chương  2: Ý thức và tiềm thức của bạn;  Chương 3: Hệ thống niềm tin; Chương 4: Giao thức nguy hiểm kì lạ; Chương 5: Mình không đủ tốt; Chương 6: Mình không xứng đáng; Chương  7: Mình không được yêu thương; Chương 8: Mình không an toàn.', 168, 'Letran, Jacqui', '', 1, '', 0, 11, '2023-02-21 16:10:14', 3, 2021, 'Hà Nội', 79000, '1'),
+(181, 24984128, 29, 4, 'Hướng dẫn nói và viết văn tự sự, miêu tả lớp 6:  Theo chương trình giáo dục phổ thông mới', 'Hướng dẫn nói và viết văn tự sự, miêu tả lớp 6:  Theo chương trình giáo dục phổ thông mới với 2 phần: Phần giới thiệu kiến thức kĩ năng văn tự sự,miêu tả; Phần luyện đề (gợi ý dán bài và bài văn hoàn chỉnh): hướng dẫn học sinh  viết và nói thành thạo hai thể loại tự sự, miêu tả.', 152, 'Kiều Bắc', '', 1, '', 0, 11, '2023-02-21 16:26:23', 3, 2021, 'Hà Nội', 55000, '8'),
+(182, 2439798, 29, 4, 'Hướng dẫn nói và viết văn nghị luận, biểu cảm, thuyết minh lớp 6 - Theo chương trình giáo dục PT mới: Định hướng phát triển phẩm chất -năng lực', 'Cuốn sách gồm 2 phần: Phần : Giới thiệu kiến thức kĩ năng; Phần luyện đề: Gồm các đề  (gợi ý dàn bài và bài văn hoàn chỉnh) giúp học sinh bước đầu viết và nói được thể loại nghị luận, biểu cảm, thuyết minh.', 183, 'Kiều Bắc', '', 1, '', 0, 11, '2023-02-21 16:34:12', 3, 2021, 'Hà Nội', 65000, '8'),
+(183, 12185448, 29, 4, 'Hướng dẫn thực hành nói và nghe trong môn ngữ văn 6: Theo chương trình giáo dục phổ thông mới', 'Cuốn sách tập trung hướng dẫn thực hành nói- nghe các kiểu bài: Kể về một trải nghiệm của bản thân; Kể lại một truyện cổ tích/ truyền thuyết; Trình bày cảm xúc của một bài thơ lục bát...', 247, 'Trần Thị Hạnh Phương, Bùi Thùy Linh', '', 1, '', 0, 11, '2023-02-21 16:42:06', 3, 2022, 'Hà Nội', 68000, '8'),
+(184, 13548504, 29, 1, 'Bộ đề kiểm tra ngữ văn 6 tập 1: Theo chương trình giáo dục phổ thông 2018', 'Sách biên soạn hướng đến mục tiêu hình thành  và phát triển các phẩm chất , năng lực của học sinh trong học ngữ văn...', 122, 'Nguyễn Thị Hồng Vân', '', 1, '', 0, 11, '2023-02-21 16:47:04', 3, 2022, 'Hà Nội', 39000, '8'),
+(185, 26069822, 29, 1, 'Bộ đề kiểm tra ngữ văn 6 tập 2 theo chương trình giáo dục phổ thông 2018 ', 'Sách biên soạn hướng đến mục tiêu hình thành  và phát triển các phẩm chất , năng lực của học sinh trong học ngữ văn...', 115, 'Nguyễn Thị Hồng Vân', '', 1, '', 0, 11, '2023-02-21 16:50:08', 3, 2022, 'Hà Nội', 39000, '8'),
+(186, 74934358, 30, 4, 'Phát triển năng lực ngữ văn 7:  Biên soạn theo chương trình giáo dục Phổ thông mới', 'Phát triển năng lực ngữ văn 7:  Biên soạn theo chương trình giáo dục Phổ thông mới biên soạn gồm 2 phần: Nội dung và đáp án.', 155, 'Nguyễn Việt Hùng', '', 1, '', 0, 11, '2023-02-21 16:59:11', 3, 2022, 'Hà Nội', 96000, '8'),
+(187, 50798736, 31, 4, 'Khám phá khoa học tự nhiên 6: Biên soạn theo chương trình giáo dục phổ thông mới  định hướng phát triển năng lực', 'Cuốn sách được biên soạn dưới dạng các chủ đề, mỗi chủ đề gồm các nội dung sau:\r\nA. Kiến thức đã được học.\r\nB. Khám phá khoa học.\r\nC. Hướng dẫn trả lời.', 159, 'Cao Cự Giác', '', 1, '', 0, 11, '2023-02-22 07:48:58', 3, 2021, 'Hà Nội', 99000, '5'),
+(188, 65267452, 31, 1, 'Bồi dưỡng khoa học tự nhiên 6', 'Sách gồm 10 chương và phần hướng dẫn giải và đáp án: Chương 1: Mở đầu về Khoa học tự nhiên; Chương 2:  Chất quanh ta; Chương 3: Một số vật liệu, nguyên liệu, nhiên liệu, lương thực - thực phẩm thông dụng; Chương  4: Hỗn hợp, tách chất ra khỏi hỗn hợp; Chương  5: Tế bào; Chương 6: Từ tế bào đến cơ thể; Chương 7: Đa dạng thế giới sống; Chương  8: Lực trong đời sống; Chương  9: Năng lượng; Chương 10: Trái đất và bầu trời.', 124, 'Phạm Hồng Bắc...', '', 1, '', 0, 11, '2023-02-22 07:54:23', 3, 2021, 'Hà Nội', 46000, '5'),
+(189, 86431584, 31, 4, 'Tuyển tập đề kiểm tra định kì Khoa học tự nhiên lớp 7: Theo chương trình giáo dục phổ thông mới - Dùng chung cho các bộ SGK hiện hành.', 'Sách được biên soạn theo 4 phần: Phần 1: Đề kiểm tra 1 tiết;  Phần 2: Đề kiểm tra kết thúc học kì 1;Phần 3: Đề kiểm tra kết thúc học kì 2; Phần 4: Đáp án và hướng dẫn chi tiết.', 224, 'Cao Cự Giác', '', 1, '', 0, 11, '2023-02-22 07:58:11', 3, 2022, 'Hà Nội', 82000, '5'),
+(190, 73272003, 33, 4, 'Tổng hợp các bài toán phổ dụng hình học 6: Biên soạn theo chương trình giáo dục phổ thông mới định hướng phát triển năng lực ', 'Tổng hợp các bài toán phổ dụng hình học 6 gồm 2 chương: Chương 1: Đoạn thẳng;  Chương 2: góc.', 111, 'Vũ Thế Hựu', '', 1, '', 0, 11, '2023-02-22 08:03:35', 3, 2021, 'Hà Nội', 40000, '51'),
+(191, 14074829, 33, 1, 'Bộ đề kiểm tra toán 6 tập 2: Theo chương trình giáo dục phổ thông 2018', 'Sách chia làm 3 phần: Phần 1: Hệ thống kiến thức và bộ đề kiểm tra;  Phần 2: Một số đề kiểm tra giữa kì và cuối kì;  Phần 3: Đáp án và hướng dẫn giải.', 119, 'Trịnh Hoài Dương', '', 1, '', 0, 11, '2023-02-22 08:14:16', 3, 2022, 'Hà Nội', 39000, '51'),
+(192, 82770785, 33, 4, 'Giới thiệu các dạng đề kiểm tra Toán 6: Dùng chung cho các bộ SGK hiện hành', 'Cuốn sách tập hợp 93 đề kiểm tra toán lớp 6 thường gặp.', 152, 'Hà Văn Chương', '', 1, '', 0, 11, '2023-02-22 08:24:08', 3, 2022, 'Hà Nội', 55000, '51'),
+(193, 35171506, 32, 4, 'Phát triển năng lực theo chyên đề toán 7: Biên soạn theo chương trình giáo dục phổ thông mới- Dùng cho các bộ SGK', 'Sách chia làm 3 phần: Phần 1: Kiến thức cơ bản và ví dụ; Phần 2: Bài tập ôn luyện theo từng dạng và có hướng dẫn; Phần 3:  Bài tập tự luyện theo từng dạng và có hướng dẫn giải.', 207, 'Trịnh Văn Bằng', '', 1, '', 0, 11, '2023-02-22 08:28:20', 3, 2022, 'Hà Nội', 75000, '51'),
+(194, 66666417, 34, 12, 'Đề kiểm tra đánh giá lịch sử 7 - Theo chương trình giáo dục phổ thông mới: Bám sát sách giáo khoa kết nốii', 'Đề kiểm tra đánh giá lịch sử 7 gồm 4 phần: Phần 1: Đề kiểm tra đánh giá thường xuyên;  Phần 2: Đề kiểm tra, đánh giá giữa kì;  Phần  3: Đề kiểm tra, đánh giá cuối kì;  Phần 4: Hướng dẫn trả lời cho mỗi đề kiểm tra đánh giá.', 168, 'Tạ Thị Thúy Anh', '', 1, '', 0, 11, '2023-02-22 08:38:39', 3, 2022, 'Hà Nội', 62000, '9'),
+(195, 92662005, 35, 4, 'Đề kiểm tra đánh giá vật lí 7- Khoa học tự nhiên: Theo chương trình GDPT mới bám sát SGK \" Kết nối tri thức với cuộc sống\".', 'Đề kiểm tra đánh giá vật lí 7- Khoa học tự nhiên Chia làm hai phần: Phần 1: Các bài kiểm tra học kì I; Phần 2: Các bài kiểm tra học kì II', 152, 'Mai Trọng Ý', '', 1, '', 0, 11, '2023-02-22 09:14:26', 3, 2022, 'Hà Nội', 55000, '53'),
+(196, 21812831, 24, 4, '26 nhà sinh học nổi tiếng', '26 nhà sinh học nổi tiếng về cuộc đời và những cống hiến vĩ đại của các nhà sinh học nổi tiếng.', 168, 'Phạm Trung Tâm', '', 1, '', 0, 11, '2023-02-22 11:09:44', 6, 2016, 'Hà Nội', 43000, '57'),
+(197, 18233251, 24, 4, '35 nhà hóa học nổi tiếng', '35 nhà hóa học nổi tiếng giới thiệu về cuộc đời của các nhà Hóa học nổi tiếng.', 167, 'Phạm Trung Tâm', '', 1, '', 0, 11, '2023-02-22 11:13:39', 4, 2016, 'Hà Nội', 45000, '54'),
+(198, 1989855, 24, 4, '25 nhà toán học nổi tiếng', '25 nhà toán học nổi tiếng viết về cuộc đời, những đóng góp của 25 nhà toán học nổi tiếng.', 112, 'Phạm Đình Thực', '', 1, '', 0, 11, '2023-02-22 11:22:28', 5, 2016, 'Hà Nội', 30000, '51'),
+(199, 52181778, 24, 4, '25 nhà vật lí học nổi tiếng', '25 nhà vật lí học nổi tiếng viết về cuộc đời, và các phát minh của 25 nhà vật lí nổi tiếng.', 183, 'Phạm Trung Tâm', '', 1, '', 0, 11, '2023-02-22 11:27:31', 1, 2016, 'Hà Nội', 48000, '53'),
+(200, 82164919, 24, 9, 'Kể chuyện danh nhân Việt Nam', 'CUốn sách biên soạn giới thiệu đến độc giả thân thế, cuộc đời, sự nghiệp  của 27 danh nhân lịch sử dân tộc, được xếp theo thứ tự thời gian.', 275, 'Nguyễn Phương Bảo An', '', 1, '', 0, 11, '2023-02-22 14:31:43', 1, 2013, 'Hà Nội', 44000, '91'),
+(201, 71471110, 24, 9, 'Danh nhân đất Việt', 'Cuốn sách viết về cuộc đơi, sự nghiệp của 23 danh nhân Việt Nam qua các thời kì.', 295, 'Nguyễn Trang Hương', '', 1, '', 0, 11, '2023-02-22 14:33:42', 1, 2010, 'Hà Nội', 49000, '91'),
+(202, 18829966, 24, 9, 'Kể chuyện danh nhân thế giới', 'Kể chuyện danh nhân thế giới  viết về cuộc đời sự nghiệp của 30 danh nhân các nước trên thế giới.', 229, 'Nguyễn Trang Hương', '', 1, '', 0, 11, '2023-02-22 14:36:35', 1, 2015, 'Hà Nội', 40000, '91'),
+(203, 46564636, 24, 4, 'Các nhà phát minh sáng chế nổi tiếng ', 'Các nhà phát minh sáng chế nổi tiếng viết về các nhà phát minh sáng chế khoa học nổi tiếng trên thế giới.', 192, 'Phạm Trung Tâm', '', 1, '', 0, 11, '2023-02-22 14:40:52', 1, 2016, 'Hà Nội', 55000, '6'),
+(204, 71709740, 24, 2, 'Kể chuyện các nhà sinh học', 'Kể chuyện các nhà sinh học: Trong lịch sử có rất nhiều những nhà sinh học lỗi lạc. Cuốn sách sẽ cung cấp các thông tin về cuộc đời, sự nghiệp của 33 nhà sinh học nổi tiếng trên thế giới', 151, 'Hoàng Anh Đức', '', 1, '', 0, 11, '2023-02-22 14:44:29', 2, 2016, 'Hà Nội', 39000, '57'),
+(205, 95225595, 36, 1, 'Atlat địa lí Việt Nam', 'Atlat địa lí Việt Nam là phương tiện giảng dạy và học tập rất cần thiết và hữu ích  đối với môn địa lí ở trường phổ thông. Atlat địa lí cung cấp kiến thức thông tin tổng hợp và hệ thống giúp giáo viên đổi mới phương pháp dạy học, hỗ trợ học sinh tự nghiên cứu.', 31, 'Ngô Đạt Tam, Nguyễn Quý Thao', '', 1, '', 0, 11, '2023-02-23 07:46:17', 1, 2009, 'Hà Nội', 23000, '91'),
+(206, 90070112, 36, 1, 'Atlat địa lí Việt Nam ', 'Atlat địa lí Việt Nam là phương tiện giảng dạy và học tập rất cần thiết và hữu ích  đối với môn địa lí ở trường phổ thông. Atlat địa lí cung cấp kiến thức thông tin tổng hợp và hệ thống giúp giáo viên đổi mới phương pháp dạy học, hỗ trợ học sinh tự nghiên cứu.', 31, 'Ngô Đạt Tam, Nguyễn Quý Thao', '', 1, '', 0, 11, '2023-02-23 07:47:17', 1, 2017, 'Hà Nội', 28000, '91'),
+(207, 53083500, 36, 1, 'Atlat địa lí Việt Nam ', 'Atlat địa lí Việt Nam là phương tiện giảng dạy và học tập rất cần thiết và hữu ích  đối với môn địa lí ở trường phổ thông. Atlat địa lí cung cấp kiến thức thông tin tổng hợp và hệ thống giúp giáo viên đổi mới phương pháp dạy học, hỗ trợ học sinh tự nghiên cứu.', 31, 'Ngô Đạt Tam, Nguyễn Quý Thao', '', 1, '', 0, 11, '2023-02-23 07:48:30', 2, 2018, 'Hà Nội', 29000, '91'),
+(208, 19097075, 36, 1, 'Atlat địa lí Việt Nam', 'Atlat địa lí Việt Nam là phương tiện giảng dạy và học tập rất cần thiết và hữu ích  đối với môn địa lí ở trường phổ thông. Atlat địa lí cung cấp kiến thức thông tin tổng hợp và hệ thống giúp giáo viên đổi mới phương pháp dạy học, hỗ trợ học sinh tự nghiên cứu.', 31, 'Ngô Đạt Tam, Nguyễn Quý Thao', '', 1, '', 0, 11, '2023-02-23 07:50:17', 9, 2019, 'Hà Nội', 31000, '91'),
+(209, 55024598, 36, 1, 'Atlat địa lí Việt Nam', 'Atlat địa lí Việt Nam là phương tiện giảng dạy và học tập rất cần thiết và hữu ích  đối với môn địa lí ở trường phổ thông. Atlat địa lí cung cấp kiến thức thông tin tổng hợp và hệ thống giúp giáo viên đổi mới phương pháp dạy học, hỗ trợ học sinh tự nghiên cứu.', 2021, 'Ngô Đạt Tam, Nguyễn Quý Thao', '', 1, '', 0, 11, '2023-02-23 07:51:32', 3, 2021, 'Hà Nội', 31000, '91'),
+(210, 30696436, 36, 1, 'Atlat địa lí Việt Nam', 'Atlat địa lí Việt Nam là phương tiện giảng dạy và học tập rất cần thiết và hữu ích  đối với môn địa lí ở trường phổ thông. Atlat địa lí cung cấp kiến thức thông tin tổng hợp và hệ thống giúp giáo viên đổi mới phương pháp dạy học, hỗ trợ học sinh tự nghiên cứu.', 31, 'Ngô Đạt Tam, Nguyễn Quý Thao', '1677124240_img_library.jpg', 1, '', 0, 11, '2023-02-23 10:50:40', 4, 2022, 'Hà Nội', 31000, '91'),
+(212, 58073529, 25, 23, '101 điều em muốn biết : Vũ trụ diệu kỳ - 2016', '101 điều em muốn biết : Vũ trụ diệu kỳ với những câu hỏi:Vũ trụ hình thành như thế nào; Hành tinh là gì?...', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 08:06:38', 1, 2016, 'Hà Nội', 39000, '0'),
+(213, 43144642, 25, 23, '101 điều em muốn biết : Vũ trụ diệu kỳ -2014', '101 điều em muốn biết : Vũ trụ diệu kỳ với những câu hỏi:Vũ trụ hình thành như thế nào; Hành tinh là gì?...', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 08:07:53', 1, 2014, 'Hà Nội', 39000, '0'),
+(214, 21416091, 25, 14, '101 điều em muốn biết : Thế giới thực vật - 2014', '101 điều em muốn biết : Thế giới thực vật với những câu hỏi như: Loài cây nào lớn nhanh nhất; Cây có bị \" Sốt\" không?; Vì sao quả chín lại rụng?..', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 08:11:37', 9, 2014, 'Hà Nội', 39000, '0'),
+(215, 26643652, 25, 14, '101 điều em muốn biết : Địa lý tự nhiên tập 2 - 2014', '101 điều em muốn biết : Địa lý tự nhiên tập 2: với những câu chuyện như: Vì sao lại có băng hà; Sương mù hình thành như thế nào; Vì sao bầu trời có màu xanh lam;...', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 08:28:22', 1, 2014, 'Hà Nội', 39000, '91'),
+(216, 11835241, 25, 14, '101 điều em muốn biết : Địa lý tự nhiên tập 2 -2013', '101 điều em muốn biết : Địa lý tự nhiên tập 2: với những câu chuyện như: Vì sao lại có băng hà; Sương mù hình thành như thế nào; Vì sao bầu trời có màu xanh lam;...', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 08:29:21', 1, 2013, 'Hà Nội', 39000, '91'),
+(217, 72761793, 25, 26, '101 điều em muốn biết : Địa lý tự nhiên tập 1', '101 điều em muốn biết : Địa lý tự nhiên tập 1 : Với những câu hỏi: Trái đất hình thành như thế nào; Trái đất bao nhiêu tuổi; Vì sao nước biển lại mặn;..', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 08:54:49', 1, 2013, 'Gia Lai', 39000, '91'),
+(218, 23829590, 25, 26, '101 điều em muốn biết : Thế giới động vật tập 2 -2013', '101 điều em muốn biết : Thế giới động vật tập 2 : Với những câu hỏi: Vì sao cá heo biết biểu diễn; Vì sao nhím có gai; Chó và mèo có nằm mơ không;...', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 08:58:10', 2, 2013, 'Gia Lai', 39000, '59'),
+(219, 24379135, 25, 14, '101 điều em muốn biết : Thế giới động vật tập 1 -2014', '101 điều em muốn biết : Thế giới động vật tập 1 : Với những câu hỏi: Vì sao tằm thích ăn lá dâu; Vì sao công lại xèo đuôi; Vẹt thực sự biết nói sao;...', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 09:04:09', 1, 2014, 'Hà Nội', 39000, '59'),
+(220, 14749351, 25, 14, '101 điều em muốn biết : Khoa học và cuộc sống - 2014', '101 điều em muốn biết : Khoa học và cuộc sống  Với những câu hỏi như: VÌ bánh xe có hình tròn; Đạn được bắn như thế nào;...', 108, 'Lưu Sướng', '', 1, '', 0, 11, '2023-02-24 09:06:48', 1, 2014, 'Hà Nội', 39000, '0'),
+(221, 54829869, 25, 27, 'Cùng bé khám phá  500 điều thú vị về Khoa học', 'Cùng bé khám phá  500 điều thú vị về Khoa học gồm 6 phần: Sinh vật; Trái đất và không gian; Cơ thể con người; Vật chất và phản ứng; Sáng chế và khám phá; Khoa học vô hình.', 304, 'Green, Dan', '', 1, '', 0, 11, '2023-02-24 10:08:56', 1, 2020, 'Hà Nội', 109000, '0'),
+(222, 21945184, 25, 24, 'Những điều kì thú quanh em', 'Những điều kì thú quanh em tìm hiểu về: Thực vật, Động vật; Cơ thể người; Khoa học vũ trụ; Tin học; Toán học; Vật lý; Hóa học; Môi trường.', 231, 'Lê Hạnh, Ngọc Phượng', '', 1, '', 0, 11, '2023-02-24 10:12:47', 1, 2012, 'Hà Nội', 32500, '0'),
+(223, 15778367, 25, 6, 'Những điều chưa biết - Tập 2: 501 điều bí ẩn về cuộc sống, vũ trụ và vạn vật', 'Những điều chưa biết: Tập 2: Với những kiến thức đa dạng của cuộc sống: Nhạc cụ; Ngôn ngữ; Hệ mặt trời...', 319, 'Hartston, William', '', 1, '', 0, 11, '2023-02-24 10:22:25', 1, 2018, 'Hà Nội', 75000, '0'),
+(224, 97950719, 25, 29, 'Thư viện tri thức dành cho Học sinh: Những câu chuyện thiên văn thú vị', 'Thư viện tri thức dành cho Học sinh: Những câu chuyện thiên văn thú vị gồm 6 chương: Mặt trời và các hành tinh; Trái đất; Mặt trăng; Bí mật các vì sao; Sự kì diệu của thời gian; Các hiện tượng thiên nhiên kì bí.', 208, 'Lâm Lâm', '', 1, '', 0, 11, '2023-02-24 10:26:52', 2, 2017, 'Hà Nội', 68000, '0'),
+(225, 20934057, 25, 29, 'Thư viện tri thức dành cho học sinh: Những điều kì thú về trái đất', 'Thư viện tri thức dành cho học sinh: Những điều kì thú về trái đất Gồm 6 chương: Bí mật của trái đất; Nam cực, bắc cực; Nguồn gốc của sự sống; Những kỉ lục thế giới về nước; Âm thanh của đất; Câu chuyện về núi.', 208, 'Ôn Gia Thắng', '', 1, '', 0, 11, '2023-02-24 10:30:20', 1, 2015, 'Hà Nội', 68000, '0'),
+(226, 20981333, 25, 6, '10 điều kinh dị nhất: Những xác ướp Ai Cập rùng rợn mà bạn phải tránh xa', '10 điều kinh dị nhất: Những xác ướp Ai Cập rùng rợn mà bạn phải tránh xa tìm hiểu: Xác ướp là gì; Xác ướp  được tạo ra như thế nào:?', 32, 'Stewat, David', '', 1, '', 0, 11, '2023-02-24 10:34:33', 1, 2012, 'Hà Nội', 26000, '0'),
+(227, 36886199, 25, 21, 'Chuyện kể về những phát minh nổi tiếng thế giới', 'Chuyện kể về những phát minh nổi tiếng thế giới: Giới thiệu về 20 nhà phát minh nổi tiếng thế giới.', 360, 'Vũ Bội Tuyền', '', 1, '', 0, 11, '2023-02-24 10:36:51', 1, 2006, 'Hà Nội', 36000, '0'),
+(228, 44112734, 25, 23, 'Những vấn đề xuyên thế kỷ: Phỏng vấn các nhà hoạt động khoa học, giáo dục, văn hóa nghệ thuật hàng đầu thế giới', 'Những vấn đề xuyên thế kỷ: Phỏng vấn các nhà hoạt động khoa học, giáo dục, văn hóa nghệ thuật hàng đầu thế giới viết về 30 nhà khoa học nổi tiếng thế giới.', 292, 'Trần Đoàn Lâm', '', 1, '', 0, 11, '2023-02-24 10:40:10', 1, 2016, 'Hà Nội', 99000, '0'),
+(229, 40221629, 25, 23, '365 bí ẩn chưa được lí giải', '365 bí ẩn chưa được lí giải viết về 365 bí ấn về khoa học cũng như đời sống.', 239, 'Trần Đoàn Lâm', '', 1, '', 0, 11, '2023-02-24 10:43:58', 1, 2019, 'Hà Nội', 220000, '0'),
+(230, 3428729, 25, 6, 'Sự diệu kì của các nguyên tố hóa học', 'Sự diệu kì của các nguyên tố hóa học với  sự hình thành và các tác dụng của nguyên tố hóa học.', 99, 'Winston, Robert', '', 1, '', 0, 11, '2023-02-24 10:49:13', 1, 2011, 'Hà Nội', 118000, '54'),
+(231, 56660809, 25, 24, 'Bách khoa địa lí', 'Bách khoa địa lí với nội dung: Địa lí tự nhiên; Sinh giới; Địa lí nhân văn; Thế giới bản đồ', 127, 'Ngô Vân', '', 1, '', 0, 11, '2023-02-24 10:52:42', 1, 2021, 'Hà Nội', 160000, '91'),
+(232, 80033340, 25, 21, 'Cuốn sách khổng lồ về cơ thể người', 'Đây là một cuốn sách kích thước lớn, có những trang gấp khổng lồ, khơi gợi sự thích thú cho độc giả, nhất là trẻ em. Cuốn sách rất trực quan và sinh động, có đầy đủ các thông tin cơ bản nhất về cơ thể người, được trình bày rất khoa học và sáng tạo: cơ thể được hình thành từ những gì, bộ xương cấu tạo ra sao, các loại cơ bắp trên cơ thể người, hệ tuần hoàn, hệ hô hấp, hệ tiêu hóa, bộ não và các dây thần kinh, và các số liệu đáng kinh ngạc về cơ thể.', 32, 'Lacey, Minna', '', 1, '', 0, 11, '2023-02-24 10:58:38', 1, 2018, 'Hà Nội', 150000, '0'),
+(233, 71749637, 25, 4, 'Thám tử tí hon tập 2: Hóa hữu cơ', 'cuốn sách “Thám tử tí hon” chính là cuốn sách hay viết về kiến thức toán học theo hình thức gợi  mở, Thám tử tí hon tập 2: Hóa hữu cơ: Toàn bộ kiến thức trong cuốn sách không chỉ gói gọn về các kiến thức toán học giá trị có trong chương trình THCS mà còn kèm theo những định hướng, gợi nhớ thú vị giúp học sinh có động lực học tập và tìm hiểu toán học tốt hơn hẳn.Thậm chí không ít nhà nghiên cứu, giáo viên cũng đánh giá cuốn “Thám tử tí hon”  chính là tài liệu tham khảo chính thức cho chương trình học tập môn Toán bậc THCS mà học sinh có thể sử dụng để tăng cường nâng cao nhận thức và hiểu biết hơn về môn toàn, giúp học sinh tăng cường yêu thích đặc biệt đối với môn học này..\r\n', 299, 'Đỗ Ngọc Kiên', '', 1, '', 0, 11, '2023-02-24 11:02:16', 1, 2017, 'Hà Nội', 80000, '54'),
+(234, 65897307, 25, 6, 'Những thành phố Việt Nam', 'Những thành phố Việt Nam  giới thiệu về 10 thành phố tiêu biểu của Việt Nam với những giá trị kiến trúc và cảnh quan đặc sắc: Hà Nội, TP. Hồ Chí Minh; Huế; Hạ Long; Đà Lạt; Hội An; Sa Pa; Đà Nẵng; Nha Trang; Vũng Tàu', 264, 'Nguyễn Thắng Vu', '', 1, '', 0, 11, '2023-02-24 11:11:58', 1, 2007, 'Hà Nội', 120000, '0'),
+(235, 81463094, 25, 30, 'Thực Hành Tư Duy Thiết Kế - Ứng Dụng Trong Phát Triển Khách Hàng, Xây Dựng Đội Ngũ Và Kiến Tạo Tương Lai', 'Cuốn sách sẽ giúp các cá nhân, đội ngũ và tổ chức:  Áp dụng các công cụ và phương pháp tư duy thiết kế trong bối cảnh phù hợp- đặc biệt là cho các sản phẩm và dịch vụ kỹ thuật số.  Hiểu được những tiến bộ mới nhất trong tư duy thiết kế.  Xây dựng nhận thức về lấy khách hàng làm trung tâm. Áp dụng tư duy thiết kế cho những thách thức của chuyển đổi kỹ thuật số trong các tổ chức.  Kết hợp tư duy thiết kế với tư duy hệ thống và phân tích dữ liệu lớn.', 352, 'Lewrick, Michael', '', 1, '', 0, 11, '2023-02-24 11:19:08', 1, 2020, 'Hà Nội', 299000, '6'),
+(236, 94408643, 25, 6, 'VuiVui  Học Cùng Tôm - Tri Thức Bách Khoa 4 : Tự Nhiên - Vũ Trụ - Thiên Văn - Môi Trường - Thực Phẩm - Đồ Dùng', 'Tri thức bách khoa 4 giải đáp cho các em nhiều câu hỏi lý thú về vũ trụ, thiên văn: “Mặt trời là thiên thể như thế nào?”, “Vì sao các vì sao phát sáng?”, “Làm thế nào loài người đặt chân được lên Mặt Trăng?”… Đồng thời trong cuốn này các em còn được tìm hiều về sông ngòi, biển cả, môi trường và ô nhiễm môi trường, đồ ăn thức uống, đồ dùng…', 144, 'Phi Phong, Tử Minh', '', 1, '', 0, 11, '2023-02-24 11:23:10', 1, 2010, 'Hà Nội', 35000, '0'),
+(237, 97310690, 25, 6, 'Tri thức bách khoa 3: Tự nhiên - Vũ trụ - Thiên văn - Đồ dùng - Giao thông - Cơ thể người - Thức ăn', 'Tri thức bách khoa 3 giải đáp cho các em nhiều câu hỏi lý thú về thiên nhiên bốn mùa: “Tại sao mây không rơi?”, “Tại sao trời lại mưa?”, “Gió từ đâu tới?”… Đồng thời trong cuốn này các em còn được tìm hiều về bầu trời sao, sóng thần, cực quang, khí quyển, động thực vật và sinh hoạt hằng ngày…', 144, 'Phi Phong, Tử Minh', '', 1, '', 0, 11, '2023-02-24 11:25:33', 1, 2015, 'Hà Nội', 42000, '0'),
+(238, 9525728, 25, 29, 'Bách khoa tri thức dành cho thiếu nhi: Xã hội và cuộc sống', 'Cuốn sách  Dựa vào đặc điểm đọc sách và nhu cầu tìm hiểu tri thức của trẻ, bộ sách đã kết hợp một cách hoàn hảo những bức tranh hình minh hoạ sôi động, rực rỡ, đầy đủ tính khoa học, tri thức. Đây là những cuốn sách bách khoa không thể đầy đủ hơn nhằm giúp trẻ nhận thức thế giới, tăng cường tri thức, nâng cao khả năng sáng tạo và trí tưởng tượng của mình.', 191, 'Ngọc Khánh', '', 1, '', 0, 11, '2023-02-24 11:29:34', 1, 2010, 'Hà Nội', 60000, '0'),
+(239, 47302530, 25, 4, 'Thách Thức Tư Duy Thuật Toán 2020', 'Sách gồm 2 phần: Phần 1: Một số chủ đề xuất hiện trong kỳ thi thách thức tư duy Thuật toán. Trong cuốn sách này, các tác giả đã tuyển chọn và giới thiệu một số thử thách tiêu biểu trong sáu chủ đề: suy luận logic, bài toán vùng lân cận, mã hóa và xử lý dữ liệu, các bài toán đếm, phương pháp lần ngược từ cuối và các bài toán về trò chơi. Phần 2: Giới thiệu đề thi chính thức của kỳ thi Bebras cấp Quốc gia năm 2019 cùng với đáp án và hướng dẫn giải.', 151, 'Lê Anh Vinh', '', 1, '', 0, 11, '2023-02-24 11:32:08', 1, 2020, 'Hà Nội', 75000, '51'),
+(240, 42664406, 28, 21, '100++ cách tạo nên một thế giới tốt đẹp hơn', 'Cuốn sách Với những lời khuyên và gợi ý chứa đựng thông điệp truyền cảm hứng, 100++ cách tạo nên một thế giới tốt đẹp hơn là kho tàng thông tin tuyệt vời và thiết thực dành cho những bạn nhỏ mong muốn làm nên sự khác biệt. Từ những ý tưởng gần gũi như tạo một thư viện cộng đồng, tìm hiểu về lịch sử nơi bạn sinh sống, chung tay chấm dứt nạn bắt nạt, cho tới những điều lớn lao hơn như diễn thuyết trước đám đông và lên kế hoạch cho chiến dịch tuyên truyền chống biến đổi khí hậu, cuốn sách này sẽ đồng hành cùng bạn trên hành trình học cách sống tử tế, hòa hợp với con người và thiên nhiên.', 96, 'Swift, Keilly', '', 1, '', 0, 11, '2023-02-24 14:14:32', 1, 2021, 'Hà Nội', 139000, '3'),
+(241, 61841216, 25, 2, 'Cẩm Nang Thiên Tài Trẻ: Cơ Thể Người', 'Cuốn sách này sẽ giúp các em khiến mọi người thán phục vì những kiến thức sâu-sắc-và-cụ-thể về cơ thể diệu kỳ của chính mình. Các em có biết cái xương nào trên cơ thể không gắn với bất cứ xương nào khác? Bộ phận nào trên cơ thể có thể làm tan rã cả chiếc dao lam? Và bộ phận cơ thể nào có các cơ nhỏ bé chuyển động tới 100.000 lần mỗi ngày?', 159, 'Jennigs, Ken', '', 1, '', 0, 11, '2023-02-24 14:18:56', 1, 2018, 'Hà Nội', 65000, '0'),
+(242, 42118745, 25, 31, 'Khi nào biết nhiều hơn về các hành tinh', 'Khi nào biết nhiều hơn về các hành tinh với 15 đề mục nhỏ: Trái đất tận cùng ở đâu? Có gì trên mặt trăng; Hành tinh là gì?...', 127, 'P. Clu-San- Txép', '', 1, '', 0, 11, '2023-02-24 14:22:55', 1, 2011, 'Đà Nẵng', 24500, '0'),
+(243, 14243872, 25, 24, 'Em muốn biết vì sao: Các nước có quốc kì và các câu hỏi khác về các dân tộc và xứ sở', 'Em muốn biết vì sao: Các nước có quốc kì và các câu hỏi khác về các dân tộc và xứ sở gồm 20 chủ đề đa dạng, hình thức hỏi đáp ngắn gọn, dễ hiểu, nhiều thông tin lí thú, hình minh họa sống động, danh mục sách tra cứu.', 22, 'Steele, Philip', '', 1, '', 0, 11, '2023-02-24 15:16:35', 1, 2013, 'Hà Nội', 30000, '0'),
+(244, 19084671, 25, 23, 'Thế giới đại dương bằng tranh', 'Cuốn sách cung cấp cho bạn đọc: Từ các loài động vật có vú được biết đến nhiều nhất cho đến những loài cá kỳ lạ nhất, hay động vật giáp xác, động vật thân mềm và thực vật, những bức tranh minh họa sống động đến không ngờ của Emmanuelle Tchoukriel mang lại cho độc giả cơ hội chiêm ngưỡng một cách chi tiết 100 loài thực vật và động vật biển, cùng những thông tin khoa học giản dị và bất ngờ. Một cuốn cẩm nang đặc biệt, mời gọi bạn đọc mọi lứa tuổi cùng lặn ngụp vào một thế giới bí ẩn, tĩnh lặng và đầy bụi nước.', 55, 'Aladjidi, Virginie; Tchoukriel, Emmanuelle', '', 1, '', 0, 11, '2023-02-24 15:22:18', 1, 2017, 'Hà Nội', 92000, '0'),
+(245, 34333296, 25, 32, 'Hành trình khám phá những bí ẩn', 'Hành trình khám phá những bí ẩn có 3 phần: Phần 1: Những chuyện lạ có thật; Phần 2: Những bài viết của Nguyễn Cung Hà ; Phần  3: Các chuyên gia nhận định ', 393, 'Phạm Lê Nhật Anh', '', 1, '', 0, 11, '2023-02-24 15:25:59', 1, 2016, 'Hà Nội', 97000, '0'),
+(246, 55016062, 25, 12, 'Giao thông kì diệu', 'Giao thông kì diệu vô cùng bổ ích đối với các em, sẽ giúp ích rất nhiều cho các em trong học tập và đời sống. Những tri thức khoa học từ những cuốn sách này và những gì thu được từ thực tế tiếp theo, chắc chắn sẽ giúp các em mở rộng kiến thức, linh hoạt và nhanh nhẹn trong tư duy, tăng thêm sự thông minh sáng tạo trong công việc và quan trọng hơn là không chịu lùi bước trước khó khăn, góp phần đưa đất nước vươn lên trở thành quốc gia phát triền về khoa học kĩ thuật tiên tiến trên thê giới\".', 142, 'Nguyễn Bá Thính, Dương Minh Hào', '', 1, '', 0, 11, '2023-02-24 15:30:03', 1, 2012, 'TP. Hồ Chí Minh', 30000, '6'),
+(247, 33083288, 25, 23, 'Khám phá đầu tiên của tớ về... - Những kỉ lục thế giới: Dành cho trẻ 2 tuổi trở lên', 'Cuốn sách mở ra Hàng loạt kỷ lục khó tin, ngỡ ngàng và thậm chí là kỳ cục, liên quan đến những loài động thực vật khổng lồ hay tí hon, những người sở hữu boojraau, tóc độc nhất vô nhị. Những sự thật kinh điển về tự nhiên, cơ thể sống, những đặc tính tuyệt diệu mà chỉ có ở duy nhất một loài, một bộ phận. Những phát minh hài hước, sáng tạo, thể hiện khả năng vô hạn của con người. Rất nhiều điều \"nhất nhì thế giới, trăm mới ngàn hay\" khác đang chờ đón bạn trong cuốn sách này, khiến bạn \"mắt chữ A, miệng chữ O\" từ khi mở trang đầu tiên cho đến trang cuối cùng, đồng thời giúp bạn có thêm niềm tin vào những điều phi thường trong cuộc sống và thấu hiểu bản chất độc đáo của tự nhiên!', 96, 'Grinberg, Delphine', '', 1, '', 0, 11, '2023-02-24 15:44:37', 1, 2020, 'Hà Nội', 100000, '0'),
+(248, 78669716, 25, 33, '100 câu chuyện về tổng thống thú vị nhất chưa từng kể', '100 câu chuyện về tổng thống thú vị nhất chưa từng kể : Chuyện về các Tổng thống là một kho tàng những điều thú vị. Bạn có bao giờ thử nghĩ xem các vị tổng thống đã trở thành… tổng thống như thế nào không? Vị tổng thống nào cũng có những bí mật của riêng họ: - George Washington là một trong những nhà phân phối rượu Whiskey lớn nhất ở Mỹ nhưng ông không phải là vị Tổng thống Mỹ đầu tiên. - Thomas Jefferson thất vọng với quyển Kinh Thánh đến nỗi ông phải tự viết một phiên bản khác. - Abraham Lincoln từng tham gia vào một trận đấu kiếm và ông đã chọn đao làm vũ khí chiến đấu. - William Henry Harrison bị mất mạng vì bài diễn thuyết của chính mình trong khi Teddy - Roosevelt lại thoát chết nhờ một bài diễn văn - Lyndon Johnson khởi nghiệp từ một phòng tắm ở Washington D.C - Còn George W.Bush sẽ chẳng bao giờ có cơ hội trở thành Tổng thống nếu không có câu chuyện về một người Anh đã may mắn thoát chết trên biển vào năm 1620 - Một người phụ nữ đã hạ bệ Nội các của Tổng thống Andrew như thế nào? Đó mới chỉ là phần mở đầu cho “100 câu chuyện về tổng thống thú vị nhất chưa từng kể”. Cuốn sách còn chứa đựng nhiều câu chuyện khiến bạn thích thú và đưa bạn tới những khám phá bất ngờ…', 217, 'Beyer, Rick', '', 1, '', 0, 11, '2023-02-24 15:38:50', 1, 2011, 'Hà Nội', 96000, '9'),
+(249, 3094983, 25, 23, '100 bí ẩn đáng kinh ngạc về vũ trụ', 'Gồm 4 chủ đề: Cơ thể, Khoa học, Vũ trụ và Thức ăn, bộ sách \"100 bí ẩn đáng kinh ngạc\" là bộ sách khoa học điển hình với những kiến thức chính xác và cô đọng dành cho bạn đọc.', 128, 'Frith, Alex', '', 1, '', 0, 11, '2023-02-24 15:44:06', 2, 2018, 'Hà Nội', 100000, '0'),
+(250, 16213835, 25, 24, 'Chinh phục không gian hành trình kì diệu', 'Nội dung sách tái hiện lại những cột mốc quan trọng trong hành trình chinh phục không gian của con người : Từ việc chế tạo những con tàu vũ trụ đầu tiên, lần đầu tiên con người bay vòng quanh Trái Đất, lần đầu tiên con người đặt chân lên Mặt Trăng, xây dựng trạm vũ trụ quốc tế, … Cùng với việc tái hiện lại hành trình chinh phục không gian cuốn sách còn đề cập đến những hiệu ứng tích cực của quá trình chinh phục không gian lên cuộc sống thường ngày trên Trái Đất cũng như những bước đi tiếp theo của con người trong hành trình chinh phục không gian tương lai.', 187, 'Nguyễn Ngọc, Minh Thương dịch', '', 1, '', 0, 11, '2023-02-24 15:52:04', 1, 2020, 'Hà Nội', 399000, '0'),
+(251, 18804448, 25, 6, 'Bộ sưu tập những điều thú vị cho thiếu nhi tập 2', ' Nguồn gốc của việc chào hỏi? - Những người đoạt giải Nobel danh tiếng? - Các loài vật không răng ăn gì? - Tổ chức tình báo của Chính phủ các nước? - Những thứ từng “làm mưa” xuống đất? - Về các quái vật huyền thoại?', 163, 'Enright, Dominique', '', 1, '', 0, 11, '2023-02-24 16:05:57', 1, 2012, 'Hà Nội', 50000, '0'),
+(252, 91085050, 25, 6, 'Bộ sưu tập những điều thú vị cho thiếu nhi tập 1', 'Những kiểu tóc nào sành điệu? - Những hình phạt của cướp biển? - Tên gọi của ông già Nô-en trên thế giới ? - Các ông hoàng bà chúa xa hoa? - Bảy biển, bảy trọng tội, bảy chú lùn? - Tại sao gà con lại chạy qua đường?... Hãy khám phá cuốn sách này để thấy được sự thông minh, ngớ ngẩn và cả những điều kì quặc nữa bạn nhé! ', 175, 'Morgan, Matthew; Barnes, Samatha', '', 1, '', 0, 11, '2023-02-24 16:08:30', 1, 2012, 'Hà Nội', 50000, '0'),
+(253, 99631304, 25, 34, 'Khoa học kĩ thuật thế kỉ XX ', 'Khoa học kĩ thuật thế kỉ XX có 3 phần: Phần 1: Các thành tựu khoa học KT thế kỉ XX; Phần 2: Các nhà KHKT thế kỉ XX; Phần 3: Các giải thưởng Nobel KH thế kỉ XX.', 319, 'Nguyễn Kiều Liên', '', 1, '', 0, 11, '2023-02-24 16:13:31', 1, 2005, 'Hà Nội', 37500, '0'),
+(254, 57525455, 25, 4, 'Khám phá những bí ẩn về trái đất', 'Cuốn sách: \"Khám Phá Bí Ẩn Về Trái Đất\" được biên soạn cho lứa tuổi với bản lĩnh đầy hiếu kỳ. Bộ sách tổng hợp rất nhiều sự kiện bí ẩn chưa lời giải đáp, những hiện tượng đa dạng phức tạp trên rất nhiều lĩnh vực như thăm dò Trái đất, bí mật thế giới tự nhiên, bí mật ngoài vũ trụ... được trình bày một cách khoa học và tri thức nhân văn liên quan được lồng ghép trong đó cũng giúp các em biết tìm hiểu, phân biệt sự thực và hư vô bằng con mắt khoa học, từ trong quá trình phát hiện không ngừng những vấn đề mới và từng bước phá giải những bí mật mà thu lượm tri thức.', 127, 'Nguyễn Phương Nam', '', 1, '', 0, 11, '2023-02-24 16:20:40', 18, 2017, 'Hà Nội', 30000, '0'),
+(255, 18132741, 25, 4, 'Thế giới bí ẩn những điều em muốn biết', 'Thế giới bí ẩn những điều em muốn biết chia làm 4 phần: Động vật; Thực vật; Thiên văn học; Bí mật cơ thể người', 111, 'Hà Thị Anh', '', 1, '', 0, 11, '2023-02-24 16:28:06', 14, 2018, 'Hà Nội', 35000, '0'),
+(256, 73875217, 25, 34, 'Khám phá thế giới kì thú: 100 câu chuyện khoa học', 'Khám phá thế giới kì thú: 100 câu chuyện khoa học thú vị.', 143, 'Nhiều tác giả', '', 1, '', 0, 11, '2023-02-24 16:34:31', 11, 2011, 'Hà Nội', 35000, '0'),
+(257, 17272856, 25, 5, 'Wow! những bí mật kì diệu dành cho học sinh: Các loài động vật và thực vật nguy hiểm', ' Nội dung phong phú, đa dạng, được trình bày rõ ràng, mạch lạc qua những mẩu chuyện nhỏ đưa khoa học đến gần hơn với độc giả nhí. Hình ảnh sinh động, bắt mắt, giúp các em dễ dàng tiếp thu những kiến thức mới mà không hề cảm thấy khó khăn, nhàm chán. Nhân vật ngộ nghĩnh, đáng yêu cùng vô vàn tình huống hài hước, vui nhộn, mang lại những giờ phút vừa học, vừa chơi đầy thú vị. Bộ truyện tranh với phong cách hài hước, vui vẻ và đầy tính trí tuệ sẽ dẫn các em nhỏ bước vào thế giới khoa học với những cuộc phiêu lưu, khám phá kì thú.', 152, 'Thỏ Dương Dương', '', 1, '', 0, 11, '2023-02-24 16:40:45', 9, 2015, 'Hà Nội', 39000, '0'),
+(258, 2516951, 25, 23, 'Wow! những bí mật kì diệu dành cho học sinh:  Vật lí với cuộc sống', 'Wow! những bí mật kì diệu dành cho học sinh:  Vật lí với cuộc sống Nội dung phong phú, đa dạng, được trình bày rõ ràng, mạch lạc qua những mẩu chuyện nhỏ đưa khoa học đến gần hơn với độc giả nhí. Hình ảnh sinh động, bắt mắt, giúp các em dễ dàng tiếp thu những kiến thức mới mà không hề cảm thấy khó khăn, nhàm chán. Nhân vật ngộ nghĩnh, đáng yêu cùng vô vàn tình huống hài hước, vui nhộn, mang lại những giờ phút vừa học, vừa chơi đầy thú vị.\r\n\r\n', 152, 'Tôn Nguyên Vĩ', '', 1, '', 0, 11, '2023-02-24 16:43:29', 1, 2020, 'Hà Nội', 55000, '0'),
+(259, 72922220, 25, 5, 'Wow! những bí mật kì diệu dành cho học sinh: Tìm hiểu thế giới robot', 'Wow! những bí mật kì diệu dành cho học sinh: Tìm hiểu thế giới robot  Nội dung phong phú, đa dạng, được trình bày rõ ràng, mạch lạc qua những mẩu chuyện nhỏ đưa khoa học đến gần hơn với độc giả nhí. Hình ảnh sinh động, bắt mắt, giúp các em dễ dàng tiếp thu những kiến thức mới mà không hề cảm thấy khó khăn, nhàm chán. Nhân vật ngộ nghĩnh, đáng yêu cùng vô vàn tình huống hài hước, vui nhộn, mang lại những giờ phút vừa học, vừa chơi đầy thú vị. Bộ truyện tranh với phong cách hài hước, vui vẻ và đầy tính trí tuệ sẽ dẫn các em nhỏ bước vào thế giới khoa học với những cuộc phiêu lưu, khám phá kì thú.\r\n Robot đầu tiên trong lịch sử do ai phát minh? Robot đầu tiên trong ngàng công nghiệp xuất hiện lúc nào? Robot ở quốc gia nào tiên tiến nhất thế giới?', 148, 'Thỏ Dương Dương', '', 1, '', 0, 11, '2023-02-24 16:46:17', 1, 2016, 'Hà Nội', 39000, '0'),
+(260, 2923288, 25, 5, 'Wow! những bí mật kì diệu dành cho học sinh: Bí mạt thoát thân của động vật', 'Nội dung phong phú, đa dạng, được trình bày rõ ràng, mạch lạc qua những mẩu chuyện nhỏ đưa khoa học đến gần hơn với độc giả nhí.Hình ảnh sinh động, bắt mắt, giúp các em dễ dàng tiếp thu những kiến thức mới mà không hề cảm thấy khó khăn, nhàm chán. Nhân vật ngộ nghĩnh, đáng yêu cùng vô vàn tình huống hài hước, vui nhộn, mang lại những giờ phút vừa học, vừa chơi đầy thú vị. Bộ truyện tranh với phong cách hài hước, vui vẻ và đầy tính trí tuệ sẽ dẫn các em nhỏ bước vào thế giới khoa học với những cuộc phiêu lưu, khám phá kì thú.', 149, 'Thỏ Dương Dương', '', 1, '', 0, 11, '2023-02-24 16:55:18', 4, 2015, 'Hà Nội', 39000, '0'),
+(261, 17517054, 25, 5, 'Wow! những bí mật kì diệu dành cho học sinh: Những thể khí kỳ lạ', 'Nội dung phong phú, đa dạng, được trình bày rõ ràng, mạch lạc qua những mẩu chuyện nhỏ đưa khoa học đến gần hơn với độc giả nhí.\r\n* Hình ảnh sinh động, bắt mắt, giúp các em dễ dàng tiếp thu những kiến thức mới mà không hề cảm thấy khó khăn, nhàm chán.\r\n* Nhân vật ngộ nghĩnh, đáng yêu cùng vô vàn tình huống hài hước, vui nhộn, mang lại những giờ phút vừa học, vừa chơi đầy thú vị.', 150, 'Thỏ Dương Dương', '', 1, '', 0, 11, '2023-02-24 16:59:46', 1, 2015, 'Hà Nội', 39000, '0'),
+(262, 34335020, 25, 21, 'Bí mật thế giới động vật: Động vật lưỡng cư và bò sát', 'Cuốn sách cung cấp những hiểu biết cơ bản về các loài động vật, như nhận ra tiếng hót thánh thót của họa mi, hay hình dáng kỳ diệu của cá vàng, nhưng bạn có biết được bí mật của các loài động vật không? Vì sao rắn đuôi chuông lại được mệnh danh là \"sát thủ sa mạc\"? Vì sao chim đỗ quyên không bao giờ xây tổ, chúng duy trì nòi giống bằng cách nào? Tại sao gấu Bắc Cực không sợ lạnh? Quá trình phát triển và suy tàn của gia tộc khủng long như thế nào?... Thế giới động vật ẩn chứa biết bao điều kỳ diệu và bí ẩn.', 127, 'Tuệ Văn dịch', '', 1, '', 0, 11, '2023-02-24 17:08:47', 2, 2017, 'Hà Nội', 55000, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_book_import`
+--
+
+CREATE TABLE `tbl_book_import` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `date_import` date NOT NULL,
+  `source` text COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `notes` text COLLATE utf8_unicode_ci NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_book_import`
+--
+
+INSERT INTO `tbl_book_import` (`id`, `code`, `date_import`, `source`, `user_id`, `notes`, `create_at`) VALUES
+(1, 1675645621, '2023-02-06', 'Kiểm kê dán mã', 1, 'Kiểm kê, xếp ko nhập dữ liệu phần mềm và dán mã mới', '2023-02-10 09:56:58'),
+(2, 1677120174, '2023-02-23', 'Kiểm kê dán mã', 11, '', '2023-02-23 09:42:54'),
+(3, 1677204010, '2023-02-24', 'Kiểm kê dán mã', 11, '', '2023-02-24 09:00:10');
+
+--
+-- Triggers `tbl_book_import`
+--
+DELIMITER $$
+CREATE TRIGGER `del_import_detail_book_after_del_import_book` AFTER DELETE ON `tbl_book_import` FOR EACH ROW DELETE FROM tbl_book_import_detail WHERE tbl_book_import_detail.code = old.code
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_book_import_detail`
+--
+
+CREATE TABLE `tbl_book_import_detail` (
+  `id` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `quanlity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_book_import_detail`
+--
+
+INSERT INTO `tbl_book_import_detail` (`id`, `code`, `book_id`, `quanlity`) VALUES
+(11, 1675645621, 76, 10),
+(12, 1675645621, 75, 11),
+(13, 1675645621, 74, 8),
+(14, 1675645621, 73, 9),
+(15, 1675645621, 72, 8),
+(16, 1675645621, 71, 22),
+(17, 1675645621, 70, 11),
+(18, 1675645621, 69, 8),
+(19, 1675645621, 68, 11),
+(20, 1675645621, 67, 17),
+(21, 1677120174, 143, 1),
+(22, 1677204010, 218, 1);
+
+--
+-- Triggers `tbl_book_import_detail`
+--
+DELIMITER $$
+CREATE TRIGGER `update_stock_book_after_del_import_book` AFTER DELETE ON `tbl_book_import_detail` FOR EACH ROW UPDATE tbl_book SET stock = (stock - old.quanlity) WHERE tbl_book.id = old.book_id
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_stock_book_after_insert_import_book` AFTER INSERT ON `tbl_book_import_detail` FOR EACH ROW UPDATE tbl_book SET stock = (stock + new.quanlity) WHERE tbl_book.id = new.book_id
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -741,7 +1185,7 @@ CREATE TABLE `tbl_book_loan` (
 --
 
 INSERT INTO `tbl_book_loan` (`id`, `code`, `user_create`, `user_id`, `student_id`, `book_id`, `sub_book`, `date_loan`, `date_return`, `status`, `create_at`) VALUES
-(1, 1667407156, 1, 0, 1097, 1, 1, '2022-11-02 23:39:16', '2022-11-24 02:29:24', 1, '2022-11-02 23:39:16');
+(5, 1677254862, 1, 0, 1097, 143, 1, '2023-02-24 23:07:42', '2023-02-24 23:10:13', 1, '2023-02-24 23:07:42');
 
 -- --------------------------------------------------------
 
@@ -755,13 +1199,6 @@ CREATE TABLE `tbl_book_read` (
   `time_read` datetime NOT NULL,
   `info_read` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_book_read`
---
-
-INSERT INTO `tbl_book_read` (`id`, `book_id`, `time_read`, `info_read`) VALUES
-(1, 4, '2022-11-10 13:51:12', '127.0.0.1::Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0');
 
 -- --------------------------------------------------------
 
@@ -785,7 +1222,8 @@ CREATE TABLE `tbl_book_return` (
 --
 
 INSERT INTO `tbl_book_return` (`id`, `code`, `user_id`, `book_id`, `sub_book`, `content`, `create_at`, `status`) VALUES
-(1, 1669231812, 1, 5, 1, 'Sách không đủ điều kiện để  phục vụ cho công tác thư viện', '2022-11-24 02:30:12', 1);
+(3, 1677252677, 1, 143, 1, 'Demo', '2023-02-24 22:31:17', 1),
+(5, 1677253056, 1, 143, 1, 'Demo', '2023-02-24 22:37:36', 2);
 
 -- --------------------------------------------------------
 
@@ -804,14 +1242,6 @@ CREATE TABLE `tbl_change_class` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_change_class`
---
-
-INSERT INTO `tbl_change_class` (`id`, `student_id`, `year_id_from`, `department_id_from`, `year_id_to`, `department_id_to`, `content`, `create_at`) VALUES
-(1, 52, 2, 1, 2, 2, 'Thay đổi nguyện vọng học ngoại ngữ', '2022-10-12 16:20:12'),
-(2, 52, 2, 2, 2, 1, 'Chuyển nhầm', '2022-10-12 16:24:06');
-
 -- --------------------------------------------------------
 
 --
@@ -828,18 +1258,10 @@ CREATE TABLE `tbl_change_device` (
   `device_id` int(11) NOT NULL,
   `sub_device` int(11) NOT NULL,
   `content` text COLLATE utf8_unicode_ci NOT NULL,
-  `status` int(11) NOT NULL COMMENT '0 là chưa duyệt, 1 là đã duyệt;  2 lad từ chối',
-  `user_app` int(11) NOT NULL,
-  `create_at` datetime NOT NULL
+  `create_at` datetime NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0 là chưa duyệt, 1 là đã duyệt; 2 lad từ chối',
+  `user_app` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_change_device`
---
-
-INSERT INTO `tbl_change_device` (`id`, `code`, `user_id`, `year_id`, `physical_from_id`, `physical_to_id`, `device_id`, `sub_device`, `content`, `status`, `user_app`, `create_at`) VALUES
-(1, 1669427947, 1, 2, 1, 2, 26, 1, 'Phục vụ công tác thi giáo viên dạy giỏi', 1, 1, '2022-11-26 08:59:07'),
-(2, 1669540264, 1, 2, 2, 1, 31, 1, 'Trả lại sau khi hoàn thành nhiệm vụ', 1, 1, '2022-11-27 16:11:04');
 
 -- --------------------------------------------------------
 
@@ -889,13 +1311,6 @@ CREATE TABLE `tbl_department_loan` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_department_loan`
---
-
-INSERT INTO `tbl_department_loan` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `date_return`, `department_id`, `lesson`, `content`, `status`, `create_at`) VALUES
-(1, 1669298223, 1, 59, '2022-11-24 00:00:00', '2022-11-24 00:00:00', 40, 1, 'Thực hành thí nghiệm khúc xạ ánh sáng', 0, '2022-11-24 20:57:03');
-
 -- --------------------------------------------------------
 
 --
@@ -923,17 +1338,44 @@ CREATE TABLE `tbl_devices` (
 --
 
 INSERT INTO `tbl_devices` (`id`, `code`, `title`, `cate_id`, `origin`, `price`, `depreciation`, `year_work`, `image`, `description`, `stock`, `status`, `user_id`) VALUES
-(26, 12345678, 'Máy tính giáo viên Core I5', 0, 'Việt Nam', 14020000, 20, 2022, '', '', 15, 1, 0),
-(27, 12345679, 'Máy tính học sinh Core I3', 1, 'Việt Nam', 14020000, 20, 2023, '', '', 10, 1, 0),
-(28, 12345680, 'Bảng tương tác thông minh', 0, 'Việt Nam', 14020000, 20, 2024, '', '', 10, 1, 0),
-(29, 12345681, 'Samsung smart tivi 5 inch', 0, 'Việt Nam', 14020000, 20, 2025, '', '', 17, 1, 0),
-(30, 12345682, 'Máy chiếu siêu gần Hitachi', 0, 'Việt Nam', 14020000, 20, 2026, '', '', 10, 1, 0),
-(31, 12345683, 'Máy chiếu đa năng kỹ thuật số Panasonic', 0, 'Việt Nam', 14020000, 20, 2027, '', '', 14, 1, 0),
-(32, 12345684, 'Máu tin Canon LBP151DW', 0, 'Việt Nam', 14020000, 20, 2028, '', '', 15, 1, 0),
-(33, 12345685, 'Loa Microlap M108', 3, 'Việt Nam', 14020000, 20, 2029, '', '', 10, 1, 0),
-(34, 12345686, 'Thiết bị trợ giảng, mic gài', 0, 'Việt Nam', 14020000, 20, 2030, '', '', 10, 1, 0),
-(35, 48320702, 'Đàn organ Yamaha 670s', 3, 'Trung quốc', 19020000, 20, 2022, '', '', 10, 1, 0),
-(61, 66254515, 'asdfasdf', 1, 'asdf', 23452300, 21, 2134, '', '', 0, 1, 0);
+(62, 84670666, 'Bàn vi tính GV', 3, 'Việt nam', 1000000, 20, 2022, '', '', 37, 1, 0),
+(63, 24415723, 'Ghế GV', 3, 'Việt nam', 1000000, 20, 2022, '', '', 37, 1, 0),
+(64, 49463408, 'Tủ đựng tài liệu', 3, 'Việt nam', 1000000, 20, 2022, '', '', 37, 1, 0),
+(65, 38515282, 'Bàn bán trú 2 chỗ ngồi cho HS', 3, 'Việt nam', 1000000, 20, 2022, '', '', 396, 1, 0),
+(66, 67439456, 'Ghế rời cho HS', 3, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(67, 79993962, 'Bảng trượt 2 lớp chống lóa', 3, 'Việt nam', 1000000, 20, 2022, '', '', 28, 1, 0),
+(68, 60351680, 'Đàn GUITAR', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 0, 0),
+(69, 14310621, 'Ghế thép gấp', 3, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(70, 15575186, 'Smart TV', 2, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(71, 57982353, 'Bộ âm thanh trợ giảng', 3, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(72, 36035330, 'Máy soi bài', 3, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(73, 17792271, 'Ổ cắm', 0, 'Việt nam', 9000, 20, 2022, '', '', 0, 1, 0),
+(74, 10517690, 'Bàn tròn', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(75, 60457339, 'Bàn đọc sách độc lập', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(76, 57796540, 'Ghế ngồi đọc cho học sinh', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(77, 77074894, 'Bàn thủ thư', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(78, 14294510, 'Kệ sách đứng', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(79, 98830640, 'Giá đa năng', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(80, 50760885, 'Ghế vi tính chân xoay', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(81, 50068017, 'Kệ sách thang cong', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(82, 55464925, 'Giá sách cong', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(83, 96293423, 'Ghế vi tính chân xoay', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(84, 48736166, 'Giá sách vòm cong', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(85, 48688143, 'Tủ thấp', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(86, 34123066, 'Bàn đọc sách tròn độc lập', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(87, 66317966, 'Tủ trưng bày', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(88, 31933406, 'Bàn học hình thang', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(89, 92372834, 'Ghế học sinh cỡ số VI', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(90, 428518, 'Bàn thí nghiệm học sinh', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(91, 97551941, 'Ghế thí nghiệm học sinh', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(92, 66732946, 'Bàn thí nghiệm GV', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(93, 48627795, 'Tủ điều khiển trung tâm', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(94, 9188148, 'Bàn chuẩn bị thí nghiệm', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(95, 86158927, 'Ghế chuẩn bị thí nghiệm', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(96, 20279108, 'Tủ thuốc y tế', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(97, 62203245, 'Tủ làm thí nghiệm, hút độc', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0),
+(98, 84345115, 'Bàn ghế học sinh 2 chỗ', 1, 'Việt nam', 1000000, 20, 2022, '', '', 158, 1, 0),
+(99, 64617081, 'Đàn guitar', 1, 'Việt nam', 1000000, 20, 2022, '', '', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -956,7 +1398,11 @@ CREATE TABLE `tbl_device_import` (
 --
 
 INSERT INTO `tbl_device_import` (`id`, `code`, `date_import`, `user_id`, `source`, `notes`, `create_at`) VALUES
-(2, 1666374036, '2022-10-22', 1, 'Mua sắm tập trung', '', '2022-10-22 00:40:36');
+(4, 1676517104, '2022-09-01', 56, 'Dự án k6', 'Đồ dùng 6', '2023-02-16 10:18:03'),
+(5, 1676517249, '2022-09-01', 56, 'Dự án K7', 'Đồ dùng khối 7', '2023-02-16 10:18:57'),
+(6, 1676517278, '2022-09-01', 56, 'Dự án K8', 'Đồ dùng khối 8', '2023-02-16 10:18:50'),
+(7, 1676517409, '2023-02-16', 56, 'Dự án K9', '', '2023-02-16 10:18:25'),
+(8, 1676517611, '2023-02-16', 56, 'Dự án Phòng âm nhạc', '', '2023-02-16 10:20:11');
 
 --
 -- Triggers `tbl_device_import`
@@ -984,10 +1430,29 @@ CREATE TABLE `tbl_device_import_detail` (
 --
 
 INSERT INTO `tbl_device_import_detail` (`id`, `code`, `device_id`, `quantily`) VALUES
-(4, 1666374036, 32, 5),
-(5, 1666374036, 31, 4),
-(6, 1666374036, 26, 5),
-(7, 1666374036, 29, 7);
+(38, 1676517104, 62, 9),
+(39, 1676517104, 63, 9),
+(40, 1676517104, 64, 9),
+(41, 1676517104, 65, 198),
+(42, 1676517104, 67, 9),
+(43, 1676517409, 98, 80),
+(44, 1676517409, 62, 9),
+(45, 1676517409, 63, 9),
+(46, 1676517409, 64, 9),
+(47, 1676517278, 62, 9),
+(48, 1676517278, 63, 9),
+(49, 1676517278, 64, 9),
+(50, 1676517278, 67, 9),
+(51, 1676517278, 98, 78),
+(52, 1676517249, 62, 9),
+(53, 1676517249, 63, 9),
+(54, 1676517249, 64, 9),
+(55, 1676517249, 65, 198),
+(56, 1676517249, 67, 9),
+(57, 1676517611, 62, 1),
+(58, 1676517611, 63, 1),
+(59, 1676517611, 64, 1),
+(60, 1676517611, 67, 1);
 
 --
 -- Triggers `tbl_device_import_detail`
@@ -1083,8 +1548,7 @@ CREATE TABLE `tbl_document_in` (
 --
 
 INSERT INTO `tbl_document_in` (`id`, `code`, `cate_id`, `number_in`, `date_in`, `number_dc`, `date_dc`, `title`, `content`, `user_id`, `user_share`, `create_at`, `file`, `status`) VALUES
-(4, 1666972114, 1, 1, '2022-10-28', '01/KH-UBND', '2022-10-01', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, '', '2022-10-28 22:48:34', '1666972114_document_in.pdf', 0),
-(5, 1669455256, 1, 2, '2022-11-26', '02/KH-UBND', '2022-11-25', 'Be careful as to how you elevate privileges to your php script', 'It\'s a good idea to use caution and planing.  It is easy to open up huge security holes.  Here are a couple of helpful hints I\'ve gathered from experimentation and Unix documentation.', 1, '', '2022-11-26 23:08:26', '1669478906_document_in.pdf', 1);
+(4, 1666972114, 1, 1, '2022-10-28', '01/KH-UBND', '2022-10-01', 'The standard Lorem Ipsum passage, used since the 1500s', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, '', '2022-10-28 22:48:34', '1666972114_document_in.pdf', 0);
 
 -- --------------------------------------------------------
 
@@ -1133,15 +1597,6 @@ CREATE TABLE `tbl_export` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tbl_export`
---
-
-INSERT INTO `tbl_export` (`id`, `code`, `year_id`, `physical_id`, `create_at`) VALUES
-(9, 1657388721, 2, 1, '2022-11-22 00:54:02'),
-(10, 1657388764, 2, 3, '2022-10-20 11:32:34'),
-(11, 1668762366, 2, 2, '2022-11-18 16:06:06');
-
---
 -- Triggers `tbl_export`
 --
 DELIMITER $$
@@ -1164,18 +1619,6 @@ CREATE TABLE `tbl_export_detail` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_export_detail`
---
-
-INSERT INTO `tbl_export_detail` (`id`, `code`, `device_id`, `sub_device`, `status`, `create_at`) VALUES
-(26, 1657388764, 34, 1, 0, '2022-10-20 11:32:34'),
-(27, 1657388764, 26, 2, 0, '2022-10-20 11:32:34'),
-(28, 1668762366, 31, 1, 1, '2022-11-18 16:06:06'),
-(29, 1657388721, 26, 1, 1, '2022-11-22 00:54:02'),
-(31, 1668762366, 26, 1, 0, '2022-11-26 09:07:45'),
-(32, 1657388721, 31, 1, 0, '2022-11-27 16:11:39');
-
 -- --------------------------------------------------------
 
 --
@@ -1196,10 +1639,12 @@ CREATE TABLE `tbl_group_role` (
 --
 
 INSERT INTO `tbl_group_role` (`id`, `code`, `title`, `roles`, `status`, `create_at`) VALUES
-(1, 1663899640, 'Giáo viên', '6,8,9,10,52,52_1,52_2,52_3,11,55,55_1,55_2,55_3,13,14,18,19,25,25_6,28,31,31_6,33,37,39,40,40_5,43,43_5,56,5,5_1,5_2,5_3', 1, '2022-10-31 09:17:48'),
-(2, 1664127781, 'Hành chính nhân sự', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,7,7_1,7_2,7_3,8,8_1,8_2,8_3,9,9_1,9_2,9_3,10,11,12,12_1,12_2,12_3,12_4,12_5,13,14,14_1,14_2,14_3,14_4,14_5,15,16,17,19,20,20_1,20_2,20_3,20_4,21,22,23,24,25,25_1,25_6,26,27,27_1,28,29,29_1,29_2,29_3,29_4,30,31,31_1', 1, '2022-09-26 01:04:09'),
-(3, 1665055113, 'Quản trị', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,7,7_1,7_2,7_3,8,8_1,8_2,8_3,9,9_1,9_2,9_3,10,50,51,51_1,51_2,51_3,52,52_1,52_2,52_3,11,53,54,55,55_1,55_2,55_3,12,12_1,12_2,12_3,12_4,12_5,13,14,14_1,14_2,14_3,14_4,14_5,15,16,17,18,18_7,19,20,20_1,20_2,20_3,20_4,21,22,23,24,25,25_1,25_6,26,27,27_1,28,29,29_1,29_2,29_3,29_4,30,31,31_1,31_6,32,32_1,33,34,34_1,34_2,34_3,35,35_1,35_2,35_3,36,37,37_1,38,38_1,39,40,40_5,41,41_5,42,42_5,43,43_5,44,44_5,45,45_5,46,46_5,47,48,48_1,48_2,48_3,49,49_1,49_2,49_3,56,57,57_1,57_2,57_3,5,5_1,5_2,5_3', 1, '2022-10-06 18:22:50'),
-(4, 1665055629, 'Hiệu trưởng', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,8,9,10,50,51,51_1,51_2,51_3,52,52_1,52_2,52_3,11,53,54,55,55_1,55_2,55_3,12,12_1,13,14,15,16,17,18,18_7,19,20,24,24_7,25,26,27,27_7,28,29,31,32,33,34,35,37,38,39,62,62_5,63,63_5,56,57,57_1,57_2,57_3,5', 1, '2022-11-27 08:03:05');
+(1, 1663899640, 'Giáo viên', '6,8,9,10,52,52_1,52_2,52_3,11,55,55_1,55_2,55_3,13,14,18,19,25,25_6,28,31,31_6,33,37,39,40,40_5,43,43_5,56,5,5_1,5_2,5_3', 0, '2022-10-31 09:17:48'),
+(2, 1664127781, 'Hành chính nhân sự', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,10,52,52_1,52_2,52_3,11,55,55_1,55_2,55_3,12,12_1,12_2,12_3,12_4,12_5,13,14,14_1,14_2,14_3,14_4,39,62,62_5,63,63_5,64,64_5', 1, '2022-11-16 02:47:22'),
+(3, 1665055113, 'Quản trị', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,6,7,7_1,7_2,7_3,8,8_1,8_2,8_3,9,9_1,9_2,9_3,10,50,51,51_1,51_2,51_3,52,52_1,52_2,52_3,11,53,54,55,55_1,55_2,55_3,12,12_1,12_2,12_3,12_4,12_5,13,14,14_1,14_2,14_3,14_4,14_5,15,16,17,18,18_7,19,20,20_1,20_2,20_3,20_4,21,22,23,24,25,25_1,25_6,26,27,27_1,28,29,29_1,29_2,29_3,29_4,30,31,31_1,31_6,32,32_1,33,34,34_1,34_2,34_3,35,35_1,35_2,35_3,36,37,37_1,38,38_1,39,40,40_5,41,41_5,42,42_5,43,43_5,44,44_5,45,45_5,46,46_5,47,48,48_1,48_2,48_3,49,49_1,49_2,49_3,56,57,57_1,57_2,57_3,5,5_1,5_2,5_3', 0, '2022-10-06 18:22:50'),
+(4, 1665055629, 'Hiệu trưởng', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,10,50,51,51_1,51_2,51_3,52,52_1,52_2,52_3,11,53,54,55,55_1,55_2,55_3,12,13,14,39,62,62_5,63,63_5', 1, '2022-11-30 23:05:55'),
+(5, 1667664401, 'Quản lý thư viện', '1,2,2_1,2_2,2_3,3,3_1,3_2,3_3,4,4_5,33,34,34_1,34_2,34_3,35,35_1,35_2,35_3,84,84_1,84_2,84_3,36,37,37_1,38,38_1,39,79,80,81', 1, '2023-02-10 09:30:30'),
+(6, 1675656625, 'Đồ dùng', '19,20,20_1,20_2,20_3,20_4,21,22,23,24,24_1,25,25_1,25_6,26,26_1,26_2,26_3,27,27_1,27_7,28,29,29_1,29_2,29_3,29_4,85,85_1,85_2,85_3,30,31,31_1,31_6,32,32_1,39,67,67_5,68,68_5,69,69_5,70,70_5,71,71_5,72,72_5,73,73_5,74,74_5,75,75_5,76,76_5,77,77_5', 1, '2023-02-06 11:38:31');
 
 -- --------------------------------------------------------
 
@@ -1225,7 +1670,7 @@ CREATE TABLE `tbl_loans` (
 --
 
 INSERT INTO `tbl_loans` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `date_return`, `content`, `notes`, `status`, `create_at`) VALUES
-(1, 1668762492, 1, 59, '2022-11-18 16:08:12', '2022-11-23 20:09:49', 'Phục vụ công tác giảng dạy', '', 1, '2022-11-18 16:08:12');
+(1, 1675657813, 56, 57, '2023-02-06 11:30:13', '2023-02-06 11:31:00', 'aSDFASF', '', 1, '2023-02-06 11:30:13');
 
 --
 -- Triggers `tbl_loans`
@@ -1255,7 +1700,7 @@ CREATE TABLE `tbl_loans_detail` (
 --
 
 INSERT INTO `tbl_loans_detail` (`id`, `code`, `device_id`, `sub_device`, `status`, `date_return`) VALUES
-(1, 1668762492, 28, 1, 1, '2022-11-23 20:09:49');
+(1, 1675657813, 28, 1, 1, '2023-02-06 11:31:00');
 
 -- --------------------------------------------------------
 
@@ -1272,20 +1717,6 @@ CREATE TABLE `tbl_notify` (
   `link` text COLLATE utf8_unicode_ci NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_notify`
---
-
-INSERT INTO `tbl_notify` (`id`, `user_id`, `user_read`, `readed`, `title`, `link`, `create_at`) VALUES
-(9, 3, 1, 1, 'Trao đổi / ý kiến công việc', 'http://localhost:81/longbien/tasks/detail?id=7', '2022-07-17 00:34:23'),
-(15, 1, 4, 1, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=13', '2022-07-18 16:20:28'),
-(21, 1, 4, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=17', '2022-08-26 10:31:10'),
-(24, 1, 60, 0, 'Bạn có công việc mới', 'http://localhost:81/longbien/tasks/detail?id=1', '2022-10-19 03:37:47'),
-(25, 1, 60, 0, 'Cập nhật nội dung công việc', 'http://localhost:81/longbien/tasks/detail?id=1', '2022-10-21 10:01:26'),
-(26, 1, 60, 0, 'Cập nhật nội dung công việc', 'http://localhost:81/longbien/tasks/detail?id=1', '2022-10-21 10:01:26'),
-(27, 1, 0, 0, 'Bạn có văn bản mới: The standard Lorem Ipsum passage, used since the 1500s', 'http://localhost:81/longbien/document_in', '2022-10-28 22:48:34'),
-(28, 1, 0, 0, 'Bạn có văn bản mới: Traducció de H. Rackham de 1914', 'http://localhost:81/longbien/document_out', '2022-10-28 22:59:07');
 
 -- --------------------------------------------------------
 
@@ -1386,13 +1817,6 @@ CREATE TABLE `tbl_proof` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_proof`
---
-
-INSERT INTO `tbl_proof` (`id`, `code`, `code_proof`, `criteria_id`, `title`, `file`, `file_link`, `create_at`, `user_id`, `status`) VALUES
-(11, 1667578118, 'H01.01.01', 4, 'Biên bản dự giờ của hiệu trưởng', '', '4_1', '2022-11-04 23:17:55', 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -1427,14 +1851,6 @@ CREATE TABLE `tbl_returns_device` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_returns_device`
---
-
-INSERT INTO `tbl_returns_device` (`id`, `code`, `create_at`, `year_id`, `physical_id`, `device_id`, `sub_device`, `content`, `status`, `user_id`) VALUES
-(1, 1669050540, '2022-11-22 00:09:00', 2, 1, 26, 1, 'Thiết bị không đủ điều kiện phục vụ công tác giảng dạy', 1, 1),
-(2, 1669050881, '2022-11-22 00:14:41', 2, 1, 26, 1, 'Thiết bị đã được sửa chữa và nâng cấp đủ điều kiện phục vụ công tác giảng dạy', 3, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -1449,7 +1865,7 @@ CREATE TABLE `tbl_roles` (
   `functions` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `order_position` int(11) NOT NULL,
   `icon` text COLLATE utf8_unicode_ci,
-  `is_submenu` int(11) NOT NULL COMMENT '0 là có,1 là không'
+  `is_submenu` int(11) NOT NULL DEFAULT '0' COMMENT '0 là có,1 là không'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -1486,15 +1902,15 @@ INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`, `order
 (27, 19, 'Thu hồi - Khôi phục', 'returns', '1,7', 8, '', 0),
 (28, 0, 'Đồ dùng dạy học', '#', '', 10, 'flask', 0),
 (29, 28, 'Thông tin', 'gear', '1,2,3,4', 1, '', 0),
-(30, 28, 'In mã đồ dùng', 'gear_code', '', 2, '', 0),
-(31, 28, 'Mượn - trả', 'gear_loans', '1,6', 3, '', 0),
-(32, 28, 'Thu hồi - Khôi phục', 'gear_return', '1', 4, '', 0),
+(30, 28, 'In mã đồ dùng', 'gear_code', '', 3, '', 0),
+(31, 28, 'Mượn - trả', 'gear_loans', '1,6', 4, '', 0),
+(32, 28, 'Thu hồi - Khôi phục', 'gear_return', '1', 5, '', 0),
 (33, 0, 'Thư viện', '#', '', 11, 'book', 0),
 (34, 33, 'Danh mục', 'lib_cate', '1,2,3', 1, '', 0),
 (35, 33, 'Quản lý đầu sách', 'library', '1,2,3', 2, '', 0),
-(36, 33, 'In mã đầu sách', 'lib_code', '', 3, '', 0),
-(37, 33, 'Mượn - trả', 'lib_loans', '1', 4, '', 0),
-(38, 33, 'Thu hồi - khôi phục', 'lib_return', '1', 5, '', 0),
+(36, 33, 'In mã đầu sách', 'lib_code', '', 4, '', 0),
+(37, 33, 'Mượn - trả', 'lib_loans', '1', 5, '', 0),
+(38, 33, 'Thu hồi - khôi phục', 'lib_return', '1', 6, '', 0),
 (39, 0, 'Báo  cáo - Thống kê', 'report', '', 12, 'bar-chart', 1),
 (47, 0, 'Quản lý người dùng', '#', '', 13, 'user', 0),
 (48, 47, 'Quản lý người dùng', 'users', '1,2,3', 1, '', 0),
@@ -1502,8 +1918,8 @@ INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`, `order
 (50, 10, 'Danh mục', 'quanlity_cate', '', 1, '', 0),
 (51, 10, 'Phân quyền tiêu chí', 'quanlity_role', '1,2,3', 2, '', 0),
 (52, 10, 'Quản lý minh chứng', 'proof', '1,2,3', 3, '', 0),
-(53, 11, 'Danh mục', '#', '', 1, '', 0),
-(54, 11, 'Phân quyền danh mục', '#', '', 2, '', 0),
+(53, 11, 'Danh mục', 'works_cate', '', 1, '', 0),
+(54, 11, 'Phân quyền danh mục', 'works_role', '', 2, '', 0),
 (55, 11, 'Quản lý hồ sơ', 'works', '1,2,3', 3, '', 0),
 (56, 0, 'Chuyên môn', '#', '', 3, 'calendar-check-o', 0),
 (57, 56, 'Phân công giáo viên', 'assign', '1,2,3', 1, '', 0),
@@ -1529,7 +1945,9 @@ INSERT INTO `tbl_roles` (`id`, `parent_id`, `title`, `link`, `functions`, `order
 (79, 39, 'Danh sách sách trong thư viện', 'report_book', '5', 20, 'book', 0),
 (80, 39, 'Báo cáo mượn trả - trả sách', 'report_book_loan', '5', 21, 'street-view', 0),
 (81, 39, 'Báo cáo thu hồi - khôi phục sách', 'report_book_return', '5', 22, 'refresh', 0),
-(82, 39, 'Báo cáo sử dụng phòng chức năng', 'report_dep_loan', '5', 23, 'truck', 0);
+(82, 39, 'Báo cáo sử dụng phòng chức năng', 'report_dep_loan', '5', 23, 'truck', 0),
+(84, 33, 'Nhập kho sách', 'lib_import', '1,2,3', 3, NULL, 0),
+(85, 28, 'Nhập kho', 'gear_imp', '1,2,3', 2, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -1552,22 +1970,17 @@ CREATE TABLE `tbl_schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tbl_schedule`
---
-
-INSERT INTO `tbl_schedule` (`id`, `code`, `user_id`, `user_create`, `lesson`, `subject_id`, `department_id`, `lesson_export`, `date_study`, `title`, `create_at`) VALUES
-(6, 1666766871, 58, 58, 1, 8, 36, 1, '2022-10-26', 'Cộng vận tốc', '2022-10-26 13:47:51'),
-(7, 1666773709, 58, 58, 2, 8, 37, 2, '2022-10-26', 'Khúc xạ ánh sáng', '2022-10-26 15:41:49'),
-(8, 1666773963, 58, 58, 3, 8, 38, 1, '2022-10-26', 'Cộng vận tốc', '2022-10-26 15:46:03');
-
---
 -- Triggers `tbl_schedule`
 --
 DELIMITER $$
 CREATE TRIGGER `del_device_gear_department_loan_after_del_schedule` AFTER DELETE ON `tbl_schedule` FOR EACH ROW BEGIN
+
 DELETE FROM tbl_loans WHERE tbl_loans.code = old.code;
+
 DELETE FROM tbl_utensils_loan WHERE tbl_utensils_loan.code = old.code;
+
 DELETE FROM tbl_department_loan WHERE tbl_department_loan.code = old.code;
+
 END
 $$
 DELIMITER ;
@@ -3998,15 +4411,6 @@ CREATE TABLE `tbl_student_point` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_student_point`
---
-
-INSERT INTO `tbl_student_point` (`id`, `code`, `student_id`, `user_id`, `subject_id`, `type_point`, `point`, `year_id`, `semester`, `create_at`) VALUES
-(1, 1667441638, 1200, 58, 8, 1, 8, 2, 1, '2022-11-03 09:13:58'),
-(2, 1667441673, 1200, 58, 8, 5, 6, 2, 1, '2022-11-03 09:14:33'),
-(3, 1667466774, 1202, 58, 8, 5, 8, 2, 1, '2022-11-03 16:12:54');
-
 -- --------------------------------------------------------
 
 --
@@ -4051,7 +4455,8 @@ CREATE TABLE `tbl_tasks` (
 --
 
 INSERT INTO `tbl_tasks` (`id`, `code`, `group_id`, `title`, `content`, `date_work`, `time_work`, `user_id`, `user_main`, `user_share`, `file`, `status`, `create_at`, `is_display`) VALUES
-(1, 1666125467, 1, 'asdf', 'asdf', '2022-10-19', 1, 1, 60, '60', '', 0, '2022-10-21 10:01:26', 0);
+(1, 1666125467, 1, 'asdf', 'asdf', '2022-10-19', 1, 1, 60, '60', '', 1, '2022-10-21 10:01:26', 0),
+(2, 1677124090, 2, 'Kiểm kê sách giáo khoa', 'Kiểm kê toàn bộ sách giáo khoa của các khối', '2023-02-23', 1, 11, 11, '', '', 2, '2023-02-23 10:48:10', 0);
 
 -- --------------------------------------------------------
 
@@ -4067,6 +4472,13 @@ CREATE TABLE `tbl_task_comment` (
   `file` text COLLATE utf8_unicode_ci NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_task_comment`
+--
+
+INSERT INTO `tbl_task_comment` (`id`, `task_id`, `user_id`, `content`, `file`, `create_at`) VALUES
+(1, 2, 11, 'Hoàn thành công việc', '', '2023-02-23 10:48:53');
 
 -- --------------------------------------------------------
 
@@ -4087,7 +4499,7 @@ CREATE TABLE `tbl_task_group` (
 --
 
 INSERT INTO `tbl_task_group` (`id`, `title`, `user_id`, `create_at`, `status`) VALUES
-(1, 'Demo', 1, '2022-10-19 03:35:33', 0);
+(2, 'Công việc hàng ngày', 11, '2023-02-23 10:47:18', 0);
 
 -- --------------------------------------------------------
 
@@ -4130,14 +4542,14 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_login`, `token`, `info_login`, `hr_id`, `group_role_id`, `avatar`, `is_change`) VALUES
-(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2022-11-28 23:34:15', '5a5f160307c133c67ecdcf07025757895a93bb6d', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0', 0, 0, '', 0),
+(1, 1, 'admin', 'b3aca92c793ee0e9b1a9b0a5f5fc044e05140df3', 1, '2023-03-01 23:50:19', '91be86da0bc94b6f737193e992e1470c2c5fa5ed', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0', 0, 0, '', 0),
 (10, 1665086234, 'huyenltt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 204, 1, '', 0),
-(11, 1665086258, 'thanhnt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 203, 2, '', 0),
+(11, 1665086258, 'thanhnt', '87e3bc383aa97e42ca0bad878ba9f22c361af283', 1, '2023-02-24 14:12:11', '6e216535f94181865bcfa6e7c678829afd7711da', '222.252.2.8-Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36', 203, 5, '', 1),
 (12, 1665086266, 'hiennt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 202, 2, '', 0),
 (13, 1665086275, 'hoantm', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 201, 2, '', 0),
 (14, 1665086282, 'binhdtt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 200, 2, '', 0),
 (15, 1665086299, 'linhnh', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 199, 1, '', 0),
-(16, 1665086307, 'tuqa', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-10-12 08:36:43', 'caaf997aa6e113db1ed59c1a9fd6fb063d2037f0', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 198, 1, '', 1),
+(16, 1665086307, 'tuqa', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 198, 1, '', 1),
 (17, 1665086313, 'maintt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 197, 1, '', 0),
 (18, 1665086320, 'maidtt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 196, 1, '', 0),
 (19, 1665086326, 'loannt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 195, 1, '', 0),
@@ -4177,11 +4589,11 @@ INSERT INTO `tbl_users` (`id`, `code`, `username`, `password`, `active`, `last_l
 (53, 1665086727, 'thuanntb', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 161, 1, '', 0),
 (54, 1665086735, 'thuynt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 160, 1, '', 0),
 (55, 1665086745, 'nhungdth', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 159, 1, '', 0),
-(56, 1665086757, 'hiepnt', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 158, 1, '', 0),
+(56, 1665086757, 'hiepnt', 'c5c69543829310b4f30e6d7dd0fbe93a6ff09b16', 1, '2023-02-24 07:59:03', '45326a815bd2004d63a0682feba9f85efefa1579', '222.252.2.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 158, 6, '', 1),
 (57, 1665086779, 'thoattk', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '0000-00-00 00:00:00', '', '', 157, 1, '', 0),
-(58, 1665086787, 'thanhmh', '61d6504733ca7757e259c644acd085c4dd471019', 1, '2022-11-03 22:30:03', 'aef0ecda19afaaf31cd0fb75ad46409cb65b8f3b', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0', 156, 1, '', 1),
-(59, 1665086795, 'anhctp', '61d6504733ca7757e259c644acd085c4dd471019', 1, '2022-10-16 00:23:26', '208aa5aaa1bc321925c6604b6101d5f3d88435aa', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0', 155, 1, '', 1),
-(60, 1665086803, 'thuyntd', 'b227cbd22eaa96019ebfc4aff35ad2add2a47439', 1, '2022-11-27 23:49:05', 'd2c78855aeed41a5bbdbfc29498612b93f0588fa', '127.0.0.1-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 154, 4, '', 1);
+(58, 1665086787, 'thanhmh', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-11-03 22:30:03', '', '', 156, 1, '', 0),
+(59, 1665086795, 'anhctp', '7ce0359f12857f2a90c7de465f40a95f01cb5da9', 1, '2022-10-16 00:23:26', '', '', 155, 1, '', 0),
+(60, 1665086803, 'thuyntd', '5a7bc24008a8a8402c06d75dd3dbc1b076220450', 1, '2022-11-30 23:07:34', '5ff739955f31e6f9faba162c7b680ae498fe4bdf', '1.54.49.202-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 154, 4, '', 1);
 
 -- --------------------------------------------------------
 
@@ -4207,26 +4619,84 @@ CREATE TABLE `tbl_utensils` (
 --
 
 INSERT INTO `tbl_utensils` (`id`, `code`, `cate_id`, `title`, `image`, `content`, `stock`, `status`, `create_at`, `user_id`) VALUES
-(1, 38163453, 3, 'Quả địa cầu', '1661189454_38163453.png', 'Quả địa cầu là một mô hình ba chiều mô phỏng Trái Đất (quả địa cầu mặt đất hay quả địa cầu địa lý) hay các thiên thể khác như hành tinh, ngôi sao hay vệ tinh tự nhiên.', 5, 0, '2022-08-23 01:22:17', 0),
-(2, 12345678, 1, 'Quả  cầu vật lý', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(3, 12345679, 1, 'Bản đồ Việt Nam', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(4, 12345680, 1, 'Ảnh mô phỏng hệ thống hô hấp của người', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(5, 12345681, 1, 'Bản đồ địa lý châu âu', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 9, 0, '2022-08-23 23:15:23', 0),
-(6, 12345682, 1, 'Bản đồ địa lý châu á', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 9, 0, '2022-08-23 23:15:23', 0),
-(7, 12345683, 1, 'Bản đồ địa lý châu phi', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 9, 0, '2022-08-23 23:15:23', 0),
-(8, 12345684, 1, 'Bản đồ địa lý chây mỹ', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 10, 0, '2022-08-23 23:15:23', 0),
-(9, 12345685, 1, 'Bản đồ địa lý châu úc', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 9, 0, '2022-08-23 23:15:23', 0),
-(10, 12345686, 1, 'Kính lúp', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(11, 12345687, 1, 'Lăng kính', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(12, 12345688, 1, 'Kính hiển vi', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(13, 12345689, 1, 'Mô hình cơ quan tiêu hóa của người', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(14, 12345690, 1, 'Bộ thí nghiệm hóa học', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(15, 12345691, 1, 'Bộ thí nghiệm vật lý - Lục đẩy Acsimet', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(16, 12345692, 1, 'Bộ thí nghiệm vật lý - Khúc xạ ánh sáng', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(17, 12345693, 1, 'Bộ thí nghiệm vật lý - Lục từ và từ trường', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(18, 12345694, 1, 'Bộ thí nghiệ vật lý - Dao động và sóng', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(19, 12345695, 1, 'Bảng tuần hoàn các nguyên tố hóa học', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:15:23', 0),
-(20, 12345696, 1, 'Mô hình hệ tuần hoàn của người', '', 'Hỗ trợ tương tác trực quan cho nội dung bài học', 4, 0, '2022-08-23 23:17:47', 0);
+(21, 55593200, 0, 'Bộ thiết bị dạy học trực quan', '', '', 0, 0, '2023-02-21 10:33:16', 0),
+(22, 58898968, 0, 'Bộ thiết bị dạy học phẳng', '', '', 0, 0, '2023-02-21 10:33:30', 0),
+(23, 18288159, 0, 'Bộ thước vẽ bảng dạy học', '', '', 0, 0, '2023-02-21 10:34:21', 0),
+(24, 36222855, 0, 'Bộ tranh mô hình hóa của các thành tố của văn bản thơ', '', '', 0, 0, '2023-02-21 10:35:07', 0),
+(25, 34364189, 0, 'Bộ tranh bìa sách một số cuốn hồi kí và du kí nổi tiếng', '', '', 0, 0, '2023-02-21 10:35:14', 0),
+(26, 60224157, 0, 'Tranh mô hình hóa các yếu tố hình thức của văn bản nghị luận: mở bài, thân bài, kết bài; ý kiến, lí lẽ, bằng chứng', '', '', 0, 0, '2023-02-21 10:35:21', 0),
+(27, 41019613, 0, 'Tranh mô hình hóa các yếu tố của văn bản thông tin', '', '', 0, 0, '2023-02-21 10:35:27', 0),
+(28, 34084243, 0, 'Mô hình hóa quy trình viết 1 văn bản', '', '', 0, 0, '2023-02-21 10:35:40', 0),
+(29, 10194136, 0, 'Sơ đồ tóm tắt nội dung chính của một số văn bản đơn giản', '', '', 0, 0, '2023-02-21 10:35:48', 0),
+(30, 43964018, 0, 'Sơ đồ một số kiểu VB có trong chương trình', '', '', 0, 0, '2023-02-21 10:35:54', 0),
+(31, 1660280, 0, 'Trống nhỏ', '', '', 0, 0, '2023-02-21 10:36:09', 0),
+(32, 28791299, 0, 'Tam giác chuông (Triangle)', '', '', 0, 0, '2023-02-21 10:36:16', 0),
+(33, 63798807, 0, 'Trống lục lạc (Tambounrin)', '', '', 0, 0, '2023-02-21 10:36:36', 0),
+(34, 43654030, 0, 'Bảng pha màu', '', '', 0, 0, '2023-02-21 10:36:51', 0),
+(35, 71814422, 0, 'Ống rửa bút', '', '', 0, 0, '2023-02-21 10:37:03', 0),
+(36, 55132583, 0, 'Màu oát', '', '', 0, 0, '2023-02-21 10:37:09', 0),
+(37, 46918502, 0, 'Đất nặn', '', '', 0, 0, '2023-02-21 10:37:15', 0),
+(38, 19267818, 0, 'Bản đồ thể hiện thế giới cổ đại', '', '', 0, 0, '2023-02-21 10:37:26', 0),
+(39, 64714144, 0, 'Bản đồ thể hiện Đông Nam Á và các quốc gia khu vực Đông Nam Á', '', '', 0, 0, '2023-02-21 10:37:33', 0),
+(40, 28521917, 0, 'Bản đồ thể hiện hoạt động trên biển Đông', '', '', 0, 0, '2023-02-21 10:37:39', 0),
+(41, 11309622, 0, 'Bản đồ thể hiện nước Văn Lang và nước Âu Lạc', '', '', 0, 0, '2023-02-21 10:37:46', 0),
+(42, 20840076, 0, 'Bản đồ thể hiện Việt Nam dưới thời Bắc thuộc', '', '', 0, 0, '2023-02-21 10:37:54', 0),
+(43, 24766338, 0, 'Lược đồ thể hiện dịa dư, vị thế và lịch sử Vương quốc Champa và Vương quốc Phù Nam', '', '', 0, 0, '2023-02-21 10:38:04', 0),
+(44, 36677936, 0, 'Lưới kinh, vĩ tuyến: Một số lưới chiếu toàn cầu', '', '', 0, 0, '2023-02-21 10:38:11', 0),
+(45, 31947304, 0, 'Sơ đồ chuyển động  của Trái đất vòng quanh Mặt trời', '', '', 0, 0, '2023-02-21 10:38:19', 0),
+(46, 68242068, 0, 'Cấu tạo bên trong trái đất', '', '', 0, 0, '2023-02-21 10:40:35', 0),
+(47, 95606404, 0, 'Sơ đồ cấu tạo trái đất', '', '', 0, 0, '2023-02-21 10:40:46', 0),
+(48, 66156001, 0, 'Các dạng địa hình trên trái đất', '', '', 0, 0, '2023-02-23 09:13:07', 0),
+(49, 30350609, 0, 'Hiện tượng tạo núi', '', '', 0, 0, '2023-02-23 09:13:15', 0),
+(50, 4342781, 0, 'Sơ đồ tuần hoàn nước và biểu đồ thành phần thủy quyển', '', '', 0, 0, '2023-02-23 09:13:23', 0),
+(51, 702312, 0, 'Tranh minh họa phẫu diện một số loại đất chính', '', '', 0, 0, '2023-02-23 09:13:31', 0),
+(52, 14695694, 0, 'Tranh về hệ sinh thái trên trái đất', '', '', 0, 0, '2023-02-23 09:13:38', 0),
+(53, 33013920, 0, 'Quả địa cầu', '', '', 0, 0, '2023-02-23 09:13:45', 0),
+(54, 72480842, 0, 'Địa bàn', '', '', 0, 0, '2023-02-23 09:13:51', 0),
+(55, 12926194, 0, 'Hộp quặng và khoáng sản chính của Việt Nam', '', '', 0, 0, '2023-02-23 09:13:57', 0),
+(56, 21650381, 0, 'Nhiệt kế', '', '', 0, 0, '2023-02-23 09:14:04', 0),
+(57, 3577960, 0, 'Nhiệt - ẩm kế treo tường', '', '', 0, 0, '2023-02-23 09:14:11', 0),
+(58, 93945428, 0, 'Thước dây', '', '', 0, 0, '2023-02-23 09:14:19', 0),
+(59, 2220046, 0, 'Tranh/ ảnh mô tả sự đa dạng của chất', '', '', 0, 0, '2023-02-23 09:14:26', 0),
+(60, 56730083, 0, 'Tranh/ảnh vẽ sơ đồ biểu diễn sự chuyển thể của chất', '', '', 0, 0, '2023-02-23 09:14:42', 0),
+(61, 74394942, 0, 'Cầu trúc tế bào thực vật', '', '', 0, 0, '2023-02-23 09:14:50', 0),
+(62, 41782751, 0, 'Cầu trúc tế bào động vật', '', '', 0, 0, '2023-02-23 09:14:58', 0),
+(63, 93364836, 0, 'So sánh tế bào thực vật, động vật', '', '', 0, 0, '2023-02-23 09:15:06', 0),
+(64, 79226472, 0, 'Cấu trúc tế bào nhân sơ', '', '', 0, 0, '2023-02-23 09:15:14', 0),
+(65, 52969939, 0, 'So sánh tế bào nhân sơ và tế bào nhân thực', '', '', 0, 0, '2023-02-23 09:15:23', 0),
+(66, 90529242, 0, 'Một số loại tế bào điển hình', '', '', 0, 0, '2023-02-23 09:16:35', 0),
+(67, 54018724, 0, 'Từ tế bào – mô, cơ quan – hệ cơ quan ở thực vật', '', '', 0, 0, '2023-02-23 09:16:42', 0),
+(68, 1344674, 0, 'Từ tế bào – mô, cơ quan – hệ cơ quan ở động vật', '', '', 0, 0, '2023-02-23 09:16:48', 0),
+(69, 83904329, 0, 'Sơ đồ 5 giới sinh vật', '', '', 0, 0, '2023-02-23 09:16:56', 0),
+(70, 34483784, 0, 'Cấu tạo virus', '', '', 0, 0, '2023-02-23 09:17:08', 0),
+(71, 41955195, 0, 'Đa dạng vi khuẩn', '', '', 0, 0, '2023-02-23 09:17:14', 0),
+(72, 50844474, 0, 'Một số đối tượng nguyên sinh vật', '', '', 0, 0, '2023-02-23 09:17:22', 0),
+(73, 31106992, 0, 'Một số dạng nấm', '', '', 0, 0, '2023-02-23 09:18:00', 0),
+(74, 34611660, 0, 'Sơ đồ nhóm thực vật ', '', '', 0, 0, '2023-02-23 09:18:07', 0),
+(75, 52237362, 0, 'Thực vật không có mạch (Rêu)', '', '', 0, 0, '2023-02-23 09:18:13', 0),
+(76, 65617101, 0, 'Thực vật có mạch, không có hạt (Dương xỉ)', '', '', 0, 0, '2023-02-23 09:18:20', 0),
+(77, 659705, 0, 'Thực vật có mạch, có hạt (Hạt trần)', '', '', 0, 0, '2023-02-23 09:18:28', 0),
+(78, 41232356, 0, 'Thực vật có mạch, có hạt , có hoa (hạt kín)', '', '', 0, 0, '2023-02-23 09:18:34', 0),
+(79, 95088380, 0, 'Sơ đồ các nhóm thực vật không xương sống và có xương sống', '', '', 0, 0, '2023-02-23 09:18:42', 0),
+(80, 37978624, 0, 'Đa dạng động vật không xương sống', '', '', 0, 0, '2023-02-23 09:18:52', 0),
+(81, 80065146, 0, 'Đa dạng động vật xương sống', '', '', 0, 0, '2023-02-23 09:19:01', 0),
+(82, 96202424, 0, 'Sự mọc lặn của mặt trời', '', '', 0, 0, '2023-02-23 09:19:11', 0),
+(83, 78431509, 0, 'Một số hình dạng nhìn thấy của mặt trăng', '', '', 0, 0, '2023-02-23 09:19:17', 0),
+(84, 77782951, 0, 'Hệ mặt trời', '', '', 0, 0, '2023-02-23 09:19:23', 0),
+(85, 66869623, 0, 'Ngân hà', '', '', 0, 0, '2023-02-23 09:19:30', 0),
+(86, 44800039, 0, 'Nhiệt kế lỏng hoặc cảm biến nhiệt độ', '', '', 0, 0, '2023-02-23 09:20:58', 0),
+(87, 43546420, 0, 'Cốc thủy tinh loại 250ml', '', '', 0, 0, '2023-02-23 09:21:05', 0),
+(88, 1780499, 0, 'Ống nghiệm', '', '', 0, 0, '2023-02-23 09:21:13', 0),
+(89, 5161516, 0, 'Ống dẫn thủy tinh chữ Z', '', '', 0, 0, '2023-02-23 09:21:20', 0),
+(90, 15748371, 0, 'Lọ thủy tinh miệng rộng', '', '', 0, 0, '2023-02-23 09:21:27', 0),
+(91, 30402033, 0, 'Cốc loại 1 lít', '', '', 0, 0, '2023-02-23 09:21:34', 0),
+(92, 9916645, 0, 'Ống đong thủy tinh hình trụ 100ml', '', '', 0, 0, '2023-02-23 09:21:43', 0),
+(93, 47113658, 0, 'Thìa café nhỏ', '', '', 0, 0, '2023-02-23 09:21:52', 0),
+(94, 57072590, 0, 'Phễu lọc thủy tinh cuống ngắn', '', '', 0, 0, '2023-02-23 09:21:59', 0),
+(95, 18151220, 0, 'Phễu chiết hình quả lê', '', '', 0, 0, '2023-02-23 09:22:06', 0),
+(96, 80079762, 0, 'Đũa thủy tinh', '', '', 0, 0, '2023-02-23 09:22:13', 0),
+(97, 17514786, 0, 'Giấy lọc', '', '', 0, 0, '2023-02-23 09:22:21', 0),
+(98, 70326915, 0, 'Cát hoặc dầu ăn', '', '', 0, 0, '2023-02-23 09:22:29', 0);
 
 -- --------------------------------------------------------
 
@@ -4243,13 +4713,6 @@ CREATE TABLE `tbl_utensils_imp` (
   `notes` text COLLATE utf8_unicode_ci NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_utensils_imp`
---
-
-INSERT INTO `tbl_utensils_imp` (`id`, `code`, `date_import`, `user_id`, `source`, `notes`, `create_at`) VALUES
-(1, 1666848975, '2022-10-27', 1, 'Tự mua sắm', '', '2022-10-27 12:46:16');
 
 --
 -- Triggers `tbl_utensils_imp`
@@ -4271,17 +4734,6 @@ CREATE TABLE `tbl_utensils_imp_detail` (
   `utensils_id` int(11) NOT NULL,
   `quantily` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_utensils_imp_detail`
---
-
-INSERT INTO `tbl_utensils_imp_detail` (`id`, `code`, `utensils_id`, `quantily`) VALUES
-(6, 1666848975, 6, 5),
-(7, 1666848975, 5, 5),
-(8, 1666848975, 7, 5),
-(9, 1666848975, 9, 5),
-(10, 1666848975, 8, 6);
 
 --
 -- Triggers `tbl_utensils_imp_detail`
@@ -4315,13 +4767,6 @@ CREATE TABLE `tbl_utensils_loan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tbl_utensils_loan`
---
-
-INSERT INTO `tbl_utensils_loan` (`id`, `code`, `user_id`, `user_loan`, `date_loan`, `date_return`, `content`, `notes`, `status`, `create_at`) VALUES
-(4, 1666773709, 58, 58, '2022-10-26 00:00:00', '2022-11-12 23:56:52', 'Phục vụ công tác giảng dạy \r\n                                môn Vật  lý: Khúc xạ ánh sáng', '', 1, '2022-10-26 15:41:49');
-
---
 -- Triggers `tbl_utensils_loan`
 --
 DELIMITER $$
@@ -4344,13 +4789,6 @@ CREATE TABLE `tbl_utensils_loan_detail` (
   `date_return` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_utensils_loan_detail`
---
-
-INSERT INTO `tbl_utensils_loan_detail` (`id`, `code`, `utensils_id`, `sub_utensils`, `status`, `date_return`) VALUES
-(4, 1666773709, 16, 1, 1, '2022-11-12 23:56:52');
-
 -- --------------------------------------------------------
 
 --
@@ -4367,14 +4805,6 @@ CREATE TABLE `tbl_utensils_return` (
   `create_at` datetime NOT NULL,
   `status` int(11) NOT NULL COMMENT '1 la thu hoi; 2 la khoi phuc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tbl_utensils_return`
---
-
-INSERT INTO `tbl_utensils_return` (`id`, `code`, `user_id`, `utensils_id`, `sub_utensils`, `content`, `create_at`, `status`) VALUES
-(1, 1669210464, 1, 20, 1, 'Không đủ điều kiện để phục vụ công tác dạy học', '2022-11-23 20:34:24', 1),
-(2, 1669218087, 1, 20, 1, 'Đã nâng cấp đủ điều kiện phục vụ công tác dạy học', '2022-11-23 22:41:27', 2);
 
 -- --------------------------------------------------------
 
@@ -4395,13 +4825,6 @@ CREATE TABLE `tbl_works` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_works`
---
-
-INSERT INTO `tbl_works` (`id`, `code`, `works_id`, `title`, `content`, `file`, `file_link`, `user_id`, `create_at`, `status`) VALUES
-(6, 1667583461, '1,2', 'Kế hoạch thực hiện nhiệm vụ năm học 2022-2023', 'Kế hoạch thực hiện nhiệm vụ năm học 2022-2023', '', '3_2', 1, '2022-11-05 00:38:34', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -4417,13 +4840,6 @@ CREATE TABLE `tbl_works_role` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_works_role`
---
-
-INSERT INTO `tbl_works_role` (`id`, `code`, `user_id`, `works`, `status`, `create_at`) VALUES
-(1, 1664698412, 3, '2,3,4', 1, '2022-10-03 09:37:38');
-
 -- --------------------------------------------------------
 
 --
@@ -4431,7 +4847,7 @@ INSERT INTO `tbl_works_role` (`id`, `code`, `user_id`, `works`, `status`, `creat
 --
 DROP TABLE IF EXISTS `data_all_search`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `data_all_search`  AS SELECT `tbl_proof`.`id` AS `id`, `tbl_proof`.`code_proof` AS `code`, `tbl_proof`.`title` AS `title`, `tbl_proof`.`create_at` AS `create_at`, 1 AS `type` FROM `tbl_proof` WHERE (`tbl_proof`.`status` = 1) union all select `tbl_works`.`id` AS `id`,`tbl_works`.`code` AS `code`,`tbl_works`.`title` AS `title`,`tbl_works`.`create_at` AS `create_at`,2 AS `type` from `tbl_works` where (`tbl_works`.`status` = 1) union all select `tbl_document_in`.`id` AS `id`,`tbl_document_in`.`number_in` AS `code`,`tbl_document_in`.`title` AS `title`,`tbl_document_in`.`create_at` AS `create_at`,3 AS `type` from `tbl_document_in` where (`tbl_document_in`.`status` = 0) union all select `tbl_document_out`.`id` AS `id`,`tbl_document_out`.`number_dc` AS `code`,`tbl_document_out`.`title` AS `title`,`tbl_document_out`.`create_at` AS `create_at`,4 AS `type` from `tbl_document_out` where (`tbl_document_out`.`status` = 0) union all select `tbl_book`.`id` AS `id`,`tbl_book`.`code` AS `code`,`tbl_book`.`title` AS `title`,`tbl_book`.`create_at` AS `create_at`,5 AS `type` from `tbl_book` where (`tbl_book`.`status` = 0)  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`thc99669_root`@`113.22.153.59` SQL SECURITY DEFINER VIEW `data_all_search`  AS SELECT `tbl_proof`.`id` AS `id`, `tbl_proof`.`code_proof` AS `code`, `tbl_proof`.`title` AS `title`, `tbl_proof`.`create_at` AS `create_at`, 1 AS `type` FROM `tbl_proof` WHERE (`tbl_proof`.`status` = 1) union all select `tbl_works`.`id` AS `id`,`tbl_works`.`code` AS `code`,`tbl_works`.`title` AS `title`,`tbl_works`.`create_at` AS `create_at`,2 AS `type` from `tbl_works` where (`tbl_works`.`status` = 1) union all select `tbl_document_in`.`id` AS `id`,`tbl_document_in`.`number_in` AS `code`,`tbl_document_in`.`title` AS `title`,`tbl_document_in`.`create_at` AS `create_at`,3 AS `type` from `tbl_document_in` where (`tbl_document_in`.`status` = 0) union all select `tbl_document_out`.`id` AS `id`,`tbl_document_out`.`number_dc` AS `code`,`tbl_document_out`.`title` AS `title`,`tbl_document_out`.`create_at` AS `create_at`,4 AS `type` from `tbl_document_out` where (`tbl_document_out`.`status` = 0) union all select `tbl_book`.`id` AS `id`,`tbl_book`.`code` AS `code`,`tbl_book`.`title` AS `title`,`tbl_book`.`create_at` AS `create_at`,5 AS `type` from `tbl_book` where (`tbl_book`.`status` = 0)  ;
 
 -- --------------------------------------------------------
 
@@ -4445,6 +4861,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbldm_bin`
+--
+ALTER TABLE `tbldm_bin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbldm_book`
@@ -4474,6 +4896,12 @@ ALTER TABLE `tbldm_document`
 -- Indexes for table `tbldm_equipment`
 --
 ALTER TABLE `tbldm_equipment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbldm_floor`
+--
+ALTER TABLE `tbldm_floor`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -4576,6 +5004,18 @@ ALTER TABLE `tbl_attend`
 -- Indexes for table `tbl_book`
 --
 ALTER TABLE `tbl_book`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_book_import`
+--
+ALTER TABLE `tbl_book_import`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_book_import_detail`
+--
+ALTER TABLE `tbl_book_import_detail`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -4841,16 +5281,22 @@ ALTER TABLE `tbl_works_role`
 --
 
 --
+-- AUTO_INCREMENT for table `tbldm_bin`
+--
+ALTER TABLE `tbldm_bin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbldm_book`
 --
 ALTER TABLE `tbldm_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbldm_book_manu`
 --
 ALTER TABLE `tbldm_book_manu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbldm_department`
@@ -4869,6 +5315,12 @@ ALTER TABLE `tbldm_document`
 --
 ALTER TABLE `tbldm_equipment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbldm_floor`
+--
+ALTER TABLE `tbldm_floor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbldm_job`
@@ -4904,13 +5356,13 @@ ALTER TABLE `tbldm_quanlity`
 -- AUTO_INCREMENT for table `tbldm_quanlity_criteria`
 --
 ALTER TABLE `tbldm_quanlity_criteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbldm_quanlity_standard`
 --
 ALTER TABLE `tbldm_quanlity_standard`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbldm_realtion`
@@ -4928,13 +5380,13 @@ ALTER TABLE `tbldm_subject`
 -- AUTO_INCREMENT for table `tbldm_utensils`
 --
 ALTER TABLE `tbldm_utensils`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbldm_works`
 --
 ALTER TABLE `tbldm_works`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbldm_works_group`
@@ -4946,19 +5398,19 @@ ALTER TABLE `tbldm_works_group`
 -- AUTO_INCREMENT for table `tbldm_years`
 --
 ALTER TABLE `tbldm_years`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_assign`
 --
 ALTER TABLE `tbl_assign`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_assign_detail`
 --
 ALTER TABLE `tbl_assign_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_attend`
@@ -4970,37 +5422,49 @@ ALTER TABLE `tbl_attend`
 -- AUTO_INCREMENT for table `tbl_book`
 --
 ALTER TABLE `tbl_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+
+--
+-- AUTO_INCREMENT for table `tbl_book_import`
+--
+ALTER TABLE `tbl_book_import`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_book_import_detail`
+--
+ALTER TABLE `tbl_book_import_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_book_loan`
 --
 ALTER TABLE `tbl_book_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_book_read`
 --
 ALTER TABLE `tbl_book_read`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_book_return`
 --
 ALTER TABLE `tbl_book_return`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_class`
 --
 ALTER TABLE `tbl_change_class`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_device`
 --
 ALTER TABLE `tbl_change_device`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_change_point`
@@ -5012,25 +5476,25 @@ ALTER TABLE `tbl_change_point`
 -- AUTO_INCREMENT for table `tbl_department_loan`
 --
 ALTER TABLE `tbl_department_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_devices`
 --
 ALTER TABLE `tbl_devices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `tbl_device_import`
 --
 ALTER TABLE `tbl_device_import`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_device_import_detail`
 --
 ALTER TABLE `tbl_device_import_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `tbl_device_repair`
@@ -5048,7 +5512,7 @@ ALTER TABLE `tbl_device_repair_detail`
 -- AUTO_INCREMENT for table `tbl_document_in`
 --
 ALTER TABLE `tbl_document_in`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_document_out`
@@ -5060,19 +5524,19 @@ ALTER TABLE `tbl_document_out`
 -- AUTO_INCREMENT for table `tbl_export`
 --
 ALTER TABLE `tbl_export`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_export_detail`
 --
 ALTER TABLE `tbl_export_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_group_role`
 --
 ALTER TABLE `tbl_group_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_loans`
@@ -5090,7 +5554,7 @@ ALTER TABLE `tbl_loans_detail`
 -- AUTO_INCREMENT for table `tbl_notify`
 --
 ALTER TABLE `tbl_notify`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_personel`
@@ -5102,7 +5566,7 @@ ALTER TABLE `tbl_personel`
 -- AUTO_INCREMENT for table `tbl_proof`
 --
 ALTER TABLE `tbl_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_quanlity_role`
@@ -5114,19 +5578,19 @@ ALTER TABLE `tbl_quanlity_role`
 -- AUTO_INCREMENT for table `tbl_returns_device`
 --
 ALTER TABLE `tbl_returns_device`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_roles`
 --
 ALTER TABLE `tbl_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
@@ -5144,7 +5608,7 @@ ALTER TABLE `tbl_student_class`
 -- AUTO_INCREMENT for table `tbl_student_point`
 --
 ALTER TABLE `tbl_student_point`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_relation`
@@ -5156,19 +5620,19 @@ ALTER TABLE `tbl_student_relation`
 -- AUTO_INCREMENT for table `tbl_tasks`
 --
 ALTER TABLE `tbl_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_task_comment`
 --
 ALTER TABLE `tbl_task_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_task_group`
 --
 ALTER TABLE `tbl_task_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_up_class`
@@ -5186,49 +5650,49 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_utensils`
 --
 ALTER TABLE `tbl_utensils`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_imp`
 --
 ALTER TABLE `tbl_utensils_imp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_imp_detail`
 --
 ALTER TABLE `tbl_utensils_imp_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_loan`
 --
 ALTER TABLE `tbl_utensils_loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_loan_detail`
 --
 ALTER TABLE `tbl_utensils_loan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_utensils_return`
 --
 ALTER TABLE `tbl_utensils_return`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_works`
 --
 ALTER TABLE `tbl_works`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_works_role`
 --
 ALTER TABLE `tbl_works_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
