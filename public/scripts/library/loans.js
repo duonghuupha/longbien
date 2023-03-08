@@ -304,6 +304,7 @@ function return_quick_book(value){
             if(result.success == true){
                 $('.overlay').hide();
                 show_message('success', result.msg);
+                $('#book_code_return').val(null);
                 $('#list_loans').load(baseUrl + '/lib_loans/content?page='+page+'&q='+keyword);
             }else{
                 $('.overlay').hide();

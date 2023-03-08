@@ -261,7 +261,6 @@ class Lib_loans extends Controller{
                             $jsonObj['success'] = false;
                             $this->view->jsonObj = json_encode($jsonObj);
                         }else{
-                            
                             // kiem tra tra sach
                             if($this->model->check_returned_book($detail[0]['id'], $code[1]) > 0){
                                 $jsonObj['msg'] = "Sách đã được trả";
