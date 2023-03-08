@@ -92,8 +92,6 @@
 		<script src="<?php echo URL ?>/styles/js/jquery.maskedinput.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/jquery.bootstrap-duallistbox.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/tree.min.js"></script>
-		<script src="<?php echo URL ?>/styles/js/jquery.jqGrid.min.js"></script>
-		<script src="<?php echo URL ?>/styles/js/grid.locale-en.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace-elements.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace.min.js"></script>
 	</body>
