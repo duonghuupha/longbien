@@ -56,10 +56,10 @@ $pages = $this->page;
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
-            <td class="text-center"><?php echo $row['namhoc'] ?></td>
+            <td class="text-center" id="titleyear_<?php echo $row['id'] ?>"><?php echo $row['namhoc'] ?></td>
             <td class="text-center"><?php echo $khu ?></td>
             <td class="text-center"><?php echo $tang ?></td>
-            <td class="text-center"><?php echo $row['physical'] ?></td>
+            <td class="text-center" id="titlephy_<?php echo $row['id'] ?>"><?php echo $row['physical'] ?></td>
             <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
             <td class="text-center">
                 <?php

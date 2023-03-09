@@ -8,7 +8,9 @@ $(function(){
 
 function edit(idh){
     var title = $('#title_'+idh).text(), year = $('#yearid_'+idh).text(), physical = $('#physicalid_'+idh).text();
-    $('#year_id').val(year).trigger('change'); $('#physical_id').val(physical).trigger('change');
+    combo_select_2('#year_id', baseUrl + '/other/combo_years', year, $('#titleyear_'+idh).text()); 
+    combo_select_2('#physical_id', baseUrl + '/other/combo_physical', physical, $('#titlephy_'+idh).text());
+    //$('#physical_id').val(physical).trigger('change');
     $('#title').val(title.trim()); var study = $('#study_'+idh).text(), isdefault = $('#default_'+idh).text();
     var isfunction = $('#function_'+idh).text();
     if(study == 1){
