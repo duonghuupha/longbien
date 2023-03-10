@@ -138,5 +138,26 @@ class Export_device extends Controller{
         $this->view->detail = $detail;
         $this->view->render("export_device/detail");
     }
+/////////////////////////////////////////////////////////////////////////////////////////////
+    function content_device_all(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_data_device_pass_id($id);
+        $this->view->jsonObj = $jsonObj;
+        $this->view->render("/export_device/content_device_all");
+    }
+
+    function update_all(){
+        $id = $_REQUEST['iddevice']; $datadc = json_decode($_REQUEST['datadc_all'], true);
+        $detail = $this->model->get_info_export($id); $iddevice = $_REQUEST['device_all_id'];
+        foreach($datadc as $row){
+            $data = array("code" => $detail[0]['code'], "device_id" => $iddevice, "sub_device" => $row,
+                            "create_at" => date("Y-m-d H:i:s"), "status" => 0);
+            $this->model->addObj_detail($data);
+        }
+        $jsonObj['msg'] = "Ghi dữ liệu thành công";
+        $jsonObj['success'] = true;
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("export_device/update_all");
+    }
 }
 ?>

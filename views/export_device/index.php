@@ -114,4 +114,50 @@
 </div>
 <!-- End formm don vi tinh-->
 
+<!--Form don vi tinh-->
+<div id="modal-all" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:50%">
+        <div class="modal-content">
+        <div class="modal-header no-padding">
+                <div class="table-header" id="title_header">
+                    Phân bổ nhiều thiết bị cùng mã
+                </div>
+            </div>
+            <div class="modal-body">
+                <form id="fm-all" method="post">
+                    <input id="iddevice" name="iddevice" type="hidden"/>
+                    <input id="datadc_all" name="datadc_all" type="hidden"/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn thiết bị</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn thiết bị..."
+                                    style="width:100%" id="device_all_id" name="device_all_id"
+                                    onchange="set_content_all(this.value)">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" id="list_device" style="height:400px;overflow:auto">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="save_all()">
+                    <i class="ace-icon fa fa-times"></i>
+                    Ghi dữ liệu
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
 <script src="<?php echo URL.'/public/' ?>scripts/devices/export_device.js"></script>

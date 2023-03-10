@@ -30,7 +30,7 @@ $jsonObj = $this->jsonObj;
             </label>
         </div>
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-12" style="height:300px;overflow:auto">
         <table 
             id="dynamic-table" 
             class="table table-striped table-bordered table-hover dataTable no-footer" 

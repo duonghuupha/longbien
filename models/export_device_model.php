@@ -89,5 +89,10 @@ class Export_device_Model extends Model{
                                     WHERE code = $code AND status = 0");
         return $query->fetchAll();
     }
+///////////////////////////////////////////////////////////////////////////////////////////////
+    function get_data_device_pass_id($id){
+        $query = $this->db->query("SELECT id, code, title, stock FROM tbl_devices WHERE id = $id");
+        return $query->fetchAll();
+    }
 }
 ?>

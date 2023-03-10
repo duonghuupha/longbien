@@ -62,6 +62,10 @@ $pages = $this->page; $sql = new Model();
                     <a class="green" href="javascript:void(0)" onclick="edit(<?php echo $row['id'] ?>)">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                     </a>
+                    <a class="blue" href="javascript:void(0)" onclick="update(<?php echo $row['id'] ?>)"
+                    title="Phân bổ nhiều thiết bị cùng loại một lúc" data-rel="tooltip">
+                        <i class="ace-icon fa fa-refresh bigger-130"></i>
+                    </a>
                 </div>
             </td>
             <td class="hidden" id="physical_<?php echo $row['id'] ?>"><?php echo $row['physical_id'] ?></td>

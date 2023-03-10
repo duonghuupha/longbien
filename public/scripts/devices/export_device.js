@@ -1,4 +1,5 @@
 var url = baseUrl + '/export_device/add', thietbidachon = [], page = 1, keyword = '';
+var data_all = [];
 $(function(){
     $('#list_export').load(baseUrl + '/export_device/content');
     combo_select_2('#physical_id', baseUrl+'/other/combo_physical', 0, '');
@@ -75,4 +76,41 @@ function search(){
         keyword = '';
     }
     $('#list_export').load(baseUrl + '/export_device/content?page=1&q='+keyword);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////
+function update(idh){
+    var title = $('#physicaltitle_'+idh).text(); data_all = [];
+    $('#title_header').text("Phân bổ nhiều thiết bị cùng mã :: "+title);
+    combo_select_2('#device_all_id', baseUrl + '/export_device/combo_devices', 0, '');
+    $('#list_device').load(baseUrl + '/export_device/content_device_all?id=0');
+    $('#iddevice').val(idh); $('#modal-all').modal('show');
+}
+
+function set_content_all(value){
+    $('#list_device').load(baseUrl + '/export_device/content_device_all?id='+value);
+}
+
+function confirm_checked(idh){
+    var checked = $('#ck_'+idh).is(":checked");
+    if(checked){
+        data_all.push(idh);
+    }else{
+        data_all = data_all.filter(item => item != idh);
+    }
+}
+
+function save_all(){
+    var required = $('input,textarea,select').filter('[required]:visible');
+    var allRequired = true;
+    required.each(function(){
+        if($(this).val() == ''){
+            allRequired = false;
+        }
+    });
+    if(allRequired && data_all.length != 0){
+        $('#datadc_all').val(JSON.stringify(data_all));
+        save_form_modal('#fm-all', baseUrl + '/export_device/update_all', '#modal-all', '#list_export', baseUrl + '/export_device/content?page='+page+'&q='+keyword); 
+    }else{
+        show_message("error", "Bạn chưa điền đủ thông tin");
+    }
 }
