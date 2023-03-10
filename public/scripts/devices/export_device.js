@@ -81,6 +81,7 @@ function search(){
 function update(idh){
     var title = $('#physicaltitle_'+idh).text(); data_all = [];
     $('#title_header').text("Phân bổ nhiều thiết bị cùng mã :: "+title);
+    $('.select2').val(null).trigger('change.select2');
     combo_select_2('#device_all_id', baseUrl + '/export_device/combo_devices', 0, '');
     $('#list_device').load(baseUrl + '/export_device/content_device_all?id=0');
     $('#iddevice').val(idh); $('#modal-all').modal('show');
@@ -97,6 +98,7 @@ function confirm_checked(idh){
     }else{
         data_all = data_all.filter(item => item != idh);
     }
+    $('#display_select').text("Đã lựa chọn: "+data_all.length);
 }
 
 function save_all(){

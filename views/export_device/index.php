@@ -146,14 +146,21 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-                    <i class="ace-icon fa fa-times"></i>
-                    Đóng
-                </button>
-                <button class="btn btn-sm btn-primary pull-right" onclick="save_all()">
-                    <i class="ace-icon fa fa-times"></i>
-                    Ghi dữ liệu
-                </button>
+                <div class="col-xs-2" style="padding:0">
+                    <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                        <i class="ace-icon fa fa-times"></i>
+                        Đóng
+                    </button>
+                </div>
+                <div class="col-xs-7" style="text-align:center">
+                    <span id="display_select">Đã lựa chọn: </span>
+                </div>
+                <div class="col-xs-3" style="padding:0">
+                    <button class="btn btn-sm btn-primary pull-right" onclick="save_all()">
+                        <i class="ace-icon fa fa-times"></i>
+                        Ghi dữ liệu
+                    </button>
+                </div>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
