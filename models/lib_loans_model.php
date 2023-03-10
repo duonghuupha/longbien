@@ -148,10 +148,14 @@ class Lib_loans_Model extends Model{
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     function check_returned_book($bookid, $sub){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book_loan WHERE status = 1 AND book_id = $bookid
-                                    AND sub_book = $sub");
+        $query = $this->db->query("SELECT status FROM tbl_book_loan WHERE book_id = $bookid  AND sub_book = $sub
+                                    ORDER BY id DESC LIMIT 0, 1");
         $row = $query->fetchAll();
-        return $row[0]['Total'];
+        if(count($row) > 0){
+            return $row[0]['status'];
+        }else{
+            return 1;
+        }
     }
 }
 ?>

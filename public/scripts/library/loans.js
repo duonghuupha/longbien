@@ -308,6 +308,7 @@ function return_quick_book(value){
                 $('#list_loans').load(baseUrl + '/lib_loans/content?page='+page+'&q='+keyword);
             }else{
                 $('.overlay').hide();
+                $('#book_code_return').val(null);
                 show_message('error', result.msg);
                 return false;
             }
