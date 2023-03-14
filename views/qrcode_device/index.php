@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12">
-                        <div id="list_dep" class="dataTables_wrapper form-inline no-footer"></div>
+                        <div id="list_dep" class="dataTables_wrapper form-inline no-footer" style="height:400px; overflow:auto"></div>
                         </div>
                     </form>
                 </div>

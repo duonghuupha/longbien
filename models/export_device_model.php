@@ -85,7 +85,8 @@ class Export_device_Model extends Model{
 
     function get_detail_export_device($code){
         $query = $this->db->query("SELECT code, device_id, sub_device, status, (SELECT title FROM tbl_devices
-                                    WHERE tbl_devices.id = device_id) AS title FROM tbl_export_detail 
+                                    WHERE tbl_devices.id = device_id) AS title, (SELECT tbl_devices.code FROM tbl_devices
+                                    WHERE tbl_devices.id = device_id) AS code_device FROM tbl_export_detail 
                                     WHERE code = $code AND status = 0");
         return $query->fetchAll();
     }
