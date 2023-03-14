@@ -165,9 +165,11 @@ class Other_Model extends Model{
     }
 
     function get_combo_department_all($yearid){
-        $query = $this->db->query("SELECT id, title FROM tbldm_department WHERE status = 0 AND class_study = 1 AND year_id = $yearid
+        $query = $this->db->query("SELECT id, CONCAT((SELECT tbldm_physical_room.title FROM tbldm_physical_room
+                                    WHERE tbldm_physical_room.id = physical_id), ' - ', title) AS title FROM tbldm_department WHERE status = 0 AND class_study = 1 AND year_id = $yearid
                                     UNION ALL
-                                    SELECT id, title FROM tbldm_department WHERE status = 0 AND class_study = 0");
+                                    SELECT id, CONCAT((SELECT tbldm_physical_room.title FROM tbldm_physical_room
+                                    WHERE tbldm_physical_room.id = physical_id), ' - ', title) AS title FROM tbldm_department WHERE status = 0 AND class_study = 0");
         return $query->fetchAll();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////
