@@ -253,6 +253,35 @@ class Convert{
         return $html;
     }
 
+    function createLinks_parameter_other($total, $rows, $currentpage, $event, $parameter, $links = 7) {
+        $last = ceil( $total / $rows );
+        $start = ( ( $currentpage - $links ) > 0 ) ? $currentpage - $links : 1;
+        $end = ( ( $currentpage + $links ) < $last ) ? $currentpage + $links : $last;
+
+        $html = '';
+        $class = ( $currentpage == 1 ) ? "active" : "";
+
+        if ( $start > 1 ) {
+            $html .= '<li class="paginate_button"><a href="javascript:void(0)" onclick="'.$event.'(1, '.$parameter.')">1</a></li>';
+            $html .= '<li class="paginate_button">';
+            $html .= '<a>...</a></li>';
+        }
+        for ( $i = $start ; $i <= $end; $i++ ) {
+            $class = ( $currentpage == $i ) ? "active" : "";
+            $html .= '<li class="paginate_button ' . $class . '">';
+            $html .= '<a href="javascript:void(0)" onclick="'.$event.'('.$i.', '.$parameter.')">' . $i . '</a>';
+            $html .= '</li>';
+        }
+        if ( $end < $last ) {
+            $html .= '<li class="paginate_button">';
+            $html .= '<a >...</a></li>';
+            $html .= '<li>';
+            $html .= '<a href="javascript:void(0)" onclick="'.$event.'('.$last.', '.$parameter.')">' . $last . '</a>';
+            $html .= '</li>';
+        }
+        return $html;
+    }
+
     function daysInWeek($weekNum){
         $result = array();
         $datetime = new DateTime('00:00:00');

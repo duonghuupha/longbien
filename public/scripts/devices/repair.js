@@ -1,5 +1,5 @@
 var page = 1, keyword = '', url = '', data = [];
-var dates = '', agencys = '', devices = '';
+var dates = '', agencys = '', devices = '', id_department = 0, page_device = 1;
 $(function(){
     $('#list_repair').load(baseUrl + '/repair/content');
     $('#table-device').animate({
@@ -77,8 +77,14 @@ function search(){
 /////////////////////////////////////////////////////////////////////////////////////////////////
 function load_device(idh){
     if(idh.length != 0){
-        $('#list_device').load(baseUrl + '/repair/list_device?id='+idh);
+        id_department = idh;
+        $('#list_device').load(baseUrl + '/repair/list_device?id='+id_department);
     }
+}
+
+function view_page_device(pages, para){
+    id_department = para; page_device = pages;
+    $('#list_device').load(baseUrl + '/repair/list_device?id='+id_department+'&page='+page_device);
 }
 
 function selected_device(idh){

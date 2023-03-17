@@ -1,4 +1,5 @@
 var page = 1; keyword = '', data_dep = [], data = [];
+let data_options = [];
 $(function(){
     $('#list_device').load(baseUrl + '/qrcode_device/content');
 });
@@ -123,4 +124,48 @@ function print_code_dep(){
     }else{
         show_message("error", "Không có bản ghi nào được chọn");
     }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////
+function print_code_options(){
+    combo_select_2('#device_id', baseUrl + '/qrcode_device/combo_devices', 0, '');
+    $('#modal-option').modal('show');
+}
+
+function select_device(){
+    var value = $('#device_id').val();
+    var objIndex = data_options.findIndex(item => item.id == value);
+    if(objIndex == -1){
+        let result = $.getJSON(baseUrl + '/qrcode_device/info_device?id='+value, function(){});
+        console.log(result);
+    }else{
+        show_message("error", "Thiết bị đã được chọn");
+    }
+}
+
+function render_table(data_json){
+    console.log(data_json);
+    $('#tbody').empty(); var html = '', j = 1;
+    for(var i = 0; i < data_json.length; i++){
+        html += '<tr role="row">';
+            html += '<td class="text-center">'+j+'</td>';
+            html += '<td class="text-center">'+data_json[i].code+'</td>';
+            html += '<td class="text-left">'+data_json[i].title+'</td>';
+            html += '<td class="text-center">';
+                html += '<input id="qty_'+data_json[i].id+'" name="qty_'+data_json[i].id+'" class="form-control"';
+                html += 'size="5" value="'+data_json[i].qty+'" onkeypress="validate(event)" style="text-align:center"';
+                html += 'onchange="change_data('+data_json[i].id+')"/>';
+            html += '</td>';
+            html += '<td class="text-center">';
+                html += '<a href="javascript:void(0)" onclick="del_selected('+data_json[i].id+')">';
+                    html += '<i class="fa fa-trash" style="color:red"></i>';
+                html += '</a>';
+            html += '</td>';
+        html += '</tr>';
+        j++;
+    }
+    $('#tbody').append(html);
+}
+
+function print_code_option(){
+
 }

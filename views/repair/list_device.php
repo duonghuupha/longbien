@@ -35,7 +35,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <?php
         if($jsonObj['total'] > $perpage){
             $pagination = $this->_Convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_device', 1);
+            $createlink = $this->_Convert->createLinks_parameter_other($jsonObj['total'], $perpage, $pagination['number'], 'view_page_device', $_REQUEST['id'], 1);
         ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">

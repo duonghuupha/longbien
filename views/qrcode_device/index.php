@@ -94,4 +94,67 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-option" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:60%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    In mã thiết bị theo mã tùy chọn
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="fm-option" method="post" enctype="multipart/form-data">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="form-field-username">Lựa chọn thiết bị</label>
+                                <div>
+                                    <select class="select2" data-placeholder="Lựa chọn thiết bị"
+                                    style="width:100%" required="" id="device_id" name="device_id" 
+                                    onchange="select_device()">
+                                    </select>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="dataTables_wrapper form-inline no-footer" style="height:400px; overflow:auto">
+                                <table 
+                                    id="dynamic-table" 
+                                    class="table table-striped table-bordered table-hover dataTable no-footer" 
+                                    role="grid"
+                                    aria-describedby="dynamic-table_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="text-center" style="width:20px">#</th>
+                                            <th class="text-center" style="width:80px">Mã TB</th>
+                                            <th class="">Tiêu đề</th>
+                                            <th class="text-left">Số con (s)</th>
+                                            <th class="text-center" style="width:80px">SL tem</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="print_code_option()">
+                    <i class="ace-icon fa fa-print"></i>
+                    In mã thiết bị
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
 <script src="<?php echo URL.'/public/' ?>scripts/devices/qrcode.js"></script>

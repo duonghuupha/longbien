@@ -26,5 +26,16 @@ class Qrcode_device_Model extends Model{
                                     WHERE tbldm_department.id = $id))");
         return $query->fetchAll();
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_combo_device($q){
+        $query = $this->db->query("SELECT id, title, code FROM tbl_devices WHERE status = 1
+                                    AND title LIKE '%$q%'");
+        return $query->fetchAll();
+    }  
+
+    function get_info_device($id){
+        $query = $this->db->query("SELECT id, title, code, stock FROM tbl_devices WHERE id = $id");
+        return $query->fetchAll();
+    }
 }
 ?>

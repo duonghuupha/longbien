@@ -70,5 +70,19 @@ class Qrcode_device extends Controller{
         }
         $this->view->render("qrcode_device/content_dep");
     }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function combo_devices(){
+        $keyword = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
+        $jsonObj = $this->model->get_combo_device($keyword);
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("qrcode_device/combo_devices");
+    }
+
+    function info_device(){
+        $id = $_REQUEST['id'];
+        $jsonObj = $this->model->get_info_device($id);
+        $this->view->jsonObj = json_encode($jsonObj[0]);
+        $this->view->render("qrcode_device/info_device");
+    }
 }
 ?>
