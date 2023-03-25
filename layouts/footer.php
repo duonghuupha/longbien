@@ -94,5 +94,11 @@
 		<script src="<?php echo URL ?>/styles/js/tree.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace-elements.min.js"></script>
 		<script src="<?php echo URL ?>/styles/js/ace.min.js"></script>
+		<script>
+			jQuery(function($){
+				$('[data-rel=tooltip]').tooltip({container:'body'});
+				$('[data-rel=popover]').popover({container:'body'});
+			});
+		</script>
 	</body>
 </html>

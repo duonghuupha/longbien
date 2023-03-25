@@ -97,7 +97,7 @@
 
 <!--Form don vi tinh-->
 <div id="modal-option" class="modal fade" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" style="width:60%">
+    <div class="modal-dialog" style="width:90%">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header">
@@ -107,37 +107,50 @@
             <div class="modal-body">
                 <div class="row">
                     <form id="fm-option" method="post" enctype="multipart/form-data">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="form-field-username">Lựa chọn thiết bị</label>
-                                <div>
-                                    <select class="select2" data-placeholder="Lựa chọn thiết bị"
-                                    style="width:100%" required="" id="device_id" name="device_id" 
-                                    onchange="select_device()">
-                                    </select>
-                                </div> 
+                    <input id="datadc_option" name="datadc_option" type="hidden"/>
+                        <div class="col-xs-4" style="height:505px">
+                            <div class="col-xs-12 col-sm-12">   
+                                <input type="text" placeholder="Tìm kiếm ..." class="form-control" id="nav-search-dv"
+                                onkeyup="search_device()" style="width:100%"/>
                             </div>
+                            <div class="col-xs-12">
+                                <div class="space-6"></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12">
+                                <div id="list_dv" class="dataTables_wrapper form-inline no-footer"></div>
+                            </div><!-- /.col -->
                         </div>
-                        <div class="col-xs-12">
-                            <div class="dataTables_wrapper form-inline no-footer" style="height:400px; overflow:auto">
-                                <table 
-                                    id="dynamic-table" 
-                                    class="table table-striped table-bordered table-hover dataTable no-footer" 
-                                    role="grid"
-                                    aria-describedby="dynamic-table_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="text-center" style="width:20px">#</th>
-                                            <th class="text-center" style="width:80px">Mã TB</th>
-                                            <th class="">Tiêu đề</th>
-                                            <th class="text-left">Số con (s)</th>
-                                            <th class="text-center" style="width:80px">SL tem</th>
-                                            <th class="text-center"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody">
-                                    </tbody>
-                                </table>
+                        <div class="col-xs-8">
+                            <div class="col-xs-12">
+                                <div class="dataTables_wrapper form-inline no-footer" style="height:510px;overflow:auto"
+                                id="table-device">
+                                    <table id="dynamic-table"
+                                        class="table table-striped table-bordered table-hover dataTable no-footer"
+                                        role="grid" aria-describedby="dynamic-table_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="text-center" style="width:20px">#</th>
+                                                <th class="text-center" style="width:80px">Mã</th>
+                                                <th class="">Tên trang thiết bị</th>
+                                                <th class="text-left" style="width:200px;">
+                                                    Số con (s)
+                                                    <span 
+                                                        class="help-button" 
+                                                        data-rel="popover" 
+                                                        data-trigger="hover" 
+                                                        data-placement="left" 
+                                                        data-content="Nhập 1,2,...,n để in các mã đã chọn 
+                                                        Nhập 1- n để in từ mã đến mã 
+                                                        VD: In các mã 1,2,5,7 hoặc 3-9 để in các mã từ 3 đến 9">?</span>
+                                                </th>
+                                                <th class="text-center" style="width:80px;">Số tem</th>
+                                                <th class="text-center" style="width:30px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </form>

@@ -1,5 +1,5 @@
 var page = 1; keyword = '', data_dep = [], data = [];
-let data_options = [];
+let data_options = [], keyword_dv = '', page_dv = 1;
 $(function(){
     $('#list_device').load(baseUrl + '/qrcode_device/content');
 });
@@ -127,16 +127,34 @@ function print_code_dep(){
 }
 /////////////////////////////////////////////////////////////////////////////////////////////
 function print_code_options(){
-    combo_select_2('#device_id', baseUrl + '/qrcode_device/combo_devices', 0, '');
+    $('#list_dv').load(baseUrl + '/qrcode_device/list_device');
     $('#modal-option').modal('show');
 }
 
-function select_device(){
-    var value = $('#device_id').val();
-    var objIndex = data_options.findIndex(item => item.id == value);
+function view_page_dv(pages){
+    page_dv = pages;
+    $('#list_dv').load(baseUrl + '/qrcode_device/list_device?page='+page_dv+'&q='+keyword_dv);
+}
+
+function search(){
+    var value = $('#nav-search-dv').val();
+    if(value.length != 0){
+        keyword_dv = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword_dv = '';
+    }
+    $('#list_dv').load(baseUrl + '/qrcode_device/list_device?page=1&q='+keyword_dv);
+}
+
+function select_device(idh){
+    var objIndex = data_options.findIndex(item => item.id == idh);
     if(objIndex == -1){
-        let result = $.getJSON(baseUrl + '/qrcode_device/info_device?id='+value, function(){});
-        console.log(result);
+        var str = {"id": idh, "title": $('#title_'+idh).text(), "code": $('#code_'+idh).text(), 
+                    "qty": 1, "selected": "", "stock": parseInt($('#stock_'+idh).text()), "type": 0}
+        data_options.push(str); render_table(data_options);
+        $('#table-device').animate({
+            scrollTop: $('#table-device').get(0).scrollHeight
+        }, 1500);
     }else{
         show_message("error", "Thiết bị đã được chọn");
     }
@@ -146,14 +164,18 @@ function render_table(data_json){
     console.log(data_json);
     $('#tbody').empty(); var html = '', j = 1;
     for(var i = 0; i < data_json.length; i++){
-        html += '<tr role="row">';
+        html += '<tr role="row" style="font-size:12px;">';
             html += '<td class="text-center">'+j+'</td>';
             html += '<td class="text-center">'+data_json[i].code+'</td>';
             html += '<td class="text-left">'+data_json[i].title+'</td>';
+            html += '<td class="text-left">';
+                html += '<input id="select_'+data_json[i].id+'" name="select_'+data_json[i].id+'" class="form-control"';
+                html += 'style="width:100%" onkeypress="validates(event)" onchange="change_data('+data_json[i].id+', 0)"/>';
+            html += '</td>';
             html += '<td class="text-center">';
-                html += '<input id="qty_'+data_json[i].id+'" name="qty_'+data_json[i].id+'" class="form-control"';
-                html += 'size="5" value="'+data_json[i].qty+'" onkeypress="validate(event)" style="text-align:center"';
-                html += 'onchange="change_data('+data_json[i].id+')"/>';
+                html += '<input id="qtyt_'+data_json[i].id+'" name="qtyt_'+data_json[i].id+'" class="form-control"';
+                html += 'style="width:100%;text-align:center" value="'+data_json[i].qty+'" onchange="change_data('+data_json[i].id+', 1)"';
+                html += 'onkeypress="validate(event)"/>';
             html += '</td>';
             html += '<td class="text-center">';
                 html += '<a href="javascript:void(0)" onclick="del_selected('+data_json[i].id+')">';
@@ -166,6 +188,67 @@ function render_table(data_json){
     $('#tbody').append(html);
 }
 
-function print_code_option(){
+function del_selected(idh){
+    data_options = data_options.filter(item => item.id != idh);
+    render_table(data_options);
+}
 
+function change_data(idh, type){
+    var objIndex = data_options.findIndex(item => item.id == idh);
+    if(type == 0){ // cap nhat gia tri so con
+        var value = $('#select_'+idh).val();
+        if(value.includes(',') || value.includes('-')){ // neu ton tai mot trong hai ky tu
+            if(value.includes(',') && value.includes('-')){ 
+                show_message("error", "Không thể thực hiện in khi có cả hai định dạng mã đặc biệt");
+            }else{
+                if(value.includes(',')){
+                    var number = value.split(",").map(function(item){return parseInt(item, 10)});
+                    number = number.filter(function(item){return !Number.isNaN(item)});
+                    if(Math.max(...number) > data_options[objIndex].stock || Math.min(...number) == 0){
+                        $('#select_'+idh).val('');
+                        show_message("error", "Gía trị lớn nhất muốn in vượt quá số lượng tồn kho hoặc giá trị nhỏ nhất muốn in phải là khác 0");
+                    }else{
+                        data_options[objIndex].selected = value;
+                        data_options[objIndex].type = 1; // in ma theo cac so dien vao
+                    }
+                }else if(value.includes('-')){
+                    var number = value.split("-").map(function(item){return parseInt(item, 10)});
+                    number = number.filter(function(item){return !Number.isNaN(item)});
+                    if(Math.max(...number) > data_options[objIndex].stock || Math.min(...number) == 0){
+                        $('#select_'+idh).val('');
+                        show_message("error", "Gía trị lớn nhất muốn in vượt quá số lượng tồn kho hoặc giá trị nhỏ nhất muốn in phải là khác 0");
+                    }else{
+                        data_options[objIndex].selected = value;
+                        data_options[objIndex].type = 2;// In ma tuwf dau den dau
+                    }
+                }else{
+                    show_message("error", "Định dạng mã đặc biệt (Số con) không chính xác, vui lòng nhập lại");
+                }
+            }
+        }else{
+            show_message("error", "Định dạng mã đặc biệt (Số con) không chính xác, vui lòng nhập lại");
+        }
+    }else{ // cap nhat gia tri so luong
+        var qty = $('#qtyt_'+idh).val();
+        data_options[objIndex].qty = qty;
+    }
+}
+
+function print_code_option(){
+    if(data_options.length != 0){
+        var allRequired = true;
+        for(var i = 0; i < data_options.length; i++){
+            if(data_options[i].selected.length == 0){
+                allRequired = false;
+            }
+        }
+        if(allRequired){
+            $('#datadc_option').val(JSON.stringify(data_options));
+            save_reject_open('#fm-option', baseUrl + '/qrcode_device/add_option', baseUrl + '/qrcode_device/code_option');
+        }else{
+            show_message("error", "Bạn chưa điền đủ thông tin");
+        }
+    }else{
+        show_message("error", "Bạn chưa điền đủ thông tin");
+    }
 }

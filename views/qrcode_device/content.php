@@ -13,7 +13,7 @@ $pages = $this->page; $sql = new Model();
             <th class="text_center"></th>
             <th class="text-center" style="width:80px">Mã TB</th>
             <th class="">Tiêu đề</th>
-            <th class="text-center">Danh mục</th>
+            <th class="text-left" style="width:200px">Danh mục</th>
             <th class="text-center">Xuất sứ</th>
             <th class="text-center">Năm sử dụng</th>
             <th class="text-center">Số con</th>
@@ -45,7 +45,7 @@ $pages = $this->page; $sql = new Model();
             </td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td><?php echo $row['title'] ?></td>
-            <td class="text-center"><?php echo $danhmuc ?></td>
+            <td class="text-left"><?php echo $danhmuc ?></td>
             <td class="text-center"><?php echo $row['origin'] ?></td>
             <td class="text-center"><?php echo $row['year_work'] ?></td>
             <td class="center">

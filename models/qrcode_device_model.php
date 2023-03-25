@@ -27,15 +27,16 @@ class Qrcode_device_Model extends Model{
         return $query->fetchAll();
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-    function get_combo_device($q){
-        $query = $this->db->query("SELECT id, title, code FROM tbl_devices WHERE status = 1
+    function get_combo_device($q, $offset, $rows){
+        $result = array();
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_devices WHERE status = 1
                                     AND title LIKE '%$q%'");
-        return $query->fetchAll();
-    }  
-
-    function get_info_device($id){
-        $query = $this->db->query("SELECT id, title, code, stock FROM tbl_devices WHERE id = $id");
-        return $query->fetchAll();
+        $row = $query->fetchAll();
+        $query = $this->db->query("SELECT id, title, code, stock FROM tbl_devices WHERE status = 1
+                                    AND title LIKE '%$q%' ORDER BY title LIMIT $offset, $rows");
+        $result['total'] = $row[0]['Total'];
+        $result['rows'] = $query->fetchAll();
+        return $result;
     }
 }
 ?>
