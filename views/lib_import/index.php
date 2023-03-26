@@ -44,7 +44,7 @@
                     <form id="fm" method="post" enctype="multipart/form-data">
                         <input id="datadc" name="datadc" type="hidden"/>
                         <input id="code" name="code" type="hidden"/>
-                        <div class="col-xs-4" style="height:510px">
+                        <div class="col-xs-4" style="height:75vh">
                             <div class="col-xs-12 col-sm-12">   
                                 <input type="text" placeholder="Tìm kiếm ..." class="form-control" id="nav-search-book"
                                 onkeyup="search_book()" style="width:100%"/>
@@ -53,7 +53,7 @@
                                 <div class="space-6"></div>
                             </div>
                             <div class="col-xs-12">
-                                <div id="list_book" class="dataTables_wrapper form-inline no-footer" style="height:476px; overflow:auto"></div>
+                                <div id="list_book" class="dataTables_wrapper form-inline no-footer"></div>
                             </div><!-- /.col -->
                         </div>
                         <div class="col-xs-8">
@@ -65,15 +65,37 @@
                             <div class="col-xs-12">
                                 <div class="space-6"></div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <div class="form-group">
-                                    <label for="form-field-username">Ngày tiếp nhận</label>
+                                    <label for="form-field-username">Số chứng từ</label>
+                                    <div>
+                                        <input type="text" id="code_import" name="code_import" style="width:100%"
+                                        placeholder="Là số hóa đơn khi mua hoặc được cấp"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label for="form-field-username">Ngày chứng từ</label>
                                     <div class="input-group">
                                         <input class="form-control date-picker" id="date_import" type="text" 
                                         name="date_import" required="" data-date-format="dd-mm-yyyy" readonly=""/>
                                         <span class="input-group-addon">
                                             <i class="fa fa-calendar bigger-110"></i>
                                         </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label for="form-field-username">Phân loại</label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn"
+                                        style="width:100%" id="type_price" name="type_price"
+                                        data-minimum-results-for-search="Infinity">
+                                            <option value="1" selected="">Phát không</option>
+                                            <option value="2">Mua</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +108,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-6">
                                 <div class="form-group">
                                     <label for="form-field-username">Ghi chú</label>
                                     <div>
@@ -95,7 +117,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12">
-                                <div class="dataTables_wrapper form-inline no-footer" style="height:295px;overflow:auto"
+                                <div class="dataTables_wrapper form-inline no-footer" style="height:49vh;overflow:auto"
                                 id="table-gear">
                                     <table id="dynamic-table"
                                         class="table table-striped table-bordered table-hover dataTable no-footer"
