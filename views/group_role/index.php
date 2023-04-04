@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12" id="roles" style="height:450px;overflow:auto">
+                        <div class="col-xs-12" id="roles" style="height:70vh;overflow:auto">
                             
                         </div>
                     </form>

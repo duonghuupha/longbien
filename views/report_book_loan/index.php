@@ -25,84 +25,62 @@
                 <div class="col-xs-12 col-sm-3">
                     <form id="fm-search" method="post">
                         <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="form-field-username">Dữ liệu hiển thị</label>
-                                    <div>
-                                        <select class="select2" data-placeholder="Lựa chọn"
-                                        style="width:100%" id="type_data" name="type_data"
-                                        onchange="set_type_data(this.value)">
-                                            <option value="1" selected="">Theo đầu sách</option>
-                                            <option value="2">Theo danh mục</option>
-                                            <option value="3">Theo ngày</option>
-                                            <option value="4">Theo tháng</option>
-                                            <option value="5">Theo năm</option>
-                                            <option value="6">Tùy chỉnh</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12" id="category">
-                                <div class="form-group">
-                                    <label for="form-field-username">Lựa chọn danh mục</label>
-                                    <div>
-                                        <select class="select2" data-placeholder="Lựa chọn danh mục"
-                                        style="width:100%" id="cate_id" name="cate_id">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-xs-12" id="date_option">
                                 <div class="form-group">
-                                    <label for="form-field-username">Lựa chọn ngày</label>
+                                    <label for="form-field-username">Từ ngày</label>
                                     <div class="input-group">
-                                        <input class="form-control date-picker" id="date_loan" type="text" 
-                                        name="date_loan" required="" data-date-format="dd-mm-yyyy" readonly=""/>
+                                        <input class="form-control date-picker" id="from_date" type="text" 
+                                        name="from_date" required="" data-date-format="dd-mm-yyyy" readonly=""
+                                        value="<?php echo date("01-m-Y") ?>"/>
                                         <span class="input-group-addon">
                                             <i class="fa fa-calendar bigger-110"></i>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12" id="month_year">
+                            <div class="col-xs-12" id="date_option">
                                 <div class="form-group">
-                                    <label for="form-field-username">Lựa chọn tháng/năm</label>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <select class="select2" data-placeholder="Lựa chọn tháng"
-                                            style="width:100%" id="thang" name="thang">
-                                            <?php
-                                            for($j = 1; $j <= 12; $j++){
-                                                echo '<option value="'.$j.'">Tháng'.$j.'</option>';
-                                            }
-                                            ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <select class="select2" data-placeholder="Lựa chọn năm"
-                                            style="width:100%" id="nam" name="nam">
-                                            <?php
-                                            for($i = 2022; $i <= 2030; $i++){
-                                                echo '<option value="'.$i.'">Năm'.$i.'</option>';
-                                            }
-                                            ?>
-                                            </select>
-                                        </div>
+                                    <label for="form-field-username">Đến ngày</label>
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" id="to_date" type="text" 
+                                        name="to_date" required="" data-date-format="dd-mm-yyyy" readonly=""
+                                        value="<?php echo date("d-m-Y") ?>"/>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12" id="year">
+                            <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label for="form-field-username">Lựa chọn năm</label>
+                                    <label for="form-field-username">
+                                        Danh mục
+                                    </label>
                                     <div>
-                                        <select class="select2" data-placeholder="Lựa chọn năm"
-                                        style="width:100%" id="nam" name="nam">
-                                            <?php
-                                            for($i = 2022; $i <= 2030; $i++){
-                                                echo '<option value="'.$i.'">Năm'.$i.'</option>';
-                                            }
-                                            ?>
+                                        <select class="select2" data-placeholder="Lựa chọn danh mục"
+                                        style="width:100%" id="category" name="category">
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">
+                                        Nhà xuất bản
+                                    </label>
+                                    <div>
+                                        <select class="select2" data-placeholder="Lựa chọn NXB"
+                                        style="width:100%" id="manu" name="manu">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="form-field-username">Tên sách</label>
+                                    <div>
+                                        <input class="form-control" id="title_book" type="text" 
+                                        name="title_book" placeholder="Nhập tên sách"/>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +89,8 @@
                                     <i class="ace-icon fa fa-search"></i>
                                     Lọc dữ liệu
                                 </button>
-                                <button class="btn btn-sm btn-success" type="button" onclick="export_xlsx()">
+                                <button class="btn btn-sm btn-success" type="button" onclick="export_xlsx()"
+                                id="btn_export">
                                     <i class="ace-icon fa fa-file-excel-o"></i>
                                     Xuất file excel
                                 </button>
