@@ -93,7 +93,7 @@ function load_device_dep (){
     $('#list_dep').load(baseUrl + '/qrcode_device/content_dep?id='+value);
 }
 
-function selected_device_dep(idh){
+/*function selected_device_dep(idh){
     var value = $('#ck_dep_'+idh).is(':checked');
     if(value){
         var sub = $('#sub_'+idh).text(), qty = $('#qty_dep_'+idh).val();
@@ -115,9 +115,15 @@ function set_qty_dep(idh){
         show_message("error", "Số lượng tem không thể bỏ trống hoặc bằng 0");
         $('#qty_dep_'+idh).val(1);
     }
-}
+}*/
 
 function print_code_dep(){
+    $('.ck_dep_single:checkbox:checked').map(function(){
+        var value = this.value.split('_');
+        var sub = $('#sub_'+value[0]+'_'+value[1]).text(), qty = $('#qty_dep_'+value[0]+'_'+value[1]).val();
+        var str = {'id': value[0], 'sub': sub, 'qty': qty};
+        data_dep.push(str);
+    }).get(); 
     if(data_dep.length != 0){
         $('#datadc_dep').val(JSON.stringify(data_dep));
         save_reject_open('#fm-dep', baseUrl + '/qrcode_device/add_code_dep', baseUrl + '/qrcode_device/code_dep');
