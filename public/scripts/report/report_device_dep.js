@@ -1,10 +1,10 @@
-var page = 1;
+var page = 1, value = 0;
 $(function(){
     combo_select_2('#department_id', baseUrl + '/other/combo_department_all');
 });
 
 function set_data(){
-    var value = $('#department_id').val();
+    value = $('#department_id').val();
     $.getJSON(baseUrl + '/report_device_dep/return_title?id='+value, function(data){
         $('#title_data').text('Danh sách trang thiết bị - '+data);
     });
@@ -17,7 +17,7 @@ function view_page_device(pages){
 }
 
 function export_xlsx(){
-    var value = $('#department_id').val();
+    value = $('#department_id').val();
     if(value.length != 0){
         window.open(baseUrl + '/report_device_dep/export_xlsx?id='+value);
     }else{
@@ -26,7 +26,7 @@ function export_xlsx(){
 }
 
 function print_report(){
-    var value = $('#department_id').val();
+    value = $('#department_id').val();
     if(value.length != 0){
         window.open(baseUrl + '/report_device_dep/print_report?id='+value);
     }else{
