@@ -8,7 +8,7 @@ class Lib_import_Model extends Model{
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_book_import");
         $row = $query->fetchAll();
-        $query = $this->db->query("SELECT id, code, user_id, date_import, source, notes, create_at,
+        $query = $this->db->query("SELECT id, code, user_id, date_import, source, notes, create_at, code_import, type_price,
                                     IF(user_id = 1, 'Administrator', (SELECT fullname FROM tbl_personel 
                                     WHERE tbl_personel.id = (SELECT hr_id FROM  tbl_users WHERE tbl_users.id = user_id))) 
                                     AS fullname, (SELECT COUNT(*) FROM tbl_book_import_detail WHERE tbl_book_import_detail.code = tbl_book_import.code)

@@ -1,42 +1,6 @@
 <?php
 $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
-$checked = (isset($_REQUEST['checked']) && $_REQUEST['checked'] != '') ? base64_decode($_REQUEST['checked']) : '';
-$checked = explode(",", $checked);
 ?>
-<script>
-$(function(){
-    var $chkboxes = $('.ck_inma');
-    var lastChecked = null;
-    $chkboxes.click(function(e){
-        if(!lastChecked){
-            lastChecked = this;
-            return;
-        }
-        if(e.shiftKey){
-            var start = $chkboxes.index(this);
-            var end = $chkboxes.index(lastChecked);
-            $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
-        }
-    });
-    var checkedbox = $('.ck_inma');
-    checkedbox.click(function(e){
-        $('input[type="checkbox"]').each(function() {
-            if($('#ck_'+this.value).is(":checked")){
-                if(data.length == 0 ){
-                    data.push(this.value);
-                }else{
-                    if(data.indexOf(this.value) === -1){
-                        data.push(this.value);
-                    }
-                }
-            }else{
-                data = data.filter(item => item !== this.value);
-            }
-        });
-        $('#data_check').val(btoa(data.join(",")));
-    });
-});
-</script>
 <table 
     id="dynamic-table" 
     class="table table-striped table-bordered table-hover dataTable no-footer" 
@@ -60,13 +24,12 @@ $(function(){
         foreach($jsonObj['rows'] as $row){
             $i++;
             $class = ($i%2 == 0) ? 'even' : 'odd';
-            $checkedbox = (in_array($row['id'], $checked)) ? 'checked=""' : '';
         ?>
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center">
                 <input id="ck_<?php echo $row['id'] ?>" name="ck_<?php echo $row['id'] ?>"
-                type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma" <?php echo $checkedbox ?>/>
+                type="checkbox" value="<?php echo $row['id'] ?>" class="ck_inma"/>
             </td>
             <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
             <td id="fullname_<?php echo $row['id'] ?>"><?php echo $row['fullname'] ?></td>

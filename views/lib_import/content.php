@@ -8,15 +8,20 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
     aria-describedby="dynamic-table_info">
     <thead>
         <tr role="row">
-            <th class="text-center" style="width:20px">#</th>
-            <th class="text-center" style="width:120px">Mã hệ thống</th>
-            <th class="text-center">Ngày nhập</th>
-            <th class="text-left">Người thực hiện</th>
-            <th class="text-left">Nguồn sách</th>
-            <th class="text-center">Tổng đầu sách</th>
-            <th class="text-center">Tổng số lượng sách</th>
-            <th class="text-center">Cập nhật lần cuối</th>
-            <th class="text-center" style="width:100px">Thao tác</th>
+            <th class="text-center" style="width:20px" rowspan="2">#</th>
+            <th class="text-center" style="width:120px" rowspan="2">Mã hệ thống</th>
+            <th class="text-center" colspan="2">Chứng từ</th>
+            <th class="text-center" rowspan="2">Phân loại</th>
+            <th class="text-left" rowspan="2">Người thực hiện</th>
+            <th class="text-left" rowspan="2">Nguồn sách</th>
+            <th class="text-center" rowspan="2">Tổng <br/>đầu sách</th>
+            <th class="text-center" rowspan="2">Tổng số <br/>lượng sách</th>
+            <th class="text-center" rowspan="2">Cập nhật lần cuối</th>
+            <th class="text-center" style="width:100px" rowspan="2">Thao tác</th>
+        </tr>
+        <tr>
+            <th class="text-center">Số</th>
+            <th class="text-center">Ngày</th>
         </tr>
     </thead>
     <tbody>
@@ -30,7 +35,11 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <tr role="row" class="<?php echo $class ?>">
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
+            <td class="text-center" id="codeimport_<?php echo $row['id'] ?>">
+                <?php echo ($row['code_import'] == '') ? "Nhập nội bộ" : $row['code_import'] ?>
+            </td>
             <td class="text-center" id="dateimport_<?php echo $row['id'] ?>"><?php echo date("d-m-Y", strtotime($row['date_import'])) ?></td>
+            <td class="text-cener"><?php echo ($row['type_price'] == 2) ? "Mua" : "Phát không" ?></td>
             <td class="text-left"><?php echo $row['fullname'] ?></td>
             <td class="text-left" id="source_<?php echo $row['id'] ?>"><?php echo $row['source'] ?></td>
             <td class="text-center"><?php echo $row['total_book'] ?></td>
@@ -51,6 +60,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             </td>
             <td class="hidden" id="notes_<?php echo $row['id'] ?>"><?php echo $row['notes'] ?></td>
             <td class="hidden" id="detail_<?php echo $row['id'] ?>"><?php echo json_encode($detail) ?></td>
+            <td class="hidden" id="type_<?php echo $row['id'] ?>"><?php echo $row['type_price'] ?></td>
         </tr>
         <?php
         }

@@ -30,12 +30,13 @@ class Library extends Controller{
         $content = addslashes($_REQUEST['content']); $type = $_REQUEST['type'];
         $image = ($_FILES['image']['name'] != '') ? $this->_Convert->convert_file($_FILES['image']['name'], 'img_library') : '';
         $yearp = $_REQUEST['year_publish']; $positionp = $_REQUEST['position_publish'];
-        $price = str_replace(",", "", $_REQUEST['price']); $subject = $_REQUEST['subject'];
-        $stock = $_REQUEST['stock'];
+        $subject = $_REQUEST['subject'];
         if($type == 2){
             $file = $this->_Convert->convert_file($_FILES['file']['name'], 'file_library');
+            $stock = 0; $price = 0;
         }else{
-            $file = '';
+            $file = ''; $price = str_replace(",", "", $_REQUEST['price']);
+            $stock = $_REQUEST['stock'];
         }
         if($this->model->dupliObj(0,$code) > 0){
             $jsonObj['msg'] = "Mã sách đã tồn tại";

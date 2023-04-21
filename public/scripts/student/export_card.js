@@ -48,8 +48,8 @@ function save(){
 
 
 function filter(){
-    $('#sdepartment').load(baseUrl + '/other/combo_department?yearid='+yearid);
-    $('#speople').load(baseUrl + '/other/combo_people');
+    combo_select_2('#sdepartment', baseUrl + '/other/combo_department?yearid='+yearid);
+    combo_select_2('#speople',  baseUrl + '/other/combo_people');
     $('#modal-search').modal('show');
 }
 
@@ -62,12 +62,11 @@ function del_sdepartment(){
 }
 
 function search_adv(){
-    var checked = $('#data_check').val();
-    var code= $('#scode').val(), name = $('#sfullname').val(), date = $('#sbirthday').val();
+    var code= $('#scode').val(), name = $('#sfullname').val(), date = $('#sbirthday').val(), status = $('#sstatus').val();
     var classid = $('#sdepartment').val(), address = $('#saddress').val(), gender = $('#sgender').val();
-    var peolpe = $('#speople').val(), religion = $('#sreligion').val();
+    var peolpe = $('#speople').val(), religion = $('#sreligion').val(), codecsdl = $('#scodecsdl').val();
     if(code.length != 0 || name.length != 0 || date.length != 0 || classid.length != 0 || address.length != 0
-        || gender != 0 || peolpe.length != 0 || religion != 0){
+        || gender != 0 || peolpe.length != 0 || religion != 0 || codecsdl.length != 0 || status != 0){
         if(name.length != 0){
             names = name.replaceAll(" ", "$", 'g');
         }
@@ -75,13 +74,13 @@ function search_adv(){
             addresss = address.replaceAll(" ", "$", 'g');
         }
         codes = code; dates = date; departments = classid; genders = gender; 
-        peoples = peolpe; religions = religion;
+        peoples = peolpe; religions = religion; codecsdls = codecsdl; sstatus = status;
     }else{
         codes = ''; dates = ''; departments = ''; names = ''; addresss = ''; genders = 0; peoples =  '';
-        religions = 0;
+        religions = 0; codecsdls = ''; sstatus = 1;
     }
     $('#modal-search').modal('hide');
-    $('#list_student').load(baseUrl + '/student/content_card?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&page=1&checked='+checked);
+    $('#list_student').load(baseUrl + '/student/content_card?code='+codes+'&name='+names+'&date='+dates+'&class='+departments+'&address='+addresss+'&gender='+genders+'&people='+peoples+'&religion='+religions+'&codecsdl='+codecsdls+'&page=1'+'&status='+sstatus);
 }
 
 function del_card(){

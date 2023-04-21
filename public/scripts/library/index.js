@@ -81,14 +81,16 @@ function set_required(value){
     if($('#id').val()  == 0){
         if(value == 2){
             $('#file').attr('disabled', false); $('#file').prop('required', true);
-            $('#file').ace_file_input('reset_input');
+            $('#file').ace_file_input('reset_input'); $('#price').prop('required', false);
+            $('#stock').prop('required', false);
         }else{
             $('#file').attr('disabled', true);  $('#file').prop('required', false);
             $('#file').ace_file_input('reset_input');
         }
     }else{
         $('#file').attr('disabled', true); $('#file').prop('required', false);
-        $('#file').ace_file_input('reset_input');
+        $('#file').ace_file_input('reset_input'); $('#price').prop('required', true);
+        $('#stock').prop('required', true);
     }
 }
 

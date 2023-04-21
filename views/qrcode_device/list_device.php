@@ -9,21 +9,21 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
     <thead>
         <tr role="row">
             <th class="text-center" style="width:20px">#</th>
-            <th class="">Tên thiết bị</th>
+            <th class="">Tiêu đề</th>
         </tr>
     </thead>
     <tbody>
         <?php
-        $i = 0;
+        $j = 0;
         foreach($jsonObj['rows'] as $row){
-            $i++;
-            $class = ($i%2 == 0) ? 'even' : 'odd';
+            $j++;
+            $class = ($j%2 == 0) ? 'even' : 'odd';
         ?>
-        <tr role="row" class="<?php echo $class ?>" ondblclick="selected_device(<?php echo $row['id'] ?>)"
-        style="cursor:pointer">
-            <td class="text-center"><?php echo $i ?></td>
-            <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'].' - '.$row['sub_device'] ?></td>
-            <td class="hidden" id="sub_<?php echo $row['id'] ?>"><?php echo $row['sub_device'] ?></td>
+        <tr role="row" class="<?php echo $class ?>" ondblclick="select_device(<?php echo $row['id'] ?>)">
+            <td class="text-center"><?php echo $j ?></td>
+            <td id="title_<?php echo $row['id'] ?>"><?php echo $row['title'] ?></td>
+            <td class="hidden" id="code_<?php echo $row['id'] ?>"><?php echo $row['code'] ?></td>
+            <td class="hidden" id="stock_<?php echo $row['id'] ?>"><?php echo $row['stock'] ?></td>
         </tr>
         <?php
         }
@@ -35,7 +35,7 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
         <?php
         if($jsonObj['total'] > $perpage){
             $pagination = $this->_Convert->pagination($jsonObj['total'], $pages, $perpage);
-            $createlink = $this->_Convert->createLinks_parameter_other($jsonObj['total'], $perpage, $pagination['number'], 'view_page_device', $_REQUEST['id'], 1);
+            $createlink = $this->_Convert->createLinks($jsonObj['total'], $perpage, $pagination['number'], 'view_page_dv', 1);
         ?>
         <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
             <ul class="pagination">

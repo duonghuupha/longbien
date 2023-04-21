@@ -39,7 +39,7 @@ $jsonObj = $this->jsonObj;
             <thead>
                 <tr role="row">
                     <th class="text-center" style="width:20px">#</th>
-                    <th class="text-center" style="width:80px">Mã phân bổ</th>
+                    <th class="text-center" style="width:80px">Mã thiết bị</th>
                     <th class="text-left" style="width:350px">Tiêu đề</th>
                     <th class="text-center">Số con </th>
                 </tr>
@@ -53,7 +53,7 @@ $jsonObj = $this->jsonObj;
                 ?>
                 <tr role="row" class="<?php echo $class ?>">
                     <td class="text-center"><?php echo $i ?></td>
-                    <td class="text-center"><?php echo $row['code'] ?></td>
+                    <td class="text-center"><?php echo $row['code_device'] ?></td>
                     <td class="text-left"><?php echo $row['title'] ?></td>
                     <td class="text-center"><?php echo $row['sub_device'] ?></td>
                 </tr>

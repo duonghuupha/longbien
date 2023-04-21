@@ -18,7 +18,7 @@
                             <i class="fa fa-filter"></i>
                             Lọc dữ liệu
                         </button>
-                        <button type="button" class="btn btn-success btn-sm" onclick="print_card()">
+                        <button type="button" class="btn btn-success btn-sm" onclick="//print_card()">
                             <i class="fa fa-print"></i>
                             Xuất thẻ
                         </button>
@@ -45,14 +45,27 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-4">
+            <div class="row">
+                    <div class="col-xs-12">
                         <div class="form-group">
                             <label for="form-field-username">
                                 Mã học sinh
                             </label>
                             <div>
-                                <input type="text" id="scode" name="scode" style="width:100%" onkeypress="validate(event)"/>
+                                <input type="text" id="scode" name="scode" style="width:100%" onkeypress="validate(event)"
+                                placeholder="Mã học sinh"/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="form-field-username">
+                                Mã định danh
+                            </label>
+                            <div>
+                                <input type="text" id="scodecsdl" name="scodecsdl" style="width:100%" onkeypress="validate(event)"
+                                placeholder="Mã định danh"/>
                             </div>
                         </div>
                     </div>
@@ -62,7 +75,7 @@
                                 Họ và tên
                             </label>
                             <div>
-                                <input type="text" id="sfullname" name="sfullname" style="width:100%" />
+                                <input type="text" id="sfullname" name="sfullname" style="width:100%" placeholder="Họ và tên"/>
                             </div>
                         </div>
                     </div>
@@ -71,7 +84,7 @@
                             <label for="form-field-username">Ngày sinh (dd-mm-yyyy)</label>
                             <div>
                                 <input class="form-control input-mask-date" id="sbirthday" type="text" 
-                                name="sbirthday"/>
+                                name="sbirthday" placeholder="NGày sinh"/>
                             </div>
                         </div>
                     </div>
@@ -80,7 +93,7 @@
                             <label for="form-field-username">Giới tính</label>
                             <div>
                                 <select class="select2" data-placeholder="Lựa chọn giới tính..."
-                                style="width:100%" id="sgender" name="sgender">
+                                style="width:100%" id="sgender" name="sgender" data-minimum-results-for-search="Infinity">
                                     <option value="0">Tất cả</option>
                                     <option value="1">Nam</option>
                                     <option value="2">Nữ</option>
@@ -108,7 +121,7 @@
                             <label for="form-field-username">Tôn giáo</label>
                             <div>
                                 <select class="select2" data-placeholder="Lựa chọn tôn giáo..."
-                                style="width:100%" id="sreligion" name="sreligion">
+                                style="width:100%" id="sreligion" name="sreligion" data-minimum-results-for-search="Infinity">
                                     <option value="0">Tất cả</option>
                                     <option value="1">Không</option>
                                     <option value="2">Phật giáo</option>
@@ -141,8 +154,23 @@
                         <div class="form-group">
                             <label for="form-field-username">Địa chỉ</label>
                             <div>
-                                <input type="text" id="saddress" name="saddress" required=""
+                                <input type="text" id="saddress" name="saddress"
                                 placeholder="Địa chỉ" style="width:100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="form-field-username">Trạng thái</label>
+                            <div>
+                                <select class="select2" data-placeholder="Lựa chọn trạng thái..."
+                                style="width:100%" id="sstatus" name="sstatus" data-minimum-results-for-search="Infinity">
+                                    <option value="0">Tất cả</option>
+                                    <option value="1" selected="">Đang đi học</option>
+                                    <option value="2">Nghỉ học</option>
+                                    <option value="3">Chuyển trường</option>
+                                    <option value="4">Ra trường</option>
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ class Qrcode_device extends Controller{
     function index(){
         require('layouts/header.php');
         unset($_SESSION['code_dep']);  unset($_SESSION['code']);
+        unset($_SESSION['code_option']);
         $this->view->render('qrcode_device/index');
         require('layouts/footer.php');
     }
@@ -69,6 +70,33 @@ class Qrcode_device extends Controller{
             $this->view->jsonObj = [];
         }
         $this->view->render("qrcode_device/content_dep");
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    function list_device(){
+        $rows = 11;
+        $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
+        $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $offset = ($get_pages-1)*$rows;
+        $jsonObj = $this->model->get_combo_device($keyword,  $offset, $rows);
+        $this->view->jsonObj = $jsonObj; $this->view->perpage = $rows; $this->view->page = $get_pages;
+        $this->view->render('qrcode_device/list_device');
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    function add_option(){
+        $datadc = json_decode($_REQUEST['datadc_option'], true);
+        if(count($datadc) > 0){
+            $_SESSION['code_option'] = $datadc;
+        }else{
+            $_SESSION['code'] = [];
+        }
+        $jsonObj['msg'] = "Load code thành công";
+        $jsonObj['success']  = true;
+        $this->view->jsonObj = json_encode($jsonObj);
+        $this->view->render("qrcode_device/add_option");
+    }
+
+    function code_option(){
+        $this->view->render("qrcode_device/code_option");
     }
 }
 ?>

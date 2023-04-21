@@ -185,7 +185,7 @@
                                     <label for="form-field-username">Giá tiền</label>
                                     <div>
                                         <input class="form-control" id="price" type="text" 
-                                        name="price" required="" placeholder="Giá của một quyển sách"
+                                        name="price" placeholder="Giá của một quyển sách"
                                         data-type='currency'/>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                     <label for="form-field-username">Số lượng</label>
                                     <div>
                                         <input class="form-control" id="stock" type="text" onkeypress="validate(event)"
-                                        name="stock" required="" placeholder="Số lượng tồn kho của sách"/>
+                                        name="stock" placeholder="Số lượng tồn kho của sách"/>
                                     </div>
                                 </div>
                             </div>

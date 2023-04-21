@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12">
-                        <div id="list_dep" class="dataTables_wrapper form-inline no-footer"></div>
+                        <div id="list_dep" class="dataTables_wrapper form-inline no-footer" style="height:400px; overflow:auto"></div>
                         </div>
                     </form>
                 </div>
@@ -86,6 +86,82 @@
                     Đóng
                 </button>
                 <button class="btn btn-sm btn-primary pull-right" onclick="print_code_dep()">
+                    <i class="ace-icon fa fa-print"></i>
+                    In mã thiết bị
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- End formm don vi tinh-->
+
+<!--Form don vi tinh-->
+<div id="modal-option" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="width:90%">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    In mã thiết bị theo mã tùy chọn
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="fm-option" method="post" enctype="multipart/form-data">
+                    <input id="datadc_option" name="datadc_option" type="hidden"/>
+                        <div class="col-xs-4" style="height:505px">
+                            <div class="col-xs-12 col-sm-12">   
+                                <input type="text" placeholder="Tìm kiếm ..." class="form-control" id="nav-search-dv"
+                                onkeyup="search_device()" style="width:100%"/>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="space-6"></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12">
+                                <div id="list_dv" class="dataTables_wrapper form-inline no-footer"></div>
+                            </div><!-- /.col -->
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="col-xs-12">
+                                <div class="dataTables_wrapper form-inline no-footer" style="height:510px;overflow:auto"
+                                id="table-device">
+                                    <table id="dynamic-table"
+                                        class="table table-striped table-bordered table-hover dataTable no-footer"
+                                        role="grid" aria-describedby="dynamic-table_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="text-center" style="width:20px">#</th>
+                                                <th class="text-center" style="width:80px">Mã</th>
+                                                <th class="">Tên trang thiết bị</th>
+                                                <th class="text-left" style="width:200px;">
+                                                    Số con (s)
+                                                    <span 
+                                                        class="help-button" 
+                                                        data-rel="popover" 
+                                                        data-trigger="hover" 
+                                                        data-placement="left" 
+                                                        data-content="Nhập 1,2,...,n để in các mã đã chọn 
+                                                        Nhập 1- n để in từ mã đến mã 
+                                                        VD: In các mã 1,2,5,7 hoặc 3-9 để in các mã từ 3 đến 9">?</span>
+                                                </th>
+                                                <th class="text-center" style="width:80px;">Số tem</th>
+                                                <th class="text-center" style="width:30px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Đóng
+                </button>
+                <button class="btn btn-sm btn-primary pull-right" onclick="print_code_option()">
                     <i class="ace-icon fa fa-print"></i>
                     In mã thiết bị
                 </button>

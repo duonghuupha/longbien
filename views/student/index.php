@@ -36,6 +36,10 @@
                         <?php
                         }
                         ?>
+                        <button type="button" class="btn btn-success btn-sm" onclick="window.location.href='<?php echo URL.'/student/export_card' ?>'">
+                            <i class="fa fa-credit-card"></i>
+                            In thẻ
+                        </button>
                     </small>
                 </h1>
             </div><!-- /.page-header -->

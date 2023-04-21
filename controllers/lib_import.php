@@ -24,9 +24,11 @@ class Lib_import extends Controller{
     function add(){
         $code = time(); $dateimport = $this->_Convert->convertDate($_REQUEST['date_import']);
         $source = $_REQUEST['source']; $notes = $_REQUEST['notes']; $userid = $this->_Info[0]['id'];
-        $datadc = json_decode($_REQUEST['datadc'], true);
+        $datadc = json_decode($_REQUEST['datadc'], true); $codeimport = $_REQUEST['code_import'];
+        $type_price = $_REQUEST['type_price'];
         $data = array("code" => $code, "date_import" => $dateimport, "source"=>$source, "user_id"=> $userid,
-                        "notes" => $notes, "create_at" => date("Y-m-d H:i:s"));
+                        "notes" => $notes, "create_at" => date("Y-m-d H:i:s"), "code_import" => $codeimport,
+                        "type_price" => $type_price);
         $temp = $this->model->addObj($data);
         if($temp){
             foreach($datadc as $row){
@@ -48,9 +50,11 @@ class Lib_import extends Controller{
         $id= $_REQUEST['id'];
         $code = $_REQUEST['code']; $dateimport = $this->_Convert->convertDate($_REQUEST['date_import']);
         $source = $_REQUEST['source']; $notes = $_REQUEST['notes']; $userid = $this->_Info[0]['id'];
-        $datadc = json_decode($_REQUEST['datadc'], true);
+        $datadc = json_decode($_REQUEST['datadc'], true); $codeimport = $_REQUEST['code_import'];
+        $type_price = $_REQUEST['type_price'];
         $data = array("date_import" => $dateimport, "source"=>$source, "user_id"=> $userid,
-                        "notes" => $notes, "create_at" => date("Y-m-d H:i:s"));
+                        "notes" => $notes, "create_at" => date("Y-m-d H:i:s"), "code_import" => $codeimport,
+                        "type_price" => $type_price);
         $temp = $this->model->updateObj($id, $data);
         if($temp){
             $this->model->delObj_detail($code);
@@ -86,7 +90,7 @@ class Lib_import extends Controller{
 /////////////////////////////////////////////////////////////////////////////////////////////////
     function list_library(){
         $keyword = isset($_REQUEST['q']) ? str_replace("$", " ", $_REQUEST['q']) : '';
-        $rows = 10;
+        $rows = 15;
         $get_pages = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
         $offset = ($get_pages-1)*$rows;
         $jsonObj = $this->model->get_data_book($keyword, $offset, $rows);

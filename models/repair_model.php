@@ -58,7 +58,8 @@ class Repair_Model extends Model{
         $query = $this->db->query("SELECT (SELECT title FROM tbl_devices WHERE tbl_devices.id = device_id) 
                                 AS title, device_id AS id, sub_device FROM tbl_export_detail WHERE status = 0 
                                 AND code  = (SELECT tbl_export.code FROM tbl_export WHERE tbl_export.physical_id = $id) 
-                                AND device_id IN (SELECT tbl_devices.id FROM tbl_devices WHERE tbl_devices.title LIKE '%$q%')");
+                                AND device_id IN (SELECT tbl_devices.id FROM tbl_devices WHERE tbl_devices.title LIKE '%$q%')
+                                LIMIT $offset, $rows");
         $result['total'] = $row[0]['Total'];
         $result['rows'] = $query->fetchAll();
         return $result;

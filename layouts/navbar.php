@@ -150,7 +150,7 @@ if(!isset($_SESSION['data'])){
 
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="<?php echo URL.'/' ?>styles/images/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="<?php echo URL.'/' ?>styles/images/Logo.png" alt="Jason's Photo" />
                         <span class="user-info">
                             <small>Xin chào,</small>
                             <?php
