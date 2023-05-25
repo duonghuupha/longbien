@@ -28,7 +28,10 @@ $jsonObj = $this->jsonObj; $perpage = $this->perpage; $pages = $this->page;
             <td class="text-center"><?php echo $i ?></td>
             <td class="text-center"><?php echo $row['code'] ?></td>
             <td title="<?php echo $row['title'] ?>">
-                <?php echo $this->_Convert->cut($row['title'], 150) ?>
+                <?php 
+                    echo ($row['type'] == 1) ? '<i class="fa fa-file"></i> - ' : '<i class="fa fa-laptop"></i> - '; 
+                    echo $this->_Convert->cut($row['title'], 150) 
+                ?>
             </td>
             <td><?php echo $row['category'] ?></td>
             <td><?php echo $row['manufactory'] ?></td>
