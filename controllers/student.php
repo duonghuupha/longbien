@@ -235,7 +235,7 @@ class Student extends Controller{
                                 'dep_temp' => $department, "code" => rand(111111111111,999999999999),
                                 "user_id" => $this->_Info[0]['id']);
                 $temp = $this->model->addObj($data);
-                    if($temp){
+                if($temp){
                     if($namefa != ''){
                         $data_fa = array("code" => $code, "relation" => 'Bố', "fullname" => $namefa, 'year' => $yearfa, 'phone' => $phonefa, 'job' => $jobfa);
                         $this->model->addObj_detail($data_fa);
